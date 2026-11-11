@@ -559,10 +559,10 @@
     }
 
     /* =========================================================
-       1. 連假天數徽章：全響應式智慧分流與高清視覺優化
-          - 手機 (<768px) 及 平板雙欄 (768px~1023px): 格子寬大 (~50-60px)，大字高清徽章 (11px)！
-          - iPad橫屏/三欄緊湊 (1024px~1279px): 格子極窄 (~26px)，自動隱藏防遮擋！
-          - 電腦超寬螢幕 (>=1280px): 空間充裕，高清徽章完整呈現！
+       1. 連假天數徽章：智慧自適應分流（大格清晰顯示，僅緊湊微縮時隱藏）
+          - 電腦大螢幕 (大於280px月曆卡): 空間充裕，顯示金色立體鎖頭與大字天數徽章 (11px)！
+          - 手機 (<768px, 單欄) 及 平板雙欄 (768px~1023px, 雙欄): 格子寬大 (~50-60px)，清晰完整呈現！
+          - iPad橫屏三欄緊湊 (小於280px月曆卡) 及 年曆全覽微縮: 格子極窄 (<32px)，自動隱藏防遮擋！
        ========================================================= */
     .span-badge-pill {
       position: absolute !important;
@@ -581,7 +581,7 @@
       white-space: nowrap;
       letter-spacing: -0.2px;
       font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;
-      display: inline-flex !important; /* 預設 (手機單欄 & 平板雙欄) 醒目大字清晰顯示 */
+      display: inline-flex !important;
       align-items: center;
       justify-content: center;
       font-size: 11px !important;
@@ -590,33 +590,21 @@
       animation: badge-pop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* iPad橫屏三欄緊湊尺寸 (1024px ~ 1279px)：三月份並排導致格子變小，自動隱藏天數徽章 */
-    @media (min-width: 1024px) and (max-width: 1279px) {
-      .span-badge-pill {
-        display: none !important;
-      }
-      .calendar-cell .day-number {
-        font-size: 0.82rem !important;
-        font-weight: 800 !important;
-      }
-    }
-
-    /* 電腦超寬大螢幕 (>= 1280px)：空間充裕，保持清晰醒目 */
-    @media (min-width: 1280px) {
-      .span-badge-pill {
-        display: inline-flex !important;
-        font-size: 11px !important;
-        padding: 0 5px !important;
-        min-width: 17px !important;
-        height: 17px !important;
-        bottom: 3px !important;
-        right: 3px !important;
-      }
-    }
-
-    /* 年曆全覽模式 (12個月微縮擠壓)：一律隱藏天數徽章 */
+    /* 僅在 iPad 橫向三欄緊湊尺寸（小卡片小於 280px）或年曆全覽微縮時隱藏天數徽章 */
+    body.cal-compact .span-badge-pill,
     body.year-overview-mode .span-badge-pill {
       display: none !important;
+    }
+
+    /* 緊湊模式下中央日期適度微縮居中 */
+    body.cal-compact .calendar-cell .day-number {
+      font-size: 0.85rem !important;
+      font-weight: 800 !important;
+    }
+
+    /* 電腦大螢幕、平板雙欄及手機單欄：寬敞大格明確認證顯示高清天數徽章 */
+    body.cal-spacious .span-badge-pill {
+      display: inline-flex !important;
     }
 
     @keyframes badge-pop {
@@ -630,11 +618,9 @@
     }
 
     /* =========================================================
-       2. 響應式鎖定（Locked）標記：智慧分流與清晰圖標放大
-          - 手機 (<768px) 及 平板雙欄 (768px~1023px): 寬敞大格，醒目金色鎖頭 (11.5px)！
-          - iPad橫屏三欄緊湊 (1024px~1279px): 格子縮小，自動隱藏鎖頭防遮擋！
-          - 電腦大螢幕 (>=1280px): 正常清晰顯示鎖頭！
-          - 年曆全覽模式: 一律隱藏鎖頭！
+       2. 響應式鎖定（Locked）標記：智慧分流
+          - 電腦大螢幕、平板雙欄及手機單欄: 醒目金色鎖頭 (11.5px)！
+          - iPad 橫向三欄緊湊及全覽微縮: 強制隱藏鎖頭防遮擋！
        ========================================================= */
     .lock-indicator {
       position: absolute;
@@ -642,13 +628,13 @@
       right: 3px;
       z-index: 25;
       pointer-events: none;
-      display: flex !important; /* 預設 (手機單欄 & 平板雙欄) 正常顯示 */
+      display: flex !important;
       align-items: center;
       justify-content: center;
     }
     .lock-indicator .lock-icon {
       display: inline-block !important;
-      font-size: 11.5px !important; /* 調大鎖頭尺寸，清晰可辨 */
+      font-size: 11.5px !important;
       color: #f59e0b;
       filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
     }
@@ -656,29 +642,17 @@
       display: none;
     }
 
-    /* iPad橫屏三欄緊湊尺寸 (1024px ~ 1279px)：三月份並排導致格子變小，自動隱藏鎖標記 */
-    @media (min-width: 1024px) and (max-width: 1279px) {
-      .lock-indicator,
-      .lock-badge {
-        display: none !important;
-      }
-    }
-
-    /* 電腦超寬大螢幕 (>= 1280px)：正常顯示清晰鎖頭 */
-    @media (min-width: 1280px) {
-      .lock-indicator {
-        display: flex !important;
-      }
-      .lock-indicator .lock-icon {
-        display: inline-block !important;
-        font-size: 11.5px !important;
-      }
-    }
-
-    /* 年曆全覽微縮模式下：隱藏鎖標記 */
+    /* 僅在 iPad 橫向三欄緊湊尺寸（小卡片小於 280px）或年曆全覽微縮時隱藏鎖標記 */
+    body.cal-compact .lock-indicator,
+    body.cal-compact .lock-badge,
     body.year-overview-mode .lock-indicator,
     body.year-overview-mode .lock-badge {
       display: none !important;
+    }
+
+    /* 電腦大螢幕、平板雙欄及手機單欄：寬敞大格明確認證顯示金色鎖頭 */
+    body.cal-spacious .lock-indicator {
+      display: flex !important;
     }
 
     /* 日期數字保持端正立體 */
@@ -2052,7 +2026,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v4.3.23 更新日誌</span>
+      <span>v4.3.25 更新日誌</span>
     </button>
   </footer>
 
@@ -2094,7 +2068,7 @@
           <div>
             <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.23</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.25</span>
             </h3>
             
           </div>
@@ -2105,7 +2079,37 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!-- v4.3.23 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!-- v4.3.25 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.25（電腦大螢幕三欄完美保留鎖頭與徽章·iPad緊湊三欄自動隱藏·雙欄手機清晰顯示）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART SCREEN</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🖥️ 電腦大螢幕三欄（卡片寬度 &ge; 280px）完美保留金色立體鎖頭與 11px 大字天數徽章</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 電腦大螢幕（三欄寬卡片）保留圖示</b>：電腦螢幕寬大時（月曆卡片寬度 &ge; 280px，格子達 45px 以上），金色立體鎖頭與 11px 特粗連假天數徽章 100% 完整保留並清晰呈現！</li>
+            <li><b>② iPad 橫向三欄緊湊微縮（卡片寬度 &lt; 280px）自動隱藏</b>：iPad Pro 11 吋橫向排列時（小方格 &lt; 30px），自動隱藏鎖頭與天數徽章，日期大字絕對居中不遮擋。</li>
+            <li><b>③ 平板雙欄與手機單欄自動顯示</b>：旋轉至直向雙欄或手機單欄時，格子拓寬至 50px 以上，鎖頭與大字天數徽章即刻自動重新顯示。</li>
+            <li><b>④ 智能卡片像素寬度感應</b>：結合幾何排列與真實卡片寬度（<code>cardWidth &lt; 280</code>），完美分流「電腦大螢幕三欄」與「iPad 緊湊三欄」。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.24 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.24（幾何真實排欄動態感應：iPad Pro 11 吋三欄自動隱藏、雙欄與手機尺寸高清顯示）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">GEOMETRY RESPONSIVE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 依真實畫面排列（卡片 offsetTop）即時精準判斷：擺脫螢幕像素模擬誤差，三欄必然隱藏、兩欄及手機必然顯示</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 幾何動態感應排欄（完美支援 iPad Pro 11 吋）</b>：直接以日曆卡片第 1 個月與第 3 個月的真實排版位置（<code>cards[0].offsetTop === cards[2].offsetTop</code>）進行幾何判斷，免疫 iPadOS 螢幕縮放與 Safari 桌面版視窗模擬誤差。</li>
+            <li><b>② 三行（三欄）月曆時 100% 徹底隱藏</b>：在 iPad 橫向或電腦排成三欄月份（格子 &lt; 30px）時，鎖頭與連假天數徽章 100% 徹底隱藏，中央日期乾淨居中。</li>
+            <li><b>③ 兩行（雙欄）及手機單欄時 100% 清晰顯示</b>：當直向旋轉或縮窄為雙欄/單欄時，格子拓寬至 50px 以上，11.5px 飽滿金色鎖頭與 11px 特粗立體天數徽章自動即時恢復顯示！</li>
+            <li><b>④ 旋轉螢幕與拉伸視窗秒速自適應</b>：整合 ResizeObserver、resize 及 orientationchange，旋轉或切換螢幕即刻無縫切換。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.23 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
             <span class="font-bold text-indigo-700 text-xs">v4.3.23（雙欄與手機尺寸圖標文字清晰化：鎖頭與連假天數徽章等比調大·告別過細模糊）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">CLEAR & BOLD</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
@@ -3128,7 +3132,7 @@
       </div>
 
       <div class="p-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-        <span class="font-mono text-[10px]">Version: 4.3.23</span>
+        <span class="font-mono text-[10px]">Version: 4.3.25</span>
         <button id="btnConfirmCloseChangelog" class="px-3 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold rounded-lg transition active:scale-95 shadow-2xs">
           關閉
         </button>
@@ -3744,7 +3748,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '4.3.23';
+    const APP_VERSION = '4.3.25';
     const APP_UPDATED_AT = '2026-11-08';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -7151,6 +7155,9 @@
       }
 
       bindCells();
+      if (typeof checkCalendarColumns === 'function') {
+        checkCalendarColumns();
+      }
     }
 
     let touchStartX = 0;
@@ -13045,6 +13052,38 @@ function setupYearOverviewToggle() {
     } else {
       run();
     }
+  
+    // === 徹底解決 iPad Pro 11吋排版：依幾何真實排欄數動態切換 ===
+    function checkCalendarColumns() {
+      const container = document.getElementById('calendarContainer');
+      if (!container) return;
+      const cards = container.children;
+      if (cards && cards.length >= 3) {
+        // 1. 幾何排列判斷：1 月與 3 月頂部高度相同，代表三月份並列在同一排（三欄月曆）
+        const isThreeCols = (cards[0].offsetTop === cards[2].offsetTop);
+        const cardWidth = cards[0].offsetWidth; // 獲取單個月曆卡片的真實像素寬度
+
+        // 2. 判斷是否為緊湊模式（iPad 3 欄時 cardWidth 小於 280px，格子小於 35px；而電腦大螢幕寬大於 280px）
+        const isMiniOverview = document.body.classList.contains('year-overview-mode');
+        const isIpadCramped = isThreeCols && (cardWidth < 280);
+
+        if (isMiniOverview || isIpadCramped) {
+          document.body.classList.add('cal-compact');
+          document.body.classList.remove('cal-spacious');
+        } else {
+          // 電腦大螢幕（cardWidth >= 280px）、平板雙欄（cardWidth >= 350px）及手機單欄：空間寬裕，保留金色鎖頭與大字徽章！
+          document.body.classList.remove('cal-compact');
+          document.body.classList.add('cal-spacious');
+        }
+      }
+    }
+
+    window.addEventListener('resize', checkCalendarColumns);
+    window.addEventListener('orientationchange', checkCalendarColumns);
+    if (window.ResizeObserver) {
+      const calBox = document.getElementById('calendarContainer');
+      if (calBox) new ResizeObserver(() => checkCalendarColumns()).observe(calBox);
+    }
   </script>
 
     <!-- 全年假期分佈走廊專屬旗艦級毛玻璃懸浮彈窗 (徹底替換原生肉酸文字框，支援手機手指觸摸與電腦滑鼠懸停) -->
@@ -13736,7 +13775,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.23</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.25</span>
           </button>
         </div>
       </div>
