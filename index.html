@@ -328,16 +328,16 @@
       padding-left: 2px !important;
       padding-right: 2px !important;
       display: flex !important;
-      align-items: baseline !important;
+      align-items: center !important;
       justify-content: space-between !important;
     }
-    body.year-overview-mode .month-header-title span:first-child { 
+    body.year-overview-mode .month-header-title .month-title-main { 
       font-size: 0.75rem !important; 
       font-weight: 800 !important; 
       color: #0f172a !important;
       letter-spacing: -0.02em !important;
     }
-    body.year-overview-mode .month-header-title span:nth-child(2) { 
+    body.year-overview-mode .month-header-title .month-title-sub { 
       display: inline !important;
       font-size: 7.5px !important;
       font-weight: 700 !important;
@@ -345,11 +345,16 @@
       margin-left: 2px !important;
       font-family: monospace !important;
     }
-    body.year-overview-mode .month-header-title span:last-child { 
+    body.year-overview-mode .month-header-title .month-title-year { 
       display: inline !important; 
       font-size: 7px !important;
       color: #94a3b8 !important;
       font-family: monospace !important;
+    }
+    body.year-overview-mode .month-header-right {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 3px !important;
     }
     body.year-overview-mode .weekdays-header { 
       font-size: 7.5px !important; 
@@ -422,13 +427,13 @@
         margin-bottom: 5px !important;
         padding-bottom: 3px !important;
       }
-      body.year-overview-mode .month-header-title span:first-child { 
+      body.year-overview-mode .month-header-title .month-title-main { 
         font-size: 1rem !important; 
       }
-      body.year-overview-mode .month-header-title span:nth-child(2) { 
+      body.year-overview-mode .month-header-title .month-title-sub { 
         font-size: 10.5px !important; 
       }
-      body.year-overview-mode .month-header-title span:last-child { 
+      body.year-overview-mode .month-header-title .month-title-year { 
         font-size: 9.5px !important; 
       }
       body.year-overview-mode .weekdays-header { 
@@ -463,13 +468,13 @@
         padding: 14px 12px !important;
         border-radius: 16px !important;
       }
-      body.year-overview-mode .month-header-title span:first-child { 
+      body.year-overview-mode .month-header-title .month-title-main { 
         font-size: 1.15rem !important; 
       }
-      body.year-overview-mode .month-header-title span:nth-child(2) { 
+      body.year-overview-mode .month-header-title .month-title-sub { 
         font-size: 12px !important; 
       }
-      body.year-overview-mode .month-header-title span:last-child { 
+      body.year-overview-mode .month-header-title .month-title-year { 
         font-size: 11px !important; 
       }
       body.year-overview-mode .weekdays-header { 
@@ -507,12 +512,12 @@
     /* === 視覺底線樣式方案 3：天數標註與回報徽章 === */
     .span-rail {
       position: absolute;
-      bottom: 0px;
+      bottom: 0px !important;
       left: 0;
       right: 0;
       height: 2.8px;
       background: linear-gradient(90deg, #1e3a8a, #1d4ed8) !important;
-      z-index: 15;
+      z-index: 20 !important;
       pointer-events: none;
       box-shadow: 0 1px 3px rgba(30, 58, 138, 0.5);
     }
@@ -553,27 +558,67 @@
       border-bottom-left-radius: 9999px;
     }
 
+    /* =========================================================
+       1. 連假天數徽章：全響應式智慧分流與高清視覺優化
+          - 手機 (<768px) 及 平板雙欄 (768px~1023px): 格子寬大 (~50-60px)，大字高清徽章 (11px)！
+          - iPad橫屏/三欄緊湊 (1024px~1279px): 格子極窄 (~26px)，自動隱藏防遮擋！
+          - 電腦超寬螢幕 (>=1280px): 空間充裕，高清徽章完整呈現！
+       ========================================================= */
     .span-badge-pill {
-      position: absolute;
-      bottom: 3px;
-      right: 2px;
-      z-index: 25;
+      position: absolute !important;
+      bottom: 3px !important;
+      right: 3px !important;
+      z-index: 25 !important;
       pointer-events: none;
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #ffffff;
-      font-size: 9px;
-      font-weight: 800;
-      line-height: 1;
-      padding: 1.5px 4px;
-      min-width: 14px;
+      font-weight: 900;
+      line-height: 14px;
+      height: 17px;
       text-align: center;
       border-radius: 9999px;
-      box-shadow: 0 1.5px 4px rgba(29, 78, 216, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.95);
+      box-shadow: 0 1px 3px rgba(29, 78, 216, 0.45), 0 0 0 1.5px rgba(255, 255, 255, 0.95);
       white-space: nowrap;
       letter-spacing: -0.2px;
       font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;
+      display: inline-flex !important; /* 預設 (手機單欄 & 平板雙欄) 醒目大字清晰顯示 */
+      align-items: center;
+      justify-content: center;
+      font-size: 11px !important;
+      padding: 0 5px !important;
+      min-width: 17px !important;
       animation: badge-pop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+
+    /* iPad橫屏三欄緊湊尺寸 (1024px ~ 1279px)：三月份並排導致格子變小，自動隱藏天數徽章 */
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      .span-badge-pill {
+        display: none !important;
+      }
+      .calendar-cell .day-number {
+        font-size: 0.82rem !important;
+        font-weight: 800 !important;
+      }
+    }
+
+    /* 電腦超寬大螢幕 (>= 1280px)：空間充裕，保持清晰醒目 */
+    @media (min-width: 1280px) {
+      .span-badge-pill {
+        display: inline-flex !important;
+        font-size: 11px !important;
+        padding: 0 5px !important;
+        min-width: 17px !important;
+        height: 17px !important;
+        bottom: 3px !important;
+        right: 3px !important;
+      }
+    }
+
+    /* 年曆全覽模式 (12個月微縮擠壓)：一律隱藏天數徽章 */
+    body.year-overview-mode .span-badge-pill {
+      display: none !important;
+    }
+
     @keyframes badge-pop {
       0% { transform: scale(0.6); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
@@ -583,8 +628,73 @@
       height: 1.5px !important;
       bottom: 0px !important;
     }
-    body.year-overview-mode .span-badge-pill {
+
+    /* =========================================================
+       2. 響應式鎖定（Locked）標記：智慧分流與清晰圖標放大
+          - 手機 (<768px) 及 平板雙欄 (768px~1023px): 寬敞大格，醒目金色鎖頭 (11.5px)！
+          - iPad橫屏三欄緊湊 (1024px~1279px): 格子縮小，自動隱藏鎖頭防遮擋！
+          - 電腦大螢幕 (>=1280px): 正常清晰顯示鎖頭！
+          - 年曆全覽模式: 一律隱藏鎖頭！
+       ========================================================= */
+    .lock-indicator {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      z-index: 25;
+      pointer-events: none;
+      display: flex !important; /* 預設 (手機單欄 & 平板雙欄) 正常顯示 */
+      align-items: center;
+      justify-content: center;
+    }
+    .lock-indicator .lock-icon {
+      display: inline-block !important;
+      font-size: 11.5px !important; /* 調大鎖頭尺寸，清晰可辨 */
+      color: #f59e0b;
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+    }
+    .lock-indicator .lock-dot {
+      display: none;
+    }
+
+    /* iPad橫屏三欄緊湊尺寸 (1024px ~ 1279px)：三月份並排導致格子變小，自動隱藏鎖標記 */
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      .lock-indicator,
+      .lock-badge {
+        display: none !important;
+      }
+    }
+
+    /* 電腦超寬大螢幕 (>= 1280px)：正常顯示清晰鎖頭 */
+    @media (min-width: 1280px) {
+      .lock-indicator {
+        display: flex !important;
+      }
+      .lock-indicator .lock-icon {
+        display: inline-block !important;
+        font-size: 11.5px !important;
+      }
+    }
+
+    /* 年曆全覽微縮模式下：隱藏鎖標記 */
+    body.year-overview-mode .lock-indicator,
+    body.year-overview-mode .lock-badge {
       display: none !important;
+    }
+
+    /* 日期數字保持端正立體 */
+    .calendar-cell .day-number {
+      font-size: 0.92rem !important;
+      font-weight: 800 !important;
+    }
+
+    /* 公眾假期色彩規範（淺橙底 + 深粗磚橙字，高對比度） */
+    .cell-holiday-ph {
+      background-color: #fff7ed !important;
+      border-color: #fed7aa !important;
+    }
+    .holiday-ph-number {
+      color: #c2410c !important;
+      font-weight: 900 !important;
     }
 
     /* === 拍立得旅行卡片 === */
@@ -1942,7 +2052,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v4.3.17 更新日誌</span>
+      <span>v4.3.23 更新日誌</span>
     </button>
   </footer>
 
@@ -1984,7 +2094,7 @@
           <div>
             <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.17</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.23</span>
             </h3>
             
           </div>
@@ -1995,7 +2105,98 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!-- v4.3.17 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!-- v4.3.23 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.23（雙欄與手機尺寸圖標文字清晰化：鎖頭與連假天數徽章等比調大·告別過細模糊）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">CLEAR & BOLD</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 雙欄及手機尺寸大格充分利用：鎖頭放大至 11.5px、天數徽章放大至 11px 加粗，一眼看清</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 鎖頭圖標清晰調大</b>：雙欄及手機尺寸下，右上角鎖頭由過小的 8px 升級放大至 <b>11.5px</b>，金黃飽滿，清晰可辨。</li>
+            <li><b>② 連假天數徽章大字立體化</b>：右下角藍底白字天數徽章由 8px 升級為 <b>11px 特粗大字</b>（高 17px，加白邊立體投影），「9」、「3.5」等數字一目了然，不再瞇眼。</li>
+            <li><b>③ 四角邊距精細校準</b>：鎖頭與天數徽章向外側微調至 3px 邊距，中央日期數字維持 0.92rem 居中，整體視覺均衡大器、層次分明。</li>
+            <li><b>④ 三欄 iPad 緊湊尺寸與全覽維持隱藏</b>：一排 3 個月（格子小於 30px）時自動維持隱藏，防遮擋核心原則不受影響。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.22 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.22（iPad 三欄/雙欄/手機雙向動態切換：三欄緊湊尺寸隱藏鎖與天數、雙欄及手機尺寸自動重新顯示）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART DUAL-VIEW</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 完美達成雙向動態響應：iPad 橫屏三欄緊湊自動隱藏防遮擋、縮至雙欄或手機尺寸即時自動重新顯示</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 雙欄及手機尺寸（寬敞大格）重新顯示</b>：當視窗縮小至平板雙欄（768px~1023px）或手機單欄（&lt;768px）時，月份格寬度達 50px 以上，鎖定圖示（🔒）與連假天數徽章（如 9、3.5）自動即時重新顯示！</li>
+            <li><b>② iPad 橫屏三欄緊湊尺寸（1024px~1279px）自動簡化</b>：當 iPad 橫屏或電腦縮小到一排擠 3 個月份時（日曆格小於 30px），自動取消鎖與天數徽章，日期大字乾淨清晰。</li>
+            <li><b>③ 電腦大螢幕（&ge;1280px）正常顯示</b>：大螢幕視窗寬裕時，鎖頭與天數徽章完整呈現。</li>
+            <li><b>④ 年曆全覽微縮模式持續純淨化</b>：12 個月微縮全覽中，鎖標與天數徽章維持隱藏，杜絕文字疊死。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.21 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.21（雙欄與手機尺寸鎖標與連假徽章全面重新恢復顯示·斷點優化）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART RESTORE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 雙欄與手機尺寸精準放開：鎖定圖示與天數徽章即刻重新顯示，僅在年曆全覽微縮時簡化</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 雙欄與手機尺寸鎖標及天數徽章重新顯示</b>：在平板雙欄（一排2個月）及手機單欄寬敞版面下，日曆格子寬度達 45px～54px，鎖定圖標與天數徽章（如連放9日、請3放9）全面重新清晰顯示！</li>
+            <li><b>② 斷點網格寬度精準優化</b>：將主日曆容器調整為 <code>xl:grid-cols-3 md:grid-cols-2 grid-cols-1</code>，確保平板尺寸永遠享受寬敞舒適的雙欄閱讀體驗，杜絕過早擠入三欄。</li>
+            <li><b>③ 空間與層級完美平衡</b>：鎖頭固定於右上角、徽章固定於右下角、貫穿藍色條帶（Ribbon）浮於色塊之上，中央日期數字清晰端正，各元素互不干擾。</li>
+            <li><b>④ 僅於年曆全覽（12個月擠壓微縮）時簡化</b>：只有在主動開啟「年曆全覽」且格子縮至 25px 時，才隱藏天數徽章與鎖頭，防止圖標壓死日期。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.20 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.20（平板緊湊尺寸極簡化：自動隱藏鎖定與天數徽章·日期數字大字端正·連假藍線貫穿保留）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">CLEAN COMPACT</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 採納漸進式簡化策略：平板與緊湊多欄自動隱藏鎖頭及天數膠囊，日期100%清晰居中無遮擋</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 隱藏天數徽章與鎖頭標記</b>：在平板、緊湊3欄及全覽模式（寬度 &lt; 1280px）下，自動隱藏小格子內的連假天數徽章與鎖定標記，徹底根治徽章遮擋日期與圖示擠迫問題。</li>
+            <li><b>② 日期大字清晰端正</b>：日曆格子回歸純粹看日期的本質，日期數字均勻置中，杜絕任何雜訊干擾。</li>
+            <li><b>③ 連假貫穿藍線（Ribbon）完整保留</b>：底部深藍色貫穿條帶完好保留，一眼便能清晰辨識連續休假區間。</li>
+            <li><b>④ 大螢幕與詳細面板互補</b>：桌面大螢幕（&ge; 1280px）自動還原天數徽章與鎖頭；平板端連假天數及請假詳情由右側「連續假期卡片」與點擊浮動窗大字呈現。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.19 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.19（平板電腦顯示深度根治：連假徽章移角防遮·藍色Ribbon條帶浮起·鎖定極細橙點·月份8/8防穿透）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">TABLET MASTER</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 徹底根除平板電腦與小螢幕疊加破版問題：天數徽章縮小定角·日期100%可讀·公眾假淺橙統一</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 連假天數徽章防遮擋</b>：微型化天數膠囊（約7px），強制緊貼右下角邊緣，搭配平板日期數字微縮（0.72rem），中央日期（如12號）與連假天數徽章各自清晰，絕不再疊死中央。</li>
+            <li><b>② 貫穿藍色條帶（Ribbon）浮現</b>：提升 <code>.span-rail</code> 層級（z-index: 20），解決原先被請假色塊掩蓋問題，連假藍線清晰貫穿相連。</li>
+            <li><b>③ 鎖定標記極細橙點</b>：平板與手機端全面切換為右上角 4px 飽和橙點，告別大鎖頭圖標壓迫日期。</li>
+            <li><b>④ 公眾假期雙模式淺橙同調</b>：無論是否適逢六日，公眾假期統一強制淺橙底色（<code>#fff7ed</code>）與深磚橙粗字（<code>#c2410c</code>），輪休模式取消「PH」字樣。</li>
+            <li><b>⑤ 月份標題防穿透間距</b>：右側資訊列加上獨立 <code>.month-header-right</code> 彈性盒防護，徹底隔開輪休膠囊（8/8）與「2027」年份字樣。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.18 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.18（日曆全尺寸響應式優化：三端鎖定圖標分流·公眾假期淺橙深字·輪休取消PH字·手機連假徽章內嵌）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">CALENDAR RESPONSIVE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎯 日曆跨裝置視覺大升級：電腦/平板/手機鎖定標示自適應、公眾假期高對比雙模式同調、連假天數全端完美收納</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 鎖定標記（Locked）三端自適應</b>：電腦版右上角顯示精緻橙色小鎖頭；平板與手機版自適應轉為極細高飽和橙色圓點（4px-4.5px），告別鋸齒模糊與破版。</li>
+            <li><b>② 公眾假期（普通與輪休雙模式同調）</b>：所有公眾假期統一採用淺橙底色（<code>#fff7ed</code>）搭配粗體深磚橙字（<code>#c2410c</code>），對比鮮明；輪休模式徹底取消左上角「PH」字，釋放格子清爽視野。</li>
+            <li><b>③ 連假天數徽章全端到位</b>：電腦版與平板版收斂於格子內右下角（平板日期縮細防溢出）；手機版（Mobile）保證現有體驗，持續於最後一日格子內右下角清晰顯示微型天數徽章。</li>
+            <li><b>④ 連假底部藍線（Ribbon）貫穿</b>：全尺寸保留深藍連假條帶貫穿引導，連貫視覺無縫銜接。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.17 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
             <span class="font-bold text-indigo-700 text-xs">v4.3.17（方案二實裝：免API·免信用卡·Google Maps官方查址捷徑·智慧門牌貼上自動帶入）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SCHEME 2 PRO</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
@@ -2927,7 +3128,7 @@
       </div>
 
       <div class="p-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-        <span class="font-mono text-[10px]">Version: 4.3.17</span>
+        <span class="font-mono text-[10px]">Version: 4.3.23</span>
         <button id="btnConfirmCloseChangelog" class="px-3 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold rounded-lg transition active:scale-95 shadow-2xs">
           關閉
         </button>
@@ -3543,7 +3744,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '4.3.17';
+    const APP_VERSION = '4.3.23';
     const APP_UPDATED_AT = '2026-11-08';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -6808,12 +7009,12 @@
         let html = `
           <div class="month-header-title flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-200/60">
             <div class="flex items-baseline gap-1.5">
-              <span class="font-extrabold text-base md:text-lg text-slate-900 tracking-tight">${m + 1}月</span>
-              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider font-mono">${monthNamesEn[m]}</span>
+              <span class="month-title-main font-extrabold text-base md:text-lg text-slate-900 tracking-tight">${m + 1}月</span>
+              <span class="month-title-sub text-[11px] font-bold text-slate-400 uppercase tracking-wider font-mono">${monthNamesEn[m]}</span>
             </div>
-            <div class="flex items-center">
+            <div class="month-header-right flex items-center gap-1.5 shrink-0">
               ${gearBtnHtml}
-              <span class="text-[10px] text-slate-400 font-medium font-mono">2027</span>
+              <span class="month-title-year text-[10px] text-slate-400 font-medium font-mono">2027</span>
             </div>
           </div>
           <div class="weekdays-header grid grid-cols-7 gap-1 sm:gap-1.5 text-center text-[10px] sm:text-[11px] font-bold text-slate-400 mb-1.5">
@@ -6841,21 +7042,9 @@
           let phBadgeHtml = '';
 
           if (isHoliday) {
-            if (isRoster) {
-              phBadgeHtml = '<span class="ph-badge">PH</span>';
-              if (isWeekend || isSundayHolidayPink) {
-                // 輪休模式下當日為 PH 假又是星期六或星期日：保留左上角 PH 標籤，並保留星期六日的假日粉紅色
-                baseBg = 'bg-rose-50/40 border-rose-100/60';
-                textColor = 'text-rose-400 font-normal';
-              } else {
-                // 平日 PH 假：工作日白底感 + 橙色大粗體數字
-                baseBg = 'bg-white border-slate-200';
-                textColor = 'roster-ph-number';
-              }
-            } else {
-              baseBg = 'bg-orange-50 border-orange-200';
-              textColor = 'text-orange-700 font-bold';
-            }
+            baseBg = 'cell-holiday-ph';
+            textColor = 'holiday-ph-number';
+            phBadgeHtml = ''; // 徹底取消左上角 PH 標籤（普通與輪休模式均取消，保持乾淨）
           } else if (isSundayHolidayPink || isWeekend) {
             if (isRoster) {
               // 輪休模式六日：降低飽和度，淡粉底與淡珊瑚紅字，避免誤導以為放假
@@ -6901,7 +7090,10 @@
           }
 
           const lockBadge = dayLeave.locked 
-            ? `<i class="lock-badge fa-solid fa-lock absolute top-1 right-1 text-[8px] text-amber-500 z-20 pointer-events-none drop-shadow-xs"></i>` 
+            ? `<div class="lock-indicator" title="此假期已鎖定">
+                 <i class="lock-icon fa-solid fa-lock"></i>
+                 <span class="lock-dot"></span>
+               </div>` 
             : '';
 
           const isPending = cycleCommitTimers[dateStr] ? 'cell-pending-commit' : '';
@@ -13544,7 +13736,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.17</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.23</span>
           </button>
         </div>
       </div>
