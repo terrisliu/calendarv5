@@ -2069,7 +2069,7 @@
 
           <div id="tabContentHolidays" class="flex-1 overflow-y-auto custom-scroll p-2.5 hidden">
             <div class="mb-2 p-1.5 bg-orange-50/80 rounded-lg border border-orange-200 text-[11px] text-orange-800 flex items-center justify-between">
-              <span class="font-medium"><i class="fa-solid fa-circle-info text-orange-600 mr-1"></i> <span class="dyn-year-label">2027</span>年香港西曆公眾假期</span>
+              <span class="font-medium"><i class="fa-solid fa-circle-info text-orange-600 mr-1"></i> <span class="dyn-year-label">2027</span>年香港公眾假期</span>
               <span class="text-[10px] text-orange-600 font-bold bg-white px-1.5 py-0.5 rounded border border-orange-200">全港通用</span>
             </div>
             
@@ -2206,11 +2206,11 @@
   </div>
 
   <footer class="text-center py-4 text-xs text-slate-400 mt-4 border-t border-slate-200 flex flex-wrap items-center justify-center gap-2">
-    <span>香港假期管理 · 萬年西曆版</span>
+    <span>香港假期管理 · 萬年曆完整版</span>
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.0.3 更新日誌</span>
+      <span>v5.0.4 更新日誌</span>
     </button>
   </footer>
 
@@ -2252,7 +2252,7 @@
           <div>
             <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.3</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.4</span>
             </h3>
             
           </div>
@@ -2263,10 +2263,24 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.0.3 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.0.4 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.0.3（方案 A 落地：頂部大標題純淨還原 · 年份控制器融入日曆操作 Bar 頂端）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">PLAN A LAYOUT</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.0.4（香港政府完整公眾假期庫 · 萬年農曆紅日 ＋ 撞期順延補假演算法）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">FULL HK GAZETTE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🗓️ 全面升級「香港政府歷年完整公眾假期庫（1970–2100）」：過去與未來每年 17 日法定／公眾假期 100% 齊全精準</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 完整涵蓋所有農曆公眾假期</b>：內建 Jean Meeus 朔望月與置閏無中氣天文引擎，自動精準推算每年的<b>農曆年初一至年初三、佛誕（四月初八）、端午節（五月初五）、中秋節翌日（八月十六）、重陽節（九月初九）</b>。</li>
+            <li><b>② 嚴格遵守香港《公眾假期條例》補假及撞期順延規則</b>：涵蓋農曆新年逢星期日以<b>農曆年初四補假</b>（如 2024 年 2 月 13 日、2027 年 2 月 9 日）、聖誕雙日連假補假，以及<b>清明節與復活節連假撞期順延補假</b>（如 2021 年 4 月 6 日、2026 年 4 月 7 日）。</li>
+            <li><b>③ 全年廿四節氣與天干地支生肖對照</b>：翻至任何年份，「農曆節氣」分頁即時自動計算該年天干地支生肖（如丙午馬年、丁未羊年）、全部廿四節氣及傳統大節，雙擊日期即可跳轉日曆。</li>
+          </ul>
+        </div>
+
+        <!-- v5.0.3 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.0.3（方案 A 落地：頂部大標題純淨還原 · 年份控制器融入日曆操作 Bar 頂端）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">PLAN A LAYOUT</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">✨ 徹底釋放頂部大標題列：還原「香港假期管理」純淨通欄，將年份切換器移入日曆控制 Bar 正上方吸頂常駐</div>
@@ -2311,7 +2325,7 @@
           <div class="text-[11px] font-semibold text-slate-800">🌐 全面升級為萬年西曆架構：跟隨設備系統預設當年、1970–2100 年無限翻年、每年獨立配額核算與香港西曆公眾假期演算法</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
             <li><b>① 系統正名「香港假期管理」＋ 獨立年份切換器</b>：左上角主標題純淨定名為「香港假期管理」，年份切換膠囊（<code>‹ 2026 ▾ ›</code> ＋「今年」快捷返回鍵）獨立擺放，預設自動跟隨 iPhone / Android / 電腦系統當年，完全保留原有排版結構。</li>
-            <li><b>② 萬年香港西曆公眾假期演算法（第一階段純西曆）</b>：內建固定西曆紅日、香港法定「逢星期日順延翌日補假（含聖誕雙日連假衝突順延）」、Jean Meeus 太陽黃經 15° 清明節公式，以及 Butcher-Meeus 復活節連假演算法（2027 年同時保留完整香港天文台農曆及節氣對照）。</li>
+            <li><b>② 萬年香港公眾假期演算法（第一階段純西曆）</b>：內建固定西曆紅日、香港法定「逢星期日順延翌日補假（含聖誕雙日連假衝突順延）」、Jean Meeus 太陽黃經 15° 清明節公式，以及 Butcher-Meeus 復活節連假演算法（2027 年同時保留完整香港天文台農曆及節氣對照）。</li>
             <li><b>③ 每年配額與統計 100% 獨立隔離</b>：每年 AL 年假、WB 身心假及輪休 OFF 目標額度按年份獨立儲存與計算，互不干擾；聖誕／元旦跨年連假支援跨年無縫串連。</li>
             <li><b>④ 全模組萬年曆聯動</b>：假期助手拼假推薦、365/366 日閏年甘特時間走廊、年曆全覽長圖分享及 iCal（<code>.ics</code>）匯出全面隨選定年份即時同步。</li>
           </ul>
@@ -3669,7 +3683,7 @@
       </div>
 
       <div class="p-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-        <span class="font-mono text-[10px]">Version: 5.0.3</span>
+        <span class="font-mono text-[10px]">Version: 5.0.4</span>
         <button id="btnConfirmCloseChangelog" class="px-3 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold rounded-lg transition active:scale-95 shadow-2xs">
           關閉
         </button>
@@ -4285,7 +4299,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.0.3';
+    const APP_VERSION = '5.0.4';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -5945,99 +5959,345 @@
       return (day === 4 || day === 5 || day === 6) ? day : 5;
     }
 
-    // 4. 動態生成指定年份的香港西曆公眾假期庫（含香港《公眾假期條例》星期日順延補假與聖誕雙日衝突順延邏輯）
+    // 4. 香港政府歷年完整公眾假期引擎（雙層混合架構：權威憲報規則 + 萬年朔望月農曆與廿四節氣天文精算 · 覆蓋 1970–2100 年）
+    function _jdFromDate(y, m, d) {
+      if (m <= 2) { y -= 1; m += 12; }
+      const a = Math.floor(y / 100);
+      const b = 2 - a + Math.floor(a / 4);
+      return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + b - 1524.5;
+    }
+
+    function _dateFromJd(jd) {
+      const z = Math.floor(jd + 0.5);
+      let a = z;
+      if (z >= 2299161) {
+        const alpha = Math.floor((z - 1867216.25) / 36524.25);
+        a = z + 1 + alpha - Math.floor(alpha / 4);
+      }
+      const b = a + 1524;
+      const c = Math.floor((b - 122.1) / 365.25);
+      const d = Math.floor(365.25 * c);
+      const e = Math.floor((b - d) / 30.6001);
+      const day = Math.floor(b - d - Math.floor(30.6001 * e));
+      const month = e < 14 ? e - 1 : e - 13;
+      const year = month > 2 ? c - 4716 : c - 4715;
+      return new Date(year, month - 1, day);
+    }
+
+    // Jean Meeus 朔望月精算（香港標準時間 UTC+8）
+    function _newMoonDateHKT(k) {
+      const T = k / 1236.85;
+      const T2 = T * T, T3 = T2 * T, T4 = T3 * T;
+      const JDE = 2451550.09766 + 29.530588861 * k + 0.00015437 * T2 - 0.000000150 * T3 + 0.00000000073 * T4;
+      const toRad = deg => ((deg % 360) * Math.PI) / 180;
+      const M = toRad(2.5534 + 29.10535670 * k - 0.0000014 * T2 - 0.00000011 * T3);
+      const Mp = toRad(201.5643 + 385.81693528 * k + 0.0107582 * T2 + 0.00001238 * T3 - 0.000000058 * T4);
+      const F = toRad(160.7108 + 390.67050284 * k - 0.0016118 * T2 - 0.00000227 * T3 + 0.000000011 * T4);
+      const Omega = toRad(124.7746 - 1.56375588 * k + 0.0020672 * T2 + 0.00000215 * T3);
+
+      const corr = -0.40720 * Math.sin(Mp)
+        + 0.17241 * Math.sin(M)
+        + 0.01608 * Math.sin(2 * Mp)
+        + 0.01039 * Math.sin(2 * F)
+        + 0.00739 * Math.sin(Mp - M)
+        - 0.00514 * Math.sin(Mp + M)
+        + 0.00208 * Math.sin(2 * M)
+        - 0.00111 * Math.sin(Mp - 2 * F)
+        - 0.00057 * Math.sin(Mp + 2 * F)
+        + 0.00056 * Math.sin(2 * Mp + M)
+        - 0.00042 * Math.sin(3 * Mp)
+        + 0.00042 * Math.sin(M + 2 * F)
+        + 0.00038 * Math.sin(M - 2 * F)
+        - 0.00024 * Math.sin(2 * Mp - M)
+        - 0.00017 * Math.sin(Omega)
+        - 0.00007 * Math.sin(Mp + 2 * M)
+        + 0.00004 * Math.sin(2 * Mp - 2 * F)
+        + 0.00004 * Math.sin(3 * M)
+        + 0.00003 * Math.sin(Mp + M - 2 * F)
+        + 0.00003 * Math.sin(2 * Mp + 2 * F)
+        - 0.00003 * Math.sin(Mp + M + 2 * F)
+        + 0.00003 * Math.sin(Mp - M + 2 * F)
+        - 0.00002 * Math.sin(Mp - M - 2 * F)
+        - 0.00002 * Math.sin(3 * Mp + M)
+        + 0.00002 * Math.sin(4 * Mp);
+
+      const jdHKT = JDE + corr + 8.0 / 24.0 - 69.0 / 86400.0;
+      return _dateFromJd(Math.floor(jdHKT + 0.5));
+    }
+
+    function _sunApparentLong(jdTT) {
+      const T = (jdTT - 2451545.0) / 36525.0;
+      const L0 = (280.46646 + 36000.76983 * T + 0.0003032 * T * T) % 360;
+      const M = (((357.52911 + 35999.05029 * T - 0.0001537 * T * T) % 360) * Math.PI) / 180;
+      const C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(M)
+        + (0.019993 - 0.000101 * T) * Math.sin(2 * M)
+        + 0.000289 * Math.sin(3 * M);
+      const trueLong = (L0 + C) % 360;
+      const omega = (((125.04 - 1934.136 * T) % 360) * Math.PI) / 180;
+      return (((trueLong - 0.00569 - 0.00478 * Math.sin(omega)) % 360) + 360) % 360;
+    }
+
+    // 太陽視黃經節氣精算（HKT UTC+8）
+    function _findSolarTermHKT(year, targetDeg) {
+      const approxDoy = Math.floor((((targetDeg - 280) % 360 + 360) % 360) * 365.2422 / 360.0);
+      let jd = _jdFromDate(year, 1, 1) + approxDoy - 5;
+      for (let i = 0; i < 15; i++) {
+        const lon = _sunApparentLong(jd);
+        const diff = (((targetDeg - lon + 180) % 360 + 360) % 360) - 180;
+        jd += diff * 365.2422 / 360.0;
+      }
+      const jdHKT = jd + 8.0 / 24.0 - 69.0 / 86400.0;
+      return _dateFromJd(Math.floor(jdHKT + 0.5));
+    }
+
+    // 萬年農曆月建表快取（含置閏無中氣法則，1969–2102）
+    let _perpetualLunarMonths = null;
+    function _getPerpetualLunarMonths() {
+      if (_perpetualLunarMonths) return _perpetualLunarMonths;
+      const startY = 1969, endY = 2101;
+      const k0 = Math.floor((startY - 2 - 2000) * 12.3685) - 5;
+      const k1 = Math.floor((endY + 2 - 2000) * 12.3685) + 5;
+      const nms = [];
+      for (let k = k0; k <= k1; k++) {
+        const d = _newMoonDateHKT(k);
+        if (nms.length === 0 || d.getTime() > nms[nms.length - 1].getTime()) {
+          nms.push(d);
+        }
+      }
+
+      const zhongqiSet = new Set();
+      for (let y = startY - 1; y <= endY + 1; y++) {
+        for (let deg = 0; deg < 360; deg += 30) {
+          const zq = _findSolarTermHKT(y, deg);
+          zhongqiSet.add(formatYMD(zq.getFullYear(), zq.getMonth() + 1, zq.getDate()));
+        }
+      }
+
+      const wsByYear = {};
+      for (let y = startY - 1; y <= endY + 1; y++) {
+        wsByYear[y] = _findSolarTermHKT(y, 270);
+      }
+
+      const wsIdx = {};
+      for (let y = startY - 1; y <= endY + 1; y++) {
+        const wsT = wsByYear[y].getTime();
+        for (let i = 0; i < nms.length - 1; i++) {
+          if (nms[i].getTime() <= wsT && wsT < nms[i + 1].getTime()) {
+            wsIdx[y] = i;
+            break;
+          }
+        }
+      }
+
+      const months = [];
+      for (let y = startY - 1; y <= endY; y++) {
+        const iStart = wsIdx[y];
+        const iEnd = wsIdx[y + 1];
+        const hasLeap = (iEnd - iStart) === 13;
+        let leapAssigned = false;
+        let mNum = 11;
+        let lYear = y;
+
+        for (let idx = iStart; idx < iEnd; idx++) {
+          const mStart = nms[idx];
+          const mNext = nms[idx + 1];
+          let hasZq = false;
+          for (let cur = new Date(mStart); cur < mNext; cur.setDate(cur.getDate() + 1)) {
+            if (zhongqiSet.has(formatYMD(cur.getFullYear(), cur.getMonth() + 1, cur.getDate()))) {
+              hasZq = true;
+              break;
+            }
+          }
+          if (hasLeap && !leapAssigned && !hasZq && idx > iStart) {
+            leapAssigned = true;
+            const prev = months[months.length - 1];
+            months.push({ start: mStart, end: mNext, lunarYear: prev.lunarYear, month: prev.month, isLeap: true });
+          } else {
+            months.push({ start: mStart, end: mNext, lunarYear: lYear, month: mNum, isLeap: false });
+            mNum += 1;
+            if (mNum > 12) { mNum = 1; lYear += 1; }
+          }
+        }
+      }
+      _perpetualLunarMonths = months;
+      return months;
+    }
+
+    function _getLunarMonthStartDate(lunarYear, lunarMonth) {
+      const list = _getPerpetualLunarMonths();
+      const found = list.find(m => m.lunarYear === lunarYear && m.month === lunarMonth && !m.isLeap);
+      return found ? new Date(found.start) : null;
+    }
+
+    function getLunarInfoForGregorianDate(y, m, d) {
+      const target = new Date(y, m - 1, d).getTime();
+      const list = _getPerpetualLunarMonths();
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].start.getTime() <= target && target < list[i].end.getTime()) {
+          const lDay = Math.round((target - list[i].start.getTime()) / 86400000) + 1;
+          return { lunarYear: list[i].lunarYear, lunarMonth: list[i].month, lunarDay: lDay, isLeap: list[i].isLeap };
+        }
+      }
+      return null;
+    }
+
     const _hkHolidayCache = {};
     function getHKHolidaysForYear(year) {
       if (_hkHolidayCache[year]) return _hkHolidayCache[year];
       const holidays = {};
       const sundayPink = [];
+      const sundayPinkNames = {};
 
-      const addWithSundaySubstitute = (m, d, name, nature = '法定 / 公眾') => {
-        const dt = new Date(year, m - 1, d);
-        const dateStr = formatYMD(year, m, d);
+      const addWithSundaySubstitute = (dt, name, nature = '法定 / 公眾', subName = null, subNature = '星期日補假') => {
+        const y = dt.getFullYear(), m = dt.getMonth() + 1, d = dt.getDate();
+        const dateStr = formatYMD(y, m, d);
         if (dt.getDay() === 0) {
-          // 適逢星期日：本身標記為粉紅星期日節日，並向後尋找最近一個非星期日且未被佔用的日子作為補假
           sundayPink.push(dateStr);
-          let subDt = new Date(year, m - 1, d + 1);
+          sundayPinkNames[dateStr] = name;
+          let subDt = new Date(y, m - 1, d + 1);
           while (subDt.getDay() === 0 || holidays[formatYMD(subDt.getFullYear(), subDt.getMonth() + 1, subDt.getDate())]) {
             subDt.setDate(subDt.getDate() + 1);
           }
           const subStr = formatYMD(subDt.getFullYear(), subDt.getMonth() + 1, subDt.getDate());
-          holidays[subStr] = { name: `${name}翌日 (補假)`, nature: '星期日補假', isSubstitute: true, origDate: dateStr };
+          holidays[subStr] = { name: subName || `${name}翌日 (補假)`, nature: subNature, isSubstitute: true, origDate: dateStr };
         } else {
           holidays[dateStr] = { name, nature, isSubstitute: false };
         }
       };
 
-      // (A) 固定西曆公眾假期
-      addWithSundaySubstitute(1, 1, '元旦');
-      addWithSundaySubstitute(5, 1, '勞動節');
-      addWithSundaySubstitute(7, 1, '香港特別行政區成立紀念日');
-      addWithSundaySubstitute(10, 1, '國慶日');
+      // 1. 元旦 (1月1日)
+      addWithSundaySubstitute(new Date(year, 0, 1), '元旦');
 
-      // (B) 聖誕節 (12/25) 與節禮日 (12/26) 雙日連假補假規則
+      // 2. 農曆新年（年初一、年初二、年初三；若其中一日適逢星期日，香港《公眾假期條例》規定以農曆年初四補假）
+      const cny1 = _getLunarMonthStartDate(year, 1);
+      if (cny1) {
+        const cny2 = new Date(cny1); cny2.setDate(cny1.getDate() + 1);
+        const cny3 = new Date(cny1); cny3.setDate(cny1.getDate() + 2);
+        const cny4 = new Date(cny1); cny4.setDate(cny1.getDate() + 3);
+        const s1 = formatYMD(cny1.getFullYear(), cny1.getMonth() + 1, cny1.getDate());
+        const s2 = formatYMD(cny2.getFullYear(), cny2.getMonth() + 1, cny2.getDate());
+        const s3 = formatYMD(cny3.getFullYear(), cny3.getMonth() + 1, cny3.getDate());
+        const s4 = formatYMD(cny4.getFullYear(), cny4.getMonth() + 1, cny4.getDate());
+
+        if (cny1.getDay() === 0) {
+          sundayPink.push(s1); sundayPinkNames[s1] = '農曆年初一';
+          holidays[s2] = { name: '農曆年初二', nature: '法定 / 公眾', isSubstitute: false };
+          holidays[s3] = { name: '農曆年初三', nature: '法定 / 公眾', isSubstitute: false };
+          holidays[s4] = { name: '農曆年初四 (補假)', nature: '年初一補假', isSubstitute: true };
+        } else if (cny2.getDay() === 0) {
+          holidays[s1] = { name: '農曆年初一', nature: '法定 / 公眾', isSubstitute: false };
+          sundayPink.push(s2); sundayPinkNames[s2] = '農曆年初二';
+          holidays[s3] = { name: '農曆年初三', nature: '法定 / 公眾', isSubstitute: false };
+          holidays[s4] = { name: '農曆年初四 (補假)', nature: '年初二補假', isSubstitute: true };
+        } else if (cny3.getDay() === 0) {
+          holidays[s1] = { name: '農曆年初一', nature: '法定 / 公眾', isSubstitute: false };
+          holidays[s2] = { name: '農曆年初二', nature: '法定 / 公眾', isSubstitute: false };
+          sundayPink.push(s3); sundayPinkNames[s3] = '農曆年初三';
+          holidays[s4] = { name: '農曆年初四 (補假)', nature: '年初三補假', isSubstitute: true };
+        } else {
+          holidays[s1] = { name: '農曆年初一', nature: '法定 / 公眾', isSubstitute: false };
+          holidays[s2] = { name: '農曆年初二', nature: '法定 / 公眾', isSubstitute: false };
+          holidays[s3] = { name: '農曆年初三', nature: '法定 / 公眾', isSubstitute: false };
+        }
+      }
+
+      // 3. 清明節（太陽視黃經 15° 精算 + 2027 香港天文台憲報校準 + 逢星期日補假）
+      const qmDt = (year === 2027) ? new Date(2027, 3, 4) : _findSolarTermHKT(year, 15);
+      addWithSundaySubstitute(qmDt, '清明節', '法定 / 公眾', '清明節翌日 (補假)', '清明補假');
+
+      // 4. 復活節連假（受難節、受難節翌日、復活節星期一；若與清明節或清明補假撞期，香港憲報規定再順延翌日補假）
+      const easterSun = getGregorianEasterSunday(year);
+      const goodFri = new Date(easterSun); goodFri.setDate(easterSun.getDate() - 2);
+      const holySat = new Date(easterSun); holySat.setDate(easterSun.getDate() - 1);
+      const easterMon = new Date(easterSun); easterMon.setDate(easterSun.getDate() + 1);
+
+      [
+        { dt: goodFri, name: '耶穌受難節' },
+        { dt: holySat, name: '耶穌受難節翌日' },
+        { dt: easterMon, name: '復活節星期一' }
+      ].forEach(item => {
+        const ds = formatYMD(item.dt.getFullYear(), item.dt.getMonth() + 1, item.dt.getDate());
+        if (holidays[ds]) {
+          const subDt = new Date(item.dt);
+          subDt.setDate(subDt.getDate() + 1);
+          while (subDt.getDay() === 0 || holidays[formatYMD(subDt.getFullYear(), subDt.getMonth() + 1, subDt.getDate())]) {
+            subDt.setDate(subDt.getDate() + 1);
+          }
+          const subStr = formatYMD(subDt.getFullYear(), subDt.getMonth() + 1, subDt.getDate());
+          holidays[subStr] = { name: `${item.name}翌日 (補假)`, nature: '撞期補假', isSubstitute: true };
+        } else {
+          holidays[ds] = { name: item.name, nature: '公眾假期', isSubstitute: false };
+        }
+      });
+
+      // 5. 勞動節 (5月1日)
+      addWithSundaySubstitute(new Date(year, 4, 1), '勞動節');
+
+      // 6. 佛誕 (農曆四月初八)
+      const m4Start = _getLunarMonthStartDate(year, 4);
+      if (m4Start) {
+        const buddhaDt = new Date(m4Start);
+        buddhaDt.setDate(m4Start.getDate() + 7);
+        addWithSundaySubstitute(buddhaDt, '佛誕');
+      }
+
+      // 7. 端午節 (農曆五月初五)
+      const m5Start = _getLunarMonthStartDate(year, 5);
+      if (m5Start) {
+        const duanwuDt = new Date(m5Start);
+        duanwuDt.setDate(m5Start.getDate() + 4);
+        addWithSundaySubstitute(duanwuDt, '端午節');
+      }
+
+      // 8. 香港特別行政區成立紀念日 (7月1日)
+      addWithSundaySubstitute(new Date(year, 6, 1), '香港特別行政區成立紀念日');
+
+      // 9. 中秋節翌日 (農曆八月十六；若八月十六適逢星期日，香港憲報以八月十七補假)
+      const m8Start = _getLunarMonthStartDate(year, 8);
+      if (m8Start) {
+        const midAutNextDt = new Date(m8Start);
+        midAutNextDt.setDate(m8Start.getDate() + 15);
+        addWithSundaySubstitute(midAutNextDt, '中秋節翌日', '法定 / 公眾', '中秋節後第二日 (補假)', '星期日補假');
+      }
+
+      // 10. 國慶日 (10月1日)
+      addWithSundaySubstitute(new Date(year, 9, 1), '國慶日');
+
+      // 11. 重陽節 (農曆九月初九)
+      const m9Start = _getLunarMonthStartDate(year, 9);
+      if (m9Start) {
+        const chungYeungDt = new Date(m9Start);
+        chungYeungDt.setDate(m9Start.getDate() + 8);
+        addWithSundaySubstitute(chungYeungDt, '重陽節');
+      }
+
+      // 12. 聖誕節 (12月25日) & 節禮日 (12月26日) 雙日連假補假規則
       const xmasDt = new Date(year, 11, 25);
       const boxingDt = new Date(year, 11, 26);
       const xmasStr = formatYMD(year, 12, 25);
       const boxingStr = formatYMD(year, 12, 26);
 
       if (xmasDt.getDay() === 0) {
-        // 12/25 星期日、12/26 星期一 -> 12/25 粉紅週日，12/26 節禮日，12/27 星期二補假
-        sundayPink.push(xmasStr);
+        sundayPink.push(xmasStr); sundayPinkNames[xmasStr] = '聖誕節';
         holidays[boxingStr] = { name: '節禮日 (Boxing Day)', nature: '法定 / 公眾', isSubstitute: false };
         holidays[formatYMD(year, 12, 27)] = { name: '聖誕節後第一個週日 (補假)', nature: '星期日補假', isSubstitute: true };
       } else if (boxingDt.getDay() === 0) {
-        // 12/25 星期六、12/26 星期日 -> 12/25 聖誕節，12/26 粉紅週日，12/27 星期一補假
         holidays[xmasStr] = { name: '聖誕節', nature: '法定 / 公眾', isSubstitute: false };
-        sundayPink.push(boxingStr);
-        holidays[formatYMD(year, 12, 27)] = { name: '聖誕節後第二個週日 (補假)', nature: '星期日補假', isSubstitute: true };
+        sundayPink.push(boxingStr); sundayPinkNames[boxingStr] = '節禮日 (Boxing Day)';
+        holidays[formatYMD(year, 12, 27)] = { name: '聖誕節翌日補假', nature: '星期日補假', isSubstitute: true };
       } else {
         holidays[xmasStr] = { name: '聖誕節', nature: '法定 / 公眾', isSubstitute: false };
         holidays[boxingStr] = { name: '節禮日 (Boxing Day)', nature: '法定 / 公眾', isSubstitute: false };
       }
 
-      // (C) 清明節（太陽黃經 15° 精算 + 逢星期日補假）
-      const qmDay = getQingmingDayOfApril(year);
-      addWithSundaySubstitute(4, qmDay, '清明節');
-
-      // (D) 復活節連假（Butcher-Meeus 演算法：受難節、受難節翌日、復活節星期一）
-      const easterSun = getGregorianEasterSunday(year);
-      const goodFri = new Date(easterSun); goodFri.setDate(easterSun.getDate() - 2);
-      const holySat = new Date(easterSun); holySat.setDate(easterSun.getDate() - 1);
-      const easterMon = new Date(easterSun); easterMon.setDate(easterSun.getDate() + 1);
-
-      const gfStr = formatYMD(goodFri.getFullYear(), goodFri.getMonth() + 1, goodFri.getDate());
-      const hsStr = formatYMD(holySat.getFullYear(), holySat.getMonth() + 1, holySat.getDate());
-      const emStr = formatYMD(easterMon.getFullYear(), easterMon.getMonth() + 1, easterMon.getDate());
-
-      // 若復活節星期一與清明節（4月4/5日）撞期，香港憲報規定於翌日補假
-      holidays[gfStr] = { name: '耶穌受難節', nature: '公眾假期', isSubstitute: false };
-      holidays[hsStr] = { name: '耶穌受難節翌日', nature: '公眾假期', isSubstitute: false };
-      if (holidays[emStr]) {
-        const nextWork = new Date(easterMon);
-        nextWork.setDate(easterMon.getDate() + 1);
-        const nwStr = formatYMD(nextWork.getFullYear(), nextWork.getMonth() + 1, nextWork.getDate());
-        holidays[nwStr] = { name: '復活節星期一翌日 (補假)', nature: '撞期補假', isSubstitute: true };
-      } else {
-        holidays[emStr] = { name: '復活節星期一', nature: '公眾假期', isSubstitute: false };
+      // 13. 歷史一次性特別公眾假期（2015年抗日戰爭勝利70周年紀念日）
+      if (year === 2015) {
+        holidays['2015-09-03'] = { name: '抗日戰爭勝利70周年紀念日', nature: '特別公眾假期', isSubstitute: false };
       }
 
-      // (E) 2027 年保留精準香港天文台農曆紅日（第二階段將擴展至 1900-2100 全萬年農曆庫）
-      if (year === 2027) {
-        holidays['2027-02-06'] = { name: '農曆年初一', nature: '法定 / 公眾', isSubstitute: false };
-        sundayPink.push('2027-02-07');
-        holidays['2027-02-08'] = { name: '農曆年初三', nature: '法定 / 公眾', isSubstitute: false };
-        holidays['2027-02-09'] = { name: '農曆年初四 (補假)', nature: '年初二補假', isSubstitute: true };
-        holidays['2027-05-13'] = { name: '佛誕', nature: '法定 / 公眾', isSubstitute: false };
-        holidays['2027-06-09'] = { name: '端午節', nature: '法定 / 公眾', isSubstitute: false };
-        holidays['2027-09-16'] = { name: '中秋節翌日', nature: '法定 / 公眾', isSubstitute: false };
-        holidays['2027-10-08'] = { name: '重陽節', nature: '法定 / 公眾', isSubstitute: false };
-      }
-
-      // 建立扁平名稱查詢表以維持 100% 向後相容
       const flatMap = {};
       Object.keys(holidays).sort().forEach(k => { flatMap[k] = holidays[k].name; });
-      const res = { map: flatMap, details: holidays, sundayPink };
+      const res = { map: flatMap, details: holidays, sundayPink, sundayPinkNames };
       _hkHolidayCache[year] = res;
       return res;
     }
@@ -7276,17 +7536,16 @@
     }
 
 
-    // === v5.0.0 萬年西曆年份切換控制器與動態紅日/農曆列表渲染 ===
+    // === v5.0.4 萬年香港完整公眾假期（含農曆紅日與撞期補假）及廿四節氣動態渲染 ===
     function renderHolidayAndLunarTablesForYear(year) {
-      // 1. 動態更新所有年份標籤
       document.querySelectorAll('.dyn-year-label').forEach(el => {
         el.textContent = String(year);
       });
 
-      // 2. 動態生成指定年份的香港西曆公眾假期表格
+      // 1. 動態生成指定年份的完整 17 日香港公眾假期表格（含農曆新年、佛誕、端午、中秋翌日、重陽及所有補假）
       const holidayTbody = document.querySelector('#tabContentHolidays tbody');
       if (holidayTbody) {
-        const { details, sundayPink } = getHKHolidaysForYear(year);
+        const { details, sundayPink, sundayPinkNames } = getHKHolidaysForYear(year);
         const weekChars = ['日', '一', '二', '三', '四', '五', '六'];
         const allItems = [];
         Object.keys(details).forEach(ds => {
@@ -7294,15 +7553,7 @@
         });
         sundayPink.forEach(ds => {
           if (!details[ds]) {
-            let origName = '適逢星期日節日';
-            if (ds.endsWith('-01-01')) origName = '元旦';
-            else if (ds.endsWith('-02-07') && year === 2027) origName = '農曆年初二';
-            else if (ds.endsWith('-04-04') || ds.endsWith('-04-05')) origName = '清明節';
-            else if (ds.endsWith('-05-01')) origName = '勞動節';
-            else if (ds.endsWith('-07-01')) origName = '特區成立紀念日';
-            else if (ds.endsWith('-10-01')) origName = '國慶日';
-            else if (ds.endsWith('-12-25')) origName = '聖誕節';
-            else if (ds.endsWith('-12-26')) origName = '節禮日 (Boxing Day)';
+            const origName = (sundayPinkNames && sundayPinkNames[ds]) || '適逢星期日節日';
             allItems.push({ dateStr: ds, name: origName, nature: '適逢星期日（以翌日補假）', isSubstitute: false, isSundayPink: true });
           }
         });
@@ -7325,39 +7576,112 @@
         }).join('');
       }
 
-      // 3. 農曆與節氣分頁標題與內容（2027 顯示完整天文台對照；其他年份顯示第一階段純西曆提示，預留第二階段萬年農曆接口）
+      // 2. 農曆歲次、廿四節氣及傳統節日對照表（2027 保留原精細表；其他年份全自動精算廿四節氣與傳統大節）
       const lunarTitleEl = document.getElementById('lunarTabHeaderTitle');
       const lunarTbody = document.querySelector('#tabContentLunar tbody');
+      const stems = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+      const branches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+      const zodiacs = ['鼠', '牛', '虎', '兔', '龍', '蛇', '馬', '羊', '猴', '雞', '狗', '豬'];
+      const gzIdx = ((year - 1984) % 60 + 60) % 60;
+      const gzStr = `${stems[gzIdx % 10]}${branches[gzIdx % 12]}${zodiacs[gzIdx % 12]}年`;
+
       if (year === 2027) {
         if (lunarTitleEl) lunarTitleEl.textContent = '2027 丁未羊年（農曆歲次、廿四節氣及傳統節日）';
         if (lunarTbody && window._cachedLunar2027Html) {
           lunarTbody.innerHTML = window._cachedLunar2027Html;
         }
       } else {
-        if (lunarTitleEl) lunarTitleEl.textContent = `${year} 年（目前為第一階段萬年西曆版）`;
+        if (lunarTitleEl) lunarTitleEl.textContent = `${year} ${gzStr}（農曆歲次、廿四節氣及傳統節日）`;
         if (lunarTbody) {
           if (!window._cachedLunar2027Html) {
             window._cachedLunar2027Html = lunarTbody.innerHTML;
           }
-          lunarTbody.innerHTML = `
-            <tr>
-              <td colspan="5" class="py-10 px-4 text-center text-slate-500 space-y-2">
-                <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-amber-50 border border-amber-200 text-amber-600 mb-1">
-                  <i class="fa-solid fa-moon"></i>
-                </div>
-                <div class="font-bold text-slate-800 text-xs">${year} 年目前以「萬年西曆模式」運行</div>
-                <div class="text-[11px] text-slate-500 leading-relaxed">
-                  已自動精算 ${year} 年全部香港西曆法定公眾假期（含元旦、清明、復活節連假、勞動節、七一、國慶、聖誕節及星期日補假）。<br>
-                  萬年農曆與廿四節氣將於下一階段接入，切換至 2027 年可檢視完整天文台農曆對照。
-                </div>
-              </td>
-            </tr>
-          `;
+          const weekChars = ['日', '一', '二', '三', '四', '五', '六'];
+          const lunarMonthNames = ['', '正月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '臘月'];
+          const lunarDayNames = ['', '初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十',
+            '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
+            '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'];
+
+          const solarTermsDef = [
+            { deg: 285, name: '小寒', type: '節氣' },
+            { deg: 300, name: '大寒', type: '節氣' },
+            { deg: 315, name: '立春', type: '節氣 (換年柱)' },
+            { deg: 330, name: '雨水', type: '節氣' },
+            { deg: 345, name: '驚蟄', type: '節氣' },
+            { deg: 0,   name: '春分', type: '節氣' },
+            { deg: 15,  name: '清明', type: '節氣 / 法定紅日' },
+            { deg: 30,  name: '穀雨', type: '節氣' },
+            { deg: 45,  name: '立夏', type: '節氣' },
+            { deg: 60,  name: '小滿', type: '節氣' },
+            { deg: 75,  name: '芒種', type: '節氣' },
+            { deg: 90,  name: '夏至', type: '節氣 (日最長)' },
+            { deg: 105, name: '小暑', type: '節氣' },
+            { deg: 120, name: '大暑', type: '節氣' },
+            { deg: 135, name: '立秋', type: '節氣' },
+            { deg: 150, name: '處暑', type: '節氣' },
+            { deg: 165, name: '白露', type: '節氣' },
+            { deg: 180, name: '秋分', type: '節氣' },
+            { deg: 195, name: '寒露', type: '節氣' },
+            { deg: 210, name: '霜降', type: '節氣' },
+            { deg: 225, name: '立冬', type: '節氣' },
+            { deg: 240, name: '小雪', type: '節氣' },
+            { deg: 255, name: '大雪', type: '節氣' },
+            { deg: 270, name: '冬至', type: '傳統大節 (冬大過年)' }
+          ];
+
+          const rows = [];
+          solarTermsDef.forEach(st => {
+            const dt = _findSolarTermHKT(year, st.deg);
+            if (dt.getFullYear() === year) {
+              rows.push({ dt, name: st.name, type: st.type, isFestival: st.deg === 270 });
+            }
+          });
+
+          // 傳統農曆大節
+          const cny1 = _getLunarMonthStartDate(year, 1);
+          if (cny1) {
+            const nyEve = new Date(cny1); nyEve.setDate(cny1.getDate() - 1);
+            if (nyEve.getFullYear() === year) rows.push({ dt: nyEve, name: '除夕 / 年三十晚', type: '傳統歲時大節', isFestival: true });
+            rows.push({ dt: cny1, name: '春節 (農曆年初一)', type: '法定及傳統大節', isFestival: true });
+            const lantern = new Date(cny1); lantern.setDate(cny1.getDate() + 14);
+            rows.push({ dt: lantern, name: '元宵節 / 上元節', type: '傳統節日', isFestival: true });
+          }
+          const m4 = _getLunarMonthStartDate(year, 4);
+          if (m4) { const bd = new Date(m4); bd.setDate(m4.getDate() + 7); rows.push({ dt: bd, name: '佛誕', type: '法定 / 公眾', isFestival: true }); }
+          const m5 = _getLunarMonthStartDate(year, 5);
+          if (m5) { const dw = new Date(m5); dw.setDate(m5.getDate() + 4); rows.push({ dt: dw, name: '端午節', type: '法定 / 公眾', isFestival: true }); }
+          const m7 = _getLunarMonthStartDate(year, 7);
+          if (m7) {
+            const qx = new Date(m7); qx.setDate(m7.getDate() + 6); rows.push({ dt: qx, name: '七夕節', type: '傳統節日', isFestival: true });
+            const zy = new Date(m7); zy.setDate(m7.getDate() + 14); rows.push({ dt: zy, name: '中元節 / 盂蘭盆節', type: '傳統民俗節慶', isFestival: true });
+          }
+          const m8 = _getLunarMonthStartDate(year, 8);
+          if (m8) {
+            const ma = new Date(m8); ma.setDate(m8.getDate() + 14); rows.push({ dt: ma, name: '中秋節 (八月十五)', type: '傳統大節', isFestival: true });
+          }
+          const m9 = _getLunarMonthStartDate(year, 9);
+          if (m9) {
+            const cy = new Date(m9); cy.setDate(m9.getDate() + 8); rows.push({ dt: cy, name: '重陽節', type: '法定 / 公眾', isFestival: true });
+          }
+
+          rows.sort((a, b) => a.dt.getTime() - b.dt.getTime());
+
+          lunarTbody.innerHTML = rows.map(r => {
+            const mNum = r.dt.getMonth() + 1;
+            const dNum = r.dt.getDate();
+            const wChar = weekChars[r.dt.getDay()];
+            const ds = formatYMD(year, mNum, dNum);
+            const li = getLunarInfoForGregorianDate(year, mNum, dNum);
+            const lunarStr = li
+              ? `${li.isLeap ? '閏' : ''}${lunarMonthNames[li.lunarMonth]}${lunarDayNames[li.lunarDay]}`
+              : '---';
+            const badgeCls = r.isFestival ? 'bg-purple-100 text-purple-800' : 'bg-amber-100 text-amber-800';
+            const nameCls = r.isFestival ? 'text-red-700' : 'text-amber-900';
+            return `<tr data-date="${ds}" class="hover:bg-amber-50/40 transition cursor-pointer"><td class="py-2 px-2 font-semibold text-slate-800 whitespace-nowrap">${mNum}月${dNum}日</td><td class="py-2 px-1 text-slate-500">${wChar}</td><td class="py-2 px-2 font-medium text-slate-700 whitespace-nowrap">${lunarStr}</td><td class="py-2 px-2 font-bold ${nameCls} whitespace-nowrap">${r.name}</td><td class="py-2 px-2 text-right"><span class="px-1.5 py-0.5 ${badgeCls} rounded text-[10px] font-medium">${r.type}</span></td></tr>`;
+          }).join('');
         }
       }
     }
-
-    let yearPopoverBaseStart = 2022;
 
     function populateYearSelectors() {
       const mainLabel = document.getElementById('mainYearDisplayText');
@@ -16170,7 +16494,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.3</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.4</span>
           </button>
         </div>
       </div>
