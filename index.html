@@ -2176,8 +2176,8 @@
   </div>
 
   
-  <!-- Apple iOS 風格順序年份快速選擇浮層 (Year Picker Popover - 嚴格順序排列 1970-2100 + 排假藍點標記) -->
-  <div id="yearPickerPopover" class="fixed z-[95] hidden w-[276px] sm:w-[296px] rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-2xl p-3 select-none">
+  <!-- Apple iOS 風格順序年份快速選擇浮層 (極限萬年曆 1900–2200 · 年代快跳 ＋ 嚴格順序 12 宮格 ＋ 排假藍點) -->
+  <div id="yearPickerPopover" class="fixed z-[95] hidden w-[292px] sm:w-[316px] rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-2xl p-3 select-none">
     <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
       <button type="button" id="btnYearPagePrev" onclick="shiftYearPopoverPage(-12)" title="前 12 年"
               class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 flex items-center justify-center cursor-pointer">
@@ -2185,12 +2185,25 @@
       </button>
       <div class="text-center">
         <span id="yearPopoverRangeLabel" class="font-mono font-black text-xs text-slate-800">2022 – 2033</span>
-        <span class="block text-[9.5px] text-slate-400 font-medium">藍點表示該年已有排假紀錄</span>
+        <span class="block text-[9.5px] text-slate-400 font-medium">極限萬年曆 (1900–2200) · 藍點=已排假</span>
       </div>
       <button type="button" id="btnYearPageNext" onclick="shiftYearPopoverPage(12)" title="後 12 年"
               class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 flex items-center justify-center cursor-pointer">
         <i class="fa-solid fa-chevron-right text-[10px]"></i>
       </button>
+    </div>
+    <!-- 快速年代跳轉膠囊列 -->
+    <div class="flex items-center gap-1 overflow-x-auto custom-scroll-x pb-1.5 mb-2 border-b border-slate-100 text-[10px] font-mono">
+      <button type="button" onclick="jumpYearPopoverStart(1900)" class="shrink-0 px-1.5 py-0.5 rounded bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 font-bold cursor-pointer">1900s</button>
+      <button type="button" onclick="jumpYearPopoverStart(1950)" class="shrink-0 px-1.5 py-0.5 rounded bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 font-bold cursor-pointer">1950s</button>
+      <button type="button" onclick="jumpYearPopoverStart(1980)" class="shrink-0 px-1.5 py-0.5 rounded bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 font-bold cursor-pointer">1980s</button>
+      <button type="button" onclick="jumpYearPopoverStart(1990)" class="shrink-0 px-1.5 py-0.5 rounded bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 font-bold cursor-pointer">1990s</button>
+      <button type="button" onclick="jumpYearPopoverStart(2000)" class="shrink-0 px-1.5 py-0.5 rounded bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 font-bold cursor-pointer">2000s</button>
+      <button type="button" onclick="jumpYearPopoverStart(2020)" class="shrink-0 px-1.5 py-0.5 rounded bg-blue-50 hover:bg-blue-100 text-blue-700 font-extrabold cursor-pointer">2020s</button>
+      <button type="button" onclick="jumpYearPopoverStart(2030)" class="shrink-0 px-1.5 py-0.5 rounded bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 font-bold cursor-pointer">2030s</button>
+      <button type="button" onclick="jumpYearPopoverStart(2050)" class="shrink-0 px-1.5 py-0.5 rounded bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 font-bold cursor-pointer">2050s</button>
+      <button type="button" onclick="jumpYearPopoverStart(2100)" class="shrink-0 px-1.5 py-0.5 rounded bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 font-bold cursor-pointer">2100s</button>
+      <button type="button" onclick="jumpYearPopoverStart(2189)" class="shrink-0 px-1.5 py-0.5 rounded bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-700 font-bold cursor-pointer">2200</button>
     </div>
     <div id="yearPopoverGrid" class="grid grid-cols-3 gap-1.5"></div>
     <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
@@ -2206,11 +2219,11 @@
   </div>
 
   <footer class="text-center py-4 text-xs text-slate-400 mt-4 border-t border-slate-200 flex flex-wrap items-center justify-center gap-2">
-    <span>香港假期管理 · 萬年曆完整版</span>
+    <span>香港假期管理 · 極限萬年曆版 (1900–2200)</span>
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.0.4 更新日誌</span>
+      <span>v5.0.5 更新日誌</span>
     </button>
   </footer>
 
@@ -2252,7 +2265,7 @@
           <div>
             <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.4</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.5</span>
             </h3>
             
           </div>
@@ -2263,10 +2276,23 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.0.4 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.0.5 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.0.4（香港政府完整公眾假期庫 · 萬年農曆紅日 ＋ 撞期順延補假演算法）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">FULL HK GAZETTE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.0.5（極限萬年曆版 · 橫跨 1900–2200 年 301 年全天文精算 · 年代快跳膠囊）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">EXTREME 301Y</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🌌 全面解放至 1900–2200 年（橫跨 301 年）：零檔案體積負擔、全年份農曆節氣與香港公眾假期補假精算</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 極限 301 年全天文演算引擎（1900–2200 年）</b>：擴充朔望月建表與太陽視黃經節氣演算法至 1900 至 2200 年，每一年均完整支援香港法定公眾假期、農曆紅日、補假順延、天干地支生肖及廿四節氣。</li>
+            <li><b>② 年份選擇浮層新增「年代快跳膠囊列」</b>：一鍵直達 <code>1900s</code>、<code>1950s</code>、<code>1980s</code>、<code>1990s</code>、<code>2000s</code>、<code>2020s</code>、<code>2030s</code>、<code>2050s</code>、<code>2100s</code> 及 <code>2200</code>，跨世紀檢索秒速直達。</li>
+          </ul>
+        </div>
+
+        <!-- v5.0.4 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.0.4（香港政府完整公眾假期庫 · 萬年農曆紅日 ＋ 撞期順延補假演算法）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">FULL HK GAZETTE</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🗓️ 全面升級「香港政府歷年完整公眾假期庫（1970–2100）」：過去與未來每年 17 日法定／公眾假期 100% 齊全精準</div>
@@ -3683,7 +3709,7 @@
       </div>
 
       <div class="p-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-        <span class="font-mono text-[10px]">Version: 5.0.4</span>
+        <span class="font-mono text-[10px]">Version: 5.0.5</span>
         <button id="btnConfirmCloseChangelog" class="px-3 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold rounded-lg transition active:scale-95 shadow-2xs">
           關閉
         </button>
@@ -4299,7 +4325,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.0.4';
+    const APP_VERSION = '5.0.5';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -6054,7 +6080,7 @@
     let _perpetualLunarMonths = null;
     function _getPerpetualLunarMonths() {
       if (_perpetualLunarMonths) return _perpetualLunarMonths;
-      const startY = 1969, endY = 2101;
+      const startY = 1899, endY = 2201;
       const k0 = Math.floor((startY - 2 - 2000) * 12.3685) - 5;
       const k1 = Math.floor((endY + 2 - 2000) * 12.3685) + 5;
       const nms = [];
@@ -7695,7 +7721,7 @@
       const rangeLabel = document.getElementById('yearPopoverRangeLabel');
       if (!grid) return;
 
-      const startY = Math.max(1970, Math.min(2089, yearPopoverBaseStart));
+      const startY = Math.max(1900, Math.min(2189, yearPopoverBaseStart));
       yearPopoverBaseStart = startY;
       const endY = startY + 11;
       if (rangeLabel) rangeLabel.textContent = `${startY} – ${endY}`;
@@ -7743,7 +7769,7 @@
       }
 
       // 令當前選定年份永遠位於 12 宮格中間舒適位置，嚴格順序由小到大排列
-      yearPopoverBaseStart = Math.max(1970, Math.min(2089, selectedYear - 5));
+      yearPopoverBaseStart = Math.max(1900, Math.min(2189, selectedYear - 5));
       renderYearPopoverGrid();
 
       const anchor = source === 'overview'
@@ -7762,7 +7788,12 @@
     }
 
     function shiftYearPopoverPage(delta) {
-      yearPopoverBaseStart = Math.max(1970, Math.min(2089, yearPopoverBaseStart + delta));
+      yearPopoverBaseStart = Math.max(1900, Math.min(2189, yearPopoverBaseStart + delta));
+      renderYearPopoverGrid();
+    }
+
+    function jumpYearPopoverStart(baseYear) {
+      yearPopoverBaseStart = Math.max(1900, Math.min(2189, baseYear));
       renderYearPopoverGrid();
     }
 
@@ -7798,7 +7829,7 @@
     }
 
     function changeCalendarYear(newYear, slideDir = 0) {
-      const target = Math.max(1970, Math.min(2100, parseInt(newYear, 10) || 2027));
+      const target = Math.max(1900, Math.min(2200, parseInt(newYear, 10) || 2027));
       if (target === selectedYear && document.getElementById('calendarContainer')?.children.length > 0) {
         populateYearSelectors();
         return;
@@ -16494,7 +16525,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.4</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.5</span>
           </button>
         </div>
       </div>
