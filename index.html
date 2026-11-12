@@ -5,7 +5,7 @@
   
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="referrer" content="no-referrer">
   <title>香港假期管理</title>
   <!-- 自訂 App 桌面圖示 (iOS + Android 通用 Apple 簡約日曆藍點 Icon) -->
@@ -42,40 +42,40 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* === HKG 香港機場登機閘口柱 (Boarding Gate Pillar) 經典主題（0px 零位移 · 絕對相同盒模型尺寸） === */
-    /* 注意：此區塊嚴禁修改任何 padding、margin、border-width、height 或 display，確保切換時像素級 0px 走位 */
+    /* === HKG 香港機場登機閘口柱 (Boarding Gate Pillar) 實景精準取色主題（0px 零位移 · 絕對相同盒模型尺寸） === */
+    /* 實景取色：柱身鈷藍 #2E49A3 · 閘口鮮黃 #FBF238 · 目的地看板酒紅 #992942 */
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-card {
-      border-color: #42406B !important;
+      border-color: #203895 !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-header {
-      background-color: #42406B !important;
-      border-bottom-color: #93c5fd !important;
+      background-color: #2E49A3 !important;
+      border-bottom-color: #60a5fa !important;
     }
+    /* 頂部左側「去程/回程」：無邊框純白字（兩個主題保持相同無外框盒模型） */
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-badge {
-      background-color: rgba(255, 255, 255, 0.14) !important;
-      color: #F8EE00 !important;
-      box-shadow: inset 0 0 0 1px rgba(248, 238, 0, 0.45) !important;
-    }
-    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-badge-dot {
-      background-color: #F8EE00 !important;
-    }
-    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-no-box {
-      background-color: rgba(255, 255, 255, 0.12) !important;
-      border-color: rgba(248, 238, 0, 0.65) !important;
-    }
-    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-no-input {
-      color: #F8EE00 !important;
-    }
-    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-no-input::placeholder {
-      color: rgba(248, 238, 0, 0.55) !important;
-    }
-    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-date-chip {
-      background-color: rgba(255, 255, 255, 0.14) !important;
-      border-color: rgba(255, 255, 255, 0.28) !important;
       color: #ffffff !important;
     }
-    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-date-chip i {
-      color: #F8EE00 !important;
+    /* 頂部左側下方航班號輸入框：純白字（HKG 閘口柱） */
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-no-box {
+      background-color: rgba(255, 255, 255, 0.14) !important;
+      border-color: rgba(255, 255, 255, 0.48) !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-no-input {
+      color: #ffffff !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-no-input::placeholder {
+      color: rgba(255, 255, 255, 0.62) !important;
+    }
+    /* 頂部右側日期：在 HKG 閘口柱下化身為「41」登機閘口超大鮮黃數字（如 1225）＋ 下方極細字（12月 / 25日 週五） */
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-date-chip {
+      background-color: transparent !important;
+      border-color: transparent !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-gate-boarding-view {
+      display: none !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-gate-pillar-view {
+      display: flex !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-airline-row {
       background-color: #ffffff !important;
@@ -91,32 +91,32 @@
       border-top: 1px solid transparent;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-dest-board {
-      background-color: #B4232C !important;
-      border-top-color: #991b1b !important;
+      background-color: #992942 !important;
+      border-top-color: #7A1E33 !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-city-input {
-      color: #F8EE00 !important;
+      color: #FBF238 !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-city-input::placeholder {
-      color: rgba(248, 238, 0, 0.55) !important;
+      color: rgba(251, 242, 56, 0.58) !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-iata-pill {
       background-color: rgba(0, 0, 0, 0.28) !important;
       color: #ffffff !important;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28) !important;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32) !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-airport-sub {
-      color: rgba(255, 255, 255, 0.94) !important;
+      color: rgba(255, 255, 255, 0.95) !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer {
-      background-color: #42406B !important;
-      border-top-color: #93c5fd !important;
+      background-color: #2E49A3 !important;
+      border-top-color: #60a5fa !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer-btn-clear {
-      color: #fca5a5 !important;
+      color: #fecdd3 !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer-btn-clear:hover {
-      background-color: rgba(255, 255, 255, 0.1) !important;
+      background-color: rgba(255, 255, 255, 0.12) !important;
       color: #ffffff !important;
     }
 
@@ -1550,6 +1550,31 @@
       background: linear-gradient(90deg, #0284c7 0%, #2563eb 100%) !important;
       box-shadow: 0 1.5px 4px rgba(2, 132, 199, 0.35) !important;
     }
+
+    /* === 徹底防止 iPhone / iPad Safari 點擊輸入框自動放大網頁 === */
+    @media screen and (max-width: 768px) {
+      input[type="text"],
+      input[type="number"],
+      input[type="password"],
+      input[type="date"],
+      input[type="time"],
+      select,
+      textarea {
+        font-size: 16px !important;
+      }
+      /* 保持航班卡片緊湊視覺高度不變形 */
+      .flight-pillar-no-input {
+        height: 22px !important;
+        line-height: 22px !important;
+      }
+      #inputFlightOutDep,
+      #inputFlightOutArr,
+      #inputFlightInDep,
+      #inputFlightInArr {
+        font-size: 24px !important;
+      }
+    }
+
 </style>
   <!-- Leaflet.js 開源免金鑰地圖庫 -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -1566,19 +1591,10 @@
       <div class="flex items-center gap-1.5 min-w-0">
         <i id="overviewAppLogo" class="fa-solid fa-calendar-days text-indigo-600 shrink-0 text-sm transition-colors duration-300"></i>
         <span class="font-bold text-xs text-slate-800 truncate">香港假期管理</span>
-        <div id="overviewYearSwitcher" class="inline-flex items-center bg-slate-100/90 border border-slate-300/80 rounded-lg px-0.5 py-0.2 shrink-0">
-          <button type="button" onclick="changeCalendarYear(selectedYear - 1, -1)" title="上一年"
-                  class="w-5 h-5 rounded hover:bg-white text-slate-600 flex items-center justify-center cursor-pointer">
-            <i class="fa-solid fa-chevron-left text-[8px]"></i>
-          </button>
-          <button type="button" id="btnOpenOverviewYearPopover" onclick="toggleYearPickerPopover(event, 'overview')" title="點擊順序選擇年份"
-                  class="inline-flex items-center justify-center gap-0.5 w-[56px] h-5 rounded hover:bg-white font-mono font-black text-[11px] text-indigo-700 cursor-pointer select-none">
-            <span id="overviewYearDisplayText">2027年</span>
-            <i class="fa-solid fa-caret-down text-[8px] text-slate-400"></i>
-          </button>
-          <button type="button" onclick="changeCalendarYear(selectedYear + 1, 1)" title="下一年"
-                  class="w-5 h-5 rounded hover:bg-white text-slate-600 flex items-center justify-center cursor-pointer">
-            <i class="fa-solid fa-chevron-right text-[8px]"></i>
+        <div id="overviewYearSwitcher" class="inline-flex items-center shrink-0">
+          <button type="button" id="btnOpenOverviewYearPopover" onclick="toggleYearPickerPopover(event, 'overview')" title="點擊選擇年份"
+                  class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full bg-white hover:bg-slate-50 active:scale-95 border border-slate-300/90 shadow-[0_1px_4px_rgba(15,23,42,0.08)] font-extrabold tracking-tight text-xs text-slate-900 cursor-pointer select-none transition leading-none">
+            <span id="overviewYearDisplayText">2027</span>
           </button>
         </div>
       </div>
@@ -1707,19 +1723,10 @@
                 <span>年度日曆</span>
                 <span class="hidden sm:inline text-[10px] font-normal text-slate-400">（左右橫掃或點擊切換年份）</span>
               </div>
-              <div id="mainYearSwitcher" class="inline-flex items-center bg-slate-100/90 border border-slate-200/90 rounded-xl p-0.5 shadow-2xs">
-                <button type="button" id="btnPrevYear" onclick="changeCalendarYear(selectedYear - 1, -1)" title="上一年"
-                        class="w-6 h-6 rounded-lg hover:bg-white text-slate-600 hover:text-blue-600 flex items-center justify-center cursor-pointer">
-                  <i class="fa-solid fa-chevron-left text-[10px]"></i>
-                </button>
-                <button type="button" id="btnOpenMainYearPopover" onclick="toggleYearPickerPopover(event, 'main')" title="點擊順序選擇年份"
-                        class="inline-flex items-center justify-center gap-1 w-[74px] h-6 rounded-lg hover:bg-white font-mono font-black text-xs md:text-sm text-blue-700 cursor-pointer select-none">
-                  <span id="mainYearDisplayText">2027年</span>
-                  <i class="fa-solid fa-caret-down text-[9px] text-slate-400"></i>
-                </button>
-                <button type="button" id="btnNextYear" onclick="changeCalendarYear(selectedYear + 1, 1)" title="下一年"
-                        class="w-6 h-6 rounded-lg hover:bg-white text-slate-600 hover:text-blue-600 flex items-center justify-center cursor-pointer">
-                  <i class="fa-solid fa-chevron-right text-[10px]"></i>
+              <div id="mainYearSwitcher" class="inline-flex items-center shrink-0">
+                <button type="button" id="btnOpenMainYearPopover" onclick="toggleYearPickerPopover(event, 'main')" title="點擊選擇年份（亦支援左右橫掃切換）"
+                        class="inline-flex items-center justify-center px-3.5 py-1 rounded-full bg-white hover:bg-slate-50 active:scale-95 border border-slate-300/90 shadow-[0_2px_8px_-2px_rgba(15,23,42,0.12),inset_0_1px_0_rgba(255,255,255,1)] font-extrabold tracking-tight text-base md:text-lg text-slate-900 cursor-pointer select-none transition leading-none">
+                  <span id="mainYearDisplayText">2027</span>
                 </button>
               </div>
             </div>
@@ -2223,7 +2230,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.0.5 更新日誌</span>
+      <span>v5.0.10 更新日誌</span>
     </button>
   </footer>
 
@@ -2265,7 +2272,7 @@
           <div>
             <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.5</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.10</span>
             </h3>
             
           </div>
@@ -2276,10 +2283,83 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.0.5 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.0.10 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.0.5（極限萬年曆版 · 橫跨 1900–2200 年 301 年全天文精算 · 年代快跳膠囊）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">EXTREME 301Y</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.0.10（純淨極簡年份膠囊 · 修復手機版預訂憑證展開 · 全航空公司中英雙語 · 閘口鮮黃緊湊月日 · 防 iPhone 輸入自動放大）<span class="ml-1.5 px-1.5 py-0.2 bg-[#2E49A3] text-[#FBF238] rounded text-[9px] font-bold">MOBILE & GATE PRO</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 全面解決手機版預訂憑證展開與 iPhone 鍵盤自動放大問題，精修純淨年份膠囊與全航司中英雙語</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 純淨獨立年份膠囊（<code>2027</code>）</b>：移除左右箭嘴與小三角點，保留純黑特粗立體膠囊按鈕，點擊即可彈出年份網格或左右橫掃切年。</li>
+            <li><b>② 修復手機版「預訂憑證」點擊展開</b>：解除電腦側欄與手機彈窗同 ID 衝突，手機點擊「預訂憑證」即時流暢展開航班與住宿詳情。</li>
+            <li><b>③ 全航空公司強制「中文行先、英文行後」</b>：涵蓋阿聯酋航空（<code>阿聯酋航空 Emirates</code>）及全球 60+ 航司，無論系統核對或手動輸入均完整顯示中英雙語。</li>
+            <li><b>④ HKG 閘口柱鮮黃月日緊密泊合</b>：取消月與日之間的多餘空隙（如 2月6日顯示緊實的 <code>26</code>），視覺更完整統一。</li>
+            <li><b>⑤ 徹底鎖定手機版頁面比例防自動放大</b>：消除 iPhone Safari 點擊輸入框時的強制放大跳動，編輯過程畫面 100% 穩固。</li>
+          </ul>
+        </div>
+
+        <!-- v5.0.9 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.0.9（純淨年份選擇器精修 · 修復手機版預訂憑證彈窗層級遮擋 · 連假月份章戳絕對置中）<span class="ml-1.5 px-1.5 py-0.2 bg-slate-900 text-white rounded text-[9px] font-bold">UI & MOBILE FIX</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">✨ 精修年份切換器字型質感、根治手機端預訂憑證無法彈出問題，並校正連假月份章戳置中</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 萬年曆年份切換器升級</b>：移除「年」字改為純淨數字（如 <code>2027</code>），採用與月曆標題「<code>3月</code>」同款無襯線特粗純黑字體與精緻膠囊外框。</li>
+            <li><b>② 修復手機版預訂憑證無法彈出</b>：提升 <code>modalEditTripBooking</code> 彈窗層級至 <code>z-[75]</code>，解決從手機版「假期規劃」視窗內點擊預訂憑證被底層遮擋的問題。</li>
+            <li><b>③ 連假月份章戳大數字絕對置中</b>：將「<code>月</code>／<code>跨月</code>」細字改為絕對定位於大數字右側旁邊，確保月份主數字水平與垂直 100% 絕對置中。</li>
+          </ul>
+        </div>
+
+        <!-- v5.0.8 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.0.8（修復雙主題日期點擊選擇 · 去前導零超大鮮黃月日 · 班次旁三態無框驗證 · 底部右側雙字操作列）<span class="ml-1.5 px-1.5 py-0.2 bg-[#2E49A3] text-[#FBF238] rounded text-[9px] font-bold">GATE UX PRO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🛠️ 全面精修航班卡片交互與閘口柱細節：日期點擊即時喚起、鮮黃月日去前導零並放大、無框即時核對狀態</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 修復雙主題日期修改點擊</b>：為日期選擇器加上全覆蓋觸控層與原生 <code>showPicker()</code> 喚起，無論簡約登機牌或 HKG 閘口柱點擊右上角即可即時修改日期。</li>
+            <li><b>② 閘口柱超大鮮黃月日去前導零並再放大</b>：單數位月份或日期自動去掉前方「0」（如 5月9日 顯示為 <code>5 9</code>），鮮黃字體放大至 <code>34px–38px</code>。</li>
+            <li><b>③ 班次輸入框旁無外框即時三態提示</b>：輸入時極細顯示「<code>確認中</code>」，核對成功顯示「<code>已確認 ●</code>（綠點）」，查無資料則顯示灰色「<code>未有資料</code>」。</li>
+            <li><b>④ 底部右側雙字操作列</b>：「<code>編輯</code>」與「<code>清空</code>」並排靠右，版面更俐落對稱。</li>
+          </ul>
+        </div>
+
+        <!-- v5.0.7 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.0.7（HKG 閘口柱與簡約登機牌同尺寸結構精修 · 閘口超大鮮黃日期 1225 ＋ 極細月日標註）<span class="ml-1.5 px-1.5 py-0.2 bg-[#2E49A3] text-[#FBF238] rounded text-[9px] font-bold">HKG GATE 1225</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🛫 雙主題外框與內部排版 100% 嚴格等尺寸零位移，HKG 閘口柱右上角化身機場登機閘口超大鮮黃數字牌</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 左上角純白無框標題 ＋ 下方白字班次輸入</b>：取消「去程 / 回程」多餘膠囊外框改為純淨文字，正下方配置航班編號輸入框（HKG 閘口柱下輸入字體為純白色）。</li>
+            <li><b>② 動態按鍵移至航空公司列最右側</b>：<code>動態 ↗</code> 按鈕移落航空公司列最右端，釋放頂部空間。</li>
+            <li><b>③ 右上角閘口超大鮮黃純數字日期（如 <code>1225</code>）</b>：HKG 閘口柱模式下，右上角模仿實景閘口號碼顯示超大鮮黃純數字（例如 12月25日顯示 <code>1225</code>），並於 <code>12</code> 與 <code>25</code> 正下方各自配置極細字標註（<code>12月</code> / <code>25日 週五</code>），點擊即可修改日期。</li>
+          </ul>
+        </div>
+
+        <!-- v5.0.6 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.0.6（HKG 登機閘口柱實景像素精準取色 · 寶石鈷藍＋經典鮮黃＋深酒紅還原）<span class="ml-1.5 px-1.5 py-0.2 bg-[#2E49A3] text-[#FBF238] rounded text-[9px] font-bold">HKG TRUE COLOR</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎨 依據香港國際機場（HKG）實景登機閘口柱照片直接像素取色，還原最純正的機場色彩</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 柱身鈷藍（<code>#2E49A3</code>）</b>：取代原先偏灰紫的暗色調，還原香港機場閘口柱標誌性的純正寶石鈷藍色頂蓋與底座。</li>
+            <li><b>② 閘口與航點鮮黃（<code>#FBF238</code>）</b>：高飽和度機場專用亮黃大字，與鈷藍及酒紅底板形成極致高對比。</li>
+            <li><b>③ 目的地看板深酒紅（<code>#992942</code>）</b>：精準校色為實景照片中沉穩典雅的深玫酒紅色，質感逼真。</li>
+          </ul>
+        </div>
+
+        <!-- v5.0.5 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.0.5（極限萬年曆版 · 橫跨 1900–2200 年 301 年全天文精算 · 年代快跳膠囊）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">EXTREME 301Y</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🌌 全面解放至 1900–2200 年（橫跨 301 年）：零檔案體積負擔、全年份農曆節氣與香港公眾假期補假精算</div>
@@ -3709,7 +3789,7 @@
       </div>
 
       <div class="p-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-        <span class="font-mono text-[10px]">Version: 5.0.5</span>
+        <span class="font-mono text-[10px]">Version: 5.0.10</span>
         <button id="btnConfirmCloseChangelog" class="px-3 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold rounded-lg transition active:scale-95 shadow-2xs">
           關閉
         </button>
@@ -4325,7 +4405,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.0.5';
+    const APP_VERSION = '5.0.10';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -6826,6 +6906,8 @@
       'HX283': { dep: '20:40', arr: '22:45', from: 'TPE 台北桃園', to: 'HKG 香港', airline: '香港航空' },
       'EK385': { dep: '21:30', arr: '23:45', from: 'HKG 香港', to: 'BKK 曼谷素萬那普', airline: '阿聯酋航空' },
       'EK384': { dep: '14:05', arr: '18:05', from: 'BKK 曼谷素萬那普', to: 'HKG 香港', airline: '阿聯酋航空' },
+      'EK386': { dep: '14:15', arr: '18:05', from: 'BKK 曼谷素萬那普', to: 'HKG 香港', airline: '阿聯酋航空' },
+      'EK387': { dep: '21:15', arr: '23:25', from: 'HKG 香港', to: 'BKK 曼谷素萬那普', airline: '阿聯酋航空' },
       'EK381': { dep: '00:35', arr: '05:40', from: 'HKG 香港', to: 'DXB 杜拜', airline: '阿聯酋航空' },
       'EK380': { dep: '10:45', arr: '22:00', from: 'DXB 杜拜', to: 'HKG 香港', airline: '阿聯酋航空' },
       'EK383': { dep: '19:10', arr: '00:05', from: 'HKG 香港', to: 'DXB 杜拜', airline: '阿聯酋航空' },
@@ -7712,8 +7794,8 @@
     function populateYearSelectors() {
       const mainLabel = document.getElementById('mainYearDisplayText');
       const ovLabel = document.getElementById('overviewYearDisplayText');
-      if (mainLabel) mainLabel.textContent = `${selectedYear}年`;
-      if (ovLabel) ovLabel.textContent = `${selectedYear}年`;
+      if (mainLabel) mainLabel.textContent = `${selectedYear}`;
+      if (ovLabel) ovLabel.textContent = `${selectedYear}`;
     }
 
     function renderYearPopoverGrid() {
@@ -9558,8 +9640,8 @@
       const monthEnList = ["", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
       const headerLabel = isCrossMonth ? `${monthEnList[startMonth]}-${monthEnList[endMonth]}` : `${monthEnList[startMonth]}`;
       const megaNumberHtml = isCrossMonth 
-        ? `<div class="month-mega-range">${startMonth}-${endMonth}</div><span class="text-[7.5px] font-bold text-slate-400 leading-none">跨月</span>`
-        : `<div class="month-mega-number">${startMonth}</div><span class="text-[8.5px] font-black text-slate-400 leading-none -mt-0.5">月</span>`;
+        ? `<div class="relative inline-flex items-baseline justify-center"><span class="month-mega-range">${startMonth}-${endMonth}</span><span class="absolute left-full bottom-[2px] ml-[2px] text-[7px] font-extrabold text-slate-400 leading-none whitespace-nowrap">跨月</span></div>`
+        : `<div class="relative inline-flex items-baseline justify-center"><span class="month-mega-number">${startMonth}</span><span class="absolute left-full bottom-[3px] ml-[2px] text-[8.5px] font-black text-slate-400 leading-none whitespace-nowrap">月</span></div>`;
 
       // 智慧比對國家/城市地標背景圖與獨立國旗 (v3.2.1 僅國家城市顯示國旗，非出國絕無任何圖章)
       const matchedDest = matchDestination(trip.title, trip);
@@ -9807,7 +9889,7 @@
             </div>
 
             <!-- 折疊憑證資訊卡 -->
-            <div id="walletDetails_${tripKey.replace(/-/g, '_')}" class="hidden mt-2 p-2.5 bg-slate-50/95 rounded-2xl border border-slate-200 space-y-2 text-[10.5px]">
+            <div class="wallet-details-panel hidden mt-2 p-2.5 bg-slate-50/95 rounded-2xl border border-slate-200 space-y-2 text-[10.5px]">
               ${outNo || inNo || bData.flightOut || bData.flightIn ? `
                 <div class="space-y-1.5">
                   <div class="flex items-center justify-between font-bold text-blue-900">
@@ -13147,15 +13229,15 @@ function setupYearOverviewToggle() {
 
         if (mode === 'system' || mode === true) {
           el.dataset.source = 'system';
-          el.style.color = isPillarNo ? '#F8EE00' : '#2563eb';
+          el.style.color = isPillarNo ? '#ffffff' : '#2563eb';
           el.style.fontWeight = '900';
         } else if (mode === 'manual') {
           el.dataset.source = 'manual';
-          el.style.color = isPillarNo ? '#F8EE00' : '#0f172a';
+          el.style.color = isPillarNo ? '#ffffff' : '#0f172a';
           el.style.fontWeight = '900';
         } else {
           delete el.dataset.source;
-          el.style.color = isPillarNo ? '#F8EE00' : '#94a3b8';
+          el.style.color = isPillarNo ? '#ffffff' : '#94a3b8';
           el.style.fontWeight = '700';
         }
       }
@@ -13225,7 +13307,38 @@ function setupYearOverviewToggle() {
         'QF': { zh: '澳洲航空', en: 'Qantas', color: 'bg-red-600' },
         'NZ': { zh: '新西蘭航空', en: 'Air New Zealand', color: 'bg-slate-900' },
         'AC': { zh: '加拿大航空', en: 'Air Canada', color: 'bg-red-600' },
-        'UA': { zh: '聯合航空', en: 'United Airlines', color: 'bg-blue-700' }
+        'UA': { zh: '聯合航空', en: 'United Airlines', color: 'bg-blue-700' },
+        'AA': { zh: '美國航空', en: 'American Airlines', color: 'bg-sky-700' },
+        'DL': { zh: '達美航空', en: 'Delta Air Lines', color: 'bg-blue-900' },
+        'EY': { zh: '阿提哈德航空', en: 'Etihad Airways', color: 'bg-amber-700' },
+        'FD': { zh: '泰國亞洲航空', en: 'Thai AirAsia', color: 'bg-red-600' },
+        'SL': { zh: '泰國獅子航空', en: 'Thai Lion Air', color: 'bg-rose-700' },
+        'VZ': { zh: '泰國越捷航空', en: 'Thai Vietjet Air', color: 'bg-red-500' },
+        'PG': { zh: '曼谷航空', en: 'Bangkok Airways', color: 'bg-sky-600' },
+        'GA': { zh: '印尼鷹航', en: 'Garuda Indonesia', color: 'bg-teal-700' },
+        'OD': { zh: '巴迪航空', en: 'Batik Air Malaysia', color: 'bg-purple-800' },
+        '7C': { zh: '濟州航空', en: 'Jeju Air', color: 'bg-orange-600' },
+        'BX': { zh: '釜山航空', en: 'Air Busan', color: 'bg-blue-600' },
+        'LJ': { zh: '真航空', en: 'Jin Air', color: 'bg-lime-600' },
+        'TW': { zh: '德威航空', en: "T'way Air", color: 'bg-red-600' },
+        'ZE': { zh: '易斯達航空', en: 'Eastar Jet', color: 'bg-rose-600' },
+        'YP': { zh: '普萊米婭航空', en: 'Air Premia', color: 'bg-slate-800' },
+        'CA': { zh: '中國國際航空', en: 'Air China', color: 'bg-red-700' },
+        'MU': { zh: '中國東方航空', en: 'China Eastern Airlines', color: 'bg-blue-800' },
+        'CZ': { zh: '中國南方航空', en: 'China Southern Airlines', color: 'bg-sky-600' },
+        'HO': { zh: '吉祥航空', en: 'Juneyao Air', color: 'bg-rose-700' },
+        '9C': { zh: '春秋航空', en: 'Spring Airlines', color: 'bg-emerald-600' },
+        'IT': { zh: '台灣虎航', en: 'Tigerair Taiwan', color: 'bg-amber-500' },
+        'B7': { zh: '立榮航空', en: 'UNI Air', color: 'bg-emerald-600' },
+        'AE': { zh: '華信航空', en: 'Mandarin Airlines', color: 'bg-sky-600' },
+        'BI': { zh: '汶萊皇家航空', en: 'Royal Brunei Airlines', color: 'bg-amber-500' },
+        'UL': { zh: '斯里蘭卡航空', en: 'SriLankan Airlines', color: 'bg-indigo-700' },
+        'AI': { zh: '印度航空', en: 'Air India', color: 'bg-red-700' },
+        '6E': { zh: '靛藍航空', en: 'IndiGo', color: 'bg-blue-700' },
+        'ET': { zh: '埃塞俄比亞航空', en: 'Ethiopian Airlines', color: 'bg-emerald-700' },
+        'SA': { zh: '南非航空', en: 'South African Airways', color: 'bg-emerald-800' },
+        'FJ': { zh: '斐濟航空', en: 'Fiji Airways', color: 'bg-stone-800' },
+        'PX': { zh: '新幾內亞航空', en: 'Air Niugini', color: 'bg-amber-600' }
       };
 
       // 純淨機場基礎資料（不寫死任何單一航廈，航廈由「航司 × 機場」規則精準決定）
@@ -13378,7 +13491,7 @@ function setupYearOverviewToggle() {
             btn.innerHTML = '<i class="fa-solid fa-check text-[8.5px]"></i><span>完成編輯</span>';
           } else {
             btn.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs';
-            btn.innerHTML = '<i class="fa-solid fa-pen text-[8.5px] text-blue-600"></i><span>編輯航線</span>';
+            btn.innerHTML = '<i class="fa-solid fa-pen text-[8.5px] text-blue-600"></i><span>編輯</span>';
           }
         }
       };
@@ -13390,6 +13503,35 @@ function setupYearOverviewToggle() {
         const d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
         const wdays = ['日', '一', '二', '三', '四', '五', '六'];
         return `${Number(parts[1])}月${Number(parts[2])}日 (${wdays[d.getDay()]})`;
+      }
+
+      function syncFlightGateDateDisplay(direction, dateStr) {
+        const isOut = direction === 'out';
+        const lbl = document.getElementById(isOut ? 'labelFlightOutDateDisplay' : 'labelFlightInDateDisplay');
+        if (lbl) lbl.textContent = formatFlightChipDate(dateStr);
+
+        const mDig = document.getElementById(isOut ? 'gateOutMonthDigits' : 'gateInMonthDigits');
+        const dDig = document.getElementById(isOut ? 'gateOutDayDigits' : 'gateInDayDigits');
+        const mSub = document.getElementById(isOut ? 'gateOutMonthSub' : 'gateInMonthSub');
+        const dSub = document.getElementById(isOut ? 'gateOutDaySub' : 'gateInDaySub');
+        if (!mDig || !dDig || !mSub || !dSub) return;
+
+        if (!dateStr || dateStr.split('-').length !== 3) {
+          mDig.textContent = '--';
+          dDig.textContent = '--';
+          mSub.textContent = '月份';
+          dSub.textContent = '日期';
+          return;
+        }
+        const parts = dateStr.split('-');
+        const mNum = Number(parts[1]);
+        const dNum = Number(parts[2]);
+        const dt = new Date(Number(parts[0]), mNum - 1, dNum);
+        const wdays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
+        mDig.textContent = String(mNum);
+        dDig.textContent = String(dNum);
+        mSub.textContent = `${mNum}月`;
+        dSub.textContent = `${dNum}日 ${wdays[dt.getDay()]}`;
       }
 
       function updateFlightStaySummaryBar() {
@@ -13531,9 +13673,13 @@ function setupYearOverviewToggle() {
         const isSystem = (mode === 'system' || mode === 'online');
         const isManual = (mode === 'manual' && cleanNo.length > 0);
 
-        const airlineMeta = AIRLINE_META_DB[carrier] || {
+        const matchedMetaByZh = (scheduleObj && scheduleObj.airline)
+          ? Object.values(AIRLINE_META_DB).find(m => m.zh === scheduleObj.airline || m.en.toUpperCase() === String(scheduleObj.airline).toUpperCase())
+          : null;
+        const resolvedMeta = AIRLINE_META_DB[carrier] || matchedMetaByZh;
+        const airlineMeta = resolvedMeta || {
           zh: (scheduleObj && scheduleObj.airline) || (cleanNo ? '自訂航班' : (direction === 'out' ? '待輸入去程航班' : '待輸入回程航班')),
-          en: cleanNo ? 'Custom Flight' : (direction === 'out' ? 'Outbound Flight' : 'Return Flight'),
+          en: cleanNo ? 'Custom Flight' : '',
           color: isSystem ? 'bg-blue-600' : (isManual ? 'bg-slate-800' : 'bg-slate-200')
         };
 
@@ -13550,13 +13696,15 @@ function setupYearOverviewToggle() {
           codeBadge.className = `w-6 h-6 rounded-md ${airlineMeta.color} ${textColor} font-black font-mono text-[10px] flex items-center justify-center shrink-0 shadow-2xs`;
         }
         if (nameLabel) {
-          const zhName = (scheduleObj && scheduleObj.airline) ? scheduleObj.airline : airlineMeta.zh;
+          const zhName = resolvedMeta ? resolvedMeta.zh : ((scheduleObj && scheduleObj.airline) ? scheduleObj.airline : airlineMeta.zh);
+          const enName = resolvedMeta ? resolvedMeta.en : (airlineMeta.en || '');
+          const bilingualHtml = enName ? `${zhName} <span class="font-semibold opacity-85">${enName}</span>` : `${zhName}`;
           if (isSystem) {
             nameLabel.className = 'text-xs font-extrabold text-blue-700 truncate';
-            nameLabel.innerHTML = `${zhName} <span class="font-semibold text-blue-600">${airlineMeta.en}</span>`;
+            nameLabel.innerHTML = bilingualHtml;
           } else if (isManual) {
             nameLabel.className = 'text-xs font-extrabold text-slate-900 truncate';
-            nameLabel.innerHTML = `${zhName}`;
+            nameLabel.innerHTML = bilingualHtml;
           } else {
             nameLabel.className = 'text-xs font-extrabold text-slate-400 truncate';
             nameLabel.innerHTML = `${zhName}`;
@@ -13574,11 +13722,16 @@ function setupYearOverviewToggle() {
         }
 
         if (verifyBox) {
-          if (isSystem) {
-            verifyBox.innerHTML = `
-              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[9.5px] font-bold">
-                <i class="fa-solid fa-check text-[8.5px]"></i> 已核對
-              </span>`;
+          const isPillarTheme = document.getElementById('flightSectionWrapper')?.classList.contains('hkg-pillar-theme');
+          if (mode === 'checking') {
+            const cls = isPillarTheme ? 'text-white/80' : 'text-slate-500';
+            verifyBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><i class="fa-solid fa-spinner fa-spin text-[8px]"></i>確認中</span>`;
+          } else if (isSystem) {
+            const cls = isPillarTheme ? 'text-white' : 'text-slate-800';
+            verifyBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><span>已確認</span><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shadow-2xs"></span></span>`;
+          } else if (isManual) {
+            const cls = isPillarTheme ? 'text-white/60' : 'text-slate-400';
+            verifyBox.innerHTML = `<span class="inline-flex items-center text-[9.5px] font-semibold ${cls} select-none">未有資料</span>`;
           } else {
             verifyBox.innerHTML = '';
           }
@@ -13675,8 +13828,7 @@ function setupYearOverviewToggle() {
         const labelId = dateId === 'inputFlightOutDate' ? 'labelFlightOutDateDisplay' : 'labelFlightInDateDisplay';
         if (el) {
           el.addEventListener('change', () => {
-            const lbl = document.getElementById(labelId);
-            if (lbl) lbl.textContent = formatFlightChipDate(el.value);
+            syncFlightGateDateDisplay(dateId === 'inputFlightOutDate' ? 'out' : 'in', el.value);
             updateFlightStaySummaryBar();
           });
         }
@@ -13716,21 +13868,33 @@ function setupYearOverviewToggle() {
         const isPillar = (themeName === 'pillar');
         wrapper.classList.toggle('hkg-pillar-theme', isPillar);
 
-        // 在閘口柱模式下，確保兩個航班號輸入框內聯顏色也切換為機場鮮黃
+        // 在閘口柱模式下，確保兩個航班號輸入框內聯顏色切換為純白色 (#ffffff)
         ['inputFlightOutNo', 'inputFlightInNo'].forEach(noId => {
           const el = document.getElementById(noId);
           if (!el) return;
+          const src = el.dataset.source;
           if (isPillar) {
-            el.style.color = '#F8EE00';
+            el.style.color = '#ffffff';
           } else {
-            const src = el.dataset.source;
             el.style.color = (src === 'system') ? '#2563eb' : (src === 'manual' ? '#0f172a' : '#94a3b8');
+          }
+          const dirKey = noId === 'inputFlightOutNo' ? 'out' : 'in';
+          const vBox = document.getElementById(dirKey === 'out' ? 'badgeOutVerifyStatus' : 'badgeInVerifyStatus');
+          if (vBox && vBox.innerHTML.trim()) {
+            const cleanVal = (el.value || '').trim();
+            if (src === 'system') {
+              const cls = isPillar ? 'text-white' : 'text-slate-800';
+              vBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><span>已確認</span><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shadow-2xs"></span></span>`;
+            } else if (cleanVal) {
+              const cls = isPillar ? 'text-white/60' : 'text-slate-400';
+              vBox.innerHTML = `<span class="inline-flex items-center text-[9.5px] font-semibold ${cls} select-none">未有資料</span>`;
+            }
           }
         });
 
         if (btnBoarding && btnPillar) {
           if (isPillar) {
-            btnPillar.className = 'w-[88px] justify-center py-1 rounded-lg text-[10px] font-extrabold bg-[#42406B] text-[#F8EE00] shadow-2xs transition-colors cursor-pointer flex items-center gap-1';
+            btnPillar.className = 'w-[88px] justify-center py-1 rounded-lg text-[10px] font-extrabold bg-[#2E49A3] text-[#FBF238] shadow-2xs transition-colors cursor-pointer flex items-center gap-1';
             btnBoarding.className = 'w-[88px] justify-center py-1 rounded-lg text-[10px] font-extrabold text-slate-600 hover:text-slate-900 transition-colors cursor-pointer flex items-center gap-1';
           } else {
             btnBoarding.className = 'w-[88px] justify-center py-1 rounded-lg text-[10px] font-extrabold bg-white text-slate-900 shadow-2xs transition-colors cursor-pointer flex items-center gap-1';
@@ -13923,8 +14087,14 @@ function setupYearOverviewToggle() {
               executeDualTrackFlightLookup(id, depId, arrId, hintId, true);
               return;
             }
-            // 打字中保持純黑色，等待停頓 1.2 秒後再觸發資料庫核對
-            inputEl.style.color = '#0f172a';
+            // 打字中保持純白(閘口柱)或純黑(登機牌)，並於右側顯示「確認中」
+            const isPillarActive = document.getElementById('flightSectionWrapper')?.classList.contains('hkg-pillar-theme');
+            inputEl.style.color = isPillarActive ? '#ffffff' : '#0f172a';
+            const vBox = document.getElementById(isOut ? 'badgeOutVerifyStatus' : 'badgeInVerifyStatus');
+            if (vBox) {
+              const cls = isPillarActive ? 'text-white/80' : 'text-slate-500';
+              vBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><i class="fa-solid fa-spinner fa-spin text-[8px]"></i>確認中</span>`;
+            }
             scheduleDebouncedScan(1200);
           });
 
@@ -14539,13 +14709,11 @@ function setupYearOverviewToggle() {
         const inDateEl = document.getElementById('inputFlightInDate');
         if (outDateEl) {
           outDateEl.value = outDateVal;
-          const lbl = document.getElementById('labelFlightOutDateDisplay');
-          if (lbl) lbl.textContent = formatFlightChipDate(outDateVal);
+          syncFlightGateDateDisplay('out', outDateVal);
         }
         if (inDateEl) {
           inDateEl.value = inDateVal;
-          const lbl = document.getElementById('labelFlightInDateDisplay');
-          if (lbl) lbl.textContent = formatFlightChipDate(inDateVal);
+          syncFlightGateDateDisplay('in', inDateVal);
         }
 
         // 載入去程（三色狀態判定：系統自動=藍色 / 手動輸入=黑色 / 未設定=淡灰）
@@ -14620,14 +14788,14 @@ function setupYearOverviewToggle() {
         if (modal) modal.classList.remove('hidden');
       });
 
-      // 2. 折疊與展開憑證卡片
+      // 2. 折疊與展開憑證卡片（相對當前卡片容器搜尋，徹底解決電腦欄與手機彈窗同 ID 衝突）
       document.addEventListener('click', (e) => {
         const toggleBtn = e.target.closest('.btn-toggle-wallet');
         if (!toggleBtn) return;
         e.stopPropagation();
 
-        const key = toggleBtn.getAttribute('data-trip-key').replace(/-/g, '_');
-        const panel = document.getElementById(`walletDetails_${key}`);
+        const cardRoot = toggleBtn.closest('.trip-card') || toggleBtn.parentElement?.parentElement;
+        const panel = cardRoot ? cardRoot.querySelector('.wallet-details-panel') : null;
         const chevron = toggleBtn.querySelector('.fa-chevron-down');
         if (panel) {
           panel.classList.toggle('hidden');
@@ -15527,7 +15695,7 @@ function setupYearOverviewToggle() {
   </div>
 
   <!-- 自訂假期名稱美化彈窗 (v2.9.1) -->
-  <div id="modalEditTripTitle" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden p-3 md:p-4">
+  <div id="modalEditTripTitle" class="fixed inset-0 z-[75] flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden p-3 md:p-4">
     <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-md w-full overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col">
       <div class="p-4 border-b border-slate-100 bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-800 text-white flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2.5">
@@ -15646,7 +15814,7 @@ function setupYearOverviewToggle() {
   </div>
 
   <!-- 專屬彈窗：機票與酒店預訂管理 (v4.3.14 Travel Wallet 智慧航班解析版) -->
-  <div id="modalEditTripBooking" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 backdrop-blur-md hidden p-3 md:p-4">
+  <div id="modalEditTripBooking" class="fixed inset-0 z-[75] flex items-center justify-center bg-slate-950/75 backdrop-blur-md hidden p-3 md:p-4">
     <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-lg w-full overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[92vh]">
       <!-- 頂部 Header -->
       <div class="p-4 border-b border-slate-100 bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-800 text-white flex items-center justify-between shrink-0">
@@ -15685,7 +15853,7 @@ function setupYearOverviewToggle() {
               </button>
               <button type="button" id="btnFlightThemePillar" onclick="setFlightCardTheme('pillar')"
                       class="w-[88px] justify-center py-1 rounded-lg text-[10px] font-extrabold text-slate-600 hover:text-slate-900 transition-colors cursor-pointer flex items-center gap-1">
-                <span class="w-2 h-2 rounded-full bg-[#B4232C] border border-[#F8EE00] shrink-0"></span>
+                <span class="w-2 h-2 rounded-full bg-[#992942] border border-[#FBF238] shrink-0"></span>
                 <span>HKG 閘口柱</span>
               </button>
             </div>
@@ -15693,51 +15861,49 @@ function setupYearOverviewToggle() {
 
           <!-- 卡片 1：去程航班 (Outbound) -->
           <div id="cardOutFlightContainer" class="flight-pillar-card bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all">
-            <!-- 頂部深藍紫閘口橫幅 / 登機牌標題列 -->
-            <div class="flight-pillar-header px-3 py-2 border-b border-slate-100 flex flex-wrap items-center justify-between gap-1.5 transition-colors">
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="flight-pillar-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 text-[10.5px] font-extrabold shrink-0">
-                  <span class="flight-pillar-badge-dot w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
-                  <span>去程 Outbound</span>
+            <!-- 頂部閘口橫幅 / 登機牌標題列（左上：去程純字＋下方輸入班次及無框狀態；右上：可點擊日期／閘口柱超大鮮黃無前導零數字） -->
+            <div class="flight-pillar-header px-3 py-2 border-b border-slate-100 flex items-center justify-between gap-2 transition-colors">
+              <!-- 左側上下兩層：上層無框「去程 Outbound」純字，下層航班號碼輸入框 ＋ 無外框狀態指示 -->
+              <div class="flex flex-col items-start gap-1 min-w-0">
+                <span class="flight-pillar-badge inline-flex items-center text-indigo-700 text-[11px] font-extrabold tracking-wide leading-none select-none">
+                  去程 Outbound
                 </span>
-                <!-- 去程航班號輸入框 -->
-                <div class="flight-pillar-no-box relative flex items-center bg-slate-50 border border-slate-300 focus-within:border-blue-500 rounded-lg px-2 py-0.5 transition">
-                  <input type="text" id="inputFlightOutNo" placeholder="輸入班次" 
-                         class="flight-pillar-no-input w-20 bg-transparent text-[11.5px] font-mono font-black text-slate-900 uppercase focus:outline-none pr-4">
-                  <button type="button" id="btnClearFlightOutNoInput" class="hidden absolute right-1 w-3.5 h-3.5 rounded-full bg-slate-400 hover:bg-slate-500 text-white flex items-center justify-center text-[8px] transition cursor-pointer select-none" title="清除">✕</button>
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <div class="flight-pillar-no-box relative flex items-center bg-slate-50 border border-slate-300 focus-within:border-blue-500 rounded-lg px-2 py-0.5 transition">
+                    <input type="text" id="inputFlightOutNo" placeholder="輸入班次" 
+                           class="flight-pillar-no-input w-20 bg-transparent text-[12px] font-mono font-black text-slate-900 uppercase focus:outline-none pr-4">
+                    <button type="button" id="btnClearFlightOutNoInput" class="hidden absolute right-1 w-3.5 h-3.5 rounded-full bg-slate-400 hover:bg-slate-500 text-white flex items-center justify-center text-[8px] transition cursor-pointer select-none" title="清除">✕</button>
+                  </div>
+                  <!-- 無外框極細即時狀態指示（確認中 / 已確認+綠點 / 未有資料） -->
+                  <div id="badgeOutVerifyStatus" class="shrink-0 inline-flex items-center"></div>
                 </div>
-                <!-- 可點擊微調的去程日期標籤 -->
-                <label class="flight-pillar-date-chip relative inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-300 text-[10px] font-bold text-slate-900 cursor-pointer transition select-none" title="點擊修改去程出發日期">
-                  <i class="fa-regular fa-calendar text-blue-600 text-[9.5px]"></i>
-                  <span id="labelFlightOutDateDisplay">出發日期</span>
-                  <input type="date" id="inputFlightOutDate" class="absolute inset-0 opacity-0 w-full h-full cursor-pointer">
-                </label>
               </div>
 
-              <div id="boxOutFlightNavGroup" class="relative inline-flex items-center rounded-lg shadow-2xs shrink-0">
-                <a id="linkFlightAwareOut" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" 
-                   class="text-[10px] font-bold px-2.5 py-0.5 rounded-l-lg bg-blue-50/90 hover:bg-blue-100 border border-blue-200 text-blue-600 transition flex items-center gap-1">
-                  <span id="labelFlightOutNavText">動態 ↗</span>
-                </a>
-                <button type="button" onclick="toggleNavDropdown('navDropdown_flightOut', event)" 
-                        class="px-1.5 py-0.5 bg-white hover:bg-slate-100 border-t border-b border-r border-slate-200 text-slate-900 rounded-r-lg text-[9px] font-bold flex items-center justify-center transition" title="選擇追蹤服務">
-                  ⌄
-                </button>
-                <div id="navDropdown_flightOut" class="hidden absolute right-0 top-full mt-1 w-40 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl z-40 py-1.5 text-[10px] space-y-0.5 text-left">
-                  <a id="linkFlightAwareOut_Item" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-blue-50 text-blue-700 font-bold flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-plane text-[9px]"></i> FlightAware 動態 (預設)
-                  </a>
-                  <a id="linkFlightRadarOut" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-indigo-50 text-indigo-700 font-bold flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-satellite-dish text-[9px]"></i> Flightradar24 雷達
-                  </a>
-                </div>
+              <!-- 右上角：日期（支援直接點擊彈出日期選擇器；HKG 閘口柱顯示超大鮮黃無前導零數字 e.g. 1225 / 59 ＋ 下方極細月日標註） -->
+              <div class="flight-pillar-date-chip relative inline-flex items-center justify-end min-w-[96px] h-[48px] px-2.5 py-1 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-300 text-slate-900 cursor-pointer transition select-none shrink-0" title="點擊修改去程出發日期">
+                <!-- 簡約登機牌模式視圖 -->
+                <span class="flight-gate-boarding-view inline-flex items-center gap-1.5 text-[11px] font-extrabold text-slate-900 pointer-events-none">
+                  <i class="fa-regular fa-calendar text-blue-600 text-[10px]"></i>
+                  <span id="labelFlightOutDateDisplay">出發日期</span>
+                </span>
+                <!-- HKG 閘口柱模式視圖：超大鮮黃無前導零數字 ＋ 月與日下方各自極細標註 -->
+                <span class="flight-gate-pillar-view hidden flex-col items-end justify-center leading-none pointer-events-none">
+                  <span class="inline-flex items-start gap-0 font-mono font-black text-[34px] sm:text-[38px] leading-[0.85] tracking-tighter text-[#FBF238]" style="text-shadow: 0 1px 2px rgba(0,0,0,0.32);">
+                    <span class="inline-flex flex-col items-center">
+                      <span id="gateOutMonthDigits">12</span>
+                      <span id="gateOutMonthSub" class="text-[7px] font-bold text-white/90 leading-none mt-[2px] tracking-normal font-sans">12月</span>
+                    </span>
+                    <span class="inline-flex flex-col items-center">
+                      <span id="gateOutDayDigits">25</span>
+                      <span id="gateOutDaySub" class="text-[7px] font-bold text-white/90 leading-none mt-[2px] tracking-normal font-sans">25日 週五</span>
+                    </span>
+                  </span>
+                </span>
+                <input type="date" id="inputFlightOutDate" onclick="try{this.showPicker()}catch(e){}" class="absolute inset-0 z-20 opacity-0 w-full h-full cursor-pointer">
               </div>
             </div>
 
-            <!-- HKG 閘口柱專屬：淺天藍幾何紋理過渡條 -->
-            <div class="flight-pillar-sky-bar hidden hkg-pillar-sky-strip"></div>
-
-            <!-- 航司與「已核對」徽章列 -->
+            <!-- 航司名稱 ＋ 最右側「動態 ↗」按鍵列 -->
             <div class="flight-pillar-airline-row px-3 py-2 border-b border-slate-100 flex items-center justify-between gap-2">
               <div class="flex items-center gap-2 min-w-0">
                 <span id="badgeOutAirlineCode" class="w-6 h-6 rounded-md bg-slate-200 text-slate-400 font-black font-mono text-[10px] flex items-center justify-center shrink-0 shadow-2xs">✈</span>
@@ -15746,7 +15912,26 @@ function setupYearOverviewToggle() {
                 </div>
                 <span id="badgeOutFlightNoPill" class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200 font-mono font-bold text-[10.5px] text-slate-400 shrink-0">--</span>
               </div>
-              <div id="badgeOutVerifyStatus" class="shrink-0"></div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <div id="boxOutFlightNavGroup" class="relative inline-flex items-center rounded-lg shadow-2xs shrink-0">
+                  <a id="linkFlightAwareOut" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" 
+                     class="text-[10px] font-bold px-2.5 py-0.5 rounded-l-lg bg-blue-50/90 hover:bg-blue-100 border border-blue-200 text-blue-600 transition flex items-center gap-1">
+                    <span id="labelFlightOutNavText">動態 ↗</span>
+                  </a>
+                  <button type="button" onclick="toggleNavDropdown('navDropdown_flightOut', event)" 
+                          class="px-1.5 py-0.5 bg-white hover:bg-slate-100 border-t border-b border-r border-slate-200 text-slate-900 rounded-r-lg text-[9px] font-bold flex items-center justify-center transition" title="選擇追蹤服務">
+                    ⌄
+                  </button>
+                  <div id="navDropdown_flightOut" class="hidden absolute right-0 top-full mt-1 w-40 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl z-40 py-1.5 text-[10px] space-y-0.5 text-left">
+                    <a id="linkFlightAwareOut_Item" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-blue-50 text-blue-700 font-bold flex items-center gap-1.5 transition">
+                      <i class="fa-solid fa-plane text-[9px]"></i> FlightAware 動態 (預設)
+                    </a>
+                    <a id="linkFlightRadarOut" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-indigo-50 text-indigo-700 font-bold flex items-center gap-1.5 transition">
+                      <i class="fa-solid fa-satellite-dish text-[9px]"></i> Flightradar24 雷達
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!-- 登機牌／閘口螢幕主體 -->
@@ -15899,16 +16084,16 @@ function setupYearOverviewToggle() {
             <div class="flight-pillar-sky-bar hidden hkg-pillar-sky-strip"></div>
 
             <!-- 底部獨立操作列（霧面靛藍灰底座 / 簡約白灰底座） -->
-            <div class="flight-pillar-footer px-3 py-1.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between gap-2 transition-colors">
+            <div class="flight-pillar-footer px-3 py-1.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-end gap-1.5 transition-colors">
               <button type="button" id="btnToggleEditOutFlight" onclick="toggleFlightCardEditMode('out')" 
                       class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs">
                 <i class="fa-solid fa-pen text-[8.5px] text-blue-600"></i>
-                <span>編輯航線</span>
+                <span>編輯</span>
               </button>
               <button type="button" onclick="resetSingleFlightCard('out')" 
-                      class="flight-pillar-footer-btn-clear inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
+                      class="flight-pillar-footer-btn-clear inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
                 <i class="fa-solid fa-eraser text-[9px] text-rose-500"></i>
-                <span>清空去程資料</span>
+                <span>清空</span>
               </button>
             </div>
             <div id="hintFlightOutAuto" class="hidden"></div>
@@ -15928,50 +16113,49 @@ function setupYearOverviewToggle() {
 
           <!-- 卡片 2：回程航班 (Return) -->
           <div id="cardReturnFlightWrapper" class="flight-pillar-card bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all">
-            <!-- 頂部深藍紫閘口橫幅 / 登機牌標題列 -->
-            <div class="flight-pillar-header px-3 py-2 border-b border-slate-100 flex flex-wrap items-center justify-between gap-1.5 transition-colors">
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="flight-pillar-badge inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 text-[10.5px] font-extrabold shrink-0">
-                  <span class="flight-pillar-badge-dot w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
-                  <span>回程 Return</span>
+            <!-- 頂部閘口橫幅 / 登機牌標題列（左上：回程純字＋下方輸入班次及無框狀態；右上：可點擊日期／閘口柱超大鮮黃無前導零數字） -->
+            <div class="flight-pillar-header px-3 py-2 border-b border-slate-100 flex items-center justify-between gap-2 transition-colors">
+              <!-- 左側上下兩層：上層無框「回程 Return」純字，下層航班號碼輸入框 ＋ 無外框狀態指示 -->
+              <div class="flex flex-col items-start gap-1 min-w-0">
+                <span class="flight-pillar-badge inline-flex items-center text-indigo-700 text-[11px] font-extrabold tracking-wide leading-none select-none">
+                  回程 Return
                 </span>
-                <div class="flight-pillar-no-box relative flex items-center bg-slate-50 border border-slate-300 focus-within:border-blue-500 rounded-lg px-2 py-0.5 transition">
-                  <input type="text" id="inputFlightInNo" placeholder="輸入班次" 
-                         class="flight-pillar-no-input w-20 bg-transparent text-[11.5px] font-mono font-black text-slate-900 uppercase focus:outline-none pr-4">
-                  <button type="button" id="btnClearFlightInNoInput" class="hidden absolute right-1 w-3.5 h-3.5 rounded-full bg-slate-400 hover:bg-slate-500 text-white flex items-center justify-center text-[8px] transition cursor-pointer select-none" title="清除">✕</button>
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <div class="flight-pillar-no-box relative flex items-center bg-slate-50 border border-slate-300 focus-within:border-blue-500 rounded-lg px-2 py-0.5 transition">
+                    <input type="text" id="inputFlightInNo" placeholder="輸入班次" 
+                           class="flight-pillar-no-input w-20 bg-transparent text-[12px] font-mono font-black text-slate-900 uppercase focus:outline-none pr-4">
+                    <button type="button" id="btnClearFlightInNoInput" class="hidden absolute right-1 w-3.5 h-3.5 rounded-full bg-slate-400 hover:bg-slate-500 text-white flex items-center justify-center text-[8px] transition cursor-pointer select-none" title="清除">✕</button>
+                  </div>
+                  <!-- 無外框極細即時狀態指示（確認中 / 已確認+綠點 / 未有資料） -->
+                  <div id="badgeInVerifyStatus" class="shrink-0 inline-flex items-center"></div>
                 </div>
-                <!-- 可點擊微調的回程日期標籤 -->
-                <label class="flight-pillar-date-chip relative inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-300 text-[10px] font-bold text-slate-900 cursor-pointer transition select-none" title="點擊修改回程返港日期">
-                  <i class="fa-regular fa-calendar text-blue-600 text-[9.5px]"></i>
-                  <span id="labelFlightInDateDisplay">回程日期</span>
-                  <input type="date" id="inputFlightInDate" class="absolute inset-0 opacity-0 w-full h-full cursor-pointer">
-                </label>
               </div>
 
-              <div id="boxInFlightNavGroup" class="relative inline-flex items-center rounded-lg shadow-2xs shrink-0">
-                <a id="linkFlightAwareIn" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" 
-                   class="text-[10px] font-bold px-2.5 py-0.5 rounded-l-lg bg-blue-50/90 hover:bg-blue-100 border border-blue-200 text-blue-600 transition flex items-center gap-1">
-                  <span id="labelFlightInNavText">動態 ↗</span>
-                </a>
-                <button type="button" onclick="toggleNavDropdown('navDropdown_flightIn', event)" 
-                        class="px-1.5 py-0.5 bg-white hover:bg-slate-100 border-t border-b border-r border-slate-200 text-slate-900 rounded-r-lg text-[9px] font-bold flex items-center justify-center transition" title="選擇追蹤服務">
-                  ⌄
-                </button>
-                <div id="navDropdown_flightIn" class="hidden absolute right-0 top-full mt-1 w-40 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl z-40 py-1.5 text-[10px] space-y-0.5 text-left">
-                  <a id="linkFlightAwareIn_Item" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-blue-50 text-blue-700 font-bold flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-plane text-[9px]"></i> FlightAware 動態 (預設)
-                  </a>
-                  <a id="linkFlightRadarIn" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-indigo-50 text-indigo-700 font-bold flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-satellite-dish text-[9px]"></i> Flightradar24 雷達
-                  </a>
-                </div>
+              <!-- 右上角：日期（支援直接點擊彈出日期選擇器；HKG 閘口柱顯示超大鮮黃無前導零數字 ＋ 下方極細月日標註） -->
+              <div class="flight-pillar-date-chip relative inline-flex items-center justify-end min-w-[96px] h-[48px] px-2.5 py-1 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-300 text-slate-900 cursor-pointer transition select-none shrink-0" title="點擊修改回程返港日期">
+                <!-- 簡約登機牌模式視圖 -->
+                <span class="flight-gate-boarding-view inline-flex items-center gap-1.5 text-[11px] font-extrabold text-slate-900 pointer-events-none">
+                  <i class="fa-regular fa-calendar text-blue-600 text-[10px]"></i>
+                  <span id="labelFlightInDateDisplay">回程日期</span>
+                </span>
+                <!-- HKG 閘口柱模式視圖：超大鮮黃無前導零數字 ＋ 月與日下方各自極細標註 -->
+                <span class="flight-gate-pillar-view hidden flex-col items-end justify-center leading-none pointer-events-none">
+                  <span class="inline-flex items-start gap-0 font-mono font-black text-[34px] sm:text-[38px] leading-[0.85] tracking-tighter text-[#FBF238]" style="text-shadow: 0 1px 2px rgba(0,0,0,0.32);">
+                    <span class="inline-flex flex-col items-center">
+                      <span id="gateInMonthDigits">12</span>
+                      <span id="gateInMonthSub" class="text-[7px] font-bold text-white/90 leading-none mt-[2px] tracking-normal font-sans">12月</span>
+                    </span>
+                    <span class="inline-flex flex-col items-center">
+                      <span id="gateInDayDigits">29</span>
+                      <span id="gateInDaySub" class="text-[7px] font-bold text-white/90 leading-none mt-[2px] tracking-normal font-sans">29日 週二</span>
+                    </span>
+                  </span>
+                </span>
+                <input type="date" id="inputFlightInDate" onclick="try{this.showPicker()}catch(e){}" class="absolute inset-0 z-20 opacity-0 w-full h-full cursor-pointer">
               </div>
             </div>
 
-            <!-- HKG 閘口柱專屬：淺天藍幾何紋理過渡條 -->
-            <div class="flight-pillar-sky-bar hidden hkg-pillar-sky-strip"></div>
-
-            <!-- 航司與「已核對」徽章列 -->
+            <!-- 航司名稱 ＋ 最右側「動態 ↗」按鍵列 -->
             <div class="flight-pillar-airline-row px-3 py-2 border-b border-slate-100 flex items-center justify-between gap-2">
               <div class="flex items-center gap-2 min-w-0">
                 <span id="badgeInAirlineCode" class="w-6 h-6 rounded-md bg-slate-200 text-slate-400 font-black font-mono text-[10px] flex items-center justify-center shrink-0 shadow-2xs">✈</span>
@@ -15980,7 +16164,26 @@ function setupYearOverviewToggle() {
                 </div>
                 <span id="badgeInFlightNoPill" class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200 font-mono font-bold text-[10.5px] text-slate-400 shrink-0">--</span>
               </div>
-              <div id="badgeInVerifyStatus" class="shrink-0"></div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <div id="boxInFlightNavGroup" class="relative inline-flex items-center rounded-lg shadow-2xs shrink-0">
+                  <a id="linkFlightAwareIn" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" 
+                     class="text-[10px] font-bold px-2.5 py-0.5 rounded-l-lg bg-blue-50/90 hover:bg-blue-100 border border-blue-200 text-blue-600 transition flex items-center gap-1">
+                    <span id="labelFlightInNavText">動態 ↗</span>
+                  </a>
+                  <button type="button" onclick="toggleNavDropdown('navDropdown_flightIn', event)" 
+                          class="px-1.5 py-0.5 bg-white hover:bg-slate-100 border-t border-b border-r border-slate-200 text-slate-900 rounded-r-lg text-[9px] font-bold flex items-center justify-center transition" title="選擇追蹤服務">
+                    ⌄
+                  </button>
+                  <div id="navDropdown_flightIn" class="hidden absolute right-0 top-full mt-1 w-40 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl z-40 py-1.5 text-[10px] space-y-0.5 text-left">
+                    <a id="linkFlightAwareIn_Item" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-blue-50 text-blue-700 font-bold flex items-center gap-1.5 transition">
+                      <i class="fa-solid fa-plane text-[9px]"></i> FlightAware 動態 (預設)
+                    </a>
+                    <a id="linkFlightRadarIn" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-indigo-50 text-indigo-700 font-bold flex items-center gap-1.5 transition">
+                      <i class="fa-solid fa-satellite-dish text-[9px]"></i> Flightradar24 雷達
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!-- 登機牌／閘口螢幕主體 -->
@@ -16132,16 +16335,16 @@ function setupYearOverviewToggle() {
             <div class="flight-pillar-sky-bar hidden hkg-pillar-sky-strip"></div>
 
             <!-- 底部獨立操作列 -->
-            <div class="flight-pillar-footer px-3 py-1.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between gap-2 transition-colors">
+            <div class="flight-pillar-footer px-3 py-1.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-end gap-1.5 transition-colors">
               <button type="button" id="btnToggleEditInFlight" onclick="toggleFlightCardEditMode('in')" 
                       class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs">
                 <i class="fa-solid fa-pen text-[8.5px] text-blue-600"></i>
-                <span>編輯航線</span>
+                <span>編輯</span>
               </button>
               <button type="button" onclick="resetSingleFlightCard('in')" 
-                      class="flight-pillar-footer-btn-clear inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
+                      class="flight-pillar-footer-btn-clear inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
                 <i class="fa-solid fa-eraser text-[9px] text-rose-500"></i>
-                <span>清空回程資料</span>
+                <span>清空</span>
               </button>
             </div>
             <div id="hintFlightInAuto" class="hidden"></div>
@@ -16525,7 +16728,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.5</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.10</span>
           </button>
         </div>
       </div>
