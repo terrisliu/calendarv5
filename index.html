@@ -376,15 +376,33 @@
       cursor: pointer;
     }
     
+    /* 1. 年曆全覽：普通模式與輪休模式六日皆保持粉紅色 */
     body.year-overview-mode .calendar-cell.bg-pink-50\/80,
-    body.year-overview-mode .calendar-cell.special-sunday-holiday {
-      background-color: rgba(254, 226, 226, 0.6) !important;
-      border-color: rgba(254, 205, 211, 0.7) !important;
+    body.year-overview-mode .calendar-cell.special-sunday-holiday,
+    body.year-overview-mode .calendar-cell.bg-rose-50\/40,
+    body.year-overview-mode.roster-theme-active .calendar-cell.bg-rose-50\/40 {
+      background-color: rgba(254, 226, 226, 0.75) !important;
+      border-color: rgba(254, 205, 211, 0.85) !important;
+    }
+    /* 輪休模式下的未排假六日文字呈現粉紅玫紅；但若排了輪休假 (帶有 text-white)，強制保持純白清晰大字！ */
+    body.year-overview-mode .calendar-cell.bg-rose-50\/40 .day-number:not(.text-white),
+    body.year-overview-mode.roster-theme-active .calendar-cell.bg-rose-50\/40 .day-number:not(.text-white) {
+      color: #e11d48 !important;
+      font-weight: 700 !important;
+    }
+    /* 只要排了全日輪休假或整天假期，年曆總覽中一律保持純白立體字 */
+    body.year-overview-mode .calendar-cell .day-number.text-white,
+    body.year-overview-mode.roster-theme-active .calendar-cell .day-number.text-white {
+      color: #ffffff !important;
+      font-weight: 900 !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
     }
     
+    /* 2. 年曆全覽：公眾假期 100% 呈現飽滿淺橙底色 */
+    body.year-overview-mode .calendar-cell.cell-holiday-ph,
     body.year-overview-mode .calendar-cell.bg-orange-50 {
-      background-color: rgba(255, 237, 213, 0.85) !important;
-      border-color: rgba(254, 215, 170, 0.8) !important;
+      background-color: #ffedd5 !important;
+      border-color: #fed7aa !important;
     }
     body.year-overview-mode .day-number,
     body.year-overview-mode .roster-ph-number,
@@ -602,9 +620,24 @@
       font-weight: 800 !important;
     }
 
-    /* 電腦大螢幕、平板雙欄及手機單欄：寬敞大格明確認證顯示高清天數徽章 */
+    /* 平板雙欄及手機單欄：寬敞大格明確認證顯示高清天數徽章 */
     body.cal-spacious .span-badge-pill {
       display: inline-flex !important;
+    }
+
+    /* 電腦大螢幕（>= 1280px）時，連假膠囊徽章進一步極致微縮（超輕巧精緻 8.5px，完全不干擾日期） */
+    @media (min-width: 1280px) {
+      body.cal-spacious .span-badge-pill {
+        display: inline-flex !important;
+        font-size: 8.5px !important;    /* 數字再微調收細至 8.5px */
+        height: 13.5px !important;      /* 膠囊高度收細至 13.5px */
+        line-height: 12px !important;
+        min-width: 13.5px !important;   /* 圓形徽章最小寬度縮減 */
+        padding: 0 3.5px !important;    /* 左右微邊距收窄 */
+        bottom: 2px !important;
+        right: 2px !important;
+        box-shadow: 0 1px 2px rgba(29, 78, 216, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.9) !important;
+      }
     }
 
     @keyframes badge-pop {
@@ -661,14 +694,18 @@
       font-weight: 800 !important;
     }
 
-    /* 公眾假期色彩規範（淺橙底 + 深粗磚橙字，高對比度） */
+    /* 公眾假期色彩規範（淺橙底 + 鮮艷純亮橙大字，所有日曆全尺寸更橙、更高對比度） */
     .cell-holiday-ph {
-      background-color: #fff7ed !important;
+      background-color: #ffedd5 !important;
       border-color: #fed7aa !important;
     }
-    .holiday-ph-number {
-      color: #c2410c !important;
-      font-weight: 900 !important;
+    .holiday-ph-number,
+    .roster-ph-number,
+    body.year-overview-mode .calendar-cell .holiday-ph-number,
+    body.year-overview-mode .calendar-cell .roster-ph-number {
+      color: #ea580c !important; /* 鮮艷飽滿純亮橙色，極度醒目立體 */
+      font-weight: 950 !important;
+      text-shadow: 0 0.5px 1px rgba(255, 255, 255, 0.8) !important;
     }
 
     /* === 拍立得旅行卡片 === */
@@ -1348,8 +1385,9 @@
     }
     .roster-ph-number {
       color: #ea580c !important;
-      font-weight: 900 !important;
+      font-weight: 950 !important;
       font-size: 1.02rem !important;
+      text-shadow: 0 0.5px 1px rgba(255, 255, 255, 0.8) !important;
     }
     /* 輪休模式 PH 數字於年曆全覽與所有日期統一大小 */
     body.year-overview-mode .roster-ph-number {
@@ -2026,7 +2064,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v4.3.25 更新日誌</span>
+      <span>v4.3.34 更新日誌</span>
     </button>
   </footer>
 
@@ -2068,7 +2106,7 @@
           <div>
             <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.25</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.34</span>
             </h3>
             
           </div>
@@ -2079,10 +2117,141 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!-- v4.3.25 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v4.3.34 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v4.3.34（系統確認航班與時間專屬藍色 · 手動輸入黑色標記 · 三色視覺狀態分流）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">COLOR CODED PRO</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">✈️ 航班數據來源視覺色彩分流：系統確認即時高亮藍色，手動微調黑色呈現</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 系統確認（藍色顯示）</b>：凡由時刻庫或即時數據庫自動比對成功之班次編號、起飛與到達時間，全面以清晰科技藍（<code>#2563eb</code> 特粗）高亮呈現。</li>
+            <li><b>② 手動輸入（黑色顯示）</b>：使用者自訂輸入之航班號碼，或手動自訂／微調修改之起降時間（包括 00:00），以沈穩純黑（<code>#0f172a</code> 特粗）區分，資料來源一目了然。</li>
+            <li><b>③ 預設未設定（灰色顯示）</b>：未確認或佔位狀態持續以淡雅灰色（<code>#94a3b8</code> <code>00:00</code>）標記。</li>
+            <li><b>④ 智能辨識提示文案同步更新</b>：比對成功後明確標示「已確認並以藍色顯示」，未在庫中提示「手動輸入起訖時間將自動轉為黑色顯示」。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.33 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v4.3.33（航班二合一動態雷達組合鍵 · 內嵌原生清除鍵 · 冗餘按鈕精簡）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SPLIT RADAR PRO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">✈️ 預訂彈窗介面全面極簡優化：消除擁擠感，操作直覺流暢</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 動態與雷達二合一組合鍵（Split Button）</b>：比照住宿物業導航鍵樣式，預設直達 FlightAware 動態，點擊右側下拉箭頭自由切換 Flightradar24 雷達，節省 50% 頂部空間。</li>
+            <li><b>② 取消多餘「即時查詢」按鍵</b>：全面由 500ms 停頓防抖與離焦自動辨識接管，無需手動點擊。</li>
+            <li><b>③ 航班輸入框內嵌原生清除鍵（✕）</b>：取消易誤觸的紅色清除按鍵，輸入航班號時自動浮現小圓 ✕，點擊一鍵清空並恢復預設 00:00。</li>
+            <li><b>④ 移除大段說教長條橫額</b>：精簡下方冗長提示框為底部單行優雅微標註，大幅釋放彈窗垂直高度。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.32 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v4.3.32（FlightAware 智慧 IATA 轉 ICAO 核心對應 · 徹底解決 EK384 等班次查無資料痛點）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART ICAO PRO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">✈️ 航班雷達智慧解析全面升級：輸入常用兩字代碼自動對應底層三字 ICAO 碼（如 EK384 自動直達 UAE384）</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 智慧 IATA ➔ ICAO 轉譯引擎</b>：使用者輸入 <code>EK384</code>、<code>CX500</code>、<code>UO624</code> 等常用兩碼航班號時，點擊「動態 ↗」自動轉譯為 FlightAware 權威底層格式 <code>UAE384</code>、<code>CPA500</code>、<code>HKE624</code>，100% 直達航班即時追蹤頁面，徹底告別「暫時還無法找到航班跟蹤資料」問題。</li>
+            <li><b>② 涵蓋 50+ 全球與港人常用航空公司</b>：內建阿聯酋航空 (EK ➔ UAE)、國泰航空 (CX ➔ CPA)、香港快運 (UO ➔ HKE)、香港航空 (HX ➔ CRK)、大灣區航空 (HB ➔ HGB)、新航 (SQ ➔ SIA)、泰航 (TG ➔ THA)、日航 (JL ➔ JAL)、全日空 (NH ➔ ANA)、長榮 (BR ➔ EVA)、華航 (CI ➔ CAL)、星宇 (JX ➔ SJX)、英航 (BA ➔ BAW) 等全球主流航司。</li>
+            <li><b>③ 雙軌自選與 500ms 防抖完整承襲</b>：行程卡片與預訂彈窗持續保留「動態 ↗（FlightAware）」與「雷達 ↗（Flightradar24）」雙按鈕，輸入航班號時游標穩固、不跳位、不食字。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.31 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.25（電腦大螢幕三欄完美保留鎖頭與徽章·iPad緊湊三欄自動隱藏·雙欄手機清晰顯示）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART SCREEN</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.31（方案 B 雙軌航班追蹤落地 · FlightAware 實用動態 + Flightradar24 地圖雷達自選）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">DUAL RADAR PRO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">✈️ 航班實時追蹤方案 B 雙軌自選：實時閘口/航廈動態 + 高清航跡雷達雙按鈕完美整合</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 方案 B 雙軌自選落地</b>：去程與回程航班同時提供 <code>動態 ↗</code>（FlightAware）與 <code>雷達 ↗</code>（Flightradar24）雙按鈕。出行旅客出發當天一鍵查登機閘口、航廈與行李轉盤；航迷隨時開地圖看 3D 即時航跡。</li>
+            <li><b>② 預訂彈窗即時雙軌聯動</b>：在編輯旅程預訂資料時，輸入航班編號後「動態」與「雷達」連結即時同步聯動目標航班網址。</li>
+            <li><b>③ 500ms 停頓防抖完美結合</b>：全面整合 v4.3.30 防抖延遲與 IME 輸入法組字保護，打字時不改寫、不跳位、不食字。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.30 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.30（航班編號輸入智慧防抖掃描 · 500ms 延遲感應 · 徹底解決打字食字與游標跳位）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART SCAN PRO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">✈️ 航班排表輸入體驗全面革新：停頓 500ms 自動防抖掃描、IME 輸入法組字保護、精準識別無干擾</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 500ms 停頓防抖智慧掃描</b>：使用者鍵入航班號時只重置計時器，絕不即時改寫輸入框內容；停手 500 毫秒後才自動掃描框內文字、整理格式並感應時刻庫，徹底根除打字「食字」與字母被吞問題。</li>
+            <li><b>② IME 輸入法組字保護（Composition Protection）</b>：加入 <code>compositionstart</code> 與 <code>compositionend</code> 監聽，手機虛擬鍵盤或電腦中文/拼音鍵盤選字過程中暫停掃描，確認上屏後才開始計時，游標穩固不跳動。</li>
+            <li><b>③ 失焦（Blur）與貼上（Paste）即時掃描</b>：點擊框外空白處（失焦）或直接貼上機票文字時略過防抖，即刻完成辨識與航點資訊帶入。</li>
+            <li><b>④ 短字元靜默過濾</b>：長度小於 2 個字元時自動隱藏提示框，不再在輸入中途跳出干擾性的「未在時刻庫中」提示。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.29 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.29（全站文案官方化標準精修 · 錯別字全面校正 · 冗贅詞句淨化精簡）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">OFFICIAL PRO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🏛️ 地氈式文案全面官方化：修正錯別字、口語詞彙標準化、提示通知精煉大器</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 錯別字與口語規範化</b>：修正「小微章」為標準「小徽章」；導航標題「單鍵一撳即開」規範為書面語「一鍵即時啟動導航」；註解俚語「肉酸」全面規範為正式書面用語。</li>
+            <li><b>② 繁複冗贅文案精簡</b>：精煉「說明書式」長篇描述，重塑更新記錄為嚴謹大器的工程日誌；剔除各舊版本殘留之重複「最新版本」標籤，層次清晰分明。</li>
+            <li><b>③ 提示通知（Toast）語氣優化</b>：排假模式與週末提示語法更符合商務操作邏輯，密碼重設與確認視窗表述更簡潔直觀。</li>
+            <li><b>④ 視覺與效能完好承襲</b>：完整保留大螢幕纖巧連假膠囊徽章（8.5px/13.5px）、年曆全覽六日輪休白字、高對比純橙公眾假期等全部極致排版特性。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.28 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.28（電腦螢幕連假膠囊極致超輕巧微調 · 8.5px/13.5px 視覺極致開揚無阻隔）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">MINI PILL PRO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🖥️ 電腦大螢幕（&ge;1280px）連假天數膠囊再微縮：高度 13.5px、字體 8.5px，極致纖巧大方</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 電腦版連假天數徽章等比精緻微縮</b>：在電腦寬螢幕（&ge;1280px）下，膠囊高度由 15px 進一步微調至 <b>13.5px</b>，天數數字由 9.5px 調細至 <b>8.5px</b>，左右 padding 收至 3.5px，邊界縮減至 2px。</li>
+            <li><b>② 日期格中央零干擾</b>：日期格中央日期數字（如 12、25）享有極度開闊通透的空間，膠囊化身右下角精美立體小徽章，精緻不搶戲。</li>
+            <li><b>③ 手機與雙欄保持清晰 11px</b>：手機單欄及平板雙欄尺寸繼續保留 11px 大字天數徽章，維持手指觸控與小螢幕一眼清晰的最佳體驗。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.27 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.27（年曆總覽六日輪休假純白大字 · 電腦尺寸連假膠囊徽章精緻微縮）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">ROSTER WHITE & DESKTOP PILL</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎯 總覽六日輪休轉純白立體字、電腦版大螢幕連假數字與膠囊徽章等比精緻微調</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 總覽六日輪休假純白大字</b>：年曆總覽中，星期六或星期日若排了輪休假（OFF），日期數字自動切換為純白色（<code>#ffffff</code>）特粗字體並帶立體微陰影，在珊瑚紅底色上清晰明亮、高對比！未排休六日則保持粉紅字體。</li>
+            <li><b>② 電腦版連假膠囊與數字等比調細</b>：在電腦大螢幕（&ge;1280px）下，連假膠囊高度由 17px 微調至 15px，天數數字微調至 9.5px，內邊距收窄，比例更顯精緻清雅，徹底消除大螢幕上的壓迫感。</li>
+            <li><b>③ 手機與雙欄尺寸維持清晰大字</b>：手機與平板雙欄尺寸下，徽章維持 11px 大字清晰易讀，滿足跨設備最佳體驗。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.26 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.26（年曆總覽公眾假期淺橙底色修復 · 輪休總覽六日粉紅底色 · 全日曆公眾假數字鮮橙醒目升級）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">HOLIDAY COLOR PRO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎨 全日曆與總覽色彩大升級：總覽公眾假淺橙底色 100% 呈現、輪休六日粉紅底色回歸、公眾假期數字鮮亮深橙再加強</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 年曆總覽公眾假期淺橙底色修復</b>：徹底解決總覽模式下被白底覆蓋的問題，公眾假期格子 100% 呈現飽滿且溫和的淺橙色底色（<code>#ffedd5</code>）與橙色邊框。</li>
+            <li><b>② 輪休模式年曆總覽六日粉紅色</b>：輪休模式下的星期六及星期日於年曆總覽模式中全面套用粉紅底色（<code>rgba(254, 226, 226, 0.75)</code>），與公眾假期的淺橙底色形成鮮明對比，一眼看清！</li>
+            <li><b>③ 公眾假期數字高飽和純橙色強化</b>：所有日曆（主日曆、雙欄、手機單欄、年曆總覽）中，公眾假期數字顏色全面升級為鮮艷亮麗的純橙色（<code>#ea580c</code>），加粗 950 權重並帶立體微白光暈，鮮明突出。</li>
+            <li><b>④ 雙向多模式完美同調</b>：普通模式與輪休模式自由切換，所有假期底色與數字視覺規範 100% 保持一致。</li>
+          </ul>
+        </div>
+
+        <!-- v4.3.25 -->
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v4.3.25（電腦大螢幕三欄完美保留鎖頭與徽章·iPad緊湊三欄自動隱藏·雙欄手機清晰顯示）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART SCREEN</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🖥️ 電腦大螢幕三欄（卡片寬度 &ge; 280px）完美保留金色立體鎖頭與 11px 大字天數徽章</div>
@@ -2097,7 +2266,7 @@
         <!-- v4.3.24 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.24（幾何真實排欄動態感應：iPad Pro 11 吋三欄自動隱藏、雙欄與手機尺寸高清顯示）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">GEOMETRY RESPONSIVE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.24（幾何真實排欄動態感應：iPad Pro 11 吋三欄自動隱藏、雙欄與手機尺寸高清顯示）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">GEOMETRY RESPONSIVE</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">📱 依真實畫面排列（卡片 offsetTop）即時精準判斷：擺脫螢幕像素模擬誤差，三欄必然隱藏、兩欄及手機必然顯示</div>
@@ -2112,7 +2281,7 @@
         <!-- v4.3.23 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.23（雙欄與手機尺寸圖標文字清晰化：鎖頭與連假天數徽章等比調大·告別過細模糊）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">CLEAR & BOLD</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.23（雙欄與手機尺寸圖標文字清晰化：鎖頭與連假天數徽章等比調大·告別過細模糊）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">CLEAR & BOLD</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">📱 雙欄及手機尺寸大格充分利用：鎖頭放大至 11.5px、天數徽章放大至 11px 加粗，一眼看清</div>
@@ -2127,7 +2296,7 @@
         <!-- v4.3.22 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.22（iPad 三欄/雙欄/手機雙向動態切換：三欄緊湊尺寸隱藏鎖與天數、雙欄及手機尺寸自動重新顯示）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART DUAL-VIEW</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.22（iPad 三欄/雙欄/手機雙向動態切換：三欄緊湊尺寸隱藏鎖與天數、雙欄及手機尺寸自動重新顯示）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART DUAL-VIEW</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">📱 完美達成雙向動態響應：iPad 橫屏三欄緊湊自動隱藏防遮擋、縮至雙欄或手機尺寸即時自動重新顯示</div>
@@ -2142,7 +2311,7 @@
         <!-- v4.3.21 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.21（雙欄與手機尺寸鎖標與連假徽章全面重新恢復顯示·斷點優化）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART RESTORE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.21（雙欄與手機尺寸鎖標與連假徽章全面重新恢復顯示·斷點優化）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART RESTORE</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">📱 雙欄與手機尺寸精準放開：鎖定圖示與天數徽章即刻重新顯示，僅在年曆全覽微縮時簡化</div>
@@ -2157,7 +2326,7 @@
         <!-- v4.3.20 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.20（平板緊湊尺寸極簡化：自動隱藏鎖定與天數徽章·日期數字大字端正·連假藍線貫穿保留）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">CLEAN COMPACT</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.20（平板緊湊尺寸極簡化：自動隱藏鎖定與天數徽章·日期數字大字端正·連假藍線貫穿保留）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">CLEAN COMPACT</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">📱 採納漸進式簡化策略：平板與緊湊多欄自動隱藏鎖頭及天數膠囊，日期100%清晰居中無遮擋</div>
@@ -2172,7 +2341,7 @@
         <!-- v4.3.19 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.19（平板電腦顯示深度根治：連假徽章移角防遮·藍色Ribbon條帶浮起·鎖定極細橙點·月份8/8防穿透）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">TABLET MASTER</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.19（平板電腦顯示深度根治：連假徽章移角防遮·藍色Ribbon條帶浮起·鎖定極細橙點·月份8/8防穿透）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">TABLET MASTER</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">📱 徹底根除平板電腦與小螢幕疊加破版問題：天數徽章縮小定角·日期100%可讀·公眾假淺橙統一</div>
@@ -2188,7 +2357,7 @@
         <!-- v4.3.18 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.18（日曆全尺寸響應式優化：三端鎖定圖標分流·公眾假期淺橙深字·輪休取消PH字·手機連假徽章內嵌）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">CALENDAR RESPONSIVE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.18（日曆全尺寸響應式優化：三端鎖定圖標分流·公眾假期淺橙深字·輪休取消PH字·手機連假徽章內嵌）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">CALENDAR RESPONSIVE</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-11</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🎯 日曆跨裝置視覺大升級：電腦/平板/手機鎖定標示自適應、公眾假期高對比雙模式同調、連假天數全端完美收納</div>
@@ -2203,7 +2372,7 @@
         <!-- v4.3.17 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.17（方案二實裝：免API·免信用卡·Google Maps官方查址捷徑·智慧門牌貼上自動帶入）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SCHEME 2 PRO</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.17（方案二實裝：免API·免信用卡·Google Maps官方查址捷徑·智慧門牌貼上自動帶入）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SCHEME 2 PRO</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-10</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🚀 方案二完整落地：免金鑰·零成本·一鍵Google Maps官方查址·智慧貼上解析門牌·3大地圖分流導航</div>
@@ -2219,7 +2388,7 @@
         <!-- v4.3.16 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.16（大廈屋苑智慧容錯搜尋·地圖選點做法C實裝·三大地圖官方即時核對與門牌快捷帶回）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">MAP PICKER PRO</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.16（大廈屋苑智慧容錯搜尋·地圖選點做法C實裝·三大地圖官方即時核對與門牌快捷帶回）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">MAP PICKER PRO</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-10</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🏨 根治「A Space Mega 1」等期數屋苑查無地址問題·地圖選點實裝做法C官方三大地圖核對</div>
@@ -2235,7 +2404,7 @@
         <!-- v4.3.15 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.15（智慧地址全閉環：航班/目的地範圍感知·大廈屋苑優先·Google Maps首選·3大導航地圖自由切換）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART MAP NAV</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.15（智慧地址全閉環：航班/目的地範圍感知·大廈屋苑優先·Google Maps首選·3大導航地圖自由切換）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART MAP NAV</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-10</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🧭 整合地址全流程閉環：大廈屋苑主導輸入·互動地圖選點自動回填·3大導航自由切換·網頁預載定位記憶</div>
@@ -2251,7 +2420,7 @@
         <!-- v4.3.14 -->
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v4.3.14（做法一：智慧地圖自動分流導航·Google Maps首選·高德地圖內地專用·單鍵一撳即開出發）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART NAV</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-indigo-700 text-xs">v4.3.14（做法一：智慧地圖自動分流導航·Google Maps首選·高德地圖內地專用·一鍵即時啟動導航）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART NAV</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-10</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🧭 實裝導航做法一：自動感應目的地與設備·海外/香港首選Google Maps·內地自動切換高德</div>
@@ -2658,7 +2827,7 @@
             <span class="font-bold text-slate-700 text-xs">v3.9.24（極致純淨・無謂介紹與說教字句全面拔除版）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-08</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🧹 終結「說明書式廢話」：刪除 7 大過度說教、教導引導語與重複副標題</div>
+          <div class="text-[11px] font-semibold text-slate-800">🧹 精簡繁複操作文案：移除 7 處重複說明與引導副標、教導引導語與重複副標題</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
             <li><b>① 剔除輪休模式說教提示</b>：刪除抽屜內「💡 提示：點擊膠囊之 [-] [+] 可快捷加減...」整句長廢話。</li>
             <li><b>② 消除彈窗無謂引導副標</b>：拔除旅程修改彈窗「點選下方推薦標籤快速帶入...」及單月微調「自訂該月份的 OFF 目標天數」等重複副標。</li>
@@ -2894,7 +3063,7 @@
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🚀 輪休模式（Roster Mode）自適應三合一智能假期助手全新登場！</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 三合一智能感知</b>：全自動辨識當前更表狀態！更表已出時智能「隙縫填補」串連現成輪休；更表未出時「預先搶假」抽取額度內 OFF 與 AL 組成長假；遇上 🔒 上鎖日雷打不動絕對保護。</li>
+            <li><b>① 三合一智能感知</b>：全自動辨識當前更表狀態！更表已出時智能「隙縫填補」串連現成輪休；更表未出時「預先搶假」抽取額度內 OFF 與 AL 組成長假；遇上 🔒 上鎖日受到嚴格保護，不受批量調整影響。</li>
             <li><b>② 預覽年曆雙色標記</b>：微型熱力年曆中，深藍色高亮顯示助手新排 AL，玫瑰粉紅高亮顯示助手自動配搭之輪休 OFF。</li>
             <li><b>③ 一鍵套用連動排程</b>：套用方案時自動在月曆劃上 AL 與連假 OFF，無縫銜接輪休配額！</li>
           </ul>
@@ -3111,7 +3280,7 @@
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
             <li><b>① 跨裝置無感即時同步</b>：支援輸入自訂同步代碼，手機與電腦即時同步所有排假進度。</li>
             <li><b>② 安全 PIN 碼保護與防暴力破解</b>：支援初次啟用設定存取密碼，連續輸入錯誤 5 次自動鎖定 10 分鐘。</li>
-            <li><b>③ 日期防誤觸鎖定（🔒）</b>：長按特定已排假日期可進行鎖定保護，重設或批量套用時雷打不動保留。</li>
+            <li><b>③ 日期防誤觸鎖定（🔒）</b>：長按特定已排假日期可進行鎖定保護，重設或批量套用時受到嚴格保護並完整保留。</li>
             <li><b>④ iCal 行事曆檔案匯出 (.ics)</b>：支援將所有排定假期一鍵匯出至 Apple Calendar 或 Google 日曆。</li>
           </ul>
         </div>
@@ -3132,7 +3301,7 @@
       </div>
 
       <div class="p-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-        <span class="font-mono text-[10px]">Version: 4.3.25</span>
+        <span class="font-mono text-[10px]">Version: 4.3.34</span>
         <button id="btnConfirmCloseChangelog" class="px-3 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold rounded-lg transition active:scale-95 shadow-2xs">
           關閉
         </button>
@@ -3249,7 +3418,7 @@
 
       <div class="p-4 space-y-3 text-xs">
         <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-900 leading-relaxed text-[11px]">
-          ⚠️ 重設後，此同步代碼（<b id="resetPinRoomLabel">---</b>）的 PIN 碼將被抹除，任何成員可重新設定新 PIN 碼。
+          ⚠️ 重設後將清除此同步代碼（<b id="resetPinRoomLabel">---</b>）的 PIN 碼，成員可重新建立新密碼。
         </div>
 
         <div>
@@ -3748,7 +3917,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '4.3.25';
+    const APP_VERSION = '4.3.34';
     const APP_UPDATED_AT = '2026-11-08';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -5908,6 +6077,78 @@
       const cleanNo = flightNo.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
       return `https://www.flightradar24.com/data/flights/${cleanNo}`;
     }
+
+    // 取得航班號專屬 FlightAware 官方航班動態（閘口、航廈、行李盤）網址（智慧 IATA 轉 ICAO 權威直達，解決 EK384 -> UAE384 查無資料痛點）
+    function getFlightAwareUrl(flightNo) {
+      if (!flightNo) return 'https://www.flightaware.com';
+      const cleanNo = flightNo.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+      // 常用航司 IATA (2碼) 自動精準轉譯為 FlightAware 底層 ICAO (3碼)
+      const IATA_TO_ICAO_MAP = {
+        'EK': 'UAE', // Emirates 阿聯酋航空 (徹底解決 EK384 查無航跡問題)
+        'CX': 'CPA', // Cathay Pacific 國泰航空
+        'UO': 'HKE', // HK Express 香港快運
+        'HX': 'CRK', // Hong Kong Airlines 香港航空
+        'HB': 'HGB', // Greater Bay Airlines 大灣區航空
+        'SQ': 'SIA', // Singapore Airlines 新加坡航空
+        'TG': 'THA', // Thai Airways 泰國國際航空
+        'JL': 'JAL', // Japan Airlines 日本航空
+        'NH': 'ANA', // All Nippon Airways 全日空
+        'CI': 'CAL', // China Airlines 中華航空
+        'BR': 'EVA', // EVA Air 長榮航空
+        'JX': 'SJX', // Starlux 星宇航空
+        'KE': 'KAL', // Korean Air 大韓航空
+        'OZ': 'AAR', // Asiana Airlines 韓亞航空
+        'BA': 'BAW', // British Airways 英國航空
+        'LH': 'DLH', // Lufthansa 漢莎航空
+        'AF': 'AFR', // Air France 法國航空
+        'KL': 'KLM', // KLM 荷蘭皇家航空
+        'AY': 'FIN', // Finnair 芬蘭航空
+        'LX': 'SWR', // Swiss 瑞士國際航空
+        'TK': 'THY', // Turkish Airlines 土耳其航空
+        'QR': 'QTR', // Qatar Airways 卡塔爾航空
+        'EY': 'ETD', // Etihad Airways 阿提哈德航空
+        'MH': 'MAS', // Malaysia Airlines 馬來西亞航空
+        'TR': 'TGW', // Scoot 酷航
+        'AK': 'AXM', // AirAsia 亞洲航空
+        'FD': 'AIQ', // Thai AirAsia 泰國亞洲航空
+        'D7': 'XAX', // AirAsia X 全亞洲航空
+        'OD': 'MXD', // Batik Air Malaysia 巴迪航空
+        'VN': 'HVN', // Vietnam Airlines 越南航空
+        'VJ': 'VJC', // VietJet Air 越捷航空
+        'PR': 'PAL', // Philippine Airlines 菲律賓航空
+        '5J': 'CEB', // Cebu Pacific 宿霧太平洋航空
+        'QF': 'QFA', // Qantas 澳洲航空
+        'NZ': 'ANZ', // Air New Zealand 紐西蘭航空
+        'UA': 'UAL', // United Airlines 聯合航空
+        'AA': 'AAL', // American Airlines 美國航空
+        'DL': 'DAL', // Delta Air Lines 達美航空
+        'AC': 'ACA', // Air Canada 加拿大航空
+        'CA': 'CCA', // Air China 中國國際航空
+        'MU': 'CES', // China Eastern 中國東方航空
+        'CZ': 'CSN', // China Southern 中國南方航空
+        'ZH': 'CSZ', // Shenzhen Airlines 深圳航空
+        'MF': 'CXA', // Xiamen Air 廈門航空
+        '3U': 'CSC', // Sichuan Airlines 四川航空
+        'HU': 'CHH', // Hainan Airlines 海南航空
+        'GK': 'JJP', // Jetstar Japan 捷星日本
+        'MM': 'APJ', // Peach 樂桃航空
+        'IT': 'TTW', // Tigerair Taiwan 台灣虎航
+        'LJ': 'JNA', // Jin Air 真航空
+        '7C': 'JJA', // Jeju Air 濟州航空
+        'BX': 'ABL', // Air Busan 釜山航空
+        'TW': 'TWB'  // T'way Air 德威航空
+      };
+
+      const match = cleanNo.match(/^([A-Z0-9]{2})(\d+)$/);
+      if (match) {
+        const iataCode = match[1];
+        const flightNum = match[2];
+        if (IATA_TO_ICAO_MAP[iataCode]) {
+          return `https://www.flightaware.com/live/flight/${IATA_TO_ICAO_MAP[iataCode]}${flightNum}`;
+        }
+      }
+      return `https://www.flightaware.com/live/flight/${cleanNo}`;
+    }
     // 智慧組裝 Google Maps 導航搜尋詞（全域作用域，供假期卡片與全覽模式安全呼叫）
     function buildCardMapQuery(name, address, defaultTitle = '') {
       const hName = (name || '').trim();
@@ -7612,7 +7853,7 @@
           cell.classList.add('cell-shake-anim');
           setTimeout(() => cell.classList.remove('cell-shake-anim'), 400);
         }
-        showToast(`💡 該日為公眾假期或週末，無需請假`);
+        showToast(`💡 該日為假期或週末，無需登記休假`);
         return;
       }
 
@@ -8344,7 +8585,9 @@
         }
 
         const outRadarUrl = getFlightRadarUrl(outNo);
+        const outAwareUrl = getFlightAwareUrl(outNo);
         const inRadarUrl = getFlightRadarUrl(inNo);
+        const inAwareUrl = getFlightAwareUrl(inNo);
 
         bookingSectionHtml = `
           <div class="pt-2 border-t border-slate-100 text-[11px]">
@@ -8378,9 +8621,22 @@
                         ${bData.flightOutDep || bData.flightOutArr ? `<span class="text-slate-600 ml-1.5 font-mono">(${bData.flightOutDep || '--:--'} ➔ ${bData.flightOutArr || '--:--'})</span>` : (bData.flightOut && !bData.flightOutDep ? `<span class="text-slate-600 ml-1.5">${bData.flightOut}</span>` : '')}
                       </div>
                       ${outNo ? `
-                        <a href="${outRadarUrl}" target="_blank" rel="noopener noreferrer" class="mr-2 px-1.5 py-0.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded text-[9.5px] font-bold flex items-center gap-1 transition" title="點擊前往 Flightradar24 官方即時雷達追蹤">
-                          <i class="fa-solid fa-satellite-dish text-[9px]"></i><span>即時雷達 ↗</span>
-                        </a>
+                        <div class="relative inline-flex items-center rounded-lg shadow-2xs mr-2">
+                          <a href="${outAwareUrl}" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-l-lg text-[9.5px] font-bold flex items-center gap-1 transition" title="前往 FlightAware 查看航廈、登機閘口及行李轉盤">
+                            <i class="fa-solid fa-plane text-[9px]"></i><span>動態 ↗</span>
+                          </a>
+                          <button type="button" onclick="toggleNavDropdown('navDropdown_cardOut_${tripKey.replace(/-/g, '_')}', event)" class="px-1.5 py-0.5 bg-slate-100 hover:bg-slate-200 border-t border-b border-r border-slate-300 text-slate-600 rounded-r-lg text-[9px] font-bold flex items-center justify-center transition" title="選擇追蹤服務">
+                            ▼
+                          </button>
+                          <div id="navDropdown_cardOut_${tripKey.replace(/-/g, '_')}" class="hidden absolute right-0 top-full mt-1 w-36 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl z-40 py-1.5 text-[10px] space-y-0.5 text-left">
+                            <a href="${outAwareUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-blue-50 text-blue-700 font-bold flex items-center gap-1.5 transition">
+                              <i class="fa-solid fa-plane text-[9px]"></i> FlightAware 動態 (預設)
+                            </a>
+                            <a href="${outRadarUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-indigo-50 text-indigo-700 font-bold flex items-center gap-1.5 transition">
+                              <i class="fa-solid fa-satellite-dish text-[9px]"></i> Flightradar24 雷達
+                            </a>
+                          </div>
+                        </div>
                       ` : ''}
                     </div>
                   ` : ''}
@@ -8392,9 +8648,22 @@
                         ${bData.flightInDep || bData.flightInArr ? `<span class="text-slate-600 ml-1.5 font-mono">(${bData.flightInDep || '--:--'} ➔ ${bData.flightInArr || '--:--'})</span>` : (bData.flightIn && !bData.flightInDep ? `<span class="text-slate-600 ml-1.5">${bData.flightIn}</span>` : '')}
                       </div>
                       ${inNo ? `
-                        <a href="${inRadarUrl}" target="_blank" rel="noopener noreferrer" class="mr-2 px-1.5 py-0.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded text-[9.5px] font-bold flex items-center gap-1 transition" title="點擊前往 Flightradar24 官方即時雷達追蹤">
-                          <i class="fa-solid fa-satellite-dish text-[9px]"></i><span>即時雷達 ↗</span>
-                        </a>
+                        <div class="relative inline-flex items-center rounded-lg shadow-2xs mr-2">
+                          <a href="${inAwareUrl}" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-l-lg text-[9.5px] font-bold flex items-center gap-1 transition" title="前往 FlightAware 查看航廈、登機閘口及行李轉盤">
+                            <i class="fa-solid fa-plane text-[9px]"></i><span>動態 ↗</span>
+                          </a>
+                          <button type="button" onclick="toggleNavDropdown('navDropdown_cardIn_${tripKey.replace(/-/g, '_')}', event)" class="px-1.5 py-0.5 bg-slate-100 hover:bg-slate-200 border-t border-b border-r border-slate-300 text-slate-600 rounded-r-lg text-[9px] font-bold flex items-center justify-center transition" title="選擇追蹤服務">
+                            ▼
+                          </button>
+                          <div id="navDropdown_cardIn_${tripKey.replace(/-/g, '_')}" class="hidden absolute right-0 top-full mt-1 w-36 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl z-40 py-1.5 text-[10px] space-y-0.5 text-left">
+                            <a href="${inAwareUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-blue-50 text-blue-700 font-bold flex items-center gap-1.5 transition">
+                              <i class="fa-solid fa-plane text-[9px]"></i> FlightAware 動態 (預設)
+                            </a>
+                            <a href="${inRadarUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-indigo-50 text-indigo-700 font-bold flex items-center gap-1.5 transition">
+                              <i class="fa-solid fa-satellite-dish text-[9px]"></i> Flightradar24 雷達
+                            </a>
+                          </div>
+                        </div>
                       ` : ''}
                     </div>
                   ` : ''}
@@ -8969,7 +9238,7 @@ function setupYearOverviewToggle() {
           overviewLockBtn.innerHTML = '<i class="fa-solid fa-pen"></i> 編輯中';
         }
         if (notifyToast) {
-          showToast('✏️ 已開啟編輯模式：點擊日子循環切換');
+          showToast('✏️ 已開啟編輯模式，可點選日期排假');
         }
       } else {
         document.body.classList.add('readonly-mode');
@@ -11474,10 +11743,29 @@ function setupYearOverviewToggle() {
       const updateModalRadarLinks = () => {
         const outNo = (document.getElementById('inputFlightOutNo').value || '').trim();
         const inNo = (document.getElementById('inputFlightInNo').value || '').trim();
-        const linkOut = document.getElementById('linkFlightRadarOut');
-        const linkIn = document.getElementById('linkFlightRadarIn');
-        if (linkOut) linkOut.href = getFlightRadarUrl(outNo);
-        if (linkIn) linkIn.href = getFlightRadarUrl(inNo);
+        const linkOutRadar = document.getElementById('linkFlightRadarOut');
+        const linkInRadar = document.getElementById('linkFlightRadarIn');
+        const linkOutAware = document.getElementById('linkFlightAwareOut');
+        const linkOutAwareItem = document.getElementById('linkFlightAwareOut_Item');
+        const linkInAware = document.getElementById('linkFlightAwareIn');
+        const linkInAwareItem = document.getElementById('linkFlightAwareIn_Item');
+        if (linkOutRadar) linkOutRadar.href = getFlightRadarUrl(outNo);
+        if (linkInRadar) linkInRadar.href = getFlightRadarUrl(inNo);
+        if (linkOutAware) linkOutAware.href = getFlightAwareUrl(outNo);
+        if (linkOutAwareItem) linkOutAwareItem.href = getFlightAwareUrl(outNo);
+        if (linkInAware) linkInAware.href = getFlightAwareUrl(inNo);
+        if (linkInAwareItem) linkInAwareItem.href = getFlightAwareUrl(inNo);
+
+        const clearOut = document.getElementById('btnClearFlightOutNoInput');
+        if (clearOut) {
+          if (outNo.length > 0) clearOut.classList.remove('hidden');
+          else clearOut.classList.add('hidden');
+        }
+        const clearIn = document.getElementById('btnClearFlightInNoInput');
+        if (clearIn) {
+          if (inNo.length > 0) clearIn.classList.remove('hidden');
+          else clearIn.classList.add('hidden');
+        }
       };
 
       // === v4.3.14 方案 1 & 2：住宿／屋苑／大廈／Airbnb 地圖導航與地理編碼（智慧名稱優先＋地址輔助） ===
@@ -11558,17 +11846,33 @@ function setupYearOverviewToggle() {
 
       // 核心航班快查引擎 (本地 230+ 班次常態庫秒速命中 ➔ 預設 00:00 ➔ 隨時手動修正)
             // === v4.3.14 航班起降時間狀態與色彩管理（支援手動 00:00 黑色確認） ===
-      function setFlightTimeStatus(el, val, isConfirmed = false) {
+      // === v4.3.34 航班與時間三態色彩管理（系統藍 #2563eb · 手動黑 #0f172a · 預設灰 #94a3b8） ===
+      function setFlightElementStatus(el, val, mode = 'default') {
         if (!el) return;
-        el.value = val || '00:00';
-        if (isConfirmed) {
-          el.dataset.userEdited = 'true';
-          el.style.color = '#0f172a'; // 黑色粗體：已確認或手動輸入
+        if (val !== undefined) el.value = val;
+        
+        if (mode === 'system' || mode === true) {
+          el.dataset.source = 'system';
+          el.style.color = '#2563eb'; // 系統確認：科技藍
+          el.style.fontWeight = '900';
+        } else if (mode === 'manual') {
+          el.dataset.source = 'manual';
+          el.style.color = '#0f172a'; // 手動輸入：純黑色
           el.style.fontWeight = '900';
         } else {
-          delete el.dataset.userEdited;
-          el.style.color = '#94a3b8'; // 灰色：預設佔位狀態
+          delete el.dataset.source;
+          el.style.color = '#94a3b8'; // 預設佔位：灰色 00:00
           el.style.fontWeight = '700';
+        }
+      }
+
+      function setFlightTimeStatus(el, val, status = false) {
+        if (status === 'system' || status === true) {
+          setFlightElementStatus(el, val, 'system');
+        } else if (status === 'manual') {
+          setFlightElementStatus(el, val, 'manual');
+        } else {
+          setFlightElementStatus(el, val || '00:00', 'default');
         }
       }
 
@@ -11578,15 +11882,18 @@ function setupYearOverviewToggle() {
         if (!v) {
           setFlightTimeStatus(el, '00:00', false);
         } else {
-          // 只要使用者有手動鍵入任何時間（包括 00:00），即轉為黑色確認
-          setFlightTimeStatus(el, v, true);
+          // 使用者手動鍵入任何時間，一律轉為手動黑
+          setFlightTimeStatus(el, v, 'manual');
         }
       }
 
-      // 相容舊函式呼叫
-      function setFlightTimeValue(el, val, forceBlack = false) {
-        setFlightTimeStatus(el, val, forceBlack);
+      function setFlightTimeValue(el, val, mode = false) {
+        setFlightTimeStatus(el, val, mode);
       }
+
+      // === 航班輸入防抖延遲掃描計時器與輸入法狀態維護 ===
+      const flightInputDebounceTimers = {};
+      const flightInputComposing = {};
 
       const executeDualTrackFlightLookup = async (noInputId, depInputId, arrInputId, hintId, forceOverwrite = true) => {
         const noEl = document.getElementById(noInputId);
@@ -11595,34 +11902,39 @@ function setupYearOverviewToggle() {
         const hintEl = document.getElementById(hintId);
         if (!noEl) return;
 
-        let raw = noEl.value.trim().replace(/\s+/g, '').toUpperCase();
-        noEl.value = raw;
+        let raw = (noEl.value || '').trim().replace(/\s+/g, '').toUpperCase();
+        // 僅在格式不一致時更新，避免重設打字游標或吞字
+        if (noEl.value !== raw) {
+          noEl.value = raw;
+        }
         updateModalRadarLinks();
 
-        // ⚡ 航班編號有任何修改時：起飛與到達時間即刻恢復預設灰色 00:00！
-        setFlightTimeValue(depEl, '00:00', false);
-        setFlightTimeValue(arrEl, '00:00', false);
+        // 航班號變更時：重設時間為預設灰色 00:00
+        if (forceOverwrite) {
+          setFlightTimeValue(depEl, '00:00', false);
+          setFlightTimeValue(arrEl, '00:00', false);
+        }
 
-        if (!raw) {
+        if (!raw || raw.length < 2) {
           if (hintEl) { hintEl.classList.add('hidden'); hintEl.innerHTML = ''; }
           return;
         }
 
-        // 1. 【第一優先·零延遲】：比對本地四大熱門地區全量常態資料庫
+        // 1. 【第一優先·零延遲】：比對本地常態班表資料庫
         const localFound = lookupLocalFlightSchedule(raw);
         if (localFound) {
-          // 成功確認：時間填入並轉為黑色顯示！
-          setFlightTimeValue(depEl, localFound.dep || '00:00', true);
-          setFlightTimeValue(arrEl, localFound.arr || '00:00', true);
+          setFlightElementStatus(noEl, raw, 'system'); // 系統確認班機：藍色
+          setFlightTimeStatus(depEl, localFound.dep || '00:00', 'system'); // 系統確認起飛時間：藍色
+          setFlightTimeStatus(arrEl, localFound.arr || '00:00', 'system'); // 系統確認到達時間：藍色
           if (hintEl) {
             hintEl.classList.remove('hidden');
-            hintEl.innerHTML = `✨ <b>${localFound.airline}</b>：${localFound.from} ➔ ${localFound.to} (起飛 ${localFound.dep} / 到達 ${localFound.arr})。已確認並以黑色顯示。`;
+            hintEl.innerHTML = `✨ <b>${localFound.airline}</b>：${localFound.from} ➔ ${localFound.to} (起飛 ${localFound.dep} / 到達 ${localFound.arr})。<span class="text-blue-600 font-bold">已確認並以藍色顯示。</span>`;
           }
           showToast(`✨ 已自動辨識 ${raw}（${localFound.airline}）：起飛 ${localFound.dep} / 到達 ${localFound.arr}`);
           return;
         }
 
-        // 2. 【第二優先】：嘗試連線獲取 (支援離港與抵港雙向結果)
+        // 2. 【第二優先】：嘗試線上即時檢索 (離港與抵港雙向支援)
         let onlineResult = null;
         try {
           onlineResult = await fetchOnlineFlightStatus(raw);
@@ -11631,27 +11943,27 @@ function setupYearOverviewToggle() {
         }
 
         if (onlineResult && (onlineResult.dep || onlineResult.arr)) {
-          if (onlineResult.dep) setFlightTimeValue(depEl, onlineResult.dep, true);
-          if (onlineResult.arr) setFlightTimeValue(arrEl, onlineResult.arr, true);
+          setFlightElementStatus(noEl, raw, 'system'); // 系統確認班機：藍色
+          if (onlineResult.dep) setFlightTimeStatus(depEl, onlineResult.dep, 'system');
+          if (onlineResult.arr) setFlightTimeStatus(arrEl, onlineResult.arr, 'system');
           const timeDesc = onlineResult.dep ? `起飛 ${onlineResult.dep}` : `到達 ${onlineResult.arr}`;
           if (hintEl) {
             hintEl.classList.remove('hidden');
-            hintEl.innerHTML = `🌐 <b>實時航班資訊</b>：${onlineResult.origin} ➔ ${onlineResult.dest}（${timeDesc} · 航廈 ${onlineResult.terminal || 'T1'}）。已確認並以黑色顯示。`;
+            hintEl.innerHTML = `🌐 <b>實時航班資訊</b>：${onlineResult.origin} ➔ ${onlineResult.dest}（${timeDesc} · 航廈 ${onlineResult.terminal || 'T1'}）。<span class="text-blue-600 font-bold">已確認並以藍色顯示。</span>`;
           }
           showToast(`🌐 已透過即時數據自動填入 ${raw} 時刻！`);
           return;
         }
 
-        // 3. 【未在時刻庫中】：保持預設灰色 00:00，提示可手動輸入（手動輸入自動黑色）
-        setFlightTimeValue(depEl, '00:00', false);
-        setFlightTimeValue(arrEl, '00:00', false);
+        // 3. 【未在時刻庫中】：自訂班次保持黑字，提示手動輸入起訖時間為黑字
+        setFlightElementStatus(noEl, raw, 'manual'); // 手動/自訂班次：黑色
         if (hintEl) {
           hintEl.classList.remove('hidden');
           hintEl.innerHTML = `ℹ️ 自訂班次 <b>${raw}</b> 未在常規時刻庫中；時間已保持預設灰色 <b>00:00</b>，手動輸入起訖時間將自動轉為黑色顯示。`;
         }
       };
 
-      // 監聽去程與回程航班號輸入事件 (多事件驅動：input、change、blur、paste)
+      // 監聽去程與回程航班號：500ms 停頓防抖掃描與輸入法組字保護 (徹底解決打字食字與游標跳動)
       ['inputFlightOutNo', 'inputFlightInNo'].forEach(id => {
         const isOut = id === 'inputFlightOutNo';
         const depId = isOut ? 'inputFlightOutDep' : 'inputFlightInDep';
@@ -11660,50 +11972,91 @@ function setupYearOverviewToggle() {
         const inputEl = document.getElementById(id);
 
         if (inputEl) {
+          // 輸入法組字開始（防止中文、拼音或手機聯想鍵盤打字中途被強制吃字）
+          inputEl.addEventListener('compositionstart', () => {
+            flightInputComposing[id] = true;
+          });
+
+          // 輸入法組字完成（上屏後啟動 500ms 防抖計時）
+          inputEl.addEventListener('compositionend', () => {
+            flightInputComposing[id] = false;
+            clearTimeout(flightInputDebounceTimers[id]);
+            flightInputDebounceTimers[id] = setTimeout(() => {
+              executeDualTrackFlightLookup(id, depId, arrId, hintId, true);
+            }, 500);
+          });
+
+          // 打字中事件：停頓 500ms 後才掃描，輸入途中不打斷、不改寫、不食字
           inputEl.addEventListener('input', () => {
-            executeDualTrackFlightLookup(id, depId, arrId, hintId, true);
+            if (flightInputComposing[id]) return;
+            clearTimeout(flightInputDebounceTimers[id]);
+            flightInputDebounceTimers[id] = setTimeout(() => {
+              executeDualTrackFlightLookup(id, depId, arrId, hintId, true);
+            }, 500);
           });
-          inputEl.addEventListener('change', () => {
-            executeDualTrackFlightLookup(id, depId, arrId, hintId, true);
-          });
-          inputEl.addEventListener('paste', () => {
-            setTimeout(() => executeDualTrackFlightLookup(id, depId, arrId, hintId, true), 50);
-          });
+
+          // 點擊框外失焦或按下 Tab/Enter：立即進行最後掃描確認
           inputEl.addEventListener('blur', () => {
+            clearTimeout(flightInputDebounceTimers[id]);
             executeDualTrackFlightLookup(id, depId, arrId, hintId, true);
+          });
+
+          // 直接貼上文字：50ms 後立刻完成識別
+          inputEl.addEventListener('paste', () => {
+            clearTimeout(flightInputDebounceTimers[id]);
+            setTimeout(() => {
+              executeDualTrackFlightLookup(id, depId, arrId, hintId, true);
+            }, 50);
           });
         }
       });
 
-      // 專屬「即時查詢」按鈕綁定 (點擊強制檢索)
-      const btnLookupOut = document.getElementById('btnAutoLookupOut');
-      if (btnLookupOut) {
-        btnLookupOut.onclick = () => executeDualTrackFlightLookup('inputFlightOutNo', 'inputFlightOutDep', 'inputFlightOutArr', 'hintFlightOutAuto', true);
-      }
-      const btnLookupIn = document.getElementById('btnAutoLookupIn');
-      if (btnLookupIn) {
-        btnLookupIn.onclick = () => executeDualTrackFlightLookup('inputFlightInNo', 'inputFlightInDep', 'inputFlightInArr', 'hintFlightInAuto', true);
+      // === v4.3.33 內嵌 ✕ 清除鍵與二合一組合鍵聯動管理 ===
+      function setupFlightClearAndLinks(inputId, clearBtnId, depId, arrId, hintId, awareIds, radarId) {
+        const inputEl = document.getElementById(inputId);
+        const clearBtn = document.getElementById(clearBtnId);
+        const depEl = document.getElementById(depId);
+        const arrEl = document.getElementById(arrId);
+        const hintEl = document.getElementById(hintId);
+
+        if (!inputEl) return;
+
+        const updateState = () => {
+          const val = inputEl.value.trim().toUpperCase();
+          if (clearBtn) {
+            if (val.length > 0) clearBtn.classList.remove('hidden');
+            else clearBtn.classList.add('hidden');
+          }
+          const faUrl = getFlightAwareUrl(val);
+          const frUrl = getFlightRadarUrl(val);
+          awareIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.href = faUrl;
+          });
+          const radarEl = document.getElementById(radarId);
+          if (radarEl) radarEl.href = frUrl;
+        };
+
+        inputEl.addEventListener('input', updateState);
+
+        if (clearBtn) {
+          clearBtn.onclick = (e) => {
+            e.stopPropagation();
+            inputEl.value = '';
+            if (depEl) setFlightTimeValue(depEl, '00:00', false);
+            if (arrEl) setFlightTimeValue(arrEl, '00:00', false);
+            if (hintEl) { hintEl.classList.add('hidden'); hintEl.innerHTML = ''; }
+            clearBtn.classList.add('hidden');
+            updateState();
+            inputEl.focus();
+            showToast('已清空航班號與時間');
+          };
+        }
+        updateState();
       }
 
-      // 清除去程時間按鈕
-      const btnClearOut = document.getElementById('btnClearOutTime');
-      if (btnClearOut) {
-        btnClearOut.onclick = () => {
-          setFlightTimeValue(document.getElementById('inputFlightOutDep'), '00:00', false);
-          setFlightTimeValue(document.getElementById('inputFlightOutArr'), '00:00', false);
-          showToast('已將去程起降時間重設為 00:00，可手動重新輸入');
-        };
-      }
-
-      // 清除回程時間按鈕
-      const btnClearIn = document.getElementById('btnClearInTime');
-      if (btnClearIn) {
-        btnClearIn.onclick = () => {
-          setFlightTimeValue(document.getElementById('inputFlightInDep'), '00:00', false);
-          setFlightTimeValue(document.getElementById('inputFlightInArr'), '00:00', false);
-          showToast('已將回程起降時間重設為 00:00，可手動重新輸入');
-        };
-      }
+      setupFlightClearAndLinks('inputFlightOutNo', 'btnClearFlightOutNoInput', 'inputFlightOutDep', 'inputFlightOutArr', 'hintFlightOutAuto', ['linkFlightAwareOut', 'linkFlightAwareOut_Item'], 'linkFlightRadarOut');
+      setupFlightClearAndLinks('inputFlightInNo', 'btnClearFlightInNoInput', 'inputFlightInDep', 'inputFlightInArr', 'hintFlightInAuto', ['linkFlightAwareIn', 'linkFlightAwareIn_Item'], 'linkFlightRadarIn');
 
       // === v4.3.14 時間輸入自動格式化與冒號跳轉 (例如 12 -> 12: 或 1250 -> 12:50，手動輸入 00:00 即轉黑色) ===
       function handleTimeInputAutoFormat(el, e) {
@@ -11725,9 +12078,9 @@ function setupYearOverviewToggle() {
         if (v.length > 5) v = v.slice(0, 5);
         el.value = v;
 
-        // 當使用者有輸入鍵盤動作時：若欄位非空（包含手動輸入的 00:00），即標記為手動確認黑！
+        // 當使用者手動輸入時間時：若欄位非空（包括手動輸入的 00:00），標記為手動黑色！
         if (v) {
-          setFlightTimeStatus(el, v, true);
+          setFlightTimeStatus(el, v, 'manual');
         } else {
           setFlightTimeStatus(el, '00:00', false);
         }
@@ -12224,25 +12577,35 @@ function setupYearOverviewToggle() {
 
         const data = (typeof tripBookings !== 'undefined' && tripBookings[currentEditingBookingKey]) ? tripBookings[currentEditingBookingKey] : {};
         
-        // 載入去程（若先前已儲存過起降時間，包括 00:00，一律顯示為黑色確認）
+        // 載入去程（智慧判定：符合系統資料庫時間顯示為藍色，自訂修改顯示為黑色）
         const outNo = data.flightOutNo || (data.flightOut ? data.flightOut.split(' ')[0] : '');
-        document.getElementById('inputFlightOutNo').value = outNo;
+        const outInputEl = document.getElementById('inputFlightOutNo');
+        outInputEl.value = outNo;
         const outDepEl = document.getElementById('inputFlightOutDep');
         const outArrEl = document.getElementById('inputFlightOutArr');
         const hasOutDep = Boolean(data.flightOutDep !== undefined && data.flightOutDep !== '');
         const hasOutArr = Boolean(data.flightOutArr !== undefined && data.flightOutArr !== '');
-        setFlightTimeStatus(outDepEl, data.flightOutDep || '00:00', hasOutDep);
-        setFlightTimeStatus(outArrEl, data.flightOutArr || '00:00', hasOutArr);
         
-        // 載入回程（若先前已儲存過起降時間，包括 00:00，一律顯示為黑色確認）
+        const outLocal = outNo ? lookupLocalFlightSchedule(outNo) : null;
+        const isOutSystem = Boolean(outLocal && data.flightOutDep === outLocal.dep && data.flightOutArr === outLocal.arr);
+        setFlightElementStatus(outInputEl, outNo, isOutSystem ? 'system' : (outNo ? 'manual' : 'default'));
+        setFlightTimeStatus(outDepEl, data.flightOutDep || '00:00', isOutSystem ? 'system' : (hasOutDep ? 'manual' : false));
+        setFlightTimeStatus(outArrEl, data.flightOutArr || '00:00', isOutSystem ? 'system' : (hasOutArr ? 'manual' : false));
+        
+        // 載入回程（智慧判定：符合系統資料庫時間顯示為藍色，自訂修改顯示為黑色）
         const inNo = data.flightInNo || (data.flightIn ? data.flightIn.split(' ')[0] : '');
-        document.getElementById('inputFlightInNo').value = inNo;
+        const inInputEl = document.getElementById('inputFlightInNo');
+        inInputEl.value = inNo;
         const inDepEl = document.getElementById('inputFlightInDep');
         const inArrEl = document.getElementById('inputFlightInArr');
         const hasInDep = Boolean(data.flightInDep !== undefined && data.flightInDep !== '');
         const hasInArr = Boolean(data.flightInArr !== undefined && data.flightInArr !== '');
-        setFlightTimeStatus(inDepEl, data.flightInDep || '00:00', hasInDep);
-        setFlightTimeStatus(inArrEl, data.flightInArr || '00:00', hasInArr);
+
+        const inLocal = inNo ? lookupLocalFlightSchedule(inNo) : null;
+        const isInSystem = Boolean(inLocal && data.flightInDep === inLocal.dep && data.flightInArr === inLocal.arr);
+        setFlightElementStatus(inInputEl, inNo, isInSystem ? 'system' : (inNo ? 'manual' : 'default'));
+        setFlightTimeStatus(inDepEl, data.flightInDep || '00:00', isInSystem ? 'system' : (hasInDep ? 'manual' : false));
+        setFlightTimeStatus(inArrEl, data.flightInArr || '00:00', isInSystem ? 'system' : (hasInArr ? 'manual' : false));
 
         document.getElementById('inputFlightPnr').value = data.flightPnr || '';
         document.getElementById('inputHotelName').value = data.hotelName || '';
@@ -13086,7 +13449,7 @@ function setupYearOverviewToggle() {
     }
   </script>
 
-    <!-- 全年假期分佈走廊專屬旗艦級毛玻璃懸浮彈窗 (徹底替換原生肉酸文字框，支援手機手指觸摸與電腦滑鼠懸停) -->
+    <!-- 全年假期分佈走廊專屬旗艦級毛玻璃懸浮彈窗 (全面取代系統原生預設提示框，支援手機手指觸摸與電腦滑鼠懸停) -->
   <div id="ganttTripTooltip" class="fixed z-[100] pointer-events-none opacity-0 transition-all duration-200 ease-out will-change-transform max-w-[310px] w-auto bg-white/95 backdrop-blur-md text-slate-800 rounded-2xl shadow-2xl overflow-hidden text-xs border border-slate-200/90 hidden ring-1 ring-slate-900/10">
     <div class="p-2.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-800 text-white flex items-center justify-between gap-2 shadow-xs">
       <div class="flex items-center gap-1.5 min-w-0">
@@ -13300,14 +13663,14 @@ function setupYearOverviewToggle() {
           </div>
         </div>
 
-        <!-- 1. 航班資料模組 (去程 + 回程) -->
+        <!-- 1. 航班資料模組 (去程 + 回程 - v4.3.33 精簡組合鍵與內嵌清除版) -->
         <div class="p-3 bg-blue-50/60 rounded-2xl border border-blue-200/80 space-y-3">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-1.5 font-bold text-blue-900 text-[11px]">
               <i class="fa-solid fa-plane text-blue-600"></i>
               <span>航班詳細排表 (Flight Details)</span>
             </div>
-            <span class="text-[9.5px] text-blue-600 font-medium">支援自動辨識與手動修改</span>
+            <span class="text-[9.5px] text-blue-600 font-medium">智慧防抖自動辨識</span>
           </div>
 
           <!-- 去程航班 -->
@@ -13317,22 +13680,35 @@ function setupYearOverviewToggle() {
                 <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
                 <span>去程航班 (Outbound)</span>
               </span>
-              <div class="flex items-center gap-1">
-                <button type="button" id="btnAutoLookupOut" class="text-[9.5px] text-blue-700 hover:text-blue-800 font-bold px-2 py-0.5 rounded-lg bg-blue-50 hover:bg-blue-100 border border-blue-200 transition flex items-center gap-1 cursor-pointer" title="點擊強制搜尋並帶入時間">
-                  <i class="fa-solid fa-magnifying-glass text-[8.5px]"></i><span>即時查詢</span>
-                </button>
-                <button type="button" id="btnClearOutTime" class="text-[9.5px] text-rose-600 hover:text-rose-700 font-semibold px-1.5 py-0.5 rounded-lg hover:bg-rose-50 transition cursor-pointer" title="清除起飛與到達時間">
-                  <i class="fa-solid fa-eraser mr-0.5"></i>清除
-                </button>
-                <a id="linkFlightRadarOut" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer" class="text-[9.5px] text-indigo-600 hover:text-indigo-800 font-bold px-1.5 py-0.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 flex items-center gap-1 transition" title="查看 Flightradar24 國際認可即時航機追蹤">
-                  <i class="fa-solid fa-satellite-dish text-[9px]"></i><span>雷達 ↗</span>
+              <!-- 二合一組合按鍵：預設 FlightAware，下拉可選 FR24 -->
+              <div id="boxOutFlightNavGroup" class="relative inline-flex items-center rounded-lg shadow-2xs">
+                <a id="linkFlightAwareOut" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" 
+                   class="text-[9.5px] font-bold px-2 py-0.5 rounded-l-lg bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 transition flex items-center gap-1">
+                  <i class="fa-solid fa-plane text-[9px]"></i>
+                  <span id="labelFlightOutNavText">動態 ↗</span>
                 </a>
+                <button type="button" onclick="toggleNavDropdown('navDropdown_flightOut', event)" 
+                        class="px-1.5 py-0.5 bg-slate-100 hover:bg-slate-200 border-t border-b border-r border-slate-300 text-slate-600 rounded-r-lg text-[9px] font-bold flex items-center justify-center transition" title="選擇追蹤服務">
+                  ▼
+                </button>
+                <div id="navDropdown_flightOut" class="hidden absolute right-0 top-full mt-1 w-36 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl z-40 py-1.5 text-[10px] space-y-0.5 text-left">
+                  <a id="linkFlightAwareOut_Item" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-blue-50 text-blue-700 font-bold flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-plane text-[9px]"></i> FlightAware 動態 (預設)
+                  </a>
+                  <a id="linkFlightRadarOut" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-indigo-50 text-indigo-700 font-bold flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-satellite-dish text-[9px]"></i> Flightradar24 雷達
+                  </a>
+                </div>
               </div>
             </div>
+
             <div class="grid grid-cols-12 gap-1.5 items-center">
-              <div class="col-span-4">
+              <div class="col-span-4 relative">
                 <label class="block text-[9px] text-slate-400 mb-0.5">航班編號</label>
-                <input type="text" id="inputFlightOutNo" placeholder="CX500" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold uppercase focus:outline-blue-500">
+                <div class="relative flex items-center">
+                  <input type="text" id="inputFlightOutNo" placeholder="CX500" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold uppercase focus:outline-blue-500 pr-6">
+                  <button type="button" id="btnClearFlightOutNoInput" class="hidden absolute right-1.5 w-3.5 h-3.5 rounded-full bg-slate-300 hover:bg-slate-400 text-white flex items-center justify-center text-[9px] transition cursor-pointer select-none" title="清除">✕</button>
+                </div>
               </div>
               <div class="col-span-4">
                 <label class="block text-[9px] text-slate-400 mb-0.5">起飛時間 (Dep)</label>
@@ -13353,30 +13729,43 @@ function setupYearOverviewToggle() {
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                 <span>回程航班 (Inbound)</span>
               </span>
-              <div class="flex items-center gap-1">
-                <button type="button" id="btnAutoLookupIn" class="text-[9.5px] text-blue-700 hover:text-blue-800 font-bold px-2 py-0.5 rounded-lg bg-blue-50 hover:bg-blue-100 border border-blue-200 transition flex items-center gap-1 cursor-pointer" title="點擊強制搜尋並帶入時間">
-                  <i class="fa-solid fa-magnifying-glass text-[8.5px]"></i><span>即時查詢</span>
-                </button>
-                <button type="button" id="btnClearInTime" class="text-[9.5px] text-rose-600 hover:text-rose-700 font-semibold px-1.5 py-0.5 rounded-lg hover:bg-rose-50 transition cursor-pointer" title="清除起飛與到達時間">
-                  <i class="fa-solid fa-eraser mr-0.5"></i>清除
-                </button>
-                <a id="linkFlightRadarIn" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer" class="text-[9.5px] text-indigo-600 hover:text-indigo-800 font-bold px-1.5 py-0.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 flex items-center gap-1 transition" title="查看 Flightradar24 國際認可即時航機追蹤">
-                  <i class="fa-solid fa-satellite-dish text-[9px]"></i><span>雷達 ↗</span>
+              <!-- 二合一組合按鍵：預設 FlightAware，下拉可選 FR24 -->
+              <div id="boxInFlightNavGroup" class="relative inline-flex items-center rounded-lg shadow-2xs">
+                <a id="linkFlightAwareIn" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" 
+                   class="text-[9.5px] font-bold px-2 py-0.5 rounded-l-lg bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-700 transition flex items-center gap-1">
+                  <i class="fa-solid fa-plane text-[9px]"></i>
+                  <span id="labelFlightInNavText">動態 ↗</span>
                 </a>
+                <button type="button" onclick="toggleNavDropdown('navDropdown_flightIn', event)" 
+                        class="px-1.5 py-0.5 bg-slate-100 hover:bg-slate-200 border-t border-b border-r border-slate-300 text-slate-600 rounded-r-lg text-[9px] font-bold flex items-center justify-center transition" title="選擇追蹤服務">
+                  ▼
+                </button>
+                <div id="navDropdown_flightIn" class="hidden absolute right-0 top-full mt-1 w-36 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl z-40 py-1.5 text-[10px] space-y-0.5 text-left">
+                  <a id="linkFlightAwareIn_Item" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-blue-50 text-blue-700 font-bold flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-plane text-[9px]"></i> FlightAware 動態 (預設)
+                  </a>
+                  <a id="linkFlightRadarIn" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 hover:bg-indigo-50 text-indigo-700 font-bold flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-satellite-dish text-[9px]"></i> Flightradar24 雷達
+                  </a>
+                </div>
               </div>
             </div>
+
             <div class="grid grid-cols-12 gap-1.5 items-center">
-              <div class="col-span-4">
+              <div class="col-span-4 relative">
                 <label class="block text-[9px] text-slate-400 mb-0.5">航班編號</label>
-                <input type="text" id="inputFlightInNo" placeholder="CX501" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold uppercase focus:outline-blue-500">
+                <div class="relative flex items-center">
+                  <input type="text" id="inputFlightInNo" placeholder="CX501" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold uppercase focus:outline-blue-500 pr-6">
+                  <button type="button" id="btnClearFlightInNoInput" class="hidden absolute right-1.5 w-3.5 h-3.5 rounded-full bg-slate-300 hover:bg-slate-400 text-white flex items-center justify-center text-[9px] transition cursor-pointer select-none" title="清除">✕</button>
+                </div>
               </div>
               <div class="col-span-4">
                 <label class="block text-[9px] text-slate-400 mb-0.5">起飛時間 (Dep)</label>
-                <input type="text" id="inputFlightInDep" placeholder="16:00" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold text-center focus:outline-blue-500">
+                <input type="text" id="inputFlightInDep" placeholder="00:00" style="color: #94a3b8;" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold text-center focus:outline-blue-500">
               </div>
               <div class="col-span-4">
                 <label class="block text-[9px] text-slate-400 mb-0.5">到達時間 (Arr)</label>
-                <input type="text" id="inputFlightInArr" placeholder="20:15" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold text-center focus:outline-blue-500">
+                <input type="text" id="inputFlightInArr" placeholder="00:00" style="color: #94a3b8;" class="w-full px-2 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono font-bold text-center focus:outline-blue-500">
               </div>
             </div>
             <div id="hintFlightInAuto" class="text-[9.5px] text-blue-700 font-medium hidden"></div>
@@ -13387,13 +13776,9 @@ function setupYearOverviewToggle() {
             <input type="text" id="inputFlightPnr" placeholder="例如：ABC123D / 160-2345678901" class="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-mono font-bold uppercase focus:outline-blue-500">
           </div>
 
-          <!-- 權威免責聲明與資料來源標註 -->
-          <div class="p-2 bg-blue-100/60 rounded-xl border border-blue-200/90 text-[10px] text-blue-900 leading-relaxed flex items-start gap-1.5">
-            <i class="fa-solid fa-circle-info text-blue-600 mt-0.5 shrink-0 text-[11px]"></i>
-            <div>
-              <span class="font-bold">資料來源與核對提示：</span>
-              <span>系統自動推薦之時間引自各大航空公司定期公佈班表庫及國際民航排程；實際起降時間、登機閘口及即時調度，請一律以航空公司官方最新公佈及機票憑證為準。</span>
-            </div>
+          <!-- 精簡微標註：取代原先大段長篇說教提示 -->
+          <div class="text-[9.5px] text-slate-400 pt-0.5 text-center leading-tight">
+            * 航班時刻由常態班表庫自動推薦，實際起降時間及閘口請以航空公司最新公佈為準。
           </div>
         </div>
 
@@ -13775,7 +14160,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.25</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v4.3.34</span>
           </button>
         </div>
       </div>
