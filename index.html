@@ -2359,7 +2359,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.3.4 更新日誌</span>
+      <span>v5.3.5 更新日誌</span>
     </button>
   </footer>
 
@@ -2401,7 +2401,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.3.4</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.3.5</span>
             </h3>
           </div>
         </div>
@@ -2411,18 +2411,13 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.3.4 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.3.5 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.3.4（防覆蓋安全鎖 · 一鍵匯出與匯入 JSON 完整備份還原系統）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">BACKUP & GUARD</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.3.5（明確標示「JSON 備份檔案 (.json)」區塊標題與按鈕名稱）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">CLEAR LABEL</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🛡️ 新增雲端斷線／權限受阻防覆蓋安全鎖，並於設定抽屜加入一鍵匯出／匯入完整 JSON 備份檔案功能</div>
-          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 雲端連線／權限防覆蓋安全鎖</b>：當 Firebase 出現 HTTP 權限受限、斷網或本機快取已有紀錄時，系統自動載入本機快取並鎖定防覆蓋保護，絕不誤彈「首次啟用設定 PIN」清空資料。</li>
-            <li><b>② 一鍵匯出完整備份（<code>.json</code>）</b>：於右上角 <code>☰</code> 設定選單點擊「<b>匯出備份</b>」，即時將全年所有排假、航班、酒店住宿、配額與自訂標題打包下載至裝置。</li>
-            <li><b>③ 一鍵匯入還原備份</b>：點擊「<b>匯入還原</b>」選擇先前的 <code>.json</code> 備份檔，一秒完整還原所有資料並自動同步上雲端。</li>
-          </ul>
+          <div class="text-[11px] font-semibold text-slate-800">🏷️ 於設定抽屜內為備份按鈕補上清晰「JSON 備份檔案 (.json)」專屬分區標題及「匯出 JSON／匯入 JSON」明確字樣</div>
         </div>
 
         <!-- v5.0.37 -->
@@ -4911,7 +4906,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.3.4';
+    const APP_VERSION = '5.3.5';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -10439,7 +10434,7 @@
 
       const gapHtml = prevTrip ? buildIntervalGapHtml(trip.startDate, prevTrip.endDate) : '';
 
-            // === v5.3.4 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
+            // === v5.3.5 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
       const tripKey = `${trip.startDate}_${trip.endDate}`;
       const bData = (typeof tripBookings !== 'undefined' && tripBookings[tripKey]) ? tripBookings[tripKey] : null;
       const cleanOutSummary = bData && bData.flightOut ? bData.flightOut.replace(/\(00:00\s*➔\s*00:00\)/g, '').trim() : '';
@@ -17642,7 +17637,7 @@ function setupYearOverviewToggle() {
     </div>
   </div>
 
-      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.4 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
+      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.5 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
   <div id="inlineBookingStudioParkingBay" class="hidden">
 
   <!-- 原裝完整「旅程預訂資料」流暢原地收放面板（全程零彈窗、無重複標題與多餘收起掣） -->
@@ -18595,8 +18590,8 @@ function setupYearOverviewToggle() {
           </div>
         </div>
         <!-- 數據與匯出區塊 -->
-        <div class="p-4 space-y-2 border-b border-slate-100">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">日曆匯出與完整備份</span>
+        <div class="p-4 space-y-2.5 border-b border-slate-100">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">日曆匯出</span>
           <button id="btnDrawerExportIcal" class="w-full py-2.5 px-3 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl font-bold text-slate-700 text-xs flex items-center justify-between transition active:scale-98 shadow-2xs">
             <span class="flex items-center gap-2">
               <i class="fa-solid fa-calendar-arrow-down text-blue-600 text-sm"></i>
@@ -18605,15 +18600,21 @@ function setupYearOverviewToggle() {
             <i class="fa-solid fa-chevron-right text-slate-300 text-[10px]"></i>
           </button>
 
-          <div class="grid grid-cols-2 gap-2 pt-1">
-            <button id="btnDrawerExportJson" type="button" class="w-full py-2.5 px-2.5 bg-blue-50/80 hover:bg-blue-100/80 border border-blue-200 rounded-xl font-bold text-blue-800 text-xs flex items-center justify-center gap-1.5 transition active:scale-95 shadow-2xs cursor-pointer">
-              <i class="fa-solid fa-file-export text-blue-600 text-xs"></i>
-              <span>匯出備份</span>
-            </button>
-            <button id="btnDrawerImportJson" type="button" class="w-full py-2.5 px-2.5 bg-emerald-50/80 hover:bg-emerald-100/80 border border-emerald-200 rounded-xl font-bold text-emerald-800 text-xs flex items-center justify-center gap-1.5 transition active:scale-95 shadow-2xs cursor-pointer">
-              <i class="fa-solid fa-file-import text-emerald-600 text-xs"></i>
-              <span>匯入還原</span>
-            </button>
+          <div class="pt-1.5 border-t border-slate-100/80 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">JSON 備份檔案 (.json)</span>
+              <span class="text-[9.5px] font-mono font-bold text-slate-400">完整資料</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="btnDrawerExportJson" type="button" class="w-full py-2.5 px-2.5 bg-blue-50/80 hover:bg-blue-100/80 border border-blue-200 rounded-xl font-bold text-blue-800 text-xs flex items-center justify-center gap-1.5 transition active:scale-95 shadow-2xs cursor-pointer">
+                <i class="fa-solid fa-file-export text-blue-600 text-xs"></i>
+                <span>匯出 JSON</span>
+              </button>
+              <button id="btnDrawerImportJson" type="button" class="w-full py-2.5 px-2.5 bg-emerald-50/80 hover:bg-emerald-100/80 border border-emerald-200 rounded-xl font-bold text-emerald-800 text-xs flex items-center justify-center gap-1.5 transition active:scale-95 shadow-2xs cursor-pointer">
+                <i class="fa-solid fa-file-import text-emerald-600 text-xs"></i>
+                <span>匯入 JSON</span>
+              </button>
+            </div>
           </div>
           <input type="file" id="inputImportJsonFile" accept=".json,application/json" class="hidden">
         </div>
@@ -18638,7 +18639,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.3.4</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.3.5</span>
           </button>
         </div>
       </div>
