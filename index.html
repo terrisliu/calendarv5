@@ -2120,7 +2120,7 @@
               <div id="mobileSmartBannerDots" class="flex items-center gap-1.5"></div>
             </div>
             <!-- 手機頂端 Smart Stack 原位無彈窗展開槽位（點擊「憑證 / 登記預訂」即緊貼此處平滑向下展開） -->
-            <div id="mobileRibbonInlineStudioSlot" class="px-2 pb-2 empty:hidden"></div>
+            <div id="mobileRibbonInlineStudioSlot" style="overflow-anchor: none;" class="px-2 pb-2 empty:hidden"></div>
           </div>
         </div>
 
@@ -2380,7 +2380,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.1.6 更新日誌</span>
+      <span>v5.2.3 更新日誌</span>
     </button>
   </footer>
 
@@ -2422,7 +2422,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.1.6</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.2.3</span>
             </h3>
           </div>
         </div>
@@ -2432,16 +2432,16 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.1.6 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.2.3 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.1.6（根治全域/局部作用域遮蔽 Bug · 實現「撳邊個彈邊個、上一個即時收起、再撳即收合」單手風琴體驗）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">ACCORDION PRO</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.2.3（固定視窗零跳動展開：點擊「憑證／登記預訂」原地向下展開 · 頂部旅程卡片與年曆標題 100% 穩固不捲走）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">ZERO JUMP</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-13</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🎯 徹底修復登記預訂後無法收起、其他月份展開預訂無反應及手機版切換卡死的問題</div>
+          <div class="text-[11px] font-semibold text-slate-800">📌 移除自動捲動跳轉並鎖定捲動錨點，展開或收起「憑證 / 登記預訂」時畫面原位不動，上方旅程卡片與資料完整保留在視線內</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 消除 <code>currentEditingBookingKey</code> 作用域遮蔽（Shadowing）</b>：將該狀態變數正式提升至頂層全域，修復先前外層 <code>openTripBookingByKey()</code> 讀寫 <code>window.currentEditingBookingKey</code>、內層 <code>run()</code> 卻讀寫局部 <code>let</code> 導致永遠無法收起與無法切換其他旅程的致命錯位。</li>
-            <li><b>② 單手風琴排他切換（撳邊個跳邊個，舊嗰個即刻收起）</b>：無論在電腦側欄、手機頂端滑動卡或「假期規劃」視窗，點擊任何一趟旅程的「登記預訂 / 展開預訂 / 憑證」，前一個面板即時自動收起並平滑展開新選旅程；再點同一橫幅即時收合。</li>
+            <li><b>① 移除強制 <code>scrollIntoView</code> 跳動</b>：點擊「憑證」或「登記預訂」後，版面直接在卡片正下方原地展開，不再自動向下捲走隱藏上方旅程摘要。</li>
+            <li><b>② 鎖定視窗捲動位置與關閉瀏覽器自動捲動錨點（<code>overflow-anchor: none</code>）</b>：展開及收起過程中完整保持原有 <code>scrollY</code> 位置，畫面絲毫不跳動。</li>
           </ul>
         </div>
 
@@ -4931,7 +4931,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.1.6';
+    const APP_VERSION = '5.2.3';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -10402,7 +10402,7 @@
 
       const gapHtml = prevTrip ? buildIntervalGapHtml(trip.startDate, prevTrip.endDate) : '';
 
-            // === v5.1.6 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
+            // === v5.2.3 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
       const tripKey = `${trip.startDate}_${trip.endDate}`;
       const bData = (typeof tripBookings !== 'undefined' && tripBookings[tripKey]) ? tripBookings[tripKey] : null;
       const hasBooking = bData && (bData.flightOut || bData.flightIn || bData.flightOutNo || bData.hotelName || bData.notes);
@@ -10719,12 +10719,14 @@
       if (countEl) countEl.textContent = trips.length;
 
       const flightWrapperEl = document.getElementById('flightSectionWrapper');
-      const isHkgPillar = flightWrapperEl
-        ? flightWrapperEl.classList.contains('hkg-pillar-theme')
-        : (localStorage.getItem('hk_flight_card_theme') === 'pillar');
+      let savedTheme = null;
+      try { savedTheme = localStorage.getItem('hk_leave_flight_card_theme'); } catch (e) {}
+      const isHkgPillar = savedTheme
+        ? (savedTheme === 'pillar')
+        : Boolean(flightWrapperEl && flightWrapperEl.classList.contains('hkg-pillar-theme'));
 
-      // 單張旅程佔滿寬度 w-full；多趟旅程時 82% 黃金比例寬度，完美容納橫向長方形相框並露出右側下一趟相片預視
-      const cardWidthCls = trips.length === 1 ? 'w-full' : 'w-[82vw] max-w-[330px]';
+      // 單張旅程佔滿寬度 w-full；多趟旅程時加寬至 w-[88vw] max-w-[360px]，讓左右兩側對稱延展並預視下一趟相片
+      const cardWidthCls = trips.length === 1 ? 'w-full' : 'w-[88vw] max-w-[360px]';
 
       let html = '';
       trips.forEach((trip, idx) => {
@@ -10738,12 +10740,12 @@
 
         const countdownInfo = calculateFlightCountdown((bData && bData.flightOutDate) || trip.startDate, outDep);
         const cdBadge = (countdownInfo && !countdownInfo.expired)
-          ? `<span class="px-1.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-bold text-[9px] whitespace-nowrap">⏳ ${countdownInfo.badgeText}</span>`
-          : `<span class="px-1.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-bold text-[9px] whitespace-nowrap">請${trip.userDays % 1 === 0 ? trip.userDays.toFixed(0) : trip.userDays.toFixed(1)}放${trip.totalDays}</span>`;
+          ? `<span class="px-1.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-bold text-[9px] whitespace-nowrap shrink-0">⏳ ${countdownInfo.badgeText}</span>`
+          : `<span class="px-1.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-bold text-[9px] whitespace-nowrap shrink-0">請${trip.userDays % 1 === 0 ? trip.userDays.toFixed(0) : trip.userDays.toFixed(1)}放${trip.totalDays}</span>`;
 
         const safeTitle = (trip.title || '連假旅程').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
 
-        // 與電腦版 100% 同源嘅橫向長方形拍立得相框（支援多圖自動淡入淡出輪播 ＋ 點擊手動切換 ＋ 右下角「X日 / DAYS」）
+        // 與電腦版 100% 同源嘅橫向長方形拍立得相框（支援多圖自動淡入淡出輪播 ＋ 右下角「X日 / DAYS」）
         let leftPolaroidHtml = '';
         if (matchedDest && matchedDest.images && matchedDest.images.length > 0) {
           const destNameSafe = (matchedDest.name || '旅行').replace(/['"]/g, '');
@@ -10753,7 +10755,7 @@
           ).join('');
 
           leftPolaroidHtml = `
-            <div class="trip-photo-polaroid-frame mobile-ribbon-polaroid-frame trip-bg-slider" data-trip-slider="ribbon_${tripKey}">
+            <div class="trip-photo-polaroid-frame mobile-ribbon-polaroid-frame trip-bg-slider self-center" data-trip-slider="ribbon_${tripKey}">
               ${slidesHtml}
               <div class="trip-polaroid-gradient-overlay"></div>
               <div class="trip-poster-days-stack">
@@ -10767,7 +10769,7 @@
           `;
         } else {
           leftPolaroidHtml = `
-            <div class="trip-photo-polaroid-frame mobile-ribbon-polaroid-frame bg-gradient-to-br from-blue-600 to-indigo-800">
+            <div class="trip-photo-polaroid-frame mobile-ribbon-polaroid-frame bg-gradient-to-br from-blue-600 to-indigo-800 self-center">
               <div class="trip-polaroid-gradient-overlay"></div>
               <div class="trip-poster-days-stack">
                 <div class="flex items-baseline gap-0.5">
@@ -10782,37 +10784,46 @@
 
         const flightBadgeHtml = isHkgPillar
           ? `<a href="${outNo ? getFlightAwareUrl(outNo) : '#'}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
-                class="px-2 py-0.5 rounded-lg bg-[#2E49A3] border border-[#60a5fa]/70 text-[#FBF238] font-mono font-black text-[10px] tracking-wide shadow-2xs flex items-center gap-1">
-               <i class="fa-solid fa-plane text-[8.5px] text-[#FBF238]"></i>
+                class="w-full justify-center px-1.5 py-0.5 rounded-md bg-[#2E49A3] border border-[#60a5fa]/70 text-[#FBF238] font-mono font-black text-[9.5px] tracking-wide shadow-2xs inline-flex items-center gap-1">
+               <i class="fa-solid fa-plane text-[8px] text-[#FBF238]"></i>
                <span>${outNo}</span>
              </a>`
           : `<a href="${outNo ? getFlightAwareUrl(outNo) : '#'}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
-                class="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-blue-50 border border-slate-300 text-blue-700 font-mono font-black text-[10px] tracking-wide shadow-2xs flex items-center gap-1">
-               <i class="fa-solid fa-plane text-[8.5px] text-blue-600"></i>
+                class="w-full justify-center px-1.5 py-0.5 rounded-md bg-slate-100 hover:bg-blue-50 border border-slate-300 text-blue-700 font-mono font-black text-[9.5px] tracking-wide shadow-2xs inline-flex items-center gap-1">
+               <i class="fa-solid fa-plane text-[8px] text-blue-600"></i>
                <span>${outNo}</span>
              </a>`;
 
-        let rightTicketHtml = '';
-        if (outNo || hotelName) {
-          rightTicketHtml = `
-            <div class="shrink-0 pl-2 border-l border-dashed border-slate-200 flex flex-col justify-between items-end min-w-[74px]">
+        // 右手邊框內靠左對齊（items-start text-left），拉闊至與左側相框左右對稱
+        const hasAnyBooking = Boolean(outNo || hotelName || (bData && (bData.flightInNo || bData.hotelAddress || bData.notes || bData.flightPnr)));
+        let rightTicketColHtml = '';
+        if (hasAnyBooking) {
+          rightTicketColHtml = `
+            <div class="shrink-0 w-[92px] pl-2.5 border-l border-dashed border-slate-200 flex flex-col justify-between items-start text-left">
               ${outNo ? `
                 ${flightBadgeHtml}
-                <span class="text-[9.5px] font-mono font-bold text-slate-600">${(outDep && outDep !== '00:00') ? outDep : '已登記'}</span>
+                <div class="w-full justify-center px-1.5 py-0.5 rounded-md bg-white border border-slate-300/90 text-slate-900 font-mono font-black text-[10.5px] tracking-wide shadow-2xs inline-flex items-center gap-1">
+                  <i class="fa-regular fa-clock text-[8.5px] text-slate-900"></i>
+                  <span>${(outDep && outDep !== '00:00') ? outDep : '已登記'}</span>
+                </div>
+              ` : (hotelName ? `
+                <span class="w-full px-1.5 py-0.5 rounded-md bg-sky-50 text-sky-800 border border-sky-200 font-bold text-[8.5px] truncate text-left">🏨 ${hotelName}</span>
+                <span class="text-[9px] font-bold text-slate-500 px-0.5">住宿已備</span>
               ` : `
-                <span class="px-1.5 py-0.5 rounded-md bg-sky-50 text-sky-800 border border-sky-200 font-bold text-[9px] max-w-[74px] truncate">🏨 ${hotelName}</span>
-              `}
+                <span class="w-full px-1.5 py-0.5 rounded-md bg-sky-50 text-sky-800 border border-sky-200 font-bold text-[8.5px] text-left">行程已備</span>
+                <span class="text-[9px] font-bold text-slate-500 px-0.5">已登記</span>
+              `)}
               <button type="button" data-ribbon-booking-key="${tripKey}" onclick="event.stopPropagation(); openTripBookingByKey('${tripKey}', 'ribbon', this)"
-                      class="btn-ribbon-inline-booking px-1.5 py-0.5 rounded bg-slate-50 hover:bg-blue-50 text-[9px] font-bold text-slate-600 hover:text-blue-700 flex items-center gap-0.5 mt-0.5 cursor-pointer active:scale-95 transition">
+                      class="btn-ribbon-inline-booking w-full justify-center px-2 py-0.5 rounded-md bg-slate-100 hover:bg-blue-50 border border-slate-200/90 text-[9px] font-extrabold text-slate-700 hover:text-blue-700 inline-flex items-center gap-1 cursor-pointer active:scale-95 transition">
                 <i class="fa-solid fa-sliders text-[8px] text-blue-600"></i><span>憑證</span>
               </button>
             </div>
           `;
         } else {
-          rightTicketHtml = `
-            <div class="shrink-0 pl-2 border-l border-dashed border-slate-200 flex flex-col justify-center items-center">
+          rightTicketColHtml = `
+            <div class="shrink-0 w-[92px] pl-2.5 border-l border-dashed border-slate-200 flex flex-col justify-center items-stretch">
               <button type="button" data-ribbon-booking-key="${tripKey}" onclick="event.stopPropagation(); openTripBookingByKey('${tripKey}', 'ribbon', this)"
-                      class="btn-ribbon-inline-booking px-2 py-1.5 rounded-xl bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200 text-[9.5px] font-bold flex flex-col items-center gap-0.5 transition active:scale-95 cursor-pointer">
+                      class="btn-ribbon-inline-booking w-full h-full px-2 py-1.5 rounded-xl bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200 text-[9.5px] font-extrabold flex flex-col items-center justify-center gap-1 transition active:scale-95 cursor-pointer">
                 <i class="fa-solid fa-ticket text-blue-600 text-xs"></i>
                 <span>登記預訂</span>
               </button>
@@ -10822,26 +10833,31 @@
 
         html += `
           <div data-ribbon-idx="${idx}" onclick="jumpToTripOnCalendar('${trip.startDate}', '${safeTitle}', ${trip.totalDays})"
-               class="snap-start shrink-0 ${cardWidthCls} bg-white border border-slate-200/90 rounded-xl p-2 shadow-2xs flex items-center gap-2 cursor-pointer active:scale-[0.99] transition">
-            <!-- 左側橫向長方形拍立得相框（自動輪播多張名勝相片 ＋ 右下角「X日 / DAYS」） -->
+               class="snap-start shrink-0 ${cardWidthCls} bg-white border border-slate-200/90 rounded-xl p-2 shadow-2xs flex items-stretch gap-2.5 cursor-pointer active:scale-[0.99] transition">
+            <!-- 左側拍立得相框（96px 寬，與右側 92px+padding 票根區左右視覺對稱） -->
             ${leftPolaroidHtml}
 
-            <!-- 中間標題、日期與倒數 -->
-            <div class="flex-1 min-w-0 flex flex-col justify-between h-[60px]">
+            <!-- 中間文字區：第一行純淨完整標題，第二行出發終結日＋緊貼編輯筆頭，第三行倒數徽章 -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between py-0.5">
               <div class="flex items-center min-w-0">
                 ${flagHtml}
-                <span class="font-extrabold text-xs text-slate-900 truncate">${trip.title || '連假旅程'}</span>
+                <span class="font-black text-xs text-slate-900 truncate">${trip.title || '連假旅程'}</span>
               </div>
-              <div class="text-[10px] font-bold text-slate-500 font-mono truncate">
-                ${formatHKDate(trip.startDate)} – ${formatHKDate(trip.endDate)}
+              <div class="flex items-center gap-1 min-w-0">
+                <span class="text-[10px] font-bold text-slate-500 font-mono truncate">${formatHKDate(trip.startDate)} – ${formatHKDate(trip.endDate)}</span>
+                <button type="button" onclick="event.stopPropagation(); openEditTripTitleModal('${tripKey}')" data-trip-key="${tripKey}"
+                        class="btn-edit-trip-title w-5 h-5 rounded-md hover:bg-blue-50 active:bg-blue-100 text-slate-400 hover:text-blue-600 inline-flex items-center justify-center shrink-0 cursor-pointer transition"
+                        aria-label="修改旅程標題">
+                  <i class="fa-solid fa-pen text-[9px]"></i>
+                </button>
               </div>
-              <div class="flex items-center gap-1 overflow-hidden">
+              <div class="flex items-center gap-1">
                 ${cdBadge}
               </div>
             </div>
 
-            <!-- 右側迷你登機牌 / 憑證入口 -->
-            ${rightTicketHtml}
+            <!-- 右側票根框：內部靠左對齊（items-start text-left），拉闊至與左側相框左右對稱 -->
+            ${rightTicketColHtml}
           </div>
         `;
       });
@@ -13771,12 +13787,9 @@ function setupYearOverviewToggle() {
       // 假期標題小筆頭修改：開啟美化彈窗與同步備註開關 (v2.9.1)
       let currentEditingTripKey = null;
 
-      document.addEventListener('click', (e) => {
-        const editBtn = e.target.closest('.btn-edit-trip-title');
-        if (!editBtn) return;
-        e.stopPropagation();
-
-        currentEditingTripKey = editBtn.getAttribute('data-trip-key');
+      window.openEditTripTitleModal = (tripKey) => {
+        if (!tripKey) return;
+        currentEditingTripKey = tripKey;
         const [startDate, endDate] = currentEditingTripKey.split('_');
         const { tripsList } = getActiveLeaveSpansMap(leaveData);
         const trip = tripsList.find(t => t.startDate === startDate && t.endDate === endDate);
@@ -13799,6 +13812,13 @@ function setupYearOverviewToggle() {
           modalEl.classList.remove('hidden');
           setTimeout(() => inputEl && inputEl.focus(), 100);
         }
+      };
+
+      document.addEventListener('click', (e) => {
+        const editBtn = e.target.closest('.btn-edit-trip-title');
+        if (!editBtn) return;
+        e.stopPropagation();
+        window.openEditTripTitleModal(editBtn.getAttribute('data-trip-key'));
       });
 
       // === v3.8.0 三級聯動智慧推薦標籤系統（國家 ➔ 動態城市 ➔ 標題結尾句智慧拼接）===
@@ -15019,6 +15039,10 @@ function setupYearOverviewToggle() {
         }
 
         try { localStorage.setItem('hk_leave_flight_card_theme', isPillar ? 'pillar' : 'boarding'); } catch (e) {}
+        if (typeof renderMobileTopTripRibbon === 'function' && typeof leaveData !== 'undefined') {
+          const { tripsList } = getActiveLeaveSpansMap(leaveData);
+          renderMobileTopTripRibbon(tripsList);
+        }
         if (!silent) {
           showToast(isPillar ? '🛫 已切換至「HKG 登機閘口柱」經典主題' : '🎫 已切換至「簡約登機牌」主題');
         }
@@ -15935,15 +15959,27 @@ function setupYearOverviewToggle() {
           el.textContent = el.getAttribute('data-default-label') || '展開預訂';
         });
         document.querySelectorAll('.btn-ribbon-inline-booking').forEach(btn => {
-          btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+          btn.style.backgroundColor = '';
+          btn.style.color = '';
+          btn.style.borderColor = '';
+          const ic = btn.querySelector('i');
+          if (ic) ic.style.color = '';
         });
       };
 
       window.closeInlineBookingStudio = () => {
+        const savedScrollY = window.scrollY;
         const drawer = document.getElementById('inlineBookingStudioDrawer');
+        const modalScrollEl = drawer ? drawer.closest('.overflow-y-auto') : null;
+        const savedModalScrollTop = modalScrollEl ? modalScrollEl.scrollTop : 0;
         const parkingBay = document.getElementById('inlineBookingStudioParkingBay');
         resetAllInlineBookingIndicators();
         window.toggleStudioMasterEditMode(false);
+        if (modalScrollEl) {
+          modalScrollEl.scrollTop = savedModalScrollTop;
+        } else {
+          window.scrollTo(0, savedScrollY);
+        }
         if (drawer) {
           drawer.classList.remove('is-open');
           drawer.style.maxHeight = '0px';
@@ -16065,7 +16101,11 @@ function setupYearOverviewToggle() {
           if (chev) chev.classList.add('rotate-180');
           if (lbl) lbl.textContent = '收起預訂';
           if (triggerEl.classList.contains('btn-ribbon-inline-booking')) {
-            triggerEl.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+            triggerEl.style.backgroundColor = '#2563eb';
+            triggerEl.style.color = '#ffffff';
+            triggerEl.style.borderColor = '#2563eb';
+            const ic = triggerEl.querySelector('i');
+            if (ic) ic.style.color = '#ffffff';
           }
         } else {
           const matchingBtn = targetSlot.parentElement?.querySelector('.btn-open-booking-modal');
@@ -16083,16 +16123,29 @@ function setupYearOverviewToggle() {
         if (drawer.parentElement !== targetSlot) {
           targetSlot.appendChild(drawer);
         }
+        const savedScrollY = window.scrollY;
+        const modalScrollEl = targetSlot.closest('.overflow-y-auto');
+        const savedModalScrollTop = modalScrollEl ? modalScrollEl.scrollTop : 0;
+
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             drawer.classList.add('is-open');
             drawer.style.maxHeight = '2600px';
             drawer.style.opacity = '1';
+            if (modalScrollEl) {
+              modalScrollEl.scrollTop = savedModalScrollTop;
+            } else {
+              window.scrollTo(0, savedScrollY);
+            }
             setTimeout(() => {
               if (drawer.classList.contains('is-open')) {
                 drawer.style.maxHeight = 'none';
               }
-              drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              if (modalScrollEl) {
+                modalScrollEl.scrollTop = savedModalScrollTop;
+              } else {
+                window.scrollTo(0, savedScrollY);
+              }
             }, 320);
           });
         });
@@ -17174,11 +17227,11 @@ function setupYearOverviewToggle() {
     </div>
   </div>
 
-      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.1.6 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
+      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.2.3 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
   <div id="inlineBookingStudioParkingBay" class="hidden">
 
   <!-- 原裝完整「旅程預訂資料」流暢原地收放面板（全程零彈窗、無重複標題與多餘收起掣） -->
-  <div id="inlineBookingStudioDrawer" class="inline-booking-accordion overflow-hidden transition-all duration-300 ease-out" style="display:none; max-height:0px; opacity:0;">
+  <div id="inlineBookingStudioDrawer" class="inline-booking-accordion overflow-hidden transition-all duration-300 ease-out" style="display:none; max-height:0px; opacity:0; overflow-anchor: none;">
     <div>
       <div id="inlineBookingStudioCard" class="mt-2 bg-white rounded-2xl shadow-sm border border-slate-200/95 overflow-hidden">
         <!-- 隱藏副標供系統同步使用 -->
@@ -17198,11 +17251,18 @@ function setupYearOverviewToggle() {
             </button>
           </div>
 
-          <button type="button" id="btnToggleStudioMasterEdit" onclick="toggleStudioMasterEditMode()"
-                  class="px-2.5 py-1 rounded-xl bg-white hover:bg-blue-50 text-slate-900 hover:text-blue-700 border border-slate-300 hover:border-blue-300 text-[10.5px] font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shadow-2xs shrink-0">
-            <i id="iconStudioMasterEdit" class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
-            <span id="labelStudioMasterEdit">編輯資料</span>
-          </button>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button type="button" id="btnCollapseInlineStudioCircle" onclick="closeInlineBookingStudio()"
+                    class="w-7 h-7 rounded-full bg-white hover:bg-slate-100 active:bg-slate-200 text-slate-700 hover:text-blue-700 border border-slate-300 hover:border-blue-300 flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs shrink-0"
+                    aria-label="收起預訂資料">
+              <i class="fa-solid fa-chevron-up text-[10px]"></i>
+            </button>
+            <button type="button" id="btnToggleStudioMasterEdit" onclick="toggleStudioMasterEditMode()"
+                    class="px-2.5 py-1 rounded-xl bg-white hover:bg-blue-50 text-slate-900 hover:text-blue-700 border border-slate-300 hover:border-blue-300 text-[10.5px] font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shadow-2xs shrink-0">
+              <i id="iconStudioMasterEdit" class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
+              <span id="labelStudioMasterEdit">編輯資料</span>
+            </button>
+          </div>
         </div>
 
         <!-- 主體內容區（檢視態 100% 零白色輸入框；編輯態平滑切換為完整輸入表單） -->
@@ -18126,7 +18186,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.1.6</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.2.3</span>
           </button>
         </div>
       </div>
