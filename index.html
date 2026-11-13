@@ -45,64 +45,31 @@
     }
 
 
-    /* === 手機版頂部右側：華麗旋轉圓形功能球按鈕 (v5.0.30) === */
-    @keyframes orb-spin-slow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    @keyframes orb-glow-breathe {
-      0%, 100% { box-shadow: 0 4px 14px -2px rgba(37, 99, 235, 0.38), 0 0 0 2px rgba(255, 255, 255, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.65); }
-      50% { box-shadow: 0 6px 20px -1px rgba(99, 102, 241, 0.55), 0 0 0 2.5px rgba(191, 219, 254, 0.95), inset 0 1px 2px rgba(255, 255, 255, 0.85); }
-    }
+    /* === 手機版頂部右側：極簡小巧圓形工具切換鈕 === */
     .mobile-orb-btn {
       position: relative;
-      width: 34px;
-      height: 34px;
+      width: 26px;
+      height: 26px;
       border-radius: 9999px;
-      background: linear-gradient(135deg, #38bdf8 0%, #2563eb 52%, #4f46e5 100%);
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
       color: #ffffff;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      animation: orb-glow-breathe 3.2s infinite ease-in-out;
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease !important;
-      overflow: hidden;
-    }
-    .mobile-orb-btn::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 9999px;
-      background: conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.65) 25%, transparent 50%, rgba(125,211,252,0.75) 75%, transparent 100%);
-      animation: orb-spin-slow 4.5s linear infinite;
-      pointer-events: none;
-      opacity: 0.75;
-    }
-    .mobile-orb-btn::after {
-      content: '';
-      position: absolute;
-      inset: 2px;
-      border-radius: 9999px;
-      background: linear-gradient(145deg, #0284c7 0%, #2563eb 55%, #4338ca 100%);
-      z-index: 1;
-      transition: background 0.3s ease;
+      box-shadow: 0 2px 6px -1px rgba(37, 99, 235, 0.32);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease !important;
     }
     .mobile-orb-btn.is-expanded {
-      transform: rotate(180deg) scale(1.04);
-    }
-    .mobile-orb-btn.is-expanded::after {
-      background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      background: linear-gradient(135deg, #1d4ed8 0%, #4f46e5 100%);
+      box-shadow: 0 3px 10px -1px rgba(37, 99, 235, 0.45);
     }
     .mobile-orb-icon {
-      position: relative;
-      z-index: 2;
-      font-size: 13px;
+      font-size: 10px;
       color: #ffffff;
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .mobile-orb-btn.is-expanded .mobile-orb-icon {
-      transform: rotate(90deg);
+      transform: rotate(180deg);
     }
 
     /* === HKG 香港機場登機閘口柱 (Boarding Gate Pillar) 實景精準取色主題（0px 零位移 · 絕對相同盒模型尺寸） === */
@@ -901,7 +868,7 @@
       border: 2.5px solid #ffffff;
       outline: 1px solid rgba(203, 213, 225, 0.85);
       box-shadow: 0 3px 10px -2px rgba(15, 23, 42, 0.14), 0 1px 4px -1px rgba(0, 0, 0, 0.05);
-      background: #f1f5f9;
+      background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
     }
     @media (min-width: 640px) {
       .trip-photo-polaroid-frame {
@@ -1675,6 +1642,22 @@
         height: 22px !important;
         line-height: 22px !important;
       }
+      /* 客運大樓輸入框：16px防Safari自動放大，視覺等比微縮至精緻 10.8px 細字 */
+      #inputOutOriginTerminal,
+      #inputOutDestTerminal,
+      #inputInOriginTerminal,
+      #inputInDestTerminal {
+        width: 147% !important;
+        transform: scale(0.68) !important;
+        transform-origin: left center !important;
+        margin-top: -3px !important;
+        margin-bottom: -3px !important;
+      }
+      #inputOutDestTerminal,
+      #inputInDestTerminal {
+        transform-origin: right center !important;
+        margin-left: -47% !important;
+      }
       #inputFlightOutDep,
       #inputFlightOutArr,
       #inputFlightInDep,
@@ -1808,9 +1791,6 @@
           </h1>
         </div>
         <div class="flex items-center gap-2 text-xs text-slate-500 shrink-0">
-          <span id="desktopSyncIndicator" class="hidden sm:inline-flex items-center gap-1 text-[11px]">
-            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> 連線正常
-          </span>
           <!-- 右上角三畫圖象選項 (☰) -->
           <button id="btnOpenDrawerMenu" class="w-8 h-8 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 flex items-center justify-center transition active:scale-95 shadow-2xs">
             <i class="fa-solid fa-bars text-sm"></i>
@@ -1821,9 +1801,9 @@
     <!-- 主內容雙欄網格佈局 (電腦端完美左右對齊並排) -->
     <div id="mainContentLayout" class="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-5 mt-1 items-start">
       <!-- 左側欄：年曆專屬控制 Bar ＋ 12個月年曆 (與年曆等寬平排！) -->
-      <div id="leftSideColumn" class="lg:col-span-7 xl:col-span-8 flex flex-col gap-2.5">
-        <div id="stickyHeaderArea" class="sticky top-0 z-30 bg-[#f8fafc]/95 backdrop-blur-md pt-1 pb-1 md:static md:bg-transparent md:pt-0 md:pb-0">
-          <div class="glass-surface p-1.5 md:p-2 rounded-2xl border border-white/80 shadow-xs mb-2">
+      <div id="leftSideColumn" class="lg:col-span-7 xl:col-span-8 flex flex-col gap-1.5 md:gap-2.5">
+        <div id="stickyHeaderArea" class="sticky top-0 z-30 bg-[#f8fafc]/95 backdrop-blur-md pt-0.5 pb-0.5 md:static md:bg-transparent md:pt-0 md:pb-0">
+          <div class="glass-surface px-1.5 py-1 md:p-2 rounded-2xl border border-white/80 shadow-xs mb-0 md:mb-2">
             <!-- 純淨左手邊超大年份切換器 ＋ 手機版右側工具列伸縮開關（預設收起釋放螢幕空間） -->
             <div id="yearHeaderRow" class="flex items-center justify-between pb-0 mb-0 md:pb-1 md:mb-1.5 border-b-0 md:border-b border-slate-200/60 px-0.5 transition-all duration-200">
               <div id="mainYearSwitcher" class="inline-flex items-center shrink-0">
@@ -1838,7 +1818,7 @@
                 <span id="mobileActiveModeMiniBadge" class="hidden text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">編輯中</span>
                 <button type="button" id="btnToggleMobileToolbar" onclick="toggleMobileHeaderToolbar()" aria-label="展開或收起工具列"
                         class="mobile-orb-btn cursor-pointer select-none">
-                  <i id="mobileToolbarToggleIcon" class="fa-solid fa-compass mobile-orb-icon"></i>
+                  <i id="mobileToolbarToggleIcon" class="fa-solid fa-chevron-down mobile-orb-icon"></i>
                 </button>
               </div>
             </div>
@@ -1886,16 +1866,15 @@
             </button>
           </div>
 
-          <!-- 右側剩餘位：圓方型「全部重設」與「檢視模式」按鈕群（手機端垂直並列精巧圓方，電腦端水平並列） -->
+          <!-- 右側剩餘位：純圖示圓方型「重設」與「檢視/編輯」按鈕群（零冗贅文字） -->
           <div class="flex flex-col md:flex-row items-center gap-1 shrink-0">
-            <button id="btnClearAll" class="w-[34px] h-[34px] md:w-auto md:h-auto md:py-1.5 md:px-2.5 bg-white/80 hover:bg-rose-50 border border-slate-200/80 hover:border-rose-200 rounded-xl text-[10px] md:text-xs font-bold text-slate-500 hover:text-rose-600 flex flex-col md:flex-row items-center justify-center gap-0.5 md:gap-1 transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer">
-              <i class="fa-solid fa-trash-can text-[11px] md:text-xs"></i>
-              <span class="text-[8px] md:text-xs leading-none scale-90 md:scale-100">重設</span>
+            <button id="btnClearAll" aria-label="全部重設" class="w-[34px] h-[34px] md:w-[32px] md:h-[32px] bg-white/80 hover:bg-rose-50 border border-slate-200/80 hover:border-rose-200 rounded-xl text-slate-500 hover:text-rose-600 flex items-center justify-center transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer">
+              <i class="fa-solid fa-trash-can text-[12px]"></i>
             </button>
 
-            <button id="btnToggleGlobalLock" class="w-[34px] h-[34px] md:w-auto md:h-auto md:px-2.5 md:py-1.5 bg-white/90 hover:bg-slate-100 text-slate-700 border border-slate-200/90 font-bold rounded-xl text-[10px] md:text-xs flex flex-col md:flex-row items-center justify-center gap-0.5 md:gap-1 transition-all duration-200 shadow-2xs cursor-pointer active:scale-95">
-              <i id="globalLockIcon" class="fa-solid fa-lock text-slate-500 text-[11px] md:text-xs"></i>
-              <span id="globalLockText" class="text-[8px] md:text-xs leading-none scale-90 md:scale-100">檢視</span>
+            <button id="btnToggleGlobalLock" aria-label="切換檢視或編輯模式" class="w-[34px] h-[34px] md:w-[32px] md:h-[32px] bg-white/90 hover:bg-slate-100 text-slate-700 border border-slate-200/90 rounded-xl flex items-center justify-center transition-all duration-200 shadow-2xs cursor-pointer active:scale-95">
+              <i id="globalLockIcon" class="fa-solid fa-lock text-slate-500 text-[12px]"></i>
+              <span id="globalLockText" class="hidden">檢視</span>
             </button>
           </div>
 
@@ -2098,7 +2077,7 @@
         
         
         <!-- 手機版頂部：iOS 智慧單張焦點 Banner (Smart Stack · 78% 寬度黃金比例 · 露出下一趟相片預視 · 零滾動條) -->
-        <div id="mobileTopTripRibbon" class="lg:hidden hidden mb-2">
+        <div id="mobileTopTripRibbon" class="lg:hidden hidden mb-1">
           <div class="rounded-2xl bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-sm overflow-hidden">
             <!-- 頂部極簡 Smart Stack 導航列 -->
             <div class="px-3 py-1 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between text-[10px]">
@@ -2120,7 +2099,7 @@
               <div id="mobileSmartBannerDots" class="flex items-center gap-1.5"></div>
             </div>
             <!-- 手機頂端 Smart Stack 原位無彈窗展開槽位（點擊「憑證 / 登記預訂」即緊貼此處平滑向下展開） -->
-            <div id="mobileRibbonInlineStudioSlot" style="overflow-anchor: none;" class="px-2 pb-2 empty:hidden"></div>
+            <div id="mobileRibbonInlineStudioSlot" style="overflow-anchor: none;" class="empty:hidden px-2 pb-2"></div>
           </div>
         </div>
 
@@ -2380,7 +2359,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.2.3 更新日誌</span>
+      <span>v5.3.4 更新日誌</span>
     </button>
   </footer>
 
@@ -2422,7 +2401,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.2.3</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.3.4</span>
             </h3>
           </div>
         </div>
@@ -2432,16 +2411,17 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.2.3 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.3.4 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.2.3（固定視窗零跳動展開：點擊「憑證／登記預訂」原地向下展開 · 頂部旅程卡片與年曆標題 100% 穩固不捲走）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">ZERO JUMP</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-11-13</span>
+            <span class="font-bold text-blue-700 text-xs">v5.3.4（防覆蓋安全鎖 · 一鍵匯出與匯入 JSON 完整備份還原系統）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">BACKUP & GUARD</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">📌 移除自動捲動跳轉並鎖定捲動錨點，展開或收起「憑證 / 登記預訂」時畫面原位不動，上方旅程卡片與資料完整保留在視線內</div>
+          <div class="text-[11px] font-semibold text-slate-800">🛡️ 新增雲端斷線／權限受阻防覆蓋安全鎖，並於設定抽屜加入一鍵匯出／匯入完整 JSON 備份檔案功能</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 移除強制 <code>scrollIntoView</code> 跳動</b>：點擊「憑證」或「登記預訂」後，版面直接在卡片正下方原地展開，不再自動向下捲走隱藏上方旅程摘要。</li>
-            <li><b>② 鎖定視窗捲動位置與關閉瀏覽器自動捲動錨點（<code>overflow-anchor: none</code>）</b>：展開及收起過程中完整保持原有 <code>scrollY</code> 位置，畫面絲毫不跳動。</li>
+            <li><b>① 雲端連線／權限防覆蓋安全鎖</b>：當 Firebase 出現 HTTP 權限受限、斷網或本機快取已有紀錄時，系統自動載入本機快取並鎖定防覆蓋保護，絕不誤彈「首次啟用設定 PIN」清空資料。</li>
+            <li><b>② 一鍵匯出完整備份（<code>.json</code>）</b>：於右上角 <code>☰</code> 設定選單點擊「<b>匯出備份</b>」，即時將全年所有排假、航班、酒店住宿、配額與自訂標題打包下載至裝置。</li>
+            <li><b>③ 一鍵匯入還原備份</b>：點擊「<b>匯入還原</b>」選擇先前的 <code>.json</code> 備份檔，一秒完整還原所有資料並自動同步上雲端。</li>
           </ul>
         </div>
 
@@ -4931,7 +4911,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.2.3';
+    const APP_VERSION = '5.3.4';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -8106,20 +8086,71 @@
       indicateSync('連線正常', true);
     }
 
+    function fallbackToLocalCacheSafely(reasonLabel = '本地離線保護') {
+      indicateSync(reasonLabel, false);
+      const localRaw = localStorage.getItem('hk_local_' + currentRoom);
+      if (localRaw) {
+        try {
+          const parsed = JSON.parse(localRaw);
+          leaveData = parsed.leaveData || {};
+          customTripTitles = parsed.customTripTitles || {};
+          tripBookings = parsed.tripBookings || {};
+          if (parsed.quotasByYear) quotasByYear = Object.assign({}, parsed.quotasByYear);
+          ensureYearQuotaState(selectedYear);
+          renderMonthGrid();
+          updateDashboard();
+        } catch (e) {}
+      }
+      isRoomUnlocked = true;
+      closeAllAuthModals();
+    }
+
     function checkRoomSecurityAndConnect() {
       indicateSync('驗證中...', false);
 
       fetch(`${FIREBASE_BASE_URL}/rooms/${currentRoom}.json`)
-        .then(res => res.json())
+        .then(async res => {
+          if (!res.ok) {
+            const errBody = await res.text().catch(() => '');
+            const err = new Error(`HTTP ${res.status}: ${errBody}`);
+            err.httpStatus = res.status;
+            throw err;
+          }
+          return res.json();
+        })
         .then(data => {
+          if (data && typeof data === 'object' && data.error) {
+            const err = new Error(String(data.error));
+            err.httpStatus = 403;
+            throw err;
+          }
+
           remoteRoomPin = data && data.pin ? String(data.pin) : null;
 
           if (!remoteRoomPin) {
-            // ⚡ 全新房間未設定 PIN 碼：立即清空舊房間遺留資料，確保乾淨新空間
+            // 🛡️ 防覆蓋保護：若雲端無 PIN，但本機快取已有此房間資料，先保留本機資料絕不清空覆蓋
+            const localRaw = localStorage.getItem('hk_local_' + currentRoom);
+            let hasLocalRecords = false;
+            if (localRaw) {
+              try {
+                const lp = JSON.parse(localRaw);
+                hasLocalRecords = Boolean(
+                  (lp.leaveData && Object.keys(lp.leaveData).length > 0) ||
+                  (lp.tripBookings && Object.keys(lp.tripBookings).length > 0)
+                );
+              } catch (e) {}
+            }
+            if (hasLocalRecords) {
+              isRoomUnlocked = false;
+              showActivationModal();
+              showToast('🛡️ 已保留本機快取資料，設定 PIN 後將安全同步上雲端');
+              return;
+            }
+            // ⚡ 確認為全新空房：安全初始化乾淨空間
             isRoomUnlocked = false;
             leaveData = {};
             customTripTitles = {};
-            tripBookings = {}; // v4.3.1
+            tripBookings = {};
             renderMonthGrid();
             updateDashboard();
             showActivationModal();
@@ -8141,8 +8172,14 @@
           }
         })
         .catch(err => {
-          console.warn('載入同步資訊失敗，切本地模式:', err);
-          indicateSync('本地模式', false);
+          console.warn('Firebase 驗證受阻，啟動防覆蓋保護模式:', err);
+          if (err && (err.httpStatus === 401 || err.httpStatus === 403)) {
+            fallbackToLocalCacheSafely('權限受限(本機保護)');
+            showToast('🛡️ 雲端讀寫權限受限，已自動載入本機備份並鎖定防覆蓋');
+          } else {
+            fallbackToLocalCacheSafely('離線本機保護');
+            showToast('📡 網絡暫時無法連接雲端，已自動載入本機備份');
+          }
         });
     }
 
@@ -10402,10 +10439,12 @@
 
       const gapHtml = prevTrip ? buildIntervalGapHtml(trip.startDate, prevTrip.endDate) : '';
 
-            // === v5.2.3 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
+            // === v5.3.4 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
       const tripKey = `${trip.startDate}_${trip.endDate}`;
       const bData = (typeof tripBookings !== 'undefined' && tripBookings[tripKey]) ? tripBookings[tripKey] : null;
-      const hasBooking = bData && (bData.flightOut || bData.flightIn || bData.flightOutNo || bData.hotelName || bData.notes);
+      const cleanOutSummary = bData && bData.flightOut ? bData.flightOut.replace(/\(00:00\s*➔\s*00:00\)/g, '').trim() : '';
+      const cleanInSummary = bData && bData.flightIn ? bData.flightIn.replace(/\(00:00\s*➔\s*00:00\)/g, '').trim() : '';
+      const hasBooking = Boolean(bData && (cleanOutSummary || cleanInSummary || bData.flightOutNo || bData.flightInNo || bData.hotelName || bData.hotelAddress || bData.notes || bData.flightPnr));
 
       let bookingSectionHtml = '';
       if (hasBooking) {
@@ -10437,7 +10476,7 @@
                   ${bData.hotelName ? `<span class="text-slate-400 shrink-0">·</span><span class="text-slate-700 font-semibold truncate">${bData.hotelName}</span>` : (routeChip !== summaryTag ? `<span class="text-slate-400 shrink-0">·</span><span class="text-slate-700 font-semibold truncate">${routeChip}</span>` : '')}
                 </span>
                 <span class="inline-flex items-center gap-1 text-[10px] font-extrabold text-blue-700 shrink-0">
-                  <span class="inline-booking-toggle-label">展開預訂</span>
+                  <span class="inline-booking-toggle-label" data-default-label="詳情">詳情</span>
                   <i class="fa-solid fa-chevron-down text-[8.5px] transition-transform duration-300 inline-booking-chevron"></i>
                 </span>
               </button>
@@ -10454,7 +10493,7 @@
               <button type="button" class="btn-open-booking-modal flex items-center justify-between gap-2 font-bold text-blue-700 hover:text-blue-800 bg-blue-50/70 hover:bg-blue-100 border border-blue-200/90 px-2.5 py-1.5 rounded-xl transition active:scale-[0.99] shadow-2xs cursor-pointer" data-trip-key="${tripKey}">
                 <span class="flex items-center gap-1.5">
                   <i class="fa-solid fa-plus text-blue-600 text-[10px]"></i>
-                  <span class="inline-booking-toggle-label" data-default-label="登記機票 / 酒店預訂">登記機票 / 酒店預訂</span>
+                  <span class="inline-booking-toggle-label" data-default-label="登記預訂">登記預訂</span>
                 </span>
                 <i class="fa-solid fa-chevron-down text-[8.5px] text-blue-600 transition-transform duration-300 inline-booking-chevron"></i>
               </button>
@@ -10547,10 +10586,6 @@
           yearRow.classList.add('pb-1.5', 'mb-1.5', 'border-b');
         }
         if (btnEl) btnEl.classList.add('is-expanded');
-        if (iconEl) {
-          iconEl.classList.remove('fa-compass');
-          iconEl.classList.add('fa-xmark');
-        }
       } else {
         toolbar.classList.add('hidden');
         toolbar.classList.remove('flex');
@@ -10559,10 +10594,6 @@
           yearRow.classList.remove('pb-1.5', 'mb-1.5', 'border-b');
         }
         if (btnEl) btnEl.classList.remove('is-expanded');
-        if (iconEl) {
-          iconEl.classList.remove('fa-xmark');
-          iconEl.classList.add('fa-compass');
-        }
         if (topApplyBar && !topApplyBar.classList.contains('hidden')) {
           topApplyBar.classList.add('hidden');
           const mainChev = document.getElementById('mainApplyChevron');
@@ -10938,11 +10969,14 @@
 
       const _studioDrawer = document.getElementById('inlineBookingStudioDrawer');
       const _parkingBay = document.getElementById('inlineBookingStudioParkingBay');
+      const _wasOpenInDesktopBox = Boolean(_studioDrawer && _studioDrawer.classList.contains('is-open') && tripBox.contains(_studioDrawer));
+      const _reopenKeyDesktop = _wasOpenInDesktopBox ? (currentEditingBookingKey || _studioDrawer.getAttribute('data-mounted-key')) : null;
       if (_studioDrawer && _parkingBay && tripBox.contains(_studioDrawer)) {
         _studioDrawer.classList.remove('is-open');
-        _studioDrawer.style.gridTemplateRows = '0fr';
+        _studioDrawer.style.maxHeight = '0px';
+        _studioDrawer.style.opacity = '0';
+        _studioDrawer.style.display = 'none';
         _parkingBay.appendChild(_studioDrawer);
-        currentEditingBookingKey = null;
       }
 
       let cardsCombinedHtml = '';
@@ -10951,6 +10985,22 @@
         cardsCombinedHtml += buildTripCardFullHtml(trip, idx, prevTrip);
       });
       tripBox.innerHTML = cardsCombinedHtml;
+
+      if (_wasOpenInDesktopBox && _reopenKeyDesktop && _studioDrawer) {
+        const targetHost = tripBox.querySelector(`.trip-booking-inline-host[data-trip-key="${_reopenKeyDesktop}"]`);
+        const targetSlot = targetHost ? targetHost.querySelector('.trip-inline-studio-slot') : null;
+        if (targetSlot) {
+          targetSlot.appendChild(_studioDrawer);
+          _studioDrawer.classList.add('is-open');
+          _studioDrawer.style.display = 'block';
+          _studioDrawer.style.maxHeight = 'none';
+          _studioDrawer.style.opacity = '1';
+          const chevron = targetHost.querySelector('.inline-booking-chevron');
+          if (chevron) chevron.classList.add('rotate-180');
+          const lbl = targetHost.querySelector('.inline-booking-toggle-label');
+          if (lbl) lbl.textContent = '收起';
+        }
+      }
 
       startTripBgSliders();
     }
@@ -11435,9 +11485,9 @@ function setupYearOverviewToggle() {
       }
       if (isEditMode) {
         document.body.classList.remove('readonly-mode');
-        if (btn) btn.className = 'w-[34px] h-[34px] md:w-auto md:h-auto md:px-2.5 md:py-1.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl text-[10px] md:text-xs flex flex-col md:flex-row items-center justify-center gap-0.5 md:gap-1 transition-all duration-200 shadow-2xs cursor-pointer active:scale-95 animate-pulse';
+        if (btn) btn.className = 'w-[34px] h-[34px] md:w-[32px] md:h-[32px] bg-amber-500 hover:bg-amber-600 text-white rounded-xl flex items-center justify-center transition-all duration-200 shadow-2xs cursor-pointer active:scale-95 animate-pulse';
         if (text) text.textContent = '編輯中';
-        if (icon) icon.className = 'fa-solid fa-pen text-white text-xs';
+        if (icon) icon.className = 'fa-solid fa-pen text-white text-[12px]';
         if (overviewLockBtn) {
           overviewLockBtn.className = 'px-2 py-0.5 rounded text-[10px] font-bold transition flex items-center gap-1 bg-amber-500 text-white';
           overviewLockBtn.innerHTML = '<i class="fa-solid fa-pen"></i> 編輯中';
@@ -11447,9 +11497,9 @@ function setupYearOverviewToggle() {
         }
       } else {
         document.body.classList.add('readonly-mode');
-        if (btn) btn.className = 'w-[34px] h-[34px] md:w-auto md:h-auto md:px-2.5 md:py-1.5 bg-white/90 hover:bg-slate-100 text-slate-700 border border-slate-200/90 font-bold rounded-xl text-[10px] md:text-xs flex flex-col md:flex-row items-center justify-center gap-0.5 md:gap-1 transition-all duration-200 shadow-2xs cursor-pointer active:scale-95';
+        if (btn) btn.className = 'w-[34px] h-[34px] md:w-[32px] md:h-[32px] bg-white/90 hover:bg-slate-100 text-slate-700 border border-slate-200/90 rounded-xl flex items-center justify-center transition-all duration-200 shadow-2xs cursor-pointer active:scale-95';
         if (text) text.textContent = '檢視'; stopAutoLockTimer();
-        if (icon) icon.className = 'fa-solid fa-lock text-slate-500 text-xs';
+        if (icon) icon.className = 'fa-solid fa-lock text-slate-500 text-[12px]';
         if (overviewLockBtn) {
           overviewLockBtn.className = 'px-2 py-0.5 rounded text-[10px] font-bold transition flex items-center gap-1 bg-slate-100 text-slate-700 border border-slate-300';
           overviewLockBtn.innerHTML = '<i class="fa-solid fa-lock text-slate-500"></i> 檢視';
@@ -12747,13 +12797,14 @@ function setupYearOverviewToggle() {
       if (modalTripsBox) {
         const _studioDrawerM = document.getElementById('inlineBookingStudioDrawer');
         const _parkingBayM = document.getElementById('inlineBookingStudioParkingBay');
+        const _wasOpenInModalBox = Boolean(_studioDrawerM && _studioDrawerM.classList.contains('is-open') && modalTripsBox.contains(_studioDrawerM));
+        const _reopenKeyModal = _wasOpenInModalBox ? (currentEditingBookingKey || _studioDrawerM.getAttribute('data-mounted-key')) : null;
         if (_studioDrawerM && _parkingBayM && modalTripsBox.contains(_studioDrawerM)) {
           _studioDrawerM.classList.remove('is-open');
           _studioDrawerM.style.maxHeight = '0px';
           _studioDrawerM.style.opacity = '0';
           _studioDrawerM.style.display = 'none';
           _parkingBayM.appendChild(_studioDrawerM);
-          currentEditingBookingKey = null;
         }
         modalTripsBox.innerHTML = '';
         if (tripsList.length === 0) {
@@ -12770,6 +12821,21 @@ function setupYearOverviewToggle() {
             modalCombinedHtml += buildTripCardFullHtml(trip, idx, prevTrip);
           });
           modalTripsBox.innerHTML = modalCombinedHtml;
+          if (_wasOpenInModalBox && _reopenKeyModal && _studioDrawerM) {
+            const modalHost = modalTripsBox.querySelector(`.trip-booking-inline-host[data-trip-key="${_reopenKeyModal}"]`);
+            const modalSlot = modalHost ? modalHost.querySelector('.trip-inline-studio-slot') : null;
+            if (modalSlot) {
+              modalSlot.appendChild(_studioDrawerM);
+              _studioDrawerM.classList.add('is-open');
+              _studioDrawerM.style.display = 'block';
+              _studioDrawerM.style.maxHeight = 'none';
+              _studioDrawerM.style.opacity = '1';
+              const chevron = modalHost.querySelector('.inline-booking-chevron');
+              if (chevron) chevron.classList.add('rotate-180');
+              const lbl = modalHost.querySelector('.inline-booking-toggle-label');
+              if (lbl) lbl.textContent = '收起';
+            }
+          }
           startTripBgSliders();
         }
       }
@@ -13069,6 +13135,104 @@ function setupYearOverviewToggle() {
         exportIcalBtn.onclick = () => {
           closeDrawer();
           openExportModal();
+        };
+      }
+
+      const exportJsonBtn = document.getElementById('btnDrawerExportJson');
+      const importJsonBtn = document.getElementById('btnDrawerImportJson');
+      const importJsonInput = document.getElementById('inputImportJsonFile');
+
+      if (exportJsonBtn) {
+        exportJsonBtn.onclick = () => {
+          try {
+            persistCurrentYearQuotaToDict();
+            const backupPayload = {
+              app: 'HK_Leave_Manager',
+              version: APP_VERSION,
+              exportedAt: new Date().toISOString(),
+              room: currentRoom,
+              selectedYear: selectedYear,
+              leaveData: leaveData || {},
+              quotasByYear: quotasByYear || {},
+              annualQuota: annualQuota,
+              wbQuota: wbQuota,
+              customLeaveConfig: customLeaveConfig || null,
+              holidayModulesConfig: holidayModulesConfig || null,
+              rosterModeConfig: rosterModeConfig || null,
+              customTripTitles: customTripTitles || {},
+              tripBookings: tripBookings || {}
+            };
+            const jsonStr = JSON.stringify(backupPayload, null, 2);
+            const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const dateTag = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+            a.href = url;
+            a.download = `HK_Leave_Backup_${currentRoom}_${dateTag}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            closeDrawer();
+            showToast('💾 已匯出完整備份檔案 (.json)');
+          } catch (err) {
+            console.error('Export JSON error:', err);
+            showToast('❌ 匯出備份失敗，請重試');
+          }
+        };
+      }
+
+      if (importJsonBtn && importJsonInput) {
+        importJsonBtn.onclick = () => {
+          importJsonInput.value = '';
+          importJsonInput.click();
+        };
+
+        importJsonInput.onchange = (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            try {
+              const parsed = JSON.parse(ev.target.result);
+              if (!parsed || typeof parsed !== 'object' || (!parsed.leaveData && !parsed.tripBookings && !parsed.quotasByYear)) {
+                showToast('❌ 無效的備份檔案格式');
+                return;
+              }
+              leaveData = parsed.leaveData || {};
+              customTripTitles = parsed.customTripTitles || {};
+              tripBookings = parsed.tripBookings || {};
+              if (parsed.quotasByYear && typeof parsed.quotasByYear === 'object') {
+                quotasByYear = Object.assign({}, parsed.quotasByYear);
+              }
+              if (parsed.customLeaveConfig) {
+                customLeaveConfig = Object.assign(customLeaveConfig, parsed.customLeaveConfig);
+                syncCustomLeaveUI();
+              }
+              if (parsed.rosterModeConfig) {
+                rosterModeConfig = Object.assign(rosterModeConfig, parsed.rosterModeConfig);
+                syncRosterModeUI();
+              }
+              if (parsed.holidayModulesConfig) {
+                holidayModulesConfig = Object.assign(holidayModulesConfig, parsed.holidayModulesConfig);
+                syncHolidayModulesVisibility();
+              }
+              ensureYearQuotaState(selectedYear);
+              lastRenderedCardsSignature = '';
+              lastAppliedDataSignature = '';
+              isRoomUnlocked = true;
+              closeAllAuthModals();
+              pushData();
+              renderMonthGrid();
+              updateDashboard();
+              closeDrawer();
+              showToast(`✅ 成功還原備份（共 ${Object.keys(leaveData).length} 日排假紀錄）`);
+            } catch (err) {
+              console.error('Import JSON error:', err);
+              showToast('❌ 讀取備份檔案失敗，請確認檔案未損毀');
+            }
+          };
+          reader.readAsText(file, 'utf-8');
         };
       }
 
@@ -14443,17 +14607,35 @@ function setupYearOverviewToggle() {
           `input${capPrefix}DestIata`
         ];
 
+        const calcCityHugWidth = (el) => {
+          const s = (el.value || el.placeholder || '').trim();
+          let units = 0;
+          for (const ch of s) units += /[一-鿿㐀-䶿＀-￯]/.test(ch) ? 1.05 : 0.62;
+          return `${Math.max(2.1, units + 0.35)}em`;
+        };
+
         textInputs.forEach(id => {
           const el = document.getElementById(id);
           if (!el) return;
+          const isCityField = id.endsWith('City');
           if (nextState) {
             el.removeAttribute('readonly');
             el.classList.remove('pointer-events-none', 'select-none');
             el.classList.add('bg-slate-50', 'ring-1', 'ring-blue-300', 'focus:outline-blue-500');
+            if (isCityField) {
+              el.style.width = '';
+              el.classList.remove('max-w-[calc(100%-3.5rem)]', 'shrink');
+              el.classList.add('flex-1', 'min-w-0');
+            }
           } else {
             el.setAttribute('readonly', 'readonly');
             el.classList.add('pointer-events-none', 'select-none');
             el.classList.remove('bg-slate-50', 'ring-1', 'ring-blue-300', 'focus:outline-blue-500');
+            if (isCityField) {
+              el.style.width = calcCityHugWidth(el);
+              el.classList.remove('flex-1', 'min-w-0');
+              el.classList.add('max-w-[calc(100%-3.5rem)]', 'shrink');
+            }
           }
         });
 
@@ -14478,14 +14660,30 @@ function setupYearOverviewToggle() {
         if (origTermBox) origTermBox.classList.toggle('hidden', !nextState);
         if (destTermBox) destTermBox.classList.toggle('hidden', !nextState);
 
+        // 同步切換該程班次輸入框唯讀/可編輯狀態
+        const flightNoInp = document.getElementById(`inputFlight${capPrefix}No`);
+        if (flightNoInp) {
+          if (nextState) {
+            flightNoInp.removeAttribute('readonly');
+            flightNoInp.classList.remove('pointer-events-none');
+          } else {
+            flightNoInp.setAttribute('readonly', 'readonly');
+            flightNoInp.classList.add('pointer-events-none');
+          }
+        }
+
         if (btn) {
           if (nextState) {
-            btn.className = 'flight-pillar-footer-btn-edit is-editing inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-extrabold bg-[#E5EEF7] border border-[#9BB4CE] text-slate-900 hover:bg-[#D8E5F2] transition active:scale-95 cursor-pointer shadow-2xs';
-            btn.innerHTML = '<i class="fa-solid fa-check text-[8.5px]"></i><span>完成編輯</span>';
+            btn.className = 'flight-pillar-footer-btn-edit is-editing inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-extrabold bg-[#E5EEF7] border border-[#9BB4CE] text-slate-900 hover:bg-[#D8E5F2] transition active:scale-95 cursor-pointer shadow-2xs';
+            btn.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
           } else {
             btn.className = 'flight-pillar-footer-btn-edit inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-slate-100 transition active:scale-95 cursor-pointer shadow-2xs';
             btn.innerHTML = '<i class="fa-solid fa-pen text-[8.5px] text-slate-700"></i><span>編輯</span>';
           }
+        }
+        if (typeof window.syncStudioEditIndicators === 'function') window.syncStudioEditIndicators();
+        if (!nextState && forceState === null && typeof window.persistCurrentInlineBookingSilently === 'function') {
+          window.persistCurrentInlineBookingSilently(isOut ? '🛫 去程航班已儲存' : '🛬 回程航班已儲存');
         }
       };
 
@@ -14540,11 +14738,11 @@ function setupYearOverviewToggle() {
           const d2 = new Date(inDateVal);
           const diff = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
           if (diff >= 0) {
-            stayEl.textContent = `${cityLabel} ${diff} 天 · 自由行行程`;
+            stayEl.textContent = `${cityLabel} ${diff} 日 · ${diff} Days`;
             return;
           }
         }
-        stayEl.textContent = `${cityLabel}行程 · 自由行安排`;
+        stayEl.textContent = `${cityLabel}行程 Stay Duration`;
       }
 
       function computeFlightDurationText(depStr, arrStr, depUtc = 8, arrUtc = 8) {
@@ -14698,7 +14896,7 @@ function setupYearOverviewToggle() {
           const cName = (origCityEl?.value || '').trim();
           const tStr = origTermEl ? origTermEl.value.trim() : '';
           const hasOrig = Boolean(cName || oCode);
-          const baseName = cName ? `${cName}機場` : (oCode ? `${oCode} 機場` : '待輸入出發機場');
+          const baseName = cName ? `${cName}機場` : (oCode ? `${oCode} 機場` : '出發機場');
           if (origZhEl) {
             origZhEl.textContent = tStr ? `${baseName} · ${tStr}` : baseName;
             origZhEl.classList.toggle('text-slate-900', hasOrig);
@@ -14731,7 +14929,7 @@ function setupYearOverviewToggle() {
           const cName = (destCityEl?.value || '').trim();
           const tStr = destTermEl ? destTermEl.value.trim() : '';
           const hasDest = Boolean(cName || dCode);
-          const baseName = cName ? `${cName}機場` : (dCode ? `${dCode} 機場` : '待輸入目的地機場');
+          const baseName = cName ? `${cName}機場` : (dCode ? `${dCode} 機場` : '目的地機場');
           if (destZhEl) {
             destZhEl.textContent = tStr ? `${baseName} · ${tStr}` : baseName;
             destZhEl.classList.toggle('text-slate-900', hasDest);
@@ -14773,7 +14971,7 @@ function setupYearOverviewToggle() {
           : null;
         const resolvedMeta = AIRLINE_META_DB[carrier] || matchedMetaByZh;
         const airlineMeta = resolvedMeta || {
-          zh: (scheduleObj && scheduleObj.airline) || (cleanNo ? '自訂航班' : (direction === 'out' ? '待輸入去程航班' : '待輸入回程航班')),
+          zh: (scheduleObj && scheduleObj.airline) || (cleanNo ? '自訂航班' : (direction === 'out' ? '請輸入去程航班 Outbound Flight' : '請輸入回程航班 Inbound Flight')),
           en: cleanNo ? 'Custom Flight' : '',
           color: isSystem ? 'bg-blue-600' : (isManual ? 'bg-slate-800' : 'bg-slate-200')
         };
@@ -14874,25 +15072,34 @@ function setupYearOverviewToggle() {
         const origKnown = Boolean(rawOrigCode || rawOrigCity);
         const destKnown = Boolean(rawDestCode || rawDestCity);
 
+        const calcCityWidth = (txt, ph) => {
+          const s = (txt || ph || '').trim();
+          let units = 0;
+          for (const ch of s) units += /[一-鿿㐀-䶿＀-￯]/.test(ch) ? 1.05 : 0.62;
+          return `${Math.max(2.1, units + 0.35)}em`;
+        };
+
         if (origCityEl) {
           origCityEl.value = rawOrigCity;
           const hasOrigVal = Boolean(origCityEl.value.trim());
-          origCityEl.className = `flight-pillar-city-input w-24 sm:w-28 bg-transparent text-base sm:text-lg font-black ${isSystem ? 'text-blue-700' : (hasOrigVal ? 'text-slate-900' : 'text-slate-400')} rounded px-0.5 -ml-0.5 truncate transition ${lockClasses}`;
+          origCityEl.style.width = isEditing ? '' : calcCityWidth(rawOrigCity, origCityEl.placeholder);
+          origCityEl.className = `flight-pillar-city-input ${isEditing ? 'flex-1 min-w-0' : 'max-w-[calc(100%-3.5rem)] shrink'} bg-transparent text-base sm:text-lg font-black ${isSystem ? 'text-blue-700' : (hasOrigVal ? 'text-slate-900' : 'text-slate-400')} rounded px-0.5 -ml-0.5 truncate transition ${lockClasses}`;
         }
         if (origIataEl) {
           origIataEl.value = rawOrigCode;
           const isOrigCodeKnown = Boolean(rawOrigCode);
-          origIataEl.className = `flight-pillar-iata-pill w-12 px-1.5 py-0.5 rounded font-mono font-extrabold text-[11px] text-center uppercase ${isSystem ? 'bg-blue-50 text-blue-700' : (isOrigCodeKnown ? 'bg-slate-100 text-slate-900' : 'bg-slate-100 text-slate-400')} ${isEditing ? 'ring-1 ring-blue-300 focus:outline-blue-500' : 'pointer-events-none select-none'}`;
+          origIataEl.className = `flight-pillar-iata-pill w-11 sm:w-12 shrink-0 px-1 py-0.5 rounded font-mono font-extrabold text-[11px] text-center uppercase ${isSystem ? 'bg-blue-50 text-blue-700' : (isOrigCodeKnown ? 'bg-slate-100 text-slate-900' : 'bg-slate-100 text-slate-400')} ${isEditing ? 'ring-1 ring-blue-300 focus:outline-blue-500' : 'pointer-events-none select-none'}`;
         }
         if (destCityEl) {
           destCityEl.value = rawDestCity;
           const hasDestVal = Boolean(destCityEl.value.trim());
-          destCityEl.className = `flight-pillar-city-input w-24 sm:w-28 bg-transparent text-base sm:text-lg font-black text-right ${isSystem ? 'text-blue-700' : (hasDestVal ? 'text-slate-900' : 'text-slate-400')} rounded px-0.5 -mr-0.5 truncate transition ${lockClasses}`;
+          destCityEl.style.width = isEditing ? '' : calcCityWidth(rawDestCity, destCityEl.placeholder);
+          destCityEl.className = `flight-pillar-city-input ${isEditing ? 'flex-1 min-w-0' : 'max-w-[calc(100%-3.5rem)] shrink'} bg-transparent text-base sm:text-lg font-black text-right ${isSystem ? 'text-blue-700' : (hasDestVal ? 'text-slate-900' : 'text-slate-400')} rounded px-0.5 -mr-0.5 truncate transition ${lockClasses}`;
         }
         if (destIataEl) {
           destIataEl.value = rawDestCode;
           const isDestCodeKnown = Boolean(rawDestCode);
-          destIataEl.className = `flight-pillar-iata-pill w-12 px-1.5 py-0.5 rounded font-mono font-extrabold text-[11px] text-center uppercase ${isSystem ? 'bg-blue-50 text-blue-700' : (isDestCodeKnown ? 'bg-slate-100 text-slate-900' : 'bg-slate-100 text-slate-400')} ${isEditing ? 'ring-1 ring-blue-300 focus:outline-blue-500' : 'pointer-events-none select-none'}`;
+          destIataEl.className = `flight-pillar-iata-pill w-11 sm:w-12 shrink-0 px-1 py-0.5 rounded font-mono font-extrabold text-[11px] text-center uppercase ${isSystem ? 'bg-blue-50 text-blue-700' : (isDestCodeKnown ? 'bg-slate-100 text-slate-900' : 'bg-slate-100 text-slate-400')} ${isEditing ? 'ring-1 ring-blue-300 focus:outline-blue-500' : 'pointer-events-none select-none'}`;
         }
 
         const resolvedOrigMeta = AIRPORT_META_DB[rawOrigCode] || originInfo;
@@ -14917,24 +15124,24 @@ function setupYearOverviewToggle() {
         };
         const origAirportZhTxt = resolvedOrigMeta.airportZh && resolvedOrigMeta.airportZh !== '待輸入機場'
           ? resolvedOrigMeta.airportZh
-          : (rawOrigCity ? `${rawOrigCity}機場` : '待輸入出發機場');
+          : (rawOrigCity ? `${rawOrigCity}機場` : '出發機場');
         const origAirportEnTxt = resolvedOrigMeta.airportEn && resolvedOrigMeta.airportEn !== 'Airport Info'
           ? resolvedOrigMeta.airportEn
           : (rawOrigCode ? `${rawOrigCode} Airport` : 'Departure Airport');
 
         const destAirportZhTxt = resolvedDestMeta.airportZh && resolvedDestMeta.airportZh !== '待輸入機場'
           ? resolvedDestMeta.airportZh
-          : (rawDestCity ? `${rawDestCity}機場` : '待輸入目的地機場');
+          : (rawDestCity ? `${rawDestCity}機場` : '目的地機場');
         const destAirportEnTxt = resolvedDestMeta.airportEn && resolvedDestMeta.airportEn !== 'Airport Info'
           ? resolvedDestMeta.airportEn
           : (rawDestCode ? `${rawDestCode} Airport` : 'Destination Airport');
 
         setTxt(`${prefix}DepUtcBadge`, `UTC${resolvedDepUtc >= 0 ? '+' + resolvedDepUtc : resolvedDepUtc}`, true);
-        setTxt(`${prefix}OriginAirportZh`, origKnown ? (resolvedOrigTerm ? `${origAirportZhTxt} · ${resolvedOrigTerm}` : origAirportZhTxt) : '待輸入出發機場', origKnown);
+        setTxt(`${prefix}OriginAirportZh`, origKnown ? (resolvedOrigTerm ? `${origAirportZhTxt} · ${resolvedOrigTerm}` : origAirportZhTxt) : '出發機場', origKnown);
         setTxt(`${prefix}OriginAirportEn`, origKnown ? origAirportEnTxt : 'Departure Airport', origKnown);
 
         setTxt(`${prefix}ArrUtcBadge`, `UTC${resolvedArrUtc >= 0 ? '+' + resolvedArrUtc : resolvedArrUtc}`, true);
-        setTxt(`${prefix}DestAirportZh`, destKnown ? (resolvedDestTerm ? `${destAirportZhTxt} · ${resolvedDestTerm}` : destAirportZhTxt) : '待輸入目的地機場', destKnown);
+        setTxt(`${prefix}DestAirportZh`, destKnown ? (resolvedDestTerm ? `${destAirportZhTxt} · ${resolvedDestTerm}` : destAirportZhTxt) : '目的地機場', destKnown);
         setTxt(`${prefix}DestAirportEn`, destKnown ? destAirportEnTxt : 'Destination Airport', destKnown);
 
         const depVal = document.getElementById(`inputFlight${capPrefix}Dep`)?.value || (scheduleObj && scheduleObj.dep) || '00:00';
@@ -15065,7 +15272,7 @@ function setupYearOverviewToggle() {
         const isHidden = card.classList.toggle('hidden');
         if (line) line.classList.toggle('hidden', isHidden);
         if (pill) pill.classList.toggle('hidden', isHidden);
-        btn.textContent = isHidden ? '顯示回程航班' : '隱藏回程航班';
+        btn.textContent = isHidden ? '展開回程 Show Inbound' : '隱藏回程 Hide Inbound';
       };
 
       window.resetSingleFlightCard = function(direction) {
@@ -15863,7 +16070,7 @@ function setupYearOverviewToggle() {
         }
         const nameEl = document.getElementById('viewHotelNameText');
         if (nameEl) {
-          nameEl.textContent = hName || '已登記住宿物業';
+          nameEl.textContent = hName || '已登記住宿';
           nameEl.classList.toggle('hidden', !hName);
         }
         const addrRow = document.getElementById('viewHotelAddressRow');
@@ -15879,31 +16086,252 @@ function setupYearOverviewToggle() {
           hPnrRow.classList.toggle('hidden', !hPnr);
         }
 
-        // 3. 行程備忘檢視卡（無內容自動隱藏，有內容顯示乾淨便條卡）
+        // 3. 行程備忘檢視卡
         const notesVal = (document.getElementById('inputBookingNotes')?.value || '').trim();
-        const notesReadBox = document.getElementById('notesReadViewBox');
         const notesTextEl = document.getElementById('viewBookingNotesText');
-        if (notesTextEl) notesTextEl.textContent = notesVal;
-        if (notesReadBox) {
-          notesReadBox.classList.toggle('hidden', !notesVal || studioMasterEditActive);
+        const notesEmptyEl = document.getElementById('notesReadEmptyGroup');
+        if (notesTextEl) {
+          notesTextEl.textContent = notesVal;
+          notesTextEl.classList.toggle('hidden', !notesVal);
+        }
+        if (notesEmptyEl) {
+          notesEmptyEl.classList.toggle('hidden', Boolean(notesVal));
         }
       };
 
+      let hotelCardEditActive = false;
+      let notesCardEditActive = false;
+
+      window.persistCurrentInlineBookingSilently = (toastMsg = '') => {
+        if (!currentEditingBookingKey) return;
+        const savedKey = currentEditingBookingKey;
+        const outNo = document.getElementById('inputFlightOutNo')?.value.trim().toUpperCase() || '';
+        const rawOutDep = document.getElementById('inputFlightOutDep')?.value.trim() || '';
+        const rawOutArr = document.getElementById('inputFlightOutArr')?.value.trim() || '';
+        const outDep = (rawOutDep && rawOutDep !== '00:00') ? rawOutDep : '';
+        const outArr = (rawOutArr && rawOutArr !== '00:00') ? rawOutArr : '';
+        const inNo = document.getElementById('inputFlightInNo')?.value.trim().toUpperCase() || '';
+        const rawInDep = document.getElementById('inputFlightInDep')?.value.trim() || '';
+        const rawInArr = document.getElementById('inputFlightInArr')?.value.trim() || '';
+        const inDep = (rawInDep && rawInDep !== '00:00') ? rawInDep : '';
+        const inArr = (rawInArr && rawInArr !== '00:00') ? rawInArr : '';
+
+        const outSummary = [outNo, (outDep && outArr) ? `(${outDep} ➔ ${outArr})` : ''].filter(Boolean).join(' ');
+        const inSummary = [inNo, (inDep && inArr) ? `(${inDep} ➔ ${inArr})` : ''].filter(Boolean).join(' ');
+
+        tripBookings[savedKey] = {
+          flightOut: outSummary,
+          flightOutNo: outNo,
+          flightOutDate: document.getElementById('inputFlightOutDate')?.value || '',
+          flightOutDep: outDep,
+          flightOutArr: outArr,
+          flightOutOriginCity: document.getElementById('inputOutOriginCity')?.value.trim() || '',
+          flightOutOriginCode: document.getElementById('inputOutOriginIata')?.value.trim().toUpperCase() || '',
+          flightOutOriginTerminal: document.getElementById('inputOutOriginTerminal')?.value.trim() || '',
+          flightOutDepUtc: document.getElementById('selectOutDepUtc')?.value || '8',
+          flightOutDestCity: document.getElementById('inputOutDestCity')?.value.trim() || '',
+          flightOutDestCode: document.getElementById('inputOutDestIata')?.value.trim().toUpperCase() || '',
+          flightOutDestTerminal: document.getElementById('inputOutDestTerminal')?.value.trim() || '',
+          flightOutArrUtc: document.getElementById('selectOutArrUtc')?.value || '8',
+          flightIn: inSummary,
+          flightInNo: inNo,
+          flightInDate: document.getElementById('inputFlightInDate')?.value || '',
+          flightInDep: inDep,
+          flightInArr: inArr,
+          flightInOriginCity: document.getElementById('inputInOriginCity')?.value.trim() || '',
+          flightInOriginCode: document.getElementById('inputInOriginIata')?.value.trim().toUpperCase() || '',
+          flightInOriginTerminal: document.getElementById('inputInOriginTerminal')?.value.trim() || '',
+          flightInDepUtc: document.getElementById('selectInDepUtc')?.value || '8',
+          flightInDestCity: document.getElementById('inputInDestCity')?.value.trim() || '',
+          flightInDestCode: document.getElementById('inputInDestIata')?.value.trim().toUpperCase() || '',
+          flightInDestTerminal: document.getElementById('inputInDestTerminal')?.value.trim() || '',
+          flightInArrUtc: document.getElementById('selectInArrUtc')?.value || '8',
+          flightPnr: document.getElementById('inputFlightPnr')?.value.trim().toUpperCase() || '',
+          hotelName: document.getElementById('inputHotelName')?.value.trim() || '',
+          hotelAddress: document.getElementById('inputHotelAddress')?.value.trim() || '',
+          hotelPnr: document.getElementById('inputHotelPnr')?.value.trim() || '',
+          notes: document.getElementById('inputBookingNotes')?.value.trim() || ''
+        };
+
+        lastRenderedCardsSignature = '';
+        pushData();
+        const drawer = document.getElementById('inlineBookingStudioDrawer');
+        const wasOpen = Boolean(drawer && drawer.classList.contains('is-open'));
+        const prevSlot = drawer ? drawer.parentElement : null;
+        const { tripsList } = getActiveLeaveSpansMap(leaveData);
+        renderTripsAndGantt(tripsList);
+        renderMobileTopTripRibbon(tripsList);
+        if (typeof renderModalLeavesContent === 'function') renderModalLeavesContent();
+        if (wasOpen && drawer) {
+          let targetSlot = (drawer.parentElement && drawer.parentElement !== document.getElementById('inlineBookingStudioParkingBay') && document.body.contains(drawer.parentElement))
+            ? drawer.parentElement
+            : ((prevSlot && document.body.contains(prevSlot)) ? prevSlot : null);
+          if (!targetSlot) {
+            const modalEl = document.getElementById('modalOverviewLeaves');
+            const isModalOpen = Boolean(modalEl && !modalEl.classList.contains('hidden'));
+            const scopeRoot = isModalOpen ? modalEl : document;
+            targetSlot = scopeRoot.querySelector(`.trip-booking-inline-host[data-trip-key="${savedKey}"] .trip-inline-studio-slot`);
+          }
+          if (targetSlot) {
+            if (drawer.parentElement !== targetSlot) targetSlot.appendChild(drawer);
+            drawer.classList.add('is-open');
+            drawer.style.display = 'block';
+            drawer.style.maxHeight = 'none';
+            drawer.style.opacity = '1';
+            const hostCard = targetSlot.closest('.trip-booking-inline-host');
+            if (hostCard) {
+              const ch = hostCard.querySelector('.inline-booking-chevron');
+              if (ch) ch.classList.add('rotate-180');
+              const lb = hostCard.querySelector('.inline-booking-toggle-label');
+              if (lb) lb.textContent = '收起';
+            }
+          }
+        }
+        if (toastMsg) showToast(toastMsg);
+      };
+
+      window.toggleHotelCardEditMode = (forceState = null, skipAutoSave = false) => {
+        const wasEditing = hotelCardEditActive;
+        hotelCardEditActive = (forceState !== null) ? Boolean(forceState) : !hotelCardEditActive;
+
+        const hotelReadBox = document.getElementById('hotelReadViewBox');
+        const hotelEditBox = document.getElementById('hotelEditViewBox');
+        const btn = document.getElementById('btnToggleEditHotelCard');
+
+        if (hotelReadBox) hotelReadBox.classList.toggle('hidden', hotelCardEditActive);
+        if (hotelEditBox) hotelEditBox.classList.toggle('hidden', !hotelCardEditActive);
+
+        if (btn) {
+          if (hotelCardEditActive) {
+            btn.className = 'inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-extrabold bg-[#E5EEF7] border border-[#9BB4CE] text-slate-900 hover:bg-[#D8E5F2] transition active:scale-95 cursor-pointer shadow-2xs';
+            btn.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
+          } else {
+            btn.className = 'inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs';
+            btn.innerHTML = '<i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>';
+          }
+        }
+
+        if (typeof window.syncStudioEditIndicators === 'function') window.syncStudioEditIndicators();
+        else window.syncInlineStudioReadViews();
+        if (hotelCardEditActive) {
+          setTimeout(() => document.getElementById('inputHotelName')?.focus(), 40);
+        } else if (wasEditing && !skipAutoSave) {
+          window.persistCurrentInlineBookingSilently('🏨 住宿詳情已儲存');
+        }
+      };
+
+      window.resetHotelSectionCard = () => {
+        ['inputHotelName', 'inputHotelAddress', 'inputQuickPasteGmapAddress', 'inputHotelPnr'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.value = '';
+        });
+        const hintEl = document.getElementById('hintHotelGeocoding');
+        if (hintEl) hintEl.classList.add('hidden');
+        if (typeof refreshModalHotelNavLink === 'function') refreshModalHotelNavLink();
+        window.syncInlineStudioReadViews();
+        window.persistCurrentInlineBookingSilently('🧹 已重設住宿詳情');
+      };
+
+      window.toggleNotesCardEditMode = (forceState = null, skipAutoSave = false) => {
+        const wasEditing = notesCardEditActive;
+        notesCardEditActive = (forceState !== null) ? Boolean(forceState) : !notesCardEditActive;
+
+        const notesReadBox = document.getElementById('notesReadViewBox');
+        const notesEditBox = document.getElementById('notesEditViewBox');
+        const btn = document.getElementById('btnToggleEditNotesCard');
+
+        if (notesReadBox) notesReadBox.classList.toggle('hidden', notesCardEditActive);
+        if (notesEditBox) notesEditBox.classList.toggle('hidden', !notesCardEditActive);
+
+        if (btn) {
+          if (notesCardEditActive) {
+            btn.className = 'inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-extrabold bg-[#E5EEF7] border border-[#9BB4CE] text-slate-900 hover:bg-[#D8E5F2] transition active:scale-95 cursor-pointer shadow-2xs';
+            btn.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
+          } else {
+            btn.className = 'inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs';
+            btn.innerHTML = '<i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>';
+          }
+        }
+
+        if (typeof window.syncStudioEditIndicators === 'function') window.syncStudioEditIndicators();
+        else window.syncInlineStudioReadViews();
+        if (notesCardEditActive) {
+          setTimeout(() => document.getElementById('inputBookingNotes')?.focus(), 40);
+        } else if (wasEditing && !skipAutoSave) {
+          window.persistCurrentInlineBookingSilently('📝 行程備忘已儲存');
+        }
+      };
+
+      window.resetNotesSectionCard = () => {
+        const notesEl = document.getElementById('inputBookingNotes');
+        if (notesEl) notesEl.value = '';
+        window.syncInlineStudioReadViews();
+        window.persistCurrentInlineBookingSilently('🧹 已重設行程備忘');
+      };
+
+      window.syncStudioEditIndicators = () => {
+        const hasAnyOpenSection = Boolean(
+          flightCardEditState.out ||
+          flightCardEditState.in ||
+          hotelCardEditActive ||
+          notesCardEditActive
+        );
+        const isAnyEditing = Boolean(studioMasterEditActive || hasAnyOpenSection);
+
+        // 若所有分區均已按完成關閉，總狀態同步自動降回檢視態
+        if (!hasAnyOpenSection && studioMasterEditActive) {
+          studioMasterEditActive = false;
+        }
+
+        const pnrEditBox = document.getElementById('pnrEditViewBox');
+        const footerBar = document.getElementById('studioEditActionFooter');
+        if (pnrEditBox) pnrEditBox.classList.toggle('hidden', !studioMasterEditActive);
+        if (footerBar) footerBar.classList.toggle('hidden', !isAnyEditing);
+
+        const btn = document.getElementById('btnToggleStudioMasterEdit');
+        const icon = document.getElementById('iconStudioMasterEdit');
+        const lbl = document.getElementById('labelStudioMasterEdit');
+        if (btn && icon && lbl) {
+          if (isAnyEditing) {
+            btn.className = 'px-2.5 py-1 rounded-xl bg-blue-600 text-white border border-blue-600 text-[10.5px] font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shadow-xs shrink-0';
+            icon.className = 'fa-solid fa-check text-[9.5px] text-white';
+            lbl.textContent = '全部完成';
+          } else {
+            btn.className = 'px-2.5 py-1 rounded-xl bg-white hover:bg-blue-50 text-slate-900 hover:text-blue-700 border border-slate-300 hover:border-blue-300 text-[10.5px] font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shadow-2xs shrink-0';
+            icon.className = 'fa-solid fa-pen text-[9.5px] text-blue-600';
+            lbl.textContent = '全部編輯';
+          }
+        }
+        window.syncInlineStudioReadViews();
+      };
+
       window.toggleStudioMasterEditMode = (forceState = null) => {
-        studioMasterEditActive = (forceState !== null) ? Boolean(forceState) : !studioMasterEditActive;
+        const hasAnyOpenSection = Boolean(
+          flightCardEditState.out ||
+          flightCardEditState.in ||
+          hotelCardEditActive ||
+          notesCardEditActive
+        );
+        const currentlyAnyEditing = Boolean(studioMasterEditActive || hasAnyOpenSection);
+        const nextMasterState = (forceState !== null) ? Boolean(forceState) : !currentlyAnyEditing;
+        studioMasterEditActive = nextMasterState;
 
         // 同步切換去程與回程航班卡片編輯鎖定態
         if (typeof window.toggleFlightCardEditMode === 'function') {
-          window.toggleFlightCardEditMode('out', studioMasterEditActive);
-          window.toggleFlightCardEditMode('in', studioMasterEditActive);
+          window.toggleFlightCardEditMode('out', nextMasterState);
+          window.toggleFlightCardEditMode('in', nextMasterState);
         }
+
+        // 同步切換住宿詳情與行程備忘就地編輯態
+        window.toggleHotelCardEditMode(nextMasterState, true);
+        window.toggleNotesCardEditMode(nextMasterState, true);
 
         // 同步切換航班班次輸入框唯讀/可編輯視覺（檢視態消除輸入框邊框感）
         ['inputFlightOutNo', 'inputFlightInNo'].forEach(id => {
           const inp = document.getElementById(id);
           const box = inp?.closest('.flight-pillar-no-box');
           if (!inp) return;
-          if (studioMasterEditActive) {
+          if (nextMasterState) {
             inp.removeAttribute('readonly');
             inp.classList.remove('pointer-events-none');
             if (box) box.classList.remove('border-transparent');
@@ -15913,19 +16341,6 @@ function setupYearOverviewToggle() {
           }
         });
 
-        // 切換 PNR、住宿物業、行程備忘的「檢視卡 vs 編輯表單」
-        const pnrEditBox = document.getElementById('pnrEditViewBox');
-        const hotelReadBox = document.getElementById('hotelReadViewBox');
-        const hotelEditBox = document.getElementById('hotelEditViewBox');
-        const notesEditBox = document.getElementById('notesEditViewBox');
-        const footerBar = document.getElementById('studioEditActionFooter');
-
-        if (pnrEditBox) pnrEditBox.classList.toggle('hidden', !studioMasterEditActive);
-        if (hotelReadBox) hotelReadBox.classList.toggle('hidden', studioMasterEditActive);
-        if (hotelEditBox) hotelEditBox.classList.toggle('hidden', !studioMasterEditActive);
-        if (notesEditBox) notesEditBox.classList.toggle('hidden', !studioMasterEditActive);
-        if (footerBar) footerBar.classList.toggle('hidden', !studioMasterEditActive);
-
         const drawerEl = document.getElementById('inlineBookingStudioDrawer');
         if (drawerEl && drawerEl.classList.contains('is-open')) {
           drawerEl.style.display = 'block';
@@ -15933,30 +16348,18 @@ function setupYearOverviewToggle() {
           drawerEl.style.opacity = '1';
         }
 
-        // 刷新檢視態文字
-        window.syncInlineStudioReadViews();
+        window.syncStudioEditIndicators();
 
-        // 更新頂部「編輯資料」總開關外觀
-        const btn = document.getElementById('btnToggleStudioMasterEdit');
-        const icon = document.getElementById('iconStudioMasterEdit');
-        const lbl = document.getElementById('labelStudioMasterEdit');
-        if (btn && icon && lbl) {
-          if (studioMasterEditActive) {
-            btn.className = 'px-2.5 py-1 rounded-xl bg-blue-600 text-white border border-blue-600 text-[10.5px] font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shadow-xs shrink-0';
-            icon.className = 'fa-solid fa-eye text-[9.5px] text-white';
-            lbl.textContent = '返回檢視';
-          } else {
-            btn.className = 'px-2.5 py-1 rounded-xl bg-white hover:bg-blue-50 text-slate-900 hover:text-blue-700 border border-slate-300 hover:border-blue-300 text-[10.5px] font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shadow-2xs shrink-0';
-            icon.className = 'fa-solid fa-pen text-[9.5px] text-blue-600';
-            lbl.textContent = '編輯資料';
-          }
+        // 用戶主動按「全部完成」時：自動儲存並留在「純淨憑證檢視態」俾用戶檢查核對，絕不強行收起抽屜
+        if (!nextMasterState && forceState === null && typeof window.persistCurrentInlineBookingSilently === 'function') {
+          window.persistCurrentInlineBookingSilently('✈️ 全部預訂資料已儲存！再按上方橫幅即可收起');
         }
       };
 
       const resetAllInlineBookingIndicators = () => {
         document.querySelectorAll('.inline-booking-chevron').forEach(el => el.classList.remove('rotate-180'));
         document.querySelectorAll('.inline-booking-toggle-label').forEach(el => {
-          el.textContent = el.getAttribute('data-default-label') || '展開預訂';
+          el.textContent = el.getAttribute('data-default-label') || '詳情';
         });
         document.querySelectorAll('.btn-ribbon-inline-booking').forEach(btn => {
           btn.style.backgroundColor = '';
@@ -16099,7 +16502,7 @@ function setupYearOverviewToggle() {
           const chev = triggerEl.querySelector('.inline-booking-chevron');
           const lbl = triggerEl.querySelector('.inline-booking-toggle-label');
           if (chev) chev.classList.add('rotate-180');
-          if (lbl) lbl.textContent = '收起預訂';
+          if (lbl) lbl.textContent = '收起';
           if (triggerEl.classList.contains('btn-ribbon-inline-booking')) {
             triggerEl.style.backgroundColor = '#2563eb';
             triggerEl.style.color = '#ffffff';
@@ -16113,7 +16516,7 @@ function setupYearOverviewToggle() {
             const chev = matchingBtn.querySelector('.inline-booking-chevron');
             const lbl = matchingBtn.querySelector('.inline-booking-toggle-label');
             if (chev) chev.classList.add('rotate-180');
-            if (lbl) lbl.textContent = '收起預訂';
+            if (lbl) lbl.textContent = '收起';
           }
         }
 
@@ -16187,6 +16590,8 @@ function setupYearOverviewToggle() {
 
           const drawer = document.getElementById('inlineBookingStudioDrawer');
           const parkingBay = document.getElementById('inlineBookingStudioParkingBay');
+          const prevParentSlot = drawer ? drawer.parentElement : null;
+          const wasInMobileRibbon = Boolean(prevParentSlot && prevParentSlot.id === 'mobileRibbonInlineStudioSlot');
           if (drawer && parkingBay) {
             drawer.classList.remove('is-open');
             drawer.style.maxHeight = '0px';
@@ -16196,11 +16601,15 @@ function setupYearOverviewToggle() {
           }
 
           const outNo = document.getElementById('inputFlightOutNo').value.trim().toUpperCase();
-          const outDep = document.getElementById('inputFlightOutDep').value.trim();
-          const outArr = document.getElementById('inputFlightOutArr').value.trim();
+          const rawOutDep = document.getElementById('inputFlightOutDep').value.trim();
+          const rawOutArr = document.getElementById('inputFlightOutArr').value.trim();
+          const outDep = (rawOutDep && rawOutDep !== '00:00') ? rawOutDep : '';
+          const outArr = (rawOutArr && rawOutArr !== '00:00') ? rawOutArr : '';
           const inNo = document.getElementById('inputFlightInNo').value.trim().toUpperCase();
-          const inDep = document.getElementById('inputFlightInDep').value.trim();
-          const inArr = document.getElementById('inputFlightInArr').value.trim();
+          const rawInDep = document.getElementById('inputFlightInDep').value.trim();
+          const rawInArr = document.getElementById('inputFlightInArr').value.trim();
+          const inDep = (rawInDep && rawInDep !== '00:00') ? rawInDep : '';
+          const inArr = (rawInArr && rawInArr !== '00:00') ? rawInArr : '';
           const outDate = document.getElementById('inputFlightOutDate')?.value || '';
           const inDate = document.getElementById('inputFlightInDate')?.value || '';
 
@@ -16270,7 +16679,13 @@ function setupYearOverviewToggle() {
             renderModalLeavesContent();
           }
           currentEditingBookingKey = null;
-          openTripBookingByKey(savedKey, 'auto');
+          openTripBookingByKey(savedKey, wasInMobileRibbon ? 'ribbon' : 'auto');
+          const reopenedDrawer = document.getElementById('inlineBookingStudioDrawer');
+          if (reopenedDrawer) {
+            setTimeout(() => {
+              reopenedDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 60);
+          }
           showToast('✈️ 預訂資料已儲存！再按上方橫幅即可收起');
         };
       }
@@ -17227,7 +17642,7 @@ function setupYearOverviewToggle() {
     </div>
   </div>
 
-      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.2.3 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
+      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.4 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
   <div id="inlineBookingStudioParkingBay" class="hidden">
 
   <!-- 原裝完整「旅程預訂資料」流暢原地收放面板（全程零彈窗、無重複標題與多餘收起掣） -->
@@ -17260,7 +17675,7 @@ function setupYearOverviewToggle() {
             <button type="button" id="btnToggleStudioMasterEdit" onclick="toggleStudioMasterEditMode()"
                     class="px-2.5 py-1 rounded-xl bg-white hover:bg-blue-50 text-slate-900 hover:text-blue-700 border border-slate-300 hover:border-blue-300 text-[10.5px] font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shadow-2xs shrink-0">
               <i id="iconStudioMasterEdit" class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
-              <span id="labelStudioMasterEdit">編輯資料</span>
+              <span id="labelStudioMasterEdit">全部編輯</span>
             </button>
           </div>
         </div>
@@ -17321,7 +17736,7 @@ function setupYearOverviewToggle() {
               <div class="flex items-center gap-2 min-w-0">
                 <span id="badgeOutAirlineCode" class="w-6 h-6 rounded-md bg-slate-200 text-slate-400 font-black font-mono text-[10px] flex items-center justify-center shrink-0 shadow-2xs">✈</span>
                 <div id="labelOutAirlineName" class="text-xs font-extrabold text-slate-400 truncate">
-                  待輸入去程航班
+                  請輸入去程航班 Outbound Flight
                 </div>
                 <span id="badgeOutFlightNoPill" class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200 font-mono font-bold text-[10.5px] text-slate-400 shrink-0">--</span>
               </div>
@@ -17456,38 +17871,38 @@ function setupYearOverviewToggle() {
                 <!-- 閘口柱專屬小標：「香港至 ➔ 目的地」 -->
                 <div class="flight-pillar-route-prefix hidden items-center justify-between text-[10px] font-bold text-white/90 mb-1">
                   <span>出發地 Departure</span>
-                  <span class="text-[#F8EE00] font-extrabold tracking-wider">至 TO ➔</span>
+                  <span class="text-[#F8EE00] font-extrabold tracking-wider">至 To ➔</span>
                 </div>
 
-                <div class="grid grid-cols-12 items-start gap-2">
-                  <!-- 左側：出發城市與機場 -->
-                  <div class="col-span-6 text-left">
-                    <div class="flex items-center gap-1.5">
-                      <input type="text" id="inputOutOriginCity" value="香港" placeholder="出發城市" readonly
-                             class="flight-pillar-city-input w-24 sm:w-28 bg-transparent text-base sm:text-lg font-black text-slate-900 rounded px-0.5 -ml-0.5 truncate transition pointer-events-none select-none">
+                <div class="grid grid-cols-12 items-start gap-3">
+                  <!-- 左側：出發城市與機場（彈性自適應寬度＋強制安全間距，縮放絕不重疊黏合） -->
+                  <div class="col-span-6 pr-2 text-left min-w-0">
+                    <div class="flex items-center gap-1.5 min-w-0">
+                      <input type="text" id="inputOutOriginCity" value="香港" placeholder="出發城市" readonly style="width: 2.5em;"
+                             class="flight-pillar-city-input max-w-[calc(100%-3.5rem)] shrink bg-transparent text-base sm:text-lg font-black text-slate-900 rounded px-0.5 -ml-0.5 truncate transition pointer-events-none select-none">
                       <input type="text" id="inputOutOriginIata" value="HKG" maxlength="3" placeholder="" readonly
-                             class="flight-pillar-iata-pill w-12 px-1.5 py-0.5 rounded bg-slate-100 text-slate-900 font-mono font-extrabold text-[11px] text-center uppercase pointer-events-none select-none">
+                             class="flight-pillar-iata-pill w-11 sm:w-12 shrink-0 px-1 py-0.5 rounded bg-slate-100 text-slate-900 font-mono font-extrabold text-[11px] text-center uppercase pointer-events-none select-none">
                     </div>
                     <div id="outOriginAirportZh" class="flight-pillar-airport-sub text-[11px] text-slate-900 font-bold mt-0.5 truncate">香港國際機場</div>
                     <div id="outOriginAirportEn" class="flight-pillar-airport-sub text-[10.5px] text-slate-900 font-medium truncate">Hong Kong International Airport</div>
                     <div id="boxOutOriginTerminalEdit" class="hidden mt-1">
-                      <input type="text" id="inputOutOriginTerminal" placeholder="航廈 (如 T1 / T2，可留空)" 
+                      <input type="text" id="inputOutOriginTerminal" placeholder="客運大樓 Terminal" 
                              class="w-full px-1.5 py-0.5 bg-white border border-slate-300 rounded text-[10px] font-bold text-slate-900 focus:outline-blue-500">
                     </div>
                   </div>
 
-                  <!-- 右側：目的城市與機場 -->
-                  <div class="col-span-6 text-right">
-                    <div class="flex items-center justify-end gap-1.5">
+                  <!-- 右側：目的城市與機場（彈性自適應寬度＋強制安全間距，縮放絕不重疊黏合） -->
+                  <div class="col-span-6 pl-2 text-right min-w-0">
+                    <div class="flex items-center justify-end gap-1.5 min-w-0">
                       <input type="text" id="inputOutDestIata" value="" maxlength="3" placeholder="" readonly
-                             class="flight-pillar-iata-pill w-12 px-1.5 py-0.5 rounded bg-slate-100 text-slate-400 font-mono font-extrabold text-[11px] text-center uppercase pointer-events-none select-none">
-                      <input type="text" id="inputOutDestCity" value="" placeholder="目的城市" readonly
-                             class="flight-pillar-city-input w-24 sm:w-28 bg-transparent text-base sm:text-lg font-black text-slate-400 text-right rounded px-0.5 -mr-0.5 truncate transition pointer-events-none select-none">
+                             class="flight-pillar-iata-pill w-11 sm:w-12 shrink-0 px-1 py-0.5 rounded bg-slate-100 text-slate-400 font-mono font-extrabold text-[11px] text-center uppercase pointer-events-none select-none">
+                      <input type="text" id="inputOutDestCity" value="" placeholder="目的城市" readonly style="width: 4.6em;"
+                             class="flight-pillar-city-input max-w-[calc(100%-3.5rem)] shrink bg-transparent text-base sm:text-lg font-black text-slate-400 text-right rounded px-0.5 -mr-0.5 truncate transition pointer-events-none select-none">
                     </div>
-                    <div id="outDestAirportZh" class="flight-pillar-airport-sub text-[11px] text-slate-400 font-bold mt-0.5 truncate">待輸入目的地機場</div>
+                    <div id="outDestAirportZh" class="flight-pillar-airport-sub text-[11px] text-slate-400 font-bold mt-0.5 truncate">目的地機場</div>
                     <div id="outDestAirportEn" class="flight-pillar-airport-sub text-[10.5px] text-slate-400 font-medium truncate">Destination Airport</div>
                     <div id="boxOutDestTerminalEdit" class="hidden mt-1">
-                      <input type="text" id="inputOutDestTerminal" placeholder="航廈 (如 T1 / T2，可留空)" 
+                      <input type="text" id="inputOutDestTerminal" placeholder="客運大樓 Terminal" 
                              class="w-full px-1.5 py-0.5 bg-white border border-slate-300 rounded text-[10px] font-bold text-slate-900 text-right focus:outline-blue-500">
                     </div>
                   </div>
@@ -17500,15 +17915,13 @@ function setupYearOverviewToggle() {
 
             <!-- 底部獨立操作列（霧面靛藍灰底座 / 簡約白灰底座） -->
             <div class="flight-pillar-footer px-3 py-1.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-end gap-1.5 transition-colors">
-              <button type="button" id="btnToggleEditOutFlight" onclick="toggleFlightCardEditMode('out')" 
-                      class="flight-pillar-footer-btn-edit inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs">
-                <i class="fa-solid fa-pen text-[8.5px] text-blue-600"></i>
-                <span>編輯</span>
+              <button type="button" id="btnToggleEditOutFlight" onclick="toggleFlightCardEditMode('out')" aria-label="編輯或完成去程航班"
+                      class="flight-pillar-footer-btn-edit inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs">
+                <i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
               </button>
-              <button type="button" onclick="resetSingleFlightCard('out')" 
-                      class="flight-pillar-footer-btn-clear inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-eraser text-[9px] text-rose-500"></i>
-                <span>清空</span>
+              <button type="button" onclick="resetSingleFlightCard('out')" aria-label="重設去程航班"
+                      class="flight-pillar-footer-btn-clear inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-rotate-left text-[10px] text-rose-500"></i>
               </button>
             </div>
             <div id="hintFlightOutAuto" class="hidden"></div>
@@ -17519,10 +17932,10 @@ function setupYearOverviewToggle() {
             <div id="flightStayDividerLine" class="absolute left-6 top-0 bottom-0 border-l border-dashed border-slate-300"></div>
             <div id="flightStayDividerPill" class="relative z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-2xs text-[10px] font-bold text-slate-900">
               <i class="fa-solid fa-clock text-amber-500 text-[10px]"></i>
-              <span id="labelFlightStayDuration">當地停留行程 · 自由行安排</span>
+              <span id="labelFlightStayDuration">當地停留行程 Stay Duration</span>
             </div>
             <button type="button" id="btnToggleReturnCard" onclick="toggleReturnFlightCard()" class="relative z-10 text-[10px] text-blue-600 hover:text-blue-800 font-bold px-2 py-0.5 rounded-lg hover:bg-blue-50 transition cursor-pointer">
-              隱藏回程航班
+              隱藏回程 Hide Inbound
             </button>
           </div>
 
@@ -17530,10 +17943,10 @@ function setupYearOverviewToggle() {
           <div id="cardReturnFlightWrapper" class="flight-pillar-card bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all">
             <!-- 頂部閘口橫幅 / 登機牌標題列（左上：回程純字＋下方輸入班次及無框狀態；右上：可點擊日期／閘口柱超大鮮黃無前導零數字） -->
             <div class="flight-pillar-header px-3 py-2 border-b border-slate-100 flex items-center justify-between gap-2 transition-colors">
-              <!-- 左側上下兩層：上層無框「回程 Return」純字，下層航班號碼輸入框 ＋ 無外框狀態指示 -->
+              <!-- 左側上下兩層：上層無框「回程 Inbound」純字，下層航班號碼輸入框 ＋ 無外框狀態指示 -->
               <div class="flex flex-col items-start gap-1 min-w-0">
                 <span class="flight-pillar-badge inline-flex items-center text-indigo-700 text-[11px] font-extrabold tracking-wide leading-none select-none">
-                  回程 Return
+                  回程 Inbound
                 </span>
                 <div class="flex items-center gap-1.5 flex-wrap">
                   <div class="flight-pillar-no-box relative flex items-center bg-slate-50 border border-slate-300 focus-within:border-blue-500 rounded-lg px-2 py-0.5 transition">
@@ -17575,7 +17988,7 @@ function setupYearOverviewToggle() {
               <div class="flex items-center gap-2 min-w-0">
                 <span id="badgeInAirlineCode" class="w-6 h-6 rounded-md bg-slate-200 text-slate-400 font-black font-mono text-[10px] flex items-center justify-center shrink-0 shadow-2xs">✈</span>
                 <div id="labelInAirlineName" class="text-xs font-extrabold text-slate-400 truncate">
-                  待輸入回程航班
+                  請輸入回程航班 Inbound Flight
                 </div>
                 <span id="badgeInFlightNoPill" class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200 font-mono font-bold text-[10.5px] text-slate-400 shrink-0">--</span>
               </div>
@@ -17709,38 +18122,38 @@ function setupYearOverviewToggle() {
               <div class="flight-pillar-dest-board transition-colors">
                 <div class="flight-pillar-route-prefix hidden items-center justify-between text-[10px] font-bold text-white/90 mb-1">
                   <span>出發地 Departure</span>
-                  <span class="text-[#F8EE00] font-extrabold tracking-wider">至 TO ➔</span>
+                  <span class="text-[#F8EE00] font-extrabold tracking-wider">至 To ➔</span>
                 </div>
 
-                <div class="grid grid-cols-12 items-start gap-2">
-                  <!-- 左側：出發城市與機場 -->
-                  <div class="col-span-6 text-left">
-                    <div class="flex items-center gap-1.5">
-                      <input type="text" id="inputInOriginCity" value="" placeholder="出發城市" readonly
-                             class="flight-pillar-city-input w-24 sm:w-28 bg-transparent text-base sm:text-lg font-black text-slate-400 rounded px-0.5 -ml-0.5 truncate transition pointer-events-none select-none">
+                <div class="grid grid-cols-12 items-start gap-3">
+                  <!-- 左側：出發城市與機場（彈性自適應寬度＋強制安全間距，縮放絕不重疊黏合） -->
+                  <div class="col-span-6 pr-2 text-left min-w-0">
+                    <div class="flex items-center gap-1.5 min-w-0">
+                      <input type="text" id="inputInOriginCity" value="" placeholder="出發城市" readonly style="width: 4.6em;"
+                             class="flight-pillar-city-input max-w-[calc(100%-3.5rem)] shrink bg-transparent text-base sm:text-lg font-black text-slate-400 rounded px-0.5 -ml-0.5 truncate transition pointer-events-none select-none">
                       <input type="text" id="inputInOriginIata" value="" maxlength="3" placeholder="" readonly
-                             class="flight-pillar-iata-pill w-12 px-1.5 py-0.5 rounded bg-slate-100 text-slate-400 font-mono font-extrabold text-[11px] text-center uppercase pointer-events-none select-none">
+                             class="flight-pillar-iata-pill w-11 sm:w-12 shrink-0 px-1 py-0.5 rounded bg-slate-100 text-slate-400 font-mono font-extrabold text-[11px] text-center uppercase pointer-events-none select-none">
                     </div>
-                    <div id="inOriginAirportZh" class="flight-pillar-airport-sub text-[11px] text-slate-400 font-bold mt-0.5 truncate">待輸入出發機場</div>
+                    <div id="inOriginAirportZh" class="flight-pillar-airport-sub text-[11px] text-slate-400 font-bold mt-0.5 truncate">出發機場</div>
                     <div id="inOriginAirportEn" class="flight-pillar-airport-sub text-[10.5px] text-slate-400 font-medium truncate">Departure Airport</div>
                     <div id="boxInOriginTerminalEdit" class="hidden mt-1">
-                      <input type="text" id="inputInOriginTerminal" placeholder="航廈 (如 T1 / T2，可留空)" 
+                      <input type="text" id="inputInOriginTerminal" placeholder="客運大樓 Terminal" 
                              class="w-full px-1.5 py-0.5 bg-white border border-slate-300 rounded text-[10px] font-bold text-slate-900 focus:outline-blue-500">
                     </div>
                   </div>
 
-                  <!-- 右側：目的城市與機場 -->
-                  <div class="col-span-6 text-right">
-                    <div class="flex items-center justify-end gap-1.5">
+                  <!-- 右側：目的城市與機場（彈性自適應寬度＋強制安全間距，縮放絕不重疊黏合） -->
+                  <div class="col-span-6 pl-2 text-right min-w-0">
+                    <div class="flex items-center justify-end gap-1.5 min-w-0">
                       <input type="text" id="inputInDestIata" value="HKG" maxlength="3" placeholder="" readonly
-                             class="flight-pillar-iata-pill w-12 px-1.5 py-0.5 rounded bg-slate-100 text-slate-900 font-mono font-extrabold text-[11px] text-center uppercase pointer-events-none select-none">
-                      <input type="text" id="inputInDestCity" value="香港" placeholder="目的城市" readonly
-                             class="flight-pillar-city-input w-24 sm:w-28 bg-transparent text-base sm:text-lg font-black text-slate-900 text-right rounded px-0.5 -mr-0.5 truncate transition pointer-events-none select-none">
+                             class="flight-pillar-iata-pill w-11 sm:w-12 shrink-0 px-1 py-0.5 rounded bg-slate-100 text-slate-900 font-mono font-extrabold text-[11px] text-center uppercase pointer-events-none select-none">
+                      <input type="text" id="inputInDestCity" value="香港" placeholder="目的城市" readonly style="width: 2.5em;"
+                             class="flight-pillar-city-input max-w-[calc(100%-3.5rem)] shrink bg-transparent text-base sm:text-lg font-black text-slate-900 text-right rounded px-0.5 -mr-0.5 truncate transition pointer-events-none select-none">
                     </div>
                     <div id="inDestAirportZh" class="flight-pillar-airport-sub text-[11px] text-slate-900 font-bold mt-0.5 truncate">香港國際機場</div>
                     <div id="inDestAirportEn" class="flight-pillar-airport-sub text-[10.5px] text-slate-900 font-medium truncate">Hong Kong International Airport</div>
                     <div id="boxInDestTerminalEdit" class="hidden mt-1">
-                      <input type="text" id="inputInDestTerminal" placeholder="航廈 (如 T1 / T2，可留空)" 
+                      <input type="text" id="inputInDestTerminal" placeholder="客運大樓 Terminal" 
                              class="w-full px-1.5 py-0.5 bg-white border border-slate-300 rounded text-[10px] font-bold text-slate-900 text-right focus:outline-blue-500">
                     </div>
                   </div>
@@ -17753,15 +18166,13 @@ function setupYearOverviewToggle() {
 
             <!-- 底部獨立操作列 -->
             <div class="flight-pillar-footer px-3 py-1.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-end gap-1.5 transition-colors">
-              <button type="button" id="btnToggleEditInFlight" onclick="toggleFlightCardEditMode('in')" 
-                      class="flight-pillar-footer-btn-edit inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs">
-                <i class="fa-solid fa-pen text-[8.5px] text-blue-600"></i>
-                <span>編輯</span>
+              <button type="button" id="btnToggleEditInFlight" onclick="toggleFlightCardEditMode('in')" aria-label="編輯或完成回程航班"
+                      class="flight-pillar-footer-btn-edit inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs">
+                <i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
               </button>
-              <button type="button" onclick="resetSingleFlightCard('in')" 
-                      class="flight-pillar-footer-btn-clear inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-eraser text-[9px] text-rose-500"></i>
-                <span>清空</span>
+              <button type="button" onclick="resetSingleFlightCard('in')" aria-label="重設回程航班"
+                      class="flight-pillar-footer-btn-clear inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-rotate-left text-[10px] text-rose-500"></i>
               </button>
             </div>
             <div id="hintFlightInAuto" class="hidden"></div>
@@ -17778,7 +18189,7 @@ function setupYearOverviewToggle() {
           </div>
           <div id="pnrEditViewBox" class="hidden pt-0.5">
             <label class="block text-[10px] text-slate-900 font-bold mb-1">機票預訂編號 (PNR)</label>
-            <input type="text" id="inputFlightPnr" placeholder="例如：ABC123D / 160-2345678901" class="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-mono font-bold text-slate-900 uppercase focus:outline-blue-500">
+            <input type="text" id="inputFlightPnr" placeholder="e.g. ABC123 / 160-2345678901" class="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-mono font-bold text-slate-900 uppercase focus:outline-blue-500">
           </div>
         </div>
 
@@ -17787,7 +18198,7 @@ function setupYearOverviewToggle() {
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200/70">
             <div class="flex items-center gap-1.5 font-extrabold text-slate-900 text-[11px]">
               <i class="fa-solid fa-house-circle-check text-sky-700"></i>
-              <span>住宿物業</span>
+              <span>住宿詳情 Stay Details</span>
             </div>
             <!-- 極簡品牌地圖定位組合鍵（Google 紅點 / Apple 標誌 / 高德藍綠標誌） -->
             <div id="boxModalHotelNavGroup" class="relative inline-flex items-center rounded-lg border border-slate-300 bg-white shadow-2xs hidden">
@@ -17835,8 +18246,8 @@ function setupYearOverviewToggle() {
               </div>
             </div>
             <div id="hotelReadEmptyGroup" class="hidden py-1 flex items-center justify-between text-[11px] text-slate-400">
-              <span>尚未登記住宿物業</span>
-              <button type="button" onclick="toggleStudioMasterEditMode(true)" class="text-blue-600 hover:underline font-bold text-[10.5px] cursor-pointer">+ 立即新增</button>
+              <span>尚未登記住宿</span>
+              <button type="button" onclick="toggleHotelCardEditMode(true)" class="text-blue-600 hover:underline font-bold text-[10.5px] cursor-pointer">+ 立即新增</button>
             </div>
           </div>
 
@@ -17844,23 +18255,23 @@ function setupYearOverviewToggle() {
           <div id="hotelEditViewBox" class="hidden space-y-2.5">
             <div>
               <div class="flex items-center justify-between mb-1">
-                <label class="text-[10.5px] text-slate-900 font-bold">住宿物業名稱</label>
+                <label class="text-[10.5px] text-slate-900 font-bold">酒店 / 住宿名稱 Property Name</label>
               </div>
               <input type="text" id="inputHotelName" 
-                     placeholder="例如：A Space Mega 1 / Conrad Tokyo / Airbnb 民宿" 
+                     placeholder="e.g. Conrad Tokyo / Park Hyatt / Airbnb" 
                      class="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:outline-slate-800">
             </div>
 
             <div>
               <div class="flex items-center justify-between mb-1">
-                <label class="text-[10.5px] text-slate-900 font-bold">詳細地址 / 門牌</label>
+                <label class="text-[10.5px] text-slate-900 font-bold">詳細地址 / 門牌 Street Address</label>
                 <span id="hintHotelGeocoding" class="text-[9.5px] text-emerald-700 font-bold hidden">
                   <i class="fa-solid fa-circle-check mr-0.5"></i>已自動填入地址
                 </span>
               </div>
               <div class="relative flex items-center">
                 <input type="text" id="inputHotelAddress" 
-                       placeholder="例如：98 Bang Kaeo, Bang Phli District, Samut Prakan 10540" 
+                       placeholder="e.g. 1-9-1 Higashi-Shinbashi, Minato-ku, Tokyo" 
                        class="w-full px-2.5 py-1.5 pr-9 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:outline-slate-800">
                 <button type="button" id="btnOpenHotelMapPickerIcon" class="absolute right-1.5 w-6 h-6 rounded-md bg-gradient-to-br from-[#F2F6FA] to-[#E2EBF4] hover:from-[#E5EEF7] hover:to-[#D5E2F0] border border-[#C8D6E5] text-slate-800 flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs">
                   <i class="fa-solid fa-location-crosshairs text-[11px]"></i>
@@ -17869,48 +18280,77 @@ function setupYearOverviewToggle() {
               <!-- 貼上 Google Maps 門牌 / 連結快速帶入欄 -->
               <div class="mt-1.5 flex items-center gap-1">
                 <input type="text" id="inputQuickPasteGmapAddress" 
-                       placeholder="貼上 Google Maps 取得的門牌文字或分享連結..." 
+                       placeholder="貼上 Google Maps 地址或連結..." 
                        class="flex-1 px-2 py-1 text-[11px] border border-slate-300 bg-white rounded-lg text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:outline-slate-800 font-semibold">
                 <button type="button" id="btnApplyQuickPasteGmapAddress" 
                         class="px-2.5 py-1 bg-gradient-to-r from-slate-500 via-sky-600 to-blue-700 hover:from-slate-600 hover:to-blue-800 text-white font-extrabold text-[10.5px] rounded-lg transition shrink-0 active:scale-95 shadow-xs cursor-pointer">
-                  解析帶入
+                  套用地址
                 </button>
               </div>
             </div>
 
             <div>
-              <label class="block text-[10.5px] text-slate-900 font-bold mb-1">預訂編號 / 門禁密碼</label>
+              <label class="block text-[10.5px] text-slate-900 font-bold mb-1">預訂編號 / 入住密碼 Booking Ref / PIN</label>
               <input type="text" id="inputHotelPnr" 
-                     placeholder="例如：HTL-987654321 / 密碼 1234#" 
+                     placeholder="e.g. #987654321 / PIN 1234" 
                      class="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-mono font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:outline-slate-800">
             </div>
           </div>
+
+          <!-- 住宿詳情獨立底部操作列（比照去回程航班：編輯 / 完成 ＋ 重設） -->
+          <div class="pt-1.5 border-t border-slate-200/70 flex items-center justify-end gap-1.5">
+            <button type="button" id="btnToggleEditHotelCard" onclick="toggleHotelCardEditMode()" aria-label="編輯或完成住宿詳情"
+                    class="inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs">
+              <i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
+            </button>
+            <button type="button" onclick="resetHotelSectionCard()" aria-label="重設住宿詳情"
+                    class="inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
+              <i class="fa-solid fa-rotate-left text-[10px] text-rose-500"></i>
+            </button>
+          </div>
         </div>
 
-        <!-- 3. 行程備忘錄（檢視態：有內容先顯示乾淨便條卡，無內容自動隱藏；編輯態：顯示輸入框） -->
-        <div id="notesReadViewBox" class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 space-y-1">
-          <div class="flex items-center gap-1.5 font-extrabold text-slate-900 text-[11px]">
-            <i class="fa-solid fa-clipboard-list text-slate-700"></i>
-            <span>行程備忘</span>
+        <!-- 3. 行程備忘錄（就地獨立檢視與編輯卡片，底部配備專屬 編輯 / 完成 ＋ 重設） -->
+        <div id="notesCardContainer" class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 space-y-2">
+          <div class="flex items-center justify-between pb-1 border-b border-slate-200/70">
+            <div class="flex items-center gap-1.5 font-extrabold text-slate-900 text-[11px]">
+              <i class="fa-solid fa-clipboard-list text-slate-700"></i>
+              <span>行程備忘 Trip Notes</span>
+            </div>
           </div>
-          <p id="viewBookingNotesText" class="text-xs font-semibold text-slate-800 whitespace-pre-line leading-relaxed"></p>
-        </div>
 
-        <div id="notesEditViewBox" class="hidden p-3 bg-white rounded-2xl border border-slate-200 shadow-2xs space-y-1.5">
-          <div class="flex items-center gap-1.5 font-extrabold text-slate-900 text-[11px]">
-            <i class="fa-solid fa-clipboard-list text-slate-800"></i>
-            <span>行程備忘</span>
+          <div id="notesReadViewBox">
+            <p id="viewBookingNotesText" class="text-xs font-semibold text-slate-800 whitespace-pre-line leading-relaxed"></p>
+            <div id="notesReadEmptyGroup" class="hidden py-0.5 flex items-center justify-between text-[11px] text-slate-400">
+              <span>尚未填寫行程備忘</span>
+              <button type="button" onclick="toggleNotesCardEditMode(true)" class="text-blue-600 hover:underline font-bold text-[10.5px] cursor-pointer">+ 立即新增</button>
+            </div>
           </div>
-          <textarea id="inputBookingNotes" rows="2" placeholder="例如：旅遊保險單號 ABC888、eSIM 啟用碼、景點門票 QR 預約號..." class="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-semibold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:outline-slate-800 resize-none"></textarea>
+
+          <div id="notesEditViewBox" class="hidden">
+            <textarea id="inputBookingNotes" rows="2" placeholder="e.g. 保單號 POL-888 / eSIM / 門票預約號" class="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-semibold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:outline-slate-800 resize-none"></textarea>
+          </div>
+
+          <!-- 行程備忘獨立底部操作列（比照去回程航班：編輯 / 完成 ＋ 重設） -->
+          <div class="pt-1.5 border-t border-slate-200/70 flex items-center justify-end gap-1.5">
+            <button type="button" id="btnToggleEditNotesCard" onclick="toggleNotesCardEditMode()" aria-label="編輯或完成行程備忘"
+                    class="inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold bg-white border border-slate-300 text-slate-900 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition active:scale-95 cursor-pointer shadow-2xs">
+              <i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
+            </button>
+            <button type="button" onclick="resetNotesSectionCard()" aria-label="重設行程備忘"
+                    class="inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
+              <i class="fa-solid fa-rotate-left text-[10px] text-rose-500"></i>
+            </button>
+          </div>
         </div>
         </div>
 
         <!-- 底部操作列：僅在「編輯態」出現取消＋儲存按鈕；「檢視態」完全隱藏多餘大按鈕，直接點擊上方摘要橫幅即可順滑收起 -->
         <div id="studioEditActionFooter" class="hidden px-3.5 py-2.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-2">
-          <button id="btnCancelBookingModal" type="button" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-900 border border-slate-300 font-bold rounded-xl transition text-xs cursor-pointer">取消編輯</button>
+          <button id="btnCancelBookingModal" type="button" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-900 border border-slate-300 font-bold rounded-xl transition text-xs cursor-pointer">取消</button>
           <button id="btnSaveBookingModal" type="button" class="px-4 py-1.5 bg-gradient-to-r from-slate-500 via-sky-600 to-blue-700 hover:from-slate-600 hover:via-sky-700 hover:to-blue-800 text-white font-black rounded-xl text-xs shadow-sm transition active:scale-95 cursor-pointer flex items-center gap-1.5">
             <i class="fa-solid fa-check text-[10px]"></i>
-            <span>儲存預訂資料</span>
+            <span>儲存</span>
           </button>
         </div>
       </div>
@@ -18156,7 +18596,7 @@ function setupYearOverviewToggle() {
         </div>
         <!-- 數據與匯出區塊 -->
         <div class="p-4 space-y-2 border-b border-slate-100">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">日曆匯出</span>
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">日曆匯出與完整備份</span>
           <button id="btnDrawerExportIcal" class="w-full py-2.5 px-3 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl font-bold text-slate-700 text-xs flex items-center justify-between transition active:scale-98 shadow-2xs">
             <span class="flex items-center gap-2">
               <i class="fa-solid fa-calendar-arrow-down text-blue-600 text-sm"></i>
@@ -18164,6 +18604,18 @@ function setupYearOverviewToggle() {
             </span>
             <i class="fa-solid fa-chevron-right text-slate-300 text-[10px]"></i>
           </button>
+
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button id="btnDrawerExportJson" type="button" class="w-full py-2.5 px-2.5 bg-blue-50/80 hover:bg-blue-100/80 border border-blue-200 rounded-xl font-bold text-blue-800 text-xs flex items-center justify-center gap-1.5 transition active:scale-95 shadow-2xs cursor-pointer">
+              <i class="fa-solid fa-file-export text-blue-600 text-xs"></i>
+              <span>匯出備份</span>
+            </button>
+            <button id="btnDrawerImportJson" type="button" class="w-full py-2.5 px-2.5 bg-emerald-50/80 hover:bg-emerald-100/80 border border-emerald-200 rounded-xl font-bold text-emerald-800 text-xs flex items-center justify-center gap-1.5 transition active:scale-95 shadow-2xs cursor-pointer">
+              <i class="fa-solid fa-file-import text-emerald-600 text-xs"></i>
+              <span>匯入還原</span>
+            </button>
+          </div>
+          <input type="file" id="inputImportJsonFile" accept=".json,application/json" class="hidden">
         </div>
 
         <!-- 全部重設：置於日曆匯出正下方，獨立整行，不向旁拉闊介面 -->
@@ -18186,7 +18638,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.2.3</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.3.4</span>
           </button>
         </div>
       </div>
