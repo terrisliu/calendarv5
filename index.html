@@ -2230,7 +2230,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.0.10 更新日誌</span>
+      <span>v5.0.11 更新日誌</span>
     </button>
   </footer>
 
@@ -2272,7 +2272,7 @@
           <div>
             <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.10</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.11</span>
             </h3>
             
           </div>
@@ -2283,10 +2283,24 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.0.10 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.0.11 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.0.10（純淨極簡年份膠囊 · 修復手機版預訂憑證展開 · 全航空公司中英雙語 · 閘口鮮黃緊湊月日 · 防 iPhone 輸入自動放大）<span class="ml-1.5 px-1.5 py-0.2 bg-[#2E49A3] text-[#FBF238] rounded text-[9px] font-bold">MOBILE & GATE PRO</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.0.11（修復假期助手拼假方案崩潰 · 全萬年曆動態紅日拼假引擎 · 年份獨立配額套用）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">SMART PLANNER FIX</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-13</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🛠️ 根治假期助手點擊拼假方案報錯問題，並升級為支援 1900–2200 全萬年曆動態拼假推薦引擎</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 修復預覽縮圖引用錯誤（<code>ReferenceError</code>）</b>：修復 <code>renderMiniYearPreview</code> 內殘留舊版未定義常數 <code>HK_HOLIDAYS_2027</code> 與 <code>SUNDAY_HOLIDAYS_PINK</code> 導致點擊三個拼假方案時中斷無法開啟看板的錯誤。</li>
+            <li><b>② 萬年曆動態拼假推薦引擎</b>：取代寫死 2027 年的靜態候選池，自動根據目前選定年份（1900–2200 任一年）的香港法定公眾假期、補假及週末即時計算最佳「請 X 放 Y」連假組合。</li>
+            <li><b>③ 跨年份資料隔離套用</b>：套用拼假方案時僅更新當前選定年份的未鎖定日期，絕不誤刪其他年份已排定的假期。</li>
+          </ul>
+        </div>
+
+        <!-- v5.0.10 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.0.10（純淨極簡年份膠囊 · 修復手機版預訂憑證展開 · 全航空公司中英雙語 · 閘口鮮黃緊湊月日 · 防 iPhone 輸入自動放大）<span class="ml-1.5 px-1.5 py-0.2 bg-[#2E49A3] text-[#FBF238] rounded text-[9px] font-bold">MOBILE & GATE PRO</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-12</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">📱 全面解決手機版預訂憑證展開與 iPhone 鍵盤自動放大問題，精修純淨年份膠囊與全航司中英雙語</div>
@@ -3789,7 +3803,7 @@
       </div>
 
       <div class="p-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-        <span class="font-mono text-[10px]">Version: 5.0.10</span>
+        <span class="font-mono text-[10px]">Version: 5.0.11</span>
         <button id="btnConfirmCloseChangelog" class="px-3 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold rounded-lg transition active:scale-95 shadow-2xs">
           關閉
         </button>
@@ -4024,7 +4038,7 @@
       </div>
 
       <div class="p-3.5 flex flex-col gap-2">
-        <button id="btnModeMaxAL" type="button" class="group text-left p-3 rounded-xl border-2 border-blue-200 hover:border-blue-500 bg-blue-50/40 hover:bg-blue-50 transition flex items-start gap-2.5 focus:outline-none">
+        <button id="btnModeMaxAL" type="button" onclick="executeTravelVacation('max')" class="group text-left p-3 rounded-xl border-2 border-blue-200 hover:border-blue-500 bg-blue-50/40 hover:bg-blue-50 transition flex items-start gap-2.5 focus:outline-none cursor-pointer">
           <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center text-sm shrink-0 group-hover:scale-105 transition shadow-xs mt-0.5">
             <i class="fa-solid fa-plane-departure"></i>
           </div>
@@ -4037,7 +4051,7 @@
           </div>
         </button>
 
-        <button id="btnModeCasualAL" type="button" class="group text-left p-3 rounded-xl border-2 border-emerald-200 hover:border-emerald-500 bg-emerald-50/30 hover:bg-emerald-50 transition flex items-start gap-2.5 focus:outline-none">
+        <button id="btnModeCasualAL" type="button" onclick="executeTravelVacation('casual')" class="group text-left p-3 rounded-xl border-2 border-emerald-200 hover:border-emerald-500 bg-emerald-50/30 hover:bg-emerald-50 transition flex items-start gap-2.5 focus:outline-none cursor-pointer">
           <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-sm shrink-0 group-hover:scale-105 transition shadow-xs mt-0.5">
             <i class="fa-solid fa-mug-saucer"></i>
           </div>
@@ -4050,7 +4064,7 @@
           </div>
         </button>
 
-        <button id="btnModeMinimalAL" type="button" class="group text-left p-3 rounded-xl border-2 border-amber-200 hover:border-amber-500 bg-amber-50/30 hover:bg-amber-50 transition flex items-start gap-2.5 focus:outline-none">
+        <button id="btnModeMinimalAL" type="button" onclick="executeTravelVacation('minimal')" class="group text-left p-3 rounded-xl border-2 border-amber-200 hover:border-amber-500 bg-amber-50/30 hover:bg-amber-50 transition flex items-start gap-2.5 focus:outline-none cursor-pointer">
           <div class="w-8 h-8 rounded-lg bg-amber-600 text-white flex items-center justify-center text-sm shrink-0 group-hover:scale-105 transition shadow-xs mt-0.5">
             <i class="fa-solid fa-feather"></i>
           </div>
@@ -4405,7 +4419,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.0.10';
+    const APP_VERSION = '5.0.11';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -10718,44 +10732,162 @@ function setupYearOverviewToggle() {
       document.getElementById('modalResetPinAdmin').classList.add('hidden');
     }
 
-    const TRIP_CANDIDATES = [
-      { id: 'newyear_4d', month: 1, name: '元旦跨年連假', range: '1月1日 - 1月4日', totalDays: 4, alCost: 1, dates: ['2027-01-04'], desc: '請1日放4日（元旦週五＋週末＋週一）' },
-      { id: 'cny_11d', month: 2, name: '農曆新年超級黃金週', range: '2月4日 - 2月14日', totalDays: 11, alCost: 5, dates: ['2027-02-04', '2027-02-05', '2027-02-10', '2027-02-11', '2027-02-12'], desc: '請5日放11日（年廿八出發連放至初八）' },
-      { id: 'cny_9d', month: 2, name: '農曆新年黃金週', range: '2月6日 - 2月14日', totalDays: 9, alCost: 3, dates: ['2027-02-10', '2027-02-11', '2027-02-12'], desc: '請3日放9日（初一至初四紅日＋雙週末）' },
-      { id: 'cny_6d', month: 2, name: '農曆新年早鳥假', range: '2月4日 - 2月9日', totalDays: 6, alCost: 2, dates: ['2027-02-04', '2027-02-05'], desc: '請2日放6日（年廿八出發連新春紅日）' },
-      { id: 'easter_chingming_11d', month: 3, name: '復活節＋清明節特長假', range: '3月26日 - 4月5日', totalDays: 11, alCost: 4, dates: ['2027-03-30', '2027-03-31', '2027-04-01', '2027-04-02'], desc: '請4日放11日（復活節連清明超級長假）' },
-      { id: 'easter_5d', month: 3, name: '復活節短途假期', range: '3月25日 - 3月29日', totalDays: 5, alCost: 1, dates: ['2027-03-25'], desc: '請1日放5日（連受難節＋復活節）' },
-      { id: 'chingming_4d', month: 4, name: '清明初春連假', range: '4月2日 - 4月5日', totalDays: 4, alCost: 1, dates: ['2027-04-02'], desc: '請1日放4日（連清明補假及週末）' },
-      { id: 'buddha_4d', month: 5, name: '佛誕初夏遊', range: '5月13日 - 5月16日', totalDays: 4, alCost: 1, dates: ['2027-05-14'], desc: '請1日放4日（佛誕連週五及週末）' },
-      { id: 'buddha_9d', month: 5, name: '佛誕深度縱橫遊', range: '5月8日 - 5月16日', totalDays: 9, alCost: 4, dates: ['2027-05-10', '2027-05-11', '2027-05-12', '2027-05-14'], desc: '請4日放9日（前後跨雙週末連佛誕）' },
-      { id: 'dragon_5d', month: 6, name: '端午節消暑遊', range: '6月9日 - 6月13日', totalDays: 5, alCost: 2, dates: ['2027-06-10', '2027-06-11'], desc: '請2日放5日（端午連週四五及週末）' },
-      { id: 'dragon_9d', month: 6, name: '端午盛夏長假', range: '6月5日 - 6月13日', totalDays: 9, alCost: 4, dates: ['2027-06-07', '2027-06-08', '2027-06-10', '2027-06-11'], desc: '請4日放9日（跨雙週末連端午）' },
-      { id: 'hksar_4d', month: 7, name: '七一回歸連假', range: '7月1日 - 7月4日', totalDays: 4, alCost: 1, dates: ['2027-07-02'], desc: '請1日放4日（七一連週五及週末）' },
-      { id: 'midautumn_4d', month: 9, name: '中秋賞月假期', range: '9月16日 - 9月19日', totalDays: 4, alCost: 1, dates: ['2027-09-17'], desc: '請1日放4日（中秋翌日連週五及週末）' },
-      { id: 'national_chungyeung_10d', month: 10, name: '國慶＋重陽秋季長假', range: '10月1日 - 10月10日', totalDays: 10, alCost: 4, dates: ['2027-10-04', '2027-10-05', '2027-10-06', '2027-10-07'], desc: '請4日放10日（國慶連重陽雙紅日跨週）' },
-      { id: 'national_4d', month: 10, name: '國慶秋日短遊', range: '10月1日 - 10月4日', totalDays: 4, alCost: 1, dates: ['2027-10-04'], desc: '請1日放4日（國慶連週末及週一）' },
-      { id: 'chungyeung_4d', month: 10, name: '重陽秋高氣爽遊', range: '10月7日 - 10月10日', totalDays: 4, alCost: 1, dates: ['2027-10-07'], desc: '請1日放4日（請週四連重陽及週末）' },
-      { id: 'xmas_9d', month: 12, name: '聖誕跨年悠長假期', range: '12月25日 - 2028年1月2日', totalDays: 9, alCost: 4, dates: ['2027-12-28', '2027-12-29', '2027-12-30', '2027-12-31'], desc: '請4日放9日（聖誕補假連跨年紅日）' },
-      { id: 'xmas_4d', month: 12, name: '聖誕冬日小旅行', range: '12月24日 - 12月27日', totalDays: 4, alCost: 1, dates: ['2027-12-24'], desc: '請1日平安夜放4日（連聖誕及補假）' },
-      { id: 'short_jan_3d', month: 1, name: '一月冬日微旅行', range: '1月15日 - 1月17日', totalDays: 3, alCost: 1, dates: ['2027-01-15'], desc: '請週五放3日週末快閃' },
-      { id: 'short_mar_3d', month: 3, name: '三月初春週末漫步', range: '3月12日 - 3月14日', totalDays: 3, alCost: 1, dates: ['2027-03-12'], desc: '請週五放3日悠閒小充電' },
-      { id: 'short_apr_3d', month: 4, name: '四月穀雨小假期', range: '4月16日 - 4月18日', totalDays: 3, alCost: 1, dates: ['2027-04-16'], desc: '請週五放3日避靜小週末' },
-      { id: 'short_may_3d', month: 5, name: '五月小滿放空遊', range: '5月21日 - 5月23日', totalDays: 3, alCost: 1, dates: ['2027-05-21'], desc: '請週五放3日避暑微旅行' },
-      { id: 'short_jun_3d', month: 6, name: '六月夏日週末小散心', range: '6月25日 - 6月27日', totalDays: 3, alCost: 1, dates: ['2027-06-25'], desc: '請週五放3日看海避暑' },
-      { id: 'short_jul_3d', month: 7, name: '七月盛夏快閃之旅', range: '7月16日 - 7月18日', totalDays: 3, alCost: 1, dates: ['2027-07-16'], desc: '請週五放3日放鬆充電' },
-      { id: 'short_aug_3d', month: 8, name: '八月立秋清涼小週末', range: '8月13日 - 8月15日', totalDays: 3, alCost: 1, dates: ['2027-08-13'], desc: '請週五放3日舒心秋意遊' },
-      { id: 'short_nov_3d', month: 11, name: '十一月初冬露營微假', range: '11月19日 - 11月21日', totalDays: 3, alCost: 1, dates: ['2027-11-19'], desc: '請週五放3日登高郊遊散步' }
-    ];
+    function buildTripCandidatesForYear(year) {
+      const y = Number(year) || 2027;
+      const holInfo = getHKHolidaysForYear(y);
+      const nextHolInfo = getHKHolidaysForYear(y + 1);
+      const isOffDay = (dt) => {
+        const yy = dt.getFullYear();
+        const mm = String(dt.getMonth() + 1).padStart(2, '0');
+        const dd = String(dt.getDate()).padStart(2, '0');
+        const ds = `${yy}-${mm}-${dd}`;
+        const dow = dt.getDay();
+        if (dow === 0 || dow === 6) return true;
+        if (yy === y && holInfo.map[ds]) return true;
+        if (yy === y + 1 && nextHolInfo.map[ds]) return true;
+        return false;
+      };
+      const fmtYMD = (dt) => `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+      const fmtMD = (dt) => `${dt.getMonth() + 1}月${dt.getDate()}日`;
+
+      const candidates = [];
+      const seenKeys = new Set();
+
+      // 掃描全年（含跨年1月3日），找出所有「公眾假期/週末群組」，自動生成 1~5 日請假的最佳連假橋接方案
+      const yearStart = new Date(y, 0, 1);
+      const yearEnd = new Date(y, 11, 31);
+
+      // 輔助：從某個工作日起連續請 k 天 AL，向前後自動延伸所有相連紅日與週末
+      const tryBuildBridge = (firstWorkDate, alDaysCount) => {
+        const alDates = [];
+        let cur = new Date(firstWorkDate);
+        for (let i = 0; i < alDaysCount; i++) {
+          if (isOffDay(cur)) return null; // 確保 alDates 都是真正需要扣 AL 的工作日
+          alDates.push(fmtYMD(cur));
+          cur.setDate(cur.getDate() + 1);
+        }
+        // 向前延伸相連的紅日/週末
+        let spanStart = new Date(firstWorkDate);
+        let prev = new Date(spanStart);
+        prev.setDate(prev.getDate() - 1);
+        while (isOffDay(prev) && prev.getFullYear() >= y) {
+          spanStart = new Date(prev);
+          prev.setDate(prev.getDate() - 1);
+        }
+        // 向後延伸相連的紅日/週末
+        let spanEnd = new Date(firstWorkDate);
+        spanEnd.setDate(spanEnd.getDate() + alDaysCount - 1);
+        let next = new Date(spanEnd);
+        next.setDate(next.getDate() + 1);
+        while (isOffDay(next)) {
+          spanEnd = new Date(next);
+          next.setDate(next.getDate() + 1);
+        }
+
+        const totalDays = Math.round((spanEnd - spanStart) / 86400000) + 1;
+        // 必須具備槓桿效益（totalDays > alDaysCount + 1，且至少連放 3 日）
+        if (totalDays < 3 || totalDays <= alDaysCount + 1) return null;
+
+        // 收集區間內的公眾假期名稱
+        const holNames = [];
+        let scan = new Date(spanStart);
+        while (scan <= spanEnd) {
+          const ds = fmtYMD(scan);
+          const hn = (scan.getFullYear() === y ? holInfo.map[ds] : nextHolInfo.map[ds]);
+          if (hn && !holNames.includes(hn)) holNames.push(hn);
+          scan.setDate(scan.getDate() + 1);
+        }
+
+        // 若無任何公眾假期（純週末請1放3），只保留精選月中的週末快閃，避免候選池過度膨脹
+        if (holNames.length === 0 && (alDaysCount !== 1 || totalDays !== 3)) return null;
+
+        const key = `${fmtYMD(spanStart)}_${fmtYMD(spanEnd)}_${alDaysCount}`;
+        if (seenKeys.has(key)) return null;
+        seenKeys.add(key);
+
+        const primaryMonth = firstWorkDate.getMonth() + 1;
+        let title = '';
+        if (holNames.length > 0) {
+          const cleanHols = holNames.map(n => n.replace(/\(補假\)|翌日|補假/g, '').trim()).filter((v, idx, arr) => arr.indexOf(v) === idx);
+          const head = cleanHols.slice(0, 2).join('＋');
+          title = totalDays >= 8 ? `${head}黃金長假` : `${head}連假`;
+        } else {
+          const mCn = ['', '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'][primaryMonth];
+          title = `${mCn}週末微旅行`;
+        }
+
+        const endLabel = spanEnd.getFullYear() > y ? `${spanEnd.getFullYear()}年${fmtMD(spanEnd)}` : fmtMD(spanEnd);
+        const spanAllDates = [];
+        let sCur = new Date(spanStart);
+        while (sCur <= spanEnd) {
+          spanAllDates.push(fmtYMD(sCur));
+          sCur.setDate(sCur.getDate() + 1);
+        }
+
+        return {
+          id: `auto_${y}_${key}`,
+          month: primaryMonth,
+          name: title,
+          range: `${fmtMD(spanStart)} - ${endLabel}`,
+          totalDays,
+          alCost: alDaysCount,
+          dates: alDates,
+          spanAllDates,
+          hasHoliday: holNames.length > 0,
+          desc: `請 ${alDaysCount} 日放 ${totalDays} 日（${fmtMD(spanStart)} 至 ${endLabel}）`
+        };
+      };
+
+      let dCursor = new Date(yearStart);
+      while (dCursor <= yearEnd) {
+        if (!isOffDay(dCursor)) {
+          // 檢查前一天或後 1~5 天內是否接壤紅日/週末
+          for (let k = 1; k <= 5; k++) {
+            const cObj = tryBuildBridge(dCursor, k);
+            if (cObj) {
+              // 對於純週末請1放3，每月最多取1個（第二個週五）保持清爽
+              if (!cObj.hasHoliday) {
+                if (dCursor.getDay() === 5 && dCursor.getDate() >= 8 && dCursor.getDate() <= 14) {
+                  candidates.push(cObj);
+                }
+              } else {
+                candidates.push(cObj);
+              }
+            }
+          }
+        }
+        dCursor.setDate(dCursor.getDate() + 1);
+      }
+
+      return candidates;
+    }
 
     // 解析候選連假的完整日期區間（含起訖日前後 1 天，用於檢查是否連繫手動假期）
-    function getTripSpanDatesWithAdjacent(rangeStr) {
+    function getTripSpanDatesWithAdjacent(tripOrRangeStr) {
+      const spanSet = new Set();
+      if (tripOrRangeStr && typeof tripOrRangeStr === 'object' && Array.isArray(tripOrRangeStr.spanAllDates) && tripOrRangeStr.spanAllDates.length > 0) {
+        const firstParts = tripOrRangeStr.spanAllDates[0].split('-').map(Number);
+        const lastParts = tripOrRangeStr.spanAllDates[tripOrRangeStr.spanAllDates.length - 1].split('-').map(Number);
+        const checkStart = new Date(firstParts[0], firstParts[1] - 1, firstParts[2] - 1);
+        const checkEnd = new Date(lastParts[0], lastParts[1] - 1, lastParts[2] + 1);
+        let cur = new Date(checkStart);
+        while (cur <= checkEnd) {
+          spanSet.add(`${cur.getFullYear()}-${String(cur.getMonth() + 1).padStart(2, '0')}-${String(cur.getDate()).padStart(2, '0')}`);
+          cur.setDate(cur.getDate() + 1);
+        }
+        return spanSet;
+      }
+
+      const rangeStr = String(tripOrRangeStr || '');
       const parts = rangeStr.split(' - ');
+      if (parts.length < 2) return spanSet;
       const parsePart = (str) => {
-        let y = 2027;
+        let y = selectedYear;
         let s = str.trim();
-        if (s.includes('2028年')) {
-          y = 2028;
-          s = s.replace('2028年', '');
+        const ym = s.match(/^(\d{4})年/);
+        if (ym) {
+          y = parseInt(ym[1], 10);
+          s = s.replace(ym[0], '');
         }
         const [m, d] = s.replace('日', '').split('月').map(Number);
         return new Date(y, m - 1, d);
@@ -10763,20 +10895,14 @@ function setupYearOverviewToggle() {
 
       const start = parsePart(parts[0]);
       const end = parsePart(parts[1]);
-
-      // 起始日前一天與結束日後一天
       const checkStart = new Date(start);
       checkStart.setDate(checkStart.getDate() - 1);
       const checkEnd = new Date(end);
       checkEnd.setDate(checkEnd.getDate() + 1);
 
-      const spanSet = new Set();
       let cur = new Date(checkStart);
       while (cur <= checkEnd) {
-        const y = cur.getFullYear();
-        const m = String(cur.getMonth() + 1).padStart(2, '0');
-        const d = String(cur.getDate()).padStart(2, '0');
-        spanSet.add(`${y}-${m}-${d}`);
+        spanSet.add(`${cur.getFullYear()}-${String(cur.getMonth() + 1).padStart(2, '0')}-${String(cur.getDate()).padStart(2, '0')}`);
         cur.setDate(cur.getDate() + 1);
       }
       return spanSet;
@@ -10784,15 +10910,10 @@ function setupYearOverviewToggle() {
 
     // 檢查候選假期是否與手動已選取日期重疊或前後相連（連繫）
     function isTripCollidingOrConnecting(trip, manualDatesSet) {
-      // 1. 檢查請假 AL 日期本身是否衝突
       if (trip.dates.some(d => manualDatesSet.has(d))) return true;
-
-      // 2. 檢查整個連假區間（含前後 1 天）是否連繫到任何手動假期
-      const bufferSpan = getTripSpanDatesWithAdjacent(trip.range);
+      const bufferSpan = getTripSpanDatesWithAdjacent(trip);
       for (const d of bufferSpan) {
-        if (manualDatesSet.has(d)) {
-          return true; // 存在重疊或緊鄰相連，判定為不可使用
-        }
+        if (manualDatesSet.has(d)) return true;
       }
       return false;
     }
@@ -10907,13 +11028,15 @@ function setupYearOverviewToggle() {
       }
 
       const monthNamesEn = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      const previewYear = Number(selectedYear) || 2027;
+      const yearHolData = getHKHolidaysForYear(previewYear);
 
       for (let m = 0; m < 12; m++) {
         const monthCard = document.createElement('div');
         monthCard.className = 'bg-white p-1 md:p-1.5 rounded-xl border border-slate-200/90 shadow-2xs flex flex-col justify-between';
 
-        const firstDay = new Date(2027, m, 1).getDay();
-        const daysInMonth = new Date(2027, m + 1, 0).getDate();
+        const firstDay = new Date(previewYear, m, 1).getDay();
+        const daysInMonth = new Date(previewYear, m + 1, 0).getDate();
 
         let daysHtml = `
           <div class="flex items-center justify-between pb-0.5 mb-1 border-b border-slate-100">
@@ -10928,11 +11051,11 @@ function setupYearOverviewToggle() {
         }
 
         for (let d = 1; d <= daysInMonth; d++) {
-          const dateStr = `2027-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+          const dateStr = `${previewYear}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
           const dayOfWeek = (firstDay + d - 1) % 7;
           const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
-          const isHoliday = HK_HOLIDAYS_2027[dateStr];
-          const isSundayHoliday = SUNDAY_HOLIDAYS_PINK.includes(dateStr);
+          const isHoliday = yearHolData.map[dateStr];
+          const isSundayHoliday = yearHolData.sundayPink.includes(dateStr);
           const dayLeave = leaveData[dateStr];
           const isLocked = Boolean(dayLeave && dayLeave.locked && (dayLeave.am || dayLeave.pm));
           const isNewAl = newLeaveDates.has(dateStr);
@@ -11071,11 +11194,13 @@ function setupYearOverviewToggle() {
       currentTravelMode = mode;
       closeTravelModeModal();
 
-      // 1. 統計已鎖定之日子與已鎖定 AL
+      const activeYearPrefix = `${selectedYear}-`;
+      // 1. 統計選定年份已鎖定之日子與已鎖定 AL
       const lockedOccupiedDates = new Set();
       let lockedAlUsed = 0;
 
       for (const d in leaveData) {
+        if (!d.startsWith(activeYearPrefix)) continue;
         const item = leaveData[d];
         if (!item) continue;
         if (item.locked && (item.am || item.pm)) {
@@ -11093,27 +11218,19 @@ function setupYearOverviewToggle() {
         return;
       }
 
-      // 2. 構建輪休模式全年候選池 (Roster Candidate Pool)
+      // 2. 構建輪休模式全年候選池 (動態適配選定年份 selectedYear)
       const rosterPool = [];
-      const phMonthMap = {
-        1: ['2027-01-01'],
-        2: ['2027-02-06', '2027-02-07', '2027-02-08', '2027-02-09'],
-        3: ['2027-03-26', '2027-03-27', '2027-03-29'],
-        4: ['2027-04-05'],
-        5: ['2027-05-01', '2027-05-13'],
-        6: ['2027-06-09'],
-        7: ['2027-07-01'],
-        8: [],
-        9: ['2027-09-16'],
-        10: ['2027-10-01', '2027-10-08'],
-        11: [],
-        12: ['2027-12-25', '2027-12-26', '2027-12-27']
-      };
+      const yearHolObj = getHKHolidaysForYear(selectedYear);
+      const phMonthMap = { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: [], 8: [], 9: [], 10: [], 11: [], 12: [] };
+      Object.keys(yearHolObj.map).sort().forEach(ds => {
+        const mm = parseInt(ds.split('-')[1], 10);
+        if (phMonthMap[mm]) phMonthMap[mm].push(ds);
+      });
 
       for (let m = 1; m <= 12; m++) {
         const mStr = String(m).padStart(2, '0');
-        const prefix = `2027-${mStr}-`;
-        const daysInM = new Date(2027, m, 0).getDate();
+        const prefix = `${selectedYear}-${mStr}-`;
+        const daysInM = new Date(selectedYear, m, 0).getDate();
 
         // 收集該月份現存的 OFF
         const existingOffs = [];
@@ -11141,7 +11258,7 @@ function setupYearOverviewToggle() {
               let hasCollision = false;
 
               while (cur < d2) {
-                const ds = `2027-${mStr}-${String(cur.getDate()).padStart(2, '0')}`;
+                const ds = `${selectedYear}-${mStr}-${String(cur.getDate()).padStart(2, '0')}`;
                 if (lockedOccupiedDates.has(ds)) { hasCollision = true; break; }
                 fillDates.push(ds);
                 cur.setDate(cur.getDate() + 1);
@@ -11177,11 +11294,11 @@ function setupYearOverviewToggle() {
           const postOff = [];
           for (let k = 1; k <= 3; k++) {
             const dn = lastDayNum + k;
-            if (dn <= daysInM) postAl.push(`2027-${mStr}-${String(dn).padStart(2, '0')}`);
+            if (dn <= daysInM) postAl.push(`${selectedYear}-${mStr}-${String(dn).padStart(2, '0')}`);
           }
           for (let k = 4; k <= 5; k++) {
             const dn = lastDayNum + k;
-            if (dn <= daysInM) postOff.push(`2027-${mStr}-${String(dn).padStart(2, '0')}`);
+            if (dn <= daysInM) postOff.push(`${selectedYear}-${mStr}-${String(dn).padStart(2, '0')}`);
           }
 
           if (postAl.length >= 2) {
@@ -11205,15 +11322,15 @@ function setupYearOverviewToggle() {
         // 方案 2: 月中通用連假（3 日 AL + 4 日 OFF = 7 日連假）
         const midStart = 10;
         const midAl = [
-          `2027-${mStr}-${midStart}`,
-          `2027-${mStr}-${midStart + 1}`,
-          `2027-${mStr}-${midStart + 2}`
+          `${selectedYear}-${mStr}-${midStart}`,
+          `${selectedYear}-${mStr}-${midStart + 1}`,
+          `${selectedYear}-${mStr}-${midStart + 2}`
         ];
         const midOff = [
-          `2027-${mStr}-${midStart - 2}`,
-          `2027-${mStr}-${midStart - 1}`,
-          `2027-${mStr}-${midStart + 3}`,
-          `2027-${mStr}-${midStart + 4}`
+          `${selectedYear}-${mStr}-${midStart - 2}`,
+          `${selectedYear}-${mStr}-${midStart - 1}`,
+          `${selectedYear}-${mStr}-${midStart + 3}`,
+          `${selectedYear}-${mStr}-${midStart + 4}`
         ];
         const midAll = [...midOff.slice(0, 2), ...midAl, ...midOff.slice(2)];
 
@@ -11233,8 +11350,8 @@ function setupYearOverviewToggle() {
 
         // 方案 3: 輕量微休候選（2 日 AL + 2 日 OFF = 4 日小長假）
         const lateStart = Math.min(20, daysInM - 4);
-        const lateAl = [`2027-${mStr}-${lateStart}`, `2027-${mStr}-${lateStart + 1}`];
-        const lateOff = [`2027-${mStr}-${lateStart + 2}`, `2027-${mStr}-${lateStart + 3}`];
+        const lateAl = [`${selectedYear}-${mStr}-${lateStart}`, `${selectedYear}-${mStr}-${lateStart + 1}`];
+        const lateOff = [`${selectedYear}-${mStr}-${lateStart + 2}`, `${selectedYear}-${mStr}-${lateStart + 3}`];
         const lateAll = [...lateAl, ...lateOff];
 
         if (!lateAll.some(d => lockedOccupiedDates.has(d))) {
@@ -11352,14 +11469,17 @@ function setupYearOverviewToggle() {
     }
 
 
-      // 1. 僅保留受鎖定（🔒）保護之假期；所有未鎖定之舊假期自動釋放給假期助手重新排程！
+      const activeYearPrefix = `${selectedYear}-`;
+      const dynamicYearCandidates = buildTripCandidatesForYear(selectedYear);
+
+      // 1. 僅保留選定年份受鎖定（🔒）保護之假期；該年份未鎖定之舊假期自動釋放給假期助手重新排程！
       const lockedOccupiedDates = new Set();
       let lockedAlUsed = 0;
 
       for (const d in leaveData) {
+        if (!d.startsWith(activeYearPrefix)) continue;
         const item = leaveData[d];
         if (!item) continue;
-        // 唯有已個別鎖定（locked === true）的日子不可被動用覆蓋
         if (item.locked && (item.am || item.pm)) {
           lockedOccupiedDates.add(d);
           if (item.am === 'annual') lockedAlUsed += 0.5;
@@ -11367,17 +11487,17 @@ function setupYearOverviewToggle() {
         }
       }
 
-      // 2. 計算剩餘可用 AL（扣除鎖定保護的 AL 額度，其餘全額釋放給助手重新規劃）
+      // 2. 計算選定年份剩餘可用 AL（扣除鎖定保護的 AL 額度）
       const remainingAl = Math.max(0, annualQuota - lockedAlUsed);
       lastAvailableAl = remainingAl;
 
       if (remainingAl < 1) {
-        showToast(`⚠️ 目前剩餘可用 AL 配額不足（剩餘 ${remainingAl.toFixed(1)} 日）`);
+        showToast(`⚠️ ${selectedYear} 年剩餘可用 AL 配額不足（剩餘 ${remainingAl.toFixed(1)} 日）`);
         return;
       }
 
       // 3. 過濾候選假期：排除重疊及「與手動假期相連繫」的候選項目
-      const candidatePool = TRIP_CANDIDATES.filter(t => {
+      const candidatePool = dynamicYearCandidates.filter(t => {
         // 若該假期與手動已選日期重疊或前後相連，則嚴格排除
         if (isTripCollidingOrConnecting(t, lockedOccupiedDates)) {
           return false;
@@ -11461,7 +11581,7 @@ function setupYearOverviewToggle() {
 
       // 全額方案在長假無法剛好湊滿 100% 時，容許納入短假期以達成 100% 耗盡
       if (mode === 'max' && inRangeCombos.length === 0) {
-        const fallbackPool = TRIP_CANDIDATES.filter(t => !isTripCollidingOrConnecting(t, lockedOccupiedDates));
+        const fallbackPool = dynamicYearCandidates.filter(t => !isTripCollidingOrConnecting(t, lockedOccupiedDates));
         allValidCombos = [];
         inRangeCombos = [];
         searchCombos(fallbackPool, 0, [], 0, new Set(), new Set());
@@ -11619,9 +11739,10 @@ function setupYearOverviewToggle() {
         applyBtn.onclick = () => {
           if (!currentGeneratedCombo) return;
 
-          // 清除所有未鎖定的舊假期，嚴格保留受鎖定保護之日子
+          // 僅清除選定年份未鎖定的舊假期，嚴格保留受鎖定保護之日子及其他年份資料
+          const targetYearPrefix = `${selectedYear}-`;
           for (const d in leaveData) {
-            if (leaveData[d] && !leaveData[d].locked) {
+            if (d.startsWith(targetYearPrefix) && leaveData[d] && !leaveData[d].locked) {
               delete leaveData[d];
             }
           }
@@ -16728,7 +16849,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.10</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.0.11</span>
           </button>
         </div>
       </div>
