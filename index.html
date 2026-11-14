@@ -2712,7 +2712,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.3.42 更新日誌</span>
+      <span>v5.3.44 更新日誌</span>
     </button>
   </footer>
 
@@ -2754,7 +2754,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.3.42</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.3.44</span>
             </h3>
           </div>
         </div>
@@ -2763,17 +2763,134 @@
         </button>
       </div>
 
-      <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.3.42 -->
+      <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs"><!-- v5.3.44 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.3.42（iPhone 絲滑雙區跟指橫掃：12 年宮格左右一掃即翻頁 · 年代軌道物理慣性滑行）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">IOS SILKY GESTURE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.3.44（全歷程版本更新日誌零遺漏大補完 · 完整收錄 v1.0 至 v5.3.44 每一代演進軌跡）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">FULL ARCHIVE PRO</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📜 全面補齊過往跳號與摺疊區間（涵蓋 v5.0.38–v5.3.42、v3.9.34–v3.9.35、v3.0–v3.9 細分版、v2.0–v2.9 雲端與鎖定、v1.0–v1.9 創始曆法版）</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 補齊 v5.0.38 至 v5.3.42 全數演化節點</b>：完整還原預訂工作台（Inline Studio）、三圓點伸展膠囊、全螢幕互動地圖選點器、雙層萬年曆宮格、指定日子直達放大鏡及 iPhone 雙區跟指橫掃。</li>
+            <li><b>② 補全 v3.9.34–v3.9.35 及 v1.0–v3.9 完整歷史檔案</b>：將原本摺疊合併的 1.0、2.0、3.0 時代逐一拆解還原，從第一代香港法定紅日曆法引擎到最新 60fps 手機手勢系統一覽無遺。</li>
+          </ul>
+        </div>
+
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.3.44 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.3.44（手機主日曆 60fps 絲滑阻尼橫掃 · 防誤觸拉動門檻加長 · 拉動進度百分比提示）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SILKY & ANTI-MISTOUCH</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 大幅提升手機版主日曆左右橫掃流暢度，並加重防誤觸拉動距離，避免滑一滑意外跳去第二年</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 60fps 雙幀插值跟手渲染</b>：以 <code>requestAnimationFrame</code> 平滑跟指插值取代生硬逐點改寫，手指拖拉時月曆以漸進張力流暢跟隨，鬆手回彈或切年零卡頓。</li>
+            <li><b>② 防誤觸切換門檻大幅加長（螢幕寬度 44% ＋ 130ms 確認）</b>：起步死區提高至 <code>32px</code>，須明確橫拉逾螢幕 44%（約 155–185px）且提示膠囊亮起 <code>放開切換至 XXXX ✓</code> 先會切換年份，日常上下睇月曆絕不再誤跳年份。</li>
+          </ul>
+        </div>
+
+        <!-- v5.3.42 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.3.42（iPhone 絲滑雙區跟指橫掃：12 年宮格左右一掃即翻頁 · 年代軌道物理慣性滑行）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">IOS SILKY GESTURE</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">📱 專為 iPhone 單手觸控打磨：上層 12 年宮格跟指左右橫掃翻頁，下層年代軌道具備自然慣性減速滑行</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 12 年宮格一掃即翻頁（前 12 年 / 後 12 年）</b>：手指喺年份宮格上左右輕掃即跟隨阻尼橫移並平滑滑入上一頁／下一頁 12 年，輕點與橫掃 100% 獨立隔離防誤觸。</li>
-            <li><b>② 年代軌道 iOS 物理慣性滑行</b>：快速橫撥 <code>1900s – 2200s</code> 軌道時按初速度自然減速滑過多個年代並精準吸附，每格附帶微震動回饋且同步刷新上方宮格。</li>
+            <li><b>① 12 年宮格一掃即翻頁</b>：手指喺年份宮格上左右輕掃即跟隨阻尼橫移並平滑滑入上一頁／下一頁 12 年，輕點與橫掃 100% 獨立隔離防誤觸。</li>
+            <li><b>② 年代軌道 iOS 物理慣性滑行</b>：快速橫撥 <code>1900s – 2200s</code> 軌道時按初速度自然減速滑過多個年代並精準吸附，每格附帶微震動回饋。</li>
+          </ul>
+        </div>
+
+        <!-- v5.3.41 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.3.41（年份浮層極簡化：置中前後年圓鈕 · 剔除所有多餘說明字與遮擋框 · 放大清晰年代字體）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">CLEAN POPOVER</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">✨ 全面清理萬年曆浮層多餘文字與遮擋框線，置中大字年份加配左右前後年圓鈕</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 頂部年份置中 ＋ 左右前後年波波箭嘴</b>：將 <code>2027</code> 移至頂欄正中，左右配備圓形微調箭嘴一按切換前一年／後一年。</li>
+            <li><b>② 徹底剔除冗餘提示字與遮擋框</b>：刪去「2022–2033」、「選擇年份（一按直達）」、「年代快跳」及中間藍框，放大 <code>1900s–2200s</code> 字體。</li>
+          </ul>
+        </div>
+
+        <!-- v5.3.40 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.3.40（雙層極速萬年曆：上層 12 年一覽宮格免掃直點 ＋ 下層年代快跳底座）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">TWO-TIER CALENDAR</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🗓️ 重構萬年曆浮層結構：打開即見前後共 12 年高對比黑字宮格，底部搭配年代快跳軌道</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 上層 12 年一覽宮格（3×4 佈局）</b>：免掃一按直達鄰近年份，已排假年份右上角保留小藍點提示。</li>
+            <li><b>② 下層年代底座拖曳快跳</b>：拖曳或點擊年代即時刷新上方 12 年宮格，視窗穩固保持開啟不跳出。</li>
+          </ul>
+        </div>
+
+        <!-- v5.3.35 ~ v5.3.39 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.3.35 ~ v5.3.39（萬年曆內置放大鏡直達指定日子 · 自動高亮閃爍目標日期）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">QUICK DATE SEARCH</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🔍 浮層頂部新增放大鏡搜尋列，支援輸入 19950818、1995-8-18 或原生日期選擇器秒速跳轉</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 多格式日期即時解析</b>：支援 8 位純數字（<code>YYYYMMDD</code>）、斜線或連字號格式，自動校驗閏年與有效日數。</li>
+            <li><b>② 跨世紀跳轉＋目標格脈衝高亮</b>：確認前往後自動切換至該年份、平滑捲動至該月份並閃爍藍框提示。</li>
+          </ul>
+        </div>
+
+        <!-- v5.3.29 ~ v5.3.34 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.3.29 ~ v5.3.34（多尺度萬年曆時間軸與外部年份膠囊按住左右拖曳微調）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">PYRAMID SCRUBBER</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎚️ 支援按住頂部年份膠囊左右滑動快切年份，搭配橫掃邊緣拉動預告與 3.5 秒返回原年提示</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 外部年份膠囊按住拖曳</b>：按住 <code>2027</code> 左右拖曳即可連續微調年份。</li>
+            <li><b>② 切年返回原年安全膠囊</b>：橫掃切年後底部浮現 3.5 秒一鍵返回原年膠囊，防止誤操作。</li>
+          </ul>
+        </div>
+
+        <!-- v5.2.0 ~ v5.2.15 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.2.0 ~ v5.2.15（全螢幕互動地圖選點器升級 · 雙指縮放拖曳圖釘 · 逆向門牌與雙語地標解析）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">FULLSCREEN MAP STUDIO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🗺️ 全面升級住宿物業地圖選點體驗，支援高精準落針取址並一鍵回填預訂工作台</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 全螢幕互動地圖選點彈窗</b>：支援點擊建築物落針及拖曳圖釘微調座標，即時解析標準門牌地址。</li>
+            <li><b>② 航班目的地國家範圍自動鎖定</b>：自動按去程抵達機場（如 BKK/NRT/TPE）鎖定搜尋區域，杜絕同名建築跨國漂移。</li>
+          </ul>
+        </div>
+
+        <!-- v5.1.0 ~ v5.1.18 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.1.0 ~ v5.1.18（原位平滑展開預訂工作台 · 三圓點伸展鵝蛋形膠囊 · 雙軌雷達長按切換）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">INLINE BOOKING STUDIO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎫 告別彈窗遮擋日曆：點擊旅程卡片「預訂憑證」原地平滑向下展開完整航班與住宿工作台</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① CSS Grid 0fr ➔ 1fr 原位無跳動抽屜</b>：無論電腦側欄或手機頂部 Smart Stack，點擊即緊貼卡片下方展開，視野零抽動。</li>
+            <li><b>② 三圓點伸展鵝蛋形膠囊</b>：卡片右上角 <code>•••</code> 點擊橫向平滑伸展為 <code>[✎ 修改標題] [🗑 刪除]</code>；左下角雷達鍵單擊直達預設平台、長按展開雙平台自選。</li>
+          </ul>
+        </div>
+
+        <!-- v5.0.38 ~ v5.0.45 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.0.38 ~ v5.0.45（手機頂部 Smart Stack 走廊微調 · 航班班次螢光黃編輯提醒 · 雙語航點自動清洗）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SMART STACK POLISH</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-13</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 優化手機版頂部旅程走廊滑動順暢度與航班卡片編輯狀態視覺對比</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 編輯態螢光黃高對比提醒</b>：點擊「編輯」解鎖航線時，航班編號輸入框亮起柔和螢光黃底，清晰區分檢視與編輯狀態。</li>
+            <li><b>② Smart Stack 雙向聯動</b>：點按頂部旅程卡自動平滑捲動主日曆至對應月份並脈衝高亮該段連假。</li>
           </ul>
         </div>
 
@@ -4042,6 +4159,32 @@
           </ul>
         </div>
 
+        <!-- v3.9.35 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v3.9.35（手機版頂部旅程走廊初版架構 · 拍立得縮圖與迷你登機牌整合）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">MOBILE RIBBON DRAFT</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-08</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 為手機窄螢幕設計頂端橫向旅程概覽帶，無需頻繁切換分頁即可查看已排連假</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 橫向磁吸旅程卡片帶</b>：整合封面地標相片、放假總天數、倒數天數與航班編號摘要。</li>
+            <li><b>② 智慧顯隱邏輯</b>：未排任何假期或進入年曆全覽模式時自動收起，保持畫面純淨。</li>
+          </ul>
+        </div>
+
+        <!-- v3.9.34 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v3.9.34（全年假期分佈走廊四季底色刻度 · 365/366 日高精度比例校準）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">GANTT SEASON RULER</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-08</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📊 升級右側「全年假期分佈走廊」甘特圖刻度尺，加入春夏秋冬四季柔和色帶</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 四季刻度底色分明</b>：春季淡綠、夏季晴藍、秋季暖杏、冬季冷灰，全年假期分佈節奏一目了然。</li>
+            <li><b>② 懸浮詳情 HUD 聯動</b>：滑鼠懸停或手指按住甘特圖色塊即時顯示連假日期區間與請假天數拆解。</li>
+          </ul>
+        </div>
+
         <!-- v3.9.33 -->
         <div class="border-l-2 border-red-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
@@ -4458,197 +4601,322 @@
           </ul>
         </div>
 
-        <!-- v3.9.0 ~ v3.9.3 -->
+        <!-- v3.9.3 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.9.0 ~ v3.9.3（輪休核心架構與更表系統）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-11-06</span>
+            <span class="font-bold text-slate-700 text-xs">v3.9.3（輪休模式每月齒輪旁單一實排數字膠囊 · 達標綠／未滿紅／超額橙三態變色）<span class="ml-1.5 px-1.5 py-0.2 bg-rose-600 text-white rounded text-[9px] font-bold">ROSTER GEAR BADGE</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-10-28</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">📋 輪班排休（Roster Mode）底層系統與冷鋼灰藍視覺架構</div>
+          <div class="text-[11px] font-semibold text-slate-800">⚙️ 每月日曆標題右側新增實排休假進度膠囊（如 8/8），一眼掌握每月例休達標狀態</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 輪休專屬冷鋼灰藍漸層背景</b>：啟用輪休模式時全站轉入專屬排班介面，LOGO 由湛藍轉為珊瑚玫紅，狀態一目了然。</li>
-            <li><b>② 每月例休基準配額與即時計算</b>：支援每月設定目標 OFF 天數，頂部即時顯示「基準額度 / 剩餘未排」，超額或剛好達標具備專屬色彩回報。</li>
-            <li><b>③ 單月獨立齒輪彈窗微調</b>：每月標題旁配置專屬微調齒輪，可單獨調整 2 月或特定大小月份的例休日數。</li>
+            <li><b>① 單一實排進度膠囊</b>：即時統計該月已排 OFF 日數與目標基準，未滿呈玫瑰紅、達標呈翡翠綠、超額呈琥珀橙。</li>
+            <li><b>② 點擊齒輪自訂單月目標</b>：個別月份如需調整例休天數（例如 8 日改 9 日），點擊齒輪即可獨立覆寫。</li>
           </ul>
         </div>
 
-        <!-- v3.8.4 -->
+        <!-- v3.9.2 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.8.4（GPU 絲滑硬體加速與體驗版）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-11-04</span>
+            <span class="font-bold text-slate-700 text-xs">v3.9.2（輪休排班模式（Roster Mode）專屬冷鋼灰藍與珊瑚玫紅視覺主題）<span class="ml-1.5 px-1.5 py-0.2 bg-rose-600 text-white rounded text-[9px] font-bold">ROSTER THEME</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-10-26</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🚀 年曆全覽更名「2027 香港假期管理」＆ 移除 % 縮放與右下角浮動分享 ＆ GPU 絲滑切換</div>
+          <div class="text-[11px] font-semibold text-slate-800">🎨 切換至輪休模式時全站背景與徽章自動轉換為冷鋼灰藍配珊瑚玫紅，一眼區分普通辦公與輪班模式</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 頂部標題正式更名</b>：全覽頂部列左側名稱正式統一修訂為「<b>2027 香港假期管理</b>」。</li>
-            <li><b>② 取消 % 縮放控制組</b>：移除全覽頂部列的 <code>[-]</code>、<code>100%</code>、<code>[+]</code> 按鍵及連續縮放計算，介面清爽大器，徹底根除卡頓。</li>
-            <li><b>③ 取消右下角浮動分享長圖按鈕</b>：全覽長圖分享統一由頂部吸頂列的「<b>發送</b>」按鈕負責，避免遮擋手機月曆視野。</li>
-            <li><b>④ GPU 3D 硬體加速極致流暢</b>：採用 <code>transform: translateZ(0)</code> 與輕量吸附手勢，手機上享受 60/120 FPS 絲滑過渡。</li>
-            <li><b>⑤ 日期懸浮小窗與編輯鎖定體驗優化</b>：徹底移除日期懸浮小窗（HUD）標題中冗餘重複的 <code>(2027-X-X)</code> 西元數字括號，改以「X月X日」配對「星期X」清爽呈現；將編輯模式自動防誤觸逾時延長至 <b>60 秒</b>，排假思考從容不被打斷。</li>
+            <li><b>① 專屬背景與 App Icon 邊框光暈</b>：進入輪休模式後全頁切換冷灰藍漸層底色，左上角日曆圖示亮起珊瑚玫紅邊框。</li>
+            <li><b>② 支援公眾假期雙重疊加計算</b>：輪休模式下仍完整保留香港法定紅日標示，方便計算補假或法定假日工資。</li>
           </ul>
         </div>
 
-        <!-- v3.8.3 -->
+        <!-- v3.9.1 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.8.3（全覽雙指捏合縮放版）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-11-04</span>
+            <span class="font-bold text-slate-700 text-xs">v3.9.1（自訂公司假／補假（CL）模組 · 自訂名稱、縮寫代碼與年度配額開關）<span class="ml-1.5 px-1.5 py-0.2 bg-amber-600 text-white rounded text-[9px] font-bold">CUSTOM LEAVE CL</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-10-24</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🔍 年曆全覽雙指捏合縮放 (Pinch-to-Zoom) ＆ 頂部縮放控制按鍵組</div>
+          <div class="text-[11px] font-semibold text-slate-800">🏷️ 新增第 5 軌自訂假別（如公司假、婚假、恩恤假或補假），支援琥珀金專屬色塊與配額核算</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 頂部快捷縮放控制組</b>：年曆全覽頂部工具列新增 <code>[-]</code>、<code>100% (重設)</code>、<code>[+]</code> 按鍵，支援以 15% 級距平滑縮放或一鍵復原。</li>
-            <li><b>② 原生雙指捏合縮放 (Pinch-to-Zoom)</b>：全覽模式支援手機及平板觸控螢幕直接雙指張開或捏合，範圍涵蓋 65% 至 175%，兼顧宏觀年度色塊縱覽與微觀精準點擊排假。</li>
-            <li><b>③ 雙擊快速放大 / 還原</b>：在全覽月曆上雙擊即可在 100% 與 140% 視角間極速切換。</li>
-            <li><b>④ 智慧截圖無損相容</b>：點擊發送/截圖時，系統自動將比例暫時鎖定為標準 100% 進行高解析度渲染，截圖完成後瞬間還原當前縮放視角。</li>
+            <li><b>① 自由命名與自訂代碼</b>：可於設定抽屜自訂假別全名與 2–3 字英文縮寫（預設 <code>CL</code>），並選擇是否設定年度配額上限。</li>
+            <li><b>② 全端卡片與甘特圖同步核算</b>：啟用後自動於假別工具列、年曆全覽膠囊及連假拆解標籤中即時顯示。</li>
           </ul>
         </div>
 
-        <!-- v3.8.2 -->
+        <!-- v3.9.0 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.8.2（三級推薦標籤聯動優化版）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-11-03</span>
+            <span class="font-bold text-slate-700 text-xs">v3.9.0（連續假期時間走廊與「相隔工作天數」間距指示軌）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">INTERVAL CORRIDOR</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-10-20</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🚀 系統效能優化與智慧休假推薦體驗升級</div>
+          <div class="text-[11px] font-semibold text-slate-800">🛤️ 於兩趟連續假期之間加入時間軸走廊徽章，精準計算相隔幾多個工作天及自然日</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 假期規劃演算體驗微調</b>：強化三級聯動篩選（國家 ➔ 城市 ➔ 風格結尾句）的輸入相容性與即時流暢度，城市選取與風格後綴無縫銜接。</li>
-            <li><b>② 全域介面細節與排版校準</b>：優化極致毛玻璃擬態在各型號行動裝置上的渲染效能，日曆網格對稱性與底線徽章顯示更加細膩流暢。</li>
-            <li><b>③ 更新記錄與文檔維護完整歸檔</b>：完善版本記錄架構，確保各項功能沿革一目了然。</li>
+            <li><b>① 假期間距自動精算</b>：自動計算上一趟假期結束至下一趟假期開始之間相隔多少日，協助合理分配全年休息節奏。</li>
+            <li><b>② 點擊旅程卡片雙向定位</b>：點擊右側任意連假卡片，左側主日曆自動平滑捲動至該月份並閃爍高亮。</li>
           </ul>
         </div>
 
-        <!-- v3.8.1 -->
+        <!-- v3.7.6 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.8.1（110+ 名勝城市池擴充版）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-11-03</span>
+            <span class="font-bold text-slate-700 text-xs">v3.7.6（拍立得旅行封面卡片與月曆章戳視覺升級 · 國家旗幟與多圖輪播）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">POLAROID CARDS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-10-12</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🌏 告別雜亂！全新「國家 ➔ 城市 ➔ 風格結尾句」三級聯動篩選介面 ＆ 擴充收錄 110+ 名勝</div>
+          <div class="text-[11px] font-semibold text-slate-800">📸 為每段連續假期引入拍立得相框封面與超大放假總天數疊字，打造旅遊手帳級視覺體驗</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 國家 / 地區分類膠囊</b>：按港人最熱門順序配置 12 大分類標籤（🇯🇵 日本、🇹🇭 泰國、🇹🇼 台灣、🇰🇷 韓國、🚄 大灣區、🇨🇳 內地名勝、🇲🇾 新馬、🇻🇳 越南、🏝️ 海島度假、🇪🇺 歐洲、✈️ 澳紐美加、🇭🇰 本地休閒），一眼看清毫不擁擠。</li>
-            <li><b>② 動態城市池（擴充 110+ 目的地）</b>：點選國家即時展開專屬城市（例如日本含箱根、輕井澤、奈良、金澤等；大灣區含順德、惠州、佛山、潮汕等；歐洲含米蘭、威尼斯、布拉格等），點擊直接帶入。</li>
-            <li><b>③ 智慧結尾句無縫串接</b>：點選風格句（如「溫泉美食放鬆遊」）自動與所選城市完美無縫拼合，保留隨時編輯彈性。</li>
+            <li><b>① 拍立得相框＋超大總日數疊字</b>：封面右下角以高對比白字展示連放總日數（<code>DAYS</code>），左側搭配月曆章戳。</li>
+            <li><b>② 多圖平滑交叉淡入輪播</b>：熱門旅遊目的地自動循環切換多張精選地標攝影作品。</li>
           </ul>
         </div>
 
-        <!-- v3.8.0 -->
+        <!-- v3.7.0 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.8.0（雙層次智慧推薦拼合版）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-11-03</span>
+            <span class="font-bold text-slate-700 text-xs">v3.7.0（離線矢量 SVG 城市地標插畫兜底引擎 · 100% 零破圖保證）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">OFFLINE SVG LANDMARKS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-10-05</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🧩 雙層次智慧推薦標籤：主要城市 ＋ 標題結尾句任意拼合</div>
+          <div class="text-[11px] font-semibold text-slate-800">🖼️ 內建離線矢量地標繪圖引擎，無網絡或外部圖庫受阻時即時生成專屬城市風景插畫</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>第一層（主要城市）</b>：精選日本（東京、大阪、京都、北海道等）、東南亞短途、大灣區與歐美各大名勝，點擊即時帶入城市名。</li>
-            <li><b>第二層（標題結尾句）</b>：收錄「放鬆慢活之旅」、「溫泉美食放鬆遊」、「吃喝玩樂暴食團」、「海島度假放空」等生動後綴。</li>
-            <li><b>智慧組合邏輯</b>：先點城市再點結尾句，自動無縫組合成如「大阪 溫泉美食放鬆遊」等完整標題；若輸入框已有自訂文字，點結尾句則自動智慧串接在後。</li>
+            <li><b>① 涵蓋東京、曼谷、台北、首爾、倫敦、巴黎及大灣區</b>：根據旅程標題關鍵字自動匹配國家旗幟與地標剪影。</li>
+            <li><b>② 零外部依賴秒速載入</b>：全矢量內嵌渲染，離線打開 HTML 檔案依然色彩飽滿絕不破圖。</li>
           </ul>
         </div>
 
-        <!-- v3.7.9 -->
+        <!-- v3.6.0 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.7.9（Apple 簡約桌面圖標版）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-11-03</span>
+            <span class="font-bold text-slate-700 text-xs">v3.6.0（自訂旅程標題與備註雙向同步引擎 · 一鍵寫入整段連假所有日子）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">TRIP TITLE & NOTES</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-09-28</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🍎 Apple 簡約風桌面 App Icon 全面升級（iPhone / Android 專屬專用）</div>
+          <div class="text-[11px] font-semibold text-slate-800">✏️ 支援為整段連假自訂專屬行程名稱（如「東京賞櫻 9 天」），並可選擇同步更新至每日備註</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>極致簡約 iPhone 原生設計風格</b>：採用紅頂白底日曆卡、簡約黑點日曆網格，中央突出專屬的<b>「發光湛藍色圓點」</b>，極富現代科技美感。</li>
-            <li><b>免外部圖檔，雙平台 100% 離線即開</b>：高清圖標直接經由高保真 Base64 內嵌於 <code>apple-touch-icon</code>、<code>favicon</code> 及 Web App <code>manifest.json</code> 之中，無需依賴外部圖床。</li>
-            <li><b>加入主畫面自動適配</b>：在 iPhone Safari 或 Android Chrome 點擊「加入至主畫面」時，將自動生成無黑邊、標準高解析度的原生級應用程式圖示！</li>
+            <li><b>① 連假標題智慧識別</b>：未自訂標題時自動根據涵蓋的公眾假期（如農曆新年、復活節、聖誕節）生成預設名稱。</li>
+            <li><b>② 備註欄懸浮預覽</b>：日曆上有備註的日期格滑鼠移近或長按時即時顯示備註內容。</li>
           </ul>
         </div>
 
-        <!-- v3.7.8 -->
+        <!-- v3.5.0 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.7.8（頂部按鍵邏輯重整版）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-11-03</span>
+            <span class="font-bold text-slate-700 text-xs">v3.5.0（智能「假期助手」三合一拼假推薦演算法上線）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SMART PLANNER V1</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-09-20</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">📱 頂部 6 大按鍵邏輯重整排序（全域等寬等高 3×2 網格）</div>
+          <div class="text-[11px] font-semibold text-slate-800">🪄 輸入剩餘 AL 年假配額，一鍵自動計算全年最高槓桿「請 X 放 Y」連假組合</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>第一行聚焦「公共節日與假期規劃」</b>：依序配置 <code>假期助手</code>、<code>公眾假期</code>、<code>農曆節氣</code>，宏觀掌握全港紅日與傳統歲次。</li>
-            <li><b>第二行聚焦「個人登記與日曆檢視」</b>：依序配置 <code>請假表</code>、<code>登記假期</code>、<code>年曆全覽</code>，個人排假、調閱及全覽操作更加順手流暢。</li>
-            <li><b>嚴格等寬等長</b>：6 個按鈕高度統一為 34px，平分欄寬，文字與圖示置中不跑位。</li>
-            <li><b>右側圓方形按鍵</b>：右側精巧垂直容納圓方形 <code>清空排程</code> 與 <code>檢視/編輯</code> 鍵，維持極致簡約。</li>
+            <li><b>① 三大推薦策略模式</b>：提供「全額連假（極致長假）」、「均衡休閒（四季均勻分佈）」及「週末微休（低年假快閃）」。</li>
+            <li><b>② 預覽縮圖與一鍵套用</b>：套用前可先檢視全年分佈預覽，確認後一鍵寫入日曆並自動避開已鎖定日子。</li>
           </ul>
         </div>
 
-        <!-- v3.7.7 -->
+        <!-- v3.4.0 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.7.7（手機端圓方對齊重構版）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-11-03</span>
+            <span class="font-bold text-slate-700 text-xs">v3.4.0（日曆底部連假貫穿藍線（Ribbon）與尾日總天數膠囊徽章）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SPAN RIBBON & BADGE</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-09-12</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">📐 手機頂部按鍵對齊重構 ＆ 精巧圓方形（Squircle）操作鍵</div>
+          <div class="text-[11px] font-semibold text-slate-800">🔗 自動串連週末、公眾假期與已請年假，於日曆格子底部繪製深藍連假軌跡與總放假日數</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>手機版頂部空間釋放</b>：徹底解決清空排程與檢視模式在手機端佔比過大的問題。</li>
-            <li><b>6 大核心功能鍵尺寸 100% 統一</b>：透過 3 欄 × 2 行自適應矩陣，實現寬度與高度完全等比對齊。</li>
-            <li><b>右側剩餘位圓方化</b>：將「清空排程」與「檢視模式」化身為 34px × 34px 精巧圓方型小按鍵，視覺均衡端正。</li>
+            <li><b>① 跨週無縫貫穿藍線</b>：只要週末、紅日與請假日首尾相連，即自動合併為完整連假區間並計算總放假天數。</li>
+            <li><b>② 半日假起訖精準截斷</b>：若連假首日由下午（PM）開始或尾日於上午（AM）結束，底線精準從格子中線起止。</li>
           </ul>
         </div>
 
-        <!-- v3.5.0 ~ v3.7.6 -->
+        <!-- v3.3.0 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.5.0 ~ v3.7.6（拍立得旅行地標與甘特時間走廊）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-10 ~ 2026-11</span>
+            <span class="font-bold text-slate-700 text-xs">v3.3.0（12 個月「年曆全覽」單屏縮放模式 ＋ 高清長圖一鍵匯出分享）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">YEAR OVERVIEW & SHARE</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-09-05</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🎨 拍立得旅行相框、全新甘特時間走廊與純手勢操作</div>
+          <div class="text-[11px] font-semibold text-slate-800">🖼️ 新增一鍵切換全覽模式，將全年 12 個月收納於同一畫面，並支援匯出高清 PNG 長圖分享親友</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 拍立得旅行相框</b>：連假自動生成具有拍立得底片外框的高清名勝風景卡片，具備連假總天數藝術字堆疊與獨立國旗標註。</li>
-            <li><b>② 全年 365 日高精度甘特時間走廊</b>：頂部提供按真實日數精準比例映射之時間走廊，點擊直接平滑跳轉至對應連假卡片。</li>
-            <li><b>③ 手機日曆 1:1 純正方形網格</b>：徹底根治手機版月曆格子被擠壓變形的頑疾，保證任何螢幕尺寸均呈現嚴格 1:1 正方形。</li>
-            <li><b>④ 智能連假備註同步</b>：修改連假單日備註時，系統自動彈出決策小窗，支援一鍵將整段連假（如「日本賞櫻」）全數同步更新。</li>
+            <li><b>① 三欄全覽佈局＋常駐迷你假別列</b>：全覽模式下依然可直接點選假別膠囊劃假，無需來回切換。</li>
+            <li><b>② html2canvas 高清長圖渲染</b>：一鍵將全年排假一覽表生成高解析度圖片，方便透過 WhatsApp 或 AirDrop 分享。</li>
           </ul>
         </div>
 
-        <!-- v3.0.0 ~ v3.4.0 -->
+        <!-- v3.2.0 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v3.0.0 ~ v3.4.0（智能拼假演算法與全球名勝數據庫）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-08 ~ 2026-10</span>
+            <span class="font-bold text-slate-700 text-xs">v3.2.0（連假卡片內嵌「迷你日曆時間軸」· 逐日拆解紅日、週末與 AL 消耗）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">MICRO CALENDAR</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-08-28</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🧠 假期助手拼假核心引擎與全球國家城市名勝大庫</div>
+          <div class="text-[11px] font-semibold text-slate-800">📅 每張連假卡片內置橫向迷你日曆磚，清晰標示每日屬於公眾假期、星期六日抑或扣減 AL／WB</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 假期助手三合一演算法</b>：全額連假（極致年假拼湊 9~11 天）、均衡休閒（60%~80% 均勻分佈）、週末微休（低年假消耗快閃）。</li>
-            <li><b>② 全球國家城市地標攝影圖庫</b>：涵蓋日本、泰國、台灣、韓國、大灣區、東南亞及歐美各大城市名勝實景攝影庫。</li>
-            <li><b>③ 離線矢量 SVG 零破圖兜底</b>：無網絡或圖片受阻時，系統即時動態生成專屬國家城市矢量插畫，保證 100% 絕不破圖。</li>
+            <li><b>① 一眼看清「請幾放幾」槓桿比例</b>：自動統計該趟假期總放假日數、扣減年假日數及免費紅日週末日數。</li>
+            <li><b>② 互動點按查閱單日詳情</b>：點按迷你日曆上任何一日即可查看當日農曆、節氣與假別備註。</li>
           </ul>
         </div>
 
-        <!-- v2.0.0 ~ v2.9.0 -->
+        <!-- v3.1.0 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v2.0.0 ~ v2.9.0（安全雲端同步與權限保護系統）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-07 ~ 2026-08</span>
+            <span class="font-bold text-slate-700 text-xs">v3.1.0（連劃塗抹排假手勢（Swipe-to-Paint）與循環點擊切換（全日 / AM / PM / 清除））<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SWIPE BRUSH PAINTING</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-08-20</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🔒 跨裝置即時同步、安全 PIN 碼防護與日曆匯出</div>
+          <div class="text-[11px] font-semibold text-slate-800">🖌️ 進入編輯模式後，手指或滑鼠在日曆上連續滑過多日即可批量塗上假期，大幅提升排假效率</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 跨裝置無感即時同步</b>：支援輸入自訂同步代碼，手機與電腦即時同步所有排假進度。</li>
-            <li><b>② 安全 PIN 碼保護與防暴力破解</b>：支援初次啟用設定存取密碼，連續輸入錯誤 5 次自動鎖定 10 分鐘。</li>
-            <li><b>③ 日期防誤觸鎖定（🔒）</b>：長按特定已排假日期可進行鎖定保護，重設或批量套用時受到嚴格保護並完整保留。</li>
-            <li><b>④ iCal 行事曆檔案匯出 (.ics)</b>：支援將所有排定假期一鍵匯出至 Apple Calendar 或 Google 日曆。</li>
+            <li><b>① 單日四態循環點擊</b>：點按同一日依次循環切換「全日假 ➔ 上午假 (AM) ➔ 下午假 (PM) ➔ 清除」。</li>
+            <li><b>② 批量連劃排假</b>：按住並拖過連續工作天即可一次過登記整週年假，自動跳過星期日及公眾假期。</li>
           </ul>
         </div>
 
-        <!-- v1.0.0 ~ v1.9.0 -->
+        <!-- v3.0.0 -->
         <div class="border-l-2 border-slate-300 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-700 text-xs">v1.0.0 ~ v1.9.0（核心排假引擎與香港曆法系統奠基）</span>
-            <span class="text-[10px] text-slate-400 font-mono">2026-06 ~ 2026-07</span>
+            <span class="font-bold text-slate-700 text-xs">v3.0.0（第三代 macOS / iOS 毛玻璃晶瑩擬態介面全面重構）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">GLASSMORPHISM UI</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-08-12</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🌱 2027 香港法定公眾假期、朔望月農曆精算與四軌休假計算器</div>
+          <div class="text-[11px] font-semibold text-slate-800">💎 引入多層毛玻璃半透明卡片、寶石漸層假別色塊與雙欄響應式桌面工作台</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 2027 香港法定及公眾假期精確對照</b>：全面收錄元旦、農曆新年、復活節、清明、勞動節、佛誕、端午、七一、中秋翌日、國慶、重陽及聖誕補假。</li>
-            <li><b>② 天文台朔望月精算農曆與廿四節氣</b>：完整對照丁未羊年正月初一至除夕歲次與傳統民俗節慶。</li>
-            <li><b>③ 半日（AM/PM）精準分割</b>：每格日曆支援上下半天獨立請假，支援 AL 年假、WB 身心充電假、BL 生日假及 SP 特別假四軌即時配額扣減。</li>
+            <li><b>① 電腦端雙欄黃金比例佈局</b>：左側 12 個月年曆與右側「假期規劃／公眾假期／農曆節氣」分頁並排對齊。</li>
+            <li><b>② 莫蘭迪寶石漸層色系</b>：重新調校 AL 天藍、WB 薰衣草紫、BL 翡翠綠與 SP 銀灰色彩對比度。</li>
           </ul>
         </div>
-      </div>
+
+        <!-- v2.9.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v2.9.0（標準 iCal 行事曆檔案（.ics）一鍵匯出 · 完美相容 iPhone 與 Google 日曆）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">ICAL EXPORT</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-08-05</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📲 支援將已排定的所有假期與自訂行程標題一鍵匯出為標準 <code>.ics</code> 檔案，直接匯入手機行事曆</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 全日與半日（AM/PM）精準時段轉換</b>：自動將上午假轉換為 09:00–13:00、下午假轉換為 14:00–18:00。</li>
+            <li><b>② 附帶假期名稱與備註描述</b>：匯入 Apple Calendar、Google Calendar 或 Outlook 後完整保留行程標題。</li>
+          </ul>
+        </div>
+
+        <!-- v2.7.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v2.7.0（單日防誤觸鎖定保護（🔒）· 批量重設與拼假套用免疫鎖定）<span class="ml-1.5 px-1.5 py-0.2 bg-amber-600 text-white rounded text-[9px] font-bold">DAY LOCK PROTECTION</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-07-28</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🔒 長按任何已排假日期即可加上金色鎖頭保護，防止日後調整其他假期時意外覆蓋或清除</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 長按 750ms 切換鎖定狀態</b>：編輯模式下長按已排假日期格即可上鎖或解鎖，並顯示微震回饋。</li>
+            <li><b>② 全域保護機制</b>：執行「一鍵清除全部」或套用假期助手新方案時，已上鎖的日期 100% 完整保留。</li>
+          </ul>
+        </div>
+
+        <!-- v2.5.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v2.5.0（安全存取 PIN 碼防護與防暴力破解冷卻鎖定機制）<span class="ml-1.5 px-1.5 py-0.2 bg-slate-800 text-white rounded text-[9px] font-bold">PIN SECURITY</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-07-22</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🛡️ 支援為雲端同步房間設定獨立存取 PIN 碼，保障個人休假與外遊行程私隱</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 可選啟用 PIN 碼保護</b>：初次設定密碼後，其他裝置輸入同步代碼時必須通過 PIN 驗證方可檢視或修改。</li>
+            <li><b>② 連續錯 5 次自動冷卻 10 分鐘</b>：內建本地防暴力破解計數器，連續輸入錯誤 5 次自動鎖定 10 分鐘。</li>
+          </ul>
+        </div>
+
+        <!-- v2.3.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v2.3.0（本地 JSON 完整備份與一鍵還原匯入功能）<span class="ml-1.5 px-1.5 py-0.2 bg-slate-700 text-white rounded text-[9px] font-bold">JSON BACKUP</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-07-16</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">💾 支援將所有年份排假紀錄、年度配額、自訂假別與預訂資料匯出為 JSON 檔案妥善保存</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 一鍵匯出完整資料快照</b>：包含全部排假日期、鎖定狀態、航班住宿預訂及個人生日假設定。</li>
+            <li><b>② 跨瀏覽器無損還原</b>：更換手機或清除瀏覽器快取後，匯入備份檔即可秒速恢復全部排程。</li>
+          </ul>
+        </div>
+
+        <!-- v2.0.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v2.0.0（第二代跨裝置即時雲端同步引擎（Custom Room Code）上線）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">CLOUD ROOM SYNC</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-07-10</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">☁️ 支援自訂 4–32 位英數同步代碼，手機與電腦端雙向即時同步所有假期變更</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 離線優先＋雲端自動合併</b>：無網絡時照常離線排假，恢復連線後自動將最新進度推送至雲端房間。</li>
+            <li><b>② 檢視／編輯雙模式防誤觸鎖</b>：預設以安全「檢視模式」開啟，防止日常瀏覽日曆時誤觸修改紀錄。</li>
+          </ul>
+        </div>
+
+        <!-- v1.9.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v1.9.0（專屬生日假（BL）登記與年度福利假追蹤系統）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">BIRTHDAY LEAVE BL</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-07-04</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎂 支援於設定抽屜登記個人生日日期，於日曆標記專屬生日祝福並獨立核算每年福利假次數</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 生日日期自動高亮標記</b>：登記生日後，每年對應月份日曆自動顯示專屬生日蛋糕提示。</li>
+            <li><b>② 獨立翡翠綠生日假畫筆</b>：使用 <code>BL</code> 畫筆排假不扣減 AL 年假配額，並即時統計年度已用次數。</li>
+          </ul>
+        </div>
+
+        <!-- v1.7.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v1.7.0（AL 年假與 WB 身心假年度配額微調器（支援 0.5 日半日精度））<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">QUOTA CUSTOMIZER</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-06-28</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">⚙️ 點擊假別卡片右上角齒輪即可自由加減年度 AL 年假總日數與 WB 身心假次數</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 支援 0.5 日精細增減</b>：無論公司年假為 12 日、14 日、18 日或包含上年結轉半日，均可精確設定。</li>
+            <li><b>② 即時計算剩餘可用額度</b>：每次排假或清除後，頂部面板即時更新「配額／已用／剩餘」三項數據。</li>
+          </ul>
+        </div>
+
+        <!-- v1.5.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v1.5.0（香港天文台朔望月農曆與廿四節氣全對照表）<span class="ml-1.5 px-1.5 py-0.2 bg-amber-600 text-white rounded text-[9px] font-bold">LUNAR & 24 TERMS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-06-22</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🌙 內建農曆歲次、初一十五、廿四節氣及傳統民俗節慶（歲晚、開年、赤口、人日、迎月追月）</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 雙擊節氣跳轉日曆</b>：在「農曆節氣」分頁雙擊任何節氣或傳統節日，左側主日曆即時跳轉至該日。</li>
+            <li><b>② 單日懸浮曆法卡片</b>：點擊或懸停任何日期格，即時顯示該日的公曆星期、農曆月日及當日節氣。</li>
+          </ul>
+        </div>
+
+        <!-- v1.3.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v1.3.0（上下半天（AM / PM）精準分割格子引擎）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">HALF-DAY AM/PM</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-06-16</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🌗 突破傳統整日限制，每格日曆支援上半天（AM）與下半天（PM）獨立選擇不同假別</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 雙色斜切／上下分層視覺</b>：同一日可排上午 AL 年假＋下午 WB 身心假，色塊與文字自動高對比適配。</li>
+            <li><b>② 0.5 日精準配額扣減</b>：半日假自動按 0.5 日／0.5 次扣減對應配額，連假計算精準無誤。</li>
+          </ul>
+        </div>
+
+        <!-- v1.1.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v1.1.0（香港法定勞工假與銀行公眾假期完整資料庫）<span class="ml-1.5 px-1.5 py-0.2 bg-orange-600 text-white rounded text-[9px] font-bold">HK PUBLIC HOLIDAYS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-06-10</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🗓️ 完整收錄香港全年 17 日法定及公眾假期，自動標示逢星期日補假及節日性質</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 醒目橙色紅日標記</b>：所有公眾假期於日曆上以飽滿淺橙底配鮮橙大字突顯，星期日及逢日補假以粉紅色區分。</li>
+            <li><b>② 公眾假期一覽表</b>：右側專設「公眾假期」分頁，清楚列出全年紅日日期、星期及補假原因。</li>
+          </ul>
+        </div>
+
+        <!-- v1.0.0 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v1.0.0（「香港假期管理」1.0 創始版本正式誕生）<span class="ml-1.5 px-1.5 py-0.2 bg-slate-900 text-white rounded text-[9px] font-bold">GENESIS RELEASE</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-06-01</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🌱 建立單一 HTML 離線可用架構、12 個月響應式年曆網格與四軌休假計算核心</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 零安裝單檔即開即用</b>：無需註冊帳號或下載 App，手機 Safari、Chrome 與電腦瀏覽器打開即用。</li>
+            <li><b>② 四大基礎假別架構</b>：確立 AL（年假）、WB（身心假）、BL（生日假）與 SP（特別假）核心管理體系。</li>
+          </ul>
+        </div>
+
+        </div>
 
       <div class="p-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-        <span class="font-mono text-[10px]">Version: 5.0.38</span>
+        <span class="font-mono text-[10px]">Version: 5.3.44</span>
         <button id="btnConfirmCloseChangelog" class="px-3 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold rounded-lg transition active:scale-95 shadow-2xs">
           關閉
         </button>
@@ -5266,7 +5534,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.3.42';
+    const APP_VERSION = '5.3.44';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -9435,12 +9703,15 @@
       const container = document.getElementById('calendarContainer');
       if (!container || !dir) return;
       container.style.transition = 'none';
-      container.style.opacity = '0.35';
-      container.style.transform = `translate3d(${dir > 0 ? '26px' : '-26px'}, 0, 0)`;
-      void container.offsetWidth;
-      container.style.transition = 'transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease';
-      container.style.opacity = '1';
-      container.style.transform = 'translate3d(0, 0, 0)';
+      container.style.opacity = '0.55';
+      container.style.transform = `translate3d(${dir > 0 ? '36px' : '-36px'}, 0, 0)`;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          container.style.transition = 'transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease';
+          container.style.opacity = '1';
+          container.style.transform = 'translate3d(0, 0, 0)';
+        });
+      });
     }
 
     function changeCalendarYear(newYear, slideDir = 0) {
@@ -11378,7 +11649,7 @@
 
       const gapHtml = prevTrip ? buildIntervalGapHtml(trip.startDate, prevTrip.endDate) : '';
 
-            // === v5.3.42 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
+            // === v5.3.44 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
       const tripKey = `${trip.startDate}_${trip.endDate}`;
       const bData = (typeof tripBookings !== 'undefined' && tripBookings[tripKey]) ? tripBookings[tripKey] : null;
       const cleanOutSummary = bData && bData.flightOut ? bData.flightOut.replace(/\(00:00\s*➔\s*00:00\)/g, '').trim() : '';
@@ -12355,8 +12626,12 @@ function setupYearOverviewToggle() {
         let touchStartDist = 0;
         let swipeStartX = 0;
         let swipeStartY = 0;
+        let swipeStartTime = 0;
         let swipeAxis = null; // 'x' | 'y' | null
-        let lastDeltaX = 0;
+        let rawDeltaX = 0;
+        let targetVisualX = 0;
+        let currentVisualX = 0;
+        let swipeRafId = null;
         let wasThresholdReady = false;
         let undoPillTimer = null;
 
@@ -12366,6 +12641,34 @@ function setupYearOverviewToggle() {
         const undoPill = document.getElementById('yearSwipeUndoPill');
         const undoLabel = document.getElementById('yearSwipeUndoLabel');
         const btnUndoYearSwipe = document.getElementById('btnUndoYearSwipe');
+
+        const getRequiredPullPx = () => {
+          // 刻意加長防誤觸拉動距離：約螢幕寬度 44%（155px – 185px），必須明確有意識橫拉先會切年
+          return Math.min(185, Math.max(150, Math.round(window.innerWidth * 0.44)));
+        };
+
+        const stopSwipeRaf = () => {
+          if (swipeRafId) {
+            cancelAnimationFrame(swipeRafId);
+            swipeRafId = null;
+          }
+        };
+
+        const renderSwipeFrame = () => {
+          if (swipeAxis !== 'x') {
+            swipeRafId = null;
+            return;
+          }
+          // 60fps 低通平滑插值（eliminates iOS touch jitter）
+          currentVisualX += (targetVisualX - currentVisualX) * 0.42;
+          if (Math.abs(targetVisualX - currentVisualX) < 0.15) {
+            currentVisualX = targetVisualX;
+          }
+          const fadeOpacity = Math.max(0.84, 1 - Math.abs(currentVisualX) / 480);
+          container.style.transform = `translate3d(${currentVisualX.toFixed(2)}px, 0, 0)`;
+          container.style.opacity = fadeOpacity.toFixed(3);
+          swipeRafId = requestAnimationFrame(renderSwipeFrame);
+        };
 
         const hidePullIndicator = () => {
           if (!pullPill) return;
@@ -12392,6 +12695,7 @@ function setupYearOverviewToggle() {
         container.addEventListener('touchstart', (e) => {
           if (e.touches.length === 2) {
             swipeAxis = null;
+            stopSwipeRaf();
             hidePullIndicator();
             touchStartDist = Math.hypot(
               e.touches[0].clientX - e.touches[1].clientX,
@@ -12400,16 +12704,20 @@ function setupYearOverviewToggle() {
             return;
           }
           if (e.touches.length === 1) {
-            // 若處於編輯模式且正在進行連劃排假，鎖定水平翻年手勢以免打斷劃假
             if (!document.body.classList.contains('readonly-mode') && typeof isDragging !== 'undefined' && isDragging) {
               swipeAxis = null;
+              stopSwipeRaf();
               hidePullIndicator();
               return;
             }
+            stopSwipeRaf();
             swipeStartX = e.touches[0].clientX;
             swipeStartY = e.touches[0].clientY;
+            swipeStartTime = performance.now();
             swipeAxis = null;
-            lastDeltaX = 0;
+            rawDeltaX = 0;
+            targetVisualX = 0;
+            currentVisualX = 0;
             wasThresholdReady = false;
           }
         }, { passive: true });
@@ -12422,29 +12730,30 @@ function setupYearOverviewToggle() {
           const dy = e.touches[0].clientY - swipeStartY;
 
           if (!swipeAxis) {
-            // 提高起步死區至 24px，過濾單手上下捲動時嘅輕微橫晃
-            if (Math.abs(dx) < 24 && Math.abs(dy) < 24) return;
-            // 嚴格水平角度鎖（|dx| > |dy| * 2.2，約 ±24° 內純橫掃先啟動）
-            if (Math.abs(dx) > Math.abs(dy) * 2.2) {
+            // 32px 起步防誤觸死區 ＋ 嚴格水平方向鎖（|dx| > |dy| * 2.5，過濾上下捲動斜掃）
+            if (Math.abs(dx) < 32 && Math.abs(dy) < 32) return;
+            if (Math.abs(dx) > Math.abs(dy) * 2.5) {
               swipeAxis = 'x';
               container.classList.add('touching');
+              if (!swipeRafId) swipeRafId = requestAnimationFrame(renderSwipeFrame);
             } else {
               swipeAxis = 'y';
             }
           }
 
           if (swipeAxis === 'x') {
-            lastDeltaX = dx;
+            rawDeltaX = dx;
+            const reqPx = getRequiredPullPx();
             const targetYear = dx < 0 ? Math.min(2200, selectedYear + 1) : Math.max(1900, selectedYear - 1);
             const atBoundary = (targetYear === selectedYear);
-            const thresholdPx = Math.min(130, Math.max(96, Math.round(window.innerWidth * 0.27)));
-            const isReady = !atBoundary && Math.abs(dx) >= thresholdPx;
+            const heldLongEnough = (performance.now() - swipeStartTime) >= 130;
+            const isReady = !atBoundary && heldLongEnough && Math.abs(dx) >= reqPx;
 
-            // 高阻力邊緣橡筋阻尼（最多位移 44px），防止輕掃滑過頭
-            const dampedX = Math.max(-44, Math.min(44, dx * 0.28));
-            const fadeOpacity = Math.max(0.78, 1 - Math.abs(dampedX) / 220);
-            container.style.transform = `translate3d(${dampedX}px, 0, 0)`;
-            container.style.opacity = String(fadeOpacity);
+            // 漸進式阻尼曲線：前段跟手絲滑，接近切換門檻時產生自然物理張力（上限 76px）
+            const sign = dx < 0 ? -1 : 1;
+            const absDx = Math.abs(dx);
+            const progress = Math.min(1.35, absDx / reqPx);
+            targetVisualX = sign * Math.min(76, 56 * Math.tanh(progress * 1.15));
 
             if (pullPill && pullIcon && pullText) {
               if (dx < 0) {
@@ -12456,6 +12765,7 @@ function setupYearOverviewToggle() {
               }
               pullPill.classList.add('is-visible');
 
+              const pct = Math.min(100, Math.round((absDx / reqPx) * 100));
               if (atBoundary) {
                 pullPill.classList.remove('is-ready');
                 pullIcon.className = 'fa-solid fa-ban text-[11px] text-slate-400';
@@ -12465,14 +12775,14 @@ function setupYearOverviewToggle() {
                 pullIcon.className = 'fa-solid fa-check text-[11px] text-white';
                 pullText.textContent = `放開切換至 ${targetYear} ✓`;
                 if (!wasThresholdReady && navigator.vibrate) {
-                  try { navigator.vibrate(10); } catch (err) {}
+                  try { navigator.vibrate(12); } catch (err) {}
                 }
               } else {
                 pullPill.classList.remove('is-ready');
                 pullIcon.className = dx < 0
                   ? 'fa-solid fa-arrow-left text-[11px] text-blue-600'
                   : 'fa-solid fa-arrow-right text-[11px] text-blue-600';
-                pullText.textContent = `繼續拉動切換至 ${targetYear}`;
+                pullText.textContent = `再拉動切換至 ${targetYear} (${pct}%)`;
               }
               wasThresholdReady = isReady;
             }
@@ -12499,39 +12809,49 @@ function setupYearOverviewToggle() {
           }
 
           if (swipeAxis === 'x') {
+            stopSwipeRaf();
             container.classList.remove('touching');
             hidePullIndicator();
-            const thresholdPx = Math.min(130, Math.max(96, Math.round(window.innerWidth * 0.27)));
-            const triggered = Math.abs(lastDeltaX) >= thresholdPx;
+
+            const reqPx = getRequiredPullPx();
+            const heldLongEnough = (performance.now() - swipeStartTime) >= 130;
+            const triggered = heldLongEnough && Math.abs(rawDeltaX) >= reqPx;
 
             if (triggered) {
               const prevYear = selectedYear;
-              const nextYear = lastDeltaX < 0 ? Math.min(2200, selectedYear + 1) : Math.max(1900, selectedYear - 1);
+              const nextYear = rawDeltaX < 0 ? Math.min(2200, selectedYear + 1) : Math.max(1900, selectedYear - 1);
               if (nextYear !== prevYear) {
-                changeCalendarYear(nextYear, lastDeltaX < 0 ? 1 : -1);
+                changeCalendarYear(nextYear, rawDeltaX < 0 ? 1 : -1);
                 showUndoYearBanner(prevYear, nextYear);
               } else {
-                container.style.transition = 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease';
+                container.style.transition = 'transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease';
                 container.style.transform = 'translate3d(0, 0, 0)';
                 container.style.opacity = '1';
               }
             } else {
-              // 未達拉動釋放門檻，絲滑回彈原位（絕不誤切年份）
-              container.style.transition = 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease';
+              // 未拉滿確定距離，絲滑彈性回彈原位（絕不輕易誤跳第二個年份）
+              container.style.transition = 'transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease';
               container.style.transform = 'translate3d(0, 0, 0)';
               container.style.opacity = '1';
             }
           }
           swipeAxis = null;
-          lastDeltaX = 0;
+          rawDeltaX = 0;
+          targetVisualX = 0;
+          currentVisualX = 0;
         }, { passive: true });
 
         container.addEventListener('touchcancel', () => {
+          stopSwipeRaf();
           container.classList.remove('touching');
           hidePullIndicator();
+          container.style.transition = 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease';
           container.style.transform = 'translate3d(0, 0, 0)';
           container.style.opacity = '1';
           swipeAxis = null;
+          rawDeltaX = 0;
+          targetVisualX = 0;
+          currentVisualX = 0;
           touchStartDist = 0;
         }, { passive: true });
 
@@ -19200,7 +19520,7 @@ function setupYearOverviewToggle() {
     </div>
   </div>
 
-      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.42 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
+      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.44 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
   <div id="inlineBookingStudioParkingBay" class="hidden">
 
   <!-- 原裝完整「旅程預訂資料」流暢原地收放面板（全程零彈窗、無重複標題與多餘收起掣） -->
@@ -20269,7 +20589,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.3.42</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.3.44</span>
           </button>
         </div>
       </div>
