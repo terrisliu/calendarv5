@@ -1856,6 +1856,111 @@
       color: #854d0e !important;
     }
 
+    /* === 防誤觸年份橫掃視覺提示與返回原年膠囊 === */
+    #yearSwipePullIndicator {
+      position: fixed;
+      top: 50%;
+      z-index: 88;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(-50%) scale(0.92);
+      transition: opacity 0.14s ease, transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+    }
+    #yearSwipePullIndicator.is-visible {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+    #yearSwipePullIndicator.is-ready {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+      color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.45) !important;
+      box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.5) !important;
+      transform: translateY(-50%) scale(1.04);
+    }
+    #yearSwipeUndoPill {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      z-index: 88;
+      transform: translate(-50%, 16px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+    }
+    #yearSwipeUndoPill.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, 0);
+    }
+    /* === 純淨年份列：鎖死 0px 零位移，滑鼠移近原地淡入左右箭嘴（文字絕不左右推郁） === */
+    .year-hover-step-btn {
+      display: none;
+      opacity: 0;
+      transform: scale(0.85);
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.15s ease, color 0.15s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      #mainYearSwitcher .year-hover-step-btn {
+        display: inline-flex;
+        width: 24px;
+        margin: 0 1px;
+      }
+      #overviewYearSwitcher .year-hover-step-btn {
+        display: inline-flex;
+        width: 20px;
+        margin: 0 1px;
+      }
+      #mainYearSwitcher:hover .year-hover-step-btn,
+      #mainYearSwitcher:focus-within .year-hover-step-btn,
+      #overviewYearSwitcher:hover .year-hover-step-btn,
+      #overviewYearSwitcher:focus-within .year-hover-step-btn {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+    }
+    #mainYearDisplayText, #overviewYearDisplayText {
+      display: inline-block;
+      transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    /* === 三層雙向聯動金字塔時間軸 (Multi-Scale Pyramid Scrubber) === */
+    .pyramid-rail-viewport {
+      position: relative;
+      overflow: hidden;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      cursor: grab;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 16%, #000 84%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 16%, #000 84%, transparent 100%);
+    }
+    .pyramid-rail-viewport:active {
+      cursor: grabbing;
+    }
+    .pyramid-rail-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      will-change: transform;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .pyramid-rail-track.is-scrubbing {
+      transition: none !important;
+    }
+    .pyramid-center-reticle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+    }
 </style>
   <!-- Leaflet.js 開源免金鑰地圖庫 -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -1872,10 +1977,18 @@
       <div class="flex items-center gap-1.5 min-w-0">
         <img id="overviewAppLogo" src="data:image/png;base64,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" alt="香港假期管理 App Icon" class="w-5 h-5 md:w-6 md:h-6 rounded-[5.5px] md:rounded-[7px] shadow-2xs border border-slate-200/80 object-cover shrink-0 transition-all duration-300">
         <span class="font-bold text-xs text-slate-800 truncate">香港假期管理</span>
-        <div id="overviewYearSwitcher" class="inline-flex items-center shrink-0">
+        <div id="overviewYearSwitcher" class="inline-flex items-center shrink-0 rounded-full hover:bg-slate-200/45 transition-colors">
+          <button type="button" onclick="event.stopPropagation(); changeCalendarYear(selectedYear - 1, -1)" aria-label="上一年"
+                  class="year-hover-step-btn h-5 rounded-full hover:bg-white text-slate-500 hover:text-blue-600 inline-flex items-center justify-center cursor-pointer select-none shrink-0">
+            <i class="fa-solid fa-chevron-left text-[9px]"></i>
+          </button>
           <button type="button" id="btnOpenOverviewYearPopover" onclick="toggleYearPickerPopover(event, 'overview')"
                   class="inline-flex items-center justify-center px-1.5 py-0.5 rounded-full bg-transparent hover:bg-slate-200/50 active:scale-95 border border-transparent font-black tracking-tight text-sm text-slate-900 cursor-pointer select-none transition leading-none">
             <span id="overviewYearDisplayText">2027</span>
+          </button>
+          <button type="button" onclick="event.stopPropagation(); changeCalendarYear(selectedYear + 1, 1)" aria-label="下一年"
+                  class="year-hover-step-btn h-5 rounded-full hover:bg-white text-slate-500 hover:text-blue-600 inline-flex items-center justify-center cursor-pointer select-none shrink-0">
+            <i class="fa-solid fa-chevron-right text-[9px]"></i>
           </button>
         </div>
       </div>
@@ -1996,10 +2109,18 @@
           <div class="glass-surface px-1.5 py-1 md:p-2 rounded-2xl border border-white/80 shadow-xs mb-0 md:mb-2">
             <!-- 純淨左手邊超大年份切換器 ＋ 手機版右側工具列伸縮開關（預設收起釋放螢幕空間） -->
             <div id="yearHeaderRow" class="flex items-center justify-between pb-0 mb-0 md:pb-1 md:mb-1.5 border-b-0 md:border-b border-slate-200/60 px-0.5 transition-all duration-200">
-              <div id="mainYearSwitcher" class="inline-flex items-center shrink-0">
+              <div id="mainYearSwitcher" class="inline-flex items-center shrink-0 rounded-full hover:bg-slate-200/40 transition-colors">
+                <button type="button" onclick="event.stopPropagation(); changeCalendarYear(selectedYear - 1, -1)" aria-label="上一年"
+                        class="year-hover-step-btn h-6 rounded-full hover:bg-white text-slate-500 hover:text-blue-600 inline-flex items-center justify-center cursor-pointer select-none shrink-0">
+                  <i class="fa-solid fa-chevron-left text-[10px]"></i>
+                </button>
                 <button type="button" id="btnOpenMainYearPopover" onclick="toggleYearPickerPopover(event, 'main')"
                         class="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-transparent hover:bg-slate-200/45 active:scale-95 border border-transparent font-black tracking-tight text-xl md:text-2xl text-slate-900 cursor-pointer select-none transition leading-none">
                   <span id="mainYearDisplayText">2027</span>
+                </button>
+                <button type="button" onclick="event.stopPropagation(); changeCalendarYear(selectedYear + 1, 1)" aria-label="下一年"
+                        class="year-hover-step-btn h-6 rounded-full hover:bg-white text-slate-500 hover:text-blue-600 inline-flex items-center justify-center cursor-pointer select-none shrink-0">
+                  <i class="fa-solid fa-chevron-right text-[10px]"></i>
                 </button>
               </div>
 
@@ -2494,50 +2615,93 @@
 
   
   <!-- Apple 簡約極致年份選擇浮層 (1900–2200 · 純淨數字 · 零冗餘字眼) -->
-  <div id="yearPickerPopover" class="fixed z-[95] hidden w-[276px] sm:w-[296px] rounded-3xl bg-white/95 backdrop-blur-2xl border border-slate-200/80 shadow-[0_20px_50px_-12px_rgba(15,23,42,0.22)] p-3.5 select-none">
-    <!-- 頂部極簡導航列 -->
-    <div class="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-100">
-      <button type="button" id="btnYearPagePrev" onclick="shiftYearPopoverPage(-12)"
-              class="w-7 h-7 rounded-full bg-slate-100/80 hover:bg-slate-200/80 text-slate-600 hover:text-slate-900 flex items-center justify-center transition active:scale-90 cursor-pointer">
-        <i class="fa-solid fa-chevron-left text-[10px]"></i>
-      </button>
-      <div class="text-center">
-        <span id="yearPopoverRangeLabel" class="font-extrabold tracking-tight text-sm text-slate-900 tabular-nums">2022 – 2033</span>
+  
+  <!-- 橫掃年份邊緣拉動預告指示器 -->
+  <div id="yearSwipePullIndicator" class="px-3.5 py-2 rounded-full bg-white/92 border border-slate-300/90 text-slate-800 shadow-lg flex items-center gap-2 text-xs font-extrabold tracking-tight select-none">
+    <i id="yearSwipePullIcon" class="fa-solid fa-arrow-right text-[11px] text-blue-600"></i>
+    <span id="yearSwipePullText">繼續拉動切換至 2028</span>
+  </div>
+
+  <!-- 橫掃切年後 3.5 秒一鍵返回原年提示膠囊 -->
+  <div id="yearSwipeUndoPill" class="px-3.5 py-2 rounded-full bg-slate-900/92 text-white border border-white/15 shadow-xl flex items-center gap-2.5 text-xs font-bold select-none">
+    <span id="yearSwipeUndoLabel" class="text-slate-100">已切換至 2028 年</span>
+    <button type="button" id="btnUndoYearSwipe" class="px-2.5 py-0.5 rounded-full bg-blue-500 hover:bg-blue-400 active:scale-95 text-white font-black text-[11px] transition cursor-pointer">
+      返回 2027
+    </button>
+  </div>
+
+  <!-- 極簡純淨萬年曆浮層（頂部置中前後年圓鈕 · 零冗餘說明字 · 放大清晰年代軌道） -->
+  <div id="yearPickerPopover" class="fixed z-[95] hidden w-[304px] sm:w-[332px] rounded-3xl bg-white/96 backdrop-blur-2xl border border-slate-200/90 shadow-[0_24px_60px_-14px_rgba(15,23,42,0.26)] p-3.5 select-none">
+    <!-- 頂部焦點列：置中 `[ ‹ ] 2027 [ › ]` ＋ 右側保留放大鏡與關閉圓鈕 -->
+    <div class="relative flex items-center justify-center pb-2.5 mb-2.5 border-b border-slate-100 min-h-[34px]">
+      <div class="inline-flex items-center gap-2">
+        <button type="button" onclick="stepYearInsidePopover(-1)" aria-label="前一年"
+                class="w-7 h-7 rounded-full bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 border border-slate-200/80 flex items-center justify-center transition active:scale-90 cursor-pointer">
+          <i class="fa-solid fa-chevron-left text-[10px]"></i>
+        </button>
+        <span id="pyramidHeroYearTitle" class="font-black text-2xl tracking-tight text-slate-950 tabular-nums leading-none min-w-[64px] text-center">2027</span>
+        <button type="button" onclick="stepYearInsidePopover(1)" aria-label="後一年"
+                class="w-7 h-7 rounded-full bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 border border-slate-200/80 flex items-center justify-center transition active:scale-90 cursor-pointer">
+          <i class="fa-solid fa-chevron-right text-[10px]"></i>
+        </button>
       </div>
-      <button type="button" id="btnYearPageNext" onclick="shiftYearPopoverPage(12)"
-              class="w-7 h-7 rounded-full bg-slate-100/80 hover:bg-slate-200/80 text-slate-600 hover:text-slate-900 flex items-center justify-center transition active:scale-90 cursor-pointer">
-        <i class="fa-solid fa-chevron-right text-[10px]"></i>
-      </button>
+
+      <div class="absolute right-0 flex items-center gap-1">
+        <button type="button" id="btnToggleInsideDateSearch" onclick="toggleInsideDateSearchBar()" aria-label="輸入指定日子直達"
+                class="w-7 h-7 rounded-full bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 border border-slate-200/80 flex items-center justify-center transition active:scale-90 cursor-pointer">
+          <i class="fa-solid fa-magnifying-glass text-[10.5px]"></i>
+        </button>
+        <button type="button" onclick="closeYearPickerPopover()" aria-label="關閉"
+                class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition active:scale-90 cursor-pointer">
+          <i class="fa-solid fa-xmark text-[11px]"></i>
+        </button>
+      </div>
     </div>
 
-    <!-- 極簡年代快跳膠囊列 -->
-    <div class="flex items-center gap-1 overflow-x-auto no-scrollbar pb-2 mb-2.5 border-b border-slate-100 text-[10px] tabular-nums">
-      <button type="button" onclick="jumpYearPopoverStart(1980)" class="shrink-0 px-2 py-0.5 rounded-full bg-slate-100/80 hover:bg-slate-200 text-slate-600 hover:text-slate-900 font-bold transition cursor-pointer">1980</button>
-      <button type="button" onclick="jumpYearPopoverStart(1990)" class="shrink-0 px-2 py-0.5 rounded-full bg-slate-100/80 hover:bg-slate-200 text-slate-600 hover:text-slate-900 font-bold transition cursor-pointer">1990</button>
-      <button type="button" onclick="jumpYearPopoverStart(2000)" class="shrink-0 px-2 py-0.5 rounded-full bg-slate-100/80 hover:bg-slate-200 text-slate-600 hover:text-slate-900 font-bold transition cursor-pointer">2000</button>
-      <button type="button" onclick="jumpYearPopoverStart(2010)" class="shrink-0 px-2 py-0.5 rounded-full bg-slate-100/80 hover:bg-slate-200 text-slate-600 hover:text-slate-900 font-bold transition cursor-pointer">2010</button>
-      <button type="button" onclick="jumpYearPopoverStart(2020)" class="shrink-0 px-2 py-0.5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-extrabold transition cursor-pointer">2020</button>
-      <button type="button" onclick="jumpYearPopoverStart(2030)" class="shrink-0 px-2 py-0.5 rounded-full bg-slate-100/80 hover:bg-slate-200 text-slate-600 hover:text-slate-900 font-bold transition cursor-pointer">2030</button>
-      <button type="button" onclick="jumpYearPopoverStart(2050)" class="shrink-0 px-2 py-0.5 rounded-full bg-slate-100/80 hover:bg-slate-200 text-slate-600 hover:text-slate-900 font-bold transition cursor-pointer">2050</button>
+    <!-- 頂部可展開「直達指定日子」搜尋列（點擊右上放大鏡即刻滑出） -->
+    <div id="insideQuickDateSearchBox" class="hidden mb-2.5 p-2.5 rounded-2xl bg-slate-50 border border-blue-200/80 space-y-1.5">
+      <div class="relative flex items-center">
+        <input type="text" id="inputQuickDateText" inputmode="numeric" autocomplete="off"
+               placeholder="19950818 / 1995-8-18"
+               class="w-full pl-2.5 pr-8 py-1.5 rounded-xl bg-white border border-slate-300 focus:border-blue-500 focus:outline-none text-slate-950 font-bold text-xs tabular-nums transition">
+        <label aria-label="開啟日曆選擇" class="absolute right-1.5 w-6 h-6 rounded-lg bg-slate-50 hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-600 flex items-center justify-center cursor-pointer transition">
+          <i class="fa-regular fa-calendar text-[10px]"></i>
+          <input type="date" id="inputQuickDateNative" min="1900-01-01" max="2200-12-31" class="sr-only">
+        </label>
+      </div>
+      <div class="flex items-center justify-between gap-1.5">
+        <span id="quickDateParsePreview" class="text-[10px] font-semibold text-slate-500 truncate flex-1">YYYYMMDD / YYYY-M-D</span>
+        <button type="button" onclick="jumpToQuickDateToday()" class="px-2 py-1 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 font-bold text-[10px] cursor-pointer shrink-0">今天</button>
+        <button type="button" onclick="submitQuickDateJump()" class="px-2.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-[10px] cursor-pointer shrink-0">前往</button>
+      </div>
     </div>
 
-    <!-- 3×4 純淨年份宮格 -->
-    <div id="yearPopoverGrid" class="grid grid-cols-3 gap-1.5"></div>
+    <!-- 第一層：前後 12 年純淨宮格（支援 iPhone 跟指左右橫掃翻頁 · 絲滑慣性動畫） -->
+    <div id="twoTierYearGridViewport" class="w-full rounded-2xl bg-slate-50/90 border border-slate-200/80 p-2 mb-2.5 overflow-hidden touch-pan-y">
+      <div id="twoTierYearGrid" class="grid grid-cols-3 gap-1.5 will-change-transform"></div>
+    </div>
+
+    <!-- 第二層：純淨年代滑動軌道（放大清晰字體 · 無遮擋線框 · 零冗餘說明字） -->
+    <div class="w-full rounded-2xl bg-slate-100/80 border border-slate-200/80 py-1.5 px-1 relative">
+      <div id="pyramidRailDecade" class="pyramid-rail-viewport h-10 flex items-center justify-center">
+        <div id="pyramidTrackDecade" class="pyramid-rail-track relative z-10"></div>
+      </div>
+    </div>
 
     <!-- 底部極簡操作列 -->
-    <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
-      <div class="flex items-center gap-1.5 text-[10px] text-slate-400 font-medium">
-        <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+    <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
+      <div class="flex items-center gap-1.5 text-[10px] text-slate-500 font-semibold">
+        <span class="w-2 h-2 rounded-full bg-blue-600"></span>
         <span>已排假</span>
       </div>
       <div class="flex items-center gap-1.5">
-        <button type="button" onclick="selectYearFromPopover(2027)"
+        <button type="button" id="btnYearPopoverJump2027" onclick="selectYearFromTwoTierGrid(2027)"
                 class="px-2.5 py-1 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-extrabold tracking-tight tabular-nums transition active:scale-95 cursor-pointer">
           2027
         </button>
         <button type="button" onclick="closeYearPickerPopover()"
-                class="px-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold transition active:scale-95 cursor-pointer">
-          完成
+                class="px-3 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold transition active:scale-95 cursor-pointer">
+          關閉
         </button>
       </div>
     </div>
@@ -2548,7 +2712,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.3.32 更新日誌</span>
+      <span>v5.3.42 更新日誌</span>
     </button>
   </footer>
 
@@ -2590,7 +2754,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.3.32</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.3.42</span>
             </h3>
           </div>
         </div>
@@ -2600,17 +2764,16 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.3.32 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.3.42 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.3.32（還原右下灰色三圓點圓波 · 鎖定 HKG 閘口柱純正寶石鈷藍頂欄 · 簡約登機牌淺灰方框與無框靠右日期）<span class="ml-1.5 px-1.5 py-0.2 bg-[#2E49A3] text-[#FBF238] rounded text-[9px] font-bold">THEME & DATE REFINED</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.3.42（iPhone 絲滑雙區跟指橫掃：12 年宮格左右一掃即翻頁 · 年代軌道物理慣性滑行）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">IOS SILKY GESTURE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🎨 還原右下角灰色圓波、修復 HKG 閘口柱頂欄藍色並精調簡約登機牌日期方框</div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 專為 iPhone 單手觸控打磨：上層 12 年宮格跟指左右橫掃翻頁，下層年代軌道具備自然慣性減速滑行</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 還原右下角灰色圓波（<code>•••</code>）</b>：取消覆蓋右下角圓波為藍色剔號，完整恢復原本灰色三圓點與展開膠囊樣式。</li>
-            <li><b>② 鎖定 HKG 閘口柱純正寶石鈷藍（<code>#2E49A3</code>）</b>：清除漸變背景覆蓋（<code>background-image: none !important</code>），確保切換至 HKG 閘口柱時頂欄 100% 呈現原本經典藍色。</li>
-            <li><b>③ 簡約登機牌淺灰日期方框</b>：外框恢復一致的淺灰微邊框，上方「<code>月日</code>」字級微調適中、下方「<code>週六</code>」取消外框並向右拍齊。</li>
+            <li><b>① 12 年宮格一掃即翻頁（前 12 年 / 後 12 年）</b>：手指喺年份宮格上左右輕掃即跟隨阻尼橫移並平滑滑入上一頁／下一頁 12 年，輕點與橫掃 100% 獨立隔離防誤觸。</li>
+            <li><b>② 年代軌道 iOS 物理慣性滑行</b>：快速橫撥 <code>1900s – 2200s</code> 軌道時按初速度自然減速滑過多個年代並精準吸附，每格附帶微震動回饋且同步刷新上方宮格。</li>
           </ul>
         </div>
 
@@ -5103,7 +5266,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.3.32';
+    const APP_VERSION = '5.3.42';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -8584,17 +8747,12 @@
       if (ovLabel) ovLabel.textContent = `${selectedYear}`;
     }
 
-    function renderYearPopoverGrid() {
-      const grid = document.getElementById('yearPopoverGrid');
-      const rangeLabel = document.getElementById('yearPopoverRangeLabel');
-      if (!grid) return;
+    let pyramidFocusYear = 2027;
+    let twoTierGridStartYear = 2022;
+    let pyramidRailJustDragged = false;
+    let twoTierGridJustSwiped = false;
 
-      const startY = Math.max(1900, Math.min(2189, yearPopoverBaseStart));
-      yearPopoverBaseStart = startY;
-      const endY = startY + 11;
-      if (rangeLabel) rangeLabel.textContent = `${startY} – ${endY}`;
-
-      // 統計邊幾年已經有排假紀錄（顯示專屬小藍點）
+    function getActiveLeaveYearsSet() {
       const activeYears = new Set();
       if (leaveData) {
         for (const d in leaveData) {
@@ -8604,30 +8762,157 @@
           }
         }
       }
-
-      let html = '';
-      for (let y = startY; y <= endY; y++) {
-        const isCurrent = (y === selectedYear);
-        const hasLeave = activeYears.has(y);
-        const btnCls = isCurrent
-          ? 'bg-slate-900 text-white font-black shadow-sm'
-          : 'bg-slate-50/80 hover:bg-slate-100 text-slate-800 hover:text-slate-950 font-bold';
-        const dotHtml = hasLeave
-          ? `<span class="w-1.5 h-1.5 rounded-full ${isCurrent ? 'bg-sky-400' : 'bg-blue-500'} absolute top-1.5 right-1.5"></span>`
-          : '';
-        html += `
-          <button type="button" onclick="selectYearFromPopover(${y})"
-                  class="relative py-2 px-1 rounded-xl text-[13px] tracking-tight tabular-nums text-center transition active:scale-95 cursor-pointer ${btnCls}">
-            ${y}
-            ${dotHtml}
-          </button>
-        `;
-      }
-      grid.innerHTML = html;
+      return activeYears;
     }
+
+    function animateTwoTierGridSlide(dir) {
+      const grid = document.getElementById('twoTierYearGrid');
+      if (!grid || !dir) return;
+      grid.style.transition = 'none';
+      grid.style.opacity = '0.45';
+      grid.style.transform = `translate3d(${dir > 0 ? 34 : -34}px, 0, 0)`;
+      void grid.offsetWidth;
+      grid.style.transition = 'transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease';
+      grid.style.opacity = '1';
+      grid.style.transform = 'translate3d(0, 0, 0)';
+    }
+
+    function stepYearInsidePopover(delta) {
+      const nextY = Math.max(1900, Math.min(2200, selectedYear + delta));
+      if (nextY === selectedYear) return;
+      const dir = nextY > selectedYear ? 1 : -1;
+      changeCalendarYear(nextY, dir);
+      pyramidFocusYear = nextY;
+      let pageDir = 0;
+      if (nextY < twoTierGridStartYear || nextY > twoTierGridStartYear + 11) {
+        const oldStart = twoTierGridStartYear;
+        twoTierGridStartYear = Math.max(1900, Math.min(2189, nextY - 5));
+        pageDir = twoTierGridStartYear > oldStart ? 1 : -1;
+      }
+      renderTwoTierYearPicker();
+      if (pageDir !== 0) animateTwoTierGridSlide(pageDir);
+    }
+
+    function renderTwoTierYearPicker() {
+      const startY = Math.max(1900, Math.min(2189, twoTierGridStartYear));
+      twoTierGridStartYear = startY;
+      const endY = startY + 11;
+      const focusDecade = Math.floor(pyramidFocusYear / 10) * 10;
+
+      const heroTitle = document.getElementById('pyramidHeroYearTitle');
+      const jump2027Btn = document.getElementById('btnYearPopoverJump2027');
+
+      if (heroTitle) heroTitle.textContent = String(selectedYear);
+      if (jump2027Btn) jump2027Btn.classList.toggle('opacity-45', selectedYear === 2027);
+
+      const activeYears = getActiveLeaveYearsSet();
+      const activeDecades = new Set();
+      activeYears.forEach(ay => activeDecades.add(Math.floor(ay / 10) * 10));
+
+      // 第一層：12 年一覽宮格（純淨高對比黑字，當前年份以藍底白字凸顯，已排假年份右上角統一藍點）
+      const grid = document.getElementById('twoTierYearGrid');
+      if (grid) {
+        let gHtml = '';
+        for (let y = startY; y <= endY; y++) {
+          const isSelected = (y === selectedYear);
+          const hasLeave = activeYears.has(y);
+          const cardCls = isSelected
+            ? 'bg-blue-600 text-white font-black shadow-xs'
+            : 'bg-white hover:bg-blue-50 text-slate-950 font-extrabold border border-slate-200/80 hover:border-blue-300';
+          const dotCls = isSelected ? 'bg-sky-200' : 'bg-blue-600';
+          const dotHtml = hasLeave
+            ? `<span class="w-1.5 h-1.5 rounded-full ${dotCls} absolute top-1.5 right-1.5"></span>`
+            : '';
+          gHtml += `
+            <button type="button" onclick="selectYearFromTwoTierGrid(${y}, event)"
+                    class="relative py-2 px-1 rounded-xl text-[14px] tracking-tight tabular-nums text-center transition active:scale-95 cursor-pointer ${cardCls}">
+              ${y}
+              ${dotHtml}
+            </button>
+          `;
+        }
+        grid.innerHTML = gHtml;
+      }
+
+      // 第二層（底座）：放大字體年代軌道（無遮擋線框 · 清晰大字 · 點選或慣性橫掃切換年代）
+      const trackDecade = document.getElementById('pyramidTrackDecade');
+      if (trackDecade) {
+        let dHtml = '';
+        for (let offset = -2; offset <= 2; offset++) {
+          const itemDec = focusDecade + offset * 10;
+          const valid = itemDec >= 1900 && itemDec <= 2200;
+          const isCenter = offset === 0;
+          const hasDot = valid && activeDecades.has(itemDec);
+          const cls = !valid
+            ? 'opacity-0 pointer-events-none'
+            : (isCenter
+              ? 'bg-white text-blue-700 font-black text-[15px] rounded-xl shadow-xs'
+              : 'text-slate-800 hover:text-blue-700 font-extrabold text-[13.5px]');
+          dHtml += `
+            <button type="button" ${valid ? `onclick="onTwoTierDecadeClick(event, ${itemDec})"` : 'disabled'}
+                    style="width:82px;"
+                    class="relative shrink-0 h-8.5 mx-0.5 flex items-center justify-center tabular-nums transition-all cursor-pointer ${cls}">
+              ${valid ? `${itemDec}s` : ''}
+              ${hasDot ? '<span class="w-1.5 h-1.5 rounded-full bg-blue-600 absolute top-1 right-1.5"></span>' : ''}
+            </button>
+          `;
+        }
+        trackDecade.innerHTML = dHtml;
+      }
+    }
+
+    function shiftTwoTierGridPage(delta) {
+      const oldStart = twoTierGridStartYear;
+      twoTierGridStartYear = Math.max(1900, Math.min(2189, twoTierGridStartYear + delta));
+      if (twoTierGridStartYear === oldStart) {
+        animateTwoTierGridSlide(delta > 0 ? 1 : -1);
+        return;
+      }
+      pyramidFocusYear = Math.min(2200, twoTierGridStartYear + 5);
+      renderTwoTierYearPicker();
+      animateTwoTierGridSlide(delta > 0 ? 1 : -1);
+      if (navigator.vibrate) {
+        try { navigator.vibrate(6); } catch (err) {}
+      }
+    }
+
+    function onTwoTierDecadeClick(e, decStart) {
+      if (e) e.stopPropagation();
+      if (pyramidRailJustDragged) {
+        pyramidRailJustDragged = false;
+        return;
+      }
+      const oldStart = twoTierGridStartYear;
+      pyramidFocusYear = Math.max(1900, Math.min(2200, decStart));
+      twoTierGridStartYear = Math.max(1900, Math.min(2189, decStart));
+      renderTwoTierYearPicker();
+      if (twoTierGridStartYear !== oldStart) {
+        animateTwoTierGridSlide(twoTierGridStartYear > oldStart ? 1 : -1);
+      }
+    }
+
+    function selectYearFromTwoTierGrid(targetY, e) {
+      if (e) e.stopPropagation();
+      if (twoTierGridJustSwiped) {
+        twoTierGridJustSwiped = false;
+        return;
+      }
+      const y = Math.max(1900, Math.min(2200, targetY));
+      pyramidFocusYear = y;
+      closeYearPickerPopover();
+      if (selectedYear !== y) {
+        changeCalendarYear(y, y > selectedYear ? 1 : -1);
+      }
+    }
+
+    let yearButtonJustDragged = false;
 
     function toggleYearPickerPopover(e, source = 'main') {
       if (e) e.stopPropagation();
+      if (yearButtonJustDragged) {
+        yearButtonJustDragged = false;
+        return;
+      }
       const pop = document.getElementById('yearPickerPopover');
       if (!pop) return;
       const isHidden = pop.classList.contains('hidden');
@@ -8636,9 +8921,11 @@
         return;
       }
 
-      // 令當前選定年份永遠位於 12 宮格中間舒適位置，嚴格順序由小到大排列
-      yearPopoverBaseStart = Math.max(1900, Math.min(2189, selectedYear - 5));
-      renderYearPopoverGrid();
+      pyramidFocusYear = selectedYear;
+      twoTierGridStartYear = Math.max(1900, Math.min(2189, selectedYear - 5));
+      const searchBox = document.getElementById('insideQuickDateSearchBox');
+      if (searchBox) searchBox.classList.add('hidden');
+      renderTwoTierYearPicker();
 
       const anchor = source === 'overview'
         ? document.getElementById('overviewYearSwitcher')
@@ -8647,22 +8934,12 @@
       pop.classList.remove('hidden');
       if (anchor) {
         const rect = anchor.getBoundingClientRect();
-        const popW = pop.offsetWidth || 284;
+        const popW = pop.offsetWidth || 320;
         const leftPos = Math.max(10, Math.min(window.innerWidth - popW - 10, rect.left + rect.width / 2 - popW / 2));
-        const topPos = Math.min(window.innerHeight - 280, rect.bottom + 6);
+        const topPos = Math.min(window.innerHeight - 360, rect.bottom + 6);
         pop.style.left = `${leftPos}px`;
         pop.style.top = `${topPos}px`;
       }
-    }
-
-    function shiftYearPopoverPage(delta) {
-      yearPopoverBaseStart = Math.max(1900, Math.min(2189, yearPopoverBaseStart + delta));
-      renderYearPopoverGrid();
-    }
-
-    function jumpYearPopoverStart(baseYear) {
-      yearPopoverBaseStart = Math.max(1900, Math.min(2189, baseYear));
-      renderYearPopoverGrid();
     }
 
     function closeYearPickerPopover() {
@@ -8671,18 +8948,488 @@
     }
 
     function selectYearFromPopover(y) {
-      const dir = y > selectedYear ? 1 : (y < selectedYear ? -1 : 0);
-      closeYearPickerPopover();
-      changeCalendarYear(y, dir);
+      selectYearFromTwoTierGrid(y);
     }
 
     document.addEventListener('click', (e) => {
       const pop = document.getElementById('yearPickerPopover');
       if (!pop || pop.classList.contains('hidden')) return;
+      if (!e.target || !e.target.isConnected) return;
       if (!pop.contains(e.target) && !e.target.closest('#mainYearSwitcher') && !e.target.closest('#overviewYearSwitcher')) {
         closeYearPickerPopover();
       }
     });
+
+    // === 第一層「12 年宮格」iPhone 跟指左右橫掃翻頁（前一頁 12 年 / 後一頁 12 年 · 絲滑阻尼回饋） ===
+    (function initTwoTierGridSwipe() {
+      const vp = document.getElementById('twoTierYearGridViewport');
+      const grid = document.getElementById('twoTierYearGrid');
+      if (!vp || !grid) return;
+
+      let tracking = false;
+      let swiping = false;
+      let startX = 0;
+      let startY = 0;
+      let startTime = 0;
+      let lastDx = 0;
+
+      const onStart = (clientX, clientY) => {
+        tracking = true;
+        swiping = false;
+        startX = clientX;
+        startY = clientY;
+        startTime = performance.now();
+        lastDx = 0;
+        grid.style.transition = 'none';
+      };
+
+      const onMove = (clientX, clientY, preventFn) => {
+        if (!tracking) return;
+        const dx = clientX - startX;
+        const dy = clientY - startY;
+        if (!swiping) {
+          if (Math.abs(dx) > 9 && Math.abs(dx) > Math.abs(dy) * 1.15) {
+            swiping = true;
+          } else if (Math.abs(dy) > 12) {
+            tracking = false;
+            return;
+          } else {
+            return;
+          }
+        }
+        if (preventFn) preventFn();
+        lastDx = dx;
+        const damped = Math.max(-72, Math.min(72, dx * 0.55));
+        const fade = Math.max(0.55, 1 - Math.abs(damped) / 160);
+        grid.style.transform = `translate3d(${damped}px, 0, 0)`;
+        grid.style.opacity = String(fade);
+      };
+
+      const onEnd = () => {
+        if (!tracking) return;
+        const wasSwiping = swiping;
+        const elapsed = Math.max(1, performance.now() - startTime);
+        const velocity = Math.abs(lastDx) / elapsed; // px/ms
+        tracking = false;
+        swiping = false;
+
+        if (wasSwiping) {
+          twoTierGridJustSwiped = true;
+          setTimeout(() => { twoTierGridJustSwiped = false; }, 160);
+
+          if (Math.abs(lastDx) >= 34 || (Math.abs(lastDx) >= 18 && velocity > 0.35)) {
+            shiftTwoTierGridPage(lastDx < 0 ? 12 : -12);
+          } else {
+            grid.style.transition = 'transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease';
+            grid.style.transform = 'translate3d(0, 0, 0)';
+            grid.style.opacity = '1';
+          }
+        }
+      };
+
+      // Touch events (iOS Safari 最優先順滑回應)
+      vp.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        onStart(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+
+      vp.addEventListener('touchmove', (e) => {
+        if (e.touches.length !== 1) return;
+        onMove(e.touches[0].clientX, e.touches[0].clientY, () => e.preventDefault());
+      }, { passive: false });
+
+      vp.addEventListener('touchend', onEnd, { passive: true });
+      vp.addEventListener('touchcancel', onEnd, { passive: true });
+
+      // Pointer events (桌面滑鼠拖曳同樣絲滑支援)
+      vp.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'touch') return;
+        if (e.button !== 0) return;
+        onStart(e.clientX, e.clientY);
+      });
+      window.addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'touch') return;
+        onMove(e.clientX, e.clientY, null);
+      });
+      window.addEventListener('pointerup', (e) => {
+        if (e.pointerType === 'touch') return;
+        onEnd();
+      });
+    })();
+
+    // === 底座「年代快跳」iOS 物理慣性橫掃＋滾輪控制器（滑動時即時刷新上方 12 年宮格，絕不跳出視窗） ===
+    (function initDecadeBaseScrubber() {
+      const vp = document.getElementById('pyramidRailDecade');
+      const tr = document.getElementById('pyramidTrackDecade');
+      if (!vp || !tr) return;
+
+      const pxPerStep = 56;
+      let active = false;
+      let startX = 0;
+      let prevX = 0;
+      let prevTime = 0;
+      let velocityX = 0;
+      let lastStepCount = 0;
+      let momentumRaf = null;
+      let wheelAccum = 0;
+      let wheelTimer = null;
+
+      const stepDecadeBy = (diffSteps, animateGrid = false) => {
+        if (!diffSteps) return false;
+        const curDec = Math.floor(pyramidFocusYear / 10) * 10;
+        const nextDec = Math.max(1900, Math.min(2200, curDec + diffSteps * 10));
+        if (nextDec !== curDec) {
+          const oldStart = twoTierGridStartYear;
+          pyramidFocusYear = nextDec;
+          twoTierGridStartYear = Math.max(1900, Math.min(2189, nextDec));
+          renderTwoTierYearPicker();
+          if (animateGrid && twoTierGridStartYear !== oldStart) {
+            animateTwoTierGridSlide(twoTierGridStartYear > oldStart ? 1 : -1);
+          }
+          if (navigator.vibrate) {
+            try { navigator.vibrate(6); } catch (err) {}
+          }
+          return true;
+        }
+        return false;
+      };
+
+      const stopMomentum = () => {
+        if (momentumRaf) {
+          cancelAnimationFrame(momentumRaf);
+          momentumRaf = null;
+        }
+      };
+
+      vp.addEventListener('pointerdown', (e) => {
+        if (e.button !== 0 && e.pointerType === 'mouse') return;
+        stopMomentum();
+        active = true;
+        startX = prevX = e.clientX;
+        prevTime = performance.now();
+        velocityX = 0;
+        lastStepCount = 0;
+        tr.classList.add('is-scrubbing');
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!active) return;
+        const now = performance.now();
+        const dt = Math.max(1, now - prevTime);
+        velocityX = 0.7 * velocityX + 0.3 * ((e.clientX - prevX) / dt);
+        prevX = e.clientX;
+        prevTime = now;
+
+        const dx = e.clientX - startX;
+        const rawSteps = Math.trunc(-dx / pxPerStep);
+        const remainderPx = dx + rawSteps * pxPerStep;
+        tr.style.transform = `translate3d(${remainderPx * 0.72}px, 0, 0)`;
+
+        if (rawSteps !== lastStepCount) {
+          const diffSteps = rawSteps - lastStepCount;
+          lastStepCount = rawSteps;
+          stepDecadeBy(diffSteps, false);
+        }
+      });
+
+      const endScrub = (e) => {
+        if (!active) return;
+        const movedPx = e && typeof e.clientX === 'number' ? Math.abs(e.clientX - startX) : 0;
+        active = false;
+        tr.classList.remove('is-scrubbing');
+        tr.style.transform = 'translate3d(0, 0, 0)';
+        if (movedPx > 6 || lastStepCount !== 0) {
+          pyramidRailJustDragged = true;
+          setTimeout(() => { pyramidRailJustDragged = false; }, 140);
+        }
+
+        // iOS 慣性滑行減速：手勢快掃鬆手後按初速度自然滑過數個年代
+        if (Math.abs(velocityX) > 0.32) {
+          let v = Math.max(-2.6, Math.min(2.6, velocityX)) * 18; // px per frame
+          let carryPx = 0;
+          const glide = () => {
+            v *= 0.88; // 自然指數阻尼
+            carryPx += v;
+            if (Math.abs(carryPx) >= pxPerStep) {
+              const steps = Math.trunc(-carryPx / pxPerStep);
+              carryPx += steps * pxPerStep;
+              const moved = stepDecadeBy(steps, true);
+              if (!moved) {
+                stopMomentum();
+                tr.style.transform = 'translate3d(0, 0, 0)';
+                return;
+              }
+            }
+            tr.style.transform = `translate3d(${carryPx * 0.55}px, 0, 0)`;
+            if (Math.abs(v) > 0.45) {
+              momentumRaf = requestAnimationFrame(glide);
+            } else {
+              tr.style.transform = 'translate3d(0, 0, 0)';
+              momentumRaf = null;
+            }
+          };
+          momentumRaf = requestAnimationFrame(glide);
+        }
+      };
+
+      window.addEventListener('pointerup', endScrub);
+      window.addEventListener('pointercancel', endScrub);
+
+      vp.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        stopMomentum();
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        wheelAccum += delta;
+        if (Math.abs(wheelAccum) >= 34) {
+          const steps = Math.trunc(wheelAccum / 34);
+          wheelAccum -= steps * 34;
+          stepDecadeBy(steps, true);
+        }
+        clearTimeout(wheelTimer);
+        wheelTimer = setTimeout(() => { wheelAccum = 0; }, 160);
+      }, { passive: false });
+    })();
+
+    // === 外部「2027」按鈕按住左右拖曳切年 ＋ 觸控板雙指橫掃切年 ===
+    (function initYearButtonGestures() {
+      const bindGestures = (btnId, labelId) => {
+        const btn = document.getElementById(btnId);
+        const lbl = document.getElementById(labelId);
+        if (!btn) return;
+
+        let ptrStartX = 0;
+        let ptrDragging = false;
+        let ptrMoved = false;
+        let wheelLock = false;
+
+        btn.addEventListener('pointerdown', (e) => {
+          if (e.button !== 0 && e.pointerType === 'mouse') return;
+          ptrStartX = e.clientX;
+          ptrDragging = true;
+          ptrMoved = false;
+        });
+
+        window.addEventListener('pointermove', (e) => {
+          if (!ptrDragging) return;
+          const dx = e.clientX - ptrStartX;
+          if (Math.abs(dx) > 10) {
+            ptrMoved = true;
+            if (lbl) {
+              const clamped = Math.max(-18, Math.min(18, dx * 0.35));
+              lbl.style.transform = `translateX(${clamped}px)`;
+            }
+          }
+        });
+
+        const endPtr = (e) => {
+          if (!ptrDragging) return;
+          const dx = e.clientX - ptrStartX;
+          ptrDragging = false;
+          if (lbl) lbl.style.transform = 'translateX(0)';
+          if (ptrMoved) {
+            yearButtonJustDragged = true;
+            setTimeout(() => { yearButtonJustDragged = false; }, 120);
+            if (Math.abs(dx) >= 28) {
+              if (dx < 0) changeCalendarYear(selectedYear + 1, 1);
+              else changeCalendarYear(selectedYear - 1, -1);
+            }
+          }
+        };
+
+        window.addEventListener('pointerup', endPtr);
+        window.addEventListener('pointercancel', () => {
+          ptrDragging = false;
+          if (lbl) lbl.style.transform = 'translateX(0)';
+        });
+
+        btn.addEventListener('wheel', (e) => {
+          if (Math.abs(e.deltaX) > 18 && Math.abs(e.deltaX) > Math.abs(e.deltaY) * 1.4) {
+            e.preventDefault();
+            if (wheelLock) return;
+            wheelLock = true;
+            if (e.deltaX > 0) changeCalendarYear(selectedYear + 1, 1);
+            else changeCalendarYear(selectedYear - 1, -1);
+            setTimeout(() => { wheelLock = false; }, 320);
+          }
+        }, { passive: false });
+      };
+
+      bindGestures('btnOpenMainYearPopover', 'mainYearDisplayText');
+      bindGestures('btnOpenOverviewYearPopover', 'overviewYearDisplayText');
+    })();
+
+    // === 金字塔頂部內置「放大鏡直達日子」搜尋 ===
+    function toggleInsideDateSearchBar() {
+      const box = document.getElementById('insideQuickDateSearchBox');
+      if (!box) return;
+      const willOpen = box.classList.contains('hidden');
+      box.classList.toggle('hidden');
+      if (willOpen) {
+        const txt = document.getElementById('inputQuickDateText');
+        const nativeInp = document.getElementById('inputQuickDateNative');
+        if (nativeInp) nativeInp.value = `${pyramidFocusYear}-01-01`;
+        if (txt) {
+          txt.value = '';
+          updateQuickDatePreview('');
+          setTimeout(() => txt.focus(), 40);
+        }
+      }
+    }
+
+    function parseFlexibleDateInput(raw) {
+      const s = String(raw || '').trim();
+      if (!s) return null;
+
+      let y = null, m = 1, d = 1, hasMonth = false, hasDay = false;
+      const digitsOnly = s.replace(/\s+/g, '');
+      if (/^\d{4}$/.test(digitsOnly)) {
+        y = parseInt(digitsOnly, 10);
+      } else if (/^\d{6}$/.test(digitsOnly)) {
+        y = parseInt(digitsOnly.slice(0, 4), 10);
+        m = parseInt(digitsOnly.slice(4, 6), 10);
+        hasMonth = true;
+      } else if (/^\d{8}$/.test(digitsOnly)) {
+        y = parseInt(digitsOnly.slice(0, 4), 10);
+        m = parseInt(digitsOnly.slice(4, 6), 10);
+        d = parseInt(digitsOnly.slice(6, 8), 10);
+        hasMonth = true;
+        hasDay = true;
+      } else {
+        const normalized = s.replace(/[年\/\.]/g, '-').replace(/月/g, '-').replace(/日/g, '').replace(/\s+/g, '');
+        const parts = normalized.split('-').filter(Boolean);
+        if (parts.length >= 1 && /^\d{4}$/.test(parts[0])) {
+          y = parseInt(parts[0], 10);
+          if (parts.length >= 2 && /^\d{1,2}$/.test(parts[1])) {
+            m = parseInt(parts[1], 10);
+            hasMonth = true;
+          }
+          if (parts.length >= 3 && /^\d{1,2}$/.test(parts[2])) {
+            d = parseInt(parts[2], 10);
+            hasDay = true;
+          }
+        }
+      }
+
+      if (y === null || y < 1900 || y > 2200) return null;
+      if (m < 1 || m > 12) return null;
+      const maxDays = new Date(y, m, 0).getDate();
+      if (d < 1 || d > maxDays) return null;
+
+      const dateStr = `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      return { year: y, month: m, day: d, dateStr, hasMonth, hasDay };
+    }
+
+    function updateQuickDatePreview(val) {
+      const preview = document.getElementById('quickDateParsePreview');
+      if (!preview) return;
+      const trimmed = String(val || '').trim();
+      if (!trimmed) {
+        preview.className = 'text-[10px] font-semibold text-slate-500 truncate flex-1';
+        preview.textContent = 'YYYYMMDD 或 YYYY-M-D';
+        return;
+      }
+      const parsed = parseFlexibleDateInput(trimmed);
+      if (!parsed) {
+        preview.className = 'text-[10px] font-bold text-rose-500 truncate flex-1';
+        preview.textContent = '請輸入 1900–2200 有效日期';
+        return;
+      }
+      const weekNames = ['日', '一', '二', '三', '四', '五', '六'];
+      const wd = weekNames[new Date(parsed.year, parsed.month - 1, parsed.day).getDay()];
+      preview.className = 'text-[10px] font-extrabold text-blue-600 truncate flex-1';
+      if (parsed.hasDay) {
+        preview.textContent = `${parsed.year}年${parsed.month}月${parsed.day}日 (週${wd})`;
+      } else if (parsed.hasMonth) {
+        preview.textContent = `${parsed.year}年${parsed.month}月`;
+      } else {
+        preview.textContent = `${parsed.year}年`;
+      }
+    }
+
+    function jumpToTargetDateOnCalendar(parsed) {
+      if (!parsed) return;
+      pyramidFocusYear = parsed.year;
+      closeYearPickerPopover();
+      if (selectedYear !== parsed.year) {
+        const dir = parsed.year > selectedYear ? 1 : -1;
+        changeCalendarYear(parsed.year, dir);
+      }
+      setTimeout(() => {
+        const cell = document.querySelector(`.calendar-cell[data-date="${parsed.dateStr}"]`);
+        if (cell) {
+          const monthCard = cell.closest('.month-card') || cell;
+          monthCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          cell.classList.remove('cell-target-highlight');
+          void cell.offsetWidth;
+          cell.classList.add('cell-target-highlight');
+          setTimeout(() => cell.classList.remove('cell-target-highlight'), 2200);
+        }
+        if (parsed.hasDay) {
+          showToast(`📍 已直達 ${parsed.year}年${parsed.month}月${parsed.day}日`);
+        } else if (parsed.hasMonth) {
+          showToast(`📍 已直達 ${parsed.year}年${parsed.month}月`);
+        } else {
+          showToast(`📍 已切換至 ${parsed.year}年`);
+        }
+      }, 60);
+    }
+
+    function submitQuickDateJump() {
+      const txt = document.getElementById('inputQuickDateText');
+      const parsed = parseFlexibleDateInput(txt ? txt.value : '');
+      if (!parsed) {
+        if (txt) {
+          txt.classList.remove('cell-shake-anim');
+          void txt.offsetWidth;
+          txt.classList.add('cell-shake-anim');
+          txt.focus();
+        }
+        showToast('請輸入有效日期或年份（例如 19950818 或 2030-12-25）');
+        return;
+      }
+      jumpToTargetDateOnCalendar(parsed);
+    }
+
+    function jumpToQuickDateToday() {
+      const now = new Date();
+      const y = Math.max(1900, Math.min(2200, now.getFullYear()));
+      const m = now.getMonth() + 1;
+      const d = now.getDate();
+      jumpToTargetDateOnCalendar({
+        year: y,
+        month: m,
+        day: d,
+        dateStr: `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`,
+        hasMonth: true,
+        hasDay: true
+      });
+    }
+
+    (function initQuickDateSearchListeners() {
+      const txt = document.getElementById('inputQuickDateText');
+      const nativeInp = document.getElementById('inputQuickDateNative');
+      if (txt) {
+        txt.addEventListener('input', () => updateQuickDatePreview(txt.value));
+        txt.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            submitQuickDateJump();
+          } else if (e.key === 'Escape') {
+            closeYearPickerPopover();
+          }
+        });
+      }
+      if (nativeInp) {
+        nativeInp.addEventListener('change', () => {
+          if (!nativeInp.value) return;
+          const parsed = parseFlexibleDateInput(nativeInp.value);
+          if (parsed) {
+            if (txt) txt.value = parsed.dateStr;
+            jumpToTargetDateOnCalendar(parsed);
+          }
+        });
+      }
+    })();
 
     function animateCalendarSlideTransition(dir) {
       const container = document.getElementById('calendarContainer');
@@ -10631,7 +11378,7 @@
 
       const gapHtml = prevTrip ? buildIntervalGapHtml(trip.startDate, prevTrip.endDate) : '';
 
-            // === v5.3.32 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
+            // === v5.3.42 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
       const tripKey = `${trip.startDate}_${trip.endDate}`;
       const bData = (typeof tripBookings !== 'undefined' && tripBookings[tripKey]) ? tripBookings[tripKey] : null;
       const cleanOutSummary = bData && bData.flightOut ? bData.flightOut.replace(/\(00:00\s*➔\s*00:00\)/g, '').trim() : '';
@@ -11608,13 +12355,44 @@ function setupYearOverviewToggle() {
         let touchStartDist = 0;
         let swipeStartX = 0;
         let swipeStartY = 0;
-        let swipeStartTime = 0;
         let swipeAxis = null; // 'x' | 'y' | null
         let lastDeltaX = 0;
+        let wasThresholdReady = false;
+        let undoPillTimer = null;
+
+        const pullPill = document.getElementById('yearSwipePullIndicator');
+        const pullIcon = document.getElementById('yearSwipePullIcon');
+        const pullText = document.getElementById('yearSwipePullText');
+        const undoPill = document.getElementById('yearSwipeUndoPill');
+        const undoLabel = document.getElementById('yearSwipeUndoLabel');
+        const btnUndoYearSwipe = document.getElementById('btnUndoYearSwipe');
+
+        const hidePullIndicator = () => {
+          if (!pullPill) return;
+          pullPill.classList.remove('is-visible', 'is-ready');
+          wasThresholdReady = false;
+        };
+
+        const showUndoYearBanner = (fromYear, toYear) => {
+          if (!undoPill || !undoLabel || !btnUndoYearSwipe) return;
+          clearTimeout(undoPillTimer);
+          undoLabel.textContent = `已切換至 ${toYear} 年`;
+          btnUndoYearSwipe.textContent = `返回 ${fromYear}`;
+          btnUndoYearSwipe.onclick = () => {
+            clearTimeout(undoPillTimer);
+            undoPill.classList.remove('is-visible');
+            changeCalendarYear(fromYear, fromYear > toYear ? 1 : -1);
+          };
+          undoPill.classList.add('is-visible');
+          undoPillTimer = setTimeout(() => {
+            undoPill.classList.remove('is-visible');
+          }, 3500);
+        };
 
         container.addEventListener('touchstart', (e) => {
           if (e.touches.length === 2) {
             swipeAxis = null;
+            hidePullIndicator();
             touchStartDist = Math.hypot(
               e.touches[0].clientX - e.touches[1].clientX,
               e.touches[0].clientY - e.touches[1].clientY
@@ -11625,13 +12403,14 @@ function setupYearOverviewToggle() {
             // 若處於編輯模式且正在進行連劃排假，鎖定水平翻年手勢以免打斷劃假
             if (!document.body.classList.contains('readonly-mode') && typeof isDragging !== 'undefined' && isDragging) {
               swipeAxis = null;
+              hidePullIndicator();
               return;
             }
             swipeStartX = e.touches[0].clientX;
             swipeStartY = e.touches[0].clientY;
-            swipeStartTime = Date.now();
             swipeAxis = null;
             lastDeltaX = 0;
+            wasThresholdReady = false;
           }
         }, { passive: true });
 
@@ -11643,9 +12422,10 @@ function setupYearOverviewToggle() {
           const dy = e.touches[0].clientY - swipeStartY;
 
           if (!swipeAxis) {
-            if (Math.abs(dx) < 12 && Math.abs(dy) < 12) return;
-            // 必須明顯偏向水平方向（橫向位移 > 垂直位移 1.35 倍）才啟動跟指橫掃
-            if (Math.abs(dx) > Math.abs(dy) * 1.35) {
+            // 提高起步死區至 24px，過濾單手上下捲動時嘅輕微橫晃
+            if (Math.abs(dx) < 24 && Math.abs(dy) < 24) return;
+            // 嚴格水平角度鎖（|dx| > |dy| * 2.2，約 ±24° 內純橫掃先啟動）
+            if (Math.abs(dx) > Math.abs(dy) * 2.2) {
               swipeAxis = 'x';
               container.classList.add('touching');
             } else {
@@ -11655,11 +12435,47 @@ function setupYearOverviewToggle() {
 
           if (swipeAxis === 'x') {
             lastDeltaX = dx;
-            // 帶阻尼跟指位移（最多 65px），重現 iOS 原生橡皮筋手感
-            const dampedX = Math.max(-65, Math.min(65, dx * 0.42));
-            const fadeOpacity = Math.max(0.65, 1 - Math.abs(dampedX) / 220);
+            const targetYear = dx < 0 ? Math.min(2200, selectedYear + 1) : Math.max(1900, selectedYear - 1);
+            const atBoundary = (targetYear === selectedYear);
+            const thresholdPx = Math.min(130, Math.max(96, Math.round(window.innerWidth * 0.27)));
+            const isReady = !atBoundary && Math.abs(dx) >= thresholdPx;
+
+            // 高阻力邊緣橡筋阻尼（最多位移 44px），防止輕掃滑過頭
+            const dampedX = Math.max(-44, Math.min(44, dx * 0.28));
+            const fadeOpacity = Math.max(0.78, 1 - Math.abs(dampedX) / 220);
             container.style.transform = `translate3d(${dampedX}px, 0, 0)`;
             container.style.opacity = String(fadeOpacity);
+
+            if (pullPill && pullIcon && pullText) {
+              if (dx < 0) {
+                pullPill.style.right = '14px';
+                pullPill.style.left = 'auto';
+              } else {
+                pullPill.style.left = '14px';
+                pullPill.style.right = 'auto';
+              }
+              pullPill.classList.add('is-visible');
+
+              if (atBoundary) {
+                pullPill.classList.remove('is-ready');
+                pullIcon.className = 'fa-solid fa-ban text-[11px] text-slate-400';
+                pullText.textContent = `已達年份邊界 (${selectedYear})`;
+              } else if (isReady) {
+                pullPill.classList.add('is-ready');
+                pullIcon.className = 'fa-solid fa-check text-[11px] text-white';
+                pullText.textContent = `放開切換至 ${targetYear} ✓`;
+                if (!wasThresholdReady && navigator.vibrate) {
+                  try { navigator.vibrate(10); } catch (err) {}
+                }
+              } else {
+                pullPill.classList.remove('is-ready');
+                pullIcon.className = dx < 0
+                  ? 'fa-solid fa-arrow-left text-[11px] text-blue-600'
+                  : 'fa-solid fa-arrow-right text-[11px] text-blue-600';
+                pullText.textContent = `繼續拉動切換至 ${targetYear}`;
+              }
+              wasThresholdReady = isReady;
+            }
           }
         }, { passive: true });
 
@@ -11678,25 +12494,29 @@ function setupYearOverviewToggle() {
               toggleYearOverview(false);
             }
             touchStartDist = 0;
+            hidePullIndicator();
             return;
           }
 
           if (swipeAxis === 'x') {
             container.classList.remove('touching');
-            const elapsed = Date.now() - swipeStartTime;
-            const velocity = Math.abs(lastDeltaX) / Math.max(1, elapsed);
-            const triggered = Math.abs(lastDeltaX) > 58 || (Math.abs(lastDeltaX) > 32 && velocity > 0.35);
+            hidePullIndicator();
+            const thresholdPx = Math.min(130, Math.max(96, Math.round(window.innerWidth * 0.27)));
+            const triggered = Math.abs(lastDeltaX) >= thresholdPx;
 
             if (triggered) {
-              if (lastDeltaX < 0) {
-                // 向左掃 ➔ 下一年
-                changeCalendarYear(selectedYear + 1, 1);
+              const prevYear = selectedYear;
+              const nextYear = lastDeltaX < 0 ? Math.min(2200, selectedYear + 1) : Math.max(1900, selectedYear - 1);
+              if (nextYear !== prevYear) {
+                changeCalendarYear(nextYear, lastDeltaX < 0 ? 1 : -1);
+                showUndoYearBanner(prevYear, nextYear);
               } else {
-                // 向右掃 ➔ 上一年
-                changeCalendarYear(selectedYear - 1, -1);
+                container.style.transition = 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease';
+                container.style.transform = 'translate3d(0, 0, 0)';
+                container.style.opacity = '1';
               }
             } else {
-              // 未達翻頁門檻，絲滑回彈原位
+              // 未達拉動釋放門檻，絲滑回彈原位（絕不誤切年份）
               container.style.transition = 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease';
               container.style.transform = 'translate3d(0, 0, 0)';
               container.style.opacity = '1';
@@ -11708,6 +12528,7 @@ function setupYearOverviewToggle() {
 
         container.addEventListener('touchcancel', () => {
           container.classList.remove('touching');
+          hidePullIndicator();
           container.style.transform = 'translate3d(0, 0, 0)';
           container.style.opacity = '1';
           swipeAxis = null;
@@ -18379,7 +19200,7 @@ function setupYearOverviewToggle() {
     </div>
   </div>
 
-      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.32 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
+      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.42 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
   <div id="inlineBookingStudioParkingBay" class="hidden">
 
   <!-- 原裝完整「旅程預訂資料」流暢原地收放面板（全程零彈窗、無重複標題與多餘收起掣） -->
@@ -19448,7 +20269,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.3.32</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.3.42</span>
           </button>
         </div>
       </div>
