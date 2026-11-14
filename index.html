@@ -78,6 +78,7 @@
       border-color: #203895 !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-header {
+      background-image: none !important;
       background-color: #2E49A3 !important;
       border-bottom-color: #60a5fa !important;
     }
@@ -96,7 +97,18 @@
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-no-input::placeholder {
       color: rgba(255, 255, 255, 0.62) !important;
     }
-    /* 頂部右側日期：在 HKG 閘口柱下化身為「41」登機閘口超大鮮黃數字（如 1225）＋ 下方極細字（12月 / 25日 週五） */
+    /* 航空公司列右側：修長精緻方圓形雷達鍵（位於 FLT 航班編號膠囊左手邊） */
+    .flight-radar-squircle {
+      background-color: #f8fafc;
+      border-color: #cbd5e1;
+      color: #334155;
+    }
+    .flight-radar-squircle:hover {
+      background-color: #eff6ff;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+    }
+        /* 頂部右側日期：在 HKG 閘口柱下化身為「41」登機閘口超大鮮黃數字（如 1225）＋ 下方極細字（12月 / 25日 週五） */
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-date-chip {
       background-color: transparent !important;
       border-color: transparent !important;
@@ -137,6 +149,83 @@
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-airport-sub {
       color: rgba(255, 255, 255, 0.95) !important;
+    }
+    /* 航班卡片左下角：與右側三圓點完全對等嘅圓形雷達膠囊（單擊直達預設平台 · 長按/右鍵橫向伸展雙平台選擇） */
+    .radar-morph-pill {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      border-radius: 9999px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+      padding: 0 3px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+    .radar-morph-pill.is-open {
+      background: #ffffff;
+      border-color: #93c5fd;
+      box-shadow: 0 4px 12px -2px rgba(37, 99, 235, 0.18);
+      padding: 0 5px;
+    }
+    .radar-morph-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: max-width 0.34s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease, margin-left 0.22s ease;
+    }
+    .radar-morph-pill.is-open .radar-morph-actions {
+      max-width: 196px;
+      opacity: 1;
+      margin-left: 4px;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer .radar-morph-pill {
+      background-color: rgba(255, 255, 255, 0.14) !important;
+      border-color: rgba(255, 255, 255, 0.35) !important;
+      box-shadow: none !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer .radar-morph-pill.is-open {
+      background-color: #ffffff !important;
+      border-color: #FBF238 !important;
+      box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.25) !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer .radar-morph-main-btn {
+      background-color: rgba(255, 255, 255, 0.18) !important;
+      color: #ffffff !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer .radar-morph-main-btn:hover {
+      background-color: rgba(255, 255, 255, 0.32) !important;
+      color: #FBF238 !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer .radar-morph-pill.is-open .radar-morph-main-btn {
+      background-color: #eff6ff !important;
+      color: #1d4ed8 !important;
+    }
+    /* 預訂卡片底部：三圓點伸展鵝蛋形膠囊 [✎] [↺]（支援雙主題自適應） */
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer .trip-morph-pill {
+      background-color: rgba(255, 255, 255, 0.14) !important;
+      border-color: rgba(255, 255, 255, 0.35) !important;
+      box-shadow: none !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer .trip-morph-pill.is-open {
+      background-color: rgba(255, 255, 255, 0.24) !important;
+      border-color: #FBF238 !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer .trip-morph-dots-btn {
+      background-color: rgba(255, 255, 255, 0.18) !important;
+      color: #ffffff !important;
+    }
+    #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer .trip-morph-dots-btn:hover {
+      background-color: rgba(255, 255, 255, 0.32) !important;
+      color: #FBF238 !important;
     }
     #flightSectionWrapper.hkg-pillar-theme .flight-pillar-footer {
       background-color: #2E49A3 !important;
@@ -1153,6 +1242,57 @@
       transform: scale(1.15);
       color: #2563eb;
     }
+    /* 原地無跳動平滑展開抽屜（CSS Grid 0fr -> 1fr，版面零抽動） */
+    .inline-booking-accordion {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      overflow-anchor: none;
+      transition: grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease;
+    }
+    .inline-booking-accordion.is-open {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+    .inline-booking-accordion > .inline-booking-accordion-inner {
+      min-height: 0;
+      overflow: hidden;
+    }
+    /* 旅程卡片右上角：極簡圓點 (•••) ➔ 點擊橫向平滑伸展為鵝蛋形膠囊 [✎] [🗑] */
+    .trip-morph-pill {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      border-radius: 9999px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+      overflow: hidden;
+      padding: 0 3px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .trip-morph-pill.is-open {
+      background: #ffffff;
+      border-color: #93c5fd;
+      box-shadow: 0 4px 12px -2px rgba(37, 99, 235, 0.18);
+      padding: 0 5px;
+    }
+    .trip-morph-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: max-width 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease, margin-right 0.22s ease;
+    }
+    .trip-morph-pill.is-open .trip-morph-actions {
+      max-width: 84px;
+      opacity: 1;
+      margin-right: 4px;
+    }
+
 
     /* 假期間距時間走廊 */
     .interval-gap-rail {
@@ -1377,16 +1517,23 @@
     }
 
     #btnClearAll {
-      background: rgba(255, 255, 255, 0.85) !important;
-      backdrop-filter: blur(12px) !important;
-      border: 1px solid rgba(254, 205, 211, 0.9) !important;
-      box-shadow: 0 2px 6px -1px rgba(225, 29, 72, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(254, 205, 211, 0.95);
+      box-shadow: 0 2px 6px -1px rgba(225, 29, 72, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.85);
     }
     #btnClearAll:hover {
-      background: rgba(255, 241, 242, 0.95) !important;
-      border-color: #f43f5e !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px -2px rgba(225, 29, 72, 0.14) !important;
+      background: rgba(255, 241, 242, 0.96);
+      border-color: #f43f5e;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px -2px rgba(225, 29, 72, 0.16);
+    }
+    #btnClearAll.is-eraser-active,
+    #btnClearAll.is-eraser-active:hover {
+      background: #e11d48 !important;
+      border-color: #be123c !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px -2px rgba(225, 29, 72, 0.35) !important;
     }
 
     .brush-card {
@@ -1858,7 +2005,6 @@
 
               <!-- 手機版專屬：右側華麗旋轉圓形功能球（無文字，點擊旋轉展開/收起 假期助手至檢視列） -->
               <div class="flex md:hidden items-center gap-2">
-                <span id="mobileActiveModeMiniBadge" class="hidden text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">編輯中</span>
                 <button type="button" id="btnToggleMobileToolbar" onclick="toggleMobileHeaderToolbar()" aria-label="展開或收起工具列"
                         class="mobile-orb-btn cursor-pointer select-none">
                   <i id="mobileToolbarToggleIcon" class="fa-solid fa-chevron-down mobile-orb-icon"></i>
@@ -1911,7 +2057,7 @@
 
           <!-- 右側剩餘位：純圖示圓方型「重設」與「檢視/編輯」按鈕群（零冗贅文字） -->
           <div class="flex flex-col md:flex-row items-center gap-1 shrink-0">
-            <button id="btnClearAll" aria-label="全部重設" class="w-[34px] h-[34px] md:w-[32px] md:h-[32px] bg-white/80 hover:bg-rose-50 border border-slate-200/80 hover:border-rose-200 rounded-xl text-slate-500 hover:text-rose-600 flex items-center justify-center transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer">
+            <button id="btnClearAll" aria-label="單日清除日曆" class="w-[34px] h-[34px] md:w-[32px] md:h-[32px] rounded-xl text-rose-600 flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer shrink-0">
               <i class="fa-solid fa-trash-can text-[12px]"></i>
             </button>
 
@@ -1933,8 +2079,8 @@
           
         </div>
         <div class="flex items-center gap-2">
-          <span class="text-slate-600 font-medium">同步代碼：</span>
-          <input type="text" id="desktopRoomInput" class="px-2 py-0.5 bg-white border border-blue-300 rounded font-mono font-bold text-blue-700 text-xs tracking-wider w-24 uppercase text-center focus:outline-blue-500" placeholder="輸入代碼">
+          <span class="text-slate-600 font-medium">同步代碼 (4–32位英數)：</span>
+          <input type="text" id="desktopRoomInput" maxlength="32" class="px-2 py-0.5 bg-white border border-blue-300 rounded font-mono font-bold text-blue-700 text-xs tracking-wider w-32 uppercase text-center focus:outline-blue-500" placeholder="4–32位英數字">
           <button id="btnDesktopSwitchRoom" class="px-2.5 py-0.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded transition">立即連接</button>
           <button id="btnDesktopResetPin" class="px-2.5 py-0.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded transition text-[11px]">重設 PIN</button>
         </div>
@@ -2120,7 +2266,7 @@
         
         
         <!-- 手機版頂部：iOS 智慧單張焦點 Banner (Smart Stack · 78% 寬度黃金比例 · 露出下一趟相片預視 · 零滾動條) -->
-        <div id="mobileTopTripRibbon" class="lg:hidden hidden mb-1">
+        <div id="mobileTopTripRibbon" style="overflow-anchor: none;" class="lg:hidden hidden mb-1">
           <div class="rounded-2xl bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-sm overflow-hidden">
             <!-- 頂部極簡 Smart Stack 導航列 -->
             <div class="px-3 py-1 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between text-[10px]">
@@ -2402,7 +2548,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.3.8 更新日誌</span>
+      <span>v5.3.32 更新日誌</span>
     </button>
   </footer>
 
@@ -2444,7 +2590,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.3.8</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.3.32</span>
             </h3>
           </div>
         </div>
@@ -2454,18 +2600,17 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.3.8 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- v5.3.32 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.3.8（城市編輯框精巧定寬 · 無框純淨編輯筆與 HKG 閘口柱純白圖標 · 航司佔位細字 · 放大去程／回程標題）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">DETAIL POLISH</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.3.32（還原右下灰色三圓點圓波 · 鎖定 HKG 閘口柱純正寶石鈷藍頂欄 · 簡約登機牌淺灰方框與無框靠右日期）<span class="ml-1.5 px-1.5 py-0.2 bg-[#2E49A3] text-[#FBF238] rounded text-[9px] font-bold">THEME & DATE REFINED</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-14</span>
           </div>
-          <div class="text-[11px] font-semibold text-slate-800">🎨 精修手機版預訂工作台比例與視覺層次，文字大小對比更協調俐落</div>
+          <div class="text-[11px] font-semibold text-slate-800">🎨 還原右下角灰色圓波、修復 HKG 閘口柱頂欄藍色並精調簡約登機牌日期方框</div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            <li><b>① 城市編輯框精巧定寬（<code>5.2rem</code>）</b>：編輯態下出發與目的城市輸入框不再過度拉長佔滿整行，剛好容納中英文城市名。</li>
-            <li><b>② 移除所有編輯筆外框 ＋ HKG 閘口柱改用純白筆圖示</b>：取消兩個主題下編輯按鈕的邊框與底盒，並在 HKG 閘口柱模式將筆圖示改為純淨白色（取代原先黃色）。</li>
-            <li><b>③ 航司空白佔位文字縮細</b>：未輸入班次時的灰色「去程航班 Outbound Flight / 回程航班 Inbound Flight」縮細至 <code>10.5px</code>，主次更分明。</li>
-            <li><b>④ 放大左上角「去程 Outbound / 回程 Inbound」標題</b>：由 <code>11px</code> 放大加粗至 <code>13.5px–14px</code>，一眼看清航段方向。</li>
+            <li><b>① 還原右下角灰色圓波（<code>•••</code>）</b>：取消覆蓋右下角圓波為藍色剔號，完整恢復原本灰色三圓點與展開膠囊樣式。</li>
+            <li><b>② 鎖定 HKG 閘口柱純正寶石鈷藍（<code>#2E49A3</code>）</b>：清除漸變背景覆蓋（<code>background-image: none !important</code>），確保切換至 HKG 閘口柱時頂欄 100% 呈現原本經典藍色。</li>
+            <li><b>③ 簡約登機牌淺灰日期方框</b>：外框恢復一致的淺灰微邊框，上方「<code>月日</code>」字級微調適中、下方「<code>週六</code>」取消外框並向右拍齊。</li>
           </ul>
         </div>
 
@@ -4486,8 +4631,11 @@
         <button id="btnCloseMobileSync" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition active:scale-95"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div>
-        <label class="block text-slate-500 mb-1">同步代碼：</label>
-        <input type="text" id="mobileRoomInput" class="w-full px-2.5 py-1.5 border border-blue-300 rounded-lg font-mono font-bold text-center text-blue-700 uppercase" placeholder="輸入代碼">
+        <div class="flex items-center justify-between mb-1">
+          <label class="text-slate-600 font-bold">同步代碼 (4–32 位英數字)：</label>
+          <span id="mobileRoomValidationHint" class="text-[10px] font-bold text-slate-400">支援 A–Z, 0–9, _ -</span>
+        </div>
+        <input type="text" id="mobileRoomInput" maxlength="32" class="w-full px-2.5 py-1.5 border border-blue-300 rounded-lg font-mono font-bold text-center text-blue-700 uppercase" placeholder="例如：HK2027VIP">
       </div>
       <div class="flex gap-2">
         <button id="btnMobileSwitchRoom" class="flex-1 py-1.5 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">立即連接</button>
@@ -4955,7 +5103,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.3.8';
+    const APP_VERSION = '5.3.32';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -8219,7 +8367,7 @@
           console.warn('Firebase 驗證受阻，啟動防覆蓋保護模式:', err);
           if (err && (err.httpStatus === 401 || err.httpStatus === 403)) {
             fallbackToLocalCacheSafely('權限受限(本機保護)');
-            showToast('🛡️ 雲端讀寫權限受限，已自動載入本機備份並鎖定防覆蓋');
+            showToast('🛡️ 雲端權限受限：請確認同步代碼為 4–32 位英數字，已自動載入本機備份');
           } else {
             fallbackToLocalCacheSafely('離線本機保護');
             showToast('📡 網絡暫時無法連接雲端，已自動載入本機備份');
@@ -10321,7 +10469,7 @@
               <span class="hero-days-number text-2xl sm:text-3xl">${trip.totalDays}</span>
               <span class="text-[10px] font-bold text-blue-600">日</span>
             </div>
-            <span class="text-[8.5px] font-bold px-1.5 py-0.5 bg-amber-100 text-amber-800 rounded-md border border-amber-200 mt-0.5 whitespace-nowrap">
+            <span class="text-[8.5px] font-bold px-1.5 py-0.5 bg-slate-100 text-slate-700 rounded-md border border-slate-200 mt-0.5 whitespace-nowrap">
               請 ${trip.userDays % 1 === 0 ? trip.userDays.toFixed(0) : trip.userDays.toFixed(1)} 放 ${trip.totalDays % 1 === 0 ? trip.totalDays.toFixed(0) : trip.totalDays.toFixed(1)}
             </span>
           </div>
@@ -10472,7 +10620,7 @@
       const formulaParts = chronologicalSegments.map(seg => {
         const days = seg.slots * 0.5;
         const daysText = (days % 1 === 0) ? days.toFixed(0) : days.toFixed(1);
-        return `<span class="px-2 py-0.5 rounded-full ${seg.pillClass}">${daysText}天 ${seg.label}</span>`;
+        return `<span class="px-2 py-0.5 rounded-full ${seg.pillClass}">${daysText} · ${seg.label}</span>`;
       });
 
       const formula = `
@@ -10483,7 +10631,7 @@
 
       const gapHtml = prevTrip ? buildIntervalGapHtml(trip.startDate, prevTrip.endDate) : '';
 
-            // === v5.3.8 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
+            // === v5.3.32 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
       const tripKey = `${trip.startDate}_${trip.endDate}`;
       const bData = (typeof tripBookings !== 'undefined' && tripBookings[tripKey]) ? tripBookings[tripKey] : null;
       const cleanOutSummary = bData && bData.flightOut ? bData.flightOut.replace(/\(00:00\s*➔\s*00:00\)/g, '').trim() : '';
@@ -10494,17 +10642,45 @@
       if (hasBooking) {
         const outNo = (bData.flightOutNo || (bData.flightOut ? bData.flightOut.split(' ')[0] : '')).toUpperCase();
         const inNo = (bData.flightInNo || (bData.flightIn ? bData.flightIn.split(' ')[0] : '')).toUpperCase();
+        const flightLabel = outNo ? `${outNo}${inNo ? ' / ' + inNo : ''}` : '';
+        const stayLabel = (bData.hotelName || bData.hotelAddress || '').trim();
         const routeChip = (bData.flightOutOriginCode && bData.flightOutDestCode)
           ? `${bData.flightOutOriginCode} ⇄ ${bData.flightOutDestCode}`
-          : (outNo && inNo ? `${outNo} / ${inNo}` : (outNo || bData.hotelName || '行程預訂已備'));
-        const summaryTag = outNo ? `${outNo}${inNo ? ' / ' + inNo : ''}` : (bData.hotelName || '行程預訂已備');
+          : '';
+
+        let summaryInnerHtml = '';
+        if (flightLabel && stayLabel) {
+          summaryInnerHtml = `
+            <i class="fa-solid fa-ticket text-sky-600 shrink-0"></i>
+            <span class="font-mono font-extrabold text-blue-800 shrink-0">${flightLabel}</span>
+            <span class="text-sky-300 shrink-0">·</span>
+            <i class="fa-solid fa-house-chimney text-sky-600 text-[10px] shrink-0"></i>
+            <span class="text-blue-800 font-bold truncate">${stayLabel}</span>
+          `;
+        } else if (flightLabel) {
+          summaryInnerHtml = `
+            <i class="fa-solid fa-ticket text-sky-600 shrink-0"></i>
+            <span class="font-mono font-extrabold text-blue-800 shrink-0">${flightLabel}</span>
+            ${routeChip ? `<span class="text-sky-300 shrink-0">·</span><span class="text-blue-800 font-bold truncate">${routeChip}</span>` : ''}
+          `;
+        } else if (stayLabel) {
+          summaryInnerHtml = `
+            <i class="fa-solid fa-house-chimney text-sky-600 text-[10px] shrink-0"></i>
+            <span class="text-blue-800 font-bold truncate">${stayLabel}</span>
+          `;
+        } else {
+          summaryInnerHtml = `
+            <i class="fa-solid fa-ticket text-sky-600 shrink-0"></i>
+            <span class="font-bold text-blue-800 truncate">行程預訂已備</span>
+          `;
+        }
 
         const countdownInfo = calculateFlightCountdown(bData.flightOutDate || trip.startDate, bData.flightOutDep);
         let countdownBadgeHtml = '';
         if (countdownInfo && !countdownInfo.expired) {
           countdownBadgeHtml = `
-            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-300 font-bold text-[9.5px] shrink-0">
-              <i class="fa-solid fa-hourglass-half text-amber-600 text-[8.5px]"></i>
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-bold text-[9.5px] shrink-0">
+              <i class="fa-solid fa-hourglass-half text-slate-500 text-[8.5px]"></i>
               <span>${countdownInfo.badgeText}</span>
             </span>
           `;
@@ -10515,9 +10691,7 @@
             <div class="flex items-center justify-between gap-1.5">
               <button type="button" class="btn-open-booking-modal flex-1 min-w-0 flex items-center justify-between gap-1.5 font-bold text-sky-950 bg-gradient-to-r from-slate-50 via-sky-50/90 to-blue-50/90 hover:from-sky-100/80 hover:to-blue-100/80 border border-sky-300/80 px-2.5 py-1.5 rounded-xl transition active:scale-[0.99] shadow-2xs cursor-pointer" data-trip-key="${tripKey}">
                 <span class="flex items-center gap-1.5 min-w-0 truncate">
-                  <i class="fa-solid fa-ticket text-sky-600 shrink-0"></i>
-                  <span class="font-mono font-extrabold text-blue-800 shrink-0">${summaryTag}</span>
-                  ${bData.hotelName ? `<span class="text-slate-400 shrink-0">·</span><span class="text-slate-700 font-semibold truncate">${bData.hotelName}</span>` : (routeChip !== summaryTag ? `<span class="text-slate-400 shrink-0">·</span><span class="text-slate-700 font-semibold truncate">${routeChip}</span>` : '')}
+                  ${summaryInnerHtml}
                 </span>
                 <span class="inline-flex items-center gap-1 text-[10px] font-extrabold text-blue-700 shrink-0">
                   <span class="inline-booking-toggle-label" data-default-label="詳情">詳情</span>
@@ -10568,22 +10742,39 @@
               <!-- 2. 中間文字與行程資訊 (自適應排版，完整顯示字樣) -->
               <div class="flex-1 min-w-0 px-1 sm:px-1.5 flex flex-col justify-between self-stretch py-0.5">
                 <div>
-                  <div class="flex items-center gap-1.5 mb-1">
-                    <span class="text-[9px] font-extrabold px-1.5 py-0.5 bg-blue-100 text-blue-800 rounded tracking-tight">旅程 #${idx + 1}</span>
-                    ${pureFlagHtml}
+                  <div class="flex items-center justify-between gap-1.5 mb-1">
+                    <div class="flex items-center gap-1.5 min-w-0">
+                      <span class="text-[9px] font-bold px-1.5 py-0.5 bg-slate-100 text-slate-500 border border-slate-200/80 rounded tracking-tight shrink-0">旅程 #${idx + 1}</span>
+                      ${pureFlagHtml}
+                    </div>
+                    <!-- 極簡小圓點 (•••) ➔ 點擊橫向平滑伸展為鵝蛋形膠囊，露出純圖示 [✎] 與 [🗑] -->
+                    <div class="trip-morph-pill shrink-0" onclick="event.stopPropagation()">
+                      <div class="trip-morph-actions">
+                        <button type="button" onclick="event.stopPropagation(); window.openEditTripTitleModal('${trip.startDate}_${trip.endDate}')"
+                                class="btn-edit-trip-title w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90"
+                                data-trip-key="${trip.startDate}_${trip.endDate}" aria-label="修改旅程標題">
+                          <i class="fa-solid fa-pen text-[9px]"></i>
+                        </button>
+                        <button type="button" onclick="event.stopPropagation(); window.deleteSingleTripByKey('${trip.startDate}_${trip.endDate}')"
+                                class="btn-delete-trip-card w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90"
+                                data-trip-key="${trip.startDate}_${trip.endDate}" aria-label="刪除此旅程">
+                          <i class="fa-solid fa-trash-can text-[9px]"></i>
+                        </button>
+                      </div>
+                      <button type="button" onclick="event.stopPropagation(); toggleTripMorphPill(this)" aria-label="展開或收起旅程選項"
+                              class="w-4 h-4 rounded-full bg-slate-200/85 hover:bg-blue-100 text-slate-600 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer transition">
+                        <i class="fa-solid fa-ellipsis text-[9px]"></i>
+                      </button>
+                    </div>
                   </div>
-                  <h4 class="font-black text-xs sm:text-sm text-slate-900 leading-snug flex items-center gap-1">
+                  <h4 class="font-black text-xs sm:text-sm text-slate-900 leading-snug">
                     <span class="line-clamp-2 break-words">${trip.title}</span>
-                    <button type="button" class="btn-edit-trip-title text-slate-400 hover:text-blue-600 transition shrink-0 p-0.5" 
-                            data-trip-key="${trip.startDate}_${trip.endDate}">
-                      <i class="fa-solid fa-pen text-[9.5px]"></i>
-                    </button>
                   </h4>
                 </div>
                 <div class="mt-1 space-y-1">
                   <p class="text-[10px] sm:text-[11px] font-bold text-slate-600 leading-tight">${formatHKDate(trip.startDate)} 至 ${formatHKDate(trip.endDate)}</p>
                   <div class="flex items-center gap-1">
-                    <span class="text-[8.5px] sm:text-[9px] font-black px-1.5 py-0.5 bg-amber-100 text-amber-900 rounded-md border border-amber-200 whitespace-nowrap inline-block">
+                    <span class="text-[8.5px] sm:text-[9px] font-bold px-1.5 py-0.5 bg-slate-100 text-slate-700 rounded-md border border-slate-200 whitespace-nowrap inline-block">
                       請 ${trip.userDays % 1 === 0 ? trip.userDays.toFixed(0) : trip.userDays.toFixed(1)} 放 ${trip.totalDays % 1 === 0 ? trip.totalDays.toFixed(0) : trip.totalDays.toFixed(1)}
                     </span>
                   </div>
@@ -10857,52 +11048,69 @@
           `;
         }
 
-        const flightBadgeHtml = isHkgPillar
-          ? `<a href="${outNo ? getFlightAwareUrl(outNo) : '#'}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
-                class="w-full justify-center px-1.5 py-0.5 rounded-md bg-[#2E49A3] border border-[#60a5fa]/70 text-[#FBF238] font-mono font-black text-[9.5px] tracking-wide shadow-2xs inline-flex items-center gap-1">
-               <i class="fa-solid fa-plane text-[8px] text-[#FBF238]"></i>
-               <span>${outNo}</span>
-             </a>`
-          : `<a href="${outNo ? getFlightAwareUrl(outNo) : '#'}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
-                class="w-full justify-center px-1.5 py-0.5 rounded-md bg-slate-100 hover:bg-blue-50 border border-slate-300 text-blue-700 font-mono font-black text-[9.5px] tracking-wide shadow-2xs inline-flex items-center gap-1">
-               <i class="fa-solid fa-plane text-[8px] text-blue-600"></i>
-               <span>${outNo}</span>
-             </a>`;
-
-        // 右手邊框內靠左對齊（items-start text-left），拉闊至與左側相框左右對稱
+        // 方案 A：整格右側票根化為「無雷達外鏈、零誤觸」直達機票與住宿詳情大按鈕，並以等寬圖示列精準垂直對齊航班號與起飛時間
         const hasAnyBooking = Boolean(outNo || hotelName || (bData && (bData.flightInNo || bData.hotelAddress || bData.notes || bData.flightPnr)));
         let rightTicketColHtml = '';
         if (hasAnyBooking) {
+          const infoBoxCls = isHkgPillar
+            ? 'w-full px-1.5 py-1 rounded-lg bg-[#2E49A3] border border-[#60a5fa]/65 shadow-2xs space-y-0.5'
+            : 'w-full px-1.5 py-1 rounded-lg bg-slate-50 group-hover:bg-blue-50/80 border border-slate-200/90 transition space-y-0.5';
+          const planeIconCls = isHkgPillar ? 'text-[#FBF238]' : 'text-blue-600';
+          const flightTxtCls = isHkgPillar ? 'text-[#FBF238]' : 'text-blue-700';
+          const clockIconCls = isHkgPillar ? 'text-white/85' : 'text-slate-600';
+          const timeTxtCls = isHkgPillar ? 'text-white' : 'text-slate-900';
+          const ctaBarCls = isHkgPillar
+            ? 'ribbon-cta-bar w-full py-0.5 rounded-md bg-[#992942] text-[#FBF238] text-[9px] font-extrabold flex items-center justify-center gap-1 shadow-2xs transition'
+            : 'ribbon-cta-bar w-full py-0.5 rounded-md bg-blue-600 group-hover:bg-blue-700 text-white text-[9px] font-extrabold flex items-center justify-center gap-1 shadow-2xs transition';
+
+          const alignedRowsHtml = outNo
+            ? `<div class="flex items-center gap-1.5 min-w-0 leading-tight">
+                 <i class="fa-solid fa-plane w-3 text-center text-[8.5px] ${planeIconCls} shrink-0"></i>
+                 <span class="font-mono font-black text-[10px] ${flightTxtCls} tracking-tight truncate">${outNo}</span>
+               </div>
+               <div class="flex items-center gap-1.5 min-w-0 leading-tight">
+                 <i class="fa-regular fa-clock w-3 text-center text-[8.5px] ${clockIconCls} shrink-0"></i>
+                 <span class="font-mono font-extrabold text-[10px] ${timeTxtCls} tracking-tight truncate">${(outDep && outDep !== '00:00') ? outDep : '已登記'}</span>
+               </div>`
+            : (hotelName
+              ? `<div class="flex items-center gap-1.5 min-w-0 leading-tight">
+                   <i class="fa-solid fa-hotel w-3 text-center text-[8.5px] ${planeIconCls} shrink-0"></i>
+                   <span class="font-bold text-[9.5px] ${timeTxtCls} truncate">${hotelName}</span>
+                 </div>
+                 <div class="flex items-center gap-1.5 min-w-0 leading-tight">
+                   <i class="fa-solid fa-circle-check w-3 text-center text-[8px] ${clockIconCls} shrink-0"></i>
+                   <span class="font-bold text-[9px] ${timeTxtCls} opacity-90 truncate">住宿已備</span>
+                 </div>`
+              : `<div class="flex items-center gap-1.5 min-w-0 leading-tight">
+                   <i class="fa-solid fa-ticket w-3 text-center text-[8.5px] ${planeIconCls} shrink-0"></i>
+                   <span class="font-bold text-[9.5px] ${timeTxtCls} truncate">行程已備</span>
+                 </div>
+                 <div class="flex items-center gap-1.5 min-w-0 leading-tight">
+                   <i class="fa-solid fa-circle-check w-3 text-center text-[8px] ${clockIconCls} shrink-0"></i>
+                   <span class="font-bold text-[9px] ${timeTxtCls} opacity-90 truncate">已登記</span>
+                 </div>`);
+
           rightTicketColHtml = `
-            <div class="shrink-0 w-[92px] pl-2.5 border-l border-dashed border-slate-200 flex flex-col justify-between items-start text-left">
-              ${outNo ? `
-                ${flightBadgeHtml}
-                <div class="w-full justify-center px-1.5 py-0.5 rounded-md bg-white border border-slate-300/90 text-slate-900 font-mono font-black text-[10.5px] tracking-wide shadow-2xs inline-flex items-center gap-1">
-                  <i class="fa-regular fa-clock text-[8.5px] text-slate-900"></i>
-                  <span>${(outDep && outDep !== '00:00') ? outDep : '已登記'}</span>
-                </div>
-              ` : (hotelName ? `
-                <span class="w-full px-1.5 py-0.5 rounded-md bg-sky-50 text-sky-800 border border-sky-200 font-bold text-[8.5px] truncate text-left">🏨 ${hotelName}</span>
-                <span class="text-[9px] font-bold text-slate-500 px-0.5">住宿已備</span>
-              ` : `
-                <span class="w-full px-1.5 py-0.5 rounded-md bg-sky-50 text-sky-800 border border-sky-200 font-bold text-[8.5px] text-left">行程已備</span>
-                <span class="text-[9px] font-bold text-slate-500 px-0.5">已登記</span>
-              `)}
-              <button type="button" data-ribbon-booking-key="${tripKey}" onclick="event.stopPropagation(); openTripBookingByKey('${tripKey}', 'ribbon', this)"
-                      class="btn-ribbon-inline-booking w-full justify-center px-2 py-0.5 rounded-md bg-slate-100 hover:bg-blue-50 border border-slate-200/90 text-[9px] font-extrabold text-slate-700 hover:text-blue-700 inline-flex items-center gap-1 cursor-pointer active:scale-95 transition">
-                <i class="fa-solid fa-sliders text-[8px] text-blue-600"></i><span>憑證</span>
-              </button>
-            </div>
+            <button type="button" data-ribbon-booking-key="${tripKey}" onclick="event.stopPropagation(); openTripBookingByKey('${tripKey}', 'ribbon', this)"
+                    class="btn-ribbon-inline-booking shrink-0 w-[94px] pl-2 border-l border-dashed border-slate-300 flex flex-col justify-between items-stretch text-left group cursor-pointer active:scale-95 transition">
+              <div class="${infoBoxCls}">
+                ${alignedRowsHtml}
+              </div>
+              <div class="${ctaBarCls}">
+                <span class="ribbon-cta-label">機票住宿</span>
+                <i class="ribbon-cta-chevron fa-solid fa-chevron-down text-[7.5px] transition-transform duration-200"></i>
+              </div>
+            </button>
           `;
         } else {
           rightTicketColHtml = `
-            <div class="shrink-0 w-[92px] pl-2.5 border-l border-dashed border-slate-200 flex flex-col justify-center items-stretch">
-              <button type="button" data-ribbon-booking-key="${tripKey}" onclick="event.stopPropagation(); openTripBookingByKey('${tripKey}', 'ribbon', this)"
-                      class="btn-ribbon-inline-booking w-full h-full px-2 py-1.5 rounded-xl bg-slate-50 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200 text-[9.5px] font-extrabold flex flex-col items-center justify-center gap-1 transition active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-ticket text-blue-600 text-xs"></i>
-                <span>登記預訂</span>
-              </button>
-            </div>
+            <button type="button" data-ribbon-booking-key="${tripKey}" onclick="event.stopPropagation(); openTripBookingByKey('${tripKey}', 'ribbon', this)"
+                    class="btn-ribbon-inline-booking shrink-0 w-[94px] pl-2 border-l border-dashed border-slate-300 flex flex-col justify-center items-stretch group cursor-pointer active:scale-95 transition">
+              <div class="ribbon-empty-box w-full h-full px-2 py-1.5 rounded-xl bg-slate-50 group-hover:bg-blue-50 text-slate-700 group-hover:text-blue-700 border border-slate-200 text-[9.5px] font-extrabold flex flex-col items-center justify-center gap-1 transition">
+                <i class="ribbon-cta-chevron fa-solid fa-ticket text-blue-600 text-xs transition-transform duration-200"></i>
+                <span class="ribbon-cta-label">機票住宿</span>
+              </div>
+            </button>
           `;
         }
 
@@ -11522,11 +11730,6 @@ function setupYearOverviewToggle() {
       const icon = document.getElementById('globalLockIcon');
       const overviewLockBtn = document.getElementById('btnOverviewToggleLock');
 
-      const miniEditBadge = document.getElementById('mobileActiveModeMiniBadge');
-      if (miniEditBadge) {
-        if (isEditMode) miniEditBadge.classList.remove('hidden');
-        else miniEditBadge.classList.add('hidden');
-      }
       if (isEditMode) {
         document.body.classList.remove('readonly-mode');
         if (btn) btn.className = 'w-[34px] h-[34px] md:w-[32px] md:h-[32px] bg-amber-500 hover:bg-amber-600 text-white rounded-xl flex items-center justify-center transition-all duration-200 shadow-2xs cursor-pointer active:scale-95 animate-pulse';
@@ -12709,6 +12912,14 @@ function setupYearOverviewToggle() {
         activeBrush = 'annual';
       }
 
+      const topSingleEraseBtn = document.getElementById('btnClearAll');
+      if (topSingleEraseBtn) {
+        const isEraserOn = (activeBrush === 'eraser' && isEditMode);
+        topSingleEraseBtn.classList.toggle('is-eraser-active', isEraserOn);
+        const ic = topSingleEraseBtn.querySelector('i');
+        if (ic) ic.className = isEraserOn ? 'fa-solid fa-trash-can text-[12px] text-white' : 'fa-solid fa-trash-can text-[12px] text-rose-600';
+      }
+
       const eraserBtn = document.getElementById('btnBrushEraser');
       if (eraserBtn) {
         if (activeBrush === 'eraser') {
@@ -13119,10 +13330,69 @@ function setupYearOverviewToggle() {
         };
       }
 
+      function sanitizeRoomCodeInput(raw) {
+        return String(raw || '').toUpperCase().replace(/[^A-Z0-9_-]/g, '').slice(0, 32);
+      }
+
+      function validateRoomCodeAndNotify(rawVal, inlineMsgEl = null) {
+        const cleaned = sanitizeRoomCodeInput(rawVal);
+        if (cleaned.length < 4) {
+          const msg = cleaned.length === 0
+            ? '請先輸入 4 至 32 位同步代碼（例如 HK2027VIP）'
+            : `同步代碼至少需要 4 個字元（目前 ${cleaned.length} 個字）`;
+          if (inlineMsgEl) {
+            inlineMsgEl.classList.remove('hidden');
+            const sp = inlineMsgEl.querySelector('span');
+            if (sp) sp.textContent = msg;
+          }
+          showToast(`⚠️ ${msg}`);
+          return null;
+        }
+        if (inlineMsgEl) inlineMsgEl.classList.add('hidden');
+        return cleaned;
+      }
+
+      ['drawerRoomInput', 'mobileRoomInput', 'desktopRoomInput'].forEach(inpId => {
+        const inp = document.getElementById(inpId);
+        if (!inp) return;
+        inp.addEventListener('input', () => {
+          const pos = inp.selectionStart;
+          const sanitized = sanitizeRoomCodeInput(inp.value);
+          if (inp.value !== sanitized) {
+            inp.value = sanitized;
+            try { inp.setSelectionRange(pos, pos); } catch (e) {}
+          }
+          if (inpId === 'drawerRoomInput') {
+            const msgEl = document.getElementById('drawerRoomValidationMsg');
+            if (msgEl) {
+              if (sanitized.length > 0 && sanitized.length < 4) {
+                msgEl.classList.remove('hidden');
+                const sp = msgEl.querySelector('span');
+                if (sp) sp.textContent = `至少需要 4 個英數字元（目前 ${sanitized.length}/4）`;
+              } else {
+                msgEl.classList.add('hidden');
+              }
+            }
+          } else if (inpId === 'mobileRoomInput') {
+            const hintEl = document.getElementById('mobileRoomValidationHint');
+            if (hintEl) {
+              if (sanitized.length > 0 && sanitized.length < 4) {
+                hintEl.textContent = `至少 4 位 (${sanitized.length}/4)`;
+                hintEl.className = 'text-[10px] font-bold text-rose-600';
+              } else {
+                hintEl.textContent = '支援 A–Z, 0–9, _ -';
+                hintEl.className = 'text-[10px] font-bold text-slate-400';
+              }
+            }
+          }
+        });
+      });
+
       if (switchBtn) {
         switchBtn.onclick = () => {
-          const val = drawerRoomInput.value.trim().toUpperCase();
+          const val = validateRoomCodeAndNotify(drawerRoomInput.value, document.getElementById('drawerRoomValidationMsg'));
           if (val) {
+            drawerRoomInput.value = val;
             // ⚡ 立即徹底清空舊房間記憶體，防止跨房間污染
             leaveData = {};
             customTripTitles = {};
@@ -14022,11 +14292,231 @@ function setupYearOverviewToggle() {
         }
       };
 
+      window.closeAllMorphPills = () => {
+        document.querySelectorAll('.trip-morph-pill.is-open').forEach(p => {
+          p.classList.remove('is-open');
+          const ic = p.querySelector('.trip-morph-dots-btn i, button[aria-label*="展開"] i');
+          if (ic) ic.className = 'fa-solid fa-ellipsis text-[9px]';
+        });
+        document.querySelectorAll('.radar-morph-pill.is-open').forEach(p => {
+          p.classList.remove('is-open');
+        });
+      };
+
+      const RADAR_DEFAULT_STORAGE_KEY = 'hk_leave_default_flight_radar';
+      window.getPreferredFlightRadarProvider = () => {
+        try {
+          const saved = localStorage.getItem(RADAR_DEFAULT_STORAGE_KEY);
+          return (saved === 'radar') ? 'radar' : 'aware';
+        } catch (e) {
+          return 'aware';
+        }
+      };
+
+      window.syncRadarMorphPillDefaultState = () => {
+        const pref = window.getPreferredFlightRadarProvider();
+        document.querySelectorAll('.radar-morph-pill').forEach(pill => {
+          const awareOpt = pill.querySelector('.radar-opt-aware');
+          const radarOpt = pill.querySelector('.radar-opt-radar');
+          if (awareOpt) {
+            awareOpt.className = pref === 'aware'
+              ? 'radar-opt-aware px-2 py-0.5 rounded-full text-[9.5px] font-black bg-sky-600 text-white border border-sky-600 inline-flex items-center gap-1 transition active:scale-95 cursor-pointer shadow-2xs'
+              : 'radar-opt-aware px-2 py-0.5 rounded-full text-[9.5px] font-extrabold bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200/80 inline-flex items-center gap-1 transition active:scale-95 cursor-pointer';
+          }
+          if (radarOpt) {
+            radarOpt.className = pref === 'radar'
+              ? 'radar-opt-radar px-2 py-0.5 rounded-full text-[9.5px] font-black bg-amber-500 text-white border border-amber-500 inline-flex items-center gap-1 transition active:scale-95 cursor-pointer shadow-2xs'
+              : 'radar-opt-radar px-2 py-0.5 rounded-full text-[9.5px] font-extrabold bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200/80 inline-flex items-center gap-1 transition active:scale-95 cursor-pointer';
+          }
+        });
+      };
+
+      let radarPillHoldTimer = null;
+      let radarPillLongPressed = false;
+
+      window.cancelRadarPillHoldTimer = () => {
+        if (radarPillHoldTimer) {
+          clearTimeout(radarPillHoldTimer);
+          radarPillHoldTimer = null;
+        }
+      };
+
+      window.openRadarMorphPill = (dir) => {
+        const cap = dir === 'out' ? 'Out' : 'In';
+        const pill = document.getElementById(`radarMorphPill${cap}`);
+        if (!pill) return;
+        const wasOpen = pill.classList.contains('is-open');
+        window.closeAllMorphPills();
+        if (!wasOpen) {
+          window.syncRadarMorphPillDefaultState();
+          pill.classList.add('is-open');
+        }
+      };
+
+      window.handleRadarPillPointerDown = (event, dir) => {
+        if (event) event.stopPropagation();
+        radarPillLongPressed = false;
+        window.cancelRadarPillHoldTimer();
+        radarPillHoldTimer = setTimeout(() => {
+          radarPillLongPressed = true;
+          radarPillHoldTimer = null;
+          window.openRadarMorphPill(dir);
+        }, 300);
+      };
+
+      window.handleRadarPillPointerUp = (event, dir) => {
+        if (event) event.stopPropagation();
+        window.cancelRadarPillHoldTimer();
+        if (radarPillLongPressed) {
+          radarPillLongPressed = false;
+          return;
+        }
+        const cap = dir === 'out' ? 'Out' : 'In';
+        const pill = document.getElementById(`radarMorphPill${cap}`);
+        if (pill && pill.classList.contains('is-open')) {
+          window.closeAllMorphPills();
+          return;
+        }
+        // 單擊：直接開啟當前預設雷達平台（預設第 1 間 FlightAware；若曾切換第 2 間則記憶為 Flightradar24）
+        const provider = window.getPreferredFlightRadarProvider();
+        const inputId = dir === 'out' ? 'inputFlightOutNo' : 'inputFlightInNo';
+        const rawNo = (document.getElementById(inputId)?.value || '').trim().replace(/\s+/g, '').toUpperCase();
+        const targetUrl = provider === 'radar' ? getFlightRadarUrl(rawNo) : getFlightAwareUrl(rawNo);
+        window.open(targetUrl, '_blank', 'noopener,noreferrer');
+      };
+
+      window.selectAndOpenFlightRadar = (event, dir, service) => {
+        if (event) event.stopPropagation();
+        try {
+          localStorage.setItem(RADAR_DEFAULT_STORAGE_KEY, service);
+        } catch (e) {}
+        window.syncRadarMorphPillDefaultState();
+        const res = window.handleModalFlightTrackClick(event, dir, service);
+        window.closeAllMorphPills();
+        const label = service === 'radar' ? 'Flightradar24' : 'FlightAware';
+        showToast(`📡 已設為預設雷達並開啟 ${label}`);
+        return res;
+      };
+
+      window.toggleTripMorphPill = (dotBtn) => {
+        const pill = dotBtn ? dotBtn.closest('.trip-morph-pill') : null;
+        if (!pill) return;
+        const willOpen = !pill.classList.contains('is-open');
+        window.closeAllMorphPills();
+        if (willOpen) {
+          pill.classList.add('is-open');
+          const ic = dotBtn.querySelector('i');
+          if (ic) ic.className = 'fa-solid fa-xmark text-[9px]';
+        }
+      };
+
+      window.deleteSingleTripByKey = (tripKey, bypassConfirm = false) => {
+        if (!tripKey) return;
+        if (!isRoomUnlocked) {
+          showUnlockModal();
+          return;
+        }
+        const [startStr, endStr] = tripKey.split('_');
+        if (!startStr || !endStr) return;
+
+        const targetDates = [];
+        let lockedSkipped = 0;
+        let cur = new Date(startStr + 'T00:00:00');
+        const end = new Date(endStr + 'T00:00:00');
+        while (cur <= end) {
+          const ds = `${cur.getFullYear()}-${String(cur.getMonth() + 1).padStart(2, '0')}-${String(cur.getDate()).padStart(2, '0')}`;
+          if (leaveData[ds]) {
+            if (leaveData[ds].locked) {
+              lockedSkipped++;
+            } else {
+              targetDates.push(ds);
+            }
+          }
+          cur.setDate(cur.getDate() + 1);
+        }
+
+        if (targetDates.length === 0) {
+          showToast(lockedSkipped > 0 ? '🔒 此旅程內所有請假日子均已鎖定，無法直接刪除' : '此旅程內無可刪除的請假紀錄');
+          return;
+        }
+
+        const tripTitleText = (customTripTitles && customTripTitles[tripKey]) ? customTripTitles[tripKey] : `${formatHKDate(startStr)} 至 ${formatHKDate(endStr)}`;
+        if (!bypassConfirm) {
+          const lockNote = lockedSkipped > 0 ? `（自動保留 ${lockedSkipped} 日已鎖定假期）` : '';
+          window.openSectionResetConfirmModal(
+            `刪除「${tripTitleText}」？`,
+            `確定刪除此旅程內的 ${targetDates.length} 日請假排程嗎？${lockNote}`,
+            () => window.deleteSingleTripByKey(tripKey, true)
+          );
+          return;
+        }
+
+        if (!isEditMode) {
+          setEditModeState(true, false);
+        }
+        targetDates.forEach(ds => {
+          delete leaveData[ds];
+        });
+        if (customTripTitles && customTripTitles[tripKey]) {
+          delete customTripTitles[tripKey];
+        }
+        pushData();
+        renderMonthGrid();
+        updateDashboard();
+        showToast(`🗑️ 已刪除「${tripTitleText}」（共清除 ${targetDates.length} 日）`);
+      };
+
       document.addEventListener('click', (e) => {
+        // 點擊外部空白處自動收起已展開的鵝蛋形膠囊
+        if (!e.target.closest('.trip-morph-pill')) {
+          document.querySelectorAll('.trip-morph-pill.is-open').forEach(p => {
+            p.classList.remove('is-open');
+            const ic = p.querySelector('button[aria-label="展開或收起旅程選項"] i');
+            if (ic) ic.className = 'fa-solid fa-ellipsis text-[9px]';
+          });
+        }
+
         const editBtn = e.target.closest('.btn-edit-trip-title');
-        if (!editBtn) return;
-        e.stopPropagation();
-        window.openEditTripTitleModal(editBtn.getAttribute('data-trip-key'));
+        if (editBtn) {
+          e.stopPropagation();
+          window.openEditTripTitleModal(editBtn.getAttribute('data-trip-key'));
+          return;
+        }
+
+        const delTripBtn = e.target.closest('.btn-delete-trip-card');
+        if (delTripBtn) {
+          e.stopPropagation();
+          window.deleteSingleTripByKey(delTripBtn.getAttribute('data-trip-key'));
+          return;
+        }
+
+        // 路徑二：點按連假卡片下方「假期日曆」單日小方塊，若該日有排假可直接清除該單日
+        const micDay = e.target.closest('.micro-cal-day[data-micdate]');
+        if (micDay) {
+          e.stopPropagation();
+          const dStr = micDay.getAttribute('data-micdate');
+          if (!dStr) return;
+          if (!isRoomUnlocked) {
+            showUnlockModal();
+            return;
+          }
+          if (!leaveData[dStr]) {
+            scrollToDateAndHighlight(dStr);
+            return;
+          }
+          if (leaveData[dStr].locked) {
+            showToast('🔒 此日子受鎖定保護，請先解鎖再清除');
+            return;
+          }
+          if (!isEditMode) {
+            setEditModeState(true, false);
+          }
+          delete leaveData[dStr];
+          pushData();
+          renderMonthGrid();
+          updateDashboard();
+          showToast(`🧹 已單獨清除 ${formatHKDate(dStr)} 嘅請假排程`);
+        }
       });
 
       // === v3.8.0 三級聯動智慧推薦標籤系統（國家 ➔ 動態城市 ➔ 標題結尾句智慧拼接）===
@@ -14244,15 +14734,11 @@ function setupYearOverviewToggle() {
         const linkOutRadar = document.getElementById('linkFlightRadarOut');
         const linkInRadar = document.getElementById('linkFlightRadarIn');
         const linkOutAware = document.getElementById('linkFlightAwareOut');
-        const linkOutAwareItem = document.getElementById('linkFlightAwareOut_Item');
         const linkInAware = document.getElementById('linkFlightAwareIn');
-        const linkInAwareItem = document.getElementById('linkFlightAwareIn_Item');
         if (linkOutRadar) linkOutRadar.href = getFlightRadarUrl(outNo);
         if (linkInRadar) linkInRadar.href = getFlightRadarUrl(inNo);
         if (linkOutAware) linkOutAware.href = getFlightAwareUrl(outNo);
-        if (linkOutAwareItem) linkOutAwareItem.href = getFlightAwareUrl(outNo);
         if (linkInAware) linkInAware.href = getFlightAwareUrl(inNo);
-        if (linkInAwareItem) linkInAwareItem.href = getFlightAwareUrl(inNo);
 
         const clearOut = document.getElementById('btnClearFlightOutNoInput');
         if (clearOut) {
@@ -14356,11 +14842,11 @@ function setupYearOverviewToggle() {
 
         if (mode === 'system' || mode === true) {
           el.dataset.source = 'system';
-          el.style.color = isPillarNo ? '#ffffff' : '#2563eb';
+          el.style.color = isPillarNo ? '#ffffff' : '#0f172a';
           el.style.fontWeight = '900';
         } else if (mode === 'manual') {
           el.dataset.source = 'manual';
-          el.style.color = isPillarNo ? '#ffffff' : '#0f172a';
+          el.style.color = isPillarNo ? '#93c5fd' : '#2563eb';
           el.style.fontWeight = '900';
         } else {
           delete el.dataset.source;
@@ -14704,28 +15190,45 @@ function setupYearOverviewToggle() {
         if (origTermBox) origTermBox.classList.toggle('hidden', !nextState);
         if (destTermBox) destTermBox.classList.toggle('hidden', !nextState);
 
-        // 同步切換該程班次輸入框唯讀/可編輯狀態（編輯態亮起螢光黃提示，完成後恢復正常配色）
+        // 同步切換該程班次輸入框與驗證文字：編輯態展開方框與文字，完成態收起方框僅留狀態燈！
         const flightNoInp = document.getElementById(`inputFlight${capPrefix}No`);
         const flightNoBox = flightNoInp ? flightNoInp.closest('.flight-pillar-no-box') : null;
+        const verifyBoxEl = document.getElementById(`badge${capPrefix}VerifyStatus`);
+        const verifyLblEl = verifyBoxEl ? verifyBoxEl.querySelector('.verify-status-label') : null;
         if (flightNoInp) {
           if (nextState) {
             flightNoInp.removeAttribute('readonly');
             flightNoInp.classList.remove('pointer-events-none');
-            if (flightNoBox) flightNoBox.classList.add('is-editing-highlight');
+            if (flightNoBox) {
+              flightNoBox.classList.remove('hidden');
+              flightNoBox.classList.add('is-editing-highlight');
+            }
+            if (verifyLblEl) verifyLblEl.classList.remove('hidden');
           } else {
             flightNoInp.setAttribute('readonly', 'readonly');
             flightNoInp.classList.add('pointer-events-none');
-            if (flightNoBox) flightNoBox.classList.remove('is-editing-highlight');
+            if (flightNoBox) {
+              flightNoBox.classList.add('hidden');
+              flightNoBox.classList.remove('is-editing-highlight');
+            }
+            if (verifyLblEl) verifyLblEl.classList.add('hidden');
           }
         }
 
         if (btn) {
+          const morphPill = btn.closest('.trip-morph-pill');
           if (nextState) {
-            btn.className = 'flight-pillar-footer-btn-edit is-editing inline-flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-extrabold bg-blue-100/80 text-blue-700 transition active:scale-95 cursor-pointer';
-            btn.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
+            btn.className = 'w-5 h-5 rounded-full bg-blue-600 text-white inline-flex items-center justify-center cursor-pointer transition active:scale-90 shadow-2xs';
+            btn.innerHTML = '<i class="fa-solid fa-check text-[9px]"></i>';
+            if (morphPill) morphPill.classList.add('is-open');
           } else {
-            btn.className = 'flight-pillar-footer-btn-edit inline-flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-bold bg-transparent text-slate-700 hover:bg-slate-200/70 hover:text-blue-700 transition active:scale-95 cursor-pointer';
-            btn.innerHTML = '<i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>';
+            btn.className = 'w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90';
+            btn.innerHTML = '<i class="fa-solid fa-pen text-[9px]"></i>';
+            if (morphPill) {
+              morphPill.classList.remove('is-open');
+              const dotIc = morphPill.querySelector('.trip-morph-dots-btn i');
+              if (dotIc) dotIc.className = 'fa-solid fa-ellipsis text-[9px]';
+            }
           }
         }
         if (typeof window.syncStudioEditIndicators === 'function') window.syncStudioEditIndicators();
@@ -14746,7 +15249,19 @@ function setupYearOverviewToggle() {
       function syncFlightGateDateDisplay(direction, dateStr) {
         const isOut = direction === 'out';
         const lbl = document.getElementById(isOut ? 'labelFlightOutDateDisplay' : 'labelFlightInDateDisplay');
-        if (lbl) lbl.textContent = formatFlightChipDate(dateStr);
+        const wdayLbl = document.getElementById(isOut ? 'labelFlightOutWeekdayDisplay' : 'labelFlightInWeekdayDisplay');
+        if (lbl) {
+          if (!dateStr || dateStr.split('-').length !== 3) {
+            lbl.textContent = isOut ? '出發日期' : '回程日期';
+            if (wdayLbl) wdayLbl.textContent = '選擇';
+          } else {
+            const p = dateStr.split('-');
+            const dtObj = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+            const shortWdays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
+            lbl.textContent = `${Number(p[1])}月${Number(p[2])}日`;
+            if (wdayLbl) wdayLbl.textContent = shortWdays[dtObj.getDay()];
+          }
+        }
 
         const mDig = document.getElementById(isOut ? 'gateOutMonthDigits' : 'gateInMonthDigits');
         const dDig = document.getElementById(isOut ? 'gateOutDayDigits' : 'gateInDayDigits');
@@ -14846,14 +15361,14 @@ function setupYearOverviewToggle() {
 
       function applyRouteFieldBlackStyle(el, hasValue, isSystem = false) {
         if (!el) return;
-        el.classList.remove('text-slate-400', 'text-slate-500', 'text-blue-700', 'text-blue-600', 'bg-blue-50', 'bg-slate-100');
+        el.classList.remove('text-slate-400', 'text-slate-500', 'text-slate-900', 'text-blue-700', 'text-blue-600', 'bg-blue-50', 'bg-slate-100');
         if (el.classList.contains('flight-pillar-iata-pill')) {
-          el.classList.add(isSystem ? 'bg-blue-50' : 'bg-slate-100');
+          el.classList.add((!isSystem && hasValue) ? 'bg-blue-50' : 'bg-slate-100');
         }
-        if (isSystem) {
-          el.classList.add('text-blue-700');
-        } else if (hasValue) {
+        if (isSystem && hasValue) {
           el.classList.add('text-slate-900');
+        } else if (hasValue) {
+          el.classList.add('text-blue-700');
         } else {
           el.classList.add('text-slate-400');
         }
@@ -15020,7 +15535,7 @@ function setupYearOverviewToggle() {
         const airlineMeta = resolvedMeta || {
           zh: (scheduleObj && scheduleObj.airline) || (cleanNo ? '自訂航班' : (direction === 'out' ? '去程航班 Outbound Flight' : '回程航班 Inbound Flight')),
           en: cleanNo ? 'Custom Flight' : '',
-          color: isSystem ? 'bg-blue-600' : (isManual ? 'bg-slate-800' : 'bg-slate-200')
+          color: isSystem ? 'bg-slate-800' : (isManual ? 'bg-blue-600' : 'bg-slate-200')
         };
 
         const codeBadge = document.getElementById(`badge${capPrefix}AirlineCode`);
@@ -15040,38 +15555,42 @@ function setupYearOverviewToggle() {
           const enName = resolvedMeta ? resolvedMeta.en : (airlineMeta.en || '');
           const bilingualHtml = enName ? `${zhName} <span class="font-semibold opacity-85">${enName}</span>` : `${zhName}`;
           if (isSystem) {
-            nameLabel.className = 'text-xs font-extrabold text-blue-700 truncate';
+            nameLabel.className = 'text-xs font-extrabold text-slate-900 leading-none truncate';
             nameLabel.innerHTML = bilingualHtml;
           } else if (isManual) {
-            nameLabel.className = 'text-xs font-extrabold text-slate-900 truncate';
+            nameLabel.className = 'text-xs font-extrabold text-blue-700 leading-none truncate';
             nameLabel.innerHTML = bilingualHtml;
           } else {
-            nameLabel.className = 'text-xs font-extrabold text-slate-400 truncate';
+            nameLabel.className = 'text-[11px] font-semibold text-slate-400 leading-none truncate';
             nameLabel.innerHTML = `${zhName}`;
           }
         }
         if (noPill) {
           noPill.textContent = cleanNo || '--';
           if (isSystem) {
-            noPill.className = 'px-2 py-0.5 rounded-md bg-blue-50 border border-blue-200 font-mono font-bold text-[10.5px] text-blue-700 shrink-0';
+            noPill.className = 'font-mono font-black text-[13px] text-slate-900 leading-none';
           } else if (isManual) {
-            noPill.className = 'px-2 py-0.5 rounded-md bg-slate-100 border border-slate-300 font-mono font-bold text-[10.5px] text-slate-900 shrink-0';
+            noPill.className = 'font-mono font-black text-[13px] text-blue-700 leading-none';
           } else {
-            noPill.className = 'px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200 font-mono font-bold text-[10.5px] text-slate-400 shrink-0';
+            noPill.className = 'font-mono font-black text-[13px] text-slate-400 leading-none';
           }
         }
 
         if (verifyBox) {
+          window._verifyStatusHideTimers = window._verifyStatusHideTimers || {};
+          clearTimeout(window._verifyStatusHideTimers[capPrefix]);
           const isPillarTheme = document.getElementById('flightSectionWrapper')?.classList.contains('hkg-pillar-theme');
+          const isEditingDir = Boolean(flightCardEditState && flightCardEditState[direction]);
+          const lblHiddenCls = isEditingDir ? '' : 'hidden';
           if (mode === 'checking') {
-            const cls = isPillarTheme ? 'text-white/80' : 'text-slate-500';
-            verifyBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><i class="fa-solid fa-spinner fa-spin text-[8px]"></i>確認中</span>`;
+            const cls = isPillarTheme ? 'text-white/85' : 'text-slate-600';
+            verifyBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><i class="fa-solid fa-spinner fa-spin text-[8px]"></i><span class="verify-status-label ${lblHiddenCls}">確認中</span></span>`;
           } else if (isSystem) {
-            const cls = isPillarTheme ? 'text-white' : 'text-slate-800';
-            verifyBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><span>時刻已載入</span><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shadow-2xs"></span></span>`;
+            const cls = isPillarTheme ? 'text-white' : 'text-slate-900';
+            verifyBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-extrabold ${cls} select-none"><span class="verify-status-label ${lblHiddenCls}">成功確認</span><span class="w-2 h-2 rounded-full bg-emerald-400 inline-block ring-2 ring-emerald-400/30 shrink-0"></span></span>`;
           } else if (isManual) {
-            const cls = isPillarTheme ? 'text-amber-200' : 'text-amber-700';
-            verifyBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><span>手動填寫</span><span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shadow-2xs"></span></span>`;
+            const cls = isPillarTheme ? 'text-white' : 'text-slate-900';
+            verifyBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-extrabold ${cls} select-none"><span class="verify-status-label ${lblHiddenCls}">未有資料</span><span class="w-2 h-2 rounded-full bg-blue-500 inline-block ring-2 ring-blue-500/30 shrink-0"></span></span>`;
           } else {
             verifyBox.innerHTML = '';
           }
@@ -15079,8 +15598,8 @@ function setupYearOverviewToggle() {
 
         if (trackGroup) {
           trackGroup.className = isSystem
-            ? 'w-full flex items-center justify-between gap-1 text-blue-600'
-            : (isManual ? 'w-full flex items-center justify-between gap-1 text-slate-900' : 'w-full flex items-center justify-between gap-1 text-slate-300');
+            ? 'w-full flex items-center justify-between gap-1 text-slate-900'
+            : (isManual ? 'w-full flex items-center justify-between gap-1 text-blue-600' : 'w-full flex items-center justify-between gap-1 text-slate-300');
         }
 
         const originInfo = scheduleObj
@@ -15130,23 +15649,23 @@ function setupYearOverviewToggle() {
           origCityEl.value = rawOrigCity;
           const hasOrigVal = Boolean(origCityEl.value.trim());
           origCityEl.style.width = isEditing ? '' : calcCityWidth(rawOrigCity, origCityEl.placeholder);
-          origCityEl.className = `flight-pillar-city-input ${isEditing ? 'flex-1 min-w-0' : 'max-w-[calc(100%-3.5rem)] shrink'} bg-transparent text-base sm:text-lg font-black ${isSystem ? 'text-blue-700' : (hasOrigVal ? 'text-slate-900' : 'text-slate-400')} rounded px-0.5 -ml-0.5 truncate transition ${lockClasses}`;
+          origCityEl.className = `flight-pillar-city-input ${isEditing ? 'flex-1 min-w-0' : 'max-w-[calc(100%-3.5rem)] shrink'} bg-transparent text-base sm:text-lg font-black ${isSystem ? 'text-slate-900' : (hasOrigVal ? 'text-blue-700' : 'text-slate-400')} rounded px-0.5 -ml-0.5 truncate transition ${lockClasses}`;
         }
         if (origIataEl) {
           origIataEl.value = rawOrigCode;
           const isOrigCodeKnown = Boolean(rawOrigCode);
-          origIataEl.className = `flight-pillar-iata-pill w-11 sm:w-12 shrink-0 px-1 py-0.5 rounded font-mono font-extrabold text-[11px] text-center uppercase ${isSystem ? 'bg-blue-50 text-blue-700' : (isOrigCodeKnown ? 'bg-slate-100 text-slate-900' : 'bg-slate-100 text-slate-400')} ${isEditing ? 'ring-1 ring-blue-300 focus:outline-blue-500' : 'pointer-events-none select-none'}`;
+          origIataEl.className = `flight-pillar-iata-pill w-11 sm:w-12 shrink-0 px-1 py-0.5 rounded font-mono font-extrabold text-[11px] text-center uppercase ${isSystem ? 'bg-slate-100 text-slate-900' : (isOrigCodeKnown ? 'bg-blue-50 text-blue-700' : 'bg-slate-100 text-slate-400')} ${isEditing ? 'ring-1 ring-blue-300 focus:outline-blue-500' : 'pointer-events-none select-none'}`;
         }
         if (destCityEl) {
           destCityEl.value = rawDestCity;
           const hasDestVal = Boolean(destCityEl.value.trim());
           destCityEl.style.width = isEditing ? '' : calcCityWidth(rawDestCity, destCityEl.placeholder);
-          destCityEl.className = `flight-pillar-city-input ${isEditing ? 'flex-1 min-w-0' : 'max-w-[calc(100%-3.5rem)] shrink'} bg-transparent text-base sm:text-lg font-black text-right ${isSystem ? 'text-blue-700' : (hasDestVal ? 'text-slate-900' : 'text-slate-400')} rounded px-0.5 -mr-0.5 truncate transition ${lockClasses}`;
+          destCityEl.className = `flight-pillar-city-input ${isEditing ? 'flex-1 min-w-0' : 'max-w-[calc(100%-3.5rem)] shrink'} bg-transparent text-base sm:text-lg font-black text-right ${isSystem ? 'text-slate-900' : (hasDestVal ? 'text-blue-700' : 'text-slate-400')} rounded px-0.5 -mr-0.5 truncate transition ${lockClasses}`;
         }
         if (destIataEl) {
           destIataEl.value = rawDestCode;
           const isDestCodeKnown = Boolean(rawDestCode);
-          destIataEl.className = `flight-pillar-iata-pill w-11 sm:w-12 shrink-0 px-1 py-0.5 rounded font-mono font-extrabold text-[11px] text-center uppercase ${isSystem ? 'bg-blue-50 text-blue-700' : (isDestCodeKnown ? 'bg-slate-100 text-slate-900' : 'bg-slate-100 text-slate-400')} ${isEditing ? 'ring-1 ring-blue-300 focus:outline-blue-500' : 'pointer-events-none select-none'}`;
+          destIataEl.className = `flight-pillar-iata-pill w-11 sm:w-12 shrink-0 px-1 py-0.5 rounded font-mono font-extrabold text-[11px] text-center uppercase ${isSystem ? 'bg-slate-100 text-slate-900' : (isDestCodeKnown ? 'bg-blue-50 text-blue-700' : 'bg-slate-100 text-slate-400')} ${isEditing ? 'ring-1 ring-blue-300 focus:outline-blue-500' : 'pointer-events-none select-none'}`;
         }
 
         const resolvedOrigMeta = AIRPORT_META_DB[rawOrigCode] || originInfo;
@@ -15196,7 +15715,7 @@ function setupYearOverviewToggle() {
         const durText = computeFlightDurationText(depVal, arrVal, resolvedDepUtc, resolvedArrUtc);
         if (durBadge) {
           durBadge.textContent = durText;
-          durBadge.className = `px-2 py-0.5 rounded-full font-bold text-[9px] whitespace-nowrap mb-1.5 ${durText !== '--小時 --分' ? (isSystem ? 'bg-blue-50 text-blue-700' : 'bg-slate-100 text-slate-900') : 'bg-slate-100 text-slate-400'}`;
+          durBadge.className = `px-2 py-0.5 rounded-full font-bold text-[9px] whitespace-nowrap mb-1.5 ${durText !== '--小時 --分' ? (isSystem ? 'bg-slate-100 text-slate-900' : 'bg-blue-50 text-blue-700') : 'bg-slate-100 text-slate-400'}`;
         }
 
         if (direction === 'out') updateFlightStaySummaryBar();
@@ -15264,20 +15783,20 @@ function setupYearOverviewToggle() {
           if (!el) return;
           const src = el.dataset.source;
           if (isPillar) {
-            el.style.color = '#ffffff';
+            el.style.color = (src === 'manual') ? '#93c5fd' : '#ffffff';
           } else {
-            el.style.color = (src === 'system') ? '#2563eb' : (src === 'manual' ? '#0f172a' : '#94a3b8');
+            el.style.color = (src === 'system') ? '#0f172a' : (src === 'manual' ? '#2563eb' : '#94a3b8');
           }
           const dirKey = noId === 'inputFlightOutNo' ? 'out' : 'in';
           const vBox = document.getElementById(dirKey === 'out' ? 'badgeOutVerifyStatus' : 'badgeInVerifyStatus');
           if (vBox && vBox.innerHTML.trim()) {
             const cleanVal = (el.value || '').trim();
+            const hasVisibleLabel = Boolean(vBox.querySelector('.verify-status-label'));
+            const cls = isPillar ? 'text-white' : 'text-slate-900';
             if (src === 'system') {
-              const cls = isPillar ? 'text-white' : 'text-slate-800';
-              vBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><span>時刻已載入</span><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shadow-2xs"></span></span>`;
+              vBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-extrabold ${cls} select-none">${hasVisibleLabel ? '<span class="verify-status-label">成功確認</span>' : ''}<span class="w-2 h-2 rounded-full bg-emerald-400 inline-block shadow-2xs shrink-0"></span></span>`;
             } else if (cleanVal) {
-              const cls = isPillar ? 'text-amber-200' : 'text-amber-700';
-              vBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><span>手動填寫</span><span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block shadow-2xs"></span></span>`;
+              vBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-extrabold ${cls} select-none">${hasVisibleLabel ? '<span class="verify-status-label">未有資料</span>' : ''}<span class="w-2 h-2 rounded-full bg-blue-500 inline-block shadow-2xs shrink-0"></span></span>`;
             }
           }
         });
@@ -15379,13 +15898,50 @@ function setupYearOverviewToggle() {
         if (hintEl) { hintEl.classList.add('hidden'); hintEl.innerHTML = ''; }
 
         toggleFlightCardEditMode(direction, false);
+        window.closeAllMorphPills();
         updateBoardingPassCardUI(direction, '', null, 'default');
         updateModalRadarLinks();
-        showToast(isOut ? '🧹 已清空去程所有航班與時間資料' : '🧹 已清空回程所有航班與時間資料');
+        if (typeof window.persistCurrentInlineBookingSilently === 'function') {
+          window.persistCurrentInlineBookingSilently(isOut ? '🧹 已清空去程航班資料' : '🧹 已清空回程航班資料');
+        } else {
+          showToast(isOut ? '🧹 已清空去程所有航班與時間資料' : '🧹 已清空回程所有航班與時間資料');
+        }
       };
 
       const flightLookupSeq = { inputFlightOutNo: 0, inputFlightInNo: 0 };
       const lastLookedUpFlightNo = { inputFlightOutNo: '', inputFlightInNo: '' };
+
+      const flightSmartAutoSaveTimers = { out: null, in: null };
+      window.cancelFlightSmartAutoSave = (dir) => {
+        if (flightSmartAutoSaveTimers[dir]) {
+          clearTimeout(flightSmartAutoSaveTimers[dir]);
+          flightSmartAutoSaveTimers[dir] = null;
+        }
+      };
+      window.scheduleFlightSmartAutoSave = (dir, flightNo, airlineName, delayMs = 5500) => {
+        window.cancelFlightSmartAutoSave(dir);
+        const dirLabel = dir === 'out' ? '去程' : '回程';
+        showToast(`✨ 已辨識 ${flightNo}（${airlineName}），${(delayMs / 1000).toFixed(1)}秒後自動儲存…`);
+        flightSmartAutoSaveTimers[dir] = setTimeout(() => {
+          flightSmartAutoSaveTimers[dir] = null;
+          if (!flightCardEditState[dir]) return;
+          const cardEl = document.getElementById(dir === 'out' ? 'cardOutFlightContainer' : 'cardReturnFlightWrapper');
+          const activeEl = document.activeElement;
+          const noInputId = dir === 'out' ? 'inputFlightOutNo' : 'inputFlightInNo';
+          // 若使用者正聚焦在時間、城市或航廈等其他欄位微調，則暫不打斷，等待手動按 ✓
+          if (cardEl && activeEl && cardEl.contains(activeEl) && activeEl.id !== noInputId) {
+            return;
+          }
+          if (activeEl && activeEl.id === noInputId) {
+            activeEl.blur();
+          }
+          toggleFlightCardEditMode(dir, false);
+          window.closeAllMorphPills();
+          if (typeof window.persistCurrentInlineBookingSilently === 'function') {
+            window.persistCurrentInlineBookingSilently(`✅ 已自動儲存${dirLabel}航班（${flightNo}）`);
+          }
+        }, delayMs);
+      };
 
       const executeDualTrackFlightLookup = async (noInputId, depInputId, arrInputId, hintId, forceOverwrite = true) => {
         const noEl = document.getElementById(noInputId);
@@ -15439,7 +15995,11 @@ function setupYearOverviewToggle() {
             setFlightTimeStatus(arrEl, localFound.arr || '00:00', 'system');
           }
           updateBoardingPassCardUI(dir, raw, localFound, 'system');
-          showToast(`✨ 已辨識 ${raw}（${localFound.airline}）：${localFound.from} ➔ ${localFound.to}`);
+          if (typeof window.scheduleFlightSmartAutoSave === 'function') {
+            window.scheduleFlightSmartAutoSave(dir, raw, localFound.airline, 5500);
+          } else {
+            showToast(`✨ 已辨識 ${raw}（${localFound.airline}）：${localFound.from} ➔ ${localFound.to}`);
+          }
           return;
         }
 
@@ -15468,7 +16028,11 @@ function setupYearOverviewToggle() {
             dep: onlineResult.dep,
             arr: onlineResult.arr
           }, 'online');
-          showToast(`🌐 已透過即時數據自動填入 ${raw} 時刻！`);
+          if (typeof window.scheduleFlightSmartAutoSave === 'function') {
+            window.scheduleFlightSmartAutoSave(dir, raw, onlineResult.airline || '實時航班', 5500);
+          } else {
+            showToast(`🌐 已透過即時數據自動填入 ${raw} 時刻！`);
+          }
           return;
         }
 
@@ -15508,6 +16072,9 @@ function setupYearOverviewToggle() {
           });
 
           inputEl.addEventListener('input', () => {
+            if (typeof window.cancelFlightSmartAutoSave === 'function') {
+              window.cancelFlightSmartAutoSave(isOut ? 'out' : 'in');
+            }
             if (flightInputComposing[id]) return;
             const cur = (inputEl.value || '').trim();
             if (!cur) {
@@ -15519,10 +16086,12 @@ function setupYearOverviewToggle() {
             // 打字中保持純白(閘口柱)或純黑(登機牌)，並於右側顯示「確認中」
             const isPillarActive = document.getElementById('flightSectionWrapper')?.classList.contains('hkg-pillar-theme');
             inputEl.style.color = isPillarActive ? '#ffffff' : '#0f172a';
+            const capKey = isOut ? 'Out' : 'In';
+            if (window._verifyStatusHideTimers) clearTimeout(window._verifyStatusHideTimers[capKey]);
             const vBox = document.getElementById(isOut ? 'badgeOutVerifyStatus' : 'badgeInVerifyStatus');
             if (vBox) {
-              const cls = isPillarActive ? 'text-white/80' : 'text-slate-500';
-              vBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><i class="fa-solid fa-spinner fa-spin text-[8px]"></i>確認中</span>`;
+              const cls = isPillarActive ? 'text-white/85' : 'text-slate-600';
+              vBox.innerHTML = `<span class="inline-flex items-center gap-1 text-[9.5px] font-bold ${cls} select-none"><i class="fa-solid fa-spinner fa-spin text-[8px]"></i><span>確認中</span></span>`;
             }
             scheduleDebouncedScan(1200);
           });
@@ -15587,8 +16156,8 @@ function setupYearOverviewToggle() {
         updateState();
       }
 
-      setupFlightClearAndLinks('inputFlightOutNo', 'btnClearFlightOutNoInput', 'inputFlightOutDep', 'inputFlightOutArr', 'hintFlightOutAuto', ['linkFlightAwareOut', 'linkFlightAwareOut_Item'], 'linkFlightRadarOut');
-      setupFlightClearAndLinks('inputFlightInNo', 'btnClearFlightInNoInput', 'inputFlightInDep', 'inputFlightInArr', 'hintFlightInAuto', ['linkFlightAwareIn', 'linkFlightAwareIn_Item'], 'linkFlightRadarIn');
+      setupFlightClearAndLinks('inputFlightOutNo', 'btnClearFlightOutNoInput', 'inputFlightOutDep', 'inputFlightOutArr', 'hintFlightOutAuto', ['linkFlightAwareOut'], 'linkFlightRadarOut');
+      setupFlightClearAndLinks('inputFlightInNo', 'btnClearFlightInNoInput', 'inputFlightInDep', 'inputFlightInArr', 'hintFlightInAuto', ['linkFlightAwareIn'], 'linkFlightRadarIn');
 
       // === v4.3.40 國際時間直覺輸入引擎（全選覆寫 · 自由輸入/退格 · 4位數字自動轉 HH:MM · 範圍智能校驗） ===
       function normalizeInternationalTime(rawStr) {
@@ -16235,6 +16804,13 @@ function setupYearOverviewToggle() {
           notes: document.getElementById('inputBookingNotes')?.value.trim() || ''
         };
 
+        // 鎖定當前捲動位置，防止儲存重繪時跳版
+        const tabLeavesEl = document.getElementById('tabContentLeaves');
+        const modalLeavesBodyEl = document.getElementById('modalOverviewLeavesBody');
+        const savedWinY = window.scrollY;
+        const savedTabTop = tabLeavesEl ? tabLeavesEl.scrollTop : 0;
+        const savedModalTop = modalLeavesBodyEl ? modalLeavesBodyEl.scrollTop : 0;
+
         lastRenderedCardsSignature = '';
         pushData();
         const drawer = document.getElementById('inlineBookingStudioDrawer');
@@ -16244,6 +16820,9 @@ function setupYearOverviewToggle() {
         renderTripsAndGantt(tripsList);
         renderMobileTopTripRibbon(tripsList);
         if (typeof renderModalLeavesContent === 'function') renderModalLeavesContent();
+        if (tabLeavesEl) tabLeavesEl.scrollTop = savedTabTop;
+        if (modalLeavesBodyEl) modalLeavesBodyEl.scrollTop = savedModalTop;
+        if (Math.abs(window.scrollY - savedWinY) > 1) window.scrollTo(window.scrollX, savedWinY);
         if (wasOpen && drawer) {
           let targetSlot = (drawer.parentElement && drawer.parentElement !== document.getElementById('inlineBookingStudioParkingBay') && document.body.contains(drawer.parentElement))
             ? drawer.parentElement
@@ -16269,10 +16848,13 @@ function setupYearOverviewToggle() {
             }
           }
         }
+        if (tabLeavesEl) tabLeavesEl.scrollTop = savedTabTop;
+        if (modalLeavesBodyEl) modalLeavesBodyEl.scrollTop = savedModalTop;
+        if (Math.abs(window.scrollY - savedWinY) > 1) window.scrollTo(window.scrollX, savedWinY);
         if (toastMsg) showToast(toastMsg);
       };
 
-      window.toggleHotelCardEditMode = (forceState = null, skipAutoSave = false) => {
+      window.toggleHotelCardEditMode = (forceState = null, skipAutoSave = false, suppressFocus = false) => {
         const wasEditing = hotelCardEditActive;
         hotelCardEditActive = (forceState !== null) ? Boolean(forceState) : !hotelCardEditActive;
 
@@ -16284,19 +16866,26 @@ function setupYearOverviewToggle() {
         if (hotelEditBox) hotelEditBox.classList.toggle('hidden', !hotelCardEditActive);
 
         if (btn) {
+          const morphPill = btn.closest('.trip-morph-pill');
           if (hotelCardEditActive) {
-            btn.className = 'inline-flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-extrabold bg-blue-100/80 text-blue-700 transition active:scale-95 cursor-pointer';
-            btn.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
+            btn.className = 'w-5 h-5 rounded-full bg-blue-600 text-white inline-flex items-center justify-center cursor-pointer transition active:scale-90 shadow-2xs';
+            btn.innerHTML = '<i class="fa-solid fa-check text-[9px]"></i>';
+            if (morphPill) morphPill.classList.add('is-open');
           } else {
-            btn.className = 'inline-flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-bold bg-transparent text-slate-700 hover:bg-slate-200/70 hover:text-blue-700 transition active:scale-95 cursor-pointer';
-            btn.innerHTML = '<i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>';
+            btn.className = 'w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90';
+            btn.innerHTML = '<i class="fa-solid fa-pen text-[9px]"></i>';
+            if (morphPill) {
+              morphPill.classList.remove('is-open');
+              const dotIc = morphPill.querySelector('.trip-morph-dots-btn i');
+              if (dotIc) dotIc.className = 'fa-solid fa-ellipsis text-[9px]';
+            }
           }
         }
 
         if (typeof window.syncStudioEditIndicators === 'function') window.syncStudioEditIndicators();
         else window.syncInlineStudioReadViews();
-        if (hotelCardEditActive) {
-          setTimeout(() => document.getElementById('inputHotelName')?.focus(), 40);
+        if (hotelCardEditActive && !suppressFocus) {
+          setTimeout(() => { try { document.getElementById('inputHotelName')?.focus({ preventScroll: true }); } catch (e) {} }, 40);
         } else if (wasEditing && !skipAutoSave) {
           window.persistCurrentInlineBookingSilently('🏨 住宿詳情已儲存');
         }
@@ -16318,11 +16907,13 @@ function setupYearOverviewToggle() {
         const hintEl = document.getElementById('hintHotelGeocoding');
         if (hintEl) hintEl.classList.add('hidden');
         if (typeof refreshModalHotelNavLink === 'function') refreshModalHotelNavLink();
+        window.toggleHotelCardEditMode(false, true);
+        window.closeAllMorphPills();
         window.syncInlineStudioReadViews();
-        window.persistCurrentInlineBookingSilently('🧹 已重設住宿詳情');
+        window.persistCurrentInlineBookingSilently('🧹 已清空住宿詳情');
       };
 
-      window.toggleNotesCardEditMode = (forceState = null, skipAutoSave = false) => {
+      window.toggleNotesCardEditMode = (forceState = null, skipAutoSave = false, suppressFocus = false) => {
         const wasEditing = notesCardEditActive;
         notesCardEditActive = (forceState !== null) ? Boolean(forceState) : !notesCardEditActive;
 
@@ -16334,19 +16925,26 @@ function setupYearOverviewToggle() {
         if (notesEditBox) notesEditBox.classList.toggle('hidden', !notesCardEditActive);
 
         if (btn) {
+          const morphPill = btn.closest('.trip-morph-pill');
           if (notesCardEditActive) {
-            btn.className = 'inline-flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-extrabold bg-blue-100/80 text-blue-700 transition active:scale-95 cursor-pointer';
-            btn.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
+            btn.className = 'w-5 h-5 rounded-full bg-blue-600 text-white inline-flex items-center justify-center cursor-pointer transition active:scale-90 shadow-2xs';
+            btn.innerHTML = '<i class="fa-solid fa-check text-[9px]"></i>';
+            if (morphPill) morphPill.classList.add('is-open');
           } else {
-            btn.className = 'inline-flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-bold bg-transparent text-slate-700 hover:bg-slate-200/70 hover:text-blue-700 transition active:scale-95 cursor-pointer';
-            btn.innerHTML = '<i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>';
+            btn.className = 'w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90';
+            btn.innerHTML = '<i class="fa-solid fa-pen text-[9px]"></i>';
+            if (morphPill) {
+              morphPill.classList.remove('is-open');
+              const dotIc = morphPill.querySelector('.trip-morph-dots-btn i');
+              if (dotIc) dotIc.className = 'fa-solid fa-ellipsis text-[9px]';
+            }
           }
         }
 
         if (typeof window.syncStudioEditIndicators === 'function') window.syncStudioEditIndicators();
         else window.syncInlineStudioReadViews();
-        if (notesCardEditActive) {
-          setTimeout(() => document.getElementById('inputBookingNotes')?.focus(), 40);
+        if (notesCardEditActive && !suppressFocus) {
+          setTimeout(() => { try { document.getElementById('inputBookingNotes')?.focus({ preventScroll: true }); } catch (e) {} }, 40);
         } else if (wasEditing && !skipAutoSave) {
           window.persistCurrentInlineBookingSilently('📝 行程備忘已儲存');
         }
@@ -16363,8 +16961,10 @@ function setupYearOverviewToggle() {
         }
         const notesEl = document.getElementById('inputBookingNotes');
         if (notesEl) notesEl.value = '';
+        window.toggleNotesCardEditMode(false, true);
+        window.closeAllMorphPills();
         window.syncInlineStudioReadViews();
-        window.persistCurrentInlineBookingSilently('🧹 已重設行程備忘');
+        window.persistCurrentInlineBookingSilently('🧹 已清空行程備忘');
       };
 
       window.syncStudioEditIndicators = () => {
@@ -16389,21 +16989,30 @@ function setupYearOverviewToggle() {
         const btn = document.getElementById('btnToggleStudioMasterEdit');
         const icon = document.getElementById('iconStudioMasterEdit');
         const lbl = document.getElementById('labelStudioMasterEdit');
-        if (btn && icon && lbl) {
+        if (btn && icon) {
           if (isAnyEditing) {
-            btn.className = 'px-2.5 py-1 rounded-xl bg-blue-600 text-white border border-blue-600 text-[10.5px] font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shadow-xs shrink-0';
-            icon.className = 'fa-solid fa-check text-[9.5px] text-white';
-            lbl.textContent = '全部完成';
+            btn.className = 'w-7 h-7 rounded-full bg-blue-600 hover:bg-blue-700 text-white border border-blue-600 flex items-center justify-center transition active:scale-90 cursor-pointer shadow-xs shrink-0';
+            icon.className = 'fa-solid fa-check text-[10.5px] text-white';
+            if (lbl) lbl.textContent = '全部完成';
           } else {
-            btn.className = 'px-2.5 py-1 rounded-xl bg-white hover:bg-blue-50 text-slate-900 hover:text-blue-700 border border-slate-300 hover:border-blue-300 text-[10.5px] font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shadow-2xs shrink-0';
-            icon.className = 'fa-solid fa-pen text-[9.5px] text-blue-600';
-            lbl.textContent = '全部編輯';
+            btn.className = 'w-7 h-7 rounded-full bg-white hover:bg-blue-50 text-blue-600 border border-slate-300 hover:border-blue-300 flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs shrink-0';
+            icon.className = 'fa-solid fa-pen text-[10px] text-blue-600';
+            if (lbl) lbl.textContent = '全部編輯';
           }
         }
         window.syncInlineStudioReadViews();
       };
 
       window.toggleStudioMasterEditMode = (forceState = null) => {
+        // 記錄點按按鈕當刻在螢幕上的絕對垂直座標，切換前後精準錨定零跳版
+        const masterBtnEl = document.getElementById('btnToggleStudioMasterEdit');
+        const beforeRectTop = masterBtnEl ? masterBtnEl.getBoundingClientRect().top : null;
+        const tabLeavesEl = document.getElementById('tabContentLeaves');
+        const modalLeavesBodyEl = document.getElementById('modalOverviewLeavesBody');
+        const savedTabTop = tabLeavesEl ? tabLeavesEl.scrollTop : 0;
+        const savedModalTop = modalLeavesBodyEl ? modalLeavesBodyEl.scrollTop : 0;
+        const savedWinY = window.scrollY;
+
         const hasAnyOpenSection = Boolean(
           flightCardEditState.out ||
           flightCardEditState.in ||
@@ -16420,41 +17029,58 @@ function setupYearOverviewToggle() {
           window.toggleFlightCardEditMode('in', nextMasterState);
         }
 
-        // 同步切換住宿詳情與行程備忘就地編輯態
-        window.toggleHotelCardEditMode(nextMasterState, true);
-        window.toggleNotesCardEditMode(nextMasterState, true);
+        // 同步切換住宿詳情與行程備忘就地編輯態（suppressFocus = true 防止自動捲落底部備忘欄跳版）
+        window.toggleHotelCardEditMode(nextMasterState, true, true);
+        window.toggleNotesCardEditMode(nextMasterState, true, true);
 
-        // 同步切換航班班次輸入框唯讀/可編輯視覺（編輯態亮起螢光黃提示，完成後恢復正常配色）
+        // 同步切換航班班次輸入框與驗證文字：編輯態展開方框，完成態收起方框僅留狀態燈
         ['inputFlightOutNo', 'inputFlightInNo'].forEach(id => {
           const inp = document.getElementById(id);
           const box = inp?.closest('.flight-pillar-no-box');
+          const vBox = document.getElementById(id === 'inputFlightOutNo' ? 'badgeOutVerifyStatus' : 'badgeInVerifyStatus');
+          const vLbl = vBox ? vBox.querySelector('.verify-status-label') : null;
           if (!inp) return;
           if (nextMasterState) {
             inp.removeAttribute('readonly');
             inp.classList.remove('pointer-events-none');
             if (box) {
-              box.classList.remove('border-transparent');
+              box.classList.remove('hidden', 'border-transparent');
               box.classList.add('is-editing-highlight');
             }
+            if (vLbl) vLbl.classList.remove('hidden');
           } else {
             inp.setAttribute('readonly', 'readonly');
             inp.classList.add('pointer-events-none');
-            if (box) box.classList.remove('is-editing-highlight');
+            if (box) {
+              box.classList.add('hidden');
+              box.classList.remove('is-editing-highlight');
+            }
+            if (vLbl) vLbl.classList.add('hidden');
           }
         });
 
-        const drawerEl = document.getElementById('inlineBookingStudioDrawer');
-        if (drawerEl && drawerEl.classList.contains('is-open')) {
-          drawerEl.style.display = 'block';
-          drawerEl.style.maxHeight = 'none';
-          drawerEl.style.opacity = '1';
-        }
-
         window.syncStudioEditIndicators();
 
-        // 用戶主動按「全部完成」時：自動儲存並留在「純淨憑證檢視態」俾用戶檢查核對，絕不強行收起抽屜
+        // 用戶主動按「完成」時：自動儲存並留在「純淨憑證檢視態」俾用戶檢查核對，絕不強行收起抽屜
         if (!nextMasterState && forceState === null && typeof window.persistCurrentInlineBookingSilently === 'function') {
-          window.persistCurrentInlineBookingSilently('✈️ 全部預訂資料已儲存！再按上方橫幅即可收起');
+          window.persistCurrentInlineBookingSilently('✈️ 全部預訂資料已儲存！');
+        }
+
+        // 同步校準捲動位置，確保畫筆按鈕原地紋風不動、0px 零跳版
+        if (tabLeavesEl) tabLeavesEl.scrollTop = savedTabTop;
+        if (modalLeavesBodyEl) modalLeavesBodyEl.scrollTop = savedModalTop;
+        if (beforeRectTop !== null && masterBtnEl) {
+          const afterRectTop = masterBtnEl.getBoundingClientRect().top;
+          const deltaY = afterRectTop - beforeRectTop;
+          if (Math.abs(deltaY) > 0.5) {
+            if (modalLeavesBodyEl && modalLeavesBodyEl.contains(masterBtnEl)) {
+              modalLeavesBodyEl.scrollTop += deltaY;
+            } else if (tabLeavesEl && tabLeavesEl.contains(masterBtnEl)) {
+              tabLeavesEl.scrollTop += deltaY;
+            } else {
+              window.scrollTo(window.scrollX, savedWinY + deltaY);
+            }
+          }
         }
       };
 
@@ -16467,8 +17093,10 @@ function setupYearOverviewToggle() {
           btn.style.backgroundColor = '';
           btn.style.color = '';
           btn.style.borderColor = '';
-          const ic = btn.querySelector('i');
-          if (ic) ic.style.color = '';
+          const lbl = btn.querySelector('.ribbon-cta-label');
+          if (lbl) lbl.textContent = '機票住宿';
+          const chev = btn.querySelector('.ribbon-cta-chevron');
+          if (chev) chev.classList.remove('rotate-180');
         });
       };
 
@@ -16482,21 +17110,24 @@ function setupYearOverviewToggle() {
         window.toggleStudioMasterEditMode(false);
         if (modalScrollEl) {
           modalScrollEl.scrollTop = savedModalScrollTop;
-        } else {
+        } else if (Math.abs(window.scrollY - savedScrollY) > 1) {
           window.scrollTo(0, savedScrollY);
         }
         if (drawer) {
           drawer.classList.remove('is-open');
-          drawer.style.maxHeight = '0px';
-          drawer.style.opacity = '0';
           setTimeout(() => {
             if (!drawer.classList.contains('is-open')) {
               drawer.style.display = 'none';
               if (parkingBay && drawer.parentElement !== parkingBay) {
                 parkingBay.appendChild(drawer);
               }
+              if (modalScrollEl) {
+                modalScrollEl.scrollTop = savedModalScrollTop;
+              } else if (Math.abs(window.scrollY - savedScrollY) > 1) {
+                window.scrollTo(0, savedScrollY);
+              }
             }
-          }, 310);
+          }, 290);
         }
         if (drawer) drawer.removeAttribute('data-mounted-key');
         currentEditingBookingKey = null;
@@ -16606,11 +17237,10 @@ function setupYearOverviewToggle() {
           if (chev) chev.classList.add('rotate-180');
           if (lbl) lbl.textContent = '收起';
           if (triggerEl.classList.contains('btn-ribbon-inline-booking')) {
-            triggerEl.style.backgroundColor = '#2563eb';
-            triggerEl.style.color = '#ffffff';
-            triggerEl.style.borderColor = '#2563eb';
-            const ic = triggerEl.querySelector('i');
-            if (ic) ic.style.color = '#ffffff';
+            const lbl = triggerEl.querySelector('.ribbon-cta-label');
+            if (lbl) lbl.textContent = '收起詳情';
+            const chev = triggerEl.querySelector('.ribbon-cta-chevron');
+            if (chev) chev.classList.add('rotate-180');
           }
         } else {
           const matchingBtn = targetSlot.parentElement?.querySelector('.btn-open-booking-modal');
@@ -16622,37 +17252,35 @@ function setupYearOverviewToggle() {
           }
         }
 
-        drawer.style.display = 'block';
-        drawer.style.maxHeight = '0px';
-        drawer.style.opacity = '0';
-        if (drawer.parentElement !== targetSlot) {
-          targetSlot.appendChild(drawer);
-        }
         const savedScrollY = window.scrollY;
         const modalScrollEl = targetSlot.closest('.overflow-y-auto');
         const savedModalScrollTop = modalScrollEl ? modalScrollEl.scrollTop : 0;
 
+        drawer.classList.remove('is-open');
+        drawer.style.display = 'grid';
+        if (drawer.parentElement !== targetSlot) {
+          targetSlot.appendChild(drawer);
+        }
+        if (modalScrollEl) {
+          modalScrollEl.scrollTop = savedModalScrollTop;
+        } else if (Math.abs(window.scrollY - savedScrollY) > 1) {
+          window.scrollTo(0, savedScrollY);
+        }
+
         requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            drawer.classList.add('is-open');
-            drawer.style.maxHeight = '2600px';
-            drawer.style.opacity = '1';
+          drawer.classList.add('is-open');
+          if (modalScrollEl) {
+            modalScrollEl.scrollTop = savedModalScrollTop;
+          } else if (Math.abs(window.scrollY - savedScrollY) > 1) {
+            window.scrollTo(0, savedScrollY);
+          }
+          setTimeout(() => {
             if (modalScrollEl) {
               modalScrollEl.scrollTop = savedModalScrollTop;
-            } else {
+            } else if (Math.abs(window.scrollY - savedScrollY) > 1) {
               window.scrollTo(0, savedScrollY);
             }
-            setTimeout(() => {
-              if (drawer.classList.contains('is-open')) {
-                drawer.style.maxHeight = 'none';
-              }
-              if (modalScrollEl) {
-                modalScrollEl.scrollTop = savedModalScrollTop;
-              } else {
-                window.scrollTo(0, savedScrollY);
-              }
-            }, 320);
-          });
+          }, 300);
         });
       };
 
@@ -17083,8 +17711,10 @@ function setupYearOverviewToggle() {
         document.getElementById('modalMobileSync').classList.add('hidden');
       };
       document.getElementById('btnMobileSwitchRoom').onclick = () => {
-        const val = document.getElementById('mobileRoomInput').value.trim().toUpperCase();
+        const mInp = document.getElementById('mobileRoomInput');
+        const val = validateRoomCodeAndNotify(mInp.value);
         if (val) {
+          mInp.value = val;
           // ⚡ 立即徹底清空舊房間記憶體，防止跨房間污染
           leaveData = {};
           customTripTitles = {};
@@ -17127,8 +17757,10 @@ function setupYearOverviewToggle() {
       const btnDesktopSwitch = document.getElementById('btnDesktopSwitchRoom');
       if (btnDesktopSwitch) {
         btnDesktopSwitch.onclick = () => {
-          const val = document.getElementById('desktopRoomInput').value.trim().toUpperCase();
+          const dInp = document.getElementById('desktopRoomInput');
+          const val = validateRoomCodeAndNotify(dInp.value);
           if (val) {
+            dInp.value = val;
             // ⚡ 立即徹底清空舊房間記憶體，防止跨房間污染
             leaveData = {};
             customTripTitles = {};
@@ -17340,10 +17972,13 @@ function setupYearOverviewToggle() {
             showUnlockModal();
             return;
           }
-          if (!isEditMode) {
-            setEditModeState(true, false);
+          if (isEditMode && activeBrush === 'eraser') {
+            activeBrush = 'annual';
+            syncActiveBrushUI();
+            showToast('已退出單日清除模式，恢復正常排假');
+          } else {
+            handleBrushSelect('eraser');
           }
-          openResetModal();
         };
       }
 
@@ -17744,12 +18379,12 @@ function setupYearOverviewToggle() {
     </div>
   </div>
 
-      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.8 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
+      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.32 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
   <div id="inlineBookingStudioParkingBay" class="hidden">
 
   <!-- 原裝完整「旅程預訂資料」流暢原地收放面板（全程零彈窗、無重複標題與多餘收起掣） -->
-  <div id="inlineBookingStudioDrawer" class="inline-booking-accordion overflow-hidden transition-all duration-300 ease-out" style="display:none; max-height:0px; opacity:0; overflow-anchor: none;">
-    <div>
+  <div id="inlineBookingStudioDrawer" class="inline-booking-accordion" style="display:none; overflow-anchor: none;">
+    <div class="inline-booking-accordion-inner">
       <div id="inlineBookingStudioCard" class="mt-2 bg-white rounded-2xl shadow-sm border border-slate-200/95 overflow-hidden">
         <!-- 隱藏副標供系統同步使用 -->
         <p id="bookingModalSubtitle" class="hidden"></p>
@@ -17775,9 +18410,10 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-chevron-up text-[10px]"></i>
             </button>
             <button type="button" id="btnToggleStudioMasterEdit" onclick="toggleStudioMasterEditMode()"
-                    class="px-2.5 py-1 rounded-xl bg-white hover:bg-blue-50 text-slate-900 hover:text-blue-700 border border-slate-300 hover:border-blue-300 text-[10.5px] font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shadow-2xs shrink-0">
-              <i id="iconStudioMasterEdit" class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
-              <span id="labelStudioMasterEdit">全部編輯</span>
+                    aria-label="全部編輯或完成"
+                    class="w-7 h-7 rounded-full bg-white hover:bg-blue-50 text-blue-600 border border-slate-300 hover:border-blue-300 flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs shrink-0">
+              <i id="iconStudioMasterEdit" class="fa-solid fa-pen text-[10px] text-blue-600"></i>
+              <span id="labelStudioMasterEdit" class="hidden">全部編輯</span>
             </button>
           </div>
         </div>
@@ -17792,31 +18428,30 @@ function setupYearOverviewToggle() {
           <!-- 卡片 1：去程航班 (Outbound) -->
           <div id="cardOutFlightContainer" class="flight-pillar-card bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all">
             <!-- 頂部閘口橫幅 / 登機牌標題列（左上：去程純字＋下方輸入班次及無框狀態；右上：可點擊日期／閘口柱超大鮮黃無前導零數字） -->
-            <div class="flight-pillar-header px-3 py-2 border-b border-slate-100 flex items-center justify-between gap-2 transition-colors">
-              <!-- 左側上下兩層：上層無框「去程 Outbound」純字，下層航班號碼輸入框 ＋ 無外框狀態指示 -->
-              <div class="flex flex-col items-start gap-1 min-w-0">
-                <span class="flight-pillar-badge inline-flex items-center text-indigo-700 text-[13.5px] sm:text-sm font-black tracking-wide leading-tight select-none">
+            <div class="flight-pillar-header px-3 py-2 min-h-[63px] box-border bg-gradient-to-r from-slate-200/85 via-slate-100/95 to-slate-200/80 border-b border-slate-200/90 flex items-center justify-between gap-2 transition-colors">
+              <!-- 左側單行並排：「去程 Outbound」＋（編輯態展開輸入框／完成態收起方框僅留狀態燈） -->
+              <div class="flex items-center gap-1.5 flex-wrap min-w-0">
+                <span class="flight-pillar-badge inline-flex items-center text-indigo-700 text-[13.5px] sm:text-sm font-black tracking-wide leading-tight select-none shrink-0">
                   去程 Outbound
                 </span>
-                <div class="flex items-center gap-1.5 flex-wrap">
-                  <div class="flight-pillar-no-box relative flex items-center bg-slate-50 border border-slate-300 focus-within:border-blue-500 rounded-lg px-2 py-0.5 transition">
-                    <input type="text" id="inputFlightOutNo" placeholder="輸入班次" 
-                           class="flight-pillar-no-input w-20 bg-transparent text-[12px] font-mono font-black text-slate-900 uppercase focus:outline-none">
-                  </div>
-                  <!-- 無外框極細即時狀態指示（確認中 / 已確認+綠點 / 未有資料） -->
-                  <div id="badgeOutVerifyStatus" class="shrink-0 inline-flex items-center"></div>
+                <div class="flight-pillar-no-box hidden relative flex items-center bg-slate-50 border border-slate-300 focus-within:border-blue-500 rounded-lg px-2 py-0.5 transition shrink-0">
+                  <input type="text" id="inputFlightOutNo" placeholder="輸入班次" 
+                         class="flight-pillar-no-input w-20 bg-transparent text-[12px] font-mono font-black text-slate-900 uppercase focus:outline-none">
                 </div>
+                <!-- 狀態燈與驗證文字（完成態僅保留狀態燈，編輯態顯示完整文字＋燈號） -->
+                <div id="badgeOutVerifyStatus" class="shrink-0 inline-flex items-center"></div>
               </div>
 
               <!-- 右上角：日期（支援直接點擊彈出日期選擇器；HKG 閘口柱顯示超大鮮黃無前導零數字 e.g. 1225 / 59 ＋ 下方極細月日標註） -->
-              <div class="flight-pillar-date-chip relative inline-flex items-center justify-end min-w-[96px] h-[48px] px-2.5 py-1 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-300 text-slate-900 cursor-pointer transition select-none shrink-0">
-                <!-- 簡約登機牌模式視圖 -->
-                <span class="flight-gate-boarding-view inline-flex items-center gap-1.5 text-[11px] font-extrabold text-slate-900 pointer-events-none">
-                  <i class="fa-regular fa-calendar text-blue-600 text-[10px]"></i>
-                  <span id="labelFlightOutDateDisplay">出發日期</span>
+              <!-- 右上角：日期（雙主題嚴格鎖定同高 h-[46px] box-border，切換主題 0px 零跳動） -->
+              <div class="flight-pillar-date-chip relative inline-flex items-center justify-end h-[46px] min-h-[46px] max-h-[46px] box-border px-2.5 py-1 rounded-xl bg-slate-100/85 hover:bg-slate-200/70 border border-slate-200/90 text-slate-900 cursor-pointer transition select-none shrink-0">
+                <!-- 簡約登機牌模式視圖：上方精巧「月日」向右拍齊 ＋ 下方純文字「週六」無框向右拍齊 -->
+                <span class="flight-gate-boarding-view inline-flex flex-col items-end justify-center h-[36px] gap-[3px] pointer-events-none">
+                  <span id="labelFlightOutDateDisplay" class="text-[13.5px] sm:text-[14px] font-black text-slate-900 leading-none tracking-tight text-right">出發日期</span>
+                  <span id="labelFlightOutWeekdayDisplay" class="text-[10px] font-bold text-slate-600 leading-none text-right">選擇</span>
                 </span>
                 <!-- HKG 閘口柱模式視圖：超大鮮黃無前導零數字 ＋ 月與日下方各自極細標註 -->
-                <span class="flight-gate-pillar-view hidden flex-col items-end justify-center leading-none pointer-events-none">
+                <span class="flight-gate-pillar-view hidden flex-col items-end justify-center h-[36px] leading-none min-w-[82px] pointer-events-none">
                   <span class="inline-flex items-start gap-0 font-mono font-black text-[34px] sm:text-[38px] leading-[0.85] tracking-tighter text-[#FBF238]" style="text-shadow: 0 1px 2px rgba(0,0,0,0.32);">
                     <span class="inline-flex flex-col items-center">
                       <span id="gateOutMonthDigits">12</span>
@@ -17832,36 +18467,23 @@ function setupYearOverviewToggle() {
               </div>
             </div>
 
-            <!-- 航司名稱 ＋ 最右側「動態 ↗」按鍵列 -->
+            <!-- 航司名稱 ＋ 修長雷達鍵 ＋ 黑色「航班編號 FLT」＋ 獨立灰框航班號碼（全列水平嚴格平齊） -->
             <div class="flight-pillar-airline-row px-3 py-2 border-b border-slate-100 flex items-center justify-between gap-2">
-              <div class="flex items-center gap-2 min-w-0">
-                <span id="badgeOutAirlineCode" class="w-6 h-6 rounded-md bg-slate-200 text-slate-400 font-black font-mono text-[10px] flex items-center justify-center shrink-0 shadow-2xs">✈</span>
-                <div id="labelOutAirlineName" class="text-[10.5px] font-semibold text-slate-400 truncate">
+              <div class="flex items-center gap-2 h-[24px] min-w-0">
+                <span id="badgeOutAirlineCode" class="w-6 h-6 rounded-md bg-slate-200 text-slate-400 font-black font-mono text-[10px] inline-flex items-center justify-center leading-none shrink-0 shadow-2xs">✈</span>
+                <div id="labelOutAirlineName" class="text-[11px] font-semibold text-slate-400 leading-none truncate">
                   去程航班 Outbound Flight
                 </div>
-                <span id="badgeOutFlightNoPill" class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200 font-mono font-bold text-[10.5px] text-slate-400 shrink-0">--</span>
               </div>
-              <div class="flex items-center gap-1.5 shrink-0">
-                <div id="boxOutFlightNavGroup" class="relative inline-flex items-center rounded-lg shadow-2xs shrink-0">
-                  <a id="linkFlightAwareOut" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" onclick="return handleModalFlightTrackClick(event, 'out', 'aware')"
-                     class="text-[10px] font-bold px-2.5 py-0.5 rounded-l-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-900 transition flex items-center gap-1 cursor-pointer">
-                    <span id="labelFlightOutNavText">動態 ↗</span>
-                  </a>
-                  <button type="button" onclick="toggleNavDropdown('navDropdown_flightOut', event)" 
-                          class="px-1.5 py-0.5 bg-white hover:bg-slate-100 border-t border-b border-r border-slate-300 text-slate-900 rounded-r-lg text-[9px] font-bold flex items-center justify-center transition cursor-pointer">
-                    ⌄
-                  </button>
-                  <div id="navDropdown_flightOut" class="hidden absolute right-0 top-full mt-1 w-36 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl z-50 py-1 text-[11px] space-y-0.5 text-left">
-                    <a id="linkFlightAwareOut_Item" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" onclick="return handleModalFlightTrackClick(event, 'out', 'aware')" class="px-3 py-1.5 hover:bg-slate-100 text-slate-900 font-bold flex items-center gap-2 transition cursor-pointer">
-                      <i class="fa-solid fa-plane text-[10px] text-sky-600"></i>
-                      <span>FlightAware</span>
-                    </a>
-                    <a id="linkFlightRadarOut" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer" onclick="return handleModalFlightTrackClick(event, 'out', 'radar')" class="px-3 py-1.5 hover:bg-slate-100 text-slate-900 font-bold flex items-center gap-2 transition cursor-pointer">
-                      <i class="fa-solid fa-satellite-dish text-[10px] text-amber-500"></i>
-                      <span>Flightradar24</span>
-                    </a>
-                  </div>
-                </div>
+
+              <div class="flex items-center gap-2 h-[24px] shrink-0">
+                <!-- 黑色純文字標籤「航班編號 FLT」（位於框外，與航司名、航班號碼同一水平線） -->
+                <span class="text-[10px] font-extrabold text-slate-900 tracking-tight leading-none whitespace-nowrap shrink-0">航班編號 FLT</span>
+
+                <!-- 獨立灰色底框：僅框住航班號碼本身 -->
+                <span id="badgeOutFlightNoWrap" class="inline-flex items-center justify-center h-[24px] min-w-[46px] px-2 rounded-md bg-slate-100 border border-slate-200/90 shrink-0">
+                  <span id="badgeOutFlightNoPill" class="font-mono font-black text-[13px] text-slate-400 leading-none">--</span>
+                </span>
               </div>
             </div>
 
@@ -18014,16 +18636,53 @@ function setupYearOverviewToggle() {
             <!-- HKG 閘口柱專屬：底部淺天藍幾何紋理過渡條 -->
             <div class="flight-pillar-sky-bar hidden hkg-pillar-sky-strip"></div>
 
-            <!-- 底部獨立操作列（霧面靛藍灰底座 / 簡約白灰底座） -->
-            <div class="flight-pillar-footer px-3 py-1.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-end gap-1.5 transition-colors">
-              <button type="button" id="btnToggleEditOutFlight" onclick="toggleFlightCardEditMode('out')" aria-label="編輯或完成去程航班"
-                      class="flight-pillar-footer-btn-edit inline-flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-bold bg-transparent text-slate-700 hover:bg-slate-200/70 hover:text-blue-700 transition active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
-              </button>
-              <button type="button" onclick="resetSingleFlightCard('out')" aria-label="重設去程航班"
-                      class="flight-pillar-footer-btn-clear inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-rotate-left text-[10px] text-rose-500"></i>
-              </button>
+                        <!-- 底部獨立操作列：左下對等圓形雷達膠囊（單擊直達預設 · 長按/右鍵展開雙平台）＋ 右下三圓點操作膠囊 -->
+            <div class="flight-pillar-footer px-3 py-1.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between gap-2 transition-colors">
+              <!-- 左下角：與右側三圓點完全對等嘅圓形雷達膠囊 -->
+              <div id="radarMorphPillOut" class="radar-morph-pill shrink-0" onclick="event.stopPropagation()">
+                <button type="button" id="btnRadarMainOut"
+                        onpointerdown="handleRadarPillPointerDown(event, 'out')"
+                        onpointerup="handleRadarPillPointerUp(event, 'out')"
+                        onpointerleave="cancelRadarPillHoldTimer()"
+                        onpointercancel="cancelRadarPillHoldTimer()"
+                        oncontextmenu="event.preventDefault(); openRadarMorphPill('out'); return false;"
+                        aria-label="航班實時雷達（單擊開啟預設平台，長按切換平台）"
+                        class="radar-morph-main-btn w-4 h-4 rounded-full bg-slate-200/85 hover:bg-blue-100 text-slate-700 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer transition active:scale-90 shrink-0">
+                  <i class="fa-solid fa-satellite-dish text-[8.5px]"></i>
+                </button>
+                <div class="radar-morph-actions">
+                  <a id="linkFlightAwareOut" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer"
+                     onclick="return selectAndOpenFlightRadar(event, 'out', 'aware')"
+                     class="radar-opt-aware px-2 py-0.5 rounded-full text-[9.5px] font-extrabold bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200/80 inline-flex items-center gap-1 transition active:scale-95 cursor-pointer">
+                    <i class="fa-solid fa-plane text-[8px]"></i>
+                    <span>FlightAware</span>
+                  </a>
+                  <a id="linkFlightRadarOut" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer"
+                     onclick="return selectAndOpenFlightRadar(event, 'out', 'radar')"
+                     class="radar-opt-radar px-2 py-0.5 rounded-full text-[9.5px] font-extrabold bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200/80 inline-flex items-center gap-1 transition active:scale-95 cursor-pointer">
+                    <i class="fa-solid fa-satellite-dish text-[8px]"></i>
+                    <span>Flightradar24</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- 右下角：三圓點伸展鵝蛋形膠囊 [✎] [↺] -->
+              <div class="trip-morph-pill shrink-0" onclick="event.stopPropagation()">
+                <div class="trip-morph-actions">
+                  <button type="button" id="btnToggleEditOutFlight" onclick="event.stopPropagation(); toggleFlightCardEditMode('out')" aria-label="編輯或完成去程航班"
+                          class="w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                    <i class="fa-solid fa-pen text-[9px]"></i>
+                  </button>
+                  <button type="button" onclick="event.stopPropagation(); resetSingleFlightCard('out')" aria-label="清空去程航班"
+                          class="w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                    <i class="fa-solid fa-rotate-left text-[9px]"></i>
+                  </button>
+                </div>
+                <button type="button" onclick="event.stopPropagation(); toggleTripMorphPill(this)" aria-label="展開或收起操作"
+                        class="trip-morph-dots-btn w-4 h-4 rounded-full bg-slate-200/85 hover:bg-blue-100 text-slate-600 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer transition">
+                  <i class="fa-solid fa-ellipsis text-[9px]"></i>
+                </button>
+              </div>
             </div>
             <div id="hintFlightOutAuto" class="hidden"></div>
           </div>
@@ -18043,31 +18702,30 @@ function setupYearOverviewToggle() {
           <!-- 卡片 2：回程航班 (Return) -->
           <div id="cardReturnFlightWrapper" class="flight-pillar-card bg-white rounded-2xl border border-slate-200/90 shadow-2xs overflow-hidden transition-all">
             <!-- 頂部閘口橫幅 / 登機牌標題列（左上：回程純字＋下方輸入班次及無框狀態；右上：可點擊日期／閘口柱超大鮮黃無前導零數字） -->
-            <div class="flight-pillar-header px-3 py-2 border-b border-slate-100 flex items-center justify-between gap-2 transition-colors">
+            <div class="flight-pillar-header px-3 py-2 min-h-[63px] box-border bg-gradient-to-r from-slate-200/85 via-slate-100/95 to-slate-200/80 border-b border-slate-200/90 flex items-center justify-between gap-2 transition-colors">
               <!-- 左側上下兩層：上層無框「回程 Inbound」純字，下層航班號碼輸入框 ＋ 無外框狀態指示 -->
-              <div class="flex flex-col items-start gap-1 min-w-0">
-                <span class="flight-pillar-badge inline-flex items-center text-indigo-700 text-[13.5px] sm:text-sm font-black tracking-wide leading-tight select-none">
+              <div class="flex items-center gap-1.5 flex-wrap min-w-0">
+                <span class="flight-pillar-badge inline-flex items-center text-indigo-700 text-[13.5px] sm:text-sm font-black tracking-wide leading-tight select-none shrink-0">
                   回程 Inbound
                 </span>
-                <div class="flex items-center gap-1.5 flex-wrap">
-                  <div class="flight-pillar-no-box relative flex items-center bg-slate-50 border border-slate-300 focus-within:border-blue-500 rounded-lg px-2 py-0.5 transition">
-                    <input type="text" id="inputFlightInNo" placeholder="輸入班次" 
-                           class="flight-pillar-no-input w-20 bg-transparent text-[12px] font-mono font-black text-slate-900 uppercase focus:outline-none">
-                  </div>
-                  <!-- 無外框極細即時狀態指示（確認中 / 已確認+綠點 / 未有資料） -->
-                  <div id="badgeInVerifyStatus" class="shrink-0 inline-flex items-center"></div>
+                <div class="flight-pillar-no-box hidden relative flex items-center bg-slate-50 border border-slate-300 focus-within:border-blue-500 rounded-lg px-2 py-0.5 transition shrink-0">
+                  <input type="text" id="inputFlightInNo" placeholder="輸入班次" 
+                         class="flight-pillar-no-input w-20 bg-transparent text-[12px] font-mono font-black text-slate-900 uppercase focus:outline-none">
                 </div>
+                <!-- 狀態燈與驗證文字（完成態僅保留狀態燈，編輯態顯示完整文字＋燈號） -->
+                <div id="badgeInVerifyStatus" class="shrink-0 inline-flex items-center"></div>
               </div>
 
               <!-- 右上角：日期（支援直接點擊彈出日期選擇器；HKG 閘口柱顯示超大鮮黃無前導零數字 ＋ 下方極細月日標註） -->
-              <div class="flight-pillar-date-chip relative inline-flex items-center justify-end min-w-[96px] h-[48px] px-2.5 py-1 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-300 text-slate-900 cursor-pointer transition select-none shrink-0">
-                <!-- 簡約登機牌模式視圖 -->
-                <span class="flight-gate-boarding-view inline-flex items-center gap-1.5 text-[11px] font-extrabold text-slate-900 pointer-events-none">
-                  <i class="fa-regular fa-calendar text-blue-600 text-[10px]"></i>
-                  <span id="labelFlightInDateDisplay">回程日期</span>
+              <!-- 右上角：日期（雙主題嚴格鎖定同高 h-[46px] box-border，切換主題 0px 零跳動） -->
+              <div class="flight-pillar-date-chip relative inline-flex items-center justify-end h-[46px] min-h-[46px] max-h-[46px] box-border px-2.5 py-1 rounded-xl bg-slate-100/85 hover:bg-slate-200/70 border border-slate-200/90 text-slate-900 cursor-pointer transition select-none shrink-0">
+                <!-- 簡約登機牌模式視圖：上方精巧「月日」向右拍齊 ＋ 下方純文字「週六」無框向右拍齊 -->
+                <span class="flight-gate-boarding-view inline-flex flex-col items-end justify-center h-[36px] gap-[3px] pointer-events-none">
+                  <span id="labelFlightInDateDisplay" class="text-[13.5px] sm:text-[14px] font-black text-slate-900 leading-none tracking-tight text-right">回程日期</span>
+                  <span id="labelFlightInWeekdayDisplay" class="text-[10px] font-bold text-slate-600 leading-none text-right">選擇</span>
                 </span>
                 <!-- HKG 閘口柱模式視圖：超大鮮黃無前導零數字 ＋ 月與日下方各自極細標註 -->
-                <span class="flight-gate-pillar-view hidden flex-col items-end justify-center leading-none pointer-events-none">
+                <span class="flight-gate-pillar-view hidden flex-col items-end justify-center h-[36px] leading-none min-w-[82px] pointer-events-none">
                   <span class="inline-flex items-start gap-0 font-mono font-black text-[34px] sm:text-[38px] leading-[0.85] tracking-tighter text-[#FBF238]" style="text-shadow: 0 1px 2px rgba(0,0,0,0.32);">
                     <span class="inline-flex flex-col items-center">
                       <span id="gateInMonthDigits">12</span>
@@ -18083,36 +18741,23 @@ function setupYearOverviewToggle() {
               </div>
             </div>
 
-            <!-- 航司名稱 ＋ 最右側「動態 ↗」按鍵列 -->
+            <!-- 航司名稱 ＋ 修長雷達鍵 ＋ 黑色「航班編號 FLT」＋ 獨立灰框航班號碼（全列水平嚴格平齊） -->
             <div class="flight-pillar-airline-row px-3 py-2 border-b border-slate-100 flex items-center justify-between gap-2">
-              <div class="flex items-center gap-2 min-w-0">
-                <span id="badgeInAirlineCode" class="w-6 h-6 rounded-md bg-slate-200 text-slate-400 font-black font-mono text-[10px] flex items-center justify-center shrink-0 shadow-2xs">✈</span>
-                <div id="labelInAirlineName" class="text-[10.5px] font-semibold text-slate-400 truncate">
+              <div class="flex items-center gap-2 h-[24px] min-w-0">
+                <span id="badgeInAirlineCode" class="w-6 h-6 rounded-md bg-slate-200 text-slate-400 font-black font-mono text-[10px] inline-flex items-center justify-center leading-none shrink-0 shadow-2xs">✈</span>
+                <div id="labelInAirlineName" class="text-[11px] font-semibold text-slate-400 leading-none truncate">
                   回程航班 Inbound Flight
                 </div>
-                <span id="badgeInFlightNoPill" class="px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200 font-mono font-bold text-[10.5px] text-slate-400 shrink-0">--</span>
               </div>
-              <div class="flex items-center gap-1.5 shrink-0">
-                <div id="boxInFlightNavGroup" class="relative inline-flex items-center rounded-lg shadow-2xs shrink-0">
-                  <a id="linkFlightAwareIn" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" onclick="return handleModalFlightTrackClick(event, 'in', 'aware')"
-                     class="text-[10px] font-bold px-2.5 py-0.5 rounded-l-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-900 transition flex items-center gap-1 cursor-pointer">
-                    <span id="labelFlightInNavText">動態 ↗</span>
-                  </a>
-                  <button type="button" onclick="toggleNavDropdown('navDropdown_flightIn', event)" 
-                          class="px-1.5 py-0.5 bg-white hover:bg-slate-100 border-t border-b border-r border-slate-300 text-slate-900 rounded-r-lg text-[9px] font-bold flex items-center justify-center transition cursor-pointer">
-                    ⌄
-                  </button>
-                  <div id="navDropdown_flightIn" class="hidden absolute right-0 top-full mt-1 w-36 bg-white/95 backdrop-blur-md border border-slate-200 rounded-xl shadow-xl z-50 py-1 text-[11px] space-y-0.5 text-left">
-                    <a id="linkFlightAwareIn_Item" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer" onclick="return handleModalFlightTrackClick(event, 'in', 'aware')" class="px-3 py-1.5 hover:bg-slate-100 text-slate-900 font-bold flex items-center gap-2 transition cursor-pointer">
-                      <i class="fa-solid fa-plane text-[10px] text-sky-600"></i>
-                      <span>FlightAware</span>
-                    </a>
-                    <a id="linkFlightRadarIn" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer" onclick="return handleModalFlightTrackClick(event, 'in', 'radar')" class="px-3 py-1.5 hover:bg-slate-100 text-slate-900 font-bold flex items-center gap-2 transition cursor-pointer">
-                      <i class="fa-solid fa-satellite-dish text-[10px] text-amber-500"></i>
-                      <span>Flightradar24</span>
-                    </a>
-                  </div>
-                </div>
+
+              <div class="flex items-center gap-2 h-[24px] shrink-0">
+                <!-- 黑色純文字標籤「航班編號 FLT」（位於框外，與航司名、航班號碼同一水平線） -->
+                <span class="text-[10px] font-extrabold text-slate-900 tracking-tight leading-none whitespace-nowrap shrink-0">航班編號 FLT</span>
+
+                <!-- 獨立灰色底框：僅框住航班號碼本身 -->
+                <span id="badgeInFlightNoWrap" class="inline-flex items-center justify-center h-[24px] min-w-[46px] px-2 rounded-md bg-slate-100 border border-slate-200/90 shrink-0">
+                  <span id="badgeInFlightNoPill" class="font-mono font-black text-[13px] text-slate-400 leading-none">--</span>
+                </span>
               </div>
             </div>
 
@@ -18264,16 +18909,53 @@ function setupYearOverviewToggle() {
             <!-- HKG 閘口柱專屬：底部淺天藍幾何紋理過渡條 -->
             <div class="flight-pillar-sky-bar hidden hkg-pillar-sky-strip"></div>
 
-            <!-- 底部獨立操作列 -->
-            <div class="flight-pillar-footer px-3 py-1.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-end gap-1.5 transition-colors">
-              <button type="button" id="btnToggleEditInFlight" onclick="toggleFlightCardEditMode('in')" aria-label="編輯或完成回程航班"
-                      class="flight-pillar-footer-btn-edit inline-flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-bold bg-transparent text-slate-700 hover:bg-slate-200/70 hover:text-blue-700 transition active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
-              </button>
-              <button type="button" onclick="resetSingleFlightCard('in')" aria-label="重設回程航班"
-                      class="flight-pillar-footer-btn-clear inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-rotate-left text-[10px] text-rose-500"></i>
-              </button>
+                        <!-- 底部獨立操作列：左下對等圓形雷達膠囊（單擊直達預設 · 長按/右鍵展開雙平台）＋ 右下三圓點操作膠囊 -->
+            <div class="flight-pillar-footer px-3 py-1.5 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between gap-2 transition-colors">
+              <!-- 左下角：與右側三圓點完全對等嘅圓形雷達膠囊 -->
+              <div id="radarMorphPillIn" class="radar-morph-pill shrink-0" onclick="event.stopPropagation()">
+                <button type="button" id="btnRadarMainIn"
+                        onpointerdown="handleRadarPillPointerDown(event, 'in')"
+                        onpointerup="handleRadarPillPointerUp(event, 'in')"
+                        onpointerleave="cancelRadarPillHoldTimer()"
+                        onpointercancel="cancelRadarPillHoldTimer()"
+                        oncontextmenu="event.preventDefault(); openRadarMorphPill('in'); return false;"
+                        aria-label="航班實時雷達（單擊開啟預設平台，長按切換平台）"
+                        class="radar-morph-main-btn w-4 h-4 rounded-full bg-slate-200/85 hover:bg-blue-100 text-slate-700 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer transition active:scale-90 shrink-0">
+                  <i class="fa-solid fa-satellite-dish text-[8.5px]"></i>
+                </button>
+                <div class="radar-morph-actions">
+                  <a id="linkFlightAwareIn" href="https://www.flightaware.com" target="_blank" rel="noopener noreferrer"
+                     onclick="return selectAndOpenFlightRadar(event, 'in', 'aware')"
+                     class="radar-opt-aware px-2 py-0.5 rounded-full text-[9.5px] font-extrabold bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200/80 inline-flex items-center gap-1 transition active:scale-95 cursor-pointer">
+                    <i class="fa-solid fa-plane text-[8px]"></i>
+                    <span>FlightAware</span>
+                  </a>
+                  <a id="linkFlightRadarIn" href="https://www.flightradar24.com" target="_blank" rel="noopener noreferrer"
+                     onclick="return selectAndOpenFlightRadar(event, 'in', 'radar')"
+                     class="radar-opt-radar px-2 py-0.5 rounded-full text-[9.5px] font-extrabold bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200/80 inline-flex items-center gap-1 transition active:scale-95 cursor-pointer">
+                    <i class="fa-solid fa-satellite-dish text-[8px]"></i>
+                    <span>Flightradar24</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- 右下角：三圓點伸展鵝蛋形膠囊 [✎] [↺] -->
+              <div class="trip-morph-pill shrink-0" onclick="event.stopPropagation()">
+                <div class="trip-morph-actions">
+                  <button type="button" id="btnToggleEditInFlight" onclick="event.stopPropagation(); toggleFlightCardEditMode('in')" aria-label="編輯或完成回程航班"
+                          class="w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                    <i class="fa-solid fa-pen text-[9px]"></i>
+                  </button>
+                  <button type="button" onclick="event.stopPropagation(); resetSingleFlightCard('in')" aria-label="清空回程航班"
+                          class="w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                    <i class="fa-solid fa-rotate-left text-[9px]"></i>
+                  </button>
+                </div>
+                <button type="button" onclick="event.stopPropagation(); toggleTripMorphPill(this)" aria-label="展開或收起操作"
+                        class="trip-morph-dots-btn w-4 h-4 rounded-full bg-slate-200/85 hover:bg-blue-100 text-slate-600 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer transition">
+                  <i class="fa-solid fa-ellipsis text-[9px]"></i>
+                </button>
+              </div>
             </div>
             <div id="hintFlightInAuto" class="hidden"></div>
           </div>
@@ -18396,16 +19078,24 @@ function setupYearOverviewToggle() {
             </div>
           </div>
 
-          <!-- 住宿詳情獨立底部操作列（比照去回程航班：編輯 / 完成 ＋ 重設） -->
-          <div class="pt-1.5 border-t border-slate-200/70 flex items-center justify-end gap-1.5">
-            <button type="button" id="btnToggleEditHotelCard" onclick="toggleHotelCardEditMode()" aria-label="編輯或完成住宿詳情"
-                    class="inline-flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-bold bg-transparent text-slate-700 hover:bg-slate-200/70 hover:text-blue-700 transition active:scale-95 cursor-pointer">
-              <i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
-            </button>
-            <button type="button" onclick="resetHotelSectionCard()" aria-label="重設住宿詳情"
-                    class="inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
-              <i class="fa-solid fa-rotate-left text-[10px] text-rose-500"></i>
-            </button>
+          <!-- 住宿詳情獨立底部操作列：三圓點伸展鵝蛋形膠囊 [✎] [↺] -->
+          <div class="pt-1.5 border-t border-slate-200/70 flex items-center justify-end">
+            <div class="trip-morph-pill shrink-0" onclick="event.stopPropagation()">
+              <div class="trip-morph-actions">
+                <button type="button" id="btnToggleEditHotelCard" onclick="event.stopPropagation(); toggleHotelCardEditMode()" aria-label="編輯或完成住宿詳情"
+                        class="w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                  <i class="fa-solid fa-pen text-[9px]"></i>
+                </button>
+                <button type="button" onclick="event.stopPropagation(); resetHotelSectionCard()" aria-label="清空住宿詳情"
+                        class="w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                  <i class="fa-solid fa-rotate-left text-[9px]"></i>
+                </button>
+              </div>
+              <button type="button" onclick="event.stopPropagation(); toggleTripMorphPill(this)" aria-label="展開或收起操作"
+                      class="trip-morph-dots-btn w-4 h-4 rounded-full bg-slate-200/85 hover:bg-blue-100 text-slate-600 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer transition">
+                <i class="fa-solid fa-ellipsis text-[9px]"></i>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -18429,16 +19119,24 @@ function setupYearOverviewToggle() {
             <textarea id="inputBookingNotes" rows="2" placeholder="e.g. 保單號 POL-888 / eSIM / 門票預約號" class="w-full px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg text-xs font-semibold text-slate-900 placeholder:text-slate-400 placeholder:font-normal focus:outline-slate-800 resize-none"></textarea>
           </div>
 
-          <!-- 行程備忘獨立底部操作列（比照去回程航班：編輯 / 完成 ＋ 重設） -->
-          <div class="pt-1.5 border-t border-slate-200/70 flex items-center justify-end gap-1.5">
-            <button type="button" id="btnToggleEditNotesCard" onclick="toggleNotesCardEditMode()" aria-label="編輯或完成行程備忘"
-                    class="inline-flex items-center justify-center w-6 h-6 rounded-md text-[11px] font-bold bg-transparent text-slate-700 hover:bg-slate-200/70 hover:text-blue-700 transition active:scale-95 cursor-pointer">
-              <i class="fa-solid fa-pen text-[9.5px] text-blue-600"></i>
-            </button>
-            <button type="button" onclick="resetNotesSectionCard()" aria-label="重設行程備忘"
-                    class="inline-flex items-center justify-center w-6 h-6 rounded-md text-[10px] font-bold text-slate-900 hover:text-rose-600 hover:bg-rose-50 transition active:scale-95 cursor-pointer">
-              <i class="fa-solid fa-rotate-left text-[10px] text-rose-500"></i>
-            </button>
+          <!-- 行程備忘獨立底部操作列：三圓點伸展鵝蛋形膠囊 [✎] [↺] -->
+          <div class="pt-1.5 border-t border-slate-200/70 flex items-center justify-end">
+            <div class="trip-morph-pill shrink-0" onclick="event.stopPropagation()">
+              <div class="trip-morph-actions">
+                <button type="button" id="btnToggleEditNotesCard" onclick="event.stopPropagation(); toggleNotesCardEditMode()" aria-label="編輯或完成行程備忘"
+                        class="w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                  <i class="fa-solid fa-pen text-[9px]"></i>
+                </button>
+                <button type="button" onclick="event.stopPropagation(); resetNotesSectionCard()" aria-label="清空行程備忘"
+                        class="w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                  <i class="fa-solid fa-rotate-left text-[9px]"></i>
+                </button>
+              </div>
+              <button type="button" onclick="event.stopPropagation(); toggleTripMorphPill(this)" aria-label="展開或收起操作"
+                      class="trip-morph-dots-btn w-4 h-4 rounded-full bg-slate-200/85 hover:bg-blue-100 text-slate-600 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer transition">
+                <i class="fa-solid fa-ellipsis text-[9px]"></i>
+              </button>
+            </div>
           </div>
         </div>
         </div>
@@ -18491,9 +19189,17 @@ function setupYearOverviewToggle() {
           </div>
 
           <div class="space-y-2">
-            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">同步代碼管理</span>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">同步代碼管理</span>
+              <span class="text-[9.5px] font-mono font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200/80">4–32 位英數</span>
+            </div>
+            <p class="text-[10.5px] text-slate-500 leading-relaxed">輸入 <b>4 至 32 位</b>英文字母、數字、<code>_</code> 或 <code>-</code>（如 <code>HK2027VIP</code>），同代碼裝置即自動雲端同步。</p>
             <div>
-              <input type="text" id="drawerRoomInput" class="w-full px-3 py-2 bg-slate-50 border border-blue-300 rounded-xl font-mono font-extrabold text-blue-700 text-sm tracking-widest uppercase text-center focus:outline-blue-500 focus:bg-white transition shadow-inner" placeholder="輸入代碼">
+              <input type="text" id="drawerRoomInput" maxlength="32" class="w-full px-3 py-2 bg-slate-50 border border-blue-300 rounded-xl font-mono font-extrabold text-blue-700 text-sm tracking-widest uppercase text-center focus:outline-blue-500 focus:bg-white transition shadow-inner" placeholder="輸入 4–32 位代碼 (如 HK2027VIP)">
+              <div id="drawerRoomValidationMsg" class="hidden mt-1 text-[10.5px] font-bold text-rose-600 flex items-center gap-1">
+                <i class="fa-solid fa-circle-exclamation text-[10px]"></i>
+                <span></span>
+              </div>
             </div>
             <div class="grid grid-cols-2 gap-2">
               <button id="btnDrawerSwitchRoom" class="w-full py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition active:scale-95 shadow-2xs flex items-center justify-center gap-1.5 text-xs">
@@ -18742,7 +19448,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-indigo-600 text-sm"></i>
               <span>版本更新日誌</span>
             </span>
-            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.3.8</span>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded border border-blue-200">v5.3.32</span>
           </button>
         </div>
       </div>
