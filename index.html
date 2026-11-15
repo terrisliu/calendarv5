@@ -357,7 +357,8 @@
       z-index: 26;
     }
     .dc-scroll-viewport {
-      max-height: 66vh;
+      max-height: 82vh;
+      min-height: 52vh;
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
@@ -2841,7 +2842,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.6.3</span>
+      <span>v5.6.6</span>
     </button>
   </footer>
 
@@ -3083,7 +3084,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.6.3</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.6.6</span>
             </h3>
           </div>
         </div>
@@ -3093,10 +3094,48 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <!-- v5.6.6 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.6.6（完善泰國身分證男女雙語抬頭辨識：Mr. นาย ／ Miss นางสาว ／ Mrs. นาง 及手術前後法律身分說明）<span class="ml-1.5 px-1.5 py-0.2 bg-rose-600 text-white rounded text-[9px] font-bold">TH ID GUIDE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🪪 補齊泰國身分證完整男女稱謂抬頭及法律不可更改性別欄之關鍵辨識細節</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 泰國身分證完整稱謂對照</b>：男性固定為 <code>นาย / Mr.</code>；未婚女性為 <code>นางสาว / Miss</code>；已婚女性為 <code>นาง / Mrs.</code>，並註明無論是否已完成手術，泰國法律均不可更改身分證性別稱謂。</li>
+          </ul>
+        </div>
+
+        <!-- v5.6.5 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.6.5（泰國「2. 常見防騙與安全防範」補入夜場／海灘搭訕隱瞞生理性別及上房安全警示 · 附泰國身分證 Mr./Ms. 辨識法）<span class="ml-1.5 px-1.5 py-0.2 bg-rose-600 text-white rounded text-[9px] font-bold">TH SAFETY ALERT</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🛡️ 於泰國防騙安全板塊首條加入夜生活場所及酒店上房防範提醒</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 新增泰國夜場／海灘搭訕與上房安全警示</b>：提醒旅客切勿輕易帶陌生人返回酒店房間，防範因隱瞞性別引發之爭執、勒索、財物失竊及人身安全風險，並註明泰國法律規定男性身分證抬頭固定為 <code>นาย / Mr.</code>。</li>
+          </ul>
+        </div>
+
+        <!-- v5.6.4 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.6.4（修復輸入 China 打到 CH 誤判瑞士 +41 · 手機版雙錦囊支援手指左右橫掃切換並加長至 82vh · 標題移除「· 雙錦囊」· 違禁電子煙及當地基本法則歸入「1. 旅遊警報、最新動態及基本法則」）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">MOBILE SWIPE & LAWS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 全面優化手機端雙錦囊觸控橫掃、視口高度、區號防打斷辨識與法例規則分類</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 修復區號輸入「China」打到「CH」即誤變 +41</b>：改為打字過程中不強行覆蓋輸入框，輸入完整「China」或「中國」後於離開欄位或按 Enter 精準解析為 <code>+86</code>。</li>
+            <li><b>② 手機版支援手指左右橫掃切換 ＋ 板塊加長至 <code>82vh</code></b>：在手機上可直接用手指左右掃切換「🧭 行前攻略」與「🛡️ 當地貼士」，內容高度亦由 66vh 加長至 82vh 閱讀更寬敞。</li>
+            <li><b>③ 結構正名與法例歸位</b>：移除行程標題後方「· 雙錦囊」字樣；將板塊 1 升級為「<b>1. 旅遊警報、最新動態及基本法則</b>」，把電子煙禁令、王室尊嚴法、海灘禁煙、地鐵禁飲食、香口膠及罰款等既定法例制度從「文化禮儀」全數歸位至板塊 1。</li>
+          </ul>
+        </div>
+
         <!-- v5.6.3 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.6.3（自訂緊急聯絡支援自訂名稱＋智能區號「香港／HK／852 ➔ +852」· 徹底封殺人口／百科廢話只留實質旅遊警報 · 補全 THIM 支援網頁及官方 App）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SMART DIAL & STRICT ALERT</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.6.3（自訂緊急聯絡支援自訂名稱＋智能區號「香港／HK／852 ➔ +852」· 徹底封殺人口／百科廢話只留實質旅遊警報 · 補全 THIM 支援網頁及官方 App）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SMART DIAL & STRICT ALERT</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">📞 升級自訂緊急熱線為「可改名稱 ＋ 智能識別地區區號 ＋ 電話號碼」雙欄結構，並收緊旅遊警報過濾零廢話</div>
@@ -6288,7 +6327,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.6.3';
+    const APP_VERSION = '5.6.6';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -20640,22 +20679,24 @@ function setupYearOverviewToggle() {
         ],
         hkAlert: '外遊警示：黃色',
         news10: [
+          '<b>嚴禁電子煙及加熱煙（刑事重罪）</b>：泰國法例全面禁止攜帶、吸食或管有電子煙及加熱煙，違者最高判監 5 年或巨額罰款。',
+          '<b>王室尊嚴法（冒犯君主罪）</b>：公開評論、貶損王室或用腳踩住印有泰王頭像之鈔票硬幣均屬嚴重刑事罪行。',
           '<b>TDAC／THIM 電子入境登記（支援網頁及官方 App）</b>：所有入境旅客須於出發前 72 小時內透過官方網頁或手機 App 完成申報並保存 QR Code。',
+          '<b>禁酒時段與佛教節日禁酒令</b>：便利店及超市每日僅限 11:00–14:00 及 17:00–24:00 售酒，逢佛教大節日全國全日強制禁酒。',
+          '<b>大麻管制與嚴禁帶出境</b>：公眾場所吸食大麻屬違法罰款，且含大麻成分藥膏或食品帶返香港即觸犯販毒罪。',
+          '<b>海灘全面禁煙法例</b>：芭堤雅、布吉、華欣等 24 個主要海灘嚴禁吸煙，違者最高罰款 10 萬泰銖或監禁 1 年。',
+          '<b>佛像出境管制法例</b>：購買超過 13 厘米高佛像雕塑帶離泰國須向文化部申請許可證。',
           '<b>曼谷軌道交通拍卡升級</b>：BTS、MRT 紅藍紫線及機場快線支援 Visa/Mastercard 拍卡直入。',
-          '<b>泰北燒山季空氣質素</b>：2–4 月前往清邁建議帶備 N95 口罩留意 PM2.5 指數。',
           '<b>遊客退稅門檻</b>：單日同店消費滿 2,000 THB 可填寫 e-VAT 退稅單於機場辦理。',
-          '<b>邊境口岸保安加強</b>：前往泰緬／泰柬邊境府份前須留意最新旅遊警示。',
-          '<b>高溫防中暑提醒</b>：夏季體感溫度常逾 40°C，戶外參觀寺廟須定時補水。',
-          '<b>蘇凡納布機場新衛星客運廊</b>：部分航班轉用 SAT-1 登機閘，須預留時間搭無人駕駛列車。',
-          '<b>藥妝與草藥攜帶限制</b>：含大麻成分之藥膏或食品嚴禁帶返香港（香港屬違法毒品）。',
-          '<b>夜間娛樂場所管制</b>：法定酒吧關門時間為凌晨 2 時（指定旅遊區延至 4 時）。',
-          '<b>Grab 機場專屬上車點</b>：BKK 機場 1 樓 4 號門外設有 Grab 官方冷氣候車區。'
+          '<b>邊境口岸保安加強</b>：前往泰緬／泰柬邊境府份前須留意最新旅遊警示。'
         ],
         newsMore: [
-          '<b>泰銖新鈔流通</b>：新版聚合物 20 泰銖膠鈔已全面流通，防水防撕裂。',
+          '<b>泰北燒山季空氣質素</b>：2–4 月前往清邁建議帶備 N95 口罩留意 PM2.5 指數。',
+          '<b>夜間娛樂場所管制</b>：法定酒吧關門時間為凌晨 2 時（指定旅遊區延至 4 時）。',
           '<b>水上市場週末人流高峰</b>：丹嫩莎朵及美功鐵道市場建議早上 8:30 前抵達避開旅行團。'
         ],
         scam10: [
+          '<b>夜場／沙灘搭訕及隱瞞生理性別安全陷阱</b>：芭堤雅、布吉、曼谷夜店或海灘常有部分跨性別人士自稱女性搭訕（不論是否已完成性別重置手術，外形與聲線皆極難分辨）；切勿輕易帶陌生人回酒店房間（上房後易引發爭執、勒索、財物失竊甚至人身安全事故），泰國法律規定無法更改身分證性別欄，必要時查驗泰國身分證：<b>男性固定為「นาย / Mr.」</b>，<b>未婚女性為「นางสาว / Miss」</b>，<b>已婚女性為「นาง / Mrs.」</b>。',
           '<b>大皇宮「今日唔開門」騙局</b>：寺廟外聲稱「皇宮休息」並推介平價 Tuk-Tuk 去珠寶店或遊船嘅全部係騙徒。',
           '<b>的士拒跳錶（No Meter）</b>：堅持要求「By Meter」，遇拒載直接改用 Grab 或 Bolt 叫車。',
           '<b>水上電單車刮花天價索賠</b>：芭堤雅／布吉租玩前務必 360 度拍片記錄原有花痕。',
@@ -20664,24 +20705,24 @@ function setupYearOverviewToggle() {
           '<b>芭堤雅／考山路 Ping Pong Show 拉客</b>：街邊寫低價「100 Baht」酒水單，入內結賬變數萬泰銖天價。',
           '<b>找續大細鈔偷龍轉鳳</b>：付 1,000 THB 時大聲講出面額，避免店員換成 100 THB 話你畀少咗。',
           '<b>假冒官方 TDAC 收費釣魚網</b>：TDAC 完全免費，凡要求輸入信用卡收費嘅網址均為假網。',
-          '<b>按摩店臨時加收「精油／房間費」</b>：入場前確認價目表已包全套費用。',
-          '<b>碼頭「快船已停航」轉介包船</b>：直接行去碼頭官方售票窗口買票，勿理會中途截停你嘅職員。'
+          '<b>按摩店臨時加收「精油／房間費」</b>：入場前確認價目表已包全套費用。'
         ],
         scamMore: [
+          '<b>碼頭「快船已停航」轉介包船</b>：直接行去碼頭官方售票窗口買票，勿理會中途截停你嘅職員。',
           '<b>機場非官方行李幫推車</b>：落機後只交由穿制服機場人員或自己推車，避免無故被索小費。',
           '<b>假冒泰絲／紅寶石投資轉售騙局</b>：聲稱免稅帶返香港轉賣賺差價均為騙局。'
         ],
         culture10: [
-          '<b>嚴禁電子煙（重罪紅線）</b>：泰國嚴禁攜帶、吸食或管有電子煙及加熱煙，最高判監 5 年或巨額罰款。',
-          '<b>絕對尊重王室</b>：嚴禁於公開場合評論或貶損王室，切勿用腳踩住滾動嘅泰銖硬幣或鈔票。',
           '<b>女性嚴禁觸碰僧侶</b>：僧侶守戒不可接觸女性，車廂內勿坐僧侶旁邊，遞物須經男士轉交或放於桌上。',
           '<b>入寺廟衣著與脫鞋儀式</b>：必須脫鞋除帽，不可穿背心、短褲、短裙或破洞牛仔褲（須遮肩過膝）。',
           '<b>坐姿與腳部禁忌</b>：泰國視腳部為最低下部位，坐低時腳掌切勿指向佛像或他人，勿用腳指物品。',
           '<b>切勿摸別人頭部</b>：頭部被視為靈魂所在極神聖，即使覺得當地小朋友可愛亦切忌摸頭。',
           '<b>雙手合十禮（Wai）回禮</b>：店員或酒店人員合十問好時，微笑點頭或合十回禮。',
-          '<b>禁止公眾場合吸食大麻</b>：公眾場所吸食散發氣味屬違法罰款，更嚴禁帶出境。',
           '<b>小費禮儀（紙幣非硬幣）</b>：非強制，按摩或搬行李可給 20–50 THB 紙幣，切忌給硬幣（硬幣代表施捨）。',
-          '<b>佛像不能作裝飾品</b>：購買大型佛像雕塑出境須申請文化部許可，切勿將佛像放於褲袋或低於腰部。'
+          '<b>每日 8:00 及 18:00 國歌肅立</b>：喺火車站、公園或市集聽到播放泰國國歌時，跟隨當地人停步肅立約 1 分鐘。',
+          '<b>忌用左手遞交物品</b>：傳統文化視左手不潔，遞錢或接物盡量使用右手或雙手。',
+          '<b>公開場合保持平和語氣</b>：泰國人極重視「面子（Kreng Jai）」，爭執時切忌當眾大聲咆哮。',
+          '<b>進入傳統民居及按摩店須脫鞋</b>：見到門口擺放鞋架時先脫鞋再踏入室內。'
         ],
         cultureMore: [
           '<b>每日 8:00 及 18:00 國歌肅立</b>：喺火車站、公園或市集聽到播放泰國國歌時，應跟隨當地人停步肅立約 1 分鐘。'
@@ -20742,7 +20783,7 @@ function setupYearOverviewToggle() {
         scamMore: ['<b>夜市大排檔「無標價海鮮」</b>：必須先問清每公斤價格並親眼睇住過磅先好落單。'],
         culture10: [
           '<b>過馬路「勻速慢行」法則</b>：電單車流極多，保持穩定步速橫過即可，切忌突然奔跑或急停後退。',
-          '<b>全面禁帶及吸食電子煙</b>：海關嚴格抽查行李，攜帶電子煙入境可被沒收及罰款。',
+          '<b>無需高聲催促侍應</b>：越南餐廳上菜節奏較悠閒，舉手微笑示意即可。',
           '<b>入寺廟及會館衣著端莊</b>：參觀寺廟及華人會館不可穿背心短褲，入殿須脫鞋。',
           '<b>切勿用腳指人或用腳關門</b>：用腳指物件或跨過坐喺地上嘅人被視為極度不敬。',
           '<b>雙手遞交現金與物品</b>：向長輩或店員遞錢時用雙手代表尊重。',
@@ -20776,15 +20817,15 @@ function setupYearOverviewToggle() {
         ],
         hkAlert: '外遊警示：無警示',
         news10: [
+          '<b>嚴禁攜帶電子煙及香口膠入境（零容忍重罰）</b>：海關對電子煙零容忍，攜帶入境即罰款最高 SGD 2,000；香口膠亦屬法定違禁進口品。',
+          '<b>地鐵及巴士內嚴禁飲食（包括飲水）</b>：踏入閘機後連飲一口清水或食糖果均屬違法，最高罰款 SGD 500。',
+          '<b>熟食中心強制自收托盤法例</b>：用餐後必須自行將餐具放回回收架，留低未收可被罰款 SGD 300。',
+          '<b>嚴禁攜帶榴槤上公共交通及酒店</b>：新加坡公共交通與酒店嚴禁攜帶榴槤，違者罰款或收高達 SGD 500 除臭費。',
+          '<b>亂過馬路及公廁未沖水法定罰款</b>：距離斑馬線 50 米內橫過馬路、或使用公廁後未沖水均屬違法（罰款 SGD 150 起）。',
+          '<b>煙酒零免稅額規定</b>：新加坡無香煙免稅額，第一支香煙起即須申報完稅；晚上 22:30 後公眾地方禁酒。',
           '<b>樟宜機場全自動無護照通關</b>：已填妥 SGAC 旅客可直接憑人臉及虹膜識別秒速過關。',
-          '<b>嚴禁攜帶電子煙入境</b>：新加坡海關對電子煙零容忍，攜帶入境即罰款最高 SGD 2,000。',
           '<b>消費稅（GST）維持 9%</b>：單筆消費滿 SGD 100 可憑電子護照辦理 eTRS 退稅。',
           '<b>SimplyGo 拍卡乘車</b>：海外信用卡拍卡搭地鐵每日僅收 SGD 0.60 行政費。',
-          '<b>熟食中心強制自收托盤</b>：用餐後必須自行將餐具放回回收架，否則可被罰款。',
-          '<b>聖淘沙入島費提示</b>：乘搭聖淘沙捷運入島費為 SGD 4，回程免費。',
-          '<b>煙酒零免稅額規定</b>：新加坡無香煙免稅額，第一支香煙起即須申報完稅。',
-          '<b>公共場所禁酒時段</b>：晚上 10:30 至翌晨 7:00 禁止於公園及街頭公眾地方飲酒。',
-          '<b>夜間動物園區預約制</b>：須網上預先揀選入園時段。',
           '<b>的士附加費時段</b>：繁忙時間及深夜（00:00–06:00）加收 25%–50% 附加費。'
         ],
         newsMore: ['<b>濱海灣花園冷室維護日</b>：出發前留意花穹及雲霧林每月指定休館保養日。'],
@@ -20802,16 +20843,16 @@ function setupYearOverviewToggle() {
         ],
         scamMore: ['<b>街頭無證募捐</b>：正規募捐者必須佩戴官方許可證。'],
         culture10: [
-          '<b>嚴禁進口及售賣香口膠</b>：切勿攜帶香口膠入境新加坡，更嚴禁吐喺地上（重罰）。',
-          '<b>地鐵及巴士內嚴禁飲食（包括飲水）</b>：連飲一口清水或食糖果都可被罰款 SGD 500。',
           '<b>熟食中心「紙巾霸位（Chope）」文化</b>：見到檯面放有一包紙巾或雨傘，代表已有食客霸位，切勿坐下。',
-          '<b>用完餐必須自行歸還托盤與餐具</b>：留低餐具未收可被罰款 SGD 300。',
-          '<b>嚴禁攜帶榴槤上地鐵、巴士及酒店</b>：酒店房內食榴槤會被收取高達 SGD 200–500 除臭費。',
-          '<b>亂過馬路（Jaywalking）罰款</b>：距離行人天橋或斑馬線 50 米內橫過馬路屬違法。',
           '<b>清真寺及印度廟參觀禮儀</b>：進入回教堂或興都廟須脫鞋並穿著長袖長褲。',
           '<b>扶手電梯靠左企立</b>：與香港相同，靠左站立、右側留空急行。',
           '<b>無需額外俾小費</b>：餐廳帳單已包含 10% 服務費及 9% GST。',
-          '<b>公共廁所使用後必須沖水</b>：法律規定如廁後未沖水可被罰款 SGD 150。'
+          '<b>使用右手遞物與進食</b>：與馬來或印度裔朋友交流時，用右手遞交物件或握手以示尊重。',
+          '<b>稱呼長輩為「Uncle / Auntie」</b>：新加坡人親切稱呼年長店員或司機為 Uncle / Auntie，非常受落。',
+          '<b>點咖啡「Kopi」地道術語</b>：Kopi O 代表齋啡加糖、Kopi C 代表加淡奶、Kosong 代表無糖。',
+          '<b>多語言夾雜「Singlish」溝通</b>：當地人習慣喺英語句尾加「Lah / Leh / Lor」，表示友善親切。',
+          '<b>切勿觸碰別人頭部</b>：尊重東南亞傳統習俗，避免摸小孩頭部。',
+          '<b>多元種族宗教尊重</b>：切勿評論種族或宗教敏感話題。'
         ],
         cultureMore: ['<b>多元種族尊重</b>：切勿評論種族或宗教敏感話題。'],
         emergency: [
@@ -20975,6 +21016,7 @@ function setupYearOverviewToggle() {
         ],
         hkAlert: '外遊警示：無警示',
         news10: [
+          '<b>捷運站內嚴禁飲食（包括飲水及香口膠）</b>：踏入捷運黃線感應區後飲水或食糖即法定罰款 NT$1,500–7,500。',
           '<b>TWAC 電子入境卡全面啟用</b>：取代傳統紙本入境登記表，出發前 7 日內網上填寫。',
           '<b>台灣旅宿業一次性備品限制</b>：全台酒店及民宿不再主動提供牙刷、牙膏、梳及剃鬚刀，須自備。',
           '<b>嚴禁攜帶肉類製品入境</b>：含肉鬆蛋捲、火腿腸、臘腸等肉類食品帶入台灣重罰 NT$20 萬起。',
@@ -21001,8 +21043,8 @@ function setupYearOverviewToggle() {
         ],
         scamMore: ['<b>桃園機場非法黃牛拉客</b>：只於航廈外正規排班計程車上車處乘車。'],
         culture10: [
-          '<b>捷運站內嚴禁飲食（包括飲水及香口膠）</b>：踏入捷運黃線感應區後飲水或食糖即罰款 NT$1,500–7,500。',
-          '<b>自備牙刷牙膏等個人洗漱用品</b>：響應環保法規，酒店房間不主動擺放即棄牙刷牙膏。',
+          '<b>誠懇講「謝謝／不好意思」文化</b>：無論搭巴士落車、店員遞餐或問路，講聲謝謝係台灣人日常基本禮貌。',
+          '<b>夜市邊走邊食留意竹籤與油漬</b>：部分小吃竹籤較尖，行走時注意安全避免撞到途人。',
           '<b>禮讓「博愛座（關愛座）」</b>：車廂深藍色博愛座文化極受重視，即使空置亦建議留給有需要人士。',
           '<b>垃圾分類與環保習慣</b>：飲料杯須先倒掉殘餘冰塊液體再分開紙杯與膠蓋回收。',
           '<b>無小費文化</b>：餐廳通常已收 10% 服務費，的士及酒店無需額外給小費。',
@@ -21632,6 +21674,38 @@ function setupYearOverviewToggle() {
       dcCurrentTripKey = null;
     }
 
+    // 手機版左右手指橫掃切換「🧭 行前攻略」與「🛡️ 當地貼士」
+    (function initDualCapsuleTouchSwipe() {
+      const drawer = document.getElementById('dualCapsuleStudioDrawer');
+      if (!drawer) return;
+      let startX = 0, startY = 0, isTracking = false;
+      drawer.addEventListener('touchstart', (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag)) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isTracking = true;
+      }, { passive: true });
+
+      drawer.addEventListener('touchend', (e) => {
+        if (!isTracking || !e.changedTouches || e.changedTouches.length !== 1) return;
+        isTracking = false;
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        // 必須為明確橫向手勢（水平距離 > 55px 且遠大於垂直滾動距離 1.4 倍）
+        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          if (dx < 0 && dcCurrentTab === 'prep') {
+            switchDualCapsuleTab('tips');
+            if (navigator.vibrate) try { navigator.vibrate(10); } catch (err) {}
+          } else if (dx > 0 && dcCurrentTab === 'tips') {
+            switchDualCapsuleTab('prep');
+            if (navigator.vibrate) try { navigator.vibrate(10); } catch (err) {}
+          }
+        }
+      }, { passive: true });
+    })();
+
     const DC_AREA_CODE_ALIASES = {
       '香港': '+852', 'hk': '+852', 'hongkong': '+852', 'hong kong': '+852', '852': '+852', '+852': '+852',
       '澳門': '+853', 'mo': '+853', 'macau': '+853', 'macao': '+853', '853': '+853', '+853': '+853',
@@ -21653,7 +21727,30 @@ function setupYearOverviewToggle() {
       '西班牙': '+34', 'es': '+34', 'spain': '+34', '34': '+34', '+34': '+34',
       '澳洲': '+61', 'au': '+61', 'australia': '+61', '61': '+61', '+61': '+61',
       '紐西蘭': '+64', '新西蘭': '+64', 'nz': '+64', 'new zealand': '+64', '64': '+64', '+64': '+64',
-      '美國': '+1', '加拿大': '+1', 'us': '+1', 'usa': '+1', 'ca': '+1', 'canada': '+1', '1': '+1', '+1': '+1'
+      '美國': '+1', '加拿大': '+1', 'us': '+1', 'usa': '+1', 'ca': '+1', 'canada': '+1', '1': '+1', '+1': '+1',
+      '中國大陸': '+86', '大陸': '+86', 'prc': '+86', 'mainland': '+86', 'mainland china': '+86',
+      '南韓': '+82', 'south korea': '+82', 'republic of korea': '+82',
+      '英國': '+44', 'united kingdom': '+44', 'britain': '+44', 'england': '+44',
+      '荷蘭': '+31', 'nl': '+31', 'netherlands': '+31', '31': '+31', '+31': '+31',
+      '比利時': '+32', 'be': '+32', 'belgium': '+32', '32': '+32', '+32': '+32',
+      '奧地利': '+43', 'at': '+43', 'austria': '+43', '43': '+43', '+43': '+43',
+      '瑞典': '+46', 'se': '+46', 'sweden': '+46', '46': '+46', '+46': '+46',
+      '挪威': '+47', 'no': '+47', 'norway': '+47', '47': '+47', '+47': '+47',
+      '丹麥': '+45', 'dk': '+45', 'denmark': '+45', '45': '+45', '+45': '+45',
+      '芬蘭': '+358', 'fi': '+358', 'finland': '+358', '358': '+358', '+358': '+358',
+      '冰島': '+354', 'is': '+354', 'iceland': '+354', '354': '+354', '+354': '+354',
+      '葡萄牙': '+351', 'pt': '+351', 'portugal': '+351', '351': '+351', '+351': '+351',
+      '希臘': '+30', 'gr': '+30', 'greece': '+30', '30': '+30', '+30': '+30',
+      '土耳其': '+90', 'tr': '+90', 'turkey': '+90', 'turkiye': '+90', '90': '+90', '+90': '+90',
+      '阿聯酋': '+971', '杜拜': '+971', 'ae': '+971', 'uae': '+971', 'dubai': '+971', '971': '+971', '+971': '+971',
+      '印度': '+91', 'in': '+91', 'india': '+91', '91': '+91', '+91': '+91',
+      '柬埔寨': '+855', 'kh': '+855', 'cambodia': '+855', '855': '+855', '+855': '+855',
+      '老撾': '+856', '寮國': '+856', 'la': '+856', 'laos': '+856', '856': '+856', '+856': '+856',
+      '緬甸': '+95', 'mm': '+95', 'myanmar': '+95', '95': '+95', '+95': '+95',
+      '汶萊': '+673', 'bn': '+673', 'brunei': '+673', '673': '+673', '+673': '+673',
+      '馬爾代夫': '+960', 'mv': '+960', 'maldives': '+960', '960': '+960', '+960': '+960',
+      '尼泊爾': '+977', 'np': '+977', 'nepal': '+977', '977': '+977', '+977': '+977',
+      '斯里蘭卡': '+94', 'lk': '+94', 'sri lanka': '+94', '94': '+94', '+94': '+94'
     };
 
     function resolveSmartAreaCode(raw) {
@@ -21665,19 +21762,6 @@ function setupYearOverviewToggle() {
         return clean.startsWith('+') ? clean : ('+' + clean);
       }
       return clean;
-    }
-
-    function handleDcAreaCodeInput(el) {
-      if (!el) return;
-      const raw = el.value.trim();
-      const low = raw.toLowerCase();
-      // 若輸入香港、HK、852 等已知國家/地區關鍵字或純數字區號，即時自動轉成 +852 格式
-      if (DC_AREA_CODE_ALIASES[low]) {
-        el.value = DC_AREA_CODE_ALIASES[low];
-      } else if (/^\d{1,4}$/.test(raw)) {
-        el.value = '+' + raw;
-      }
-      saveDcCustomEmergency();
     }
 
     function normalizeDcAreaCodeOnBlur(el) {
@@ -22225,7 +22309,7 @@ function setupYearOverviewToggle() {
 
       const tripTitle = (customTripTitles && customTripTitles[tripKey]) || spec.name;
       document.getElementById('dcHeaderFlag').textContent = spec.flag || '🌏';
-      document.getElementById('dcHeaderTitle').textContent = `${tripTitle} · 雙錦囊`;
+      document.getElementById('dcHeaderTitle').textContent = `${tripTitle}`;
 
       // 按目的地國家／地區自動選用最佳權威氣象與匯率資料源
       const autoSources = getBestRegionalSources(resolved.code);
@@ -22811,7 +22895,7 @@ function setupYearOverviewToggle() {
           <div class="flex items-center justify-between">
             <span class="font-black text-blue-950 text-xs flex items-center gap-1.5">
               <i class="fa-solid fa-tower-broadcast text-blue-600"></i>
-              <span>1. 旅遊警報與最新動態</span>
+              <span>1. 旅遊警報、最新動態及基本法則</span>
             </span>
             <span id="dcHkAlertBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">外遊警示：正常</span>
           </div>
@@ -22896,8 +22980,9 @@ function setupYearOverviewToggle() {
             <div class="flex items-center gap-1.5">
               <div class="w-24 shrink-0 relative">
                 <input type="text" id="dcCustomEmergencyAreaInput"
-                       oninput="handleDcAreaCodeInput(this)"
+                       oninput="saveDcCustomEmergency()"
                        onblur="normalizeDcAreaCodeOnBlur(this)"
+                       onkeydown="if(event.key==='Enter'){event.preventDefault(); normalizeDcAreaCodeOnBlur(this); document.getElementById('dcCustomEmergencyPhoneInput')?.focus();}"
                        placeholder="區號/香港"
                        class="w-full font-mono font-black text-sm text-center text-blue-950 bg-slate-50 border border-slate-300 rounded-lg px-2 py-1.5 focus:border-blue-600 focus:outline-none">
               </div>
@@ -24011,7 +24096,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-blue-700 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-black text-blue-950 tracking-tight">版本更新日誌</span>
             </span>
-            <span class="text-[10.5px] font-mono font-bold text-blue-700">v5.6.3</span>
+            <span class="text-[10.5px] font-mono font-bold text-blue-700">v5.6.6</span>
           </button>
         </div>
 
