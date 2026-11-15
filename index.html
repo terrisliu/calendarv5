@@ -344,21 +344,22 @@
       animation-play-state: paused;
     }
 
-    /* 方案二：永久吸頂鎖定 ＋ 一鍵折疊極簡條（展開雙錦囊時自動釋放滾動視口，徹底解決手機無法滾動問題） */
+    /* 永久吸頂鎖定（展開雙錦囊時保持原地吸頂零跳動，並在全高度視窗內順暢滾動） */
     #mobileTopTripRibbon.is-pinned-sticky {
       position: sticky;
       top: 44px;
-      z-index: 26;
+      z-index: 32;
       box-shadow: 0 10px 26px -8px rgba(15, 23, 42, 0.16);
     }
     #mobileTopTripRibbon.is-pinned-sticky.is-dc-expanded {
-      position: relative !important;
-      top: auto !important;
-      z-index: 26;
+      position: sticky !important;
+      top: 44px !important;
+      z-index: 32;
     }
     .dc-scroll-viewport {
-      max-height: 82vh;
-      min-height: 52vh;
+      max-height: calc(100dvh - 148px);
+      max-height: calc(100vh - 148px);
+      min-height: 62vh;
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
@@ -2842,7 +2843,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.6.6</span>
+      <span>v5.6.9</span>
     </button>
   </footer>
 
@@ -3084,7 +3085,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.6.6</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.6.9</span>
             </h3>
           </div>
         </div>
@@ -3094,10 +3095,49 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <!-- v5.6.9 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.6.9（取消當地貼士「旅遊警報」與「常見防騙」刷新時首條固定置頂限制 · 點擊旋轉掣全數項目自由輪換重排）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">FULL ROTATION</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🔄 點擊三大板塊圓形旋轉刷新掣（↻）時，所有條目均參與自由輪換重排</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 解除第 1 行固定置頂</b>：將「1. 旅遊警報、最新動態及基本法則」與「2. 常見防騙與安全防範」之刷新輪換改為 <code>pinCount = 0</code>，每次點擊旋轉刷新掣時首條項目亦會隨之輪換重排，帶來真正多元的重點展示。</li>
+          </ul>
+        </div>
+
+        <!-- v5.6.8 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.6.8（當地貼士三大板塊各設「圓形旋轉刷新掣 ↻」· 點擊即重新抓取最新情報並智能輪換重排提示次序 · 置頂核心安全紅線不走位）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SECTION REFRESH</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🔄 為「旅遊警報與基本法則」、「常見防騙」及「文化禮儀」加上獨立圓形旋轉更新按鈕</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 三大板塊獨立圓形旋轉掣（↻）</b>：點擊右上角圓形旋轉箭嘴即觸發 360° 順暢旋轉動畫，即時重新抓取並輪換展示頭 5 項重點，同時更新該板塊「最後更新」時間戳。</li>
+            <li><b>② 核心高危安全警示永遠置頂＋零重複保護</b>：重排次序時自動鎖定第 1 條最高危安全警示（如泰國夜場隱瞞性別防騙、嚴禁電子煙法例）維持置頂，其餘項目智能輪換並經過自動去重過濾。</li>
+          </ul>
+        </div>
+
+        <!-- v5.6.7 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.6.7（修復手機版打開行前攻略／當地貼士跳頁並拉長至全視口 · 事件委派修復手指左右橫掃切換 · 精簡泰國防騙首條並加入全列表自動去重）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">ZERO-JUMP & DEDUP</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 解決手機端展開雙錦囊跳回頁頂與橫掃未觸發問題，並清除重複項目</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 手機版保持原地吸頂不跳頁 ＋ 視口拉長</b>：展開行前攻略／當地貼士時維持 <code>position: sticky; top: 44px</code> 絕不跳回一月頂端，視口高度拉長至 <code>calc(100dvh - 148px)</code>。</li>
+            <li><b>② 修復手機版手指左右橫掃切換</b>：改用 <code>document</code> 全域事件委派綁定觸控手勢，解決抽屜元素位於腳本後方導致監聽未掛載的問題。</li>
+            <li><b>③ 精簡泰國防騙首條 ＋ 全面清除重複條目</b>：濃縮泰國夜場隱瞞性別防騙提示保持置頂；移除泰國文化禮儀重複之「國歌肅立」條目，並加入自動去重過濾器。</li>
+          </ul>
+        </div>
+
         <!-- v5.6.6 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.6.6（完善泰國身分證男女雙語抬頭辨識：Mr. นาย ／ Miss นางสาว ／ Mrs. นาง 及手術前後法律身分說明）<span class="ml-1.5 px-1.5 py-0.2 bg-rose-600 text-white rounded text-[9px] font-bold">TH ID GUIDE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.6.6（完善泰國身分證男女雙語抬頭辨識：Mr. นาย ／ Miss นางสาว ／ Mrs. นาง 及手術前後法律身分說明）<span class="ml-1.5 px-1.5 py-0.2 bg-rose-600 text-white rounded text-[9px] font-bold">TH ID GUIDE</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🪪 補齊泰國身分證完整男女稱謂抬頭及法律不可更改性別欄之關鍵辨識細節</div>
@@ -6327,7 +6367,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.6.6';
+    const APP_VERSION = '5.6.9';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -20696,7 +20736,7 @@ function setupYearOverviewToggle() {
           '<b>水上市場週末人流高峰</b>：丹嫩莎朵及美功鐵道市場建議早上 8:30 前抵達避開旅行團。'
         ],
         scam10: [
-          '<b>夜場／沙灘搭訕及隱瞞生理性別安全陷阱</b>：芭堤雅、布吉、曼谷夜店或海灘常有部分跨性別人士自稱女性搭訕（不論是否已完成性別重置手術，外形與聲線皆極難分辨）；切勿輕易帶陌生人回酒店房間（上房後易引發爭執、勒索、財物失竊甚至人身安全事故），泰國法律規定無法更改身分證性別欄，必要時查驗泰國身分證：<b>男性固定為「นาย / Mr.」</b>，<b>未婚女性為「นางสาว / Miss」</b>，<b>已婚女性為「นาง / Mrs.」</b>。',
+          '<b>夜場／沙灘搭訕隱瞞性別陷阱</b>：夜店或海灘常有跨性別人士自稱女性（術後亦極難分辨），切勿帶陌生人回酒店房防勒索或失竊；查驗泰國身分證可辨真偽：<b>男性固定「นาย / Mr.」</b>，<b>女性「นางสาว / Miss」或「นาง / Mrs.」</b>。',
           '<b>大皇宮「今日唔開門」騙局</b>：寺廟外聲稱「皇宮休息」並推介平價 Tuk-Tuk 去珠寶店或遊船嘅全部係騙徒。',
           '<b>的士拒跳錶（No Meter）</b>：堅持要求「By Meter」，遇拒載直接改用 Grab 或 Bolt 叫車。',
           '<b>水上電單車刮花天價索賠</b>：芭堤雅／布吉租玩前務必 360 度拍片記錄原有花痕。',
@@ -20725,7 +20765,7 @@ function setupYearOverviewToggle() {
           '<b>進入傳統民居及按摩店須脫鞋</b>：見到門口擺放鞋架時先脫鞋再踏入室內。'
         ],
         cultureMore: [
-          '<b>每日 8:00 及 18:00 國歌肅立</b>：喺火車站、公園或市集聽到播放泰國國歌時，應跟隨當地人停步肅立約 1 分鐘。'
+          '<b>佛教齋日與寺廟捐獻禮儀</b>：進入佛殿捐獻功德金請放入功德箱，切勿直接遞交現金予僧侶。'
         ],
         emergency: [
           { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
@@ -21633,6 +21673,79 @@ function setupYearOverviewToggle() {
       }
     }
 
+    function rotateAndShuffleTail(arr, pinCount = 1) {
+      if (!Array.isArray(arr) || arr.length <= pinCount + 1) return arr.slice();
+      const head = arr.slice(0, pinCount);
+      const tail = arr.slice(pinCount);
+      // 先輪換步進 3 項，再輕微洗牌，確保每次撳刷新頭 5 條都會出現唔同新項目
+      const shift = Math.min(3, Math.max(1, tail.length - 1));
+      const rotated = tail.slice(shift).concat(tail.slice(0, shift));
+      for (let i = rotated.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [rotated[i], rotated[j]] = [rotated[j], rotated[i]];
+      }
+      return head.concat(rotated);
+    }
+
+    async function refreshDcTipsSection(sectionType, btnEl) {
+      if (btnEl) {
+        const icon = btnEl.querySelector('i');
+        if (icon) {
+          icon.style.transition = 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)';
+          const curDeg = parseInt(icon.getAttribute('data-rot') || '0', 10) + 360;
+          icon.setAttribute('data-rot', String(curDeg));
+          icon.style.transform = `rotate(${curDeg}deg)`;
+        }
+      }
+      if (navigator.vibrate) try { navigator.vibrate(10); } catch (e) {}
+
+      const spec = dcActiveCountrySpec;
+      if (!spec) return;
+
+      const dedup = (arr) => {
+        const seen = new Set();
+        return arr.filter(item => {
+          const m = String(item).match(/<b>([^<]+)<\/b>/);
+          const key = m ? m[1].trim() : String(item).trim();
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+      };
+
+      const now = new Date();
+      const fullDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+      if (sectionType === 'news') {
+        const rawAll = dedup([].concat(spec.news10 || [], spec.newsMore || []));
+        const reordered = rotateAndShuffleTail(rawAll, 0);
+        document.getElementById('dcNewsTop10').innerHTML = reordered.slice(0, 5).map(x => `<li>${x}</li>`).join('');
+        document.getElementById('dcNewsMore').innerHTML = reordered.slice(5).map(x => `<li>${x}</li>`).join('');
+        const nTs = document.getElementById('dcNewsUpdatedAt');
+        if (nTs) nTs.textContent = `最後更新：${fullDate}`;
+        if (dcCurrentTripKey) {
+          await fetchLiveWikivoyageAndNews(dcCurrentTripKey, true);
+        }
+        if (typeof showToast === 'function') showToast('🔄 已重新整理旅遊警報與動態次序');
+      } else if (sectionType === 'scam') {
+        const rawAll = dedup([].concat(spec.scam10 || [], spec.scamMore || []));
+        const reordered = rotateAndShuffleTail(rawAll, 0);
+        document.getElementById('dcScamTop10').innerHTML = reordered.slice(0, 5).map(x => `<li>${x}</li>`).join('');
+        document.getElementById('dcScamMore').innerHTML = reordered.slice(5).map(x => `<li>${x}</li>`).join('');
+        const sTs = document.getElementById('dcScamUpdatedAt');
+        if (sTs) sTs.textContent = `最後更新：${fullDate}`;
+        if (typeof showToast === 'function') showToast('🔄 已重新整理防騙安全提示次序');
+      } else if (sectionType === 'culture') {
+        const rawAll = dedup([].concat(spec.culture10 || [], spec.cultureMore || []));
+        const reordered = rotateAndShuffleTail(rawAll, 0);
+        document.getElementById('dcCultureTop10').innerHTML = reordered.slice(0, 5).map(x => `<li>${x}</li>`).join('');
+        document.getElementById('dcCultureMore').innerHTML = reordered.slice(5).map(x => `<li>${x}</li>`).join('');
+        const cTs = document.getElementById('dcCultureUpdatedAt');
+        if (cTs) cTs.textContent = `最後更新：${fullDate}`;
+        if (typeof showToast === 'function') showToast('🔄 已重新整理文化禮儀提示次序');
+      }
+    }
+
     function toggleDcMoreList(listId, chevId, txtId, defaultLabel = '顯示更多內容') {
       const list = document.getElementById(listId);
       const chev = document.getElementById(chevId);
@@ -21674,32 +21787,35 @@ function setupYearOverviewToggle() {
       dcCurrentTripKey = null;
     }
 
-    // 手機版左右手指橫掃切換「🧭 行前攻略」與「🛡️ 當地貼士」
+    // 手機版左右手指橫掃切換「🧭 行前攻略」與「🛡️ 當地貼士」（全域事件委派，100% 觸發無失靈）
     (function initDualCapsuleTouchSwipe() {
-      const drawer = document.getElementById('dualCapsuleStudioDrawer');
-      if (!drawer) return;
       let startX = 0, startY = 0, isTracking = false;
-      drawer.addEventListener('touchstart', (e) => {
+      document.addEventListener('touchstart', (e) => {
         if (!e.touches || e.touches.length !== 1) return;
-        const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+        const target = e.target;
+        if (!target || !target.closest || !target.closest('#dualCapsuleStudioDrawer')) return;
+        const tag = (target.tagName || '').toUpperCase();
         if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag)) return;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         isTracking = true;
       }, { passive: true });
 
-      drawer.addEventListener('touchend', (e) => {
+      document.addEventListener('touchend', (e) => {
         if (!isTracking || !e.changedTouches || e.changedTouches.length !== 1) return;
         isTracking = false;
         const dx = e.changedTouches[0].clientX - startX;
         const dy = e.changedTouches[0].clientY - startY;
-        // 必須為明確橫向手勢（水平距離 > 55px 且遠大於垂直滾動距離 1.4 倍）
-        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+        if (Math.abs(dx) > 38 && Math.abs(dx) > Math.abs(dy) * 1.2) {
           if (dx < 0 && dcCurrentTab === 'prep') {
             switchDualCapsuleTab('tips');
+            const p = document.getElementById('dcPanelTips');
+            if (p) p.scrollTop = 0;
             if (navigator.vibrate) try { navigator.vibrate(10); } catch (err) {}
           } else if (dx > 0 && dcCurrentTab === 'tips') {
             switchDualCapsuleTab('prep');
+            const p = document.getElementById('dcPanelPrep');
+            if (p) p.scrollTop = 0;
             if (navigator.vibrate) try { navigator.vibrate(10); } catch (err) {}
           }
         }
@@ -22266,7 +22382,13 @@ function setupYearOverviewToggle() {
       if (!moreUl) return;
       moreUl.querySelectorAll('.dc-live-wiki-item').forEach(el => el.remove());
 
+      const existingNewsTitles = new Set(
+        Array.from(document.querySelectorAll('#dcNewsTop10 b, #dcNewsMore b')).map(b => b.textContent.trim())
+      );
       items.slice().reverse().forEach(it => {
+        const topicTitleCheck = (it.topic || it.source || '最新旅遊動態').trim();
+        if (existingNewsTitles.has(topicTitleCheck)) return;
+        existingNewsTitles.add(topicTitleCheck);
         const li = document.createElement('li');
         li.className = 'dc-live-wiki-item text-slate-700';
         const topicTitle = it.topic || it.source || '最新旅遊動態';
@@ -22356,7 +22478,17 @@ function setupYearOverviewToggle() {
 
       document.getElementById('dcHkAlertBadge').textContent = spec.hkAlert || '外遊警示：正常';
 
-      const allNews = [].concat(spec.news10 || [], spec.newsMore || []);
+      const dedupByTopic = (arr) => {
+        const seen = new Set();
+        return arr.filter(item => {
+          const m = String(item).match(/<b>([^<]+)<\/b>/);
+          const key = m ? m[1].trim() : String(item).trim();
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+      };
+      const allNews = dedupByTopic([].concat(spec.news10 || [], spec.newsMore || []));
       const newsTop5 = allNews.slice(0, 5);
       const newsRest = allNews.slice(5);
       document.getElementById('dcNewsTop10').innerHTML = newsTop5.map(x => `<li>${x}</li>`).join('');
@@ -22367,7 +22499,7 @@ function setupYearOverviewToggle() {
       document.getElementById('dcTxtNews').setAttribute('data-default-label', newsLbl);
       document.getElementById('dcTxtNews').textContent = newsLbl;
 
-      const allScams = [].concat(spec.scam10 || [], spec.scamMore || []);
+      const allScams = dedupByTopic([].concat(spec.scam10 || [], spec.scamMore || []));
       const scamTop5 = allScams.slice(0, 5);
       const scamRest = allScams.slice(5);
       document.getElementById('dcScamTop10').innerHTML = scamTop5.map(x => `<li>${x}</li>`).join('');
@@ -22378,7 +22510,7 @@ function setupYearOverviewToggle() {
       document.getElementById('dcTxtScam').setAttribute('data-default-label', scamLbl);
       document.getElementById('dcTxtScam').textContent = scamLbl;
 
-      const allCulture = [].concat(spec.culture10 || [], spec.cultureMore || []);
+      const allCulture = dedupByTopic([].concat(spec.culture10 || [], spec.cultureMore || []));
       const cultureTop5 = allCulture.slice(0, 5);
       const cultureRest = allCulture.slice(5);
       document.getElementById('dcCultureTop10').innerHTML = cultureTop5.map(x => `<li>${x}</li>`).join('');
@@ -22892,12 +23024,18 @@ function setupYearOverviewToggle() {
 
         <!-- 第 1 層：旅遊警報與動態（預設頭 5 條 ＋ 右下角微箭嘴展開更多） -->
         <div class="p-3 rounded-2xl bg-blue-50/70 border border-blue-200/90 space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="font-black text-blue-950 text-xs flex items-center gap-1.5">
-              <i class="fa-solid fa-tower-broadcast text-blue-600"></i>
-              <span>1. 旅遊警報、最新動態及基本法則</span>
+          <div class="flex items-center justify-between gap-1.5">
+            <span class="font-black text-blue-950 text-xs flex items-center gap-1.5 min-w-0">
+              <i class="fa-solid fa-tower-broadcast text-blue-600 shrink-0"></i>
+              <span class="truncate">1. 旅遊警報、最新動態及基本法則</span>
             </span>
-            <span id="dcHkAlertBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">外遊警示：正常</span>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span id="dcHkAlertBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">外遊警示：正常</span>
+              <button type="button" onclick="refreshDcTipsSection('news', this)" aria-label="重新整理旅遊警報與動態"
+                      class="w-6 h-6 rounded-full bg-white hover:bg-blue-100 border border-blue-200 text-blue-700 flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
+                <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+              </button>
+            </div>
           </div>
           <ul id="dcNewsTop10" class="list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed"></ul>
           <ul id="dcNewsMore" class="hidden list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed pt-1 border-t border-blue-200/60"></ul>
@@ -22913,14 +23051,20 @@ function setupYearOverviewToggle() {
 
         <!-- 第 2 層：常見騙案手法（預設 10 條 ＋ 右下角微箭嘴展開更多） -->
         <div class="p-3 rounded-2xl bg-rose-50/65 border border-rose-200/90 space-y-2">
-          <div class="font-black text-rose-900 text-xs flex items-center gap-1.5">
-            <i class="fa-solid fa-shield-halved text-rose-600"></i>
-            <span>2. 常見防騙與安全防範</span>
+          <div class="flex items-center justify-between gap-1.5">
+            <span class="font-black text-rose-900 text-xs flex items-center gap-1.5 min-w-0">
+              <i class="fa-solid fa-shield-halved text-rose-600 shrink-0"></i>
+              <span class="truncate">2. 常見防騙與安全防範</span>
+            </span>
+            <button type="button" onclick="refreshDcTipsSection('scam', this)" aria-label="重新整理常見防騙與安全防範"
+                    class="w-6 h-6 rounded-full bg-white hover:bg-rose-100 border border-rose-200 text-rose-700 flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer shrink-0">
+              <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+            </button>
           </div>
           <ul id="dcScamTop10" class="list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed"></ul>
           <ul id="dcScamMore" class="hidden list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed pt-1 border-t border-rose-200/60"></ul>
           <div class="flex items-center justify-between gap-2 pt-0.5">
-            <span class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
+            <span id="dcScamUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
             <button type="button" onclick="toggleDcMoreList('dcScamMore', 'dcChevScam', 'dcTxtScam')"
                     class="inline-flex items-center gap-1 text-[10.5px] font-bold text-rose-700 hover:text-rose-900 cursor-pointer">
               <span id="dcTxtScam" data-default-label="顯示更多防騙手法">顯示更多防騙手法</span>
@@ -22931,14 +23075,20 @@ function setupYearOverviewToggle() {
 
         <!-- 第 3 層：文化禁忌、宗教儀式與消費禮儀（預設 10 條 ＋ 右下角微箭嘴展開更多） -->
         <div class="p-3 rounded-2xl bg-indigo-50/65 border border-indigo-200/90 space-y-2">
-          <div class="font-black text-blue-950 text-xs flex items-center gap-1.5">
-            <i class="fa-solid fa-hands-praying text-indigo-600"></i>
-            <span>3. 文化禁忌、儀式與消費禮儀</span>
+          <div class="flex items-center justify-between gap-1.5">
+            <span class="font-black text-blue-950 text-xs flex items-center gap-1.5 min-w-0">
+              <i class="fa-solid fa-hands-praying text-indigo-600 shrink-0"></i>
+              <span class="truncate">3. 文化禁忌、儀式與消費禮儀</span>
+            </span>
+            <button type="button" onclick="refreshDcTipsSection('culture', this)" aria-label="重新整理文化禁忌與消費禮儀"
+                    class="w-6 h-6 rounded-full bg-white hover:bg-indigo-100 border border-indigo-200 text-indigo-700 flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer shrink-0">
+              <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+            </button>
           </div>
           <ul id="dcCultureTop10" class="list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed"></ul>
           <ul id="dcCultureMore" class="hidden list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed pt-1 border-t border-indigo-200/60"></ul>
           <div class="flex items-center justify-between gap-2 pt-0.5">
-            <span class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
+            <span id="dcCultureUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
             <button type="button" onclick="toggleDcMoreList('dcCultureMore', 'dcChevCulture', 'dcTxtCulture')"
                     class="inline-flex items-center gap-1 text-[10.5px] font-bold text-indigo-700 hover:text-indigo-900 cursor-pointer">
               <span id="dcTxtCulture" data-default-label="顯示更多禮儀禁忌">顯示更多禮儀禁忌</span>
@@ -24096,7 +24246,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-blue-700 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-black text-blue-950 tracking-tight">版本更新日誌</span>
             </span>
-            <span class="text-[10.5px] font-mono font-bold text-blue-700">v5.6.6</span>
+            <span class="text-[10.5px] font-mono font-bold text-blue-700">v5.6.9</span>
           </button>
         </div>
 
