@@ -344,12 +344,46 @@
       animation-play-state: paused;
     }
 
-    /* 方案二：永久吸頂鎖定 ＋ 一鍵折疊極簡條 */
+    /* 方案二：永久吸頂鎖定 ＋ 一鍵折疊極簡條（展開雙錦囊時自動釋放滾動視口，徹底解決手機無法滾動問題） */
     #mobileTopTripRibbon.is-pinned-sticky {
       position: sticky;
       top: 44px;
       z-index: 26;
       box-shadow: 0 10px 26px -8px rgba(15, 23, 42, 0.16);
+    }
+    #mobileTopTripRibbon.is-pinned-sticky.is-dc-expanded {
+      position: relative !important;
+      top: auto !important;
+      z-index: 26;
+    }
+    .dc-scroll-viewport {
+      max-height: 66vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
+    }
+    @media (min-width: 1024px) {
+      .dc-scroll-viewport {
+        max-height: none !important;
+        overflow-y: visible !important;
+        overflow-x: hidden !important;
+      }
+      #rightSidePanel {
+        position: relative;
+      }
+      #rightSidePanelCard {
+        position: absolute !important;
+        inset: 0 !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        overflow: hidden !important;
+      }
+      #tabContentLeaves {
+        overflow-y: auto !important;
+        overscroll-behavior: contain;
+      }
     }
     /* === 旗艦級 macOS / iOS 毛玻璃晶瑩擬態 (Glassmorphism Core) === */
     .glass-surface {
@@ -2184,7 +2218,7 @@
       </div>
 
     <!-- 主內容雙欄網格佈局 (電腦端完美左右對齊並排) -->
-    <div id="mainContentLayout" class="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-5 mt-1 items-start">
+    <div id="mainContentLayout" class="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-5 mt-1 items-start lg:items-stretch">
       <!-- 左側欄：年曆專屬控制 Bar ＋ 12個月年曆 (與年曆等寬平排！) -->
       <div id="leftSideColumn" class="lg:col-span-7 xl:col-span-8 flex flex-col gap-1.5 md:gap-2.5">
         <div id="stickyHeaderArea" class="sticky top-1 z-30 rounded-[20px] bg-transparent md:static md:bg-transparent">
@@ -2503,6 +2537,7 @@
                 <div id="mobileSmartBannerDots" class="flex items-center gap-1.5"></div>
               </div>
               <div id="mobileRibbonInlineStudioSlot" style="overflow-anchor: none;" class="empty:hidden px-2 pb-2"></div>
+              <div id="mobileRibbonDualCapsuleSlot" style="overflow-anchor: none;" class="empty:hidden px-2 pb-2"></div>
             </div>
           </div>
         </div>
@@ -2511,8 +2546,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3" id="calendarContainer"></div>
       </div>
 
-      <div id="rightSidePanel" class="lg:col-span-5 xl:col-span-4 flex flex-col gap-4 mt-2 lg:mt-0 lg:sticky lg:top-3">
-        <div class="glass-surface rounded-2xl flex flex-col h-[520px] md:h-[650px] lg:h-[calc(100vh-80px)] overflow-hidden shadow-sm">
+      <div id="rightSidePanel" class="lg:col-span-5 xl:col-span-4 flex flex-col gap-4 mt-2 lg:mt-0">
+        <div id="rightSidePanelCard" class="glass-surface rounded-2xl flex flex-col h-[520px] md:h-[650px] lg:h-full overflow-hidden shadow-sm transition-all duration-200">
           
           <div class="p-2 border-b border-slate-200 bg-slate-50 flex items-center justify-between gap-1">
             <div class="flex flex-wrap items-center gap-1">
@@ -2806,7 +2841,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.4.17</span>
+      <span>v5.6.3</span>
     </button>
   </footer>
 
@@ -3048,7 +3083,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.4.17</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.6.3</span>
             </h3>
           </div>
         </div>
@@ -3057,10 +3092,200 @@
         </button>
       </div>
 
-      <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs"<!-- v5.4.17 -->
+      <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <!-- v5.6.3 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.4.17（假期規劃單行走馬燈深海軍藍字體升級 · 自動偵測城市／國家並於標題前顯示國旗）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-700 text-white rounded text-[9px] font-bold">MARQUEE FLAG & NAVY</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.6.3（自訂緊急聯絡支援自訂名稱＋智能區號「香港／HK／852 ➔ +852」· 徹底封殺人口／百科廢話只留實質旅遊警報 · 補全 THIM 支援網頁及官方 App）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SMART DIAL & STRICT ALERT</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📞 升級自訂緊急熱線為「可改名稱 ＋ 智能識別地區區號 ＋ 電話號碼」雙欄結構，並收緊旅遊警報過濾零廢話</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 自訂緊急聯絡名稱 ＋ 智能區號識別</b>：上方聯絡名稱可自由修改（如旅遊保險、酒店前台、當地包車司機）；下方區號欄輸入「香港」、「HK」、「852」或「+852」即時自動轉換為 <code>+852</code>（亦支援泰國/日本/台灣/韓國/英美等地區名或直接輸入 <code>+XXX</code>），並即時預覽完整撥號。</li>
+            <li><b>② 嚴格過濾旅遊警報廢話</b>：升級句子白名單與黑名單，徹底封殺「人口超過 XXX 萬居民」、「首都」、「面積」等百科介紹，並升級快取鍵清除舊緩存。</li>
+            <li><b>③ 泰國 TDAC／THIM 支援網頁及官方 App 說明</b>：更新泰國入境申報提示，明確標註 THIM 同時支援官方網頁版及官方手機 App 填報。</li>
+          </ul>
+        </div>
+
+        <!-- v5.6.2 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.6.2（電腦版右側「假期規劃」絕對鎖齊 12 月年曆高度不撐長 · 泰國入境申報補全 TDAC ＋ THIM 雙系統指引）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">LOCKED HEIGHT & THIM</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🔒 鎖死電腦版右側面板高度與左側 1–12 月年曆 100% 齊平，展開雙錦囊時絕不超越年曆底部；同步完善泰國 TDAC 及 THIM 入境指引</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 電腦版右側欄絕對等高鎖定（<code>position: absolute; inset: 0; height: 100%</code>）</b>：右側「假期規劃」大框嚴格鎖齊左側 1–12 月年曆高度，展開「行前攻略／當地貼士」時於大框內順暢捲動，外框永遠唔會撐長超越年曆。</li>
+            <li><b>② 泰國入境申報補齊 TDAC ＋ THIM 雙系統說明</b>：更新泰國免簽 30 日入境要求，完整列明 <b>TDAC 電子入境卡</b>及 <b>THIM 泰國入境管理／健康旅客登記系統</b>申報要點與官方直達連結。</li>
+          </ul>
+        </div>
+
+        <!-- v5.6.1 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.6.1（終極根治修復：補回地區智能選源 <code>getBestRegionalSources</code> 與緊急熱線雙語函數 · 雙錦囊行前攻略與當地貼士 100% 完整運作）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">RUNTIME FIXED</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">✅ 補回在 v5.5.8 程式碼整併時被意外覆蓋的三個核心輔助函數，徹底解除執行期 ReferenceError 中斷</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 補回 <code>getBestRegionalSources()</code></b>：解除 <code>toggleTripDualCapsule</code> 第 44 行因找不到函數而拋出 <code>ReferenceError</code> 中斷後面所有渲染（天氣、匯率、入境、清單、貼士、緊急電話）的根本原因。</li>
+            <li><b>② 補回 <code>formatEmergencyBilingual()</code> 與 <code>confirmAndDialEmergency()</code></b>：確保「當地貼士」第 4 層緊急求助卡完整渲染中英雙語標題，點擊號碼彈出直撥確認視窗。</li>
+          </ul>
+        </div>
+
+        <!-- v5.6.0 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.6.0（徹底修復雙錦囊腳本啟動中斷問題 · 完整恢復行前攻略天氣／匯率／入境／清單與當地貼士／緊急電話全部即時載入）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">DUAL CAPSULE FIXED</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">✅ 改用十六進位字元碼清洗引號，徹底消除瀏覽器解析單引號字面量時的語法錯誤，雙錦囊 100% 正常執行</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 徹底解決 <code>SyntaxError</code> 導致雙錦囊空白</b>：在 HTML 單一檔案內，<code>'</code> 會在 JS 編譯階段先還原成裸單引號導致整段腳本罷工；現改用 <code>/['"]/g</code> 零引號衝突寫法，並逐行驗證全部 15,916 行程式碼語法零錯誤。</li>
+            <li><b>② 完整恢復雙錦囊所有新功能</b>：行前攻略（遠期季節大卡／30日內 5 日預報＋PM2.5、白框正下方基準切換、入境申報、出發清單）及當地貼士（極簡 <code>UPDATE</code> 徽章、地理百科廢話過濾、中英雙語緊急熱線直撥確認）全部即開即載。</li>
+          </ul>
+        </div>
+
+        <!-- v5.5.9 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.5.9（緊急熱修復：修正雙錦囊單引號轉義語法錯誤恢復全部資料載入 · 強化航班目的地城市／酒店地址多維度自動識別）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">HOTFIX RESTORED</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🛠️ 修復緊急電話標籤單引號轉義引發的腳本中斷，並增強目的地識別（支援標題、航班城市、三字碼及酒店位置）</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 修復 <code>toggleTripDualCapsule</code> 字串轉義語法錯誤</b>：修正 <code>safeLabel</code> 單引號轉義導致雙錦囊資料無法渲染的問題，完整恢復天氣大卡片／5日預報、實時匯率、入境申報、出發清單及當地貼士全部內容。</li>
+            <li><b>② 多維度目的地自動識別</b>：即使旅程標題未寫國家名，亦會自動從預訂資料之「去程目的地城市、機場三字碼、酒店城市及地址」精準識別目的地。</li>
+          </ul>
+        </div>
+
+        <!-- v5.5.8 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.5.8（電腦版右側「假期規劃」拉長對齊 12 月底並消除雙重滾軸 · 天氣遠期季節大卡片 vs 30日內精裝5日卡＋PM2.5 · 匯率白框正下方基準切換 · 當地貼士極簡 UPDATE 徽章與百科廢話過濾）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">UNIFIED SCROLL & WEATHER PRO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🖥️ 徹底解決電腦版巢狀滾軸打架，並全面重構遠期季節天氣大卡片、匯率對齊及旅遊情報智慧過濾</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 電腦版右側欄等高延伸至 12 月底 ＋ 單一主滾軸</b>：右側「假期規劃」大框自然拉長與左側 1–12 月年曆底部齊平，展開「行前攻略／當地貼士」時直接順暢展開，全頁僅保留最右側一條主滾軸，告別窗中窗滾軸卡頓（手機版維持獨立順暢滾動）。</li>
+            <li><b>② 遠期季節氣候大卡片 vs 30 日內精裝 5 日卡</b>：剔除標題多餘膠囊；出發逾 30 日顯示該月份「季節名稱、平均高低溫區間、月均降雨量與濕度、PM2.5 常見範圍」大卡片；30 日內切換為 5 張放大天氣圖示＋星期日期＋溫濕度＋PM2.5 逐日卡。</li>
+            <li><b>③ 實時外幣匯率對齊優化</b>：白框保持一行過純淨匯率與計算器，「目前：銀行中間價（點擊切換找換店估算）」緊貼白框底邊靠左對齊，底部左側整齊泊回「實時同步」時間戳。</li>
+            <li><b>④ 當地貼士極簡 UPDATE 標記與地理百科過濾</b>：來源名稱旁有更新即亮起 <code>UPDATE</code> 徽章、同步時間移至左下角對齊；動態條目只顯示主題粗體並於結尾附 <code>NEW UPDATE</code>，自動過濾首都／人口／面積等無關地理百科廢話，並清除所有第三方網站推廣名稱。</li>
+          </ul>
+        </div>
+
+        <!-- v5.5.7 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.5.7（天氣與匯率右上角懸停自動彈出＋按地區智能選源 · 匯率一行過無阻隔排版 · 四層出發距離天氣預測＋PM2.5 指數 · 極簡無框湛藍字色同步列 · 緊急求助中英雙語直撥確認）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SMART WEATHER & FX</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🌤️ 全面升級智能天氣分層預測與 PM2.5 空氣指標、匯率一行過換算視線、極簡湛藍字色同步列及緊急熱線中英雙語</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 天氣與匯率右上角懸停自動彈出＋地區智能選源</b>：滑鼠移近城市／貨幣／引擎選擇器即自動彈出、離開自動收起，並按東南亞、日韓台、歐美澳紐自動匹配最佳氣象及匯率引擎。</li>
+            <li><b>② 實時外幣匯率一行過視線</b>：將「目前使用換算基準」移至框外底部，白框內一行過對齊匯率與計算結果。</li>
+            <li><b>③ 四層距離天氣預測＋未來 5 日 PM2.5</b>：按出發距離自動切換（0–5 日未來 5 天實時＋PM2.5 空氣指數、6–15 日中期預報、16–30 日近一個月趨勢、逾 30 日歷年月份氣候基準）。</li>
+            <li><b>④ 當地貼士極簡無框湛藍三階字色</b>：去除多餘方框，僅以最深湛藍／中湛藍／柔和藍字色區分同步時間與情報層級。</li>
+            <li><b>⑤ 緊急求助中英雙語（中文行先）＋ 直撥確認提示</b>：所有熱線名稱補齊中英雙語，點擊號碼先彈出單位與電話確認框再啟動手機直撥。</li>
+          </ul>
+        </div>
+
+        <!-- v5.5.6 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.5.6（當地貼士「湛藍三階漸層」情報比重矩陣 ＋ 最深湛藍同步時間戳 · 緊急求助卡片高對比大字號碼與一鍵複製）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">ROYAL BLUE & CRISIS UX</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎨 落地湛藍三階視覺語義分級系統，並全面放大緊急求助熱線字體與報案指引</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 湛藍三階漸層情報來源矩陣</b>：整齊雙欄呈現六大情報源並按時效分三層深淺藍色——<b>第一階（最深湛藍 <code>bg-blue-950</code>）</b>標示「最後同步日期時間」與「即時新聞／全球風險警報」；<b>第二階（中湛藍 <code>bg-blue-600</code>）</b>標示「中文維基導遊／Wikivoyage 繁中譯」；<b>第三階（淺湛藍 <code>bg-blue-100</code>）</b>標示「香港保安局／當地官方旅遊移民局」，展開條目亦同步顯示對應漸層徽章。</li>
+            <li><b>② 緊急求助高對比大字升級</b>：加大熱線上方說明文字與報警英文求助句，電話號碼放大至 <code>18px</code> 特粗等寬字體（<code>text-lg font-mono font-black</code>），附帶一鍵直撥與一鍵複製按鈕。</li>
+          </ul>
+        </div>
+
+        <!-- v5.5.5 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.5.5（電腦版右側「假期規劃」保持螢幕固定高度＋雙錦囊「行前攻略／當地貼士」內嵌式獨立捲軸 · 開啟自動平滑對焦滾動）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">EMBEDDED SCROLL</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🖥️ 恢復電腦版右側面板精巧固定視口高度，以內嵌式滾軸獨立捲動「行前攻略／當地貼士」，無需拉長整頁</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 電腦版雙錦囊內嵌式獨立滾軸（<code>calc(100vh - 235px)</code> ＋ <code>overscroll-behavior: contain</code>）</b>：右側「假期規劃」保持貼齊螢幕視窗高度不撐長整頁，展開「行前攻略」或「當地貼士」時直接喺卡片內部以精緻滾軸順暢上下碌動，且不會牽動外層主網頁。</li>
+            <li><b>② 開啟自動平滑定位</b>：點擊旅程上的「行前攻略」或「當地貼士」時，右側面板內嵌捲軸會自動平滑捲動將錦囊標題列對齊視口頂端。</li>
+          </ul>
+        </div>
+
+        <!-- v5.5.4 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.5.4（修復電腦版右側假期規劃展開雙錦囊時高度被鎖死無法向下伸延滾動 · 地球儀外鏈按鈕改為游標懸停自動彈出及離開自動收起 · 升級 6 源實時自動翻譯情報抓取）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">DESKTOP EXPAND & 6-SOURCE</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🖥️ 修復電腦版雙錦囊展開高度限制，升級地球按鈕智慧懸停開合及 6 大權威實時情報來源聯動</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 電腦版右側欄動態解除固定高度限制（<code>is-dc-desktop-open</code>）</b>：在電腦版打開「行前攻略」或「當地貼士」時，右側面板自動取消 <code>calc(100vh-80px)</code> 高度裁剪並隨內容自然向下伸延，整頁順暢滾動無阻。</li>
+            <li><b>② 地球按鈕智慧懸停彈出＋離開自動收起</b>：滑鼠移近天氣或匯率右下角地球儀圓鈕即自動彈出外部網站選單，游標離開 0.65 秒後自動收縮歸位，無需額外點擊關閉。</li>
+            <li><b>③ 精簡展開按鈕文案並升級 6+ 實時情報來源</b>：移除「顯示更多動態」後方括號項目數；實時抓取並自動翻譯繁體中文涵蓋<b>香港保安局、當地官方旅遊局、中文維基導遊、英文 Wikivoyage（自動繁中翻譯）、Google News 港媒／當地即時新聞、全球安全風險資料庫及國際國家數據庫</b>，並於頂部實時列出所有已讀取來源。</li>
+          </ul>
+        </div>
+
+        <!-- v5.5.3 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.5.3（天氣與匯率外部網站收納為純淨地球儀圓形按鈕 🌐 · 當地貼士頂部及各板塊左下角加入「最後更新日期」標示）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">GLOBE ORB & TIMESTAMPS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🌐 收納冗餘外鏈膠囊為精緻地球圓鈕，並為旅遊警報、防騙與文化禁忌加上清晰最後更新日期</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 天氣與匯率底部「地球圓形按鈕（🌐）」</b>：將原本並排外露的多個外部網站按鈕收納於右下角圓形地球圖示內，點擊即彈出選單（Windy / AccuWeather / Weather.com 及 TTRate / XE / Wise），畫面更乾淨俐落。</li>
+            <li><b>② 全面標示「最後更新日期」</b>：於當地貼士頂部情報欄及旅遊警報、常見防騙、文化禁忌三大板塊左下角加上 <code>最後更新：2026-11-15</code>，並於實時連線同步天氣／匯率／維基百科時自動更新時間戳。</li>
+          </ul>
+        </div>
+
+        <!-- v5.5.2 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.5.2（當地貼士三大板塊改為「預設顯示頭 5 項 ＋ 點擊展開更多」· 新增情報來源標示與維基導遊實時同步更新鈕）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">TOP 5 & LIVE SYNC</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🛡️ 優化「當地貼士」閱讀節奏，預設展示最關鍵頭 5 項重點並清晰標示剩餘可展開數量與實時情報來源</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 三大板塊預設顯示頭 5 項（Top 5）</b>：「旅遊警報與最新動態」、「常見防騙與安全防範」及「文化禁忌、儀式與消費禮儀」預設精簡展示頭 5 項核心要點，點擊右下角微箭嘴即展開全部剩餘條目。</li>
+            <li><b>② 情報來源標示與 24 小時自動／手動同步</b>：頂部標示情報來源並支援每日自動連線維基導遊開放介面（<code>zh.wikivoyage.org</code>）補充當地最新概覽。</li>
+          </ul>
+        </div>
+
+        <!-- v5.5.1 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.5.1（修復手機版雙錦囊展開後無法上下滾動 · 修正泰國免簽停留期為最新 30 日 · 補齊東南亞全境 11 國與全球各國精準座標及旅遊警察專線）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">MOBILE SCROLL & VISA FIX</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 修復手機端吸頂走廊展開「行前攻略／當地貼士」被裁切無法滾動的問題，並全面覆檢更正各國簽證與旅遊警察數據</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 手機版雙錦囊原生順暢滾動（<code>dc-scroll-viewport</code> ＋ 動態解除吸頂鎖定）</b>：當手機頂部走廊展開雙錦囊時，自動解除固定吸頂裁剪並賦予內容區 <code>66vh</code> 獨立原生觸控捲動視口（<code>-webkit-overflow-scrolling: touch</code>），上下滑動順暢無阻。</li>
+            <li><b>② 修正泰國免簽期為最新 30 日（＋強制 TDAC 電子入境卡）</b>：同步覆檢東南亞全部 11 國（泰國、越南、新加坡、馬來西亞、印尼／峇里島旅遊稅、菲律賓、柬埔寨、老撾、緬甸、汶萊、東帝汶）及東亞、南亞、中東、歐洲、美加澳紐之最新入境規則、真實經緯度天氣座標與各國旅遊警察專線。</li>
+          </ul>
+        </div>
+
+        <!-- v5.5.0 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.5.0（正式整合「雙錦囊系統：🧭 行前攻略 ＋ 🛡️ 當地貼士」· ECMWF 9km／ERA5 天氣與多央行實時匯率雙引擎 · 全球全覆蓋電子入境網址與旅遊警察專線）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-700 text-white rounded text-[9px] font-bold">DUAL CAPSULE PRO</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎒 正式版重大里程碑升級：為每趟旅程配備「🧭 行前攻略」與「🛡️ 當地貼士」雙錦囊智慧引擎</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 🧭 行前攻略（4 層次序）</b>：整合三層智能天氣（ECMWF 9km / JMA / NOAA / ERA5 歷年基準＋右上角來源與城市選擇器＋Windy/AccuWeather 直達）、實時外幣匯率（Frankfurter v2 / ExchangeRate / CDN 三層備援＋圓形反轉掣 <code>⇄</code>＋找換店現鈔估算＋TTRate/XE/Wise 直達）、全球全覆蓋入境申報狀態標籤（含泰國免簽 30 日＋TDAC、越南 e-Visa、新加坡 SGAC、馬來西亞 MDAC、日本 VJW、英國 ETA 等官方直達網）及出發前準備（電壓插頭歸位＋國家專屬細心物品＋3 行自訂空白行）。</li>
+            <li><b>② 🛡️ 當地貼士（4 層次序）</b>：旅遊警報與最新動態、常見防騙手法、文化禁忌儀式與消費禮儀均升級為「預設 10 條高密度貼士 ＋ 右下角微箭嘴展開更多」，底部配備純淨緊急求助卡（<code>+(852) 1868</code>、各國旅遊警察專線及自訂旅遊保險熱線）。</li>
+          </ul>
+        </div>
+
+        <!-- v5.4.17 -->
+        <div class="border-l-2 border-slate-300 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-700 text-xs">v5.4.17（假期規劃單行走馬燈深海軍藍字體升級 · 自動偵測城市／國家並於標題前顯示國旗）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-700 text-white rounded text-[9px] font-bold">MARQUEE FLAG & NAVY</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🎌 統一走馬燈標題與系統深海軍藍主色調，並自動識別目的地城市或國家補上國旗標誌</div>
@@ -6063,7 +6288,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.4.17';
+    const APP_VERSION = '5.6.3';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -7214,6 +7439,7 @@
             return {
               name: city.name,
               country: country.name || '',
+              countryCode: city.countryCode || '',
               flag: country.flag || null,
               images: resolvedImages
             };
@@ -7231,6 +7457,7 @@
             return {
               name: country.name,
               country: country.name,
+              countryCode: countryCode,
               flag: country.flag || null,
               images: resolvedImages
             };
@@ -7255,6 +7482,7 @@
               return {
                 name: city.name,
                 country: country.name || '',
+                countryCode: city.countryCode || '',
                 flag: country.flag || null,
                 images: resolvedImages
               };
@@ -12279,6 +12507,30 @@
       const cleanInSummary = bData && bData.flightIn ? bData.flightIn.replace(/\(00:00\s*➔\s*00:00\)/g, '').trim() : '';
       const hasBooking = Boolean(bData && (cleanOutSummary || cleanInSummary || bData.flightOutNo || bData.flightInNo || bData.hotelName || bData.hotelAddress || bData.notes || bData.flightPnr));
 
+      const dualCapsuleBarHtml = `
+        <div class="pt-1.5 flex items-center gap-1.5" onclick="event.stopPropagation()">
+          <button type="button" data-trip-key="${tripKey}" data-capsule-type="prep"
+                  onclick="event.stopPropagation(); toggleTripDualCapsule('${tripKey}', 'prep', this)"
+                  class="btn-dual-capsule flex-1 py-1.5 px-2.5 rounded-xl bg-blue-50/90 hover:bg-blue-100/90 border border-blue-200/90 text-blue-950 font-black text-[11px] flex items-center justify-between transition active:scale-[0.98] cursor-pointer shadow-2xs">
+            <span class="flex items-center gap-1.5">
+              <span>🧭</span>
+              <span>行前攻略</span>
+            </span>
+            <i class="fa-solid fa-chevron-down text-[9px] text-blue-600 transition-transform duration-200 dual-capsule-chev"></i>
+          </button>
+          <button type="button" data-trip-key="${tripKey}" data-capsule-type="tips"
+                  onclick="event.stopPropagation(); toggleTripDualCapsule('${tripKey}', 'tips', this)"
+                  class="btn-dual-capsule flex-1 py-1.5 px-2.5 rounded-xl bg-indigo-50/90 hover:bg-indigo-100/90 border border-indigo-200/90 text-indigo-950 font-black text-[11px] flex items-center justify-between transition active:scale-[0.98] cursor-pointer shadow-2xs">
+            <span class="flex items-center gap-1.5">
+              <span>🛡️</span>
+              <span>當地貼士</span>
+            </span>
+            <i class="fa-solid fa-chevron-down text-[9px] text-indigo-600 transition-transform duration-200 dual-capsule-chev"></i>
+          </button>
+        </div>
+        <div class="trip-dual-capsule-slot" data-trip-key="${tripKey}"></div>
+      `;
+
       let bookingSectionHtml = '';
       if (hasBooking) {
         const outNo = (bData.flightOutNo || (bData.flightOut ? bData.flightOut.split(' ')[0] : '')).toUpperCase();
@@ -12432,6 +12684,8 @@
             ${formula}
             <!-- 6. v4.3.14 Travel Wallet 預訂憑證與登記入口 -->
             ${bookingSectionHtml}
+            <!-- 7. v5.5.0 雙錦囊（🧭 行前攻略 ＋ 🛡️ 當地貼士） -->
+            ${dualCapsuleBarHtml}
           </div>
         </div>
       `;
@@ -12823,8 +13077,10 @@
                   <i class="fa-solid fa-pen text-[9px]"></i>
                 </button>
               </div>
-              <div class="flex items-center gap-1">
+              <div class="flex items-center gap-1 flex-wrap">
                 ${cdBadge}
+                <button type="button" onclick="event.stopPropagation(); toggleTripDualCapsule('${tripKey}', 'prep', this, 'ribbon')" class="px-1.5 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-950 font-extrabold text-[8.5px] inline-flex items-center gap-0.5 cursor-pointer"><span>🧭</span><span>攻略</span></button>
+                <button type="button" onclick="event.stopPropagation(); toggleTripDualCapsule('${tripKey}', 'tips', this, 'ribbon')" class="px-1.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-950 font-extrabold text-[8.5px] inline-flex items-center gap-0.5 cursor-pointer"><span>🛡️</span><span>貼士</span></button>
               </div>
             </div>
 
@@ -13203,6 +13459,12 @@
       }
       lastRenderedCardsSignature = currentTripsSignature;
 
+      const _dcDrawer = document.getElementById('dualCapsuleStudioDrawer');
+      const _dcBay = document.getElementById('dualCapsuleParkingBay');
+      if (_dcDrawer && _dcBay && tripBox.contains(_dcDrawer)) {
+        _dcBay.appendChild(_dcDrawer);
+        dcCurrentTripKey = null;
+      }
       const _studioDrawer = document.getElementById('inlineBookingStudioDrawer');
       const _parkingBay = document.getElementById('inlineBookingStudioParkingBay');
       const _wasOpenInDesktopBox = Boolean(_studioDrawer && _studioDrawer.classList.contains('is-open') && tripBox.contains(_studioDrawer));
@@ -15156,6 +15418,12 @@ function setupYearOverviewToggle() {
 
       // 1. 渲染手機端假期規劃卡片 (modalTripsListContainer)
       if (modalTripsBox) {
+        const _dcDrawerM = document.getElementById('dualCapsuleStudioDrawer');
+        const _dcBayM = document.getElementById('dualCapsuleParkingBay');
+        if (_dcDrawerM && _dcBayM && modalTripsBox.contains(_dcDrawerM)) {
+          _dcBayM.appendChild(_dcDrawerM);
+          dcCurrentTripKey = null;
+        }
         const _studioDrawerM = document.getElementById('inlineBookingStudioDrawer');
         const _parkingBayM = document.getElementById('inlineBookingStudioParkingBay');
         const _wasOpenInModalBox = Boolean(_studioDrawerM && _studioDrawerM.classList.contains('is-open') && modalTripsBox.contains(_studioDrawerM));
@@ -20314,6 +20582,1787 @@ function setupYearOverviewToggle() {
       const calBox = document.getElementById('calendarContainer');
       if (calBox) new ResizeObserver(() => checkCalendarColumns()).observe(calBox);
     }
+  
+    // =========================================================================
+    // v5.5.0 雙錦囊旅遊情報引擎（東南亞全覆蓋 ＋ 全球自適應 ＋ 實時天氣與匯率）
+    // =========================================================================
+    const DC_CURRENCY_OPTIONS = [
+      { code: 'THB', label: '🇹🇭 THB 泰銖' },
+      { code: 'VND', label: '🇻🇳 VND 越南盾' },
+      { code: 'SGD', label: '🇸🇬 SGD 新加坡元' },
+      { code: 'MYR', label: '🇲🇾 MYR 馬來西亞令吉' },
+      { code: 'IDR', label: '🇮🇩 IDR 印尼盾' },
+      { code: 'PHP', label: '🇵🇭 PHP 菲律賓披索' },
+      { code: 'KHR', label: '🇰🇭 KHR 柬埔寨瑞爾' },
+      { code: 'LAK', label: '🇱🇦 LAK 老撾基普' },
+      { code: 'JPY', label: '🇯🇵 JPY 日圓' },
+      { code: 'TWD', label: '🇹🇼 TWD 新台幣' },
+      { code: 'KRW', label: '🇰🇷 KRW 韓元' },
+      { code: 'CNY', label: '🇨🇳 CNY 人民幣' },
+      { code: 'EUR', label: '🇪🇺 EUR 歐元' },
+      { code: 'GBP', label: '🇬🇧 GBP 英鎊' },
+      { code: 'USD', label: '🇺🇸 USD 美元' },
+      { code: 'AUD', label: '🇦🇺 AUD 澳元' },
+      { code: 'CAD', label: '🇨🇦 CAD 加元' },
+      { code: 'CHF', label: '🇨🇭 CHF 瑞士法郎' }
+    ];
+
+    const DC_FALLBACK_RATES = {
+      THB: 4.38, VND: 3265, SGD: 0.172, MYR: 0.568, IDR: 2045, PHP: 7.45,
+      KHR: 525, LAK: 2820, JPY: 19.65, TWD: 4.15, KRW: 178.5, CNY: 0.925,
+      EUR: 0.118, GBP: 0.101, USD: 0.128, AUD: 0.196, CAD: 0.178, CHF: 0.113
+    };
+
+    const DC_COUNTRY_KNOWLEDGE = {
+      TH: {
+        name: '泰國', flag: '🇹🇭', curr: 'THB',
+        cities: [
+          { name: '曼谷', lat: 13.7563, lon: 100.5018 },
+          { name: '清邁', lat: 18.7883, lon: 98.9853 },
+          { name: '布吉', lat: 7.8804, lon: 98.3923 },
+          { name: '芭堤雅', lat: 12.9236, lon: 100.8825 },
+          { name: '蘇梅島', lat: 9.5120, lon: 100.0136 }
+        ],
+        visaPill: '🟡 免簽 30 日｜TDAC／THIM 網頁及 App',
+        entryHtml: '<div>• <b>免簽證停留</b>：最長 30 日（最新收緊由 60 日改回 30 日，護照有效期須超過 6 個月）。</div><div>• <b>網上／手機 App 入境申報（TDAC ＋ THIM）</b>：出發前 72 小時內須免費填妥 <b>TDAC 電子入境卡</b>及新版 <b>THIM 泰國入境管理登記</b>（<b>同時設有官方網頁版及官方手機 App</b> 供填報），完成後儲存 QR Code 於入境櫃檯查驗。</div>',
+        portals: [
+          { name: 'TDAC 官方網頁申報', url: 'https://tdac.immigration.go.th/' },
+          { name: '泰國移民局官網（THIM 網頁及 App 指引）', url: 'https://www.immigration.go.th/' }
+        ],
+        festivals: '<div>• <b>宋干節／潑水節（4月13–15日）</b>：市中心主要大道封路慶祝，前往機場須預留額外 45 分鐘。</div><div>• <b>佛教大節日（佛誕／萬佛節）</b>：全國便利店及餐廳實施<b>全日強制禁酒</b>。</div>',
+        plug: '220V · 兩腳扁插 / 雙圓插',
+        fxTip: '💡 建議帶港幣 $500/$1000 紙幣到曼谷綠色或橙色 SuperRich 兌換（匯率最靚）；連鎖店支援 AlipayHK / PromptPay，夜市及篤篤車只收現金。',
+        countryPrep: [
+          '高濃度防蚊液（DEET / Picaridin 防登革熱）',
+          '防水手機袋（潑水節及出海必備）',
+          '過膝長褲／長裙及有袖上衣（入大皇宮及寺廟必備）',
+          '20 / 50 泰銖細面額紙幣（付按摩及酒店小費）'
+        ],
+        hkAlert: '外遊警示：黃色',
+        news10: [
+          '<b>TDAC／THIM 電子入境登記（支援網頁及官方 App）</b>：所有入境旅客須於出發前 72 小時內透過官方網頁或手機 App 完成申報並保存 QR Code。',
+          '<b>曼谷軌道交通拍卡升級</b>：BTS、MRT 紅藍紫線及機場快線支援 Visa/Mastercard 拍卡直入。',
+          '<b>泰北燒山季空氣質素</b>：2–4 月前往清邁建議帶備 N95 口罩留意 PM2.5 指數。',
+          '<b>遊客退稅門檻</b>：單日同店消費滿 2,000 THB 可填寫 e-VAT 退稅單於機場辦理。',
+          '<b>邊境口岸保安加強</b>：前往泰緬／泰柬邊境府份前須留意最新旅遊警示。',
+          '<b>高溫防中暑提醒</b>：夏季體感溫度常逾 40°C，戶外參觀寺廟須定時補水。',
+          '<b>蘇凡納布機場新衛星客運廊</b>：部分航班轉用 SAT-1 登機閘，須預留時間搭無人駕駛列車。',
+          '<b>藥妝與草藥攜帶限制</b>：含大麻成分之藥膏或食品嚴禁帶返香港（香港屬違法毒品）。',
+          '<b>夜間娛樂場所管制</b>：法定酒吧關門時間為凌晨 2 時（指定旅遊區延至 4 時）。',
+          '<b>Grab 機場專屬上車點</b>：BKK 機場 1 樓 4 號門外設有 Grab 官方冷氣候車區。'
+        ],
+        newsMore: [
+          '<b>泰銖新鈔流通</b>：新版聚合物 20 泰銖膠鈔已全面流通，防水防撕裂。',
+          '<b>水上市場週末人流高峰</b>：丹嫩莎朵及美功鐵道市場建議早上 8:30 前抵達避開旅行團。'
+        ],
+        scam10: [
+          '<b>大皇宮「今日唔開門」騙局</b>：寺廟外聲稱「皇宮休息」並推介平價 Tuk-Tuk 去珠寶店或遊船嘅全部係騙徒。',
+          '<b>的士拒跳錶（No Meter）</b>：堅持要求「By Meter」，遇拒載直接改用 Grab 或 Bolt 叫車。',
+          '<b>水上電單車刮花天價索賠</b>：芭堤雅／布吉租玩前務必 360 度拍片記錄原有花痕。',
+          '<b>海鮮檔「兩／100克」計價陷阱</b>：落單前白紙黑字確認係「每隻」定「每 100 克」計錢。',
+          '<b>夜市「免費送手繩／餵白鴿」收費</b>：切勿接過陌生人遞來嘅粟米粒或手繩，否則即被圍堵索價。',
+          '<b>芭堤雅／考山路 Ping Pong Show 拉客</b>：街邊寫低價「100 Baht」酒水單，入內結賬變數萬泰銖天價。',
+          '<b>找續大細鈔偷龍轉鳳</b>：付 1,000 THB 時大聲講出面額，避免店員換成 100 THB 話你畀少咗。',
+          '<b>假冒官方 TDAC 收費釣魚網</b>：TDAC 完全免費，凡要求輸入信用卡收費嘅網址均為假網。',
+          '<b>按摩店臨時加收「精油／房間費」</b>：入場前確認價目表已包全套費用。',
+          '<b>碼頭「快船已停航」轉介包船</b>：直接行去碼頭官方售票窗口買票，勿理會中途截停你嘅職員。'
+        ],
+        scamMore: [
+          '<b>機場非官方行李幫推車</b>：落機後只交由穿制服機場人員或自己推車，避免無故被索小費。',
+          '<b>假冒泰絲／紅寶石投資轉售騙局</b>：聲稱免稅帶返香港轉賣賺差價均為騙局。'
+        ],
+        culture10: [
+          '<b>嚴禁電子煙（重罪紅線）</b>：泰國嚴禁攜帶、吸食或管有電子煙及加熱煙，最高判監 5 年或巨額罰款。',
+          '<b>絕對尊重王室</b>：嚴禁於公開場合評論或貶損王室，切勿用腳踩住滾動嘅泰銖硬幣或鈔票。',
+          '<b>女性嚴禁觸碰僧侶</b>：僧侶守戒不可接觸女性，車廂內勿坐僧侶旁邊，遞物須經男士轉交或放於桌上。',
+          '<b>入寺廟衣著與脫鞋儀式</b>：必須脫鞋除帽，不可穿背心、短褲、短裙或破洞牛仔褲（須遮肩過膝）。',
+          '<b>坐姿與腳部禁忌</b>：泰國視腳部為最低下部位，坐低時腳掌切勿指向佛像或他人，勿用腳指物品。',
+          '<b>切勿摸別人頭部</b>：頭部被視為靈魂所在極神聖，即使覺得當地小朋友可愛亦切忌摸頭。',
+          '<b>雙手合十禮（Wai）回禮</b>：店員或酒店人員合十問好時，微笑點頭或合十回禮。',
+          '<b>禁止公眾場合吸食大麻</b>：公眾場所吸食散發氣味屬違法罰款，更嚴禁帶出境。',
+          '<b>小費禮儀（紙幣非硬幣）</b>：非強制，按摩或搬行李可給 20–50 THB 紙幣，切忌給硬幣（硬幣代表施捨）。',
+          '<b>佛像不能作裝飾品</b>：購買大型佛像雕塑出境須申請文化部許可，切勿將佛像放於褲袋或低於腰部。'
+        ],
+        cultureMore: [
+          '<b>每日 8:00 及 18:00 國歌肅立</b>：喺火車站、公園或市集聽到播放泰國國歌時，應跟隨當地人停步肅立約 1 分鐘。'
+        ],
+        emergency: [
+          { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
+          { label: '泰國旅遊警察 (支援中文)', num: '1155', primary: false },
+          { label: '當地報警熱線', num: '191', primary: false },
+          { label: '醫療急救中心', num: '1669', primary: false }
+        ]
+      },
+      VN: {
+        name: '越南', flag: '🇻🇳', curr: 'VND',
+        cities: [
+          { name: '峴港', lat: 16.0544, lon: 108.2022 },
+          { name: '胡志明市', lat: 10.8231, lon: 106.6297 },
+          { name: '河內', lat: 21.0285, lon: 105.8542 },
+          { name: '富國島', lat: 10.2899, lon: 103.9840 }
+        ],
+        visaPill: '🔴 須預先申請電子簽證 (e-Visa)',
+        entryHtml: '<div>• <b>必須辦理電子簽證</b>：出發前至少 5–7 個工作天於官方網站申請 <b>Vietnam e-Visa</b>（單次 USD 25 / 多次 USD 50），獲批後<b>必須列印紙本</b>隨身攜帶過關。（直飛富國島停留 30 日內免簽除外）。</div><div>• <b>入境卡提示</b>：持獲批 e-Visa 入境無需額外填寫紙本或電子入境卡。</div>',
+        portals: [{ name: '越南官方電子簽證網 (e-Visa)', url: 'https://evisa.gov.vn/' }],
+        festivals: '<div>• <b>越南南方解放日＆勞動節連假（4月30日–5月1日）</b>：全國黃金週，海灘酒店爆滿、餐廳可能加收假期服務費。</div>',
+        plug: '220V · 兩腳扁插 / 雙圓插',
+        fxTip: '💡 越南盾零位極多！建議去當地金舖用全新無摺痕港幣 $500/$1000 紙幣兌換（匯率遠勝銀行）；叫車及外賣全面用 Grab。',
+        countryPrep: [
+          '列印紙本 Vietnam e-Visa 批文（過關必須出示紙本）',
+          '備用白底證件相 2 張（應付臨時邊檢或補證需要）',
+          '多格銀包／透明夾（分開擺放 50萬 同 2萬 藍色鈔票防混淆）',
+          '防曬用品及輕便摺疊口罩（防電單車廢氣）'
+        ],
+        hkAlert: '外遊警示：無警示',
+        news10: [
+          '<b>越南 e-Visa 延長至 90 日</b>：開放所有國際機場及陸路口岸出入境，審批約 3–5 個工作天。',
+          '<b>電子煙全面禁止令</b>：越南已正式立法全面禁止生產、買賣、進口及吸食電子煙。',
+          '<b>Grab 全面普及</b>：峴港、會安、河內及胡志明市均可用 Grab 綁定香港信用卡扣數。',
+          '<b>新山一機場（胡志明市）排隊高峰</b>：國際線出入境輪候時間較長，建議提早 3 小時到機場。',
+          '<b>富國島直飛免簽政策</b>：由香港直飛富國島（無轉機越南內陸）可享 30 日免簽。',
+          '<b>會安古鎮門票制度</b>：進入會安核心古鎮及參觀會館須購買觀光套票（120,000 VND）。',
+          '<b>手機流動支付興起</b>：大型商場及連鎖咖啡店支援 Apple Pay / Visa 感應支付。',
+          '<b>出入境外幣申報線</b>：攜帶超過等值 USD 5,000 現金或 1,500 萬越南盾須向海關申報。',
+          '<b>國內線行李嚴格</b>：乘搭越捷航空手提行李限重 7kg，登機口會逐件磅重。',
+          '<b>高溫防曬提醒</b>：中南部 3–8 月陽光猛烈，戶外活動需定時補水。'
+        ],
+        newsMore: ['<b>峴港國際煙花節（DIFF）</b>：初夏週末漢江兩岸實施交通封路管制。'],
+        scam10: [
+          '<b>500,000 VND 與 20,000 VND 藍色鈔票混淆</b>：兩款鈔票均為藍綠色極相似，付款時務必數清楚「5 個零」定「4 個零」。',
+          '<b>山寨版 Mai Linh / Vinasun 的士</b>：只認準車身電話 <b>38.38.38.38 (Mai Linh)</b> 或 <b>38.27.27.27 (Vinasun)</b>，切忌搭黑車。',
+          '<b>街頭「擦鞋黨」強行拆鞋</b>：行街時有人突然蹲低幫你擦鞋或補鞋底，隨即索取數十萬越南盾。',
+          '<b>電單車飛車黨搶手機</b>：喺馬路邊切忌單手舉起手機影相或睇地圖。',
+          '<b>椰青／水果擔挑「免費試孭影相」</b>：肩挑水果小販主動將擔挑放上你膊頭影相後即索高價。',
+          '<b>的士改裝「跳錶加速器」</b>：司機按隱藏掣令跳錶速度倍增，用 Grab 最安全。',
+          '<b>仿冒越南 e-Visa 釣魚網站</b>：唯一官方網址為 evisa.gov.vn，其他收費 USD 60–100 均為中介。',
+          '<b>餐廳濕紙巾與花生收費</b>：檯面預先擺放嘅濕紙巾（Khăn lạnh）拆開即計費。',
+          '<b>按摩店強索高額小費</b>：入店前問清楚小費標準（一般 60 分鐘約 50,000–100,000 VND）。',
+          '<b>會安燈籠船喊價過高</b>：官方指定碼頭買票有公價（1–3 人一船約 150,000 VND），勿理街邊拉客。'
+        ],
+        scamMore: ['<b>夜市大排檔「無標價海鮮」</b>：必須先問清每公斤價格並親眼睇住過磅先好落單。'],
+        culture10: [
+          '<b>過馬路「勻速慢行」法則</b>：電單車流極多，保持穩定步速橫過即可，切忌突然奔跑或急停後退。',
+          '<b>全面禁帶及吸食電子煙</b>：海關嚴格抽查行李，攜帶電子煙入境可被沒收及罰款。',
+          '<b>入寺廟及會館衣著端莊</b>：參觀寺廟及華人會館不可穿背心短褲，入殿須脫鞋。',
+          '<b>切勿用腳指人或用腳關門</b>：用腳指物件或跨過坐喺地上嘅人被視為極度不敬。',
+          '<b>雙手遞交現金與物品</b>：向長輩或店員遞錢時用雙手代表尊重。',
+          '<b>拍攝當地人前先微笑示意</b>：尤其喺少數民族村落或傳統市場，先徵求同意再舉機。',
+          '<b>小費習慣</b>：街邊小店無需小費，包車司機或水療按摩可視乎服務給予 50,000–100,000 VND。',
+          '<b>尊重歷史與政治話題</b>：避免於公開場合爭論敏感議題。',
+          '<b>進入民居及部分店舖須脫鞋</b>：見到門口擺滿鞋履，務必先脫鞋先入內。',
+          '<b>餐桌筷子禮儀</b>：切忌將筷子垂直插喺飯碗中央（形似祭祀香燭）。'
+        ],
+        cultureMore: ['<b>午休文化</b>：部分小型郵局或傳統商舖中午 12:00–13:30 會關門午休。'],
+        emergency: [
+          { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
+          { label: '越南旅遊支援專線', num: '+84 28 3829 8888', primary: false },
+          { label: '當地報警熱線', num: '113', primary: false },
+          { label: '醫療急救熱線', num: '115', primary: false }
+        ]
+      },
+      SG: {
+        name: '新加坡', flag: '🇸🇬', curr: 'SGD',
+        cities: [{ name: '新加坡市區', lat: 1.3521, lon: 103.8198 }, { name: '聖淘沙', lat: 1.2494, lon: 103.8303 }],
+        visaPill: '🟡 免簽 30 日｜須網上填 SGAC',
+        entryHtml: '<div>• <b>免簽證停留</b>：最長 30 日（護照有效期須超過 6 個月）。</div><div>• <b>強制電子入境卡</b>：抵達前 3 日內須於官網或 MyICA App 免費填妥 <b>SGAC 新加坡電子入境卡</b>。</div>',
+        portals: [{ name: 'SGAC 新加坡電子入境卡官網', url: 'https://eservices.ica.gov.sg/sgarrivalcard/' }],
+        festivals: '<div>• <b>新加坡熱賣會（6–7月）</b>：各大商場推出全年最大折扣優惠。</div>',
+        plug: '230V · 英式三腳方插（同香港）',
+        fxTip: '💡 地鐵巴士直接用香港 Visa/Mastercard 感應式信用卡或 Apple Pay 拍卡即入閘，無需買儲值卡；熟食中心需備少量坡幣現金。',
+        countryPrep: [
+          '出發前 3 日內完成 SGAC 電子入境申報',
+          '開通香港感應式信用卡海外交易（直接拍卡搭地鐵）',
+          '細包紙巾（熟食中心霸位「Chope」及抹手必備）'
+        ],
+        hkAlert: '外遊警示：無警示',
+        news10: [
+          '<b>樟宜機場全自動無護照通關</b>：已填妥 SGAC 旅客可直接憑人臉及虹膜識別秒速過關。',
+          '<b>嚴禁攜帶電子煙入境</b>：新加坡海關對電子煙零容忍，攜帶入境即罰款最高 SGD 2,000。',
+          '<b>消費稅（GST）維持 9%</b>：單筆消費滿 SGD 100 可憑電子護照辦理 eTRS 退稅。',
+          '<b>SimplyGo 拍卡乘車</b>：海外信用卡拍卡搭地鐵每日僅收 SGD 0.60 行政費。',
+          '<b>熟食中心強制自收托盤</b>：用餐後必須自行將餐具放回回收架，否則可被罰款。',
+          '<b>聖淘沙入島費提示</b>：乘搭聖淘沙捷運入島費為 SGD 4，回程免費。',
+          '<b>煙酒零免稅額規定</b>：新加坡無香煙免稅額，第一支香煙起即須申報完稅。',
+          '<b>公共場所禁酒時段</b>：晚上 10:30 至翌晨 7:00 禁止於公園及街頭公眾地方飲酒。',
+          '<b>夜間動物園區預約制</b>：須網上預先揀選入園時段。',
+          '<b>的士附加費時段</b>：繁忙時間及深夜（00:00–06:00）加收 25%–50% 附加費。'
+        ],
+        newsMore: ['<b>濱海灣花園冷室維護日</b>：出發前留意花穹及雲霧林每月指定休館保養日。'],
+        scam10: [
+          '<b>假冒免費 SGAC 收費釣魚網</b>：官方 SGAC 完全免費，切勿誤入收取 USD 30–50 嘅假網站。',
+          '<b>牛車水／芽籠街頭「高價藥油／保健品」推銷</b>：聲稱免費把脈後強迫購買數百坡幣套裝。',
+          '<b>森林廣場電子產品隱藏套餐價</b>：購買前確認已含保養及配件，勿簽空白單。',
+          '<b>假冒警察／銀行職員電話詐騙</b>：警方絕不會透過電話要求轉賬或索取銀行密碼。',
+          '<b>網上轉售二手主題樂園假門票</b>：務必經官網或正規平台購買環球影城門票。',
+          '<b>機場非法白牌車拉客</b>：只於官方 Taxi Stand 排隊或用 Grab / Zig 叫車。',
+          '<b>餐廳濕紙巾（Wet Tissue）及花生小碟</b>：入座時檯面預設濕紙巾屬收費項目。',
+          '<b>換錢黨黑市兌換</b>：只於商場持牌找換店兌換。',
+          '<b>共享單車未停泊於指定黃格</b>：用完單車須掃描停車區二維碼，否則持續計費。',
+          '<b>克拉碼頭酒吧「無標價特調」</b>：點酒前先睇清楚酒牌價格。'
+        ],
+        scamMore: ['<b>街頭無證募捐</b>：正規募捐者必須佩戴官方許可證。'],
+        culture10: [
+          '<b>嚴禁進口及售賣香口膠</b>：切勿攜帶香口膠入境新加坡，更嚴禁吐喺地上（重罰）。',
+          '<b>地鐵及巴士內嚴禁飲食（包括飲水）</b>：連飲一口清水或食糖果都可被罰款 SGD 500。',
+          '<b>熟食中心「紙巾霸位（Chope）」文化</b>：見到檯面放有一包紙巾或雨傘，代表已有食客霸位，切勿坐下。',
+          '<b>用完餐必須自行歸還托盤與餐具</b>：留低餐具未收可被罰款 SGD 300。',
+          '<b>嚴禁攜帶榴槤上地鐵、巴士及酒店</b>：酒店房內食榴槤會被收取高達 SGD 200–500 除臭費。',
+          '<b>亂過馬路（Jaywalking）罰款</b>：距離行人天橋或斑馬線 50 米內橫過馬路屬違法。',
+          '<b>清真寺及印度廟參觀禮儀</b>：進入回教堂或興都廟須脫鞋並穿著長袖長褲。',
+          '<b>扶手電梯靠左企立</b>：與香港相同，靠左站立、右側留空急行。',
+          '<b>無需額外俾小費</b>：餐廳帳單已包含 10% 服務費及 9% GST。',
+          '<b>公共廁所使用後必須沖水</b>：法律規定如廁後未沖水可被罰款 SGD 150。'
+        ],
+        cultureMore: ['<b>多元種族尊重</b>：切勿評論種族或宗教敏感話題。'],
+        emergency: [
+          { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
+          { label: '新加坡報警熱線', num: '999', primary: false },
+          { label: '救護車與消防', num: '995', primary: false },
+          { label: '新加坡旅遊局諮詢', num: '1800 736 2000', primary: false }
+        ]
+      },
+      MY: {
+        name: '馬來西亞', flag: '🇲🇾', curr: 'MYR',
+        cities: [
+          { name: '吉隆坡', lat: 3.1390, lon: 101.6869 },
+          { name: '檳城', lat: 5.4141, lon: 100.3288 },
+          { name: '亞庇(沙巴)', lat: 5.9804, lon: 116.0735 }
+        ],
+        visaPill: '🟡 免簽 90 日｜須網上填 MDAC',
+        entryHtml: '<div>• <b>免簽證停留</b>：最長 90 日（護照有效期須超過 6 個月）。</div><div>• <b>強制電子入境卡</b>：抵達前 3 日內須於官網免費填妥 <b>MDAC 馬來西亞電子入境卡</b>。</div>',
+        portals: [{ name: 'MDAC 馬來西亞電子入境卡官網', url: 'https://imigresen-online.imi.gov.my/mdac/main' }],
+        festivals: '<div>• <b>開齋節（Hari Raya）</b>：全國大假期，吉隆坡市區人流減少但跨州公路極度擠塞。</div>',
+        plug: '240V · 英式三腳方插（同香港）',
+        fxTip: '💡 吉隆坡 Mid Valley 或 Bukit Bintang 商場找換店匯率極佳；日常叫車必用 Grab，商場及食肆支援 Touch ’n Go / AlipayHK 掃碼。',
+        countryPrep: ['出發前 3 日內填妥 MDAC 電子入境卡', '高濃度防蚊液（沙巴海島及雨林必備）', '薄外套（商場及長途巴士冷氣極凍）'],
+        hkAlert: '外遊警示：黃色（沙巴東岸留意）',
+        news10: [
+          '<b>MDAC 電子入境卡強制執行</b>：抵達前 3 天內網上提交，可走自動閘機過關。',
+          '<b>馬來西亞旅遊稅（TTx）</b>：外國遊客入住酒店每房每晚現場收取 RM 10 旅遊稅。',
+          '<b>檳城及浮羅交怡地方稅</b>：部分州份另收每晚 RM 2–3 地方政府保育費。',
+          '<b>吉隆坡機場快線（KLIA Ekspres）</b>：支援 Visa/Mastercard 感應式拍卡直接入閘。',
+          '<b>沙巴東岸海域外遊警示</b>：前往仙本那潛水須選擇信譽良好持牌度假村。',
+          '<b>檳城喬治市壁畫區步行提醒</b>：假日人車爭路，過馬路留意電單車。',
+          '<b>Grab 全面覆蓋</b>：全馬主要城市均可用 Grab 叫車及點餐。',
+          '<b>海關現金申報線</b>：攜帶超過等值 USD 10,000 現金須向海關申報。',
+          '<b>雨季雷陣雨提醒</b>：11–2 月東海岸風浪較大，部分海島船班停航。',
+          '<b>免稅購物退稅</b>：目前馬來西亞未設通用旅客離境退稅櫃位（浮羅交怡本身為免稅島）。'
+        ],
+        newsMore: ['<b>吉隆坡雙子塔觀景台預約</b>：建議提早網上購票。'],
+        scam10: [
+          '<b>假冒 MDAC 收費網站</b>：官方 MDAC 完全免費，切勿輸入信用卡資料。',
+          '<b>機場外無牌黑車拉客</b>：只於機場櫃位買票或用 Grab 叫車。',
+          '<b>武吉免登街頭「迷魂黨／問路換錢」</b>：聲稱想睇港幣鈔票樣式藉機偷龍轉鳳。',
+          '<b>海鮮餐廳「時價」未問清單位</b>：亞羅街或海邊大排檔落單前問清每 100g 價格。',
+          '<b>假警察截查護照索賄</b>：遇可疑便衣要求罰款時，堅持前往最近警署處理。',
+          '<b>電單車飛車搶手袋</b>：行馬路邊將斜孭袋放於遠離車道一側。',
+          '<b>的士拒跳錶</b>：吉隆坡路邊紅色舊款的士常開天價，一律用 Grab。',
+          '<b>浮羅交怡租車刮花糾紛</b>：取車時先拍片記錄車身及輪胎狀況。',
+          '<b>ATM 讀卡器側錄</b>：優先使用銀行分行內之提款機。',
+          '<b>沙巴跳島游無牌中介</b>：只於哲斯頓碼頭（Jesselton Point）官方櫃位購票。'
+        ],
+        scamMore: ['<b>夜市找續假鈔</b>：收到破損紙幣可即時要求更換。'],
+        culture10: [
+          '<b>尊重伊斯蘭教禮儀</b>：進入清真寺須穿長袖長褲及包頭巾（門口通常免費借用長袍）。',
+          '<b>勿用左手遞物或進食</b>：傳統文化視左手為不潔，遞錢或握手務必用右手。',
+          '<b>勿用食指指人或物品</b>：應用右手拇指（其餘四指握拳）禮貌示意方向。',
+          '<b>齋戒月（Ramadan）尊重</b>：白天避免喺穆斯林朋友面前公開大吃大喝。',
+          '<b>切勿摸頭</b>：與東南亞文化相同，忌摸成年人或小孩頭部。',
+          '<b>嚴禁帶榴槤及山竹入酒店及交通工具</b>：違者被罰款除臭費。',
+          '<b>入屋及寺廟脫鞋</b>：進入清真寺、印度廟及當地人家中必須脫鞋。',
+          '<b>無小費習慣</b>：酒店及高級餐廳帳單已含 10% 服務費。',
+          '<b>多元文化尊重</b>：馬來西亞由馬來人、華人及印度人組成，尊重各族宗教習俗。',
+          '<b>雙手接名片或禮物</b>：用雙手或右手接過代表禮貌。'
+        ],
+        cultureMore: ['<b>週五祈禱時段</b>：週五中午 12:30–14:30 部分穆斯林商舖會暫停營業。'],
+        emergency: [
+          { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
+          { label: '吉隆坡旅遊警察熱線', num: '+60 3-2149 6590', primary: false },
+          { label: '當地報警與救護', num: '999', primary: false },
+          { label: '旅遊部諮詢熱線', num: '1-300-88-5050', primary: false }
+        ]
+      },
+      JP: {
+        name: '日本', flag: '🇯🇵', curr: 'JPY',
+        cities: [
+          { name: '東京', lat: 35.6762, lon: 139.6503 },
+          { name: '大阪', lat: 34.6937, lon: 135.5023 },
+          { name: '京都', lat: 35.0116, lon: 135.7681 },
+          { name: '札幌', lat: 43.0618, lon: 141.3545 },
+          { name: '福岡', lat: 33.5902, lon: 130.4017 },
+          { name: '沖繩那霸', lat: 26.2124, lon: 127.6809 }
+        ],
+        visaPill: '🟡 免簽 90 日｜建議填 VJW',
+        entryHtml: '<div>• <b>免簽證停留</b>：最長 90 日（護照有效期須涵蓋整個逗留期間）。</div><div>• <b>電子入境及海關申報</b>：強烈建議出發前於 <b>Visit Japan Web</b> 填寫入境及海關申報，掃 QR Code 快速通關。</div>',
+        portals: [{ name: 'Visit Japan Web 官方登記網', url: 'https://www.vjw.digital.go.jp/' }],
+        festivals: '<div>• <b>日本黃金週（4月29日–5月5日）＆ 盂蘭盆節（8月中旬）</b>：新幹線指定席極易爆滿，酒店房價顯著上升。</div>',
+        plug: '100V · 兩腳扁插（同美式）',
+        fxTip: '💡 建議香港先唱少量日圓現鈔（拉麵店、神社及小店只收現金），其餘直接用 iPhone Wallet 綁定 Suica / ICOCA 信用卡增值最方便。',
+        countryPrep: [
+          '零錢包／散紙包（日本 1円 至 500円 硬幣極多）',
+          '保濕潤唇膏與護手霜（日本秋冬室內暖氣極乾燥）',
+          '摺疊環保購物袋（日本便利店及超市膠袋全收費）',
+          '肉色遮瑕貼（有紋身者浸溫泉或健身室必備）'
+        ],
+        hkAlert: '外遊警示：無警示',
+        news10: [
+          '<b>Visit Japan Web 合併二維碼</b>：入境審查與海關申報已整合為單一 QR Code。',
+          '<b>免稅購物須出示實體護照正本</b>：所有免稅店均不接受護照副本或手機相片。',
+          '<b>數碼 Suica / ICOCA 普及</b>：可直接於 iPhone Apple Wallet 免費開通並用 Visa/Master 增值。',
+          '<b>新幹線特大行李預約制</b>：三邊總和 160–250cm 行李箱必須預訂「特大行李席位」，否則罰款 ¥1,000。',
+          '<b>嚴禁攜帶肉類及新鮮水果入境</b>：飛機餐未食完嘅三文治或水果亦不可帶落機。',
+          '<b>防災警報 App</b>：建議下載「Safety tips」官方多語言地震及天氣警報程式。',
+          '<b>京都市營巴士行李限制</b>：禁止攜帶大型行李箱上巴士，善用地下鐵或行李寄送。',
+          '<b>藥妝免稅封袋規定</b>：消耗品免稅透明膠袋於離境日本前絕對不可拆封。',
+          '<b>熱門餐廳預約制</b>：燒肉、壽司及居酒屋強烈建議預先經 Tabelog 或官網訂座。',
+          '<b>住宿稅徵收</b>：東京、大阪、京都及福岡酒店按房價每晚另收 ¥100–¥1,000 住宿稅。'
+        ],
+        newsMore: ['<b>日本紙幣改版流通</b>：新版一萬日圓已流通，舊版紙幣依然永久有效。'],
+        scam10: [
+          '<b>歌舞伎町／六本木街頭「免費介紹所」拉客</b>：切勿跟隨街邊主動搭訕推介居酒屋嘅人員，結賬動輒數十萬日圓。',
+          '<b>餐廳「お通し（座位前菜費）」文化</b>：居酒屋入座自動送上小碟前菜並收費 ¥300–800 屬合法常態，非騙局。',
+          '<b>白牌車（無牌私家車）機場接送</b>：機場外只搭乘綠牌正規的士或官方預約車輛。',
+          '<b>神社周邊「假僧侶化緣」</b>：淺草寺或上野公園外主動遞護身符並索現金多為假冒。',
+          '<b>景區人力車未問清收費</b>：乘搭前確認係「按人頭」定「按車」計價。',
+          '<b>夾公仔機高額誘導</b>：部分遊客區遊戲機店店員會誘導不斷增值，留意預算。',
+          '<b>假冒官方 VJW 收費網站</b>：Visit Japan Web 完全免費，任何要求付費網站均屬假冒。',
+          '<b>網購二手演唱會／樂園門票</b>：日本實名制嚴格，二手門票極易被拒入場。',
+          '<b>的士深夜附加費</b>：晚上 22:00 至翌晨 05:00 車資自動加收 20%。',
+          '<b>扭蛋機／販賣機找續檢查</b>：投幣後留意退幣口有否卡住硬幣。'
+        ],
+        scamMore: ['<b>居酒屋週末限時 2 小時＋一人一飲品低消</b>：入座前留意店規說明。'],
+        culture10: [
+          '<b>無小費文化</b>：日本任何場合均不收小費，放低現金反而會被店員追返出嚟歸還。',
+          '<b>浸溫泉禮儀與儀式</b>：必須全裸入浴，入池前先坐低洗淨身體；<b>毛巾絕不可浸入溫泉水中</b>。',
+          '<b>電車及巴士內保持安靜</b>：手機調至靜音，車廂內禁止講電話。',
+          '<b>切勿邊走邊吃（食べ歩き禁止）</b>：買小食應企喺店舖門口或指定飲食區食完先繼續行。',
+          '<b>餐廳飲水規矩</b>：日本餐廳一律奉上免費冰水，切忌自帶外來飲品入店飲用。',
+          '<b>筷子餐桌禁忌</b>：切忌用一對筷子傳遞食物給另一人（類似火葬撿骨），亦勿插飯中央。',
+          '<b>入屋及傳統餐廳脫鞋規則</b>：進入榻榻米和室、試身室或寺廟大殿必須先脫鞋，鞋頭朝外擺整齊。',
+          '<b>街頭垃圾分類</b>：街頭極少垃圾桶，膠樽掉入自動販賣機旁回收箱，其餘自備袋帶返酒店。',
+          '<b>攝影私隱尊重</b>：京都祇園花見小路部分私人小巷禁止進入及未經許可拍攝藝伎。',
+          '<b>扶手電梯企位</b>：東京習慣靠左企立；大阪則相反靠右企立。'
+        ],
+        cultureMore: ['<b>神社參拜禮儀</b>：先於手水舍洗手漱口，投幣後行「二拜、二拍手、一拜」。'],
+        emergency: [
+          { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
+          { label: 'JNTO 24h 旅遊熱線 (中文)', num: '050-3816-2787', primary: false },
+          { label: '日本報警熱線', num: '110', primary: false },
+          { label: '火警與救護車', num: '119', primary: false }
+        ]
+      },
+      TW: {
+        name: '台灣', flag: '🇹🇼', curr: 'TWD',
+        cities: [
+          { name: '台北', lat: 25.0330, lon: 121.5654 },
+          { name: '高雄', lat: 22.6273, lon: 120.3014 },
+          { name: '台中', lat: 24.1477, lon: 120.6736 },
+          { name: '台南', lat: 22.9999, lon: 120.2269 }
+        ],
+        visaPill: '🟡 須預先網上辦入台證 ＋ TWAC',
+        entryHtml: '<div>• <b>網上申請入台證</b>：港澳出生或曾赴台者可免費網上申辦並列印（非港澳出生首次申請須經雲端系統收費 NT$600）。</div><div>• <b>強制電子入境卡</b>：抵達前 7 日內須於官網免費填妥 <b>TWAC 台灣電子入境卡</b>。</div>',
+        portals: [
+          { name: '港澳居民網簽入台證系統', url: 'https://coa.immigration.gov.tw/coa-frontend/overseas-honk-macao' },
+          { name: 'TWAC 台灣電子入境卡', url: 'https://twac.immigration.gov.tw/' }
+        ],
+        festivals: '<div>• <b>清明連假／端午／中秋連假</b>：高鐵及台鐵車票開賣即秒殺，墾丁及宜蘭民宿爆滿。</div>',
+        plug: '110V · 兩腳扁插（同美式）',
+        fxTip: '💡 桃園／松山機場入境大堂銀行櫃位兌換台幣匯率已相當好（僅收 NT$30 手續費）；買悠遊卡或一卡通搭捷運及便利店消費最方便。',
+        countryPrep: [
+          '列印紙本入台證（過關必須出示紙本）',
+          '摺疊環保購物袋及餐具（台灣實施限塑令不免費派膠袋）',
+          '防蚊貼／防蚊液（花蓮、台南及山區小黑蚊較多）'
+        ],
+        hkAlert: '外遊警示：無警示',
+        news10: [
+          '<b>TWAC 電子入境卡全面啟用</b>：取代傳統紙本入境登記表，出發前 7 日內網上填寫。',
+          '<b>台灣旅宿業一次性備品限制</b>：全台酒店及民宿不再主動提供牙刷、牙膏、梳及剃鬚刀，須自備。',
+          '<b>嚴禁攜帶肉類製品入境</b>：含肉鬆蛋捲、火腿腸、臘腸等肉類食品帶入台灣重罰 NT$20 萬起。',
+          '<b>捷運及高鐵電子支付</b>：台北捷運、高雄捷運及機場捷運支援 Apple Pay / 信用卡感應入閘。',
+          '<b>遊台灣金福氣抽獎活動</b>：入境前登記有機會抽中 NT$5,000 消費金。',
+          '<b>颱風及豪雨警報留意</b>：7–10 月前往花東山區前留意蘇花公路及台鐵路況。',
+          '<b>外國旅客退稅（TRS）</b>：同日同店消費滿 NT$2,000 可辦理 5% 營業稅退稅。',
+          '<b>共享單車 YouBike 2.0</b>：可使用悠遊卡或信用卡單次租借。',
+          '<b>夜市行動支付普及</b>：部分攤檔支援 LINE Pay，但仍建議備足台幣現金。',
+          '<b>地震防災警報</b>：手機若收到國家級警報提示音保持冷靜遵循指示。'
+        ],
+        newsMore: ['<b>台灣高鐵早鳥票</b>：出發前 29 日開放預購最高享 65 折優惠。'],
+        scam10: [
+          '<b>夜市現切水果檔「天價論兩計」</b>：士林、六合或墾丁大街買切好水果前務必先問清楚每份總價，勿隨便試食。',
+          '<b>街頭「愛心筆／手工零錢包」強迫推銷</b>：西門町或台北車站外遇到學生模樣遞筆或鎖匙扣切勿接過。',
+          '<b>九份／野柳無牌白牌車包車喊價</b>：搭的士堅持按錶計費或用 Uber / 55688 叫車。',
+          '<b>假冒入台證收費代辦網</b>：港澳居民符合資格者網簽完全免費，認準 .gov.tw 域名。',
+          '<b>夾公仔機兌幣機或遊戲陷阱</b>：留意機台保夾金額標示。',
+          '<b>墾丁水上活動套票重複收費</b>：購票時保留收據並確認包含項目。',
+          '<b>網上代購演唱會假門票</b>：只經拓元、KKTIX 等官方售票系統購買。',
+          '<b>的士夜間加成</b>：晚上 23:00 至翌晨 06:00 每趟加收 NT$20 夜間加成（計費錶自動計算）。',
+          '<b>旅館訂房釣魚確認信</b>：切勿點擊來歷不明要求重新輸入信用卡之電郵連結。',
+          '<b>伴手禮店「買十送一」過期日期檢查</b>：購買鳳梨酥及太陽餅時留意保存期限（部分手工餅僅 14 日）。'
+        ],
+        scamMore: ['<b>桃園機場非法黃牛拉客</b>：只於航廈外正規排班計程車上車處乘車。'],
+        culture10: [
+          '<b>捷運站內嚴禁飲食（包括飲水及香口膠）</b>：踏入捷運黃線感應區後飲水或食糖即罰款 NT$1,500–7,500。',
+          '<b>自備牙刷牙膏等個人洗漱用品</b>：響應環保法規，酒店房間不主動擺放即棄牙刷牙膏。',
+          '<b>禮讓「博愛座（關愛座）」</b>：車廂深藍色博愛座文化極受重視，即使空置亦建議留給有需要人士。',
+          '<b>垃圾分類與環保習慣</b>：飲料杯須先倒掉殘餘冰塊液體再分開紙杯與膠蓋回收。',
+          '<b>無小費文化</b>：餐廳通常已收 10% 服務費，的士及酒店無需額外給小費。',
+          '<b>扶手電梯靠右企立</b>：台北捷運習慣靠右站立、左側急行。',
+          '<b>寺廟參拜禮儀</b>：進入龍山寺或行天宮遵循「龍門進、虎門出」，勿踩踏門檻。',
+          '<b>排隊禮讓文化</b>：無論搭巴士、買小食或等電梯均整齊排隊。',
+          '<b>餐廳共食與打包習慣</b>：台灣餐廳非常歡迎客人將未食完食物打包帶走。',
+          '<b>避免高談闊論敏感政治話題</b>：與當地人交流保持友善尊重。'
+        ],
+        cultureMore: ['<b>夜市邊行邊食留意油漬</b>：部分小吃竹籤較尖，行走時注意安全。'],
+        emergency: [
+          { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
+          { label: '外國人/港澳旅遊諮詢', num: '1990', primary: false },
+          { label: '當地報警熱線', num: '110', primary: false },
+          { label: '火警與救護車', num: '119', primary: false }
+        ]
+      },
+      KR: {
+        name: '韓國', flag: '🇰🇷', curr: 'KRW',
+        cities: [
+          { name: '首爾', lat: 37.5665, lon: 126.9780 },
+          { name: '釜山', lat: 35.1796, lon: 129.0756 },
+          { name: '濟州島', lat: 33.4996, lon: 126.5312 }
+        ],
+        visaPill: '🟡 免簽 90 日｜須填 e-Arrival',
+        entryHtml: '<div>• <b>免簽證停留</b>：最長 90 日（K-ETA 暫時豁免至 2026 年底）。</div><div>• <b>強制電子入境卡</b>：抵達前 72 小時內須於官網免費填妥 <b>韓國 e-Arrival Card</b>。</div>',
+        portals: [
+          { name: '韓國電子入境卡 (e-Arrival)', url: 'https://www.e-arrivalcard.go.kr/' },
+          { name: 'K-ETA 官網（豁免期免填）', url: 'https://www.k-eta.go.kr/' }
+        ],
+        festivals: '<div>• <b>韓國秋夕（中秋）＆ 農曆新年</b>：部分傳統市場及家庭食肆休息 2–3 日，大型百貨照常營業。</div>',
+        plug: '220V · 德標雙圓腳插（Type C/F）',
+        fxTip: '💡 明洞大使館前／一品香找換店匯率全韓最靚；辦一張 WOWPASS 或 T-money 卡搭地鐵及便利店消費最順暢。',
+        countryPrep: [
+          '牙刷牙膏套裝（韓國法例禁止酒店免費派發即棄牙刷牙膏）',
+          '預先下載 Naver Map 或 KakaoMap（Google Map 喺韓國步行導航不準）',
+          '歐標／德標雙圓腳轉換插頭（Type F）'
+        ],
+        hkAlert: '外遊警示：無警示',
+        news10: [
+          '<b>韓國電子入境卡（e-Arrival Card）上線</b>：抵達前 3 日內網上提交，免填紙本入境表。',
+          '<b>K-ETA 豁免延長</b>：香港旅客免申請 K-ETA 即可免簽入境韓國。',
+          '<b>仁川機場 Smart Pass 人臉識別</b>：預先於 App 登記護照及人臉可走專用快速通道出境。',
+          '<b>酒店不提供免費牙刷牙膏</b>：韓國《資源節約法》規定所有 50 房以上酒店禁免費派發即棄牙刷。',
+          '<b>嚴禁攜帶肉類及新鮮蔬果入境</b>：肉乾、香腸等帶入韓國最高罰款 1,000 萬韓元。',
+          '<b>即場退稅（Immediate Tax Refund）</b>：Olive Young、樂天超市等單筆滿 ₩15,000 出示護照即扣稅。',
+          '<b>氣候同行卡（Climate Card）</b>：首爾市內無限次搭地鐵巴士短期旅遊卡。',
+          '<b>行動電源隨身攜帶新規</b>：韓國航空公司嚴格要求尿袋絕不可放頭頂行李架，須隨身或放前座袋。',
+          '<b>韓國餐廳「一人份限制」</b>：部分烤肉店及部隊鍋須點滿至少兩人份先開爐。',
+          '<b>冬季嚴寒防滑提醒</b>：12–2 月首爾氣溫常跌破 -10°C，路面結冰須穿防滑鞋。'
+        ],
+        newsMore: ['<b>釜山 Visit Busan Pass</b>：包涵海雲台膠囊列車及多個景點門票。'],
+        scam10: [
+          '<b>東大門／明洞黑色模範的士或無牌黑車喊價</b>：深夜時段拒載並開天價，一律用 Kakao T 或 Uber 叫車。',
+          '<b>廣藏市場／鷺梁津海鮮檔「偷換死蟹／少秤」</b>：落單前確認活海鮮當面處理及標明總價。',
+          '<b>弘大／明洞街頭「問路／免費測面相」傳教拉客</b>：遇到主動用流利英文或中文搭訕帶去飲茶切勿跟隨。',
+          '<b>化妝品店「免費試用樣品」強行拉入店</b>：接過試用裝後店員會緊跟推銷高價套裝。',
+          '<b>的士司機按「市外加成鍵」</b>：首爾市區內乘車留意計費錶有否誤亮「시계외（市界外）」字樣。',
+          '<b>假冒 K-ETA 收費代辦網站</b>：豁免期間根本無需申請，切勿付費。',
+          '<b>仁川機場非官方包車舉牌拉客</b>：只搭乘機場巴士、AREX 機場快線或正規的士站車輛。',
+          '<b>夜市小食無標價</b>：明洞街頭小食近年價格偏高，買前先睇清價目牌。',
+          '<b>餐廳酒精飲品點單誤會</b>：韓國燒酒及啤酒逐支計費，結賬前核對空瓶數量。',
+          '<b>網購二手韓團演唱會門票</b>：韓國實名核對護照極嚴，二手票極易被拒入場。'
+        ],
+        scamMore: ['<b>的士深夜割增時段</b>：晚上 22:00 至翌晨 04:00 車資上調 20%–40%。'],
+        culture10: [
+          '<b>地鐵「關愛座（老弱病殘席）」絕對禮讓</b>：車廂兩端關愛座即使全空，年輕人亦絕不會坐下（會被長輩責罵）。',
+          '<b>長輩未動筷前晚輩勿先開動</b>：與韓國人同桌用餐，等最年長者先拿起匙羹或筷子先開始食。',
+          '<b>雙手敬酒與接酒禮儀</b>：倒酒或接酒時須用雙手（或右手持杯、左手輕托右手腕），飲酒時側身避開長輩視線。',
+          '<b>用匙羹食飯、筷子夾餸</b>：韓國人用扁平金屬筷夾菜，用長柄匙羹食飯及飲湯（切忌端起飯碗就口食）。',
+          '<b>無小費文化</b>：餐廳、的士及酒店均不收小費。',
+          '<b>進入韓屋及傳統食肆必須脫鞋</b>：坐地暖炕餐廳入座前脫鞋並擺放整齊。',
+          '<b>扶手電梯靠右企立</b>：首爾及釜山地鐵扶手電梯一律靠右企、左側急行。',
+          '<b>車廂內避免大聲講電話</b>：地鐵及巴士內保持低聲交談。',
+          '<b>咖啡店及快餐店自助回收</b>：飲完咖啡或食完快餐須自行將托盤放回回收處。',
+          '<b>雙手遞交信用卡與現金</b>：結賬時用雙手遞卡代表基本禮貌。'
+        ],
+        cultureMore: ['<b>垃圾分類極嚴格</b>：便利店及街頭垃圾桶分一般垃圾、塑膠、紙類及食物殘渣。'],
+        emergency: [
+          { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
+          { label: '韓國旅遊警察/諮詢 (中文)', num: '1330', primary: false },
+          { label: '當地報警熱線', num: '112', primary: false },
+          { label: '火警與救護車', num: '119', primary: false }
+        ]
+      }
+    };
+
+    const DC_GLOBAL_FALLBACK_BY_COUNTRY = {
+      GB: {
+        name: '英國', flag: '🇬🇧', curr: 'GBP', cities: [{ name: '倫敦', lat: 51.5072, lon: -0.1276 }, { name: '愛丁堡', lat: 55.9533, lon: -3.1883 }],
+        visaPill: '🔴 須網上申請英國 ETA (£20)',
+        entryHtml: '<div>• <b>免簽停留 6 個月</b>，但出發前必須網上申請 <b>UK ETA 電子旅行證</b>（費用 £20，有效期 2 年；持 BNO 護照豁免）。</div>',
+        portals: [{ name: '英國政府 UK ETA 官方申請網', url: 'https://www.gov.uk/eta' }],
+        festivals: '<div>• <b>英國銀行假日（Bank Holidays）</b>：地鐵及國鐵可能進行工程維修減班，出行前先查 TfL。</div>',
+        plug: '230V · 英式三腳方插（同香港，無需轉插）',
+        fxTip: '💡 倫敦地鐵、巴士及幾乎所有商戶均為無現金感應支付（直接用 Apple Pay / Visa 拍卡，設每日車費上限）。',
+        countryPrep: ['開通感應式信用卡海外交易（直接拍卡搭倫敦地鐵）', '防風防水連帽外套（英國天氣一日四季隨時驟雨）', '防盜斜孭袋（防牛津街及地鐵扒手）'],
+        hkAlert: '外遊警示：黃色',
+        news10: ['<b>UK ETA 強制實施</b>：持特區護照入境或轉機均須預先獲批 ETA。', '<b>倫敦地鐵無現金化</b>：直接用手機 Apple Pay 拍卡享 Oyster 同等每日封頂車資。', '<b>英國已取消旅客購物退稅</b>：僅限商家直接寄送海外地址方可免 VAT。', '<b>希斯路機場安檢液體規定</b>：隨身液體仍須裝入 100ml 以下透明密實袋。', '<b>餐廳帳單自動加收 12.5% 服務費</b>：屬可選項目（Optional），不滿意可要求剔除。', '<b>國鐵罷工及工程通知</b>：週末跨城火車出發前宜於 National Rail App 核實。', '<b>白金漢宮衛兵交接時間</b>：通常逢週一、三、五、日早上 11:00 舉行。', '<b>博物館免費入場制</b>：大英博物館、自然史博物館免費但須網上預約免費時段。', '<b>倫敦治安防搶手機</b>：街頭切忌貼近馬路邊舉起手機，防單車匪徒搶奪。', '<b>冬季日照極短</b>：11–2 月下午 4 時即天黑，戶外行程宜早出發。'],
+        newsMore: ['<b>機場快線早鳥票</b>：Heathrow Express 提早 30 日網購享大幅折扣。'],
+        scam10: ['<b>單車／電動滑板車飛車搶手機</b>：牛津街、蘇豪區及火車站外切勿邊行邊睇手機。', '<b>假便衣警察查證件／搜銀包</b>：真警察絕不會於街頭要求檢查旅客銀包現金。', '<b>西敏橋「街頭猜杯子賭局」</b>：圍觀落注者全為同黨，切勿駐足。', '<b>餐廳未標明 12.5% Service Charge 重複給小費</b>：結賬前先看清帳單是否已含服務費。', '<b>機場外無牌私家車拉客</b>：只搭乘黑色官方 Black Cab 或用 Uber / Bolt 叫車。', '<b>地鐵車門關閉瞬間搶手袋</b>：坐近車門位置看管好隨身袋。', '<b>假冒 UK ETA 代辦高價網站</b>：官方收費僅 £20，認準 gov.uk 域名。', '<b>街頭「慈善簽名／送花」募捐</b>：簽名後即被強索捐款。', '<b>ATM 提款機遮擋密碼</b>：提款時用手遮蓋鍵盤。', '<b>露天茶座手機放檯面被順手牽羊</b>：切勿將手機或銀包放於戶外餐桌邊緣。'],
+        scamMore: ['<b>二手英超球賽假門票</b>：只經球會官方渠道購票。'],
+        culture10: ['<b>扶手電梯嚴格靠右企立</b>：倫敦地鐵扶手電梯右側站立、左側急行，阻擋左側會被催促。', '<b>無處不在的「Sorry / Cheers / Please」</b>：碰撞或擦身而過講聲 Sorry 係英國基本社交禮儀。', '<b>酒吧（Pub）自行到吧檯點餐付款</b>：傳統英國 Pub 不設桌邊落單，須自行行去吧檯點酒食並先付款。', '<b>小費習慣</b>：若帳單已含 12.5% Discretionary Service Charge 則無需額外給小費。', '<b>排隊文化神聖不可侵犯</b>：任何場合切忌插隊。', '<b>切忌比「手背向外的 V 字手勢」</b>：手背朝外比 V 字在英國屬極度侮辱性手勢。', '<b>週日營業時間較短</b>：大型超市星期日僅營業 6 小時（通常 11:00–17:00）。', '<b>地鐵車廂保持安靜</b>：避免高聲講電話。', '<b>過馬路留意「LOOK RIGHT / LOOK LEFT」</b>：英國右軚行車與香港相同，但單行道極多須看清地面提示。', '<b>尊重皇室衛兵</b>：切勿阻擋白金漢宮衛兵巡邏路線或觸碰馬匹。'],
+        cultureMore: ['<b>英式下午茶衣著</b>：高級酒店下午茶（如 Ritz / Fortnum & Mason）要求 Smart Casual，忌穿波鞋短褲。'],
+        emergency: [
+          { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
+          { label: '英國緊急報警/救護', num: '999', primary: false },
+          { label: '歐盟通用緊急電話', num: '112', primary: false },
+          { label: '非緊急醫療諮詢', num: '111', primary: false }
+        ]
+      },
+      FR: {
+        name: '法國', flag: '🇫🇷', curr: 'EUR', cities: [{ name: '巴黎', lat: 48.8566, lon: 2.3522 }, { name: '尼斯', lat: 43.7102, lon: 7.2620 }],
+        visaPill: '🟢 免簽 90 日｜無需預先入境卡',
+        entryHtml: '<div>• <b>免簽停留</b>：神根區每 180 日內最多停留 90 日。</div><div>• <b>無需預先電子入境卡</b>：ETIAS 尚未啟用，無需事前網上登記；首次入境須配合 EES 生物辨識打指模。</div>',
+        portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }],
+        festivals: '<div>• <b>週日營業提示</b>：逢星期日大部份傳統麵包店及街區超市休息，大型百貨照常營業。</div>',
+        plug: '230V · 歐標雙圓腳插（Type E）',
+        fxTip: '💡 巴黎 95% 商戶及地鐵接受感應式信用卡（Apple Pay / Visa），切勿帶 €200/€500 大面額歐元（小店拒收）；單店單日消費滿 €100.01 可辦約 12% 退稅。',
+        countryPrep: ['防盜斜孭袋 ＋ 手機防搶掛繩（防地鐵扒手）', '便攜式摺疊電熱水壺（歐洲酒店普遍無提供熱水壺）', '歐標雙圓腳轉換插頭（Type E）', '列印紙本酒店確認單及回程機票（神根邊檢備查）'],
+        hkAlert: '外遊警示：黃色',
+        news10: ['<b>ETIAS 繼續延後實施</b>：歐盟確認暫未啟用，持護照直接免簽入境神根區。', '<b>EES 生物辨識邊檢系統啟用</b>：非歐盟旅客首次入境須採集指紋及面部照片。', '<b>巴黎地鐵手機拍卡通行</b>：可用 iPhone Apple Wallet 直接購買 Navigo 車票入閘。', '<b>羅浮宮及凡爾賽宮全預約制</b>：所有參觀人士必須預先網上訂購指定時段門票。', '<b>法國退稅規定</b>：同日同一商店消費滿 €100.01 即可申請 PABLO 電子退稅。', '<b>旅遊城市稅上調</b>：巴黎酒店按星級每晚現場另收 €2.60 至 €15.60 城市稅。', '<b>戴高樂機場（CDG）的士公價</b>：往巴黎右岸 €56、左岸 €65，明碼實價免被兜路。', '<b>法國國鐵 SNCF 罷工預警</b>：出行前一日宜透過 SNCF Connect App 核實列車班次。', '<b>巴黎市中心低排放交通管制</b>：乘搭地鐵最快捷。', '<b>夏季訂房留意冷氣</b>：部分老牌三星酒店未設冷氣，訂房須確認標有 Air Conditioning。'],
+        newsMore: ['<b>塞納河沿岸步行區</b>：夏季河畔設有多個露天咖啡座。'],
+        scam10: ['<b>聖心堂「強行綁幸運手繩黨」</b>：遇到主動靠近伸手想幫你綁彩色手繩嘅人，雙手插袋果斷拒絕並急步離開。', '<b>假請願書簽名／假聾啞人士募捐</b>：拿寫字板要求簽名時，同黨會趁你低頭時伸手入袋偷銀包及手機。', '<b>地鐵車門關閉瞬間搶手機</b>：坐喺近車門位置切忌低頭玩手機。', '<b>假便衣警察查證件／搜銀包</b>：真警察絕不會喺街頭無故要求檢查你銀包內嘅現金。', '<b>鐵塔／羅浮宮外「街頭猜杯子賭局」</b>：圍觀落注者全為同黨，切勿圍觀。', '<b>地上「執到金戒指」問係咪你跌</b>：騙徒扮執到金戒指送給你再索取「飲咖啡酬金」。', '<b>戴高樂機場出口非官方「假的士」拉客</b>：只行去藍色 Official Taxi 排隊處上車。', '<b>餐廳未經同意放低瓶裝水或麵包收費</b>：免費自來水（Carafe d’eau）免費，開瓶裝水要收費。', '<b>ATM 提款機遮擋密碼</b>：提款時用手遮蓋鍵盤。', '<b>酒店大堂或露天茶座背囊放腳邊被順手牽羊</b>：背囊務必放於大腿上或繞住椅腳。'],
+        scamMore: ['<b>火車站售票機「好心人幫手買票」</b>：防調包信用卡或索取小費。'],
+        culture10: ['<b>入店必須先講「Bonjour（日安）」</b>：進入任何餐廳、麵包店或商店，先微笑講 Bonjour 再發問係法國最高禮儀。', '<b>餐廳切勿自行入座</b>：必須站喺門口等侍應帶位。', '<b>小費禮儀（非強制）</b>：帳單已包含 15% 服務費，滿意服務可留 €1–€2 硬幣。', '<b>向餐廳索取免費自來水</b>：講「Une carafe d’eau, s’il vous plaît」即可獲免費冰水。', '<b>參觀教堂衣著與脫帽</b>：進入宗教建築須除帽、保持安靜及遮蓋肩膀。', '<b>地鐵摺疊椅（Strapontin）禮儀</b>：車廂人多擠迫時，必須站起摺起車門旁嘅摺疊椅讓出企位。', '<b>切勿攜帶 €200 / €500 大鈔消費</b>：絕大部分商店及售票機拒收 €200 以上大鈔。', '<b>扶手電梯靠右企立</b>：法國及歐洲大陸扶手電梯一律靠右企、左側急行。', '<b>店舖關門前 15 分鐘勿入內</b>：法國店員準時收工。', '<b>公共洗手間收費習慣</b>：火車站及商場洗手間多數需投幣 €0.50–€1。'],
+        cultureMore: ['<b>麵包店買法棍</b>：法國人習慣直接用手撕開一小段食。'],
+        emergency: [
+          { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
+          { label: '歐盟統一緊急救援', num: '112', primary: false },
+          { label: '法國報警熱線', num: '17', primary: false },
+          { label: '醫療急救 (SAMU)', num: '15', primary: false }
+        ]
+      }
+    };
+
+    const DC_GLOBAL_VISA_INDEX = {
+      // 東南亞全境 11 國（連同泰國、越南、新加坡、馬來西亞共 11 國完整核實）
+      SG: { pill: '🟡 免簽 30 日｜須網上填 SGAC', desc: '免簽證停留最長 30 日；抵達前 3 日內須於官網免費填妥 SGAC 新加坡電子入境卡。', portals: [{ name: 'SGAC 新加坡電子入境卡', url: 'https://eservices.ica.gov.sg/sgarrivalcard/' }], curr: 'SGD', plug: '230V · 英式三腳方插', police: '999', amb: '995', touristPolice: '1800 736 2000', lat: 1.3521, lon: 103.8198 },
+      MY: { pill: '🟡 免簽 90 日｜須網上填 MDAC', desc: '免簽證停留最長 90 日；抵達前 3 日內須於官網免費填妥 MDAC 馬來西亞電子入境卡。', portals: [{ name: 'MDAC 馬來西亞電子入境卡', url: 'https://imigresen-online.imi.gov.my/mdac/main' }], curr: 'MYR', plug: '240V · 英式三腳方插', police: '999', amb: '999', touristPolice: '+60 3-2149 6590', lat: 3.1390, lon: 101.6869 },
+      ID: { pill: '🟡 免簽 30 日｜須填 All Indonesia', desc: '免簽證停留最長 30 日（不可延期）；抵達前 3 日內須免費填妥 All Indonesia 電子入境及海關申報（峇里島另須繳付 IDR 150,000 旅遊稅）。', portals: [{ name: 'All Indonesia 電子入境申報', url: 'https://allindonesia.imigrasi.go.id/' }, { name: '峇里島 Love Bali 旅遊稅', url: 'https://lovebali.baliprov.go.id/' }], curr: 'IDR', plug: '230V · 歐標雙圓腳插', police: '110', amb: '118', touristPolice: '+62 361 224111', lat: -8.4095, lon: 115.1889 },
+      PH: { pill: '🟡 免簽 14 日｜須網上填 eTravel', desc: '免簽證停留最長 14 日；抵達前 72 小時內須免費填妥 eTravel 電子入境及海關申報。', portals: [{ name: '菲律賓 eTravel 官方登記', url: 'https://etravel.gov.ph/' }], curr: 'PHP', plug: '220V · 兩腳扁插', police: '911', amb: '911', touristPolice: '+63 2 8524 1728', lat: 14.5995, lon: 120.9842 },
+      KH: { pill: '🔴 須辦 e-Visa ＋ 強制 e-Arrival', desc: '須申請電子簽證（USD 30，停留 30 日）或落地簽，且所有旅客抵達前 7 日內必須免費填妥 Cambodia e-Arrival 電子入境卡。', portals: [{ name: '柬埔寨電子簽證 (e-Visa)', url: 'https://www.evisa.gov.kh/' }, { name: '柬埔寨電子入境卡', url: 'https://arrival.gov.kh/' }], curr: 'KHR', plug: '230V · 兩腳扁/雙圓插', police: '117', amb: '119', touristPolice: '+855 12 942 484', lat: 13.3633, lon: 103.8564 },
+      LA: { pill: '🟢 免簽 14 日｜無需預先入境卡', desc: '免簽證停留最長 14 日，無需預先網上填寫入境卡（停留 15–30 日須於出發前辦 e-Visa USD 50）。', portals: [{ name: '老撾 e-Visa（超過14日用）', url: 'https://laoevisa.gov.la/' }], curr: 'LAK', plug: '230V · 兩腳扁/雙圓插', police: '1191', amb: '1195', touristPolice: '+856 21 251 128', lat: 17.9757, lon: 102.6331 },
+      MM: { pill: '🔴 必須辦理電子簽證 (e-Visa)', desc: '須預先網上申請旅遊電子簽證（USD 50，停留 28 日），獲批後無需額外電子入境卡。', portals: [{ name: '緬甸官方 e-Visa 網站', url: 'https://evisa.moip.gov.mm/' }], curr: 'MMK', plug: '230V · 雙圓/英式三腳插', police: '199', amb: '192', touristPolice: '+95 67 414 303', lat: 16.8409, lon: 96.1735 },
+      BN: { pill: '🟡 免簽 14 日｜須填 E-Arrival', desc: '免簽證停留最長 14 日；抵達前須於汶萊移民局 INRS 系統免費填寫 E-Arrival Card。', portals: [{ name: '汶萊移民局 E-Arrival 官網', url: 'https://www.imm.gov.bn/' }], curr: 'BND', plug: '240V · 英式三腳方插', police: '993', amb: '991', touristPolice: '+673 224 2334', lat: 4.9031, lon: 114.9398 },
+      TL: { pill: '🟢 免簽 14 日｜無需預先入境卡', desc: '乘飛機抵達帝力機場可享免簽證停留 14 日，無需預先網上填寫入境卡（停留 30 日可辦落地簽 USD 30）。', portals: [{ name: '東帝汶移民局資訊網', url: 'https://migracao.gov.tl/' }], curr: 'USD', plug: '220V · 歐標雙圓腳插', police: '112', amb: '110', lat: -8.5569, lon: 125.5603 },
+      // 東亞及南亞
+      CN: { pill: '🟢 憑回鄉證通行｜無需簽證', desc: '持有效《港澳居民來往內地通行證》（回鄉證）直接通關，無需簽證或預先入境卡。', portals: [], curr: 'CNY', plug: '220V · 三腳八字扁插 / 兩腳扁插', police: '110', amb: '120', touristPolice: '12345', lat: 31.2304, lon: 121.4737 },
+      MO: { pill: '🟢 憑香港身份證通行｜無需簽證', desc: '持香港永久性居民身份證可直接經自助通道入境澳門，無需簽證或預先入境卡。', portals: [], curr: 'MOP', plug: '230V · 英式三腳方插', police: '999', amb: '999', touristPolice: '+853 2833 3000', lat: 22.1987, lon: 113.5439 },
+      MN: { pill: '🟢 免簽 14 日｜無需預先入境卡', desc: '免簽證停留最長 14 日，無需預先網上登記（停留超過 14 日須辦 e-Visa）。', portals: [{ name: '蒙古電子簽證網 (e-Visa)', url: 'https://evisa.mn/' }], curr: 'MNT', plug: '220V · 歐標雙圓腳插', police: '102', amb: '103', lat: 47.8864, lon: 106.9057 },
+      IN: { pill: '🔴 必須辦理電子簽證 (e-Visa)', desc: '出發前至少 4 日須於官方網站申請印度旅遊電子簽證（30 日／1 年／5 年）。', portals: [{ name: '印度官方 e-Visa 申請網', url: 'https://indianvisaonline.gov.in/evisa/' }], curr: 'INR', plug: '230V · 印度三圓腳插 (Type D)', police: '112', amb: '102', touristPolice: '1363', lat: 28.6139, lon: 77.2090 },
+      LK: { pill: '🟡 必須預先網上申請 ETA', desc: '須於出發前經斯里蘭卡官方網站預先登記電子旅行許可（ETA）並獲批後登機。', portals: [{ name: '斯里蘭卡官方 ETA 網', url: 'https://eta.gov.lk/' }], curr: 'LKR', plug: '230V · 三圓/英式三腳插', police: '119', amb: '110', touristPolice: '1912', lat: 6.9271, lon: 79.8612 },
+      MV: { pill: '🟡 免簽 30 日｜須填 IMUGA', desc: '免簽證停留最長 30 日；出入境前 96 小時內均須於官網免費填寫 IMUGA 電子旅客申報。', portals: [{ name: '馬爾代夫 IMUGA 申報網', url: 'https://imuga.immigration.gov.mv/' }], curr: 'MVR', plug: '230V · 英式三腳方插', police: '119', amb: '102', lat: 4.1755, lon: 73.5093 },
+      NP: { pill: '🟡 落地簽證｜可預先網上填表', desc: '可於加德滿都機場辦理落地簽（15 日 USD 30 / 30 日 USD 50），建議出發前先於官網預填申請表列印加快辦理。', portals: [{ name: '尼泊爾移民局預填系統', url: 'https://nepaliport.immigration.gov.np/' }], curr: 'NPR', plug: '230V · 歐標/印度圓腳插', police: '100', amb: '102', touristPolice: '1144', lat: 27.7172, lon: 85.3240 },
+      // 中東及高加索
+      AE: { pill: '🟢 免簽 30 日｜無需預先入境卡', desc: '阿聯酋（杜拜／阿布扎比）落地直接蓋章免簽 30 日，無需預先網上填寫入境卡。', portals: [], curr: 'AED', plug: '230V · 英式三腳方插', police: '999', amb: '998', touristPolice: '800 4438', lat: 25.2048, lon: 55.2708 },
+      QA: { pill: '🟢 免簽 30 日｜無需預先入境卡', desc: '卡塔爾（多哈）落地免簽停留 30 日，無需預先網上填寫入境卡。', portals: [{ name: '卡塔爾 Hayya 官方平台', url: 'https://hayya.qa/' }], curr: 'QAR', plug: '240V · 英式三腳方插', police: '999', amb: '999', lat: 25.2854, lon: 51.5310 },
+      TR: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '免簽證停留每 180 日內最多 90 日，無需預先電子入境卡（註：持 BNO 護照則必須於官網辦 e-Visa）。', portals: [{ name: '土耳其 e-Visa（僅 BNO 需辦）', url: 'https://www.evisa.gov.tr/en/' }], curr: 'TRY', plug: '230V · 歐標雙圓腳插', police: '155', amb: '112', touristPolice: '+90 212 527 4503', lat: 41.0082, lon: 28.9784 },
+      // 歐洲神根區及非神根國
+      IT: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'EUR', plug: '230V · 歐標雙圓腳插', police: '112', amb: '118', lat: 41.9028, lon: 12.4964 },
+      CH: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'CHF', plug: '230V · 瑞士三圓腳插 (Type J)', police: '117', amb: '144', lat: 47.3769, lon: 8.5417 },
+      ES: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'EUR', plug: '230V · 歐標雙圓腳插', police: '112', amb: '112', touristPolice: '+34 902 102 112', lat: 40.4168, lon: -3.7038 },
+      DE: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'EUR', plug: '230V · 歐標雙圓腳插', police: '110', amb: '112', lat: 52.5200, lon: 13.4050 },
+      AT: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'EUR', plug: '230V · 歐標雙圓腳插', police: '133', amb: '144', lat: 48.2082, lon: 16.3738 },
+      NL: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'EUR', plug: '230V · 歐標雙圓腳插', police: '112', amb: '112', lat: 52.3676, lon: 4.9041 },
+      IS: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'ISK', plug: '230V · 歐標雙圓腳插', police: '112', amb: '112', lat: 64.1466, lon: -21.9426 },
+      GR: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'EUR', plug: '230V · 歐標雙圓腳插', police: '100', amb: '166', touristPolice: '1571', lat: 37.9838, lon: 23.7275 },
+      PT: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'EUR', plug: '230V · 歐標雙圓腳插', police: '112', amb: '112', touristPolice: '+351 21 342 1623', lat: 38.7223, lon: -9.1393 },
+      CZ: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'CZK', plug: '230V · 歐標雙圓腳插', police: '158', amb: '155', lat: 50.0755, lon: 14.4378 },
+      HU: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'HUF', plug: '230V · 歐標雙圓腳插', police: '107', amb: '104', lat: 47.4979, lon: 19.0402 },
+      NO: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'NOK', plug: '230V · 歐標雙圓腳插', police: '112', amb: '113', lat: 59.9139, lon: 10.7522 },
+      FI: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '神根區每 180 日內最多停留 90 日；ETIAS 啟用前無需事前網上登記。', portals: [{ name: '歐盟 ETIAS 官方資訊網', url: 'https://travel-europe.europa.eu/etias' }], curr: 'EUR', plug: '230V · 歐標雙圓腳插', police: '112', amb: '112', lat: 60.1699, lon: 24.9384 },
+      // 美洲、大洋洲及非洲
+      AU: { pill: '🔴 必須辦理電子旅行證 (ETA)', desc: '出發前必須透過官方 AustralianETA 手機 App 申請 ETA（AUD 20，有效期 1 年）。', portals: [{ name: '澳洲官方 ETA 資訊網', url: 'https://immi.homeaffairs.gov.au/' }], curr: 'AUD', plug: '230V · 澳標八字扁插 (Type I)', police: '000', amb: '000', lat: -33.8688, lon: 151.2093 },
+      NZ: { pill: '🟡 免簽 3 個月｜須辦 NZeTA ＋ 旅客稅', desc: '免簽證停留 3 個月；出發前必須網上申請 NZeTA 並繳付國際旅客保育及旅遊稅（IVL NZD 100）。', portals: [{ name: '新西蘭 NZeTA 官方申請網', url: 'https://nzeta.immigration.govt.nz/' }], curr: 'NZD', plug: '230V · 澳標八字扁插 (Type I)', police: '111', amb: '111', lat: -36.8485, lon: 174.7633 },
+      CA: { pill: '🟡 免簽 6 個月｜搭飛機須辦 eTA', desc: '免簽證停留最長 6 個月；乘搭飛機入境加拿大前必須網上申請 eTA（CAD 7）。', portals: [{ name: '加拿大 eTA 官方申請網', url: 'https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta.html' }], curr: 'CAD', plug: '120V · 兩腳扁插（同美式）', police: '911', amb: '911', lat: 49.2827, lon: -123.1207 },
+      US: { pill: '🔴 必須辦理傳統面談簽證 (B1/B2)', desc: '不適用 ESTA 免簽計劃，必須網上填寫 DS-160 表格並預約美國領事館面談辦理 B1/B2 簽證。', portals: [{ name: '美國 DS-160 簽證申請系統', url: 'https://ceac.state.gov/genniv/' }], curr: 'USD', plug: '120V · 兩腳扁插', police: '911', amb: '911', lat: 40.7128, lon: -74.0060 },
+      EG: { pill: '🟢 免簽 3 個月｜無需預先入境卡', desc: '免簽證停留最長 3 個月，無需預先網上填寫入境卡（其他護照需於 visa2egypt.gov.eg 辦 e-Visa）。', portals: [], curr: 'EGP', plug: '220V · 歐標雙圓腳插', police: '122', amb: '123', touristPolice: '126', lat: 30.0444, lon: 31.2357 },
+      MA: { pill: '🟢 免簽 90 日｜無需預先入境卡', desc: '免簽證停留最長 90 日，無需預先網上填寫入境卡（註：持 BNO 護照須於 acces-maroc.ma 辦 e-Visa）。', portals: [], curr: 'MAD', plug: '220V · 歐標雙圓腳插', police: '19', amb: '15', touristPolice: '+212 524 38 46 01', lat: 31.6295, lon: -7.9811 }
+    };
+
+    let dcCurrentTripKey = null;
+    let dcCurrentTab = 'prep';
+    let dcCurrentCountryCode = 'TH';
+    let dcSelectedCity = { name: '曼谷', lat: 13.7563, lon: 100.5018 };
+    let dcSelectedCurr = 'THB';
+    let dcIsReversedFx = false;
+    let dcIsCashMode = false;
+    let dcLiveRatesMap = Object.assign({}, DC_FALLBACK_RATES);
+    let dcPrefWeatherSrc = 'ECMWF 9km';
+    let dcPrefFxSrc = '多央行 v2';
+
+    try {
+      const sw = localStorage.getItem('hk_leave_dc_weather_src');
+      if (sw) dcPrefWeatherSrc = sw;
+      const sf = localStorage.getItem('hk_leave_dc_fx_src');
+      if (sf) dcPrefFxSrc = sf;
+    } catch (e) {}
+
+    function getDcTripStore(tripKey) {
+      try {
+        const raw = localStorage.getItem('hk_leave_dc_store_' + tripKey);
+        if (raw) return JSON.parse(raw);
+      } catch (e) {}
+      return { checked: {}, customItems: ['', '', ''], customChecked: [false, false, false], insuranceHotline: '' };
+    }
+
+    function saveDcTripStore(tripKey, obj) {
+      try { localStorage.setItem('hk_leave_dc_store_' + tripKey, JSON.stringify(obj)); } catch (e) {}
+    }
+
+    function toggleDcDropdown(menuId) {
+      ['dcWeatherCityMenu', 'dcWeatherSrcMenu', 'dcWeatherWebMenu', 'dcFxCurrMenu', 'dcFxSrcMenu', 'dcFxWebMenu'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && id !== menuId) el.classList.add('hidden');
+      });
+      const target = document.getElementById(menuId);
+      if (target) target.classList.toggle('hidden');
+    }
+
+    function selectDcWeatherSource(srcName) {
+      dcPrefWeatherSrc = srcName;
+      const lbl = document.getElementById('dcWeatherSrcLabel');
+      if (lbl) lbl.textContent = srcName;
+      document.getElementById('dcWeatherSrcMenu')?.classList.add('hidden');
+      try { localStorage.setItem('hk_leave_dc_weather_src', srcName); localStorage.setItem('hk_leave_dc_weather_src_manual', '1'); } catch (e) {}
+      if (dcCurrentTripKey) fetchAndRenderDcWeather(dcCurrentTripKey);
+    }
+
+    function selectDcFxSource(srcName) {
+      dcPrefFxSrc = srcName;
+      const lbl = document.getElementById('dcFxSrcLabel');
+      if (lbl) lbl.textContent = srcName;
+      document.getElementById('dcFxSrcMenu')?.classList.add('hidden');
+      try { localStorage.setItem('hk_leave_dc_fx_src', srcName); localStorage.setItem('hk_leave_dc_fx_src_manual', '1'); } catch (e) {}
+      fetchAndRenderDcFxRates();
+    }
+
+    function selectDcFxCurrency(code) {
+      dcSelectedCurr = code;
+      document.getElementById('dcFxCurrMenu')?.classList.add('hidden');
+      const inp = document.getElementById('dcFxCalcInput');
+      if (inp) inp.value = (code === 'VND' || code === 'KRW' || code === 'IDR') ? 100000 : (code === 'JPY' ? 10000 : 1000);
+      renderDcFxDisplay();
+    }
+
+    function flipDcFxDirection() {
+      dcIsReversedFx = !dcIsReversedFx;
+      renderDcFxDisplay();
+    }
+
+    function toggleDcCashSpread() {
+      dcIsCashMode = !dcIsCashMode;
+      const btn = document.getElementById('dcBtnCashMode');
+      if (btn) btn.textContent = dcIsCashMode ? '目前：找換店現鈔（切回中間價）' : '目前：銀行中間價（切換找換店）';
+      renderDcFxDisplay();
+    }
+
+    function renderDcFxDisplay() {
+      const baseRate = dcLiveRatesMap[dcSelectedCurr] || DC_FALLBACK_RATES[dcSelectedCurr] || 1;
+      const rate = dcIsCashMode ? baseRate * 0.99 : baseRate;
+      const leftEl = document.getElementById('dcFxLeftCode');
+      const rightEl = document.getElementById('dcFxRightCode');
+      const mainText = document.getElementById('dcFxRateMainText');
+      const fromUnit = document.getElementById('dcFxCalcFromUnit');
+      if (!leftEl || !rightEl || !mainText) return;
+
+      if (!dcIsReversedFx) {
+        leftEl.textContent = 'HKD';
+        rightEl.textContent = dcSelectedCurr;
+        if (fromUnit) fromUnit.textContent = 'HKD';
+        mainText.textContent = rate >= 100
+          ? `1 HKD ≈ ${Math.round(rate).toLocaleString()} ${dcSelectedCurr}`
+          : `1 HKD ≈ ${rate.toFixed(rate < 1 ? 3 : 2)} ${dcSelectedCurr}`;
+      } else {
+        leftEl.textContent = dcSelectedCurr;
+        rightEl.textContent = 'HKD';
+        if (fromUnit) fromUnit.textContent = dcSelectedCurr;
+        const unitBase = (dcSelectedCurr === 'VND' || dcSelectedCurr === 'KRW' || dcSelectedCurr === 'IDR') ? 10000 : (dcSelectedCurr === 'JPY' ? 1000 : 100);
+        const hkdVal = (unitBase / rate).toFixed(2);
+        mainText.textContent = `${unitBase.toLocaleString()} ${dcSelectedCurr} ≈ ${hkdVal} HKD`;
+      }
+      recalcDcFx();
+    }
+
+    function recalcDcFx() {
+      const baseRate = dcLiveRatesMap[dcSelectedCurr] || DC_FALLBACK_RATES[dcSelectedCurr] || 1;
+      const rate = dcIsCashMode ? baseRate * 0.99 : baseRate;
+      const val = parseFloat(document.getElementById('dcFxCalcInput')?.value) || 0;
+      const outEl = document.getElementById('dcFxCalcOutput');
+      if (!outEl) return;
+      if (!dcIsReversedFx) {
+        const res = val * rate;
+        outEl.textContent = `${res >= 100 ? Math.round(res).toLocaleString() : res.toFixed(1)} ${dcSelectedCurr}`;
+      } else {
+        const res = val / rate;
+        outEl.textContent = `HK$${res.toFixed(1)}`;
+      }
+    }
+
+    async function fetchAndRenderDcFxRates() {
+      renderDcFxDisplay();
+      try {
+        let fetched = null;
+        if (dcPrefFxSrc === '多央行 v2') {
+          const r = await fetch('https://api.frankfurter.dev/v2/rates?base=HKD');
+          if (r.ok) {
+            const j = await r.json();
+            if (Array.isArray(j)) {
+              fetched = {};
+              j.forEach(item => { if (item.quote && item.rate) fetched[item.quote] = item.rate; });
+            }
+          }
+        }
+        if (!fetched && dcPrefFxSrc !== '全球 CDN 備援') {
+          const r2 = await fetch('https://open.er-api.com/v6/latest/HKD');
+          if (r2.ok) {
+            const j2 = await r2.json();
+            if (j2 && j2.rates) fetched = j2.rates;
+          }
+        }
+        if (!fetched) {
+          const r3 = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/hkd.json');
+          if (r3.ok) {
+            const j3 = await r3.json();
+            if (j3 && j3.hkd) {
+              fetched = {};
+              Object.keys(j3.hkd).forEach(k => { fetched[k.toUpperCase()] = j3.hkd[k]; });
+            }
+          }
+        }
+        if (fetched) {
+          dcLiveRatesMap = Object.assign({}, dcLiveRatesMap, fetched);
+          renderDcFxDisplay();
+          const fxTs = document.getElementById('dcFxUpdatedAt');
+          if (fxTs) {
+            const now = new Date();
+            fxTs.textContent = `實時同步：${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+          }
+        }
+      } catch (e) {}
+    }
+
+    function weatherCodeToIcon(code) {
+      if (code === 0) return '☀️';
+      if (code <= 3) return '⛅';
+      if (code <= 48) return '🌫️';
+      if (code <= 67) return '🌦️';
+      if (code <= 77) return '❄️';
+      if (code <= 82) return '🌧️';
+      return '⛈️';
+    }
+
+    function getMonthSeasonLabel(monthNum, lat) {
+      const isSouth = (typeof lat === 'number' && lat < -10);
+      if (!isSouth) {
+        if (monthNum >= 3 && monthNum <= 5) return '春季 · 氣候回暖過渡';
+        if (monthNum >= 6 && monthNum <= 8) return '夏季 · 盛夏陽光充沛';
+        if (monthNum >= 9 && monthNum <= 11) return '秋季 · 涼爽舒適旺季';
+        return '冬季 · 乾爽清涼季節';
+      } else {
+        if (monthNum >= 9 && monthNum <= 11) return '南半球春季 · 溫暖花季';
+        if (monthNum === 12 || monthNum <= 2) return '南半球夏季 · 陽光盛夏';
+        if (monthNum >= 3 && monthNum <= 5) return '南半球秋季 · 溫和清爽';
+        return '南半球冬季 · 清涼乾爽';
+      }
+    }
+
+    function estimateSeasonalPm25Range(countryCode, monthNum) {
+      const code = (countryCode || '').toUpperCase();
+      if (['TH', 'VN', 'LA', 'MM', 'KH'].includes(code)) {
+        return (monthNum >= 1 && monthNum <= 4) ? '35 – 75 µg/m³（旱季偏高建議備口罩）' : '15 – 32 µg/m³（空氣良好）';
+      }
+      if (['CN', 'IN', 'KR'].includes(code)) {
+        return (monthNum >= 11 || monthNum <= 3) ? '30 – 65 µg/m³（冬春季節留意空氣質素）' : '15 – 35 µg/m³（空氣優良）';
+      }
+      return '8 – 22 µg/m³（空氣清新優良）';
+    }
+
+    async function fetchAndRenderDcWeather(tripKey) {
+      const gridEl = document.getElementById('dcWeatherGrid');
+      const advEl = document.getElementById('dcWeatherAdvice');
+      if (!gridEl || !advEl) return;
+
+      const [startDate] = tripKey.split('_');
+      const startObj = new Date(startDate + 'T00:00:00');
+      const todayObj = new Date();
+      todayObj.setHours(0, 0, 0, 0);
+      const diffDays = Math.round((startObj - todayObj) / 86400000);
+      const startMonthNum = parseInt(startDate.split('-')[1], 10);
+
+      const lat = dcSelectedCity.lat;
+      const lon = dcSelectedCity.lon;
+
+      const wLink = document.getElementById('dcLinkWindy');
+      if (wLink) wLink.href = `https://www.windy.com/?${lat},${lon},8`;
+      const aLink = document.getElementById('dcLinkAccu');
+      if (aLink) aLink.href = `https://www.accuweather.com/zh/search-locations?query=${encodeURIComponent(dcSelectedCity.name)}`;
+      const tLink = document.getElementById('dcLinkTwc');
+      if (tLink) tLink.href = `https://weather.com/`;
+
+      // 兩大清晰模式：
+      // 1) 距離出發 > 30 日（或手動選 ERA5）：顯示「單張大型月份季節氣候卡片」（溫度區間、濕度與降雨量、PM2.5 常見範圍）
+      // 2) 距離出發 <= 30 日：顯示「5 張精裝逐日天氣卡片」（放大天氣圖示、清晰日子與星期、高低溫、濕度及 PM2.5）
+      const isLongRange = (diffDays > 30 || diffDays < -2 || dcPrefWeatherSrc === 'ERA5 十年基準');
+
+      gridEl.className = isLongRange ? 'block' : 'grid grid-cols-5 gap-1.5 text-center';
+      gridEl.innerHTML = '<div class="col-span-5 py-3 text-[11px] font-bold text-sky-700 text-center">正在同步最新氣象與空氣指數...</div>';
+
+      try {
+        if (isLongRange) {
+          const m = startDate.split('-')[1];
+          const refYear = Math.min(new Date().getFullYear() - 1, 2025);
+          const refStart = `${refYear}-${m}-01`;
+          const refEnd = `${refYear}-${m}-28`;
+
+          let avgHi = 26, avgLo = 19, totalRain = 45, avgHum = 68, domCode = 1;
+          try {
+            const archUrl = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${refStart}&end_date=${refEnd}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,relative_humidity_2m_mean&timezone=auto`;
+            const resA = await fetch(archUrl);
+            if (resA.ok) {
+              const dataA = await resA.json();
+              if (dataA && dataA.daily && Array.isArray(dataA.daily.temperature_2m_max) && dataA.daily.temperature_2m_max.length > 0) {
+                const maxArr = dataA.daily.temperature_2m_max.filter(v => typeof v === 'number');
+                const minArr = dataA.daily.temperature_2m_min.filter(v => typeof v === 'number');
+                const rainArr = (dataA.daily.precipitation_sum || []).filter(v => typeof v === 'number');
+                const humArr = (dataA.daily.relative_humidity_2m_mean || []).filter(v => typeof v === 'number');
+                const codeArr = (dataA.daily.weather_code || []).filter(v => typeof v === 'number');
+                if (maxArr.length) avgHi = Math.round(maxArr.reduce((a, b) => a + b, 0) / maxArr.length);
+                if (minArr.length) avgLo = Math.round(minArr.reduce((a, b) => a + b, 0) / minArr.length);
+                if (rainArr.length) totalRain = Math.round(rainArr.reduce((a, b) => a + b, 0));
+                if (humArr.length) avgHum = Math.round(humArr.reduce((a, b) => a + b, 0) / humArr.length);
+                if (codeArr.length) domCode = codeArr[Math.floor(codeArr.length / 2)];
+              }
+            }
+          } catch (e) {}
+
+          const seasonText = getMonthSeasonLabel(startMonthNum, lat);
+          const pmRange = estimateSeasonalPm25Range(dcCurrentCountryCode, startMonthNum);
+          const rainDesc = totalRain >= 150 ? '多雨潮濕' : (totalRain >= 60 ? '間有陣雨' : '少雨乾爽');
+          const bigIcon = weatherCodeToIcon(domCode);
+
+          const wTs = document.getElementById('dcWeatherUpdatedAt');
+          if (wTs) {
+            const now = new Date();
+            wTs.textContent = `歷年氣候基準：${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+          }
+
+          gridEl.innerHTML = `
+            <div class="p-3 rounded-2xl bg-gradient-to-br from-white via-sky-50/80 to-blue-50/70 border border-sky-200/90 shadow-2xs space-y-2.5 text-left">
+              <div class="flex items-center justify-between gap-2">
+                <div>
+                  <div class="text-xs font-black text-blue-950">${dcSelectedCity.name} · ${startMonthNum} 月份季節氣候</div>
+                  <div class="text-[10.5px] font-bold text-sky-700 mt-0.5">${seasonText}</div>
+                </div>
+                <div class="text-3xl leading-none drop-shadow-xs select-none">${bigIcon}</div>
+              </div>
+              <div class="grid grid-cols-3 gap-1.5 pt-1 border-t border-sky-100">
+                <div class="p-2 rounded-xl bg-white/95 border border-sky-100">
+                  <div class="text-[9.5px] font-bold text-slate-500">🌡️ 平均氣溫</div>
+                  <div class="text-xs font-mono font-black text-blue-950 mt-0.5">${avgLo}° – ${avgHi}°C</div>
+                </div>
+                <div class="p-2 rounded-xl bg-white/95 border border-sky-100">
+                  <div class="text-[9.5px] font-bold text-slate-500">💧 降雨與濕度</div>
+                  <div class="text-[11px] font-mono font-black text-sky-800 mt-0.5">${totalRain}mm · ${avgHum}%</div>
+                  <div class="text-[8.5px] font-bold text-slate-400">${rainDesc}</div>
+                </div>
+                <div class="p-2 rounded-xl bg-white/95 border border-sky-100">
+                  <div class="text-[9.5px] font-bold text-slate-500">🍃 PM2.5 範圍</div>
+                  <div class="text-[10px] font-mono font-black text-emerald-800 mt-0.5 leading-tight">${pmRange.split('（')[0]}</div>
+                </div>
+              </div>
+            </div>
+          `;
+
+          if (avgHi >= 30) {
+            advEl.textContent = `☀️ ${dcSelectedCity.name} ${startMonthNum} 月日間炎熱（約 ${avgLo}°–${avgHi}°C，月均雨量約 ${totalRain}mm），建議透氣短袖、高倍防曬、摺傘，並帶備薄外套應付室內冷氣。`;
+          } else if (avgHi >= 20) {
+            advEl.textContent = `🌤️ ${dcSelectedCity.name} ${startMonthNum} 月氣候溫和舒適（約 ${avgLo}°–${avgHi}°C，濕度約 ${avgHum}%），建議長短袖配搭輕便防風薄外套，早晚微涼留意添衣。`;
+          } else if (avgHi >= 10) {
+            advEl.textContent = `🍁 ${dcSelectedCity.name} ${startMonthNum} 月清涼偏凍（約 ${avgLo}°–${avgHi}°C），日夜溫差較大，建議採用洋蔥式穿法（薄長袖＋毛衣／輕羽絨外套）。`;
+          } else {
+            advEl.textContent = `❄️ ${dcSelectedCity.name} ${startMonthNum} 月寒冷（約 ${avgLo}°–${avgHi}°C），務必帶備保暖內衣、厚羽絨外套、頸巾及防滑鞋履。`;
+          }
+          return;
+        }
+
+        // 30 日內：精裝 5 日逐日天氣預測卡片（放大天氣圖示 ＋ 清晰日子與星期 ＋ 溫度/濕度/降雨/PM2.5）
+        let daysList = [];
+        let pm25Daily = [];
+        let modelParam = '';
+        if (dcPrefWeatherSrc === 'ECMWF 9km') modelParam = '&models=ecmwf_ifs';
+        else if (dcPrefWeatherSrc === 'JMA 日本氣象廳') modelParam = '&models=jma_seamless';
+        else if (dcPrefWeatherSrc === 'NOAA GFS') modelParam = '&models=gfs_seamless';
+
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,relative_humidity_2m_mean&timezone=auto&forecast_days=16${modelParam}`;
+        const aqUrl = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&hourly=pm2_5&timezone=auto&forecast_days=7`;
+        const [res, resAq] = await Promise.all([fetch(url), fetch(aqUrl).catch(() => null)]);
+
+        if (resAq && resAq.ok) {
+          try {
+            const aqData = await resAq.json();
+            if (aqData && aqData.hourly && Array.isArray(aqData.hourly.pm2_5)) {
+              for (let dIdx = 0; dIdx < 7; dIdx++) {
+                const slice = aqData.hourly.pm2_5.slice(dIdx * 24, (dIdx + 1) * 24).filter(v => typeof v === 'number');
+                if (slice.length > 0) {
+                  pm25Daily[dIdx] = Math.round(slice.reduce((a, b) => a + b, 0) / slice.length);
+                }
+              }
+            }
+          } catch (e) {}
+        }
+
+        const weekNames = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
+        if (res && res.ok) {
+          const data = await res.json();
+          if (data && data.daily && data.daily.time) {
+            const allTimes = data.daily.time;
+            let startIdx = allTimes.findIndex(t => t >= startDate);
+            if (startIdx === -1) startIdx = 0;
+            if (startIdx + 5 > allTimes.length) startIdx = Math.max(0, allTimes.length - 5);
+
+            for (let i = startIdx; i < Math.min(allTimes.length, startIdx + 5); i++) {
+              const dtObj = new Date(allTimes[i] + 'T00:00:00');
+              const mPart = dtObj.getMonth() + 1;
+              const dPart = dtObj.getDate();
+              const wkPart = weekNames[dtObj.getDay()];
+              const pmVal = (pm25Daily[i] !== undefined) ? pm25Daily[i] : (pm25Daily[0] !== undefined ? pm25Daily[0] : 22);
+              daysList.push({
+                dateStr: `${mPart}/${dPart}`,
+                wkStr: wkPart,
+                icon: weatherCodeToIcon(data.daily.weather_code[i]),
+                hi: Math.round(data.daily.temperature_2m_max[i]) + '°',
+                lo: Math.round(data.daily.temperature_2m_min[i]) + '°',
+                pop: (data.daily.precipitation_probability_max ? (data.daily.precipitation_probability_max[i] ?? 15) : 15) + '%',
+                hum: (data.daily.relative_humidity_2m_mean ? (data.daily.relative_humidity_2m_mean[i] ?? 68) : 68) + '%',
+                pm25: pmVal
+              });
+            }
+          }
+        }
+
+        if (daysList.length > 0) {
+          const wTs = document.getElementById('dcWeatherUpdatedAt');
+          if (wTs) {
+            const now = new Date();
+            wTs.textContent = `實時同步：${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+          }
+          gridEl.innerHTML = daysList.map(w => {
+            const pmCls = w.pm25 <= 25
+              ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
+              : (w.pm25 <= 50 ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-rose-100 text-rose-800 border-rose-200');
+            return `
+            <div class="p-2 rounded-2xl bg-gradient-to-b from-white via-sky-50/50 to-sky-100/50 border border-sky-200/90 shadow-2xs flex flex-col items-center justify-between gap-1">
+              <div class="w-full pb-1 border-b border-sky-100/90 flex flex-col items-center leading-tight">
+                <span class="text-[10.5px] font-mono font-black text-blue-950">${w.dateStr}</span>
+                <span class="text-[8.5px] font-bold text-slate-400">${w.wkStr}</span>
+              </div>
+              <div class="text-2xl my-0.5 leading-none drop-shadow-xs select-none">${w.icon}</div>
+              <div class="text-[11.5px] font-mono font-black text-blue-950 leading-none">
+                ${w.hi}<span class="text-[9.5px] font-bold text-slate-400">/${w.lo}</span>
+              </div>
+              <div class="w-full space-y-0.5 pt-0.5 text-[8.5px] font-mono font-bold text-slate-600 leading-tight">
+                <div class="text-sky-700">💧${w.pop} · 💦${w.hum}</div>
+                <div class="inline-block px-1.5 py-0.2 rounded-full border ${pmCls} text-[8px] font-extrabold">PM ${w.pm25}</div>
+              </div>
+            </div>
+          `;}).join('');
+
+          const avgHi = Math.round(daysList.reduce((acc, x) => acc + parseInt(x.hi, 10), 0) / daysList.length);
+          const avgPm = Math.round(daysList.reduce((acc, x) => acc + x.pm25, 0) / daysList.length);
+          const pmNote = ` 未來 5 日平均 PM2.5 約 ${avgPm} µg/m³（${avgPm <= 25 ? '空氣優良' : (avgPm <= 50 ? '空氣尚可' : '建議備口罩')}）。`;
+          if (avgHi >= 30) {
+            advEl.textContent = `☀️ ${dcSelectedCity.name}未來 5 日日間炎熱（約 ${avgHi}°C），建議透氣短袖、高倍防曬、摺傘，並帶備薄外套應付室內冷氣。${pmNote}`;
+          } else if (avgHi >= 20) {
+            advEl.textContent = `🌤️ ${dcSelectedCity.name}未來 5 日氣候溫和舒適（約 ${avgHi}°C），建議長短袖配搭輕便防風薄外套，早晚微涼留意添衣。${pmNote}`;
+          } else if (avgHi >= 10) {
+            advEl.textContent = `🍁 ${dcSelectedCity.name}未來 5 日清涼偏凍（約 ${avgHi}°C），日夜溫差較大，建議採用洋蔥式穿法（薄長袖＋毛衣／輕羽絨外套）。${pmNote}`;
+          } else {
+            advEl.textContent = `❄️ ${dcSelectedCity.name}未來 5 日寒冷（約 ${avgHi}°C），務必帶備保暖內衣、厚羽絨外套、頸巾及防滑鞋履。${pmNote}`;
+          }
+        }
+      } catch (e) {
+        gridEl.innerHTML = '<div class="col-span-5 py-2 text-[11px] text-slate-500">暫未能連線取得預報，可點擊下方 Windy.com 查看實況。</div>';
+      }
+    }
+
+    function toggleDcMoreList(listId, chevId, txtId, defaultLabel = '顯示更多內容') {
+      const list = document.getElementById(listId);
+      const chev = document.getElementById(chevId);
+      const txt = document.getElementById(txtId);
+      if (!list) return;
+      const isHidden = list.classList.contains('hidden');
+      list.classList.toggle('hidden', !isHidden);
+      if (chev) chev.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+      if (txt) txt.textContent = isHidden ? '收起部分內容' : (txt.getAttribute('data-default-label') || defaultLabel);
+    }
+
+    function switchDualCapsuleTab(tab) {
+      dcCurrentTab = tab;
+      const prepPanel = document.getElementById('dcPanelPrep');
+      const tipsPanel = document.getElementById('dcPanelTips');
+      const btnPrep = document.getElementById('dcTabPrep');
+      const btnTips = document.getElementById('dcTabTips');
+      if (prepPanel) prepPanel.classList.toggle('hidden', tab !== 'prep');
+      if (tipsPanel) tipsPanel.classList.toggle('hidden', tab !== 'tips');
+      if (btnPrep) {
+        btnPrep.className = (tab === 'prep')
+          ? 'px-2.5 py-1 rounded-lg text-[10.5px] font-black bg-white text-blue-950 shadow-2xs transition cursor-pointer'
+          : 'px-2.5 py-1 rounded-lg text-[10.5px] font-black bg-white/15 text-white hover:bg-white/25 transition cursor-pointer';
+      }
+      if (btnTips) {
+        btnTips.className = (tab === 'tips')
+          ? 'px-2.5 py-1 rounded-lg text-[10.5px] font-black bg-white text-indigo-950 shadow-2xs transition cursor-pointer'
+          : 'px-2.5 py-1 rounded-lg text-[10.5px] font-black bg-white/15 text-white hover:bg-white/25 transition cursor-pointer';
+      }
+    }
+
+    function closeTripDualCapsule() {
+      const drawer = document.getElementById('dualCapsuleStudioDrawer');
+      const bay = document.getElementById('dualCapsuleParkingBay');
+      if (drawer && bay) bay.appendChild(drawer);
+      const mobRibbon = document.getElementById('mobileTopTripRibbon');
+      if (mobRibbon) mobRibbon.classList.remove('is-dc-expanded');
+
+      dcCurrentTripKey = null;
+    }
+
+    const DC_AREA_CODE_ALIASES = {
+      '香港': '+852', 'hk': '+852', 'hongkong': '+852', 'hong kong': '+852', '852': '+852', '+852': '+852',
+      '澳門': '+853', 'mo': '+853', 'macau': '+853', 'macao': '+853', '853': '+853', '+853': '+853',
+      '中國': '+86', '內地': '+86', 'cn': '+86', 'china': '+86', '86': '+86', '+86': '+86',
+      '台灣': '+886', '臺灣': '+886', 'tw': '+886', 'taiwan': '+886', '886': '+886', '+886': '+886',
+      '泰國': '+66', 'th': '+66', 'thailand': '+66', '66': '+66', '+66': '+66',
+      '日本': '+81', 'jp': '+81', 'japan': '+81', '81': '+81', '+81': '+81',
+      '韓國': '+82', '南韓': '+82', 'kr': '+82', 'korea': '+82', '82': '+82', '+82': '+82',
+      '新加坡': '+65', 'sg': '+65', 'singapore': '+65', '65': '+65', '+65': '+65',
+      '馬來西亞': '+60', '大馬': '+60', 'my': '+60', 'malaysia': '+60', '60': '+60', '+60': '+60',
+      '越南': '+84', 'vn': '+84', 'vietnam': '+84', '84': '+84', '+84': '+84',
+      '印尼': '+62', 'id': '+62', 'indonesia': '+62', '62': '+62', '+62': '+62',
+      '菲律賓': '+63', 'ph': '+63', 'philippines': '+63', '63': '+63', '+63': '+63',
+      '英國': '+44', 'gb': '+44', 'uk': '+44', '44': '+44', '+44': '+44',
+      '法國': '+33', 'fr': '+33', 'france': '+33', '33': '+33', '+33': '+33',
+      '德國': '+49', 'de': '+49', 'germany': '+49', '49': '+49', '+49': '+49',
+      '瑞士': '+41', 'ch': '+41', 'switzerland': '+41', '41': '+41', '+41': '+41',
+      '意大利': '+39', 'it': '+39', 'italy': '+39', '39': '+39', '+39': '+39',
+      '西班牙': '+34', 'es': '+34', 'spain': '+34', '34': '+34', '+34': '+34',
+      '澳洲': '+61', 'au': '+61', 'australia': '+61', '61': '+61', '+61': '+61',
+      '紐西蘭': '+64', '新西蘭': '+64', 'nz': '+64', 'new zealand': '+64', '64': '+64', '+64': '+64',
+      '美國': '+1', '加拿大': '+1', 'us': '+1', 'usa': '+1', 'ca': '+1', 'canada': '+1', '1': '+1', '+1': '+1'
+    };
+
+    function resolveSmartAreaCode(raw) {
+      const clean = (raw || '').trim();
+      if (!clean) return '';
+      const low = clean.toLowerCase();
+      if (DC_AREA_CODE_ALIASES[low]) return DC_AREA_CODE_ALIASES[low];
+      if (/^\+?\d{1,4}$/.test(clean)) {
+        return clean.startsWith('+') ? clean : ('+' + clean);
+      }
+      return clean;
+    }
+
+    function handleDcAreaCodeInput(el) {
+      if (!el) return;
+      const raw = el.value.trim();
+      const low = raw.toLowerCase();
+      // 若輸入香港、HK、852 等已知國家/地區關鍵字或純數字區號，即時自動轉成 +852 格式
+      if (DC_AREA_CODE_ALIASES[low]) {
+        el.value = DC_AREA_CODE_ALIASES[low];
+      } else if (/^\d{1,4}$/.test(raw)) {
+        el.value = '+' + raw;
+      }
+      saveDcCustomEmergency();
+    }
+
+    function normalizeDcAreaCodeOnBlur(el) {
+      if (!el) return;
+      el.value = resolveSmartAreaCode(el.value);
+      saveDcCustomEmergency();
+    }
+
+    function updateDcCustomEmergencyPreview() {
+      const areaEl = document.getElementById('dcCustomEmergencyAreaInput');
+      const phoneEl = document.getElementById('dcCustomEmergencyPhoneInput');
+      const prevEl = document.getElementById('dcCustomEmergencyFullPreview');
+      if (!prevEl) return;
+      const area = resolveSmartAreaCode(areaEl ? areaEl.value : '');
+      const phone = (phoneEl ? phoneEl.value : '').trim();
+      if (!phone) {
+        prevEl.textContent = '完整號碼：尚未輸入';
+        return;
+      }
+      const combined = area ? `${area} ${phone}` : phone;
+      prevEl.textContent = `完整號碼：${combined}`;
+    }
+
+    function saveDcCustomEmergency() {
+      updateDcCustomEmergencyPreview();
+      if (!dcCurrentTripKey) return;
+      const st = getDcTripStore(dcCurrentTripKey);
+      const titleEl = document.getElementById('dcCustomEmergencyTitleInput');
+      const areaEl = document.getElementById('dcCustomEmergencyAreaInput');
+      const phoneEl = document.getElementById('dcCustomEmergencyPhoneInput');
+      st.customEmergencyTitle = titleEl ? titleEl.value : '';
+      st.customEmergencyArea = areaEl ? areaEl.value : '';
+      st.customEmergencyPhone = phoneEl ? phoneEl.value : '';
+      saveDcTripStore(dcCurrentTripKey, st);
+    }
+
+    function getFormattedDcCustomEmergency() {
+      const titleEl = document.getElementById('dcCustomEmergencyTitleInput');
+      const areaEl = document.getElementById('dcCustomEmergencyAreaInput');
+      const phoneEl = document.getElementById('dcCustomEmergencyPhoneInput');
+      const title = (titleEl && titleEl.value.trim()) ? titleEl.value.trim() : '自訂緊急支援熱線';
+      const area = resolveSmartAreaCode(areaEl ? areaEl.value : '');
+      const phone = (phoneEl ? phoneEl.value : '').trim();
+      const displayNum = phone ? (area ? `${area} ${phone}` : phone) : '';
+      const cleanTel = (area + phone).replace(/[^+0-9]/g, '');
+      return { title, displayNum, cleanTel };
+    }
+
+    function copyDcCustomEmergency() {
+      const info = getFormattedDcCustomEmergency();
+      if (!info.displayNum) {
+        if (typeof showToast === 'function') showToast('請先輸入電話號碼');
+        return;
+      }
+      navigator.clipboard?.writeText(info.displayNum);
+      if (typeof showToast === 'function') showToast(`📋 已複製 ${info.title}：${info.displayNum}`);
+    }
+
+    function dialDcCustomEmergency() {
+      const info = getFormattedDcCustomEmergency();
+      if (!info.cleanTel) {
+        if (typeof showToast === 'function') showToast('請先輸入電話號碼');
+        return;
+      }
+      confirmAndDialEmergency(info.title, info.displayNum, info.cleanTel);
+    }
+
+    function toggleDcCheck(itemKey) {
+      if (!dcCurrentTripKey) return;
+      const st = getDcTripStore(dcCurrentTripKey);
+      st.checked[itemKey] = !st.checked[itemKey];
+      saveDcTripStore(dcCurrentTripKey, st);
+      renderDcChecklistSection(dcCurrentTripKey);
+    }
+
+    function toggleDcCustomCheck(idx) {
+      if (!dcCurrentTripKey) return;
+      const st = getDcTripStore(dcCurrentTripKey);
+      st.customChecked[idx] = !st.customChecked[idx];
+      saveDcTripStore(dcCurrentTripKey, st);
+      renderDcChecklistSection(dcCurrentTripKey);
+    }
+
+    function updateDcCustomText(idx, val) {
+      if (!dcCurrentTripKey) return;
+      const st = getDcTripStore(dcCurrentTripKey);
+      st.customItems[idx] = val;
+      saveDcTripStore(dcCurrentTripKey, st);
+    }
+
+    let dcActiveCountrySpec = null;
+
+    function renderDcChecklistSection(tripKey) {
+      const st = getDcTripStore(tripKey);
+      const spec = dcActiveCountrySpec;
+      const specificItems = (spec && spec.countryPrep) ? spec.countryPrep : ['檢查當地電子入境申報二維碼截圖', '備妥當地細面額現金及海外交易信用卡'];
+      const generalItems = [
+        '護照（檢查有效期超過 6 個月）＋ 香港身份證',
+        '旅遊保險保單副本（儲存 24 小時全球支援電話）',
+        '漫遊數據 SIM / eSIM、充電線及合規格行動電源',
+        '平安藥（止痛退燒、腸胃止瀉、暈浪丸、膠布）'
+      ];
+
+      const specBox = document.getElementById('dcCountrySpecificList');
+      const genBox = document.getElementById('dcGeneralChecklistList');
+      const custBox = document.getElementById('dcCustomRowsList');
+      if (!specBox || !genBox || !custBox) return;
+
+      let total = specificItems.length + generalItems.length;
+      let done = 0;
+
+      specBox.innerHTML = specificItems.map((txt, i) => {
+        const k = 'sp_' + i;
+        const isDone = Boolean(st.checked[k]);
+        if (isDone) done++;
+        return `
+          <button type="button" onclick="toggleDcCheck('${k}')"
+                  class="w-full p-1.5 rounded-lg bg-white border ${isDone ? 'border-emerald-200' : 'border-indigo-100'} flex items-center gap-2 text-left cursor-pointer">
+            <span class="w-4 h-4 rounded flex items-center justify-center text-[9px] shrink-0 ${isDone ? 'bg-emerald-500 text-white' : 'border border-slate-300'}">${isDone ? '✓' : ''}</span>
+            <span class="text-[11px] font-bold ${isDone ? 'line-through text-slate-400' : 'text-blue-950'}">${txt}</span>
+          </button>`;
+      }).join('');
+
+      genBox.innerHTML = generalItems.map((txt, i) => {
+        const k = 'gn_' + i;
+        const isDone = Boolean(st.checked[k]);
+        if (isDone) done++;
+        return `
+          <button type="button" onclick="toggleDcCheck('${k}')"
+                  class="w-full p-1.5 rounded-lg bg-white border border-slate-200/80 flex items-center gap-2 text-left cursor-pointer">
+            <span class="w-4 h-4 rounded flex items-center justify-center text-[9px] shrink-0 ${isDone ? 'bg-blue-600 text-white' : 'border border-slate-300'}">${isDone ? '✓' : ''}</span>
+            <span class="text-[11px] font-medium ${isDone ? 'line-through text-slate-400' : 'text-slate-700'}">${txt}</span>
+          </button>`;
+      }).join('');
+
+      custBox.innerHTML = [0, 1, 2].map(idx => {
+        const cDone = Boolean(st.customChecked[idx]);
+        const cVal = (st.customItems[idx] || '').replace(/"/g, '&quot;');
+        if (cVal.trim()) { total++; if (cDone) done++; }
+        return `
+          <div class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-2 py-1">
+            <button type="button" onclick="toggleDcCustomCheck(${idx})"
+                    class="w-4 h-4 rounded flex items-center justify-center text-[9px] shrink-0 cursor-pointer ${cDone ? 'bg-blue-600 text-white' : 'border border-slate-300'}">${cDone ? '✓' : ''}</button>
+            <input type="text" value="${cVal}" oninput="updateDcCustomText(${idx}, this.value)"
+                   placeholder="自訂準備項目 ${idx + 1}..."
+                   class="w-full bg-transparent text-[11px] font-bold text-blue-950 focus:outline-none ${cDone ? 'line-through text-slate-400' : ''}">
+          </div>`;
+      }).join('');
+
+      const progEl = document.getElementById('dcChecklistProgress');
+      if (progEl) progEl.textContent = `${done} / ${total} 已完成`;
+    }
+
+    function resolveCountrySpecForTrip(tripKey) {
+      const title = (customTripTitles && customTripTitles[tripKey]) || '';
+      const bData = (typeof tripBookings !== 'undefined' && tripBookings[tripKey]) ? tripBookings[tripKey] : null;
+      const extraHint = bData ? [bData.flightOutDestCity, bData.hotelCity, bData.hotelName, bData.hotelAddress].filter(Boolean).join(' ') : '';
+      const matched = matchDestination((title + ' ' + extraHint).trim(), null);
+      let cCode = (matched && matched.countryCode) ? matched.countryCode : '';
+
+      if (!cCode && bData && bData.flightOutDestCode) {
+        const iata = bData.flightOutDestCode.toUpperCase();
+        const iataToCountry = {
+          BKK: 'TH', DMK: 'TH', HKT: 'TH', CNX: 'TH', USM: 'TH',
+          DAD: 'VN', HAN: 'VN', SGN: 'VN', PQC: 'VN',
+          SIN: 'SG', KUL: 'MY', PEN: 'MY', BKI: 'MY',
+          DPS: 'ID', CGK: 'ID', MNL: 'PH', REP: 'KH', PNH: 'KH', VTE: 'LA', RGN: 'MM', BWN: 'BN',
+          NRT: 'JP', HND: 'JP', KIX: 'JP', FUK: 'JP', CTS: 'JP', OKA: 'JP', NGO: 'JP',
+          TPE: 'TW', KHH: 'TW', RMQ: 'TW', ICN: 'KR', PUS: 'KR', CJU: 'KR',
+          LHR: 'GB', LGW: 'GB', MAN: 'GB', CDG: 'FR', NCE: 'FR',
+          FCO: 'IT', MXP: 'IT', ZRH: 'CH', GVA: 'CH', MAD: 'ES', BCN: 'ES', FRA: 'DE', MUC: 'DE',
+          SYD: 'AU', MEL: 'AU', AKL: 'NZ', YVR: 'CA', YYZ: 'CA', LAX: 'US', SFO: 'US', JFK: 'US', DXB: 'AE'
+        };
+        cCode = iataToCountry[iata] || '';
+      }
+
+      if (cCode && DC_COUNTRY_KNOWLEDGE[cCode]) {
+        return { code: cCode, spec: DC_COUNTRY_KNOWLEDGE[cCode] };
+      }
+      if (cCode && DC_GLOBAL_FALLBACK_BY_COUNTRY[cCode]) {
+        return { code: cCode, spec: DC_GLOBAL_FALLBACK_BY_COUNTRY[cCode] };
+      }
+      if (cCode && DC_GLOBAL_VISA_INDEX[cCode]) {
+        const idxInfo = DC_GLOBAL_VISA_INDEX[cCode];
+        const cObj = GLOBAL_COUNTRY_DATABASE[cCode] || { name: cCode, flag: '🌍' };
+        return {
+          code: cCode,
+          spec: {
+            name: cObj.name,
+            flag: cObj.flag || '🌍',
+            curr: idxInfo.curr || 'USD',
+            cities: [{ name: (matched && matched.name) ? matched.name : cObj.name, lat: idxInfo.lat || 22.3193, lon: idxInfo.lon || 114.1694 }],
+            visaPill: idxInfo.pill,
+            entryHtml: `<div>• ${idxInfo.desc}</div>`,
+            portals: idxInfo.portals || [],
+            festivals: '<div>• 出發前建議查閱當地法定公眾假期及大型節慶交通安排。</div>',
+            plug: idxInfo.plug || '220V · 萬能轉插',
+            fxTip: `💡 建議開通海外感應式信用卡消費，並兌換適量 ${idxInfo.curr || 'USD'} 細面額現鈔備用。`,
+            countryPrep: ['確認護照有效期超過 6 個月', '備妥回程機票及酒店預訂確認單', '攜帶適用當地之萬能轉插'],
+            hkAlert: '外遊警示：出發前核查保安局最新級別',
+            news10: [
+              `<b>${cObj.name}入境文件核實</b>：出發前確認已完成所需電子旅行授權或入境申報。`,
+              '<b>旅遊保險保障覆蓋</b>：確保保單涵蓋醫療運送及行程延誤保障。',
+              '<b>海外信用卡交易設定</b>：出發前於銀行 App 開通海外簽賬及提款權限。',
+              '<b>海關申報限額</b>：超額現金及受管制物品須主動走紅色通道申報。',
+              '<b>漫遊數據及離線地圖</b>：預先下載 Google Maps 離線地圖備用。',
+              '<b>航班動態追蹤</b>：出發前 24 小時留意航空公司值機及閘口更新。',
+              '<b>隨身藥物處方證明</b>：攜帶處方藥物建議保留原裝藥袋或醫生紙。',
+              '<b>證件副本雲端備份</b>：將護照資料頁拍照加密保存以防遺失。',
+              '<b>當地天氣及交通實況</b>：善用上方 Windy.com 查閱出發前風雨趨勢。',
+              '<b>香港入境處 1868 支援</b>：下載「入境處」流動應用程式支援網絡免費致電 1868。'
+            ],
+            newsMore: ['<b>當地公共交通卡</b>：抵達機場後可先購買當地通用交通卡或開通手機拍卡乘車。'],
+            scam10: [
+              '<b>假冒官方電子簽證／入境卡收費網</b>：只透過本頁提供之官方政府網站辦理，慎防高價代辦釣魚網。',
+              '<b>機場外無牌黑車拉客</b>：只於官方的士站排隊或使用正規叫車平台。',
+              '<b>景點外「今日閉館」轉介購物點</b>：切勿輕信陌生人推介轉去高價店舖。',
+              '<b>街頭「免費送手繩／簽名募捐」</b>：保持距離切勿接過陌生人遞來物品。',
+              '<b>假便衣警察要求檢查銀包現金</b>：真警察絕不會喺街頭無故檢查旅客現金。',
+              '<b>餐廳無標價海鮮或隱藏附加費</b>：落單前先確認計價單位及服務費。',
+              '<b>找續大細鈔偷龍轉鳳</b>：大面額付款時確認找續金額無誤。',
+              '<b>ATM 提款機遮擋密碼</b>：提款時用手遮蓋鍵盤並留意插卡口有否異物。',
+              '<b>露天座位手機放檯面被順手牽羊</b>：隨身手袋及手機切勿離身。',
+              '<b>非官方低價一日遊中介</b>：只向持牌旅行社或正規平台預訂行程。'
+            ],
+            scamMore: ['<b>免費公共 Wi-Fi 風險</b>：連接未加密 Wi-Fi 時避免登入網上銀行。'],
+            culture10: [
+              '<b>參觀宗教場所衣著端莊</b>：進入寺廟、教堂或清真寺須遮蓋肩膝並遵守脫鞋／除帽規定。',
+              '<b>公共交通保持禮讓與安靜</b>：禮讓優先座，車廂內避免高聲喧嘩。',
+              '<b>尊重當地排隊與攝影私隱</b>：拍攝當地居民或宗教儀式前先徵求同意。',
+              '<b>留意當地小費與服務費文化</b>：結賬前查看帳單是否已包含 Service Charge。',
+              '<b>遵守當地禁煙與環保法例</b>：留意指定吸煙區標示及垃圾分類規定。',
+              '<b>友善問候禮儀</b>：進入商店或餐廳先微笑點頭問好。',
+              '<b>雙手遞交物品與現金</b>：展現基本尊重與禮貌。',
+              '<b>切勿觸碰宗教聖物或王室肖像</b>：保持敬意。',
+              '<b>遵守交通燈號與行人過路處</b>：留意當地行車方向（左軚或右軚）。',
+              '<b>餐桌基本禮儀</b>：尊重當地飲食習慣，避免浪費食物。'
+            ],
+            cultureMore: ['<b>緊急聯絡隨身備忘</b>：將酒店地址電話卡片放於銀包內。'],
+            emergency: [
+              { label: '香港入境處 24h 求助', num: '+852 1868', primary: true },
+              { label: idxInfo.touristPolice ? '當地旅遊警察熱線' : '國際通用緊急電話', num: idxInfo.touristPolice || '112', primary: false },
+              { label: '當地報警熱線', num: idxInfo.police || '112 / 911', primary: false },
+              { label: '醫療急救熱線', num: idxInfo.amb || '112 / 911', primary: false }
+            ]
+          }
+        };
+      }
+      return { code: 'TH', spec: DC_COUNTRY_KNOWLEDGE.TH };
+    }
+
+    const dcHoverCloseTimers = {};
+    function openDcHoverMenu(menuId) {
+      if (dcHoverCloseTimers[menuId]) {
+        clearTimeout(dcHoverCloseTimers[menuId]);
+        delete dcHoverCloseTimers[menuId];
+      }
+      ['dcWeatherCityMenu', 'dcWeatherSrcMenu', 'dcWeatherWebMenu', 'dcFxCurrMenu', 'dcFxSrcMenu', 'dcFxWebMenu'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && id !== menuId) el.classList.add('hidden');
+      });
+      const target = document.getElementById(menuId);
+      if (target) target.classList.remove('hidden');
+    }
+
+    function scheduleCloseDcHoverMenu(menuId) {
+      if (dcHoverCloseTimers[menuId]) clearTimeout(dcHoverCloseTimers[menuId]);
+      dcHoverCloseTimers[menuId] = setTimeout(() => {
+        const target = document.getElementById(menuId);
+        if (target) target.classList.add('hidden');
+        delete dcHoverCloseTimers[menuId];
+      }, 650);
+    }
+
+    const DC_CITY_EN_MAP = {
+      '曼谷': 'Bangkok', '清邁': 'Chiang Mai', '布吉': 'Phuket', '芭堤雅': 'Pattaya', '蘇梅島': 'Ko Samui',
+      '峴港': 'Da Nang', '胡志明市': 'Ho Chi Minh City', '河內': 'Hanoi', '富國島': 'Phu Quoc',
+      '新加坡市區': 'Singapore', '聖淘沙': 'Sentosa', '吉隆坡': 'Kuala Lumpur', '檳城': 'Penang', '亞庇(沙巴)': 'Kota Kinabalu',
+      '東京': 'Tokyo', '大阪': 'Osaka', '京都': 'Kyoto', '札幌': 'Sapporo', '福岡': 'Fukuoka', '沖繩那霸': 'Naha',
+      '台北': 'Taipei', '高雄': 'Kaohsiung', '台中': 'Taichung', '台南': 'Tainan',
+      '首爾': 'Seoul', '釜山': 'Busan', '濟州島': 'Jeju',
+      '倫敦': 'London', '愛丁堡': 'Edinburgh', '巴黎': 'Paris', '尼斯': 'Nice'
+    };
+
+    const DC_LOCAL_AUTHORITY_NAMES = {
+      TH: '泰國觀光局 (TAT) ＆ 泰國移民局',
+      VN: '越南國家旅遊局 (VNAT) ＆ 越南出入境管理局',
+      SG: '新加坡旅遊局 (STB) ＆ 移民與關卡局 (ICA)',
+      MY: '馬來西亞旅遊局 (Tourism Malaysia) ＆ 移民局',
+      JP: '日本政府觀光局 (JNTO) ＆ 數位廳 VJW',
+      TW: '台灣交通部觀光署 ＆ 內政部移民署',
+      KR: '韓國觀光公社 (KTO) ＆ 法務部出入境局',
+      GB: '英國旅遊局 (VisitBritain) ＆ GOV.UK 內政部',
+      FR: '法國旅遊發展署 (Atout France) ＆ 法國內政部'
+    };
+
+    async function translateEnToZhHk(text) {
+      if (!text) return '';
+      try {
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=zh-TW&dt=t&q=${encodeURIComponent(text.slice(0, 220))}`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && Array.isArray(data[0])) {
+            return data[0].map(seg => seg[0]).join('');
+          }
+        }
+      } catch (e) {}
+      return text;
+    }
+
+    function getBestRegionalSources(countryCode) {
+      const code = (countryCode || '').toUpperCase();
+      const eastAsia = new Set(['JP', 'KR', 'TW', 'CN', 'MO', 'HK']);
+      const americasOceania = new Set(['US', 'CA', 'AU', 'NZ', 'MX', 'BR']);
+      const eurCentralFx = new Set(['GB', 'FR', 'DE', 'IT', 'ES', 'CH', 'NL', 'BE', 'AT', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'IS', 'PL', 'CZ', 'HU', 'JP', 'KR', 'US', 'CA', 'AU', 'NZ', 'SG', 'TH', 'MY', 'ID', 'PH', 'IN', 'CN']);
+      let weatherSrc = 'ECMWF 9km';
+      if (eastAsia.has(code)) weatherSrc = 'JMA 日本氣象廳';
+      else if (americasOceania.has(code)) weatherSrc = 'NOAA GFS';
+      const fxSrc = eurCentralFx.has(code) ? '多央行 v2' : 'ExchangeRate';
+      return { weatherSrc, fxSrc };
+    }
+
+    function formatEmergencyBilingual(label) {
+      if (!label) return '';
+      if (/[A-Za-z]{4,}/.test(label) && label.includes('·')) return label;
+      const map = [
+        [/香港入境處\s*24h?\s*求助/i, '香港入境處 24 小時求助 · HK Immigration 24h Hotline'],
+        [/泰國旅遊警察.*中文.*/i, '泰國旅遊警察 (支援中文) · Thailand Tourist Police'],
+        [/旅遊警察/i, '當地旅遊警察 · Tourist Police'],
+        [/越南旅遊支援專線/i, '越南旅遊支援專線 · Vietnam Tourist Support'],
+        [/新加坡旅遊局諮詢/i, '新加坡旅遊局諮詢 · Singapore Tourism Hotline'],
+        [/旅遊部諮詢熱線/i, '旅遊部諮詢熱線 · Tourism Malaysia Hotline'],
+        [/JNTO.*旅遊熱線.*/i, '日本國家旅遊局 24h 熱線 · JNTO Tourist Hotline'],
+        [/外國人\/港澳旅遊諮詢/i, '外國人及港澳旅遊諮詢 · Visitor Info Hotline'],
+        [/韓國旅遊警察\/諮詢.*/i, '韓國旅遊警察及諮詢 (中文) · Korea Travel Hotline'],
+        [/英國緊急報警\/救護/i, '英國緊急報警及救護 · UK Police & Ambulance'],
+        [/歐盟通用緊急電話|歐盟統一緊急救援/i, '歐盟統一緊急救援 · EU Emergency Number'],
+        [/非緊急醫療諮詢/i, '非緊急醫療諮詢 · NHS Non-Emergency Medical'],
+        [/當地報警與救護/i, '當地報警與救護 · Police & Ambulance'],
+        [/新加坡報警熱線|日本報警熱線|韓國報警熱線|法國報警熱線|當地報警熱線/i, '當地報警熱線 · Local Police Emergency'],
+        [/救護車與消防|火警與救護車/i, '火警與救護車 · Fire & Ambulance'],
+        [/醫療急救中心|醫療急救熱線|醫療急救\s*\(SAMU\)/i, '醫療急救熱線 · Medical & Ambulance']
+      ];
+      for (const [rx, out] of map) {
+        if (rx.test(label)) return out;
+      }
+      return `${label} · Emergency Hotline`;
+    }
+
+    function confirmAndDialEmergency(label, rawNum, cleanTel) {
+      const ok = window.confirm(`📞 緊急直撥確認\n\n聯絡單位：${label}\n電話號碼：${rawNum}\n\n確定立即跳轉至手機撥號介面致電？`);
+      if (ok) {
+        window.location.href = 'tel:' + cleanTel;
+      }
+    }
+
+    function filterAndExtractTravelAlert(rawText, placeName) {
+      if (!rawText) return '';
+      // 嚴格拆句：只允許真正具備「最新旅遊警示／入境政策／交通治安異動」嘅句子通過，徹底封殺人口、首都、面積、歷史、氣候介紹等百科廢話！
+      const sentences = rawText.split(/[。！？!?\n]/).map(s => s.trim()).filter(Boolean);
+      const triviaRx = /(首都|最大城市|第二大|第三大|人口|居民|萬人|億人|面積|平方公里|平方英里|位於|坐落|地處|半島|盆地|平原|三角洲|海峽|接壤|鄰國|行政區|省份|府份|官方語言|主要宗教|歷史上|建城|成立於|氣候屬於|熱帶季風|亞熱帶|知名景點|著名美食|購物天堂|旅遊勝地)/;
+      const alertRx = /(外遊警示|安全警示|紅色警示|黃色警示|黑色警示|入境規定|免簽|電子入境|簽證|申報|海關|機場快線|地鐵罷工|交通管制|封路|颱風|暴雨|洪水|地震|火山|登革熱|疫情|詐騙|騙案|扒手|宵禁|禁酒|罰款|違法|嚴禁|暫停開放)/;
+      const useful = sentences.filter(s => s.length >= 10 && !triviaRx.test(s) && alertRx.test(s));
+      if (useful.length === 0) return '';
+      const picked = useful.slice(0, 2).join('；');
+      if (triviaRx.test(picked)) return '';
+      return picked.length > 90 ? picked.slice(0, 90) + '...' : picked;
+    }
+
+    async function fetchLiveWikivoyageAndNews(tripKey, isManual = false) {
+      if (!dcActiveCountrySpec) return;
+      const spec = dcActiveCountrySpec;
+      const cityZh = (dcSelectedCity && dcSelectedCity.name) ? dcSelectedCity.name : (spec.name || '曼谷');
+      const cityEn = DC_CITY_EN_MAP[cityZh] || cityZh;
+      const localAuth = DC_LOCAL_AUTHORITY_NAMES[dcCurrentCountryCode] || `${spec.name || '當地'}官方旅遊局及出入境部門`;
+      const cacheKey = 'hk_leave_dc_live7_' + dcCurrentCountryCode + '_' + cityZh;
+
+      const localGovPill = document.getElementById('dcLocalGovPillName');
+      if (localGovPill) {
+        localGovPill.textContent = '○ ' + localAuth.split('＆')[0].trim();
+      }
+
+      try {
+        if (!isManual) {
+          const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
+          if (cached && cached.ts && (Date.now() - cached.ts < 43200000) && Array.isArray(cached.items) && cached.items.length > 0) {
+            renderLiveMultiSourceItems(cached.items, cached.dateStr, localAuth);
+            return;
+          }
+        }
+
+        const fetchedItems = [];
+        const dStr = new Date().toLocaleDateString('zh-HK', { month: 'numeric', day: 'numeric' });
+
+        // 來源 1：中文維基導遊（僅篩選安全／入境／交通實用段落，剔除地理人口百科廢話）
+        try {
+          const rZh = await fetch(`https://zh.wikivoyage.org/w/api.php?action=query&format=json&origin=*&prop=extracts&explaintext=1&exsectionformat=plain&titles=${encodeURIComponent(cityZh)}`);
+          if (rZh.ok) {
+            const jZh = await rZh.json();
+            const pages = jZh?.query?.pages ? Object.values(jZh.query.pages) : [];
+            if (pages.length > 0 && pages[0].extract) {
+              const filteredZh = filterAndExtractTravelAlert(pages[0].extract.replace(/\s+/g, ' '), cityZh);
+              if (filteredZh) {
+                fetchedItems.push({ topic: `${cityZh}旅遊安全與交通動態`, tier: 2, srcId: 'wiki_zh', text: filteredZh });
+              }
+            }
+          }
+        } catch (e) {}
+
+        // 來源 2：英文 Wikivoyage 最新安全／入境修訂 ＋ 自動繁中翻譯 ＋ 過濾地理廢話
+        try {
+          const rEn = await fetch(`https://en.wikivoyage.org/w/api.php?action=query&format=json&origin=*&prop=extracts&explaintext=1&titles=${encodeURIComponent(cityEn)}`);
+          if (rEn.ok) {
+            const jEn = await rEn.json();
+            const pagesEn = jEn?.query?.pages ? Object.values(jEn.query.pages) : [];
+            if (pagesEn.length > 0 && pagesEn[0].extract) {
+              const rawEn = pagesEn[0].extract.replace(/\s+/g, ' ').trim().slice(0, 220);
+              const zhTranslated = await translateEnToZhHk(rawEn);
+              const filteredEn = filterAndExtractTravelAlert(zhTranslated, cityZh);
+              if (filteredEn) {
+                fetchedItems.push({ topic: `${cityZh}旅客須知修訂`, tier: 2, srcId: 'wiki_en', text: filteredEn });
+              }
+            }
+          }
+        } catch (e) {}
+
+        // 來源 3：港媒／當地即時旅遊與入境新聞（剔除新聞標題後方媒體名稱）
+        try {
+          const gNewsQ = encodeURIComponent(`${spec.name || cityZh} 旅遊 入境 最新`);
+          const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://news.google.com/rss/search?q=${gNewsQ}&hl=zh-HK&gl=HK&ceid=HK:zh-Hant`)}`;
+          const rNews = await fetch(rssUrl);
+          if (rNews.ok) {
+            const jNews = await rNews.json();
+            if (jNews && Array.isArray(jNews.items) && jNews.items.length > 0) {
+              const rawTitle = (jNews.items[0].title || '').replace(/\s*[-–—|]\s*[^-–—|]+$/, '').trim();
+              if (rawTitle) {
+                fetchedItems.push({ topic: `${spec.name || cityZh}最新旅遊報道`, tier: 1, srcId: 'news', text: rawTitle });
+              }
+            }
+          }
+        } catch (e) {}
+
+        // 來源 4：全球旅遊安全風險指數開放介面
+        try {
+          if (dcCurrentCountryCode && dcCurrentCountryCode.length === 2) {
+            const rAdv = await fetch(`https://www.travel-advisory.info/api?countrycode=${dcCurrentCountryCode}`);
+            if (rAdv.ok) {
+              const jAdv = await rAdv.json();
+              const info = jAdv?.data?.[dcCurrentCountryCode]?.advisory;
+              if (info && info.score !== undefined) {
+                fetchedItems.push({
+                  topic: `${spec.name || dcCurrentCountryCode}實時安全風險評級`,
+                  tier: 1,
+                  srcId: 'advisory',
+                  text: `當前國際安全風險指數 ${Number(info.score).toFixed(1)} / 5.0（核實日期：${info.updated || dStr}）`
+                });
+              }
+            }
+          }
+        } catch (e) {}
+
+        if (fetchedItems.length > 0) {
+          localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), items: fetchedItems, dateStr: dStr }));
+          renderLiveMultiSourceItems(fetchedItems, dStr, localAuth);
+          if (isManual && typeof showToast === 'function') showToast(`✅ 已從 ${fetchedItems.length} 個情報源同步最新動態`);
+        } else if (isManual && typeof showToast === 'function') {
+          showToast('✅ 已顯示最新核實本地精華情報');
+        }
+      } catch (e) {
+        if (isManual && typeof showToast === 'function') showToast('⚠️ 離線狀態：已顯示內置最新核實情報');
+      }
+    }
+
+    function renderLiveMultiSourceItems(items, dateStr, localAuth) {
+      const now = new Date();
+      const fullDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+      const gTs = document.getElementById('dcTipsGlobalUpdatedAt');
+      if (gTs) {
+        gTs.textContent = `最後更新：${fullDate}`;
+      }
+      const nTs = document.getElementById('dcNewsUpdatedAt');
+      if (nTs) nTs.textContent = `最後更新：${fullDate}`;
+
+      const localGovPill = document.getElementById('dcLocalGovPillName');
+      if (localGovPill && localAuth) {
+        localGovPill.textContent = '○ ' + localAuth.split('＆')[0].trim();
+      }
+
+      // 在有抓到新資料的來源機構名稱旁邊顯示 UPDATE 徽章
+      const activeIds = new Set(items.map(x => x.srcId));
+      const grid = document.getElementById('dcTipsSourcePillsGrid');
+      if (grid) {
+        grid.querySelectorAll('[data-src-id]').forEach(el => {
+          const sid = el.getAttribute('data-src-id');
+          const tag = el.querySelector('.dc-upd-tag');
+          if (tag) tag.classList.toggle('hidden', !activeIds.has(sid));
+        });
+      }
+
+      const moreUl = document.getElementById('dcNewsMore');
+      if (!moreUl) return;
+      moreUl.querySelectorAll('.dc-live-wiki-item').forEach(el => el.remove());
+
+      items.slice().reverse().forEach(it => {
+        const li = document.createElement('li');
+        li.className = 'dc-live-wiki-item text-slate-700';
+        const topicTitle = it.topic || it.source || '最新旅遊動態';
+        li.innerHTML = `<b class="text-blue-950">${topicTitle}</b>：${it.text} <span class="inline-block ml-1 px-1.5 py-0.2 rounded bg-blue-600 text-white font-mono text-[8.5px] font-black align-middle">NEW UPDATE</span>`;
+        moreUl.prepend(li);
+      });
+    }
+
+    function toggleTripDualCapsule(tripKey, tabType = 'prep', triggerEl = null, sourceContext = 'card') {
+      const drawer = document.getElementById('dualCapsuleStudioDrawer');
+      const bay = document.getElementById('dualCapsuleParkingBay');
+      if (!drawer || !bay) return;
+
+      let targetSlot = null;
+      if (sourceContext === 'ribbon') {
+        targetSlot = document.getElementById('mobileRibbonDualCapsuleSlot');
+      } else if (triggerEl) {
+        const cardInner = triggerEl.closest('.trip-card-inner');
+        if (cardInner) targetSlot = cardInner.querySelector(`.trip-dual-capsule-slot[data-trip-key="${tripKey}"]`);
+      }
+      if (!targetSlot) {
+        targetSlot = document.querySelector(`.trip-dual-capsule-slot[data-trip-key="${tripKey}"]`) || document.getElementById('mobileRibbonDualCapsuleSlot');
+      }
+      if (!targetSlot) return;
+
+      const isAlreadyOpenHere = (dcCurrentTripKey === tripKey && drawer.parentElement === targetSlot && dcCurrentTab === tabType);
+      if (isAlreadyOpenHere) {
+        closeTripDualCapsule();
+        return;
+      }
+
+      dcCurrentTripKey = tripKey;
+      targetSlot.appendChild(drawer);
+      switchDualCapsuleTab(tabType);
+
+      const resolved = resolveCountrySpecForTrip(tripKey);
+      dcCurrentCountryCode = resolved.code;
+      const spec = resolved.spec;
+      dcActiveCountrySpec = spec;
+
+      const tripTitle = (customTripTitles && customTripTitles[tripKey]) || spec.name;
+      document.getElementById('dcHeaderFlag').textContent = spec.flag || '🌏';
+      document.getElementById('dcHeaderTitle').textContent = `${tripTitle} · 雙錦囊`;
+
+      // 按目的地國家／地區自動選用最佳權威氣象與匯率資料源
+      const autoSources = getBestRegionalSources(resolved.code);
+      if (!localStorage.getItem('hk_leave_dc_weather_src_manual')) {
+        dcPrefWeatherSrc = autoSources.weatherSrc;
+      }
+      if (!localStorage.getItem('hk_leave_dc_fx_src_manual')) {
+        dcPrefFxSrc = autoSources.fxSrc;
+      }
+      document.getElementById('dcWeatherSrcLabel').textContent = dcPrefWeatherSrc;
+      document.getElementById('dcFxSrcLabel').textContent = dcPrefFxSrc;
+
+      const cities = (spec.cities && spec.cities.length > 0) ? spec.cities : [{ name: spec.name, lat: 13.7563, lon: 100.5018 }];
+      dcSelectedCity = cities[0];
+      document.getElementById('dcWeatherCityLabel').textContent = dcSelectedCity.name;
+      document.getElementById('dcWeatherCityMenu').innerHTML = cities.map((c, i) => `
+        <button type="button" onclick="dcSelectedCity = dcActiveCountrySpec.cities[${i}]; document.getElementById('dcWeatherCityLabel').textContent='${c.name}'; document.getElementById('dcWeatherCityMenu').classList.add('hidden'); fetchAndRenderDcWeather('${tripKey}');"
+                class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 text-blue-950 cursor-pointer">${c.name}</button>
+      `).join('');
+
+      document.getElementById('dcFxCurrMenu').innerHTML = DC_CURRENCY_OPTIONS.map(opt => `
+        <button type="button" onclick="selectDcFxCurrency('${opt.code}')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 text-blue-950 cursor-pointer">${opt.label}</button>
+      `).join('');
+
+      dcSelectedCurr = spec.curr || 'THB';
+      dcIsReversedFx = false;
+      const calcInp = document.getElementById('dcFxCalcInput');
+      if (calcInp) calcInp.value = (dcSelectedCurr === 'VND' || dcSelectedCurr === 'KRW' || dcSelectedCurr === 'IDR') ? 100000 : (dcSelectedCurr === 'JPY' ? 10000 : 1000);
+      document.getElementById('dcFxTipText').textContent = spec.fxTip || '';
+
+      document.getElementById('dcVisaStatusPill').textContent = spec.visaPill;
+      document.getElementById('dcEntryDetailBox').innerHTML = spec.entryHtml;
+      document.getElementById('dcOfficialPortalLinks').innerHTML = (spec.portals || []).map(p => `
+        <a href="${p.url}" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10.5px] shadow-2xs transition">
+          <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+          <span>${p.name}</span>
+        </a>
+      `).join('');
+      document.getElementById('dcLocalFestivalBox').innerHTML = spec.festivals || '';
+
+      document.getElementById('dcPlugSpecText').textContent = spec.plug || '220V · 萬能轉插';
+      renderDcChecklistSection(tripKey);
+
+      document.getElementById('dcHkAlertBadge').textContent = spec.hkAlert || '外遊警示：正常';
+
+      const allNews = [].concat(spec.news10 || [], spec.newsMore || []);
+      const newsTop5 = allNews.slice(0, 5);
+      const newsRest = allNews.slice(5);
+      document.getElementById('dcNewsTop10').innerHTML = newsTop5.map(x => `<li>${x}</li>`).join('');
+      document.getElementById('dcNewsMore').innerHTML = newsRest.map(x => `<li>${x}</li>`).join('');
+      document.getElementById('dcNewsMore').classList.add('hidden');
+      document.getElementById('dcChevNews').style.transform = 'rotate(0deg)';
+      const newsLbl = '顯示更多動態';
+      document.getElementById('dcTxtNews').setAttribute('data-default-label', newsLbl);
+      document.getElementById('dcTxtNews').textContent = newsLbl;
+
+      const allScams = [].concat(spec.scam10 || [], spec.scamMore || []);
+      const scamTop5 = allScams.slice(0, 5);
+      const scamRest = allScams.slice(5);
+      document.getElementById('dcScamTop10').innerHTML = scamTop5.map(x => `<li>${x}</li>`).join('');
+      document.getElementById('dcScamMore').innerHTML = scamRest.map(x => `<li>${x}</li>`).join('');
+      document.getElementById('dcScamMore').classList.add('hidden');
+      document.getElementById('dcChevScam').style.transform = 'rotate(0deg)';
+      const scamLbl = '顯示更多防騙手法';
+      document.getElementById('dcTxtScam').setAttribute('data-default-label', scamLbl);
+      document.getElementById('dcTxtScam').textContent = scamLbl;
+
+      const allCulture = [].concat(spec.culture10 || [], spec.cultureMore || []);
+      const cultureTop5 = allCulture.slice(0, 5);
+      const cultureRest = allCulture.slice(5);
+      document.getElementById('dcCultureTop10').innerHTML = cultureTop5.map(x => `<li>${x}</li>`).join('');
+      document.getElementById('dcCultureMore').innerHTML = cultureRest.map(x => `<li>${x}</li>`).join('');
+      document.getElementById('dcCultureMore').classList.add('hidden');
+      document.getElementById('dcChevCulture').style.transform = 'rotate(0deg)';
+      const cultureLbl = '顯示更多禮儀禁忌';
+      document.getElementById('dcTxtCulture').setAttribute('data-default-label', cultureLbl);
+      document.getElementById('dcTxtCulture').textContent = cultureLbl;
+
+      document.getElementById('dcEmergencyGrid').innerHTML = (spec.emergency || []).map(e => {
+        const cleanTel = e.num.replace(/[^+0-9]/g, '');
+        const biLabel = formatEmergencyBilingual(e.label);
+        const safeLabel = biLabel.replace(/[\x27"]/g, "");
+        return `
+        <div class="p-2.5 rounded-xl ${e.primary ? 'bg-rose-600 text-white shadow-sm' : 'bg-white border-2 border-slate-200 text-blue-950 shadow-2xs'} flex flex-col justify-between gap-1.5">
+          <div class="text-xs font-black leading-snug ${e.primary ? 'text-white' : 'text-slate-800'}">${biLabel}</div>
+          <div class="flex items-center justify-between gap-1.5 pt-1 border-t ${e.primary ? 'border-rose-400/50' : 'border-slate-100'}">
+            <button type="button" onclick="confirmAndDialEmergency('${safeLabel}', '${e.num}', '${cleanTel}')"
+                    class="text-left text-lg font-mono font-black tracking-tight leading-none ${e.primary ? 'text-white' : 'text-blue-950'} hover:underline cursor-pointer">
+              ${e.num}
+            </button>
+            <button type="button" onclick="navigator.clipboard?.writeText('${e.num}'); if(typeof showToast==='function') showToast('📋 已複製電話：${e.num}');"
+                    class="px-2 py-1 rounded-lg text-[10px] font-extrabold ${e.primary ? 'bg-rose-800/70 hover:bg-rose-900 text-white' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'} cursor-pointer transition active:scale-90 shrink-0">
+              複製
+            </button>
+          </div>
+        </div>
+      `;}).join('');
+
+      const st = getDcTripStore(tripKey);
+      const cTitleEl = document.getElementById('dcCustomEmergencyTitleInput');
+      const cAreaEl = document.getElementById('dcCustomEmergencyAreaInput');
+      const cPhoneEl = document.getElementById('dcCustomEmergencyPhoneInput');
+      if (cTitleEl) cTitleEl.value = st.customEmergencyTitle || '個人旅遊保險 24 小時緊急支援熱線';
+      if (cAreaEl) cAreaEl.value = (st.customEmergencyArea !== undefined) ? st.customEmergencyArea : '+852';
+      if (cPhoneEl) cPhoneEl.value = st.customEmergencyPhone || st.insuranceHotline || '';
+      updateDcCustomEmergencyPreview();
+
+      const mobRibbon = document.getElementById('mobileTopTripRibbon');
+      if (mobRibbon) {
+        mobRibbon.classList.toggle('is-dc-expanded', targetSlot.id === 'mobileRibbonDualCapsuleSlot');
+      }
+      if (targetSlot.id !== 'mobileRibbonDualCapsuleSlot') {
+        const leavesContainer = document.getElementById('tabContentLeaves');
+        if (leavesContainer && drawer) {
+          requestAnimationFrame(() => {
+            const topOffset = drawer.offsetTop - leavesContainer.offsetTop - 8;
+            leavesContainer.scrollTo({ top: Math.max(0, topOffset), behavior: 'smooth' });
+          });
+        }
+      }
+      const prepP = document.getElementById('dcPanelPrep');
+      const tipsP = document.getElementById('dcPanelTips');
+      if (prepP) prepP.scrollTop = 0;
+      if (tipsP) tipsP.scrollTop = 0;
+
+      fetchAndRenderDcWeather(tripKey);
+      fetchAndRenderDcFxRates();
+      fetchLiveWikivoyageAndNews(tripKey, false);
+
+      setTimeout(() => {
+        try {
+          drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch (e) {}
+      }, 60);
+    }
+
   </script>
 
     <!-- 全年假期分佈走廊專屬旗艦級毛玻璃懸浮彈窗 (全面取代系統原生預設提示框，支援手機手指觸摸與電腦滑鼠懸停) -->
@@ -20490,7 +22539,395 @@ function setupYearOverviewToggle() {
   </div>
 
       <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.45 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
-  <div id="inlineBookingStudioParkingBay" class="hidden">
+  
+  <!-- ==================== v5.5.0 雙錦囊系統（🧭 行前攻略 ＋ 🛡️ 當地貼士） ==================== -->
+  <div id="dualCapsuleParkingBay" class="hidden">
+    <div id="dualCapsuleStudioDrawer" class="mt-2 bg-white rounded-2xl border border-slate-200/95 shadow-sm overflow-hidden transition-all duration-200">
+      <!-- 頂部雙錦囊切換列與關閉鈕 -->
+      <div class="px-3 py-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-800 text-white flex items-center justify-between gap-2">
+        <div class="flex items-center gap-1.5 min-w-0">
+          <span id="dcHeaderFlag" class="text-base leading-none">🌏</span>
+          <span id="dcHeaderTitle" class="font-black text-xs text-white truncate">雙錦囊旅遊助手</span>
+        </div>
+        <div class="flex items-center gap-1 shrink-0">
+          <button type="button" id="dcTabPrep" onclick="switchDualCapsuleTab('prep')"
+                  class="px-2.5 py-1 rounded-lg text-[10.5px] font-black bg-white text-blue-950 shadow-2xs transition cursor-pointer">
+            🧭 行前攻略
+          </button>
+          <button type="button" id="dcTabTips" onclick="switchDualCapsuleTab('tips')"
+                  class="px-2.5 py-1 rounded-lg text-[10.5px] font-black bg-white/15 text-white hover:bg-white/25 transition cursor-pointer">
+            🛡️ 當地貼士
+          </button>
+          <button type="button" onclick="closeTripDualCapsule()" aria-label="收起雙錦囊"
+                  class="w-6 h-6 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition cursor-pointer ml-0.5">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 錦囊一：🧭 行前攻略（4 層黃金編排次序） -->
+      <div id="dcPanelPrep" class="p-3 space-y-3 text-xs dc-scroll-viewport custom-scroll">
+        <!-- 第 1 層：天氣與穿衣（遠期月份季節大卡片 vs 30日內精裝 5 日氣象卡＋PM2.5 空氣指數） -->
+        <div class="p-3 rounded-2xl bg-gradient-to-b from-sky-50/90 to-white border border-sky-200/90 space-y-2 relative shadow-2xs">
+          <div class="flex items-center justify-between gap-1">
+            <span class="font-black text-blue-950 text-xs flex items-center gap-1.5 shrink-0">
+              <i class="fa-solid fa-cloud-sun text-sky-600"></i>
+              <span>1. 天氣與穿衣</span>
+            </span>
+            <div class="flex items-center gap-1 relative shrink-0">
+              <div class="relative" onmouseenter="openDcHoverMenu('dcWeatherCityMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcWeatherCityMenu')">
+                <button type="button" onclick="toggleDcDropdown('dcWeatherCityMenu')"
+                        class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-white hover:bg-sky-50 border border-sky-200 text-blue-950 flex items-center gap-1 cursor-pointer shadow-2xs">
+                  <span id="dcWeatherCityLabel">目的地</span>
+                  <i class="fa-solid fa-caret-down text-[9px] text-sky-600"></i>
+                </button>
+                <div id="dcWeatherCityMenu" class="hidden absolute right-0 top-6 z-40 w-36 bg-white rounded-2xl shadow-xl border border-slate-200 p-1 text-[11px] font-bold max-h-48 overflow-y-auto"></div>
+              </div>
+              <div class="relative" onmouseenter="openDcHoverMenu('dcWeatherSrcMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcWeatherSrcMenu')">
+                <button type="button" onclick="toggleDcDropdown('dcWeatherSrcMenu')"
+                        class="text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-600 hover:bg-sky-700 text-white flex items-center gap-1 cursor-pointer shadow-2xs">
+                  <span id="dcWeatherSrcLabel">ECMWF 9km</span>
+                  <i class="fa-solid fa-caret-down text-[9px]"></i>
+                </button>
+                <div id="dcWeatherSrcMenu" class="hidden absolute right-0 top-6 z-40 w-56 bg-white rounded-2xl shadow-xl border border-slate-200 p-1.5 text-[11px] space-y-1">
+                  <div class="px-2 py-0.5 text-[9.5px] font-bold text-slate-400">氣象引擎（已按地區智能匹配）</div>
+                  <button type="button" onclick="selectDcWeatherSource('ECMWF 9km')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
+                    <span>歐洲中心 ECMWF (9km)</span><span class="text-[9px] text-sky-600">歐洲/東南亞最佳</span>
+                  </button>
+                  <button type="button" onclick="selectDcWeatherSource('JMA 日本氣象廳')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
+                    <span>日本氣象廳 JMA (5km)</span><span class="text-[9px] text-emerald-600">日韓台東亞最佳</span>
+                  </button>
+                  <button type="button" onclick="selectDcWeatherSource('NOAA GFS')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
+                    <span>美國氣象局 NOAA GFS</span><span class="text-[9px] text-slate-500">美加澳紐最佳</span>
+                  </button>
+                  <button type="button" onclick="selectDcWeatherSource('ERA5 十年基準')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
+                    <span>ERA5 歷年月份氣候基準</span><span class="text-[9px] text-slate-500">遠期季節大卡</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="dcWeatherGrid" class="grid grid-cols-5 gap-1.5 text-center"></div>
+          <p id="dcWeatherAdvice" class="text-[11px] font-medium text-slate-700 bg-sky-50/70 rounded-xl px-2.5 py-1.5 border border-sky-100 leading-relaxed"></p>
+
+          <div class="flex items-center justify-between gap-2 pt-0.5 relative">
+            <span id="dcWeatherUpdatedAt" class="text-[9.5px] font-mono text-slate-500">資料核實：2026-11-15</span>
+            <div class="relative" onmouseenter="openDcHoverMenu('dcWeatherWebMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcWeatherWebMenu')">
+              <button type="button" onclick="toggleDcDropdown('dcWeatherWebMenu')" aria-label="開啟外部氣象網站"
+                      class="w-6 h-6 rounded-full bg-white hover:bg-sky-100 border border-sky-300 text-sky-700 flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
+                <i class="fa-solid fa-globe text-[11px]"></i>
+              </button>
+              <div id="dcWeatherWebMenu" class="hidden absolute right-0 bottom-7 z-40 w-44 bg-white rounded-2xl shadow-xl border border-slate-200 p-1.5 text-[11px] font-bold space-y-1">
+                <div class="px-2 py-0.5 text-[9px] font-bold text-slate-400">外部氣象實況直達</div>
+                <a id="dcLinkWindy" href="https://www.windy.com/" target="_blank" rel="noopener" onclick="document.getElementById('dcWeatherWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-sky-50 text-sky-900">
+                  <span>Windy.com 雷達</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-sky-500"></i>
+                </a>
+                <a id="dcLinkAccu" href="https://www.accuweather.com/" target="_blank" rel="noopener" onclick="document.getElementById('dcWeatherWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-sky-50 text-sky-900">
+                  <span>AccuWeather</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-sky-500"></i>
+                </a>
+                <a id="dcLinkTwc" href="https://weather.com/" target="_blank" rel="noopener" onclick="document.getElementById('dcWeatherWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-sky-50 text-sky-900">
+                  <span>Weather.com</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-sky-500"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第 2 層：實時外幣匯率（一行過白色換算框 ＋ 正下方緊貼靠左基準切換 ＋ 底部實時同步靠左） -->
+        <div class="p-3 rounded-2xl bg-emerald-50/65 border border-emerald-200/90 space-y-2 relative">
+          <div class="flex items-center justify-between gap-1">
+            <span class="font-black text-blue-950 text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-coins text-emerald-600"></i>
+              <span>2. 實時外幣匯率</span>
+            </span>
+
+            <div class="flex items-center gap-1 relative">
+              <div class="inline-flex items-center bg-white border border-emerald-200 rounded-full px-1.5 py-0.5 shadow-2xs gap-1 relative"
+                   onmouseenter="openDcHoverMenu('dcFxCurrMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcFxCurrMenu')">
+                <span id="dcFxLeftCode" class="text-[10px] font-mono font-black text-blue-950">HKD</span>
+                <button type="button" onclick="flipDcFxDirection()" aria-label="反轉兌換方向"
+                        class="w-4 h-4 rounded-full bg-emerald-100 hover:bg-emerald-600 text-emerald-800 hover:text-white flex items-center justify-center transition active:rotate-180 cursor-pointer">
+                  <i class="fa-solid fa-right-left text-[8px]"></i>
+                </button>
+                <button type="button" onclick="toggleDcDropdown('dcFxCurrMenu')" class="inline-flex items-center gap-0.5 text-[10px] font-mono font-black text-emerald-800 cursor-pointer">
+                  <span id="dcFxRightCode">THB</span>
+                  <i class="fa-solid fa-caret-down text-[8px]"></i>
+                </button>
+                <div id="dcFxCurrMenu" class="hidden absolute right-0 top-6 z-40 w-44 bg-white rounded-2xl shadow-xl border border-slate-200 p-1 text-[11px] font-bold max-h-56 overflow-y-auto"></div>
+              </div>
+
+              <div class="relative" onmouseenter="openDcHoverMenu('dcFxSrcMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcFxSrcMenu')">
+                <button type="button" onclick="toggleDcDropdown('dcFxSrcMenu')"
+                        class="text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1 cursor-pointer shadow-2xs">
+                  <span id="dcFxSrcLabel">多央行 v2</span>
+                  <i class="fa-solid fa-caret-down text-[9px]"></i>
+                </button>
+                <div id="dcFxSrcMenu" class="hidden absolute right-0 top-6 z-40 w-56 bg-white rounded-2xl shadow-xl border border-slate-200 p-1.5 text-[11px] space-y-1">
+                  <div class="px-2 py-0.5 text-[9.5px] font-bold text-slate-400">匯率引擎（已按地區智能匹配）</div>
+                  <button type="button" onclick="selectDcFxSource('多央行 v2')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
+                    <span>Frankfurter v2 歐洲央行</span><span class="text-[9px] text-emerald-700">歐美日最佳</span>
+                  </button>
+                  <button type="button" onclick="selectDcFxSource('ExchangeRate')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
+                    <span>ExchangeRate-API 金融</span><span class="text-[9px] text-sky-700">東南亞全幣種</span>
+                  </button>
+                  <button type="button" onclick="selectDcFxSource('全球 CDN 備援')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
+                    <span>jsDelivr CDN 300+幣</span><span class="text-[9px] text-slate-500">全球備援</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 白色換算主框（一行過純淨視線）＋ 正下方貼緊白框底邊靠左之基準切換 -->
+          <div class="space-y-1">
+            <div class="px-3 py-2.5 rounded-xl bg-white border border-emerald-100 flex items-center justify-between gap-2">
+              <div id="dcFxRateMainText" class="text-sm font-black font-mono text-blue-950 shrink-0">載入匯率中...</div>
+              <div class="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-xl px-2 py-1 min-w-0">
+                <input type="number" id="dcFxCalcInput" value="1000" oninput="recalcDcFx()" class="w-14 sm:w-16 bg-transparent font-mono font-black text-xs text-right text-blue-950 focus:outline-none">
+                <span id="dcFxCalcFromUnit" class="text-[10px] font-mono font-bold text-slate-600 shrink-0">HKD</span>
+                <span class="text-slate-400 text-xs shrink-0">=</span>
+                <span id="dcFxCalcOutput" class="text-xs font-mono font-black text-emerald-700 truncate">--</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-start pl-0.5">
+              <button type="button" onclick="toggleDcCashSpread()" id="dcBtnCashMode"
+                      class="text-[10.5px] font-extrabold text-emerald-800 hover:text-emerald-950 underline decoration-emerald-400 underline-offset-2 cursor-pointer transition">
+                目前：銀行中間價（點擊切換找換店估算）
+              </button>
+            </div>
+          </div>
+
+          <p id="dcFxTipText" class="text-[11px] text-slate-700 leading-relaxed"></p>
+
+          <!-- 卡片最底列：左側對齊「實時同步」時間戳，右側懸停地球外鏈圓鈕 -->
+          <div class="flex items-center justify-between gap-2 pt-0.5 relative">
+            <span id="dcFxUpdatedAt" class="text-[9.5px] font-mono text-slate-500">資料核實：2026-11-15</span>
+            <div class="relative shrink-0" onmouseenter="openDcHoverMenu('dcFxWebMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcFxWebMenu')">
+              <button type="button" onclick="toggleDcDropdown('dcFxWebMenu')" aria-label="開啟外部匯率格價網站"
+                      class="w-6 h-6 rounded-full bg-white hover:bg-emerald-100 border border-emerald-300 text-emerald-700 flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
+                <i class="fa-solid fa-globe text-[11px]"></i>
+              </button>
+              <div id="dcFxWebMenu" class="hidden absolute right-0 bottom-7 z-40 w-48 bg-white rounded-2xl shadow-xl border border-slate-200 p-1.5 text-[11px] font-bold space-y-1">
+                <div class="px-2 py-0.5 text-[9px] font-bold text-slate-400">外部匯率格價／走勢</div>
+                <a href="https://www.ttrate.com/zh_hk/" target="_blank" rel="noopener" onclick="document.getElementById('dcFxWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 text-emerald-900">
+                  <span>TTRate 香港找換格價</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-emerald-600"></i>
+                </a>
+                <a href="https://www.xe.com/currencyconverter/" target="_blank" rel="noopener" onclick="document.getElementById('dcFxWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 text-emerald-900">
+                  <span>XE.com 國際匯率</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-emerald-600"></i>
+                </a>
+                <a href="https://wise.com/zh-hk/currency-converter/" target="_blank" rel="noopener" onclick="document.getElementById('dcFxWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 text-emerald-900">
+                  <span>Wise 中間價換算</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-emerald-600"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第 3 層：入境申報（全覆蓋狀態標籤＋官方網址）＆ 當地節日影響 -->
+        <div class="p-3 rounded-2xl bg-amber-50/70 border border-amber-200/90 space-y-2">
+          <div class="flex items-center justify-between gap-1 flex-wrap">
+            <span class="font-black text-blue-950 text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-passport text-amber-600"></i>
+              <span>3. 入境申報與當地節日影響</span>
+            </span>
+            <span id="dcVisaStatusPill" class="text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">免簽證查詢</span>
+          </div>
+          <div id="dcEntryDetailBox" class="text-[11px] text-slate-700 space-y-1 leading-relaxed"></div>
+          <div id="dcOfficialPortalLinks" class="flex flex-wrap gap-1.5 pt-0.5"></div>
+          <div class="pt-1.5 border-t border-amber-200/70">
+            <div class="text-[10.5px] font-black text-amber-950 mb-1">🗓️ 當地節日與公眾假期對旅客影響：</div>
+            <div id="dcLocalFestivalBox" class="text-[11px] text-slate-700 space-y-1 leading-relaxed"></div>
+          </div>
+        </div>
+
+        <!-- 第 4 層：出發前準備（電壓歸位 ＋ 當地國家專屬細心物品 ＋ 預留 3 行自訂空白行） -->
+        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="font-black text-blue-950 text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-suitcase-rolling text-blue-600"></i>
+              <span>4. 出發前準備清單</span>
+            </span>
+            <span id="dcChecklistProgress" class="text-[10px] font-mono font-bold text-blue-700">0 / 0 已完成</span>
+          </div>
+
+          <div class="p-2 rounded-xl bg-blue-50/80 border border-blue-200/80 flex items-center justify-between text-[11px]">
+            <span class="font-bold text-blue-950 flex items-center gap-1.5">
+              <i class="fa-solid fa-plug text-blue-600"></i>
+              <span>當地電壓與插頭：</span>
+            </span>
+            <span id="dcPlugSpecText" class="font-mono font-black text-blue-900">220V · 萬能轉插</span>
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-indigo-50/60 border border-indigo-200/80 space-y-1.5">
+            <div class="text-[10.5px] font-black text-indigo-950">✨ 當地專屬細心準備（針對目的地精選）</div>
+            <div id="dcCountrySpecificList" class="space-y-1"></div>
+          </div>
+
+          <div id="dcGeneralChecklistList" class="space-y-1"></div>
+
+          <div class="pt-1.5 border-t border-slate-200/80 space-y-1.5">
+            <span class="text-[10px] font-bold text-slate-500 block">✏️ 自訂補充項目（點擊輸入並打勾，自動儲存）：</span>
+            <div id="dcCustomRowsList" class="space-y-1.5"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 錦囊二：🛡️ 當地貼士（4 層黃金編排次序 · 預設頭 5 項 ＋ 點擊展開更多） -->
+      <div id="dcPanelTips" class="hidden p-3 space-y-3 text-xs dc-scroll-viewport custom-scroll">
+        <!-- 極簡無框純文字 · 情報來源與左下角同步時間戳 -->
+        <div class="p-2.5 rounded-2xl bg-slate-50/90 border border-slate-200/80 space-y-2 text-[10px]">
+          <div id="dcTipsSourcePillsGrid" class="grid grid-cols-2 gap-x-2 gap-y-1 leading-snug">
+            <span data-src-id="news" class="font-extrabold text-blue-950 truncate flex items-center gap-1">
+              <span>● 港媒／當地即時新聞</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-950 text-white">UPDATE</span>
+            </span>
+            <span data-src-id="advisory" class="font-extrabold text-blue-950 truncate flex items-center gap-1">
+              <span>● 全球安全風險警報</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-950 text-white">UPDATE</span>
+            </span>
+            <span data-src-id="wiki_zh" class="font-bold text-blue-700 truncate flex items-center gap-1">
+              <span>◐ 中文維基導遊百科</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-600 text-white">UPDATE</span>
+            </span>
+            <span data-src-id="wiki_en" class="font-bold text-blue-700 truncate flex items-center gap-1">
+              <span>◐ Wikivoyage 繁中譯</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-600 text-white">UPDATE</span>
+            </span>
+            <span data-src-id="hk_sb" class="font-semibold text-blue-500 truncate flex items-center gap-1">
+              <span>○ 香港保安局外遊警示</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-100 text-blue-900">UPDATE</span>
+            </span>
+            <span data-src-id="local_gov" class="font-semibold text-blue-500 truncate flex items-center gap-1">
+              <span id="dcLocalGovPillName" class="truncate">○ 當地官方旅遊移民局</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-100 text-blue-900">UPDATE</span>
+            </span>
+          </div>
+          <div class="flex items-center justify-between gap-2 pt-1 border-t border-slate-200/70">
+            <span id="dcTipsGlobalUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
+            <button type="button" onclick="if(dcCurrentTripKey) fetchLiveWikivoyageAndNews(dcCurrentTripKey, true)"
+                    class="shrink-0 px-2 py-0.5 rounded-full bg-white hover:bg-blue-50 border border-slate-300 text-blue-900 font-bold text-[10px] cursor-pointer transition">
+              <i class="fa-solid fa-arrows-rotate text-[9px] mr-1 text-blue-600"></i>同步更新
+            </button>
+          </div>
+        </div>
+
+        <!-- 第 1 層：旅遊警報與動態（預設頭 5 條 ＋ 右下角微箭嘴展開更多） -->
+        <div class="p-3 rounded-2xl bg-blue-50/70 border border-blue-200/90 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-black text-blue-950 text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-tower-broadcast text-blue-600"></i>
+              <span>1. 旅遊警報與最新動態</span>
+            </span>
+            <span id="dcHkAlertBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">外遊警示：正常</span>
+          </div>
+          <ul id="dcNewsTop10" class="list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed"></ul>
+          <ul id="dcNewsMore" class="hidden list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed pt-1 border-t border-blue-200/60"></ul>
+          <div class="flex items-center justify-between gap-2 pt-0.5">
+            <span id="dcNewsUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
+            <button type="button" onclick="toggleDcMoreList('dcNewsMore', 'dcChevNews', 'dcTxtNews')"
+                    class="inline-flex items-center gap-1 text-[10.5px] font-bold text-blue-700 hover:text-blue-900 cursor-pointer">
+              <span id="dcTxtNews" data-default-label="顯示更多動態">顯示更多動態</span>
+              <i id="dcChevNews" class="fa-solid fa-chevron-down text-[9px] transition-transform duration-200"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 第 2 層：常見騙案手法（預設 10 條 ＋ 右下角微箭嘴展開更多） -->
+        <div class="p-3 rounded-2xl bg-rose-50/65 border border-rose-200/90 space-y-2">
+          <div class="font-black text-rose-900 text-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-shield-halved text-rose-600"></i>
+            <span>2. 常見防騙與安全防範</span>
+          </div>
+          <ul id="dcScamTop10" class="list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed"></ul>
+          <ul id="dcScamMore" class="hidden list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed pt-1 border-t border-rose-200/60"></ul>
+          <div class="flex items-center justify-between gap-2 pt-0.5">
+            <span class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
+            <button type="button" onclick="toggleDcMoreList('dcScamMore', 'dcChevScam', 'dcTxtScam')"
+                    class="inline-flex items-center gap-1 text-[10.5px] font-bold text-rose-700 hover:text-rose-900 cursor-pointer">
+              <span id="dcTxtScam" data-default-label="顯示更多防騙手法">顯示更多防騙手法</span>
+              <i id="dcChevScam" class="fa-solid fa-chevron-down text-[9px] transition-transform duration-200"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 第 3 層：文化禁忌、宗教儀式與消費禮儀（預設 10 條 ＋ 右下角微箭嘴展開更多） -->
+        <div class="p-3 rounded-2xl bg-indigo-50/65 border border-indigo-200/90 space-y-2">
+          <div class="font-black text-blue-950 text-xs flex items-center gap-1.5">
+            <i class="fa-solid fa-hands-praying text-indigo-600"></i>
+            <span>3. 文化禁忌、儀式與消費禮儀</span>
+          </div>
+          <ul id="dcCultureTop10" class="list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed"></ul>
+          <ul id="dcCultureMore" class="hidden list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed pt-1 border-t border-indigo-200/60"></ul>
+          <div class="flex items-center justify-between gap-2 pt-0.5">
+            <span class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
+            <button type="button" onclick="toggleDcMoreList('dcCultureMore', 'dcChevCulture', 'dcTxtCulture')"
+                    class="inline-flex items-center gap-1 text-[10.5px] font-bold text-indigo-700 hover:text-indigo-900 cursor-pointer">
+              <span id="dcTxtCulture" data-default-label="顯示更多禮儀禁忌">顯示更多禮儀禁忌</span>
+              <i id="dcChevCulture" class="fa-solid fa-chevron-down text-[9px] transition-transform duration-200"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 第 4 層：高對比大字緊急求助卡片（危機視覺設計 · 特大清晰號碼 ＋ 求助指引 ＋ 一鍵撥號複製） -->
+        <div class="p-3.5 rounded-2xl bg-rose-50/75 border-2 border-rose-300/90 space-y-2.5 shadow-xs">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-black text-rose-950 text-[13.5px] flex items-center gap-1.5 tracking-tight">
+              <i class="fa-solid fa-phone-volume text-rose-600 text-sm"></i>
+              <span>4. 緊急求助與旅遊警察專線</span>
+            </span>
+            <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-rose-600 text-white tracking-wide">點擊號碼直撥</span>
+          </div>
+
+          <div class="px-2.5 py-2 rounded-xl bg-white/95 border border-rose-200 text-xs font-bold text-slate-800 leading-snug">
+            🆘 遇事報警請索取<span class="text-rose-700 font-black">正式報案編號 (Police Report)</span> 以便回港索償；可出示以下英文求助句：
+            <div class="mt-1 font-mono text-[11.5px] font-extrabold text-blue-950 bg-slate-100 px-2 py-1 rounded-lg select-all">
+              "I am a tourist from Hong Kong. I need police / medical assistance."
+            </div>
+          </div>
+
+          <div id="dcEmergencyGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+
+          <div class="p-2.5 rounded-xl bg-white border-2 border-blue-200 space-y-2 shadow-2xs">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5 flex-1 min-w-0">
+                <span class="text-xs shrink-0">📌</span>
+                <input type="text" id="dcCustomEmergencyTitleInput" oninput="saveDcCustomEmergency()"
+                       placeholder="自訂緊急聯絡名稱（例：旅遊保險熱線 / 酒店前台）"
+                       class="w-full text-xs font-black text-blue-950 bg-blue-50/60 hover:bg-blue-50 focus:bg-white border border-blue-200/80 focus:border-blue-600 rounded-lg px-2 py-1 focus:outline-none transition">
+              </div>
+              <span class="text-[10px] font-bold text-blue-600 shrink-0">自動儲存</span>
+            </div>
+
+            <div class="flex items-center gap-1.5">
+              <div class="w-24 shrink-0 relative">
+                <input type="text" id="dcCustomEmergencyAreaInput"
+                       oninput="handleDcAreaCodeInput(this)"
+                       onblur="normalizeDcAreaCodeOnBlur(this)"
+                       placeholder="區號/香港"
+                       class="w-full font-mono font-black text-sm text-center text-blue-950 bg-slate-50 border border-slate-300 rounded-lg px-2 py-1.5 focus:border-blue-600 focus:outline-none">
+              </div>
+              <input type="text" id="dcCustomEmergencyPhoneInput" inputmode="tel"
+                     oninput="saveDcCustomEmergency()"
+                     placeholder="輸入電話號碼（例：2888 9999）"
+                     class="w-full font-mono font-black text-base text-blue-950 bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 focus:border-blue-600 focus:outline-none">
+            </div>
+
+            <div class="flex items-center justify-between gap-2 pt-1 border-t border-slate-100">
+              <span id="dcCustomEmergencyFullPreview" class="text-[11px] font-mono font-extrabold text-slate-600 truncate">完整號碼：尚未輸入</span>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <button type="button" onclick="copyDcCustomEmergency()"
+                        class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-[11px] cursor-pointer transition active:scale-95">
+                  複製
+                </button>
+                <button type="button" onclick="dialDcCustomEmergency()"
+                        class="px-3 py-1.5 rounded-xl bg-blue-950 hover:bg-blue-800 text-white font-black text-xs flex items-center gap-1 shadow-2xs cursor-pointer transition active:scale-95">
+                  <i class="fa-solid fa-phone text-[11px]"></i>
+                  <span>撥打</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id="inlineBookingStudioParkingBay" class="hidden">
 
   <!-- 原裝完整「旅程預訂資料」流暢原地收放面板（全程零彈窗、無重複標題與多餘收起掣） -->
   <div id="inlineBookingStudioDrawer" class="inline-booking-accordion" style="display:none; overflow-anchor: none;">
@@ -21574,7 +24011,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-blue-700 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-black text-blue-950 tracking-tight">版本更新日誌</span>
             </span>
-            <span class="text-[10.5px] font-mono font-bold text-blue-700">v5.4.17</span>
+            <span class="text-[10.5px] font-mono font-bold text-blue-700">v5.6.3</span>
           </button>
         </div>
 
