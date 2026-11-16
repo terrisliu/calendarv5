@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Fetch HK OTA alerts & Strictly Verified Deduplicated Insights (31 Countries)
+      - name: Fetch HK OTA alerts & Strictly Whitelisted Real-Impact Insights (31 Countries)
         run: |
           python3 - << 'EOF'
           import json, datetime, time, urllib.request, urllib.parse, xml.etree.ElementTree as ET, re
@@ -36,17 +36,27 @@ jobs:
               data = {"lastUpdated": today_str, "source": "GitHub Actions 自動更新", "countries": {}}
 
           data["lastUpdated"] = today_str
-          data["source"] = "GitHub Actions 自動更新（保安局官方警示 ＋ 嚴格核實去重動態 ＋ 旅遊實戰社群 · 31 國）"
+          data["source"] = "GitHub Actions 自動更新（保安局官方警示 ＋ 正面鎖定突發變動 ＋ 旅遊實戰社群 · 31 國）"
 
-          # 全局排除詞：非香港對象、未定案傳聞、促銷機票廣告軟文，以及底層已收錄之常設法規（防止重複）
+          # 【正面白名單】：新聞標題必須包含至少一個「實質行程影響字眼」，徹底杜絕攻略/伴手禮/美食軟文
+          MUST_IMPACT_NEWS_KW = (
+              '關閉', '暫停', '維修', '罷工', '颱風', '暴雨', '火山', '地震', '洪水', '示威', '戒嚴',
+              '新規定', '新制', '生效', '實施', '加價', '徵收', '稅', '預約制', '延誤', '停駛', '封閉', '警示'
+          )
+          MUST_IMPACT_SCAM_KW = (
+              '騙案', '詐騙', '劏客', '陷阱', '扒手', '搶劫', '失竊', '假冒', '黑店', '被騙'
+          )
+
+          # 【全局黑名單】：排除台灣/內地專屬、未定案傳聞、任何攻略推介及底層已收錄法規
           GLOBAL_EXCLUDE_KW = (
               '台灣旅客', '台灣人', '台胞', '持台灣護照', '陸客', '內地旅客', '大陸旅客',
-              '擬議', '擬徵', '或將', '有望', '傳將', '建議徵收', '完整教學', '優惠碼', '折扣碼',
-              '優惠', '最平', '劈價', '機票', '酒店推介', '開航', '限時',
+              '擬議', '擬徵', '或將', '有望', '傳將', '建議徵收',
+              '攻略', '教學', '懶人包', '必買', '伴手禮', '手信', '美食', '推介', '打卡', '好物',
+              '優惠', '最平', '劈價', '機票', '酒店', '開航', '限時',
               '沙灘禁煙', '海灘禁煙', '電子煙', '加熱煙', '王室', '禁酒時段', '200支', '20,000泰銖'
           )
 
-          def fetch_verified_rss(query, must_have_keywords, other_country_keywords, tag="媒體報道", max_items=2):
+          def fetch_verified_rss(query, must_country_kws, other_country_kws, impact_kws, tag="突發動態", max_items=2):
               url = f"https://news.google.com/rss/search?q={urllib.parse.quote(query)}&hl=zh-HK&gl=HK&ceid=HK:zh-Hant"
               req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
               items = []
@@ -61,13 +71,15 @@ jobs:
                       publisher = parts[1].strip() if len(parts) > 1 else '新聞報道'
                       if not title:
                           continue
-                      if not any(k in title for k in must_have_keywords):
+                      if not any(k in title for k in must_country_kws):
                           continue
-                      if any(oc in title for oc in other_country_keywords):
+                      if any(oc in title for oc in other_country_kws):
                           continue
                       if any(ex in title for ex in GLOBAL_EXCLUDE_KW):
                           continue
-                      entry = f"<b>[{today_str}] {tag}（{publisher} · 僅供參考）</b>：{title}"
+                      if not any(ik in title for ik in impact_kws):
+                          continue
+                      entry = f"<b>[{today_str}] {tag}（{publisher}）</b>：{title}"
                       if entry not in items:
                           items.append(entry)
                       if len(items) >= max_items:
@@ -80,10 +92,10 @@ jobs:
               if not subreddit:
                   return [], []
               url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=15"
-              req = urllib.request.Request(url, headers={'User-Agent': 'HKLeaveManagerBot/3.2'})
+              req = urllib.request.Request(url, headers={'User-Agent': 'HKLeaveManagerBot/4.0'})
               news_tips, scam_tips = [], []
-              news_kw = ('closed', 'closure', 'booking', 'reservation', 'strike', 'delay', 'airport', 'train', 'tax', 'fee', 'new rule', 'construction')
-              scam_kw = ('scam', 'fake', 'overcharge', 'trap', 'taxi', 'tuk', 'pickpocket', 'theft', 'warning', 'avoid')
+              news_kw = ('closed', 'closure', 'strike', 'delay', 'cancelled', 'shutdown', 'construction', 'new rule', 'mandatory')
+              scam_kw = ('scam', 'fake', 'overcharge', 'trap', 'pickpocket', 'theft', 'stolen', 'warning', 'avoid')
               try:
                   with urllib.request.urlopen(req, timeout=10) as resp:
                       payload = json.loads(resp.read().decode('utf-8'))
@@ -100,7 +112,7 @@ jobs:
                   print("Reddit fetch skipped:", subreddit, e)
               return news_tips, scam_tips
 
-          # 1. 抓取香港保安局外遊警示網頁最新官方狀態（100% 權威官方源）
+          # 1. 香港保安局外遊警示官方網頁（100% 權威官方源）
           ota_map = {
               "CN": "中國", "TW": "台灣", "JP": "日本", "KR": "韓國", "MN": "蒙古",
               "TH": "泰國", "SG": "新加坡", "MY": "馬來西亞", "VN": "越南", "PH": "菲律賓", "ID": "印尼", "KH": "柬埔寨", "LA": "老撾",
@@ -122,43 +134,43 @@ jobs:
           except Exception as e:
               print("HK OTA fetch skipped:", e)
 
-          # 2. 31 個國家專屬白名單與排他過濾設定
+          # 2. 31 個國家專屬設定
           targets = {
-              "CN": ("中國 內地 景區 預約 高鐵", "中國 旅遊 騙案 陷阱", ("中國", "內地", "北京", "上海", "廣州", "深圳", "成都", "重慶", "西安", "新疆", "西藏", "高鐵"), "chinatravel"),
-              "TW": ("台灣 台北 景點 交通 颱風", "台灣 旅遊 騙案 陷阱", ("台灣", "台北", "台中", "台南", "高雄", "花蓮", "宜蘭", "墾丁"), "taiwan"),
-              "JP": ("日本 東京 大阪 京都 景點 預約 退稅", "日本 旅遊 騙案 陷阱", ("日本", "東京", "大阪", "京都", "北海道", "沖繩", "福岡", "名古屋", "富士山", "日圓"), "JapanTravelTips"),
-              "KR": ("韓國 首爾 釜山 濟州 交通 預約", "韓國 旅遊 騙案 劏客", ("韓國", "南韓", "首爾", "釜山", "濟州", "仁川", "韓元"), "koreatravel"),
-              "MN": ("蒙古 烏蘭巴托 旅遊 交通", "蒙古 旅遊 騙案 陷阱", ("蒙古", "烏蘭巴托"), "mongolia"),
+              "CN": ("中國 內地 景區 關閉 颱風 暴雨 高鐵", "中國 旅遊 騙案 詐騙", ("中國", "內地", "北京", "上海", "廣州", "深圳", "成都", "重慶", "西安", "新疆", "西藏", "高鐵"), "chinatravel"),
+              "TW": ("台灣 台北 颱風 暴雨 封閉 交通", "台灣 旅遊 騙案 詐騙", ("台灣", "台北", "台中", "台南", "高雄", "花蓮", "宜蘭", "墾丁"), "taiwan"),
+              "JP": ("日本 東京 大阪 京都 關閉 維修 颱風 新制", "日本 旅遊 騙案 詐騙", ("日本", "東京", "大阪", "京都", "北海道", "沖繩", "福岡", "名古屋", "富士山", "日圓"), "JapanTravelTips"),
+              "KR": ("韓國 首爾 釜山 濟州 罷工 關閉 新制", "韓國 旅遊 騙案 劏客", ("韓國", "南韓", "首爾", "釜山", "濟州", "仁川", "韓元"), "koreatravel"),
+              "MN": ("蒙古 烏蘭巴托 旅遊 關閉 警示", "蒙古 旅遊 騙案 陷阱", ("蒙古", "烏蘭巴托"), "mongolia"),
 
-              "TH": ("泰國 曼谷 清邁 布吉 景點 交通 關閉", "泰國 曼谷 布吉 騙案 劏客", ("泰國", "曼谷", "清邁", "布吉", "芭堤雅", "蘇梅", "甲米", "泰銖"), "ThailandTourism"),
-              "SG": ("新加坡 樟宜 聖淘沙 景點 交通", "新加坡 旅遊 騙案 陷阱", ("新加坡", "星加坡", "樟宜", "聖淘沙"), "askSingapore"),
-              "MY": ("馬來西亞 吉隆坡 檳城 沙巴 景點 交通", "馬來西亞 旅遊 騙案 陷阱", ("馬來西亞", "大馬", "吉隆坡", "檳城", "沙巴", "亞庇", "浮羅交怡", "馬六甲"), "malaysia"),
-              "VN": ("越南 河內 胡志明 峴港 富國島 景點", "越南 旅遊 騙案 換錢", ("越南", "河內", "胡志明", "峴港", "富國島", "芽莊", "下龍灣"), "VietNam"),
-              "PH": ("菲律賓 馬尼拉 宿霧 長灘島 景點 交通", "菲律賓 旅遊 騙案 陷阱", ("菲律賓", "馬尼拉", "宿霧", "長灘島", "薄荷島", "巴拉望"), "Philippines_Expats"),
-              "ID": ("印尼 峇里島 雅加達 景點 火山 封路", "峇里島 換錢 騙案 陷阱", ("印尼", "峇里島", "雅加達", "日惹", "科莫多"), "bali"),
-              "KH": ("柬埔寨 吳哥窟 暹粒 金邊 旅遊", "柬埔寨 金邊 暹粒 騙案", ("柬埔寨", "吳哥窟", "暹粒", "金邊"), "cambodia"),
-              "LA": ("老撾 寮國 琅勃拉邦 永珍 中老鐵路", "老撾 寮國 旅遊 騙案 陷阱", ("老撾", "寮國", "琅勃拉邦", "永珍", "萬榮"), "laos"),
+              "TH": ("泰國 曼谷 清邁 布吉 關閉 維修 暴雨 新制", "泰國 曼谷 布吉 騙案 劏客", ("泰國", "曼谷", "清邁", "布吉", "芭堤雅", "蘇梅", "甲米", "泰銖"), "ThailandTourism"),
+              "SG": ("新加坡 樟宜 聖淘沙 維修 關閉 新制", "新加坡 旅遊 騙案 詐騙", ("新加坡", "星加坡", "樟宜", "聖淘沙"), "askSingapore"),
+              "MY": ("馬來西亞 吉隆坡 檳城 沙巴 關閉 暴雨 新制", "馬來西亞 旅遊 騙案 詐騙", ("馬來西亞", "大馬", "吉隆坡", "檳城", "沙巴", "亞庇", "浮羅交怡", "馬六甲"), "malaysia"),
+              "VN": ("越南 河內 胡志明 峴港 富國島 颱風 關閉", "越南 旅遊 騙案 詐騙", ("越南", "河內", "胡志明", "峴港", "富國島", "芽莊", "下龍灣"), "VietNam"),
+              "PH": ("菲律賓 馬尼拉 宿霧 長灘島 颱風 火山 關閉", "菲律賓 旅遊 騙案 詐騙", ("菲律賓", "馬尼拉", "宿霧", "長灘島", "薄荷島", "巴拉望"), "Philippines_Expats"),
+              "ID": ("印尼 峇里島 雅加達 火山 關閉 封閉", "峇里島 騙案 詐騙 陷阱", ("印尼", "峇里島", "雅加達", "日惹", "科莫多"), "bali"),
+              "KH": ("柬埔寨 吳哥窟 暹粒 金邊 關閉 新制", "柬埔寨 金邊 暹粒 騙案", ("柬埔寨", "吳哥窟", "暹粒", "金邊"), "cambodia"),
+              "LA": ("老撾 寮國 琅勃拉邦 永珍 關閉 暴雨", "老撾 寮國 旅遊 騙案", ("老撾", "寮國", "琅勃拉邦", "永珍", "萬榮"), "laos"),
 
-              "IN": ("印度 新德里 孟買 泰姬陵 旅遊", "印度 旅遊 騙案 陷阱", ("印度", "新德里", "孟買", "泰姬陵", "齋浦爾"), "india"),
-              "NP": ("尼泊爾 加德滿都 博卡拉 珠峰 旅遊", "尼泊爾 旅遊 騙案 陷阱", ("尼泊爾", "加德滿都", "博卡拉", "喜馬拉雅"), "Nepal"),
-              "AE": ("杜拜 阿聯酋 阿布扎比 景點 交通", "杜拜 旅遊 騙案 陷阱", ("杜拜", "阿聯酋", "阿布扎比"), "dubai"),
-              "TR": ("土耳其 伊斯坦堡 卡帕多奇亞 熱氣球 門票", "土耳其 伊斯坦堡 騙案 的士", ("土耳其", "伊斯坦堡", "卡帕多奇亞"), "Turkey"),
+              "IN": ("印度 新德里 孟買 泰姬陵 暴雨 關閉", "印度 旅遊 騙案 詐騙", ("印度", "新德里", "孟買", "泰姬陵", "齋浦爾"), "india"),
+              "NP": ("尼泊爾 加德滿都 博卡拉 封閉 關閉", "尼泊爾 旅遊 騙案 詐騙", ("尼泊爾", "加德滿都", "博卡拉", "喜馬拉雅"), "Nepal"),
+              "AE": ("杜拜 阿聯酋 阿布扎比 關閉 暴雨 新制", "杜拜 旅遊 騙案 詐騙", ("杜拜", "阿聯酋", "阿布扎比"), "dubai"),
+              "TR": ("土耳其 伊斯坦堡 卡帕多奇亞 關閉 加價 示威", "土耳其 伊斯坦堡 騙案 劏客", ("土耳其", "伊斯坦堡", "卡帕多奇亞"), "Turkey"),
 
-              "GB": ("英國 倫敦 愛丁堡 交通 罷工 博物館", "英國 倫敦 搶手機 騙案", ("英國", "倫敦", "愛丁堡", "曼徹斯特", "希斯路", "英鎊"), "LondonTravel"),
-              "FR": ("法國 巴黎 羅浮宮 交通 罷工 預約", "巴黎 扒手 騙案 陷阱", ("法國", "巴黎", "羅浮宮", "凡爾賽", "尼斯"), "ParisTravelGuide"),
-              "DE": ("德國 柏林 慕尼黑 國鐵 罷工 旅遊", "德國 旅遊 扒手 騙案", ("德國", "柏林", "慕尼黑", "法蘭克福"), "germany"),
-              "IT": ("意大利 羅馬 威尼斯 米蘭 佛羅倫斯 預約", "意大利 羅馬 米蘭 扒手 騙案", ("意大利", "義大利", "羅馬", "威尼斯", "米蘭", "佛羅倫斯"), "ItalyTravel"),
-              "CH": ("瑞士 少女峰 蘇黎世 鐵路 交通", "瑞士 旅遊 騙案 陷阱", ("瑞士", "少女峰", "蘇黎世", "日內瓦", "策馬特"), "askswitzerland"),
-              "ES": ("西班牙 巴塞隆拿 馬德里 聖家堂 預約", "巴塞隆拿 扒手 騙案", ("西班牙", "巴塞隆拿", "巴塞隆納", "馬德里", "聖家堂"), "askspain"),
-              "PT": ("葡萄牙 里斯本 波圖 交通 旅遊", "里斯本 扒手 騙案", ("葡萄牙", "里斯本", "波圖", "波爾圖"), "PortugalExpats"),
-              "NL": ("荷蘭 阿姆斯特丹 博物館 預約 旅遊", "阿姆斯特丹 旅遊 騙案", ("荷蘭", "阿姆斯特丹", "鹿特丹"), "Amsterdam"),
-              "GR": ("希臘 雅典 聖托里尼 船期 罷工", "希臘 雅典 扒手 騙案", ("希臘", "雅典", "聖托里尼", "米科諾斯"), "GreeceTravel"),
-              "IS": ("冰島 雷克雅未克 火山 封路 極光", "冰島 旅遊 騙案 陷阱", ("冰島", "雷克雅未克"), "VisitingIceland"),
+              "GB": ("英國 倫敦 愛丁堡 罷工 關閉 新制", "英國 倫敦 搶劫 騙案", ("英國", "倫敦", "愛丁堡", "曼徹斯特", "希斯路", "英鎊"), "LondonTravel"),
+              "FR": ("法國 巴黎 羅浮宮 罷工 關閉 示威", "巴黎 扒手 騙案 陷阱", ("法國", "巴黎", "羅浮宮", "凡爾賽", "尼斯"), "ParisTravelGuide"),
+              "DE": ("德國 柏林 慕尼黑 國鐵 罷工 關閉", "德國 旅遊 扒手 騙案", ("德國", "柏林", "慕尼黑", "法蘭克福"), "germany"),
+              "IT": ("意大利 羅馬 威尼斯 米蘭 罷工 關閉 徵收", "意大利 羅馬 米蘭 扒手 騙案", ("意大利", "義大利", "羅馬", "威尼斯", "米蘭", "佛羅倫斯"), "ItalyTravel"),
+              "CH": ("瑞士 少女峰 蘇黎世 封閉 關閉 維修", "瑞士 旅遊 騙案 詐騙", ("瑞士", "少女峰", "蘇黎世", "日內瓦", "策馬特"), "askswitzerland"),
+              "ES": ("西班牙 巴塞隆拿 馬德里 罷工 關閉 稅", "巴塞隆拿 扒手 騙案", ("西班牙", "巴塞隆拿", "巴塞隆納", "馬德里", "聖家堂"), "askspain"),
+              "PT": ("葡萄牙 里斯本 波圖 罷工 關閉 稅", "里斯本 扒手 騙案", ("葡萄牙", "里斯本", "波圖", "波爾圖"), "PortugalExpats"),
+              "NL": ("荷蘭 阿姆斯特丹 關閉 罷工 稅", "阿姆斯特丹 旅遊 騙案", ("荷蘭", "阿姆斯特丹", "鹿特丹"), "Amsterdam"),
+              "GR": ("希臘 雅典 聖托里尼 罷工 地震 關閉", "希臘 雅典 扒手 騙案", ("希臘", "雅典", "聖托里尼", "米科諾斯"), "GreeceTravel"),
+              "IS": ("冰島 雷克雅未克 火山 封閉 關閉", "冰島 旅遊 騙案 詐騙", ("冰島", "雷克雅未克"), "VisitingIceland"),
 
-              "US": ("美國 紐約 洛杉磯 三藩市 國家公園 預約", "美國 紐約 旅遊 騙案", ("美國", "紐約", "洛杉磯", "三藩市", "舊金山", "拉斯維加斯", "夏威夷"), "AskNYC"),
-              "CA": ("加拿大 溫哥華 多倫多 班夫 旅遊", "加拿大 旅遊 騙案 陷阱", ("加拿大", "溫哥華", "多倫多", "班夫", "黃刀鎮"), "canada"),
-              "AU": ("澳洲 悉尼 墨爾本 黃金海岸 旅遊", "澳洲 旅遊 騙案 陷阱", ("澳洲", "澳大利亞", "悉尼", "雪梨", "墨爾本", "布里斯本", "黃金海岸"), "AustraliaTravel"),
-              "NZ": ("紐西蘭 奧克蘭 皇后鎮 自駕 旅遊", "紐西蘭 新西蘭 旅遊 騙案", ("紐西蘭", "新西蘭", "奧克蘭", "皇后鎮", "基督城"), "newzealand")
+              "US": ("美國 紐約 洛杉磯 三藩市 關閉 罷工 颶風", "美國 紐約 旅遊 騙案", ("美國", "紐約", "洛杉磯", "三藩市", "舊金山", "拉斯維加斯", "夏威夷"), "AskNYC"),
+              "CA": ("加拿大 溫哥華 多倫多 班夫 罷工 關閉", "加拿大 旅遊 騙案 詐騙", ("加拿大", "溫哥華", "多倫多", "班夫", "黃刀鎮"), "canada"),
+              "AU": ("澳洲 悉尼 墨爾本 黃金海岸 暴雨 關閉", "澳洲 旅遊 騙案 詐騙", ("澳洲", "澳大利亞", "悉尼", "雪梨", "墨爾本", "布里斯本", "黃金海岸"), "AustraliaTravel"),
+              "NZ": ("紐西蘭 奧克蘭 皇后鎮 封閉 關閉 新制", "紐西蘭 新西蘭 旅遊 騙案", ("紐西蘭", "新西蘭", "奧克蘭", "皇后鎮", "基督城"), "newzealand")
           }
 
           all_primary_names = {c: kws[0] for c, kws in targets.items()}
@@ -168,15 +180,15 @@ jobs:
                   data["countries"][code] = {}
               other_countries = tuple(name for c2, name in all_primary_names.items() if c2 != code)
               r_news, r_scam = fetch_reddit_categorized(sub)
-              combined_news = fetch_verified_rss(q_news, must_kws, other_countries, "媒體報道", 2) + r_news
-              combined_scams = fetch_verified_rss(q_scam, must_kws, other_countries, "媒體防伏報道", 2) + r_scam
+              combined_news = fetch_verified_rss(q_news, must_kws, other_countries, MUST_IMPACT_NEWS_KW, "突發變動", 2) + r_news
+              combined_scams = fetch_verified_rss(q_scam, must_kws, other_countries, MUST_IMPACT_SCAM_KW, "防伏警示", 2) + r_scam
               data["countries"][code]["liveNews"] = combined_news
               data["countries"][code]["liveScams"] = combined_scams
               time.sleep(0.35)
 
           with open('travel_rules.json', 'w', encoding='utf-8') as f:
               json.dump(data, f, ensure_ascii=False, indent=2)
-          print("Verified deduplicated update completed at", today_str)
+          print("Whitelisted clean update completed at", today_str)
           EOF
 
       - name: Commit and push updated travel_rules.json
@@ -184,4 +196,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add travel_rules.json
-          git diff --staged --quiet || (git commit -m "chore: verified deduplicated update 31 countries ($(date -u +'%Y-%m-%d'))" && git push)
+          git diff --staged --quiet || (git commit -m "chore: whitelisted clean update 31 countries ($(date -u +'%Y-%m-%d'))" && git push)
