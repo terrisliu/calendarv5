@@ -2902,7 +2902,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.11.4</span>
+      <span>v5.11.9</span>
     </button>
   </footer>
 
@@ -3144,7 +3144,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.11.4</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.11.9</span>
             </h3>
           </div>
         </div>
@@ -3154,10 +3154,76 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
-        <!-- v5.11.4 -->
+        <!-- v5.11.9 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.11.4（零遺漏完整入境及海關細則 ＋ 泰國 e-Gate 自助通關資格與 20,000/40,000 泰銖實體現金規定 ＋ GitHub 雲端動態規則庫同步與出發倒數時效引擎）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">FULL ENTRY & LIVE SYNC</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.11.9（四色來源雙重視覺識別升級 · 🇭🇰 香港區旗 ＋ 🇹🇭🇯🇵 目的地國旗動態連動 ＋ 🛡️ 全球旅遊安全風險評估盾牌標誌）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">FLAG & SHIELD BADGES</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🇭🇰 保留四色圓點與色彩外，為頂部來源網格及下方每條情報徽章同步加上專屬旗幟與盾牌圖示</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 🇭🇰 香港區旗標示</b>：凡屬「香港保安局」及「香港入境處 / RTHK」之來源方格與下方情報徽章，前方一律加上 <code>🇭🇰</code> 香港區旗。</li>
+            <li><b>② 動態目的地國旗（如 🇹🇭 / 🇯🇵 / 🇰🇷）</b>：切換至任何國家時，頂部「當地官方旅遊局」及下方所有當地法規與翻譯公告徽章自動換上該目的地國旗。</li>
+            <li><b>③ 🛡️ 全球旅遊安全風險評估標誌</b>：為「全球旅遊安全風險評估指數」配備專屬 <code>🛡️</code> 盾牌徽章，實現「顏色＋圖示」雙重直覺辨識。</li>
+          </ul>
+        </div>
+
+        <!-- v5.11.8 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.11.8（全量四色出處徽章 100% 精準對應 · 廢除灰色通用標籤，每條警示與當地法規均直接顯示所屬官方機構專屬顏色徽章）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">4-COLOR SOURCE SYNC</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎨 徹底取消灰色「官方核實法規」標籤，讓每一條動態與法規都直接以頂部 4 種對應顏色（深藍／靛藍／翠綠／琥珀金）標示真實出處</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 智能識別每條法規與警示的來源歸屬</b>：凡涉及香港保安局外遊警示一律掛上<b>皇室深藍徽章</b>（<code>香港保安局</code>）；凡涉及香港入境處／特區護照／BNO／RTHK 一律掛上<b>靛藍徽章</b>（<code>香港入境處 / RTHK</code>）；凡屬當地旅遊局／移民局／海關法規一律掛上<b>翠綠徽章</b>（<code>[當地機構] · 譯</code>）；凡屬安全風險指數及治安防範則掛上<b>琥珀金徽章</b>（<code>安全風險評級</code>）。</li>
+          </ul>
+        </div>
+
+        <!-- v5.11.7 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.11.7（純官方與權威頻道白名單架構 · 當地官方旅遊局／主流通訊社自動翻譯繁體中文 · 頂部來源與下方情報 100% 同色出處徽章一一對應）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">OFFICIAL CHANNELS ONLY</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🏛️ 徹底剔除自媒體與自由編輯維基內容，建立「香港官方頻道 ＋ 當地官方旅遊局自動譯本 ＋ 同色出處徽章」雙軌嚴肅情報網</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 100% 官方與主流權威頻道白名單</b>：僅向<b>香港保安局（sb.gov.hk）、港府新聞公報（info.gov.hk）、入境處（immd.gov.hk）、香港電台（RTHK）</b>及<b>各國官方旅遊局／國家級主流媒體</b>檢索一手公告，徹底杜絕自媒體改寫文章。</li>
+            <li><b>② 當地官方英文通告自動翻譯繁體中文</b>：切換至泰國、日本、韓國、新加坡、英法澳紐等任何國家時，自動抓取該國官方旅遊局或國家通訊社最新公告並即時翻譯成香港繁體中文。</li>
+            <li><b>③ 頂部來源列表與下方每條情報 100% 同色徽章對應</b>：統一頂部 4 大官方來源色彩（皇室藍／靛藍／翠綠／琥珀金），下方每條動態均直接顯示對應顏色機構標籤（如 <code>[香港保安局]</code>、<code>[泰國觀光局 · 譯]</code>、<code>[官方核實法規]</code>），出處一目了然。</li>
+          </ul>
+        </div>
+
+        <!-- v5.11.6 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.11.6（即時旅遊新聞香港本地化過濾引擎 · 自動剔除純台灣／外地媒體新聞標題並自動清除舊快取）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">HK NEWS FILTER</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📰 升級城市指南即時新聞過濾器，優先抓取香港旅客適用報道並自動淘汰舊版快取</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 香港旅客專屬搜尋與負向過濾閘門</b>：<code>fetchLiveWikivoyageAndNews()</code> 查詢關鍵字自動加入「香港」及負向過濾詞，並檢查每則標題，自動跳過僅針對台灣護照／台幣／桃園機場之非港人報道。</li>
+            <li><b>② 快取版本升級至 <code>v8</code> 並自動清理舊緩存</b>：載入時自動清除 <code>hk_leave_dc_live7_</code> 舊快取，確保即時顯示最新乾淨動態。</li>
+          </ul>
+        </div>
+
+        <!-- v5.11.5 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.11.5（全 56 國及地區雙錦囊資料庫完整性核查與補全 · 香港 Staycation 專屬緊急支援與本地模式 · 全球全量城市英文氣象外鏈直達優化）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">56 COUNTRIES VERIFIED</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🌏 完成全部 56 個國家及地區雙錦囊條目、緊急熱線及氣象座標全量校驗</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 補全香港（HK）本地度假模式</b>：於 <code>DC_GLOBAL_VISA_INDEX</code> 補入香港專屬條目，支援香港 Staycation 行程免出入境提示、本地緊急熱線（999 / 旅發局熱線）並自動隱藏境外求助 1868／12308 卡片。</li>
+            <li><b>② 全球城市氣象外鏈精準直達</b>：<code>updateDcWeatherExternalLinks</code> 優先讀取資料庫內建英文城市標準名（<code>cityObj.en</code>），涵蓋東南亞及全球所有新增海島、山城與景點之 AccuWeather 精準查詢。</li>
+          </ul>
+        </div>
+
+        <!-- v5.11.5 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.11.5（零遺漏完整入境及海關細則 ＋ 泰國 e-Gate 自助通關資格與 20,000/40,000 泰銖實體現金規定 ＋ GitHub 雲端動態規則庫同步與出發倒數時效引擎）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">FULL ENTRY & LIVE SYNC</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🛂 全面補齊各國完整入境、自助通關（e-Gate）、隨身現金及海關煙酒禁運細則，並支援 GitHub Pages 每日自動同步最新實戰情報</div>
@@ -26967,6 +27033,7 @@ function setupYearOverviewToggle() {
       { code: 'KHR', label: '🇰🇭 KHR 柬埔寨瑞爾' },
       { code: 'LAK', label: '🇱🇦 LAK 老撾基普' },
       { code: 'JPY', label: '🇯🇵 JPY 日圓' },
+      { code: 'HKD', label: '🇭🇰 HKD 港元' },
       { code: 'TWD', label: '🇹🇼 TWD 新台幣' },
       { code: 'KRW', label: '🇰🇷 KRW 韓元' },
       { code: 'CNY', label: '🇨🇳 CNY 人民幣' },
@@ -28144,6 +28211,7 @@ function setupYearOverviewToggle() {
       // 東亞及南亞
       CN: { pill: '🟢 憑回鄉證通行｜無需簽證', desc: '持有效《港澳居民來往內地通行證》（回鄉證）直接通關，無需簽證或預先入境卡。', portals: [], curr: 'CNY', plug: '220V · 三腳八字扁插 / 兩腳扁插', police: '110', amb: '120', touristPolice: '12345', lat: 31.2304, lon: 121.4737 },
       MO: { pill: '🟢 憑香港身份證通行｜無需簽證', desc: '持香港永久性居民身份證可直接經自助通道入境澳門，無需簽證或預先入境卡。', portals: [], curr: 'MOP', plug: '230V · 英式三腳方插', police: '999', amb: '999', touristPolice: '+853 2833 3000', lat: 22.1987, lon: 113.5439 },
+      HK: { pill: '🟢 香港本地行程｜無需出入境', desc: '香港本地度假及 Staycation 行程，無需辦理出入境或海關申報。', portals: [], curr: 'HKD', plug: '220V · 英式三腳方插', police: '999', amb: '999', touristPolice: '+852 2508 1234', lat: 22.3193, lon: 114.1694 },
       MN: { pill: '🟢 免簽 14 日｜無需預先入境卡', desc: '免簽證停留最長 14 日，無需預先網上登記（停留超過 14 日須辦 e-Visa）。', portals: [{ name: '蒙古電子簽證網 (e-Visa)', url: 'https://evisa.mn/' }], curr: 'MNT', plug: '220V · 歐標雙圓腳插', police: '102', amb: '103', lat: 47.8864, lon: 106.9057 },
       IN: { pill: '🔴 必須辦理電子簽證 (e-Visa)', desc: '出發前至少 4 日須於官方網站申請印度旅遊電子簽證（30 日／1 年／5 年）。', portals: [{ name: '印度官方 e-Visa 申請網', url: 'https://indianvisaonline.gov.in/evisa/' }], curr: 'INR', plug: '230V · 印度三圓腳插 (Type D)', police: '112', amb: '102', touristPolice: '1363', lat: 28.6139, lon: 77.2090 },
       LK: { pill: '🟡 必須預先網上申請 ETA', desc: '須於出發前經斯里蘭卡官方網站預先登記電子旅行許可（ETA）並獲批後登機。', portals: [{ name: '斯里蘭卡官方 ETA 網', url: 'https://eta.gov.lk/' }], curr: 'LKR', plug: '230V · 三圓/英式三腳插', police: '119', amb: '110', touristPolice: '1912', lat: 6.9271, lon: 79.8612 },
@@ -28693,8 +28761,8 @@ function setupYearOverviewToggle() {
       if (sectionType === 'news') {
         const rawAll = dedup([].concat(spec.news10 || [], spec.newsMore || []));
         const reordered = rotateAndShuffleTail(rawAll, 0);
-        document.getElementById('dcNewsTop10').innerHTML = reordered.slice(0, 5).map(x => `<li>${x}</li>`).join('');
-        document.getElementById('dcNewsMore').innerHTML = reordered.slice(5).map(x => `<li>${x}</li>`).join('');
+        document.getElementById('dcNewsTop10').innerHTML = reordered.slice(0, 5).map(x => `<li>${formatTipItemWithMatchedBadge(x, spec)}</li>`).join('');
+        document.getElementById('dcNewsMore').innerHTML = reordered.slice(5).map(x => `<li>${formatTipItemWithMatchedBadge(x, spec)}</li>`).join('');
         const nTs = document.getElementById('dcNewsUpdatedAt');
         if (nTs) nTs.textContent = `最後更新：${fullDate}`;
         if (dcCurrentTripKey) {
@@ -29429,6 +29497,11 @@ function setupYearOverviewToggle() {
         }
       }
     } catch (e) {}
+    try {
+      Object.keys(localStorage).forEach(k => {
+        if (k.startsWith('hk_leave_dc_live7_') || k.startsWith('hk_leave_dc_live8_')) localStorage.removeItem(k);
+      });
+    } catch (e) {}
     setTimeout(syncExternalTravelRulesJson, 400);
 
     // 按用戶輸入之旅行日期與目的地計算「時效性倒數提醒 ＋ 雲端核對狀態」
@@ -29685,8 +29758,9 @@ function setupYearOverviewToggle() {
       if (!cityObj) return;
       const lat = Number(cityObj.lat || 13.7563).toFixed(4);
       const lon = Number(cityObj.lon || 100.5018).toFixed(4);
-      const rawName = String(cityObj.name || 'Bangkok').replace(/（.*?）/g, '').trim();
-      const enName = DC_CITY_EN_MAP[rawName] || DC_CITY_EN_MAP[cityObj.name] || rawName;
+      const rawEn = String(cityObj.en || '').replace(/\(.*?\)/g, '').split('/')[0].trim();
+      const rawName = String(cityObj.name || 'Bangkok').replace(/（.*?）/g, '').split('/')[0].trim();
+      const enName = rawEn || DC_CITY_EN_MAP[rawName] || DC_CITY_EN_MAP[cityObj.name] || rawName;
 
       const wLink = document.getElementById('dcLinkWindy');
       if (wLink) wLink.href = `https://www.windy.com/${lat}/${lon}?${lat},${lon},9`;
@@ -29723,17 +29797,107 @@ function setupYearOverviewToggle() {
       VN: '越南國家旅遊局 (VNAT) ＆ 越南出入境管理局',
       SG: '新加坡旅遊局 (STB) ＆ 移民與關卡局 (ICA)',
       MY: '馬來西亞旅遊局 (Tourism Malaysia) ＆ 移民局',
-      JP: '日本政府觀光局 (JNTO) ＆ 數位廳 VJW',
+      ID: '印尼旅遊部 (Wonderful Indonesia) ＆ 移民局',
+      PH: '菲律賓旅遊部 (DOT) ＆ 移民局',
+      KH: '柬埔寨旅遊部 ＆ 移民總局',
+      LA: '老撾新聞文化旅遊部',
+      JP: '日本國家旅遊局 (JNTO) ＆ 數位廳 VJW',
       TW: '台灣交通部觀光署 ＆ 內政部移民署',
       KR: '韓國觀光公社 (KTO) ＆ 法務部出入境局',
-      GB: '英國旅遊局 (VisitBritain) ＆ GOV.UK 內政部',
-      FR: '法國旅遊發展署 (Atout France) ＆ 法國內政部'
+      CN: '國家移民管理局 ＆ 文化和旅遊部',
+      MO: '澳門旅遊局 (MGTO) ＆ 治安警察局',
+      GB: '英國政府 (GOV.UK) ＆ 英國旅遊局',
+      FR: '法國旅遊發展署 (Atout France) ＆ 法國內政部',
+      IT: '意大利國家旅遊局 (ENIT) ＆ 外交部',
+      CH: '瑞士國家旅遊局 (Switzerland Tourism)',
+      ES: '西班牙國家旅遊局 (Turespaña)',
+      DE: '德國國家旅遊局 (DZT) ＆ 聯邦內政部',
+      AU: '澳洲內政部 (Home Affairs) ＆ 旅遊局',
+      NZ: '新西蘭移民局 (INZ) ＆ 旅遊局',
+      CA: '加拿大政府 (Canada.ca) ＆ 邊境服務局',
+      US: '美國國務院旅遊局 ＆ 國土安全部',
+      AE: '杜拜經濟及旅遊部 (DET) ＆ 阿聯酋政府',
+      TR: '土耳其文化旅遊部 (GoTürkiye)'
     };
+
+    const DC_OFFICIAL_MEDIA_WHITELIST = {
+      TH: { domains: 'site:tatnews.org OR site:bangkokpost.com', org: '泰國觀光局 / 曼谷郵報', query: 'Thailand entry visa tourist' },
+      JP: { domains: 'site:japan.travel OR site:jnto.go.jp OR site:www3.nhk.or.jp', org: '日本國家旅遊局 / NHK', query: 'Japan tourist entry rule' },
+      KR: { domains: 'site:english.visitkorea.or.kr OR site:en.yna.co.kr', org: '韓國觀光公社 / 韓聯社', query: 'Korea tourist entry K-ETA' },
+      SG: { domains: 'site:stb.gov.sg OR site:visitsingapore.com OR site:channelnewsasia.com', org: '新加坡旅遊局 / CNA', query: 'Singapore ICA entry tourist' },
+      MY: { domains: 'site:malaysia.travel OR site:bernama.com', org: '馬來西亞旅遊局 / 馬新社', query: 'Malaysia MDAC tourist entry' },
+      VN: { domains: 'site:vietnam.travel OR site:vietnamnews.vn', org: '越南國家旅遊局 / Vietnam News', query: 'Vietnam e-visa tourist entry' },
+      ID: { domains: 'site:indonesia.travel OR site:antaranews.com', org: '印尼旅遊部 / 安塔拉通訊社', query: 'Indonesia Bali tourist entry' },
+      PH: { domains: 'site:philippines.travel OR site:pna.gov.ph', org: '菲律賓旅遊部 / 菲律賓通訊社', query: 'Philippines eTravel tourist entry' },
+      KH: { domains: 'site:tourismcambodia.org OR site:khmertimeskh.com', org: '柬埔寨旅遊部 / 高棉時報', query: 'Cambodia e-arrival tourist visa' },
+      LA: { domains: 'site:tourismlaos.org OR site:vientianetimes.org.la', org: '老撾旅遊部 / 萬象時報', query: 'Laos tourist visa entry' },
+      IN: { domains: 'site:incredibleindia.gov.in OR site:pib.gov.in', org: '印度政府新聞局 / 旅遊部', query: 'India e-visa tourist entry' },
+      NP: { domains: 'site:ntb.gov.np OR site:risingnepaldaily.com', org: '尼泊爾旅遊局 / 尼泊爾日報', query: 'Nepal tourist entry trekking' },
+      LK: { domains: 'site:srilanka.travel OR site:dailynews.lk', org: '斯里蘭卡旅遊局 / Daily News', query: 'Sri Lanka ETA tourist entry' },
+      MV: { domains: 'site:visitmaldives.com OR site:psmnews.mv', org: '馬爾代夫旅遊局 / PSM 國營台', query: 'Maldives IMUGA tourist entry' },
+      AE: { domains: 'site:u.ae OR site:visitdubai.com OR site:wam.ae', org: '阿聯酋政府 / 杜拜旅遊局', query: 'UAE Dubai tourist entry' },
+      QA: { domains: 'site:visitqatar.com OR site:qna.org.qa', org: '卡塔爾旅遊局 / 卡塔爾通訊社', query: 'Qatar Hayya tourist entry' },
+      SA: { domains: 'site:visitsaudi.com OR site:spa.gov.sa', org: '沙特旅遊局 / 沙特通訊社', query: 'Saudi Arabia tourist e-visa' },
+      JO: { domains: 'site:visitjordan.com OR site:petra.gov.jo', org: '約旦旅遊局 / 約旦通訊社', query: 'Jordan Pass tourist entry' },
+      TR: { domains: 'site:goturkiye.com OR site:aa.com.tr', org: '土耳其旅遊局 / 阿納多盧通訊社', query: 'Turkey tourist entry travel' },
+      GB: { domains: 'site:gov.uk OR site:bbc.com/news', org: '英國政府 GOV.UK / BBC', query: 'UK ETA border entry travel' },
+      FR: { domains: 'site:france.fr OR site:france24.com', org: '法國旅遊發展署 / France 24', query: 'France travel entry Schengen' },
+      IT: { domains: 'site:italia.it OR site:ansa.it', org: '意大利國家旅遊局 / ANSA', query: 'Italy travel tourist entry' },
+      CH: { domains: 'site:myswitzerland.com OR site:swissinfo.ch', org: '瑞士國家旅遊局 / Swissinfo', query: 'Switzerland travel tourist' },
+      ES: { domains: 'site:spain.info OR site:efe.com', org: '西班牙國家旅遊局 / 埃菲社', query: 'Spain travel tourist entry' },
+      DE: { domains: 'site:germany.travel OR site:dw.com', org: '德國國家旅遊局 / 德國之聲 DW', query: 'Germany travel Schengen entry' },
+      AT: { domains: 'site:austria.info OR site:orf.at', org: '奧地利國家旅遊局 / ORF', query: 'Austria travel tourist' },
+      NL: { domains: 'site:holland.com OR site:nltimes.nl', org: '荷蘭旅遊局 / NL Times', query: 'Netherlands Amsterdam tourist' },
+      IS: { domains: 'site:visiticeland.com OR site:ruv.is', org: '冰島旅遊局 / 冰島國家廣播 RÚV', query: 'Iceland travel safety volcano' },
+      GR: { domains: 'site:visitgreece.gr OR site:amna.gr', org: '希臘國家旅遊局 / 雅典通訊社', query: 'Greece travel tourist' },
+      PT: { domains: 'site:visitportugal.com OR site:rtp.pt', org: '葡萄牙旅遊局 / 葡萄牙廣播 RTP', query: 'Portugal travel tourist' },
+      AU: { domains: 'site:homeaffairs.gov.au OR site:australia.com OR site:abc.net.au', org: '澳洲內政部 / ABC 澳洲廣播', query: 'Australia ETA biosecurity entry' },
+      NZ: { domains: 'site:immigration.govt.nz OR site:newzealand.com OR site:rnz.co.nz', org: '新西蘭移民局 / RNZ 國營電台', query: 'New Zealand NZeTA IVL entry' },
+      CA: { domains: 'site:canada.ca OR site:cbc.ca', org: '加拿大政府 / CBC 加拿大廣播', query: 'Canada eTA travel entry' },
+      US: { domains: 'site:travel.state.gov OR site:cbp.gov', org: '美國國務院 / 海關邊境局 CBP', query: 'US visa customs entry' },
+      EG: { domains: 'site:experienceegypt.eg OR site:sis.gov.eg', org: '埃及旅遊局 / 埃及新聞總署', query: 'Egypt tourist visa entry' },
+      MA: { domains: 'site:visitmorocco.com OR site:mapnews.ma', org: '摩洛哥旅遊局 / 摩洛哥通訊社', query: 'Morocco travel tourist entry' }
+    };
+
+    const DC_SOURCE_BADGE_MAP = {
+      hk_sb: { label: '香港保安局', icon: '🇭🇰', cls: 'bg-blue-100 text-blue-950 border-blue-300', dot: 'bg-blue-700' },
+      hk_official: { label: '香港入境處 / RTHK', icon: '🇭🇰', cls: 'bg-indigo-100 text-indigo-950 border-indigo-300', dot: 'bg-indigo-600' },
+      local_gov: { label: '當地官方機構 · 譯', icon: '🌐', cls: 'bg-emerald-100 text-emerald-950 border-emerald-300', dot: 'bg-emerald-600' },
+      advisory: { label: '安全風險評級', icon: '🛡️', cls: 'bg-amber-100 text-amber-950 border-amber-300', dot: 'bg-amber-500' }
+    };
+
+    function getSourceBadgeIcon(srcId, spec) {
+      if (srcId === 'hk_sb' || srcId === 'hk_official') return '🇭🇰';
+      if (srcId === 'advisory') return '🛡️';
+      if (srcId === 'local_gov') {
+        const dbEntry = (typeof GLOBAL_COUNTRY_DATABASE !== 'undefined' && dcCurrentCountryCode) ? GLOBAL_COUNTRY_DATABASE[dcCurrentCountryCode] : null;
+        return (spec && spec.flag) || (dbEntry && dbEntry.flag) || '🌐';
+      }
+      return '🌐';
+    }
+
+    function classifyTipSourceId(rawText) {
+      const t = String(rawText || '');
+      if (/(保安局|外遊警示|紅色警示|黃色警示|黑色警示)/.test(t)) return 'hk_sb';
+      if (/(特區護照|入境處|BNO|回鄉證|回港|港人|香港電台|RTHK|1868)/i.test(t)) return 'hk_official';
+      if (/(安全風險|安全指數|治安|騙案|扒手|防範|高危|緊急|示威|恐襲|詐騙|假警察|黑的|迷魂)/.test(t)) return 'advisory';
+      return 'local_gov';
+    }
+
+    function formatTipItemWithMatchedBadge(rawHtml, spec) {
+      const srcId = classifyTipSourceId(rawHtml);
+      const meta = DC_SOURCE_BADGE_MAP[srcId] || DC_SOURCE_BADGE_MAP.local_gov;
+      const icon = getSourceBadgeIcon(srcId, spec);
+      const localAuth = DC_LOCAL_AUTHORITY_NAMES[dcCurrentCountryCode] || `${(spec && spec.name) || '當地'}官方機構`;
+      const shortLocal = localAuth.split('＆')[0].split('(')[0].trim();
+      const label = srcId === 'local_gov' ? `${shortLocal} · 譯` : meta.label;
+      return `${rawHtml} <span class="dc-source-color-badge inline-flex items-center gap-1 ml-1 px-1.5 py-0.2 rounded border ${meta.cls} font-extrabold text-[8.5px] align-middle"><span class="w-1.5 h-1.5 rounded-full ${meta.dot}"></span><span>${icon}</span><span>${label}</span></span>`;
+    }
 
     async function translateEnToZhHk(text) {
       if (!text) return '';
       try {
-        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=zh-TW&dt=t&q=${encodeURIComponent(text.slice(0, 220))}`;
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=zh-TW&dt=t&q=${encodeURIComponent(text.slice(0, 240))}`;
         const res = await fetch(url);
         if (res.ok) {
           const data = await res.json();
@@ -29791,36 +29955,26 @@ function setupYearOverviewToggle() {
       }
     }
 
-    function filterAndExtractTravelAlert(rawText, placeName) {
-      if (!rawText) return '';
-      // 嚴格拆句：只允許真正具備「最新旅遊警示／入境政策／交通治安異動」嘅句子通過，徹底封殺人口、首都、面積、歷史、氣候介紹等百科廢話！
-      const sentences = rawText.split(/[。！？!?\n]/).map(s => s.trim()).filter(Boolean);
-      const triviaRx = /(首都|最大城市|第二大|第三大|人口|居民|萬人|億人|面積|平方公里|平方英里|位於|坐落|地處|半島|盆地|平原|三角洲|海峽|接壤|鄰國|行政區|省份|府份|官方語言|主要宗教|歷史上|建城|成立於|氣候屬於|熱帶季風|亞熱帶|知名景點|著名美食|購物天堂|旅遊勝地)/;
-      const alertRx = /(外遊警示|安全警示|紅色警示|黃色警示|黑色警示|入境規定|免簽|電子入境|簽證|申報|海關|機場快線|地鐵罷工|交通管制|封路|颱風|暴雨|洪水|地震|火山|登革熱|疫情|詐騙|騙案|扒手|宵禁|禁酒|罰款|違法|嚴禁|暫停開放)/;
-      const useful = sentences.filter(s => s.length >= 10 && !triviaRx.test(s) && alertRx.test(s));
-      if (useful.length === 0) return '';
-      const picked = useful.slice(0, 2).join('；');
-      if (triviaRx.test(picked)) return '';
-      return picked.length > 90 ? picked.slice(0, 90) + '...' : picked;
-    }
-
     async function fetchLiveWikivoyageAndNews(tripKey, isManual = false) {
       if (!dcActiveCountrySpec) return;
       const spec = dcActiveCountrySpec;
       const cityZh = (dcSelectedCity && dcSelectedCity.name) ? dcSelectedCity.name : (spec.name || '曼谷');
-      const cityEn = DC_CITY_EN_MAP[cityZh] || cityZh;
       const localAuth = DC_LOCAL_AUTHORITY_NAMES[dcCurrentCountryCode] || `${spec.name || '當地'}官方旅遊局及出入境部門`;
-      const cacheKey = 'hk_leave_dc_live7_' + dcCurrentCountryCode + '_' + cityZh;
+      const cacheKey = 'hk_leave_dc_official_v9_' + dcCurrentCountryCode + '_' + cityZh;
 
       const localGovPill = document.getElementById('dcLocalGovPillName');
       if (localGovPill) {
-        localGovPill.textContent = '○ ' + localAuth.split('＆')[0].trim();
+        localGovPill.textContent = localAuth.split('＆')[0].trim() + '（譯）';
+      }
+      const localGovFlagEl = document.getElementById('dcLocalGovFlagSpan');
+      if (localGovFlagEl) {
+        localGovFlagEl.textContent = getSourceBadgeIcon('local_gov', spec);
       }
 
       try {
         if (!isManual) {
           const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-          if (cached && cached.ts && (Date.now() - cached.ts < 43200000) && Array.isArray(cached.items) && cached.items.length > 0) {
+          if (cached && cached.ts && (Date.now() - cached.ts < 43200000) && Array.isArray(cached.items)) {
             renderLiveMultiSourceItems(cached.items, cached.dateStr, localAuth);
             return;
           }
@@ -29828,67 +29982,69 @@ function setupYearOverviewToggle() {
 
         const fetchedItems = [];
         const dStr = new Date().toLocaleDateString('zh-HK', { month: 'numeric', day: 'numeric' });
+        const countryZh = spec.name || cityZh;
 
-        // 來源 1：中文維基導遊（僅篩選安全／入境／交通實用段落，剔除地理人口百科廢話）
+        // 頻道 1 & 2（深藍 / 靛藍）：僅限香港保安局 (sb.gov.hk)、港府新聞公報 (info.gov.hk)、入境處 (immd.gov.hk) 及香港電台 (rthk.hk) 嚴肅官方報道
         try {
-          const rZh = await fetch(`https://zh.wikivoyage.org/w/api.php?action=query&format=json&origin=*&prop=extracts&explaintext=1&exsectionformat=plain&titles=${encodeURIComponent(cityZh)}`);
-          if (rZh.ok) {
-            const jZh = await rZh.json();
-            const pages = jZh?.query?.pages ? Object.values(jZh.query.pages) : [];
-            if (pages.length > 0 && pages[0].extract) {
-              const filteredZh = filterAndExtractTravelAlert(pages[0].extract.replace(/\s+/g, ' '), cityZh);
-              if (filteredZh) {
-                fetchedItems.push({ topic: `${cityZh}旅遊安全與交通動態`, tier: 2, srcId: 'wiki_zh', text: filteredZh });
-              }
-            }
-          }
-        } catch (e) {}
-
-        // 來源 2：英文 Wikivoyage 最新安全／入境修訂 ＋ 自動繁中翻譯 ＋ 過濾地理廢話
-        try {
-          const rEn = await fetch(`https://en.wikivoyage.org/w/api.php?action=query&format=json&origin=*&prop=extracts&explaintext=1&titles=${encodeURIComponent(cityEn)}`);
-          if (rEn.ok) {
-            const jEn = await rEn.json();
-            const pagesEn = jEn?.query?.pages ? Object.values(jEn.query.pages) : [];
-            if (pagesEn.length > 0 && pagesEn[0].extract) {
-              const rawEn = pagesEn[0].extract.replace(/\s+/g, ' ').trim().slice(0, 220);
-              const zhTranslated = await translateEnToZhHk(rawEn);
-              const filteredEn = filterAndExtractTravelAlert(zhTranslated, cityZh);
-              if (filteredEn) {
-                fetchedItems.push({ topic: `${cityZh}旅客須知修訂`, tier: 2, srcId: 'wiki_en', text: filteredEn });
-              }
-            }
-          }
-        } catch (e) {}
-
-        // 來源 3：港媒／當地即時旅遊與入境新聞（剔除新聞標題後方媒體名稱）
-        try {
-          const gNewsQ = encodeURIComponent(`${spec.name || cityZh} 旅遊 入境 最新`);
-          const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://news.google.com/rss/search?q=${gNewsQ}&hl=zh-HK&gl=HK&ceid=HK:zh-Hant`)}`;
-          const rNews = await fetch(rssUrl);
-          if (rNews.ok) {
-            const jNews = await rNews.json();
-            if (jNews && Array.isArray(jNews.items) && jNews.items.length > 0) {
-              const rawTitle = (jNews.items[0].title || '').replace(/\s*[-–—|]\s*[^-–—|]+$/, '').trim();
+          const hkOfficialQ = encodeURIComponent(`${countryZh} (site:sb.gov.hk OR site:info.gov.hk OR site:immd.gov.hk OR site:news.rthk.hk)`);
+          const hkRssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://news.google.com/rss/search?q=${hkOfficialQ}&hl=zh-HK&gl=HK&ceid=HK:zh-Hant`)}`;
+          const rHk = await fetch(hkRssUrl);
+          if (rHk.ok) {
+            const jHk = await rHk.json();
+            if (jHk && Array.isArray(jHk.items) && jHk.items.length > 0) {
+              const item0 = jHk.items[0];
+              const linkStr = String(item0.link || '');
+              const rawTitle = (item0.title || '').replace(/\s*[-–—|]\s*[^-–—|]+$/, '').trim();
               if (rawTitle) {
-                fetchedItems.push({ topic: `${spec.name || cityZh}最新旅遊報道`, tier: 1, srcId: 'news', text: rawTitle });
+                const isSb = linkStr.includes('sb.gov.hk') || rawTitle.includes('外遊警示');
+                fetchedItems.push({
+                  topic: isSb ? `保安局對${countryZh}最新外遊警示動態` : `香港官方頻道：${countryZh}最新資訊`,
+                  srcId: isSb ? 'hk_sb' : 'hk_official',
+                  badgeLabel: isSb ? '香港保安局' : '港府 / RTHK',
+                  text: rawTitle
+                });
               }
             }
           }
         } catch (e) {}
 
-        // 來源 4：全球旅遊安全風險指數開放介面
+        // 頻道 3（翠綠）：當地官方旅遊局 / 政府 / 國家通訊社白名單，自動翻譯成繁體中文
         try {
-          if (dcCurrentCountryCode && dcCurrentCountryCode.length === 2) {
+          const wl = DC_OFFICIAL_MEDIA_WHITELIST[dcCurrentCountryCode];
+          if (wl && wl.domains) {
+            const localQ = encodeURIComponent(`${wl.query} (${wl.domains})`);
+            const localRssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://news.google.com/rss/search?q=${localQ}&hl=en&gl=US&ceid=US:en`)}`;
+            const rLocal = await fetch(localRssUrl);
+            if (rLocal.ok) {
+              const jLocal = await rLocal.json();
+              if (jLocal && Array.isArray(jLocal.items) && jLocal.items.length > 0) {
+                const rawEnTitle = (jLocal.items[0].title || '').replace(/\s*[-–—|]\s*[^-–—|]+$/, '').trim();
+                if (rawEnTitle) {
+                  const zhTitle = await translateEnToZhHk(rawEnTitle);
+                  fetchedItems.push({
+                    topic: `${wl.org}最新官方公告`,
+                    srcId: 'local_gov',
+                    badgeLabel: `${wl.org.split('/')[0].trim()} · 譯`,
+                    text: zhTitle
+                  });
+                }
+              }
+            }
+          }
+        } catch (e) {}
+
+        // 頻道 4（琥珀金）：全球旅遊安全風險指數官方開放介面
+        try {
+          if (dcCurrentCountryCode && dcCurrentCountryCode.length === 2 && !['HK', 'MO', 'CN', 'TW'].includes(dcCurrentCountryCode)) {
             const rAdv = await fetch(`https://www.travel-advisory.info/api?countrycode=${dcCurrentCountryCode}`);
             if (rAdv.ok) {
               const jAdv = await rAdv.json();
               const info = jAdv?.data?.[dcCurrentCountryCode]?.advisory;
               if (info && info.score !== undefined) {
                 fetchedItems.push({
-                  topic: `${spec.name || dcCurrentCountryCode}實時安全風險評級`,
-                  tier: 1,
+                  topic: `${countryZh}國際安全風險評估指數`,
                   srcId: 'advisory',
+                  badgeLabel: '安全風險評級',
                   text: `當前國際安全風險指數 ${Number(info.score).toFixed(1)} / 5.0（核實日期：${info.updated || dStr}）`
                 });
               }
@@ -29896,15 +30052,15 @@ function setupYearOverviewToggle() {
           }
         } catch (e) {}
 
-        if (fetchedItems.length > 0) {
-          localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), items: fetchedItems, dateStr: dStr }));
-          renderLiveMultiSourceItems(fetchedItems, dStr, localAuth);
-          if (isManual && typeof showToast === 'function') showToast(`✅ 已從 ${fetchedItems.length} 個情報源同步最新動態`);
-        } else if (isManual && typeof showToast === 'function') {
-          showToast('✅ 已顯示最新核實本地精華情報');
+        localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), items: fetchedItems, dateStr: dStr }));
+        renderLiveMultiSourceItems(fetchedItems, dStr, localAuth);
+        if (isManual && typeof showToast === 'function') {
+          showToast(fetchedItems.length > 0
+            ? `✅ 已從 ${fetchedItems.length} 個官方頻道同步最新公告`
+            : '✅ 已核對官方頻道，暫無額外突發公報');
         }
       } catch (e) {
-        if (isManual && typeof showToast === 'function') showToast('⚠️ 離線狀態：已顯示內置最新核實情報');
+        if (isManual && typeof showToast === 'function') showToast('⚠️ 離線狀態：已顯示內置官方核實條款');
       }
     }
 
@@ -29912,19 +30068,21 @@ function setupYearOverviewToggle() {
       const now = new Date();
       const fullDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
       const gTs = document.getElementById('dcTipsGlobalUpdatedAt');
-      if (gTs) {
-        gTs.textContent = `最後更新：${fullDate}`;
-      }
+      if (gTs) gTs.textContent = `官方頻道同步：${fullDate}`;
       const nTs = document.getElementById('dcNewsUpdatedAt');
-      if (nTs) nTs.textContent = `最後更新：${fullDate}`;
+      if (nTs) nTs.textContent = `最後核對：${fullDate}`;
 
       const localGovPill = document.getElementById('dcLocalGovPillName');
       if (localGovPill && localAuth) {
-        localGovPill.textContent = '○ ' + localAuth.split('＆')[0].trim();
+        localGovPill.textContent = localAuth.split('＆')[0].trim() + '（譯）';
+      }
+      const localGovFlagEl = document.getElementById('dcLocalGovFlagSpan');
+      if (localGovFlagEl) {
+        localGovFlagEl.textContent = getSourceBadgeIcon('local_gov', dcActiveCountrySpec);
       }
 
-      // 在有抓到新資料的來源機構名稱旁邊顯示 UPDATE 徽章
-      const activeIds = new Set(items.map(x => x.srcId));
+      // 頂部來源方格亮起對應 LIVE 標籤，與下方每條情報顏色 100% 呼應
+      const activeIds = new Set((items || []).map(x => x.srcId));
       const grid = document.getElementById('dcTipsSourcePillsGrid');
       if (grid) {
         grid.querySelectorAll('[data-src-id]').forEach(el => {
@@ -29934,25 +30092,34 @@ function setupYearOverviewToggle() {
         });
       }
 
-      const moreUl = document.getElementById('dcNewsMore');
-      if (!moreUl) return;
-      moreUl.querySelectorAll('.dc-live-wiki-item').forEach(el => el.remove());
+      // 清除舊動態條目，確保所有條目均採用頂部 4 大官方來源對應色彩徽章
+      ['dcNewsTop10', 'dcNewsMore'].forEach(ulId => {
+        const ul = document.getElementById(ulId);
+        if (!ul) return;
+        ul.querySelectorAll('.dc-live-wiki-item').forEach(el => el.remove());
+      });
 
-      const existingNewsTitles = new Set(
+      const topUl = document.getElementById('dcNewsTop10');
+      if (!topUl || !Array.isArray(items) || items.length === 0) return;
+
+      const existingTitles = new Set(
         Array.from(document.querySelectorAll('#dcNewsTop10 b, #dcNewsMore b')).map(b => b.textContent.trim())
       );
+
+      // 將實時抓到的官方頻道最新公告置頂顯示於第 1 欄最上方，並附上對應來源顏色徽章
       items.slice().reverse().forEach(it => {
-        const topicTitleCheck = (it.topic || it.source || '最新旅遊動態').trim();
-        if (existingNewsTitles.has(topicTitleCheck)) return;
-        existingNewsTitles.add(topicTitleCheck);
+        const topicTitle = (it.topic || '官方最新公告').trim();
+        if (existingTitles.has(topicTitle)) return;
+        existingTitles.add(topicTitle);
+        const badgeMeta = DC_SOURCE_BADGE_MAP[it.srcId] || DC_SOURCE_BADGE_MAP.local_gov;
+        const badgeIcon = getSourceBadgeIcon(it.srcId, dcActiveCountrySpec);
+        const badgeText = it.badgeLabel || badgeMeta.label;
         const li = document.createElement('li');
-        li.className = 'dc-live-wiki-item text-slate-700';
-        const topicTitle = it.topic || it.source || '最新旅遊動態';
-        li.innerHTML = `<b class="text-blue-950">${topicTitle}</b>：${it.text} <span class="inline-block ml-1 px-1.5 py-0.2 rounded bg-blue-600 text-white font-mono text-[8.5px] font-black align-middle">NEW UPDATE</span>`;
-        moreUl.prepend(li);
+        li.className = 'dc-live-wiki-item text-slate-800';
+        li.innerHTML = `<b class="text-blue-950">${topicTitle}</b>：${it.text} <span class="dc-source-color-badge inline-flex items-center gap-1 ml-1 px-1.5 py-0.2 rounded border ${badgeMeta.cls} font-extrabold text-[8.5px] align-middle"><span class="w-1.5 h-1.5 rounded-full ${badgeMeta.dot}"></span><span>${badgeIcon}</span><span>${badgeText}</span></span>`;
+        topUl.prepend(li);
       });
     }
-
 
     function getChineseNewYearDate(year) {
       // 精準農曆正月初一公曆日期表 (2024-2035) 及通用推算
@@ -30551,8 +30718,8 @@ function setupYearOverviewToggle() {
       const allNews = dedupByTopic([].concat(spec.news10 || [], spec.newsMore || []));
       const newsTop5 = allNews.slice(0, 5);
       const newsRest = allNews.slice(5);
-      document.getElementById('dcNewsTop10').innerHTML = newsTop5.map(x => `<li>${x}</li>`).join('');
-      document.getElementById('dcNewsMore').innerHTML = newsRest.map(x => `<li>${x}</li>`).join('');
+      document.getElementById('dcNewsTop10').innerHTML = newsTop5.map(x => `<li>${formatTipItemWithMatchedBadge(x, spec)}</li>`).join('');
+      document.getElementById('dcNewsMore').innerHTML = newsRest.map(x => `<li>${formatTipItemWithMatchedBadge(x, spec)}</li>`).join('');
       document.getElementById('dcNewsMore').classList.add('hidden');
       document.getElementById('dcChevNews').style.transform = 'rotate(0deg)';
       const newsLbl = '更多';
@@ -30581,23 +30748,28 @@ function setupYearOverviewToggle() {
       document.getElementById('dcTxtCulture').setAttribute('data-default-label', cultureLbl);
       document.getElementById('dcTxtCulture').textContent = cultureLbl;
 
-      const rawEmergency = Array.isArray(spec.emergency) ? spec.emergency.slice() : [
+
+      const cCodeUpper = (resolved.code || '').toUpperCase();
+      let rawEmergency = Array.isArray(spec.emergency) ? spec.emergency.slice() : [
         { label: '香港入境處 24 小時求助 · HK Immigration 24h Hotline', num: '+852 1868', primary: true }
       ];
-      // 第 2 行：外交部全球領保熱線（直接標註轉介領事館）
-      const has12308 = rawEmergency.some(item => String(item.num).includes('12308'));
-      if (!has12308) {
-        const mfaItem = {
-          label: '外交部全球領保熱線（轉介領事館）· MFA 12308 Hotline',
-          num: '+86 10 12308',
-          primary: false,
-          mfa: true
-        };
-        if (rawEmergency.length >= 1) rawEmergency.splice(1, 0, mfaItem);
-        else rawEmergency.push(mfaItem);
+      if (cCodeUpper === 'HK') {
+        rawEmergency = rawEmergency.filter(item => !String(item.num).includes('1868') && !String(item.num).includes('12308'));
+      } else {
+        // 第 2 行：外交部全球領保熱線（直接標註轉介領事館）
+        const has12308 = rawEmergency.some(item => String(item.num).includes('12308'));
+        if (!has12308) {
+          const mfaItem = {
+            label: '外交部全球領保熱線（轉介領事館）· MFA 12308 Hotline',
+            num: '+86 10 12308',
+            primary: false,
+            mfa: true
+          };
+          if (rawEmergency.length >= 1) rawEmergency.splice(1, 0, mfaItem);
+          else rawEmergency.push(mfaItem);
+        }
       }
-      // 第 3 行：中國駐當地使領館領保電話（非中國內地／澳門／台灣地區自動顯示）
-      const cCodeUpper = (resolved.code || '').toUpperCase();
+      // 第 3 行：中國駐當地使領館領保電話（非中國內地／香港／澳門／台灣地區自動顯示）
       const embassyInfo = DC_CN_EMBASSY_HOTLINES[cCodeUpper];
       if (embassyInfo && !rawEmergency.some(item => item.embassy)) {
         const embItem = {
@@ -31754,24 +31926,22 @@ function setupYearOverviewToggle() {
             <i class="fa-solid fa-circle-info text-blue-600 text-[10px]"></i>
             <span>以下第 1 至 3 欄資訊均綜合整理自下列機構及平台：</span>
           </div>
-          <div id="dcTipsSourcePillsGrid" class="grid grid-cols-2 gap-x-2 gap-y-1 leading-snug">
-            <span data-src-id="news" class="font-extrabold text-blue-950 truncate flex items-center gap-1">
-              <span>● 本港及當地即時新聞</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-950 text-white">UPDATE</span>
+          <div id="dcTipsSourcePillsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 leading-snug">
+            <span data-src-id="hk_sb" class="px-2 py-1 rounded-lg bg-blue-50 border border-blue-300 font-extrabold text-blue-950 truncate flex items-center justify-between gap-1">
+              <span class="flex items-center gap-1.5 truncate"><span class="w-2.5 h-2.5 rounded-full bg-blue-700 shrink-0"></span><span class="text-xs leading-none shrink-0">🇭🇰</span><span class="truncate">香港保安局外遊警示及公報</span></span>
+              <span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1.5 py-0.2 rounded bg-blue-700 text-white shrink-0">LIVE</span>
             </span>
-            <span data-src-id="advisory" class="font-extrabold text-blue-950 truncate flex items-center gap-1">
-              <span>● 全球旅遊安全風險評估</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-950 text-white">UPDATE</span>
+            <span data-src-id="hk_official" class="px-2 py-1 rounded-lg bg-indigo-50 border border-indigo-300 font-extrabold text-indigo-950 truncate flex items-center justify-between gap-1">
+              <span class="flex items-center gap-1.5 truncate"><span class="w-2.5 h-2.5 rounded-full bg-indigo-600 shrink-0"></span><span class="text-xs leading-none shrink-0">🇭🇰</span><span class="truncate">香港入境處及香港電台 (RTHK)</span></span>
+              <span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1.5 py-0.2 rounded bg-indigo-600 text-white shrink-0">LIVE</span>
             </span>
-            <span data-src-id="wiki_zh" class="font-bold text-blue-700 truncate flex items-center gap-1">
-              <span>◐ 維基導遊（繁體中文）</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-600 text-white">UPDATE</span>
+            <span data-src-id="local_gov" class="px-2 py-1 rounded-lg bg-emerald-50 border border-emerald-300 font-extrabold text-emerald-950 truncate flex items-center justify-between gap-1">
+              <span class="flex items-center gap-1.5 truncate"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0"></span><span id="dcLocalGovFlagSpan" class="text-xs leading-none shrink-0">🌐</span><span id="dcLocalGovPillName" class="truncate">當地官方旅遊局／政府法規（譯）</span></span>
+              <span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1.5 py-0.2 rounded bg-emerald-600 text-white shrink-0">LIVE</span>
             </span>
-            <span data-src-id="wiki_en" class="font-bold text-blue-700 truncate flex items-center gap-1">
-              <span>◐ Wikivoyage（自動繁體譯本）</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-600 text-white">UPDATE</span>
-            </span>
-            <span data-src-id="hk_sb" class="font-semibold text-blue-500 truncate flex items-center gap-1">
-              <span>○ 香港保安局外遊警示</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-100 text-blue-900">UPDATE</span>
-            </span>
-            <span data-src-id="local_gov" class="font-semibold text-blue-500 truncate flex items-center gap-1">
-              <span id="dcLocalGovPillName" class="truncate">○ 當地官方旅遊及出入境部門</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-100 text-blue-900">UPDATE</span>
+            <span data-src-id="advisory" class="px-2 py-1 rounded-lg bg-amber-50 border border-amber-300 font-extrabold text-amber-950 truncate flex items-center justify-between gap-1">
+              <span class="flex items-center gap-1.5 truncate"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0"></span><span class="text-xs leading-none shrink-0">🛡️</span><span class="truncate">全球旅遊安全風險評估指數</span></span>
+              <span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1.5 py-0.2 rounded bg-amber-600 text-white shrink-0">LIVE</span>
             </span>
           </div>
           <div class="flex items-center justify-between gap-2 pt-1 border-t border-slate-200/70">
@@ -33031,7 +33201,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-blue-700 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-black text-blue-950 tracking-tight">版本更新日誌</span>
             </span>
-            <span class="text-[10.5px] font-mono font-bold text-blue-700">v5.8.0</span>
+            <span class="text-[10.5px] font-mono font-bold text-blue-700">v5.11.9</span>
           </button>
         </div>
 
