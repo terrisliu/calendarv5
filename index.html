@@ -344,7 +344,7 @@
       animation-play-state: paused;
     }
 
-    /* 永久吸頂鎖定（展開雙錦囊時保持原地吸頂零跳動，並在全高度視窗內順暢滾動） */
+    /* 永久吸頂鎖定（展開雙錦囊時鎖定背景月曆不穿透捲動，並精確計算可用視口高度確保100%滑到底部） */
     #mobileTopTripRibbon.is-pinned-sticky {
       position: sticky;
       top: 44px;
@@ -354,35 +354,49 @@
     #mobileTopTripRibbon.is-pinned-sticky.is-dc-expanded {
       position: sticky !important;
       top: 44px !important;
-      z-index: 32;
+      z-index: 45;
+    }
+    @media (max-width: 1023px) {
+      body.dc-mobile-sheet-lock {
+        overflow: hidden !important;
+        overscroll-behavior: none !important;
+      }
     }
     .dc-scroll-viewport {
-      max-height: calc(100dvh - 148px);
-      max-height: calc(100vh - 148px);
-      min-height: 62vh;
-      overflow-y: auto;
-      overflow-x: hidden;
+      height: var(--dc-avail-h, calc(100dvh - 195px));
+      max-height: var(--dc-avail-h, calc(100dvh - 195px));
+      min-height: 220px;
+      padding-bottom: calc(3.25rem + env(safe-area-inset-bottom, 0px)) !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch;
-      overscroll-behavior: contain;
+      overscroll-behavior-y: contain;
+      overscroll-behavior-x: none;
       touch-action: pan-y;
     }
     @media (min-width: 1024px) {
       .dc-scroll-viewport {
+        height: auto !important;
         max-height: none !important;
-        overflow-y: visible !important;
-        overflow-x: hidden !important;
+        padding-bottom: 0.75rem !important;
+        overflow: visible !important;
       }
       #rightSidePanel {
         position: relative;
+        min-height: 0;
       }
       #rightSidePanelCard {
         position: absolute !important;
         inset: 0 !important;
         height: 100% !important;
         max-height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
         overflow: hidden !important;
       }
       #tabContentLeaves {
+        flex: 1 1 0% !important;
+        min-height: 0 !important;
         overflow-y: auto !important;
         overscroll-behavior: contain;
       }
@@ -1935,6 +1949,10 @@
         height: 22px !important;
         line-height: 22px !important;
       }
+      #dcFxCalcInput {
+        font-size: 16px !important;
+        line-height: 1.2 !important;
+      }
       #inputFlightOutDep,
       #inputFlightOutArr,
       #inputFlightInDep,
@@ -2843,7 +2861,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.9.1</span>
+      <span>v5.9.4</span>
     </button>
   </footer>
 
@@ -3085,7 +3103,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.9.1</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.9.4</span>
             </h3>
           </div>
         </div>
@@ -3095,10 +3113,53 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <!-- v5.9.4 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.9.4（電腦版雙錦囊滑鼠滾輪流暢聯動 · 修正泰國「TDAC 或 THIM 任選其一」· 城市指南精簡「更多／收起」· 視窗縮放自動保留開啟狀態）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">DESKTOP & RESPONSIVE FIX</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🖥️ 修復電腦端游標停留於雙錦囊時滾輪無反應、視窗縮放後消失問題，並修正泰國入境申報為「TDAC 或 THIM 二選一」</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 電腦版滑鼠滾輪直接驅動右側主清單捲動</b>：修正右側面板高度分配並加入滑鼠滾輪聯動，游標指向「出行須知」或「城市指南」內任何位置滾動均可暢順上下瀏覽。</li>
+            <li><b>② 泰國入境申報更正為「TDAC 或 THIM 任選其一」</b>：全面將「TDAC ＋ THIM / 及」改為「<b>TDAC 或 THIM（二選一即可，無需兩項同時登記）</b>」。</li>
+            <li><b>③ 城市指南三大板塊右下角按鈕統一簡化</b>：動態渲染時徹底套用純淨「<code>更多 ▾</code>」及「<code>收起 ▴</code>」。</li>
+            <li><b>④ 電腦／手機視窗縮放自動保留雙錦囊開啟狀態</b>：將瀏覽器視窗拉窄至手機版再拉回全螢幕時，已開啟的出行須知／城市指南會自動無縫還原至對應位置，無需重新點擊。</li>
+          </ul>
+        </div>
+
+        <!-- v5.9.3 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.9.3（一體化大位數貨幣換算視窗 · 氣象及匯率地球外鏈直達目標城市與港幣兌換 · 城市指南來源說明與極簡「更多／收起」按鈕）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">FX & DIRECT LINKS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">💱 合併貨幣換算為全寬單一視窗支援大位數完整顯示與手機數字鍵盤，並打通天氣與匯率外鏈直達目標城市及港幣報價</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 一體化全寬貨幣換算白色視窗</b>：取消右側獨立換算欄，預設顯示 <code>1 HKD ≈ 目標貨幣</code>，點擊銀碼自動全選並彈出純數字小鍵盤（<code>inputmode="decimal"</code>），支援自動千分位逗號與一鍵清空（<code>×</code>），日元、韓元、越南盾等大位數金額完整顯示不截斷。</li>
+            <li><b>② 天氣地球外鏈直達目標城市預報</b>：Windy（精準經緯度飛抵）、AccuWeather（直達 40+ 主要旅遊城市預報專頁）與 Weather.com（帶入目標城市座標今日預報）一鍵直達。</li>
+            <li><b>③ 匯率地球外鏈直達「目標貨幣 ⇄ 港幣」</b>：TTRate 香港找換店格價網、XE.com 及 Wise 全部自動帶入 <code>HKD</code> 與當前目標外幣專屬換算頁面。</li>
+            <li><b>④ 城市指南來源說明與極簡「更多／收起」</b>：頂部補上「以下第 1 至 3 欄資訊均綜合整理自下列機構及平台：」提示，右下角展開按鈕統一簡化為「<code>更多 ▾</code>」及「<code>收起 ▴</code>」。</li>
+          </ul>
+        </div>
+
+        <!-- v5.9.2 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.9.2（修復手機版瀏覽「出行須知／城市指南」時滑動穿透至背景月曆、無法暢順拉到最底部的問題）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">MOBILE SCROLL LOCK</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 動態精算手機視口剩餘高度並鎖定背景月曆滾動，確保雙錦囊 100% 暢順掃到最底一行</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 動態計算視口高度（<code>syncDcViewportHeight()</code>）＋ 底部安全留白</b>：即時量度視窗扣除頂部工具列與旅程卡片後之真實剩餘高度（<code>--dc-avail-h</code>），並加入底部安全內邊距，確保最底層自訂檢查項目及緊急求助熱線完整可滑動見底。</li>
+            <li><b>② 鎖定背景月曆滾動穿透（<code>dc-mobile-sheet-lock</code> ＋ 觸控邊界攔截）</b>：展開手機頂部「出行須知」或「城市指南」期間自動鎖定背景頁面，防止手指上下掃動時誤觸捲動後方月曆。</li>
+          </ul>
+        </div>
+
         <!-- v5.9.1 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.9.1（修復開住「出行須知／城市指南」畫面改標題為已知城市時未即時更新、仍顯示「未有此目的地資料」問題）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">INSTANT LIVE SYNC</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.9.1（修復開住「出行須知／城市指南」畫面改標題為已知城市時未即時更新、仍顯示「未有此目的地資料」問題）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">INSTANT LIVE SYNC</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-15</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">⚡ 開住「🧭 出行須知」或「🛡️ 城市指南」畫面改標題時，即時自動刷新全部天氣、匯率、入境與城市情報，無需關閉重開</div>
@@ -6579,7 +6640,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.9.1';
+    const APP_VERSION = '5.9.4';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -20969,9 +21030,37 @@ function setupYearOverviewToggle() {
         if (drawer && drawer.classList.contains('is-open') && drawer.offsetParent === null && typeof window.closeInlineBookingStudio === 'function') {
           window.closeInlineBookingStudio();
         }
+
+        // 保留已開啟之「出行須知／城市指南」狀態，跨裝置視窗縮放時自動重新掛載至對應可見容器
+        const dcDrawer = document.getElementById('dualCapsuleStudioDrawer');
+        const dcBay = document.getElementById('dualCapsuleParkingBay');
+        const savedDcKey = dcCurrentTripKey;
+        const savedDcTab = dcCurrentTab || 'prep';
+        if (dcDrawer && dcBay && !dcBay.contains(dcDrawer)) {
+          dcBay.appendChild(dcDrawer);
+        }
+        document.body.classList.remove('dc-mobile-sheet-lock');
+        const mobRibbon = document.getElementById('mobileTopTripRibbon');
+        if (mobRibbon) mobRibbon.classList.remove('is-dc-expanded');
+
         lastRenderedCardsSignature = '';
         const { tripsList } = getActiveLeaveSpansMap(leaveData);
         renderTripsAndGantt(tripsList);
+        if (typeof renderMobileTopTripRibbon === 'function') {
+          renderMobileTopTripRibbon(tripsList);
+        }
+
+        if (savedDcKey && typeof toggleTripDualCapsule === 'function') {
+          dcCurrentTripKey = null;
+          if (nowIsDesktop) {
+            toggleTripDualCapsule(savedDcKey, savedDcTab, null, 'card');
+          } else {
+            if (typeof toggleMobileTripRibbonDrawer === 'function') {
+              toggleMobileTripRibbonDrawer(1);
+            }
+            toggleTripDualCapsule(savedDcKey, savedDcTab, null, 'ribbon');
+          }
+        }
       }
     });
     window.addEventListener('orientationchange', checkCalendarColumns);
@@ -21029,8 +21118,8 @@ function setupYearOverviewToggle() {
           { name: '象島・沙美島', lat: 12.0612, lon: 102.3526, nearby: ['芭堤雅', '曼谷'] },
           { name: '北碧府', lat: 14.0228, lon: 99.5328, nearby: ['曼谷', '大城', '華欣'] }
         ],
-        visaPill: '🟡 免簽 30 日｜TDAC／THIM 網頁及 App',
-        entryHtml: '<div>• <b>免簽證停留</b>：最長 30 日（最新收緊由 60 日改回 30 日，護照有效期須超過 6 個月）。</div><div>• <b>網上／手機 App 入境申報（TDAC ＋ THIM）</b>：出發前 72 小時內須免費填妥 <b>TDAC 電子入境卡</b>及新版 <b>THIM 泰國入境管理登記</b>（<b>同時設有官方網頁版及官方手機 App</b> 供填報），完成後儲存 QR Code 於入境櫃檯查驗。</div>',
+        visaPill: '🟡 免簽 30 日｜TDAC 或 THIM 任選其一',
+        entryHtml: '<div>• <b>免簽證停留</b>：最長 30 日（最新收緊由 60 日改回 30 日，護照有效期須超過 6 個月）。</div><div>• <b>網上／手機 App 入境申報（TDAC 或 THIM 任選其一）</b>：出發前 72 小時內免費填妥 <b>TDAC 電子入境卡</b> <b>或</b> 最新 <b>THIM 泰國入境管理登記</b>（<b>二選一即可，無需兩項同時登記</b>；支援官方網頁版或手機 App 填報），完成後儲存 QR Code 於入境櫃檯查驗。</div>',
         portals: [
           { name: 'TDAC 官方網頁申報', url: 'https://tdac.immigration.go.th/' },
           { name: '泰國移民局官網（THIM 網頁及 App 指引）', url: 'https://www.immigration.go.th/' }
@@ -21048,7 +21137,7 @@ function setupYearOverviewToggle() {
         news10: [
           '<b>嚴禁電子煙及加熱煙（刑事重罪）</b>：泰國法例全面禁止攜帶、吸食或管有電子煙及加熱煙，違者最高判監 5 年或巨額罰款。',
           '<b>王室尊嚴法（冒犯君主罪）</b>：公開評論、貶損王室或用腳踩住印有泰王頭像之鈔票硬幣均屬嚴重刑事罪行。',
-          '<b>TDAC／THIM 電子入境登記（支援網頁及官方 App）</b>：所有入境旅客須於出發前 72 小時內透過官方網頁或手機 App 完成申報並保存 QR Code。',
+          '<b>TDAC 或 THIM 電子入境登記（二選一即可）</b>：所有入境旅客須於出發前 72 小時內透過官方網頁或手機 App 填妥 TDAC 或最新 THIM 其中一項並保存 QR Code。',
           '<b>禁酒時段與佛教節日禁酒令</b>：便利店及超市每日僅限 11:00–14:00 及 17:00–24:00 售酒，逢佛教大節日全國全日強制禁酒。',
           '<b>大麻管制與嚴禁帶出境</b>：公眾場所吸食大麻屬違法罰款，且含大麻成分藥膏或食品帶返香港即觸犯販毒罪。',
           '<b>海灘全面禁煙法例</b>：芭堤雅、布吉、華欣等 24 個主要海灘嚴禁吸煙，違者最高罰款 10 萬泰銖或監禁 1 年。',
@@ -21651,16 +21740,33 @@ function setupYearOverviewToggle() {
       fetchAndRenderDcFxRates();
     }
 
+    function formatDcFxFormattedInput(numVal) {
+      if (!Number.isFinite(numVal) || numVal < 0) return '1';
+      return numVal.toLocaleString('en-US', { maximumFractionDigits: 4 });
+    }
+
     function selectDcFxCurrency(code) {
       dcSelectedCurr = code;
       document.getElementById('dcFxCurrMenu')?.classList.add('hidden');
       const inp = document.getElementById('dcFxCalcInput');
-      if (inp) inp.value = (code === 'VND' || code === 'KRW' || code === 'IDR') ? 100000 : (code === 'JPY' ? 10000 : 1000);
+      if (inp) {
+        const defAmt = dcIsReversedFx
+          ? ((code === 'VND' || code === 'KRW' || code === 'IDR') ? 10000 : (code === 'JPY' ? 1000 : 100))
+          : 1;
+        inp.value = formatDcFxFormattedInput(defAmt);
+      }
       renderDcFxDisplay();
     }
 
     function flipDcFxDirection() {
       dcIsReversedFx = !dcIsReversedFx;
+      const inp = document.getElementById('dcFxCalcInput');
+      if (inp) {
+        const defAmt = dcIsReversedFx
+          ? ((dcSelectedCurr === 'VND' || dcSelectedCurr === 'KRW' || dcSelectedCurr === 'IDR') ? 10000 : (dcSelectedCurr === 'JPY' ? 1000 : 100))
+          : 1;
+        inp.value = formatDcFxFormattedInput(defAmt);
+      }
       renderDcFxDisplay();
     }
 
@@ -21671,45 +21777,88 @@ function setupYearOverviewToggle() {
       renderDcFxDisplay();
     }
 
+    function handleDcFxAmountInput(inpEl) {
+      if (!inpEl) return;
+      let raw = String(inpEl.value || '').replace(/,/g, '').replace(/[^0-9.]/g, '');
+      const dotIdx = raw.indexOf('.');
+      if (dotIdx !== -1) {
+        raw = raw.slice(0, dotIdx + 1) + raw.slice(dotIdx + 1).replace(/\./g, '');
+      }
+      if (raw === '' || raw === '.') {
+        recalcDcFx(0);
+        return;
+      }
+      const parts = raw.split('.');
+      const intNum = parseInt(parts[0] || '0', 10);
+      const formattedInt = Number.isFinite(intNum) ? intNum.toLocaleString('en-US') : '0';
+      const nextDisplay = parts.length > 1 ? `${formattedInt}.${parts[1].slice(0, 4)}` : formattedInt;
+      if (inpEl.value !== nextDisplay) {
+        inpEl.value = nextDisplay;
+      }
+      recalcDcFx(parseFloat(raw) || 0);
+    }
+
+    function clearDcFxAmountInput() {
+      const inp = document.getElementById('dcFxCalcInput');
+      if (inp) {
+        inp.value = '';
+        inp.focus();
+      }
+      recalcDcFx(0);
+    }
+
     function renderDcFxDisplay() {
       const baseRate = dcLiveRatesMap[dcSelectedCurr] || DC_FALLBACK_RATES[dcSelectedCurr] || 1;
       const rate = dcIsCashMode ? baseRate * 0.99 : baseRate;
       const leftEl = document.getElementById('dcFxLeftCode');
       const rightEl = document.getElementById('dcFxRightCode');
-      const mainText = document.getElementById('dcFxRateMainText');
       const fromUnit = document.getElementById('dcFxCalcFromUnit');
-      if (!leftEl || !rightEl || !mainText) return;
+      const toUnit = document.getElementById('dcFxCalcToUnit');
+      if (!leftEl || !rightEl) return;
 
       if (!dcIsReversedFx) {
         leftEl.textContent = 'HKD';
         rightEl.textContent = dcSelectedCurr;
         if (fromUnit) fromUnit.textContent = 'HKD';
-        mainText.textContent = rate >= 100
-          ? `1 HKD ≈ ${Math.round(rate).toLocaleString()} ${dcSelectedCurr}`
-          : `1 HKD ≈ ${rate.toFixed(rate < 1 ? 3 : 2)} ${dcSelectedCurr}`;
+        if (toUnit) toUnit.textContent = dcSelectedCurr;
       } else {
         leftEl.textContent = dcSelectedCurr;
         rightEl.textContent = 'HKD';
         if (fromUnit) fromUnit.textContent = dcSelectedCurr;
-        const unitBase = (dcSelectedCurr === 'VND' || dcSelectedCurr === 'KRW' || dcSelectedCurr === 'IDR') ? 10000 : (dcSelectedCurr === 'JPY' ? 1000 : 100);
-        const hkdVal = (unitBase / rate).toFixed(2);
-        mainText.textContent = `${unitBase.toLocaleString()} ${dcSelectedCurr} ≈ ${hkdVal} HKD`;
+        if (toUnit) toUnit.textContent = 'HKD';
       }
+      updateDcFxExternalLinks(dcSelectedCurr);
       recalcDcFx();
     }
 
-    function recalcDcFx() {
+    function recalcDcFx(overrideVal = null) {
       const baseRate = dcLiveRatesMap[dcSelectedCurr] || DC_FALLBACK_RATES[dcSelectedCurr] || 1;
       const rate = dcIsCashMode ? baseRate * 0.99 : baseRate;
-      const val = parseFloat(document.getElementById('dcFxCalcInput')?.value) || 0;
+      const inpEl = document.getElementById('dcFxCalcInput');
+      const rawStr = inpEl ? String(inpEl.value || '').replace(/,/g, '') : '';
+      const val = (overrideVal !== null) ? overrideVal : (rawStr === '' ? 1 : (parseFloat(rawStr) || 0));
       const outEl = document.getElementById('dcFxCalcOutput');
       if (!outEl) return;
       if (!dcIsReversedFx) {
         const res = val * rate;
-        outEl.textContent = `${res >= 100 ? Math.round(res).toLocaleString() : res.toFixed(1)} ${dcSelectedCurr}`;
+        if (res === 0) {
+          outEl.textContent = '0';
+        } else if (res >= 1000) {
+          outEl.textContent = Math.round(res).toLocaleString('en-US');
+        } else if (res >= 10) {
+          outEl.textContent = res.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        } else {
+          outEl.textContent = res.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+        }
       } else {
         const res = val / rate;
-        outEl.textContent = `HK$${res.toFixed(1)}`;
+        if (res === 0) {
+          outEl.textContent = '0';
+        } else if (res >= 100) {
+          outEl.textContent = res.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        } else {
+          outEl.textContent = res.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+        }
       }
     }
 
@@ -21807,12 +21956,7 @@ function setupYearOverviewToggle() {
       const lat = dcSelectedCity.lat;
       const lon = dcSelectedCity.lon;
 
-      const wLink = document.getElementById('dcLinkWindy');
-      if (wLink) wLink.href = `https://www.windy.com/?${lat},${lon},8`;
-      const aLink = document.getElementById('dcLinkAccu');
-      if (aLink) aLink.href = `https://www.accuweather.com/zh/search-locations?query=${encodeURIComponent(dcSelectedCity.name)}`;
-      const tLink = document.getElementById('dcLinkTwc');
-      if (tLink) tLink.href = `https://weather.com/`;
+      updateDcWeatherExternalLinks(dcSelectedCity);
 
       // 兩大清晰模式：
       // 1) 距離出發 > 30 日（或手動選 ERA5）：顯示「單張大型月份季節氣候卡片」（溫度區間、濕度與降雨量、PM2.5 常見範圍）
@@ -22073,7 +22217,7 @@ function setupYearOverviewToggle() {
       }
     }
 
-    function toggleDcMoreList(listId, chevId, txtId, defaultLabel = '顯示更多內容') {
+    function toggleDcMoreList(listId, chevId, txtId, defaultLabel = '更多') {
       const list = document.getElementById(listId);
       const chev = document.getElementById(chevId);
       const txt = document.getElementById(txtId);
@@ -22081,10 +22225,11 @@ function setupYearOverviewToggle() {
       const isHidden = list.classList.contains('hidden');
       list.classList.toggle('hidden', !isHidden);
       if (chev) chev.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
-      if (txt) txt.textContent = isHidden ? '收起部分內容' : (txt.getAttribute('data-default-label') || defaultLabel);
+      if (txt) txt.textContent = isHidden ? '收起' : (txt.getAttribute('data-default-label') || defaultLabel);
     }
 
     function switchDualCapsuleTab(tab) {
+      requestAnimationFrame(syncDcViewportHeight);
       dcCurrentTab = tab;
       const prepPanel = document.getElementById('dcPanelPrep');
       const tipsPanel = document.getElementById('dcPanelTips');
@@ -22104,6 +22249,21 @@ function setupYearOverviewToggle() {
       }
     }
 
+    function syncDcViewportHeight() {
+      if (window.innerWidth >= 1024) return;
+      const prepP = document.getElementById('dcPanelPrep');
+      const tipsP = document.getElementById('dcPanelTips');
+      const activePanel = (prepP && !prepP.classList.contains('hidden')) ? prepP : tipsP;
+      if (!activePanel) return;
+      const rect = activePanel.getBoundingClientRect();
+      const vh = (window.visualViewport && window.visualViewport.height) ? window.visualViewport.height : window.innerHeight;
+      if (rect.top > 0 && rect.top < vh - 120) {
+        const avail = Math.max(220, Math.floor(vh - rect.top - 10));
+        if (prepP) prepP.style.setProperty('--dc-avail-h', `${avail}px`);
+        if (tipsP) tipsP.style.setProperty('--dc-avail-h', `${avail}px`);
+      }
+    }
+
     function closeTripDualCapsule() {
       const savedWinY = window.scrollY;
       const drawer = document.getElementById('dualCapsuleStudioDrawer');
@@ -22112,6 +22272,7 @@ function setupYearOverviewToggle() {
       if (drawer && bay) bay.appendChild(drawer);
       const mobRibbon = document.getElementById('mobileTopTripRibbon');
       if (mobRibbon) mobRibbon.classList.remove('is-dc-expanded');
+      document.body.classList.remove('dc-mobile-sheet-lock');
 
       dcCurrentTripKey = null;
       if (isFromMobileRibbon) {
@@ -22121,19 +22282,40 @@ function setupYearOverviewToggle() {
       }
     }
 
-    // 手機版左右手指橫掃切換「🧭 出行須知」與「🛡️ 城市指南」（全域事件委派，100% 觸發無失靈）
+    // 手機版左右手指橫掃切換「🧭 出行須知」與「🛡️ 城市指南」＋ 隔離垂直滑動防止穿透背景月曆
     (function initDualCapsuleTouchSwipe() {
       let startX = 0, startY = 0, isTracking = false;
       document.addEventListener('touchstart', (e) => {
         if (!e.touches || e.touches.length !== 1) return;
         const target = e.target;
         if (!target || !target.closest || !target.closest('#dualCapsuleStudioDrawer')) return;
+        e.stopPropagation();
         const tag = (target.tagName || '').toUpperCase();
         if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag)) return;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         isTracking = true;
       }, { passive: true });
+
+      document.addEventListener('touchmove', (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        const target = e.target;
+        if (!target || !target.closest || !target.closest('#dualCapsuleStudioDrawer')) return;
+        e.stopPropagation();
+        if (window.innerWidth >= 1024) return;
+        const scroller = target.closest('.dc-scroll-viewport');
+        if (!scroller) {
+          if (e.cancelable) e.preventDefault();
+          return;
+        }
+        const curY = e.touches[0].clientY;
+        const deltaY = curY - startY;
+        const atTop = scroller.scrollTop <= 0;
+        const atBottom = Math.ceil(scroller.scrollTop + scroller.clientHeight) >= scroller.scrollHeight;
+        if ((atTop && deltaY > 0) || (atBottom && deltaY < 0)) {
+          if (e.cancelable) e.preventDefault();
+        }
+      }, { passive: false });
 
       document.addEventListener('touchend', (e) => {
         if (!isTracking || !e.changedTouches || e.changedTouches.length !== 1) return;
@@ -22145,15 +22327,43 @@ function setupYearOverviewToggle() {
             switchDualCapsuleTab('tips');
             const p = document.getElementById('dcPanelTips');
             if (p) p.scrollTop = 0;
+            requestAnimationFrame(syncDcViewportHeight);
             if (navigator.vibrate) try { navigator.vibrate(10); } catch (err) {}
           } else if (dx > 0 && dcCurrentTab === 'tips') {
             switchDualCapsuleTab('prep');
             const p = document.getElementById('dcPanelPrep');
             if (p) p.scrollTop = 0;
+            requestAnimationFrame(syncDcViewportHeight);
             if (navigator.vibrate) try { navigator.vibrate(10); } catch (err) {}
           }
         }
       }, { passive: true });
+
+      // 電腦版滑鼠指標停留於雙錦囊板塊內滾動滾輪時，直接驅動右側主清單流暢上下捲動
+      document.addEventListener('wheel', (e) => {
+        if (window.innerWidth < 1024) return;
+        const target = e.target;
+        if (!target || !target.closest) return;
+        const inDrawer = target.closest('#dualCapsuleStudioDrawer');
+        if (!inDrawer) return;
+        // 若正在捲動內部的貨幣下拉選單或城市下拉選單則放行
+        const innerMenu = target.closest('#dcWeatherCityMenu, #dcFxCurrMenu');
+        if (innerMenu && innerMenu.scrollHeight > innerMenu.clientHeight) return;
+        const leavesBox = document.getElementById('tabContentLeaves');
+        if (leavesBox && leavesBox.contains(inDrawer) && leavesBox.scrollHeight > leavesBox.clientHeight) {
+          leavesBox.scrollTop += e.deltaY;
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      window.addEventListener('resize', () => {
+        if (dcCurrentTripKey) syncDcViewportHeight();
+      });
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', () => {
+          if (dcCurrentTripKey) syncDcViewportHeight();
+        });
+      }
     })();
 
     const DC_AREA_CODE_ALIASES = {
@@ -22625,14 +22835,104 @@ function setupYearOverviewToggle() {
     }
 
     const DC_CITY_EN_MAP = {
-      '曼谷': 'Bangkok', '清邁': 'Chiang Mai', '布吉': 'Phuket', '芭堤雅': 'Pattaya', '蘇梅島': 'Ko Samui',
+      '曼谷': 'Bangkok', '清邁': 'Chiang Mai', '清萊': 'Chiang Rai', '拜縣': 'Pai', '布吉': 'Phuket', '芭堤雅': 'Pattaya',
+      '蘇梅島': 'Ko Samui', '甲米': 'Krabi', '華欣': 'Hua Hin', '考艾': 'Khao Yai', '大城': 'Ayutthaya',
+      '合艾・麗貝島': 'Hat Yai', '象島・沙美島': 'Ko Chang', '北碧府': 'Kanchanaburi',
       '峴港': 'Da Nang', '胡志明市': 'Ho Chi Minh City', '河內': 'Hanoi', '富國島': 'Phu Quoc',
       '新加坡市區': 'Singapore', '聖淘沙': 'Sentosa', '吉隆坡': 'Kuala Lumpur', '檳城': 'Penang', '亞庇(沙巴)': 'Kota Kinabalu',
       '東京': 'Tokyo', '大阪': 'Osaka', '京都': 'Kyoto', '札幌': 'Sapporo', '福岡': 'Fukuoka', '沖繩那霸': 'Naha',
       '台北': 'Taipei', '高雄': 'Kaohsiung', '台中': 'Taichung', '台南': 'Tainan',
       '首爾': 'Seoul', '釜山': 'Busan', '濟州島': 'Jeju',
-      '倫敦': 'London', '愛丁堡': 'Edinburgh', '巴黎': 'Paris', '尼斯': 'Nice'
+      '倫敦': 'London', '愛丁堡': 'Edinburgh', '巴黎': 'Paris', '尼斯': 'Nice',
+      '阿姆斯特丹': 'Amsterdam', '羅馬': 'Rome', '米蘭': 'Milan', '蘇黎世': 'Zurich', '柏林': 'Berlin', '慕尼黑': 'Munich',
+      '馬德里': 'Madrid', '巴塞隆拿': 'Barcelona', '維也納': 'Vienna', '布拉格': 'Prague', '布達佩斯': 'Budapest',
+      '雷克雅未克': 'Reykjavik', '雅典': 'Athens', '里斯本': 'Lisbon', '奧斯陸': 'Oslo', '赫爾辛基': 'Helsinki',
+      '悉尼': 'Sydney', '墨爾本': 'Melbourne', '奧克蘭': 'Auckland', '皇后鎮': 'Queenstown',
+      '溫哥華': 'Vancouver', '多倫多': 'Toronto', '紐約': 'New York', '洛杉磯': 'Los Angeles', '三藩市': 'San Francisco',
+      '杜拜': 'Dubai', '多哈': 'Doha', '伊斯坦堡': 'Istanbul', '馬累': 'Male', '新德里': 'New Delhi', '加德滿都': 'Kathmandu'
     };
+
+    const DC_ACCU_DIRECT_MAP = {
+      'Bangkok': 'https://www.accuweather.com/zh/th/bangkok/318849/weather-forecast/318849',
+      'Chiang Mai': 'https://www.accuweather.com/zh/th/chiang-mai/317505/weather-forecast/317505',
+      'Chiang Rai': 'https://www.accuweather.com/zh/th/chiang-rai/317513/weather-forecast/317513',
+      'Phuket': 'https://www.accuweather.com/zh/th/phuket/319874/weather-forecast/319874',
+      'Pattaya': 'https://www.accuweather.com/zh/th/pattaya/317635/weather-forecast/317635',
+      'Ko Samui': 'https://www.accuweather.com/zh/th/ko-samui/320989/weather-forecast/320989',
+      'Krabi': 'https://www.accuweather.com/zh/th/krabi/318389/weather-forecast/318389',
+      'Hua Hin': 'https://www.accuweather.com/zh/th/hua-hin/320282/weather-forecast/320282',
+      'Da Nang': 'https://www.accuweather.com/zh/vn/da-nang/352954/weather-forecast/352954',
+      'Ho Chi Minh City': 'https://www.accuweather.com/zh/vn/ho-chi-minh-city/353981/weather-forecast/353981',
+      'Hanoi': 'https://www.accuweather.com/zh/vn/hanoi/353412/weather-forecast/353412',
+      'Phu Quoc': 'https://www.accuweather.com/zh/vn/phu-quoc/354336/weather-forecast/354336',
+      'Singapore': 'https://www.accuweather.com/zh/sg/singapore/300597/weather-forecast/300597',
+      'Kuala Lumpur': 'https://www.accuweather.com/zh/my/kuala-lumpur/233776/weather-forecast/233776',
+      'Penang': 'https://www.accuweather.com/zh/my/george-town/234824/weather-forecast/234824',
+      'Kota Kinabalu': 'https://www.accuweather.com/zh/my/kota-kinabalu/235232/weather-forecast/235232',
+      'Tokyo': 'https://www.accuweather.com/zh/jp/tokyo/226396/weather-forecast/226396',
+      'Osaka': 'https://www.accuweather.com/zh/jp/osaka/225007/weather-forecast/225007',
+      'Kyoto': 'https://www.accuweather.com/zh/jp/kyoto/224436/weather-forecast/224436',
+      'Sapporo': 'https://www.accuweather.com/zh/jp/sapporo/223985/weather-forecast/223985',
+      'Fukuoka': 'https://www.accuweather.com/zh/jp/fukuoka/223548/weather-forecast/223548',
+      'Naha': 'https://www.accuweather.com/zh/jp/naha/224962/weather-forecast/224962',
+      'Taipei': 'https://www.accuweather.com/zh/tw/taipei/315078/weather-forecast/315078',
+      'Kaohsiung': 'https://www.accuweather.com/zh/tw/kaohsiung/313812/weather-forecast/313812',
+      'Taichung': 'https://www.accuweather.com/zh/tw/taichung/315040/weather-forecast/315040',
+      'Seoul': 'https://www.accuweather.com/zh/kr/seoul/226081/weather-forecast/226081',
+      'Busan': 'https://www.accuweather.com/zh/kr/busan/222888/weather-forecast/222888',
+      'Jeju': 'https://www.accuweather.com/zh/kr/jeju/224209/weather-forecast/224209',
+      'London': 'https://www.accuweather.com/zh/gb/london/ec4a-2/weather-forecast/328328',
+      'Paris': 'https://www.accuweather.com/zh/fr/paris/623/weather-forecast/623',
+      'Amsterdam': 'https://www.accuweather.com/zh/nl/amsterdam/249758/weather-forecast/249758',
+      'Rome': 'https://www.accuweather.com/zh/it/rome/213490/weather-forecast/213490',
+      'Zurich': 'https://www.accuweather.com/zh/ch/zurich/316622/weather-forecast/316622',
+      'Berlin': 'https://www.accuweather.com/zh/de/berlin/178087/weather-forecast/178087',
+      'Sydney': 'https://www.accuweather.com/zh/au/sydney/22889/weather-forecast/22889',
+      'Melbourne': 'https://www.accuweather.com/zh/au/melbourne/26216/weather-forecast/26216',
+      'Auckland': 'https://www.accuweather.com/zh/nz/auckland/252066/weather-forecast/252066',
+      'Vancouver': 'https://www.accuweather.com/zh/ca/vancouver/53286/weather-forecast/53286',
+      'Toronto': 'https://www.accuweather.com/zh/ca/toronto/55488/weather-forecast/55488',
+      'New York': 'https://www.accuweather.com/zh/us/new-york/10021/weather-forecast/349727',
+      'Los Angeles': 'https://www.accuweather.com/zh/us/los-angeles/90012/weather-forecast/347625',
+      'Dubai': 'https://www.accuweather.com/zh/ae/dubai/323091/weather-forecast/323091'
+    };
+
+    function updateDcWeatherExternalLinks(cityObj) {
+      if (!cityObj) return;
+      const lat = Number(cityObj.lat || 13.7563).toFixed(4);
+      const lon = Number(cityObj.lon || 100.5018).toFixed(4);
+      const rawName = String(cityObj.name || 'Bangkok').replace(/（.*?）/g, '').trim();
+      const enName = DC_CITY_EN_MAP[rawName] || DC_CITY_EN_MAP[cityObj.name] || rawName;
+
+      const wLink = document.getElementById('dcLinkWindy');
+      if (wLink) wLink.href = `https://www.windy.com/${lat}/${lon}?${lat},${lon},9`;
+
+      const aLink = document.getElementById('dcLinkAccu');
+      if (aLink) {
+        aLink.href = DC_ACCU_DIRECT_MAP[enName] || `https://www.accuweather.com/zh/search-locations?query=${encodeURIComponent(enName)}`;
+      }
+
+      const tLink = document.getElementById('dcLinkTwc');
+      if (tLink) {
+        tLink.href = `https://weather.com/zh-HK/weather/today/l/${lat},${lon}`;
+      }
+    }
+
+    function updateDcFxExternalLinks(currCode) {
+      const code = String(currCode || 'THB').toUpperCase();
+      const ttrLink = document.getElementById('dcLinkTtrate');
+      if (ttrLink) {
+        ttrLink.href = `https://www.ttrate.com/zh_hk/index.php?b=0&c=${encodeURIComponent(code)}&s=3&t=1`;
+      }
+      const xeLink = document.getElementById('dcLinkXe');
+      if (xeLink) {
+        xeLink.href = `https://www.xe.com/currencyconverter/convert/?Amount=1&From=HKD&To=${encodeURIComponent(code)}`;
+      }
+      const wiseLink = document.getElementById('dcLinkWise');
+      if (wiseLink) {
+        wiseLink.href = `https://wise.com/zh-hk/currency-converter/hkd-to-${code.toLowerCase()}-rate?amount=1`;
+      }
+    }
 
     const DC_LOCAL_AUTHORITY_NAMES = {
       TH: '泰國觀光局 (TAT) ＆ 泰國移民局',
@@ -23378,7 +23678,7 @@ function setupYearOverviewToggle() {
       dcSelectedCurr = spec.curr || 'THB';
       dcIsReversedFx = false;
       const calcInp = document.getElementById('dcFxCalcInput');
-      if (calcInp) calcInp.value = (dcSelectedCurr === 'VND' || dcSelectedCurr === 'KRW' || dcSelectedCurr === 'IDR') ? 100000 : (dcSelectedCurr === 'JPY' ? 10000 : 1000);
+      if (calcInp) calcInp.value = '1';
       document.getElementById('dcFxTipText').textContent = spec.fxTip || '';
 
       document.getElementById('dcVisaStatusPill').textContent = spec.visaPill;
@@ -23414,7 +23714,7 @@ function setupYearOverviewToggle() {
       document.getElementById('dcNewsMore').innerHTML = newsRest.map(x => `<li>${x}</li>`).join('');
       document.getElementById('dcNewsMore').classList.add('hidden');
       document.getElementById('dcChevNews').style.transform = 'rotate(0deg)';
-      const newsLbl = '展開更多動態及法規';
+      const newsLbl = '更多';
       document.getElementById('dcTxtNews').setAttribute('data-default-label', newsLbl);
       document.getElementById('dcTxtNews').textContent = newsLbl;
 
@@ -23425,7 +23725,7 @@ function setupYearOverviewToggle() {
       document.getElementById('dcScamMore').innerHTML = scamRest.map(x => `<li>${x}</li>`).join('');
       document.getElementById('dcScamMore').classList.add('hidden');
       document.getElementById('dcChevScam').style.transform = 'rotate(0deg)';
-      const scamLbl = '展開更多騙案防範';
+      const scamLbl = '更多';
       document.getElementById('dcTxtScam').setAttribute('data-default-label', scamLbl);
       document.getElementById('dcTxtScam').textContent = scamLbl;
 
@@ -23436,7 +23736,7 @@ function setupYearOverviewToggle() {
       document.getElementById('dcCultureMore').innerHTML = cultureRest.map(x => `<li>${x}</li>`).join('');
       document.getElementById('dcCultureMore').classList.add('hidden');
       document.getElementById('dcChevCulture').style.transform = 'rotate(0deg)';
-      const cultureLbl = '展開更多文化及禮儀須知';
+      const cultureLbl = '更多';
       document.getElementById('dcTxtCulture').setAttribute('data-default-label', cultureLbl);
       document.getElementById('dcTxtCulture').textContent = cultureLbl;
 
@@ -23628,6 +23928,13 @@ function setupYearOverviewToggle() {
       if (mobRibbon) {
         mobRibbon.classList.toggle('is-dc-expanded', isMobileRibbonSlot);
       }
+      if (isMobileRibbonSlot && window.innerWidth < 1024) {
+        document.body.classList.add('dc-mobile-sheet-lock');
+      } else {
+        document.body.classList.remove('dc-mobile-sheet-lock');
+      }
+      requestAnimationFrame(syncDcViewportHeight);
+      setTimeout(syncDcViewportHeight, 120);
       if (!isMobileRibbonSlot) {
         const leavesContainer = document.getElementById('tabContentLeaves');
         if (leavesContainer && drawer) {
@@ -24416,28 +24723,41 @@ function setupYearOverviewToggle() {
             </div>
           </div>
 
-          <!-- 白色換算主框（一行過純淨視線）＋ 正下方貼緊白框底邊靠左之基準切換 -->
+          <!-- 一體化全寬白色匯率與換算主框（預設 1 HKD = 目標貨幣，點擊數字直接輸入銀碼，支援手機純數字鍵盤與大位數完整顯示） -->
           <div class="space-y-1">
-            <div class="px-3 py-2.5 rounded-xl bg-white border border-emerald-100 flex items-center justify-between gap-2">
-              <div id="dcFxRateMainText" class="text-sm font-black font-mono text-blue-950 shrink-0">載入匯率中...</div>
-              <div class="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-xl px-2 py-1 min-w-0">
-                <input type="number" id="dcFxCalcInput" value="1000" oninput="recalcDcFx()" class="w-14 sm:w-16 bg-transparent font-mono font-black text-xs text-right text-blue-950 focus:outline-none">
-                <span id="dcFxCalcFromUnit" class="text-[10px] font-mono font-bold text-slate-600 shrink-0">HKD</span>
-                <span class="text-slate-400 text-xs shrink-0">=</span>
-                <span id="dcFxCalcOutput" class="text-xs font-mono font-black text-emerald-700 truncate">--</span>
+            <div class="px-3 py-2.5 rounded-xl bg-white border border-emerald-200/90 shadow-2xs flex items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5 bg-emerald-50/75 focus-within:bg-emerald-50 border border-emerald-200 focus-within:border-emerald-500 rounded-xl px-2 py-1 transition shrink-0">
+                <input type="text" id="dcFxCalcInput" inputmode="decimal" enterkeyhint="done" value="1"
+                       onfocus="this.select()"
+                       onclick="this.select()"
+                       oninput="handleDcFxAmountInput(this)"
+                       onblur="if(!this.value.trim()){this.value='1'; recalcDcFx(1);}"
+                       aria-label="輸入兌換金額"
+                       class="w-20 sm:w-24 bg-transparent font-mono font-black text-sm text-right text-blue-950 focus:outline-none tabular-nums">
+                <span id="dcFxCalcFromUnit" class="text-[11px] font-mono font-black text-blue-900 shrink-0">HKD</span>
+                <button type="button" onclick="clearDcFxAmountInput()" aria-label="清空銀碼"
+                        class="w-4 h-4 rounded-full bg-slate-200/80 hover:bg-rose-100 text-slate-500 hover:text-rose-600 inline-flex items-center justify-center text-[9px] transition cursor-pointer shrink-0">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <span class="text-slate-400 font-black text-sm shrink-0">≈</span>
+              <div class="flex items-baseline justify-end gap-1 min-w-0 flex-1 text-right">
+                <span id="dcFxCalcOutput" class="text-sm sm:text-base font-mono font-black text-emerald-700 tabular-nums break-all leading-tight">--</span>
+                <span id="dcFxCalcToUnit" class="text-[11px] font-mono font-black text-emerald-900 shrink-0">THB</span>
               </div>
             </div>
-            <div class="flex items-center justify-start pl-0.5">
+            <div class="flex items-center justify-between gap-2 pl-0.5">
               <button type="button" onclick="toggleDcCashSpread()" id="dcBtnCashMode"
-                      class="text-[10.5px] font-extrabold text-emerald-800 hover:text-emerald-950 underline decoration-emerald-400 underline-offset-2 cursor-pointer transition">
+                      class="text-[10.5px] font-extrabold text-emerald-800 hover:text-emerald-950 underline decoration-emerald-400 underline-offset-2 cursor-pointer transition text-left">
                 目前基準：銀行中間價（點擊切換至找換店估算）
               </button>
+              <span class="text-[9.5px] font-semibold text-emerald-700/80 shrink-0">點擊銀碼直接換算</span>
             </div>
           </div>
 
           <p id="dcFxTipText" class="text-[11px] text-slate-700 leading-relaxed"></p>
 
-          <!-- 卡片最底列：左側對齊「實時同步」時間戳，右側懸停地球外鏈圓鈕 -->
+          <!-- 卡片最底列：左側對齊「實時同步」時間戳，右側懸停地球外鏈圓鈕（直達港幣 ⇄ 目標貨幣） -->
           <div class="flex items-center justify-between gap-2 pt-0.5 relative">
             <span id="dcFxUpdatedAt" class="text-[9.5px] font-mono text-slate-500">資料核實：2026-11-15</span>
             <div class="relative shrink-0" onmouseenter="openDcHoverMenu('dcFxWebMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcFxWebMenu')">
@@ -24446,14 +24766,14 @@ function setupYearOverviewToggle() {
                 <i class="fa-solid fa-globe text-[11px]"></i>
               </button>
               <div id="dcFxWebMenu" class="hidden absolute right-0 bottom-7 z-40 w-48 bg-white rounded-2xl shadow-xl border border-slate-200 p-1.5 text-[11px] font-bold space-y-1">
-                <div class="px-2 py-0.5 text-[9px] font-bold text-slate-400">外部找換店格價與走勢</div>
-                <a href="https://www.ttrate.com/zh_hk/" target="_blank" rel="noopener" onclick="document.getElementById('dcFxWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 text-emerald-900">
+                <div class="px-2 py-0.5 text-[9px] font-bold text-slate-400">直達目標貨幣 ⇄ 港幣</div>
+                <a id="dcLinkTtrate" href="https://www.ttrate.com/zh_hk/" target="_blank" rel="noopener" onclick="document.getElementById('dcFxWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 text-emerald-900">
                   <span>TTRate 香港找換格價</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-emerald-600"></i>
                 </a>
-                <a href="https://www.xe.com/currencyconverter/" target="_blank" rel="noopener" onclick="document.getElementById('dcFxWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 text-emerald-900">
+                <a id="dcLinkXe" href="https://www.xe.com/currencyconverter/" target="_blank" rel="noopener" onclick="document.getElementById('dcFxWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 text-emerald-900">
                   <span>XE.com 國際匯率</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-emerald-600"></i>
                 </a>
-                <a href="https://wise.com/zh-hk/currency-converter/" target="_blank" rel="noopener" onclick="document.getElementById('dcFxWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 text-emerald-900">
+                <a id="dcLinkWise" href="https://wise.com/zh-hk/currency-converter/" target="_blank" rel="noopener" onclick="document.getElementById('dcFxWebMenu').classList.add('hidden')" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 text-emerald-900">
                   <span>Wise 中間價換算</span><i class="fa-solid fa-arrow-up-right-from-square text-[9px] text-emerald-600"></i>
                 </a>
               </div>
@@ -24520,8 +24840,12 @@ function setupYearOverviewToggle() {
           <p id="dcTipsEmptySubtext" class="text-[11px] text-slate-600 leading-relaxed">暫無此城市之當地法規、騙案及文化禮儀記錄；下方仍為你保留全球適用之香港入境處及外交部緊急領事求助熱線。</p>
         </div>
         <div id="dcTipsMainSections" class="space-y-3">
-        <!-- 極簡無框純文字 · 情報來源與左下角同步時間戳 -->
+        <!-- 極簡無框純文字 · 情報來源說明與左下角同步時間戳 -->
         <div class="p-2.5 rounded-2xl bg-slate-50/90 border border-slate-200/80 space-y-2 text-[10px]">
+          <div class="text-[10.5px] font-extrabold text-blue-950 flex items-center gap-1">
+            <i class="fa-solid fa-circle-info text-blue-600 text-[10px]"></i>
+            <span>以下第 1 至 3 欄資訊均綜合整理自下列機構及平台：</span>
+          </div>
           <div id="dcTipsSourcePillsGrid" class="grid grid-cols-2 gap-x-2 gap-y-1 leading-snug">
             <span data-src-id="news" class="font-extrabold text-blue-950 truncate flex items-center gap-1">
               <span>● 本港及當地即時新聞</span><span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1 py-0.2 rounded bg-blue-950 text-white">UPDATE</span>
@@ -24572,7 +24896,7 @@ function setupYearOverviewToggle() {
             <span id="dcNewsUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
             <button type="button" onclick="toggleDcMoreList('dcNewsMore', 'dcChevNews', 'dcTxtNews')"
                     class="inline-flex items-center gap-1 text-[10.5px] font-bold text-blue-700 hover:text-blue-900 cursor-pointer">
-              <span id="dcTxtNews" data-default-label="展開更多動態及法規">展開更多動態及法規</span>
+              <span id="dcTxtNews" data-default-label="更多">更多</span>
               <i id="dcChevNews" class="fa-solid fa-chevron-down text-[9px] transition-transform duration-200"></i>
             </button>
           </div>
@@ -24596,7 +24920,7 @@ function setupYearOverviewToggle() {
             <span id="dcScamUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
             <button type="button" onclick="toggleDcMoreList('dcScamMore', 'dcChevScam', 'dcTxtScam')"
                     class="inline-flex items-center gap-1 text-[10.5px] font-bold text-rose-700 hover:text-rose-900 cursor-pointer">
-              <span id="dcTxtScam" data-default-label="展開更多騙案防範">展開更多騙案防範</span>
+              <span id="dcTxtScam" data-default-label="更多">更多</span>
               <i id="dcChevScam" class="fa-solid fa-chevron-down text-[9px] transition-transform duration-200"></i>
             </button>
           </div>
@@ -24621,7 +24945,7 @@ function setupYearOverviewToggle() {
             <span id="dcCultureUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
             <button type="button" onclick="toggleDcMoreList('dcCultureMore', 'dcChevCulture', 'dcTxtCulture')"
                     class="inline-flex items-center gap-1 text-[10.5px] font-bold text-indigo-700 hover:text-indigo-900 cursor-pointer">
-              <span id="dcTxtCulture" data-default-label="展開更多文化及禮儀須知">展開更多文化及禮儀須知</span>
+              <span id="dcTxtCulture" data-default-label="更多">更多</span>
               <i id="dcChevCulture" class="fa-solid fa-chevron-down text-[9px] transition-transform duration-200"></i>
             </button>
           </div>
