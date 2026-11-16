@@ -21,10 +21,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Fetch HK OTA alerts, Google News RSS & Reddit practical insights (Append-Only)
+      - name: Fetch HK OTA alerts, Google News RSS & Reddit practical insights (31 Countries)
         run: |
           python3 - << 'EOF'
-          import json, datetime, urllib.request, urllib.parse, xml.etree.ElementTree as ET, re
+          import json, datetime, time, urllib.request, urllib.parse, xml.etree.ElementTree as ET, re
 
           hk_tz = datetime.timezone(datetime.timedelta(hours=8))
           today_str = datetime.datetime.now(hk_tz).strftime('%Y-%m-%d')
@@ -36,14 +36,14 @@ jobs:
               data = {"lastUpdated": today_str, "source": "GitHub Actions 自動更新", "countries": {}}
 
           data["lastUpdated"] = today_str
-          data["source"] = "GitHub Actions 自動更新（保安局外遊警示 ＋ Google News RSS ＋ Reddit 旅遊實戰社群）"
+          data["source"] = "GitHub Actions 自動更新（保安局外遊警示 ＋ Google News RSS ＋ Reddit 旅遊實戰社群 · 全球 31 國）"
 
-          def fetch_rss_items(query, tag="實戰動態", max_items=3):
+          def fetch_rss_items(query, tag="實戰動態", max_items=2):
               url = f"https://news.google.com/rss/search?q={urllib.parse.quote(query)}&hl=zh-HK&gl=HK&ceid=HK:zh-Hant"
               req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
               items = []
               try:
-                  with urllib.request.urlopen(req, timeout=12) as resp:
+                  with urllib.request.urlopen(req, timeout=10) as resp:
                       xml_bytes = resp.read()
                   root = ET.fromstring(xml_bytes)
                   for item in root.findall('.//item')[:max_items]:
@@ -56,12 +56,12 @@ jobs:
 
           def fetch_reddit_categorized(subreddit):
               url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=15"
-              req = urllib.request.Request(url, headers={'User-Agent': 'HKLeaveManagerBot/1.1'})
+              req = urllib.request.Request(url, headers={'User-Agent': 'HKLeaveManagerBot/2.1'})
               news_tips, scam_tips = [], []
-              news_kw = ('visa', 'tdac', 'e-gate', 'autogate', 'customs', 'cash', 'closed', 'booking', 'reservation', 'tax', 'vape', 'train', 'airport')
-              scam_kw = ('scam', 'fake', 'overcharge', 'trap', 'taxi', 'tuk', 'police', 'fine', 'warning', 'avoid')
+              news_kw = ('visa', 'tdac', 'e-gate', 'autogate', 'customs', 'cash', 'closed', 'booking', 'reservation', 'tax', 'vape', 'train', 'airport', 'eta', 'etias', 'pass')
+              scam_kw = ('scam', 'fake', 'overcharge', 'trap', 'taxi', 'tuk', 'police', 'fine', 'warning', 'avoid', 'pickpocket', 'theft')
               try:
-                  with urllib.request.urlopen(req, timeout=12) as resp:
+                  with urllib.request.urlopen(req, timeout=10) as resp:
                       payload = json.loads(resp.read().decode('utf-8'))
                   for post in payload.get('data', {}).get('children', []):
                       title = str(post.get('data', {}).get('title', '')).strip()
@@ -76,8 +76,15 @@ jobs:
                   print("Reddit fetch skipped:", subreddit, e)
               return news_tips, scam_tips
 
-          # 1. 抓取香港保安局外遊警示網頁最新狀態
-          ota_map = {"TH": "泰國", "JP": "日本", "KR": "韓國", "TW": "台灣", "SG": "新加坡", "VN": "越南", "PH": "菲律賓", "MY": "馬來西亞", "ID": "印尼", "GB": "英國", "FR": "法國"}
+          # 1. 抓取香港保安局外遊警示網頁最新狀態（覆蓋全部 31 國，含老撾）
+          ota_map = {
+              "CN": "中國", "TW": "台灣", "JP": "日本", "KR": "韓國", "MN": "蒙古",
+              "TH": "泰國", "SG": "新加坡", "MY": "馬來西亞", "VN": "越南", "PH": "菲律賓", "ID": "印尼", "KH": "柬埔寨", "LA": "老撾",
+              "IN": "印度", "NP": "尼泊爾", "AE": "阿聯酋", "TR": "土耳其",
+              "GB": "英國", "FR": "法國", "DE": "德國", "IT": "意大利", "CH": "瑞士",
+              "ES": "西班牙", "PT": "葡萄牙", "NL": "荷蘭", "GR": "希臘", "IS": "冰島",
+              "US": "美國", "CA": "加拿大", "AU": "澳洲", "NZ": "紐西蘭"
+          }
           try:
               ota_req = urllib.request.Request("https://www.sb.gov.hk/chi/ota/", headers={'User-Agent': 'Mozilla/5.0'})
               with urllib.request.urlopen(ota_req, timeout=12) as resp:
@@ -91,29 +98,65 @@ jobs:
           except Exception as e:
               print("HK OTA fetch skipped:", e)
 
-          # 2. 按國家抓取最新實戰動態與新型騙案（只增不減，保留經典條目）
+          # 2. 全球 31 個重點旅遊國家及地區實戰情報與防伏動態
           targets = {
-              "TH": ("泰國 入境 免簽 e-Gate 機場 預約 關閉", "泰國 騙案 劏客 罰款", "ThailandTourism"),
+              # 大中華及東亞 (5)
+              "CN": ("中國 內地 景區 預約 實名 高鐵 免簽", "中國 旅遊 騙案 陷阱", "chinatravel"),
+              "TW": ("台灣 入境 入台證 海關 罰款 交通", "台灣 旅遊 騙案 陷阱", "taiwan"),
               "JP": ("日本 入境 Visit Japan Web 預約 關閉 退稅", "日本 旅遊 騙案 陷阱", "JapanTravelTips"),
-              "KR": ("韓國 入境 e-Arrival 預約 交通", "韓國 旅遊 騙案 劏客", "koreatravel"),
-              "TW": ("台灣 入境 入台證 海關 罰款", "台灣 旅遊 騙案 陷阱", ""),
-              "SG": ("新加坡 入境 SGAC 樟宜 罰款", "新加坡 旅遊 騙案", ""),
-              "VN": ("越南 入境 電子簽證 富國島", "越南 旅遊 騙案 換錢", "")
+              "KR": ("韓國 入境 e-Arrival 預約 交通 退稅", "韓國 旅遊 騙案 劏客", "koreatravel"),
+              "MN": ("蒙古 烏蘭巴托 入境 旅遊 交通", "蒙古 旅遊 騙案 安全", "mongolia"),
+
+              # 東南亞 (8 · 已補入老撾 LA)
+              "TH": ("泰國 入境 免簽 e-Gate 機場 預約 關閉", "泰國 騙案 劏客 罰款", "ThailandTourism"),
+              "SG": ("新加坡 入境 SGAC 樟宜 罰款 交通", "新加坡 旅遊 騙案", "askSingapore"),
+              "MY": ("馬來西亞 入境 MDAC 自動通關 旅遊稅", "馬來西亞 旅遊 騙案", "malaysia"),
+              "VN": ("越南 入境 電子簽證 富國島 交通", "越南 旅遊 騙案 換錢", "VietNam"),
+              "PH": ("菲律賓 入境 eTravel 長灘島 宿霧 環保稅", "菲律賓 旅遊 騙案 機場", "Philippines_Expats"),
+              "ID": ("印尼 峇里島 入境 旅遊稅 封路", "峇里島 換錢 騙案 陷阱", "bali"),
+              "KH": ("柬埔寨 吳哥窟 電子入境卡 簽證", "柬埔寨 金邊 暹粒 騙案", "cambodia"),
+              "LA": ("老撾 寮國 琅勃拉邦 永珍 中老鐵路 簽證", "老撾 寮國 旅遊 騙案 注意", "laos"),
+
+              # 南亞及中東 (4)
+              "IN": ("印度 電子簽證 入境 泰姬陵 預約", "印度 旅遊 騙案 交通", "india"),
+              "NP": ("尼泊爾 加德滿都 簽證 行山 許可證", "尼泊爾 旅遊 騙案", "Nepal"),
+              "AE": ("杜拜 阿聯酋 入境 免簽 景點 預約", "杜拜 旅遊 騙案 交通", "dubai"),
+              "TR": ("土耳其 伊斯坦堡 入境 熱氣球 博物館 門票", "土耳其 伊斯坦堡 騙案 的士", "Turkey"),
+
+              # 主要歐洲旅遊國家 (10)
+              "GB": ("英國 倫敦 入境 ETA 交通 罷工 博物館", "英國 倫敦 搶手機 騙案", "LondonTravel"),
+              "FR": ("法國 巴黎 入境 博物館 預約 罷工 交通", "巴黎 扒手 騙案 陷阱", "ParisTravelGuide"),
+              "DE": ("德國 慕尼黑 柏林 國鐵 罷工 退稅", "德國 旅遊 扒手 騙案", "germany"),
+              "IT": ("意大利 羅馬 威尼斯 入城費 博物館 預約", "意大利 羅馬 米蘭 扒手 騙案", "ItalyTravel"),
+              "CH": ("瑞士 少女峰 鐵路 通票 交通 封路", "瑞士 旅遊 注意事項", "askswitzerland"),
+              "ES": ("西班牙 巴塞隆拿 馬德里 聖家堂 預約 遊客稅", "巴塞隆拿 扒手 騙案", "askspain"),
+              "PT": ("葡萄牙 里斯本 波圖 交通 遊客稅", "里斯本 扒手 騙案", "PortugalExpats"),
+              "NL": ("荷蘭 阿姆斯特丹 博物館 預約 遊客稅", "阿姆斯特丹 旅遊 騙案", "Amsterdam"),
+              "GR": ("希臘 雅典 聖托里尼 船期 罷工 門票", "希臘 雅典 扒手 騙案", "GreeceTravel"),
+              "IS": ("冰島 雷克雅未克 火山 封路 極光 自駕", "冰島 自駕 罰款 注意", "VisitingIceland"),
+
+              # 北美及澳紐 (4)
+              "US": ("美國 紐約 洛杉磯 入境 ESTA 國家公園 預約", "美國 紐約 旅遊 騙案", "AskNYC"),
+              "CA": ("加拿大 溫哥華 多倫多 入境 eTA 國家公園", "加拿大 旅遊 騙案", "canada"),
+              "AU": ("澳洲 悉尼 墨爾本 入境 ETA 海關 罰款", "澳洲 旅遊 騙案", "AustraliaTravel"),
+              "NZ": ("紐西蘭 奧克蘭 皇后鎮 入境 NZeTA 遊客稅", "紐西蘭 自駕 旅遊 注意", "newzealand")
           }
 
           for code, (q_news, q_scam, sub) in targets.items():
               if code not in data["countries"]:
                   data["countries"][code] = {}
               r_news, r_scam = fetch_reddit_categorized(sub) if sub else ([], [])
-              combined_news = fetch_rss_items(q_news, "實戰動態", 3) + r_news
+              combined_news = fetch_rss_items(q_news, "實戰動態", 2) + r_news
               combined_scams = fetch_rss_items(q_scam, "新型騙案", 2) + r_scam
               if combined_news:
                   data["countries"][code]["liveNews"] = combined_news
               if combined_scams:
                   data["countries"][code]["liveScams"] = combined_scams
+              time.sleep(0.35)
 
           with open('travel_rules.json', 'w', encoding='utf-8') as f:
               json.dump(data, f, ensure_ascii=False, indent=2)
+          print("Successfully updated 31 countries at", today_str)
           EOF
 
       - name: Commit and push updated travel_rules.json
@@ -121,4 +164,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add travel_rules.json
-          git diff --staged --quiet || (git commit -m "chore: auto-update travel_rules.json ($(date -u +'%Y-%m-%d'))" && git push)
+          git diff --staged --quiet || (git commit -m "chore: auto-update 31 countries travel_rules.json ($(date -u +'%Y-%m-%d'))" && git push)
