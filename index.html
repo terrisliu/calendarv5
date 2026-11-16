@@ -2902,7 +2902,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.11.19</span>
+      <span>v5.11.21</span>
     </button>
   </footer>
 
@@ -3144,7 +3144,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.11.19</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.11.21</span>
             </h3>
           </div>
         </div>
@@ -3154,10 +3154,41 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <!-- v5.11.21 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.11.21（設定選單版本號同步更新 · 情報機構列表改為單行完整顯示 · 緊急求助淡雅分層配色、ISO 三位碼區號轉換及翠綠撥打鍵）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">UX & SOS POLISH</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🎨 全面微調資訊機構列表可讀性、緊急求助卡片色階與自訂熱線互動體驗</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 設定選單版本更新日誌同步</b>：設定抽屜底部「版本更新日誌」即時顯示最新 <code>v5.11.21</code>。</li>
+            <li><b>② 氣象與匯率選單標題精簡</b>：移除下拉選單頂部多餘說明括號，畫面更簡潔俐落。</li>
+            <li><b>③ 情報來源機構改為單行全字顯示</b>：取消雙欄截斷設計，改為一行一機構完整呈現全部中英名稱。</li>
+            <li><b>④ 緊急求助外框淡雅灰白底＋使領館紅卡突顯</b>：外框轉用柔和灰白底以突顯使領館淺玫瑰紅卡片；報警與醫療熱線改用清雅天藍／青綠配色。</li>
+            <li><b>⑤ 自訂緊急熱線交互升級</b>：標題改用淺灰可編輯提示、右側增設「💾 儲存」確認按鈕（兼備即時自動儲存）、國際區號支援英文國名、ISO 三位碼（如 <code>HKG / THA / JPN / GBR / USA</code>）、中文及數字自動轉換，撥打按鈕升級為鮮明翠綠色。</li>
+          </ul>
+        </div>
+
+        <!-- v5.11.20 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.11.20（永久封鎖大紀元／Funliday 及商業報章媒體名稱 · 獨立長方形彩色「🇭🇰 香港外遊警示」專屬橫幅 · 氣象與匯率內外名稱 100% 統一及中行先英行後選單）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">CLEAN UI & MEDIA BLOCK</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">🛡️ 全面淨化媒體名稱干擾，並重構「香港外遊警示」長方形橫幅與氣象／匯率中英雙語選擇器</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 永久封鎖大紀元、Funliday 及常見旅遊騙案媒體引述</b>：建立全域黑名單過濾器，徹底封鎖大紀元（Epoch Times）、Funliday，並自動過濾「常見旅遊騙案及安全防範」及動態情報中的報紙與媒體名稱（如香港01、東網、星島、明報等）。</li>
+            <li><b>② 「🇭🇰 香港外遊警示」獨立長方形圓角白框橫幅</b>：移至「1. 外遊警示、最新動態及當地法規」標題正下方第一行，左側標示「🇭🇰 香港外遊警示」，右側按實際警示級別自動配對綠／黃／紅／黑專屬色彩。</li>
+            <li><b>③ 國際風險與安全預警標籤精簡</b>：刪除「多國警示・」字眼，直接顯示為 <code>國際風險與安全預警（GDACS・WHO/CDC・UNODC・EASA/FAA · 譯）</code>。</li>
+            <li><b>④ 氣象與匯率選擇器內外 100% 統一</b>：收起狀態僅顯示純英文機構代號（<code>ECMWF / JMA / NOAA / ERA5</code> 及 <code>Frankfurter / ExchangeRate / jsDelivr</code>），點開下拉選單則「中文字行先、英文行後」且內外名稱完全一致。</li>
+          </ul>
+        </div>
+
         <!-- v5.11.19 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.11.19（全部 54 個海外國家／地區純官方網域白名單、第 1 欄當地法規與海關禁令，以及三大純官方情報體系最終全量實裝）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">54 DESTINATIONS VERIFIED</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.11.19（全部 54 個海外國家／地區純官方網域白名單、第 1 欄當地法規與海關禁令，以及三大純官方情報體系最終全量實裝）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">54 DESTINATIONS VERIFIED</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">✅ 完成亞洲 27 國／地區、中東 5 國、歐洲 15 國及美洲澳紐非洲 6 國共 54 個海外目的地全量白名單與法規寫入</div>
@@ -28628,14 +28659,29 @@ function setupYearOverviewToggle() {
     let dcIsReversedFx = false;
     let dcIsCashMode = false;
     let dcLiveRatesMap = Object.assign({}, DC_FALLBACK_RATES);
-    let dcPrefWeatherSrc = 'ECMWF 9km';
-    let dcPrefFxSrc = '多央行 v2';
+    function normalizeDcWeatherSrcCode(raw) {
+      const s = String(raw || '').trim();
+      if (s.startsWith('JMA')) return 'JMA';
+      if (s.startsWith('NOAA')) return 'NOAA';
+      if (s.startsWith('ERA5')) return 'ERA5';
+      return 'ECMWF';
+    }
+
+    function normalizeDcFxSrcCode(raw) {
+      const s = String(raw || '').trim();
+      if (s.includes('ExchangeRate')) return 'ExchangeRate';
+      if (s.includes('jsDelivr') || s.includes('CDN')) return 'jsDelivr';
+      return 'Frankfurter';
+    }
+
+    let dcPrefWeatherSrc = 'ECMWF';
+    let dcPrefFxSrc = 'Frankfurter';
 
     try {
       const sw = localStorage.getItem('hk_leave_dc_weather_src');
-      if (sw) dcPrefWeatherSrc = sw;
+      if (sw) dcPrefWeatherSrc = normalizeDcWeatherSrcCode(sw);
       const sf = localStorage.getItem('hk_leave_dc_fx_src');
-      if (sf) dcPrefFxSrc = sf;
+      if (sf) dcPrefFxSrc = normalizeDcFxSrcCode(sf);
     } catch (e) {}
 
     function getDcTripStore(tripKey) {
@@ -28660,18 +28706,18 @@ function setupYearOverviewToggle() {
     }
 
     function selectDcWeatherSource(srcName) {
-      dcPrefWeatherSrc = srcName;
+      dcPrefWeatherSrc = normalizeDcWeatherSrcCode(srcName);
       const lbl = document.getElementById('dcWeatherSrcLabel');
-      if (lbl) lbl.textContent = srcName;
+      if (lbl) lbl.textContent = dcPrefWeatherSrc;
       document.getElementById('dcWeatherSrcMenu')?.classList.add('hidden');
       try { localStorage.setItem('hk_leave_dc_weather_src', srcName); localStorage.setItem('hk_leave_dc_weather_src_manual', '1'); } catch (e) {}
       if (dcCurrentTripKey) fetchAndRenderDcWeather(dcCurrentTripKey);
     }
 
     function selectDcFxSource(srcName) {
-      dcPrefFxSrc = srcName;
+      dcPrefFxSrc = normalizeDcFxSrcCode(srcName);
       const lbl = document.getElementById('dcFxSrcLabel');
-      if (lbl) lbl.textContent = srcName;
+      if (lbl) lbl.textContent = dcPrefFxSrc;
       document.getElementById('dcFxSrcMenu')?.classList.add('hidden');
       try { localStorage.setItem('hk_leave_dc_fx_src', srcName); localStorage.setItem('hk_leave_dc_fx_src_manual', '1'); } catch (e) {}
       fetchAndRenderDcFxRates();
@@ -28803,7 +28849,7 @@ function setupYearOverviewToggle() {
       renderDcFxDisplay();
       try {
         let fetched = null;
-        if (dcPrefFxSrc === '多央行 v2') {
+        if (dcPrefFxSrc === 'Frankfurter') {
           const r = await fetch('https://api.frankfurter.dev/v2/rates?base=HKD');
           if (r.ok) {
             const j = await r.json();
@@ -28813,7 +28859,7 @@ function setupYearOverviewToggle() {
             }
           }
         }
-        if (!fetched && dcPrefFxSrc !== '全球 CDN 備援') {
+        if (!fetched && dcPrefFxSrc !== 'jsDelivr') {
           const r2 = await fetch('https://open.er-api.com/v6/latest/HKD');
           if (r2.ok) {
             const j2 = await r2.json();
@@ -28898,7 +28944,7 @@ function setupYearOverviewToggle() {
       // 兩大清晰模式：
       // 1) 距離出發 > 30 日（或手動選 ERA5）：顯示「單張大型月份季節氣候卡片」（溫度區間、濕度與降雨量、PM2.5 常見範圍）
       // 2) 距離出發 <= 30 日：顯示「5 張精裝逐日天氣卡片」（放大天氣圖示、清晰日子與星期、高低溫、濕度及 PM2.5）
-      const isLongRange = (diffDays > 30 || diffDays < -2 || dcPrefWeatherSrc === 'ERA5 十年基準');
+      const isLongRange = (diffDays > 30 || diffDays < -2 || dcPrefWeatherSrc === 'ERA5');
 
       gridEl.className = isLongRange ? 'block' : 'grid grid-cols-5 gap-1.5 text-center';
       gridEl.innerHTML = '<div class="col-span-5 py-3 text-[11px] font-bold text-sky-700 text-center">正在同步最新氣象與空氣指數...</div>';
@@ -28985,9 +29031,9 @@ function setupYearOverviewToggle() {
         let daysList = [];
         let pm25Daily = [];
         let modelParam = '';
-        if (dcPrefWeatherSrc === 'ECMWF 9km') modelParam = '&models=ecmwf_ifs';
-        else if (dcPrefWeatherSrc === 'JMA 日本氣象廳') modelParam = '&models=jma_seamless';
-        else if (dcPrefWeatherSrc === 'NOAA GFS') modelParam = '&models=gfs_seamless';
+        if (dcPrefWeatherSrc === 'ECMWF') modelParam = '&models=ecmwf_ifs';
+        else if (dcPrefWeatherSrc === 'JMA') modelParam = '&models=jma_seamless';
+        else if (dcPrefWeatherSrc === 'NOAA') modelParam = '&models=gfs_seamless';
 
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,relative_humidity_2m_mean&timezone=auto&forecast_days=16${modelParam}`;
         const aqUrl = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&hourly=pm2_5&timezone=auto&forecast_days=7`;
@@ -29095,6 +29141,36 @@ function setupYearOverviewToggle() {
       return head.concat(rotated);
     }
 
+    function renderDcHkTravelAlertBox(rawAlert) {
+      const boxEl = document.getElementById('dcHkAlertRowBox');
+      const badgeEl = document.getElementById('dcHkAlertBadge');
+      const dotEl = document.getElementById('dcHkAlertDot');
+      const txtEl = document.getElementById('dcHkAlertLevelText');
+      if (!badgeEl || !txtEl) return;
+
+      let cleaned = String(rawAlert || '無警示').replace(/^香港外遊警示[：:]\s*|^外遊警示[：:]\s*/i, '').trim();
+      if (!cleaned || cleaned === '正常') cleaned = '無警示';
+      txtEl.textContent = cleaned;
+
+      if (/黑/.test(cleaned)) {
+        if (boxEl) boxEl.className = 'w-full px-3 py-2 rounded-xl bg-white border-2 border-slate-900 shadow-2xs flex items-center justify-between gap-2';
+        badgeEl.className = 'inline-flex items-center gap-1.5 text-[10.5px] font-black px-2.5 py-0.5 rounded-lg bg-slate-900 text-white border border-red-500 truncate';
+        if (dotEl) dotEl.className = 'w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0';
+      } else if (/紅/.test(cleaned)) {
+        if (boxEl) boxEl.className = 'w-full px-3 py-2 rounded-xl bg-white border border-rose-300 shadow-2xs flex items-center justify-between gap-2';
+        badgeEl.className = 'inline-flex items-center gap-1.5 text-[10.5px] font-black px-2.5 py-0.5 rounded-lg bg-rose-100 text-rose-900 border border-rose-300 truncate';
+        if (dotEl) dotEl.className = 'w-2 h-2 rounded-full bg-rose-600 animate-pulse shrink-0';
+      } else if (/黃/.test(cleaned)) {
+        if (boxEl) boxEl.className = 'w-full px-3 py-2 rounded-xl bg-white border border-amber-300 shadow-2xs flex items-center justify-between gap-2';
+        badgeEl.className = 'inline-flex items-center gap-1.5 text-[10.5px] font-black px-2.5 py-0.5 rounded-lg bg-amber-100 text-amber-900 border border-amber-300 truncate';
+        if (dotEl) dotEl.className = 'w-2 h-2 rounded-full bg-amber-500 shrink-0';
+      } else {
+        if (boxEl) boxEl.className = 'w-full px-3 py-2 rounded-xl bg-white border border-emerald-200/90 shadow-2xs flex items-center justify-between gap-2';
+        badgeEl.className = 'inline-flex items-center gap-1.5 text-[10.5px] font-black px-2.5 py-0.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-300 truncate';
+        if (dotEl) dotEl.className = 'w-2 h-2 rounded-full bg-emerald-500 shrink-0';
+      }
+    }
+
     async function refreshDcTipsSection(sectionType, btnEl) {
       if (btnEl) {
         const icon = btnEl.querySelector('i');
@@ -29125,7 +29201,7 @@ function setupYearOverviewToggle() {
       const fullDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
 
       if (sectionType === 'news') {
-        const rawAll = dedup([].concat(spec.news10 || [], spec.newsMore || []));
+        const rawAll = filterAndCleanTipArray([].concat(spec.news10 || [], spec.newsMore || []));
         const reordered = rotateAndShuffleTail(rawAll, 0);
         document.getElementById('dcNewsTop10').innerHTML = reordered.slice(0, 5).map(x => `<li>${formatTipItemWithMatchedBadge(x, spec)}</li>`).join('');
         document.getElementById('dcNewsMore').innerHTML = reordered.slice(5).map(x => `<li>${formatTipItemWithMatchedBadge(x, spec)}</li>`).join('');
@@ -29136,7 +29212,7 @@ function setupYearOverviewToggle() {
         }
         if (typeof showToast === 'function') showToast('🔄 已更新外遊警示及當地法規排序');
       } else if (sectionType === 'scam') {
-        const rawAll = dedup([].concat(spec.scam10 || [], spec.scamMore || []));
+        const rawAll = filterAndCleanTipArray([].concat(spec.scam10 || [], spec.scamMore || []));
         const reordered = rotateAndShuffleTail(rawAll, 0);
         document.getElementById('dcScamTop10').innerHTML = reordered.slice(0, 5).map(x => `<li>${x}</li>`).join('');
         document.getElementById('dcScamMore').innerHTML = reordered.slice(5).map(x => `<li>${x}</li>`).join('');
@@ -29458,50 +29534,70 @@ function setupYearOverviewToggle() {
     })();
 
     const DC_AREA_CODE_ALIASES = {
-      '香港': '+852', 'hk': '+852', 'hongkong': '+852', 'hong kong': '+852', '852': '+852', '+852': '+852',
-      '澳門': '+853', 'mo': '+853', 'macau': '+853', 'macao': '+853', '853': '+853', '+853': '+853',
-      '中國': '+86', '內地': '+86', 'cn': '+86', 'china': '+86', '86': '+86', '+86': '+86',
-      '台灣': '+886', '臺灣': '+886', 'tw': '+886', 'taiwan': '+886', '886': '+886', '+886': '+886',
-      '泰國': '+66', 'th': '+66', 'thailand': '+66', '66': '+66', '+66': '+66',
-      '日本': '+81', 'jp': '+81', 'japan': '+81', '81': '+81', '+81': '+81',
-      '韓國': '+82', '南韓': '+82', 'kr': '+82', 'korea': '+82', '82': '+82', '+82': '+82',
-      '新加坡': '+65', '星加坡': '+65', '星洲': '+65', '新加坡共和國': '+65', 'sg': '+65', 'singapore': '+65', 'republic of singapore': '+65', '65': '+65', '+65': '+65',
-      '馬來西亞': '+60', '大馬': '+60', 'my': '+60', 'malaysia': '+60', '60': '+60', '+60': '+60',
-      '越南': '+84', 'vn': '+84', 'vietnam': '+84', '84': '+84', '+84': '+84',
-      '印尼': '+62', 'id': '+62', 'indonesia': '+62', '62': '+62', '+62': '+62',
-      '菲律賓': '+63', 'ph': '+63', 'philippines': '+63', '63': '+63', '+63': '+63',
-      '英國': '+44', 'gb': '+44', 'uk': '+44', '44': '+44', '+44': '+44',
-      '法國': '+33', 'fr': '+33', 'france': '+33', '33': '+33', '+33': '+33',
-      '德國': '+49', 'de': '+49', 'germany': '+49', '49': '+49', '+49': '+49',
-      '瑞士': '+41', 'ch': '+41', 'switzerland': '+41', '41': '+41', '+41': '+41',
-      '意大利': '+39', 'it': '+39', 'italy': '+39', '39': '+39', '+39': '+39',
-      '西班牙': '+34', 'es': '+34', 'spain': '+34', '34': '+34', '+34': '+34',
-      '澳洲': '+61', 'au': '+61', 'australia': '+61', '61': '+61', '+61': '+61',
-      '紐西蘭': '+64', '新西蘭': '+64', 'nz': '+64', 'new zealand': '+64', '64': '+64', '+64': '+64',
-      '美國': '+1', '加拿大': '+1', 'us': '+1', 'usa': '+1', 'ca': '+1', 'canada': '+1', '1': '+1', '+1': '+1',
-      '中國大陸': '+86', '大陸': '+86', 'prc': '+86', 'mainland': '+86', 'mainland china': '+86',
-      '南韓': '+82', 'south korea': '+82', 'republic of korea': '+82',
-      '英國': '+44', 'united kingdom': '+44', 'britain': '+44', 'england': '+44',
-      '荷蘭': '+31', 'nl': '+31', 'netherlands': '+31', '31': '+31', '+31': '+31',
-      '比利時': '+32', 'be': '+32', 'belgium': '+32', '32': '+32', '+32': '+32',
-      '奧地利': '+43', 'at': '+43', 'austria': '+43', '43': '+43', '+43': '+43',
-      '瑞典': '+46', 'se': '+46', 'sweden': '+46', '46': '+46', '+46': '+46',
-      '挪威': '+47', 'no': '+47', 'norway': '+47', '47': '+47', '+47': '+47',
-      '丹麥': '+45', 'dk': '+45', 'denmark': '+45', '45': '+45', '+45': '+45',
-      '芬蘭': '+358', 'fi': '+358', 'finland': '+358', '358': '+358', '+358': '+358',
-      '冰島': '+354', 'is': '+354', 'iceland': '+354', '354': '+354', '+354': '+354',
-      '葡萄牙': '+351', 'pt': '+351', 'portugal': '+351', '351': '+351', '+351': '+351',
-      '希臘': '+30', 'gr': '+30', 'greece': '+30', '30': '+30', '+30': '+30',
-      '土耳其': '+90', 'tr': '+90', 'turkey': '+90', 'turkiye': '+90', '90': '+90', '+90': '+90',
-      '阿聯酋': '+971', '杜拜': '+971', 'ae': '+971', 'uae': '+971', 'dubai': '+971', '971': '+971', '+971': '+971',
-      '印度': '+91', 'in': '+91', 'india': '+91', '91': '+91', '+91': '+91',
-      '柬埔寨': '+855', 'kh': '+855', 'cambodia': '+855', '855': '+855', '+855': '+855',
-      '老撾': '+856', '寮國': '+856', 'la': '+856', 'laos': '+856', '856': '+856', '+856': '+856',
-      '緬甸': '+95', 'mm': '+95', 'myanmar': '+95', '95': '+95', '+95': '+95',
-      '汶萊': '+673', 'bn': '+673', 'brunei': '+673', '673': '+673', '+673': '+673',
-      '馬爾代夫': '+960', 'mv': '+960', 'maldives': '+960', '960': '+960', '+960': '+960',
-      '尼泊爾': '+977', 'np': '+977', 'nepal': '+977', '977': '+977', '+977': '+977',
-      '斯里蘭卡': '+94', 'lk': '+94', 'sri lanka': '+94', '94': '+94', '+94': '+94'
+      // 香港 / 澳門 / 中國內地 / 台灣
+      '香港': '+852', 'hk': '+852', 'hkg': '+852', 'hongkong': '+852', 'hong kong': '+852', '852': '+852', '+852': '+852',
+      '澳門': '+853', 'mo': '+853', 'mac': '+853', 'macau': '+853', 'macao': '+853', '853': '+853', '+853': '+853',
+      '中國': '+86', '內地': '+86', '中國大陸': '+86', '大陸': '+86', 'cn': '+86', 'chn': '+86', 'prc': '+86', 'china': '+86', 'mainland china': '+86', '86': '+86', '+86': '+86',
+      '台灣': '+886', '臺灣': '+886', 'tw': '+886', 'twn': '+886', 'taiwan': '+886', '886': '+886', '+886': '+886',
+      // 東南亞
+      '泰國': '+66', 'th': '+66', 'tha': '+66', 'thailand': '+66', '66': '+66', '+66': '+66',
+      '日本': '+81', 'jp': '+81', 'jpn': '+81', 'japan': '+81', '81': '+81', '+81': '+81',
+      '韓國': '+82', '南韓': '+82', 'kr': '+82', 'kor': '+82', 'korea': '+82', 'south korea': '+82', 'republic of korea': '+82', '82': '+82', '+82': '+82',
+      '新加坡': '+65', '星加坡': '+65', '星洲': '+65', 'sg': '+65', 'sgp': '+65', 'singapore': '+65', '65': '+65', '+65': '+65',
+      '馬來西亞': '+60', '大馬': '+60', 'my': '+60', 'mys': '+60', 'malaysia': '+60', '60': '+60', '+60': '+60',
+      '越南': '+84', 'vn': '+84', 'vnm': '+84', 'vietnam': '+84', '84': '+84', '+84': '+84',
+      '印尼': '+62', 'id': '+62', 'idn': '+62', 'indonesia': '+62', '62': '+62', '+62': '+62',
+      '菲律賓': '+63', 'ph': '+63', 'phl': '+63', 'philippines': '+63', '63': '+63', '+63': '+63',
+      '柬埔寨': '+855', 'kh': '+855', 'khm': '+855', 'cambodia': '+855', '855': '+855', '+855': '+855',
+      '老撾': '+856', '寮國': '+856', 'la': '+856', 'lao': '+856', 'laos': '+856', '856': '+856', '+856': '+856',
+      '緬甸': '+95', 'mm': '+95', 'mmr': '+95', 'myanmar': '+95', 'burma': '+95', '95': '+95', '+95': '+95',
+      '汶萊': '+673', 'bn': '+673', 'brn': '+673', 'brunei': '+673', '673': '+673', '+673': '+673',
+      '東帝汶': '+670', 'tl': '+670', 'tls': '+670', 'timor-leste': '+670', 'east timor': '+670', '670': '+670', '+670': '+670',
+      // 南亞及中亞
+      '印度': '+91', 'in': '+91', 'ind': '+91', 'india': '+91', '91': '+91', '+91': '+91',
+      '尼泊爾': '+977', 'np': '+977', 'npl': '+977', 'nepal': '+977', '977': '+977', '+977': '+977',
+      '斯里蘭卡': '+94', 'lk': '+94', 'lka': '+94', 'sri lanka': '+94', '94': '+94', '+94': '+94',
+      '馬爾代夫': '+960', 'mv': '+960', 'mdv': '+960', 'maldives': '+960', '960': '+960', '+960': '+960',
+      '不丹': '+975', 'bt': '+975', 'btn': '+975', 'bhutan': '+975', '975': '+975', '+975': '+975',
+      '孟加拉': '+880', 'bd': '+880', 'bgd': '+880', 'bangladesh': '+880', '880': '+880', '+880': '+880',
+      '巴基斯坦': '+92', 'pk': '+92', 'pak': '+92', 'pakistan': '+92', '92': '+92', '+92': '+92',
+      '哈薩克': '+7', 'kz': '+7', 'kaz': '+7', 'kazakhstan': '+7',
+      '烏茲別克': '+998', 'uz': '+998', 'uzb': '+998', 'uzbekistan': '+998', '998': '+998', '+998': '+998',
+      '吉爾吉斯': '+996', 'kg': '+996', 'kgz': '+996', 'kyrgyzstan': '+996', '996': '+996', '+996': '+996',
+      '塔吉克': '+992', 'tj': '+992', 'tjk': '+992', 'tajikistan': '+992', '992': '+992', '+992': '+992',
+      '土庫曼': '+993', 'tm': '+993', 'tkm': '+993', 'turkmenistan': '+993', '993': '+993', '+993': '+993',
+      // 中東
+      '阿聯酋': '+971', '杜拜': '+971', 'ae': '+971', 'are': '+971', 'uae': '+971', 'dubai': '+971', '971': '+971', '+971': '+971',
+      '卡塔爾': '+974', 'qa': '+974', 'qat': '+974', 'qatar': '+974', '974': '+974', '+974': '+974',
+      '沙特阿拉伯': '+966', '沙地阿拉伯': '+966', 'sa': '+966', 'sau': '+966', 'saudi arabia': '+966', '966': '+966', '+966': '+966',
+      '約旦': '+962', 'jo': '+962', 'jor': '+962', 'jordan': '+962', '962': '+962', '+962': '+962',
+      '土耳其': '+90', 'tr': '+90', 'tur': '+90', 'turkey': '+90', 'turkiye': '+90', '90': '+90', '+90': '+90',
+      // 歐洲
+      '英國': '+44', 'gb': '+44', 'gbr': '+44', 'uk': '+44', 'united kingdom': '+44', 'britain': '+44', 'england': '+44', '44': '+44', '+44': '+44',
+      '法國': '+33', 'fr': '+33', 'fra': '+33', 'france': '+33', '33': '+33', '+33': '+33',
+      '德國': '+49', 'de': '+49', 'deu': '+49', 'germany': '+49', '49': '+49', '+49': '+49',
+      '意大利': '+39', 'it': '+39', 'ita': '+39', 'italy': '+39', '39': '+39', '+39': '+39',
+      '西班牙': '+34', 'es': '+34', 'esp': '+34', 'spain': '+34', '34': '+34', '+34': '+34',
+      '荷蘭': '+31', 'nl': '+31', 'nld': '+31', 'netherlands': '+31', 'holland': '+31', '31': '+31', '+31': '+31',
+      '瑞士': '+41', 'ch': '+41', 'che': '+41', 'switzerland': '+41', '41': '+41', '+41': '+41',
+      '奧地利': '+43', 'at': '+43', 'aut': '+43', 'austria': '+43', '43': '+43', '+43': '+43',
+      '葡萄牙': '+351', 'pt': '+351', 'prt': '+351', 'portugal': '+351', '351': '+351', '+351': '+351',
+      '希臘': '+30', 'gr': '+30', 'grc': '+30', 'greece': '+30', '30': '+30', '+30': '+30',
+      '冰島': '+354', 'is': '+354', 'isl': '+354', 'iceland': '+354', '354': '+354', '+354': '+354',
+      '捷克': '+420', 'cz': '+420', 'cze': '+420', 'czechia': '+420', 'czech republic': '+420', '420': '+420', '+420': '+420',
+      '匈牙利': '+36', 'hu': '+36', 'hun': '+36', 'hungary': '+36', '36': '+36', '+36': '+36',
+      '挪威': '+47', 'no': '+47', 'nor': '+47', 'norway': '+47', '47': '+47', '+47': '+47',
+      '芬蘭': '+358', 'fi': '+358', 'fin': '+358', 'finland': '+358', '358': '+358', '+358': '+358',
+      '比利時': '+32', 'be': '+32', 'bel': '+32', 'belgium': '+32', '32': '+32', '+32': '+32',
+      '瑞典': '+46', 'se': '+46', 'swe': '+46', 'sweden': '+46', '46': '+46', '+46': '+46',
+      '丹麥': '+45', 'dk': '+45', 'dnk': '+45', 'denmark': '+45', '45': '+45', '+45': '+45',
+      // 美洲、澳紐及非洲
+      '美國': '+1', 'us': '+1', 'usa': '+1', 'united states': '+1', 'america': '+1', '1': '+1', '+1': '+1',
+      '加拿大': '+1', 'ca': '+1', 'can': '+1', 'canada': '+1',
+      '澳洲': '+61', 'au': '+61', 'aus': '+61', 'australia': '+61', '61': '+61', '+61': '+61',
+      '新西蘭': '+64', '紐西蘭': '+64', 'nz': '+64', 'nzl': '+64', 'new zealand': '+64', '64': '+64', '+64': '+64',
+      '埃及': '+20', 'eg': '+20', 'egy': '+20', 'egypt': '+20', '20': '+20', '+20': '+20',
+      '摩洛哥': '+212', 'ma': '+212', 'mar': '+212', 'morocco': '+212', '212': '+212', '+212': '+212'
     };
 
     function resolveSmartAreaCode(raw) {
@@ -29547,6 +29643,21 @@ function setupYearOverviewToggle() {
       st.customEmergencyArea = areaEl ? areaEl.value : '';
       st.customEmergencyPhone = phoneEl ? phoneEl.value : '';
       saveDcTripStore(dcCurrentTripKey, st);
+      const statusEl = document.getElementById('dcCustomEmSaveStatus');
+      if (statusEl) {
+        statusEl.textContent = '已自動儲存';
+      }
+    }
+
+    function manualSaveDcCustomEmergency() {
+      const areaEl = document.getElementById('dcCustomEmergencyAreaInput');
+      if (areaEl) areaEl.value = resolveSmartAreaCode(areaEl.value);
+      saveDcCustomEmergency();
+      const statusEl = document.getElementById('dcCustomEmSaveStatus');
+      if (statusEl) statusEl.textContent = '已儲存 ✓';
+      if (typeof showToast === 'function') {
+        showToast('💾 已儲存自訂緊急支援熱線');
+      }
     }
 
     function getFormattedDcCustomEmergency() {
@@ -29865,7 +29976,7 @@ function setupYearOverviewToggle() {
     } catch (e) {}
     try {
       Object.keys(localStorage).forEach(k => {
-        if (k.startsWith('hk_leave_dc_live7_') || k.startsWith('hk_leave_dc_live8_') || k.startsWith('hk_leave_dc_official_v10_') || k.startsWith('hk_leave_dc_official_v11_') || k.startsWith('hk_leave_dc_official_v12_') || k.startsWith('hk_leave_dc_official_v13_') || k.startsWith('hk_leave_dc_official_v14_')) localStorage.removeItem(k);
+        if (k.startsWith('hk_leave_dc_live7_') || k.startsWith('hk_leave_dc_live8_') || k.startsWith('hk_leave_dc_official_v10_') || k.startsWith('hk_leave_dc_official_v11_') || k.startsWith('hk_leave_dc_official_v12_') || k.startsWith('hk_leave_dc_official_v13_') || k.startsWith('hk_leave_dc_official_v14_') || k.startsWith('hk_leave_dc_official_v15_')) localStorage.removeItem(k);
       });
     } catch (e) {}
     setTimeout(syncExternalTravelRulesJson, 400);
@@ -30349,6 +30460,41 @@ function setupYearOverviewToggle() {
       return `${rawHtml} <span class="dc-source-color-badge inline-flex items-center gap-1 ml-1 px-1.5 py-0.2 rounded border ${meta.cls} font-extrabold text-[8.5px] align-middle"><span class="w-1.5 h-1.5 rounded-full ${meta.dot}"></span><span>${icon}</span><span>${label}</span></span>`;
     }
 
+    // 全域黑名單：徹底封鎖大紀元、Funliday 及商業媒體／報章名稱
+    const DC_BLOCKED_SOURCES_REGEX = /(大紀元|epoch\s*times|epochtimes|funliday|香港01|hk01|東網|on\.cc|東方日報|星島|頭條日報|明報|蘋果日報|apple\s*daily|南華早報|scmp|經濟日報|hket|信報|hkej|大公報|文匯報|商報|晴報|am730|巴士的報|bastille|獨立媒體|inmedia|立場|眾新聞|端傳媒|ettoday|東森|tvbs|三立|民視|中時|聯合報|udn|自由時報|ltn|鏡週刊|風傳媒|nownews|yahoo\s*新聞|line\s*today)/i;
+
+    function isBlockedCommercialSource(text) {
+      return DC_BLOCKED_SOURCES_REGEX.test(String(text || ''));
+    }
+
+    function sanitizeMediaMentionsFromTip(rawHtml) {
+      if (!rawHtml) return '';
+      let s = String(rawHtml);
+      s = s.replace(/[（(][^）)]*?(?:大紀元|epoch\s*times|funliday|香港01|hk01|東網|東方日報|星島|頭條日報|明報|蘋果日報|南華早報|scmp|經濟日報|信報|晴報|am730|巴士的報|ettoday|東森|tvbs|三立|民視|中時|聯合報|自由時報|鏡週刊|風傳媒|nownews|yahoo|bbc|cnn|報道|報導|消息|媒體|報章)[^）)]*?[）)]/gi, '');
+      s = s.replace(/(?:據|引述|綜合|根據|來源[：:])\s*(?:大紀元|epoch\s*times|funliday|香港01|hk01|東網|東方日報|星島|頭條日報|明報|蘋果日報|南華早報|scmp|經濟日報|信報|晴報|am730|巴士的報|ettoday|東森|tvbs|三立|民視|中時|聯合報|自由時報|鏡週刊|風傳媒|nownews|yahoo|bbc|cnn)[^，。；：、\s]*/gi, '');
+      s = s.replace(/(?:大紀元|epoch\s*times|epochtimes|funliday|香港01|hk01)/gi, '');
+      return s.replace(/\s{2,}/g, ' ').replace(/：\s*。/g, '。').trim();
+    }
+
+    function filterAndCleanTipArray(arr) {
+      if (!Array.isArray(arr)) return [];
+      const out = [];
+      const seen = new Set();
+      for (const item of arr) {
+        if (isBlockedCommercialSource(item)) {
+          if (/(大紀元|epoch\s*times|epochtimes|funliday)/i.test(String(item))) continue;
+        }
+        const cleaned = sanitizeMediaMentionsFromTip(item);
+        if (!cleaned) continue;
+        const m = cleaned.match(/<b>([^<]+)<\/b>/);
+        const key = m ? m[1].trim() : cleaned.trim();
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push(cleaned);
+      }
+      return out;
+    }
+
     async function translateEnToZhHk(text) {
       if (!text) return '';
       try {
@@ -30369,10 +30515,10 @@ function setupYearOverviewToggle() {
       const eastAsia = new Set(['JP', 'KR', 'TW', 'CN', 'MO', 'HK']);
       const americasOceania = new Set(['US', 'CA', 'AU', 'NZ', 'MX', 'BR']);
       const eurCentralFx = new Set(['GB', 'FR', 'DE', 'IT', 'ES', 'CH', 'NL', 'BE', 'AT', 'PT', 'GR', 'SE', 'NO', 'DK', 'FI', 'IS', 'PL', 'CZ', 'HU', 'JP', 'KR', 'US', 'CA', 'AU', 'NZ', 'SG', 'TH', 'MY', 'ID', 'PH', 'IN', 'CN']);
-      let weatherSrc = 'ECMWF 9km';
-      if (eastAsia.has(code)) weatherSrc = 'JMA 日本氣象廳';
-      else if (americasOceania.has(code)) weatherSrc = 'NOAA GFS';
-      const fxSrc = eurCentralFx.has(code) ? '多央行 v2' : 'ExchangeRate';
+      let weatherSrc = 'ECMWF';
+      if (eastAsia.has(code)) weatherSrc = 'JMA';
+      else if (americasOceania.has(code)) weatherSrc = 'NOAA';
+      const fxSrc = eurCentralFx.has(code) ? 'Frankfurter' : 'ExchangeRate';
       return { weatherSrc, fxSrc };
     }
 
@@ -30415,7 +30561,7 @@ function setupYearOverviewToggle() {
       const spec = dcActiveCountrySpec;
       const cityZh = (dcSelectedCity && dcSelectedCity.name) ? dcSelectedCity.name : (spec.name || '曼谷');
       const localAuth = DC_LOCAL_AUTHORITY_NAMES[dcCurrentCountryCode] || `${spec.name || '當地'}官方旅遊局及出入境部門`;
-      const cacheKey = 'hk_leave_dc_official_v15_' + dcCurrentCountryCode + '_' + cityZh;
+      const cacheKey = 'hk_leave_dc_official_v16_' + dcCurrentCountryCode + '_' + cityZh;
 
       const localGovPill = document.getElementById('dcLocalGovPillName');
       if (localGovPill) {
@@ -30442,7 +30588,7 @@ function setupYearOverviewToggle() {
         // 頻道 1 & 2（深藍 / 靛藍）：純香港政府官方部門域名（sb.gov.hk / info.gov.hk / immd.gov.hk / travelhealth.gov.hk），絕不夾雜傳媒
         try {
           const hkOfficialQ = encodeURIComponent(`${countryZh} (site:sb.gov.hk OR site:info.gov.hk OR site:immd.gov.hk OR site:travelhealth.gov.hk)`);
-          const hkRssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://news.google.com/rss/search?q=${hkOfficialQ}&hl=zh-HK&gl=HK&ceid=HK:zh-Hant`)}`;
+          const hkRssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://news.google.com/rss/search?q=${hkOfficialQ}%20-大紀元%20-epochtimes%20-funliday%20-hk01&hl=zh-HK&gl=HK&ceid=HK:zh-Hant`)}`;
           const rHk = await fetch(hkRssUrl);
           if (rHk.ok) {
             const jHk = await rHk.json();
@@ -30450,7 +30596,7 @@ function setupYearOverviewToggle() {
               const item0 = jHk.items[0];
               const linkStr = String(item0.link || '');
               const rawTitle = (item0.title || '').replace(/\s*[-–—|]\s*[^-–—|]+$/, '').trim();
-              if (rawTitle) {
+              if (rawTitle && !isBlockedCommercialSource(rawTitle) && !isBlockedCommercialSource(linkStr)) {
                 const isSb = linkStr.includes('sb.gov.hk') || rawTitle.includes('外遊警示');
                 const isHealth = linkStr.includes('travelhealth.gov.hk') || /(衞生署|傳染病|疫苗|登革熱)/.test(rawTitle);
                 fetchedItems.push({
@@ -30469,13 +30615,13 @@ function setupYearOverviewToggle() {
           const wl = DC_OFFICIAL_MEDIA_WHITELIST[dcCurrentCountryCode];
           if (wl && wl.domains) {
             const localQ = encodeURIComponent(`${wl.query} (${wl.domains})`);
-            const localRssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://news.google.com/rss/search?q=${localQ}&hl=en&gl=US&ceid=US:en`)}`;
+            const localRssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://news.google.com/rss/search?q=${localQ}%20-epochtimes%20-funliday&hl=en&gl=US&ceid=US:en`)}`;
             const rLocal = await fetch(localRssUrl);
             if (rLocal.ok) {
               const jLocal = await rLocal.json();
               if (jLocal && Array.isArray(jLocal.items) && jLocal.items.length > 0) {
                 const rawEnTitle = (jLocal.items[0].title || '').replace(/\s*[-–—|]\s*[^-–—|]+$/, '').trim();
-                if (rawEnTitle) {
+                if (rawEnTitle && !isBlockedCommercialSource(rawEnTitle)) {
                   const zhTitle = await translateEnToZhHk(rawEnTitle);
                   fetchedItems.push({
                     topic: `${wl.org}最新官方公告`,
@@ -30534,7 +30680,7 @@ function setupYearOverviewToggle() {
                   const itM = jMulti.items[0];
                   const lnkM = String(itM.link || '');
                   const rawEnM = (itM.title || '').replace(/\s*[-–—|]\s*[^-–—|]+$/, '').trim();
-                  if (rawEnM) {
+                  if (rawEnM && !isBlockedCommercialSource(rawEnM) && !isBlockedCommercialSource(lnkM)) {
                     const zhM = await translateEnToZhHk(rawEnM);
                     let govSrcName = '多國政府旅遊警示';
                     if (lnkM.includes('gov.uk')) govSrcName = '英國 FCDO 外遊警示';
@@ -30565,7 +30711,7 @@ function setupYearOverviewToggle() {
                   const itH = jUnH.items[0];
                   const lnkH = String(itH.link || '');
                   const rawEnH = (itH.title || '').replace(/\s*[-–—|]\s*[^-–—|]+$/, '').trim();
-                  if (rawEnH) {
+                  if (rawEnH && !isBlockedCommercialSource(rawEnH) && !isBlockedCommercialSource(lnkH)) {
                     const zhH = await translateEnToZhHk(rawEnH);
                     let uhOrg = 'GDACS / WHO / CDC 預警';
                     if (lnkH.includes('gdacs.org')) uhOrg = 'GDACS 全球災害警報';
@@ -30592,7 +30738,7 @@ function setupYearOverviewToggle() {
                   const itA = jUnA.items[0];
                   const lnkA = String(itA.link || '');
                   const rawEnA = (itA.title || '').replace(/\s*[-–—|]\s*[^-–—|]+$/, '').trim();
-                  if (rawEnA) {
+                  if (rawEnA && !isBlockedCommercialSource(rawEnA) && !isBlockedCommercialSource(lnkA)) {
                     const zhA = await translateEnToZhHk(rawEnA);
                     let uaOrg = 'UNODC / EASA / FAA 預警';
                     if (lnkA.includes('unodc.org')) uaOrg = 'UNODC 聯合國治安統計';
@@ -30666,7 +30812,7 @@ function setupYearOverviewToggle() {
       );
 
       // 將實時抓到的官方頻道最新公告置頂顯示於第 1 欄最上方，並附上對應來源顏色徽章
-      items.slice().reverse().forEach(it => {
+      items.filter(it => !isBlockedCommercialSource(it && it.topic) && !isBlockedCommercialSource(it && it.text)).slice().reverse().forEach(it => {
         const topicTitle = (it.topic || '官方最新公告').trim();
         if (existingTitles.has(topicTitle)) return;
         existingTitles.add(topicTitle);
@@ -31191,6 +31337,8 @@ function setupYearOverviewToggle() {
       if (!localStorage.getItem('hk_leave_dc_fx_src_manual')) {
         dcPrefFxSrc = autoSources.fxSrc;
       }
+      dcPrefWeatherSrc = normalizeDcWeatherSrcCode(dcPrefWeatherSrc);
+      dcPrefFxSrc = normalizeDcFxSrcCode(dcPrefFxSrc);
       document.getElementById('dcWeatherSrcLabel').textContent = dcPrefWeatherSrc;
       document.getElementById('dcFxSrcLabel').textContent = dcPrefFxSrc;
 
@@ -31264,7 +31412,7 @@ function setupYearOverviewToggle() {
       document.getElementById('dcPlugSpecText').textContent = spec.plug || '220V · 萬能轉插';
       renderDcChecklistSection(tripKey);
 
-      document.getElementById('dcHkAlertBadge').textContent = spec.hkAlert || '外遊警示：正常';
+      renderDcHkTravelAlertBox(spec.hkAlert);
 
       const dedupByTopic = (arr) => {
         const seen = new Set();
@@ -31276,7 +31424,7 @@ function setupYearOverviewToggle() {
           return true;
         });
       };
-      const allNews = dedupByTopic([].concat(spec.news10 || [], spec.newsMore || []));
+      const allNews = filterAndCleanTipArray([].concat(spec.news10 || [], spec.newsMore || []));
       const newsTop5 = allNews.slice(0, 5);
       const newsRest = allNews.slice(5);
       document.getElementById('dcNewsTop10').innerHTML = newsTop5.map(x => `<li>${formatTipItemWithMatchedBadge(x, spec)}</li>`).join('');
@@ -31287,7 +31435,7 @@ function setupYearOverviewToggle() {
       document.getElementById('dcTxtNews').setAttribute('data-default-label', newsLbl);
       document.getElementById('dcTxtNews').textContent = newsLbl;
 
-      const allScams = dedupByTopic([].concat(spec.scam10 || [], spec.scamMore || []));
+      const allScams = filterAndCleanTipArray([].concat(spec.scam10 || [], spec.scamMore || []));
       const scamTop5 = allScams.slice(0, 5);
       const scamRest = allScams.slice(5);
       document.getElementById('dcScamTop10').innerHTML = scamTop5.map(x => `<li>${x}</li>`).join('');
@@ -31376,28 +31524,31 @@ function setupYearOverviewToggle() {
         // 2. 外交部 12308 -> 暖琥珀黃 (淺黃底 + 深棕字)
         // 3. 中國駐當地大使館 -> 淺紅色 (淺玫瑰紅底 + 深紅字，對調原 1868 紅色並改淺底深字)
         // 4. 當地報警／急救 -> 純白底 + 深藍黑字
+        const isMedRescue = /(醫療|急救|救護|ambulance|medical|samu|1669|119|999)/i.test(String(e.label || '') + String(e.num || ''));
         const cardCls = isImm1868
           ? 'bg-blue-50/95 border-2 border-blue-300 text-blue-950 shadow-2xs'
           : (e.mfa
               ? 'bg-amber-50/95 border-2 border-amber-300 text-amber-950 shadow-2xs'
               : (e.embassy
                   ? 'bg-rose-50/95 border-2 border-rose-300 text-rose-950 shadow-2xs'
-                  : 'bg-white border-2 border-slate-200 text-blue-950 shadow-2xs'));
+                  : (isMedRescue
+                      ? 'bg-teal-50/85 border border-teal-200 text-teal-950 shadow-2xs'
+                      : 'bg-sky-50/85 border border-sky-200 text-sky-950 shadow-2xs')));
         const labelCls = isImm1868
           ? 'text-blue-950'
-          : (e.mfa ? 'text-amber-950' : (e.embassy ? 'text-rose-950' : 'text-slate-800'));
+          : (e.mfa ? 'text-amber-950' : (e.embassy ? 'text-rose-950' : (isMedRescue ? 'text-teal-900' : 'text-sky-900')));
         const borderCls = isImm1868
           ? 'border-blue-200'
-          : (e.mfa ? 'border-amber-200' : (e.embassy ? 'border-rose-200' : 'border-slate-100'));
+          : (e.mfa ? 'border-amber-200' : (e.embassy ? 'border-rose-200' : (isMedRescue ? 'border-teal-200/70' : 'border-sky-200/70')));
         const numCls = isImm1868
           ? 'text-blue-900'
-          : (e.mfa ? 'text-amber-900' : (e.embassy ? 'text-rose-900' : 'text-blue-950'));
+          : (e.mfa ? 'text-amber-900' : (e.embassy ? 'text-rose-900' : (isMedRescue ? 'text-teal-950' : 'text-sky-950')));
         const phoneIconBoxCls = isImm1868
           ? 'bg-blue-600 text-white'
-          : (e.mfa ? 'bg-amber-500 text-white' : (e.embassy ? 'bg-rose-500 text-white' : 'bg-slate-700 text-white'));
+          : (e.mfa ? 'bg-amber-500 text-white' : (e.embassy ? 'bg-rose-500 text-white' : (isMedRescue ? 'bg-teal-600 text-white' : 'bg-sky-600 text-white')));
         const copyCls = isImm1868
           ? 'bg-blue-200/80 hover:bg-blue-300 text-blue-950'
-          : (e.mfa ? 'bg-amber-200/80 hover:bg-amber-300 text-amber-950' : (e.embassy ? 'bg-rose-200/80 hover:bg-rose-300 text-rose-950' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'));
+          : (e.mfa ? 'bg-amber-200/80 hover:bg-amber-300 text-amber-950' : (e.embassy ? 'bg-rose-200/80 hover:bg-rose-300 text-rose-950' : (isMedRescue ? 'bg-teal-100 hover:bg-teal-200 text-teal-900' : 'bg-sky-100 hover:bg-sky-200 text-sky-900')));
 
         const drawerId = `dcEmDrawer_${idx}`;
         let servicePill = '';
@@ -31490,7 +31641,10 @@ function setupYearOverviewToggle() {
       const cTitleEl = document.getElementById('dcCustomEmergencyTitleInput');
       const cAreaEl = document.getElementById('dcCustomEmergencyAreaInput');
       const cPhoneEl = document.getElementById('dcCustomEmergencyPhoneInput');
-      if (cTitleEl) cTitleEl.value = st.customEmergencyTitle || '個人旅遊保險 24 小時緊急支援熱線';
+      const savedTitle = (st.customEmergencyTitle || '').trim();
+      if (cTitleEl) cTitleEl.value = (savedTitle === '個人旅遊保險 24 小時緊急支援熱線') ? '' : savedTitle;
+      const statusEl = document.getElementById('dcCustomEmSaveStatus');
+      if (statusEl) statusEl.textContent = (st.customEmergencyPhone || savedTitle) ? '已儲存' : '儲存';
       if (cAreaEl) cAreaEl.value = (st.customEmergencyArea !== undefined) ? st.customEmergencyArea : '+852';
       if (cPhoneEl) cPhoneEl.value = st.customEmergencyPhone || st.insuranceHotline || '';
       updateDcCustomEmergencyPreview();
@@ -32261,22 +32415,22 @@ function setupYearOverviewToggle() {
               <div class="relative" onmouseenter="openDcHoverMenu('dcWeatherSrcMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcWeatherSrcMenu')">
                 <button type="button" onclick="toggleDcDropdown('dcWeatherSrcMenu')"
                         class="text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full bg-sky-600 hover:bg-sky-700 text-white flex items-center gap-1 cursor-pointer shadow-2xs">
-                  <span id="dcWeatherSrcLabel">ECMWF 9km</span>
+                  <span id="dcWeatherSrcLabel">ECMWF</span>
                   <i class="fa-solid fa-caret-down text-[9px]"></i>
                 </button>
-                <div id="dcWeatherSrcMenu" class="hidden absolute right-0 top-6 z-40 w-56 bg-white rounded-2xl shadow-xl border border-slate-200 p-1.5 text-[11px] space-y-1">
-                  <div class="px-2 py-0.5 text-[9.5px] font-bold text-slate-400">氣象預報來源（已按地區自動配對）</div>
-                  <button type="button" onclick="selectDcWeatherSource('ECMWF 9km')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
-                    <span>歐洲中心 ECMWF (9km)</span><span class="text-[9px] text-sky-600">歐洲/東南亞最佳</span>
+                <div id="dcWeatherSrcMenu" class="hidden absolute right-0 top-6 z-40 w-60 bg-white rounded-2xl shadow-xl border border-slate-200 p-1.5 text-[11px] space-y-1">
+                  <div class="px-2 py-0.5 text-[9.5px] font-bold text-slate-400">氣象預報來源</div>
+                  <button type="button" onclick="selectDcWeatherSource('ECMWF')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between gap-1 cursor-pointer">
+                    <span>歐洲中期天氣預報中心 ECMWF</span><span class="text-[9px] text-sky-600 shrink-0">歐亞最佳</span>
                   </button>
-                  <button type="button" onclick="selectDcWeatherSource('JMA 日本氣象廳')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
-                    <span>日本氣象廳 JMA (5km)</span><span class="text-[9px] text-emerald-600">日韓台東亞最佳</span>
+                  <button type="button" onclick="selectDcWeatherSource('JMA')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between gap-1 cursor-pointer">
+                    <span>日本氣象廳 JMA</span><span class="text-[9px] text-emerald-600 shrink-0">東亞最佳</span>
                   </button>
-                  <button type="button" onclick="selectDcWeatherSource('NOAA GFS')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
-                    <span>美國氣象局 NOAA GFS</span><span class="text-[9px] text-slate-500">美加澳紐最佳</span>
+                  <button type="button" onclick="selectDcWeatherSource('NOAA')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between gap-1 cursor-pointer">
+                    <span>美國國家氣象局 NOAA</span><span class="text-[9px] text-slate-500 shrink-0">美澳最佳</span>
                   </button>
-                  <button type="button" onclick="selectDcWeatherSource('ERA5 十年基準')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
-                    <span>ERA5 歷年月份氣候基準</span><span class="text-[9px] text-slate-500">遠期季節大卡</span>
+                  <button type="button" onclick="selectDcWeatherSource('ERA5')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-sky-50 font-bold text-blue-950 flex items-center justify-between gap-1 cursor-pointer">
+                    <span>歐洲歷年氣候基準 ERA5</span><span class="text-[9px] text-slate-500 shrink-0">遠期基準</span>
                   </button>
                 </div>
               </div>
@@ -32335,19 +32489,19 @@ function setupYearOverviewToggle() {
               <div class="relative" onmouseenter="openDcHoverMenu('dcFxSrcMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcFxSrcMenu')">
                 <button type="button" onclick="toggleDcDropdown('dcFxSrcMenu')"
                         class="text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1 cursor-pointer shadow-2xs">
-                  <span id="dcFxSrcLabel">多央行 v2</span>
+                  <span id="dcFxSrcLabel">Frankfurter</span>
                   <i class="fa-solid fa-caret-down text-[9px]"></i>
                 </button>
-                <div id="dcFxSrcMenu" class="hidden absolute right-0 top-6 z-40 w-56 bg-white rounded-2xl shadow-xl border border-slate-200 p-1.5 text-[11px] space-y-1">
-                  <div class="px-2 py-0.5 text-[9.5px] font-bold text-slate-400">匯率引擎（已按地區智能匹配）</div>
-                  <button type="button" onclick="selectDcFxSource('多央行 v2')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
-                    <span>Frankfurter v2 歐洲央行</span><span class="text-[9px] text-emerald-700">歐美日最佳</span>
+                <div id="dcFxSrcMenu" class="hidden absolute right-0 top-6 z-40 w-60 bg-white rounded-2xl shadow-xl border border-slate-200 p-1.5 text-[11px] space-y-1">
+                  <div class="px-2 py-0.5 text-[9.5px] font-bold text-slate-400">匯率引擎</div>
+                  <button type="button" onclick="selectDcFxSource('Frankfurter')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 font-bold text-blue-950 flex items-center justify-between gap-1 cursor-pointer">
+                    <span>歐洲央行匯率 Frankfurter</span><span class="text-[9px] text-emerald-700 shrink-0">歐美日最佳</span>
                   </button>
-                  <button type="button" onclick="selectDcFxSource('ExchangeRate')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
-                    <span>ExchangeRate-API 金融</span><span class="text-[9px] text-sky-700">東南亞全幣種</span>
+                  <button type="button" onclick="selectDcFxSource('ExchangeRate')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 font-bold text-blue-950 flex items-center justify-between gap-1 cursor-pointer">
+                    <span>國際金融匯率 ExchangeRate</span><span class="text-[9px] text-sky-700 shrink-0">東南亞全幣</span>
                   </button>
-                  <button type="button" onclick="selectDcFxSource('全球 CDN 備援')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 font-bold text-blue-950 flex items-center justify-between cursor-pointer">
-                    <span>jsDelivr CDN 300+幣</span><span class="text-[9px] text-slate-500">全球備援</span>
+                  <button type="button" onclick="selectDcFxSource('jsDelivr')" class="w-full text-left px-2.5 py-1.5 rounded-xl hover:bg-emerald-50 font-bold text-blue-950 flex items-center justify-between gap-1 cursor-pointer">
+                    <span>全球備援匯率 jsDelivr</span><span class="text-[9px] text-slate-500 shrink-0">全球 300+幣</span>
                   </button>
                 </div>
               </div>
@@ -32487,23 +32641,23 @@ function setupYearOverviewToggle() {
             <i class="fa-solid fa-circle-info text-blue-600 text-[10px]"></i>
             <span>以下第 1 至 3 欄資訊均綜合整理自下列機構及平台：</span>
           </div>
-          <div id="dcTipsSourcePillsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 leading-snug">
-            <span data-src-id="hk_sb" class="px-2 py-1 rounded-lg bg-blue-50 border border-blue-300 font-extrabold text-blue-950 truncate flex items-center justify-between gap-1">
-              <span class="flex items-center gap-1.5 truncate"><span class="w-2.5 h-2.5 rounded-full bg-blue-700 shrink-0"></span><span class="text-xs leading-none shrink-0">🇭🇰</span><span class="truncate">香港保安局外遊警示制度（sb.gov.hk）</span></span>
+          <div id="dcTipsSourcePillsGrid" class="flex flex-col gap-1.5 leading-snug">
+            <div data-src-id="hk_sb" class="w-full px-2.5 py-1.5 rounded-xl bg-blue-50 border border-blue-300 font-extrabold text-blue-950 flex items-center justify-between gap-2">
+              <span class="flex items-center gap-1.5 min-w-0"><span class="w-2.5 h-2.5 rounded-full bg-blue-700 shrink-0"></span><span class="text-xs leading-none shrink-0">🇭🇰</span><span class="break-words">香港保安局外遊警示制度（sb.gov.hk）</span></span>
               <span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1.5 py-0.2 rounded bg-blue-700 text-white shrink-0">LIVE</span>
-            </span>
-            <span data-src-id="hk_official" class="px-2 py-1 rounded-lg bg-indigo-50 border border-indigo-300 font-extrabold text-indigo-950 truncate flex items-center justify-between gap-1">
-              <span class="flex items-center gap-1.5 truncate"><span class="w-2.5 h-2.5 rounded-full bg-indigo-600 shrink-0"></span><span class="text-xs leading-none shrink-0">🇭🇰</span><span class="truncate">香港入境處（ROTI / 1868）＆ 衞生署</span></span>
+            </div>
+            <div data-src-id="hk_official" class="w-full px-2.5 py-1.5 rounded-xl bg-indigo-50 border border-indigo-300 font-extrabold text-indigo-950 flex items-center justify-between gap-2">
+              <span class="flex items-center gap-1.5 min-w-0"><span class="w-2.5 h-2.5 rounded-full bg-indigo-600 shrink-0"></span><span class="text-xs leading-none shrink-0">🇭🇰</span><span class="break-words">香港入境處（ROTI / 1868）＆ 衞生署旅遊健康服務</span></span>
               <span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1.5 py-0.2 rounded bg-indigo-600 text-white shrink-0">LIVE</span>
-            </span>
-            <span data-src-id="local_gov" class="px-2 py-1 rounded-lg bg-emerald-50 border border-emerald-300 font-extrabold text-emerald-950 truncate flex items-center justify-between gap-1">
-              <span class="flex items-center gap-1.5 truncate"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0"></span><span id="dcLocalGovFlagSpan" class="text-xs leading-none shrink-0">🌐</span><span id="dcLocalGovPillName" class="truncate">當地官方旅遊局／政府公告（譯）</span></span>
+            </div>
+            <div data-src-id="local_gov" class="w-full px-2.5 py-1.5 rounded-xl bg-emerald-50 border border-emerald-300 font-extrabold text-emerald-950 flex items-center justify-between gap-2">
+              <span class="flex items-center gap-1.5 min-w-0"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0"></span><span id="dcLocalGovFlagSpan" class="text-xs leading-none shrink-0">🌐</span><span id="dcLocalGovPillName" class="break-words">當地官方旅遊局／政府公告（譯）</span></span>
               <span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1.5 py-0.2 rounded bg-emerald-600 text-white shrink-0">LIVE</span>
-            </span>
-            <span data-src-id="advisory" class="px-2 py-1 rounded-lg bg-amber-50 border border-amber-300 font-extrabold text-amber-950 truncate flex items-center justify-between gap-1">
-              <span class="flex items-center gap-1.5 truncate"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0"></span><span class="text-xs leading-none shrink-0">🛡️</span><span class="truncate">國際風險與安全預警（多國警示・GDACS・WHO/CDC・UNODC・EASA/FAA · 譯）</span></span>
+            </div>
+            <div data-src-id="advisory" class="w-full px-2.5 py-1.5 rounded-xl bg-amber-50 border border-amber-300 font-extrabold text-amber-950 flex items-center justify-between gap-2">
+              <span class="flex items-center gap-1.5 min-w-0"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0"></span><span class="text-xs leading-none shrink-0">🛡️</span><span class="break-words">國際風險與安全預警（GDACS・WHO/CDC・UNODC・EASA/FAA · 譯）</span></span>
               <span class="dc-upd-tag hidden text-[8px] font-mono font-black px-1.5 py-0.2 rounded bg-amber-600 text-white shrink-0">LIVE</span>
-            </span>
+            </div>
           </div>
           <div class="flex items-center justify-between gap-2 pt-1 border-t border-slate-200/70">
             <span id="dcTipsGlobalUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
@@ -32521,13 +32675,21 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-tower-broadcast text-blue-600 shrink-0"></i>
               <span class="truncate">1. 外遊警示、最新動態及當地法規</span>
             </span>
-            <div class="flex items-center gap-1.5 shrink-0">
-              <span id="dcHkAlertBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">外遊警示：正常</span>
-              <button type="button" onclick="refreshDcTipsSection('news', this)" aria-label="重新整理旅遊警報與動態"
-                      class="w-6 h-6 rounded-full bg-white hover:bg-blue-100 border border-blue-200 text-blue-700 flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
-                <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
-              </button>
-            </div>
+            <button type="button" onclick="refreshDcTipsSection('news', this)" aria-label="重新整理旅遊警報與動態"
+                    class="w-6 h-6 rounded-full bg-white hover:bg-blue-100 border border-blue-200 text-blue-700 flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer shrink-0">
+              <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+            </button>
+          </div>
+          <!-- 標題下面第一行：長方形圓角白色外框，左邊「🇭🇰 香港外遊警示」，右邊顯示對應警示級別與顏色 -->
+          <div id="dcHkAlertRowBox" class="w-full px-3 py-2 rounded-xl bg-white border border-blue-200/90 shadow-2xs flex items-center justify-between gap-2">
+            <span class="text-[11px] font-black text-blue-950 flex items-center gap-1.5 shrink-0">
+              <span class="text-xs leading-none">🇭🇰</span>
+              <span>香港外遊警示</span>
+            </span>
+            <span id="dcHkAlertBadge" class="inline-flex items-center gap-1.5 text-[10.5px] font-black px-2.5 py-0.5 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-300 truncate">
+              <span id="dcHkAlertDot" class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+              <span id="dcHkAlertLevelText" class="truncate">無警示</span>
+            </span>
           </div>
           <ul id="dcNewsTop10" class="list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed"></ul>
           <ul id="dcNewsMore" class="hidden list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed pt-1 border-t border-blue-200/60"></ul>
@@ -32590,10 +32752,10 @@ function setupYearOverviewToggle() {
           </div>
         </div>
 
-        <!-- 第 4 層：高對比大字緊急求助卡片（危機視覺設計 · 特大清晰號碼 ＋ 求助指引 ＋ 一鍵撥號複製） -->
-        <div class="p-3.5 rounded-2xl bg-rose-50/75 border-2 border-rose-300/90 space-y-2.5 shadow-xs">
+        <!-- 第 4 層：高對比大字緊急求助卡片（淡雅灰白底框突顯使領館紅卡 ＋ 可編輯自訂熱線 ＋ 翠綠撥打鍵） -->
+        <div class="p-3.5 rounded-2xl bg-slate-100/85 border border-slate-200/95 space-y-2.5 shadow-xs">
           <div class="flex items-center justify-between gap-2">
-            <span class="font-black text-rose-950 text-[13.5px] flex items-center gap-1.5 tracking-tight">
+            <span class="font-black text-slate-900 text-[13.5px] flex items-center gap-1.5 tracking-tight">
               <i class="fa-solid fa-phone-volume text-rose-600 text-sm"></i>
               <span>4. 緊急求助與領事支援</span>
             </span>
@@ -32602,41 +32764,45 @@ function setupYearOverviewToggle() {
 
           <div id="dcEmergencyGrid" class="flex flex-col gap-2"></div>
 
-          <div class="p-2.5 rounded-xl bg-white border-2 border-blue-200 space-y-2 shadow-2xs">
-            <div class="flex items-center justify-between gap-2">
+          <div class="p-2.5 rounded-xl bg-white border border-slate-200/95 space-y-2 shadow-2xs">
+            <div class="flex items-center justify-between gap-1.5">
               <div class="flex items-center gap-1.5 flex-1 min-w-0">
                 <span class="text-xs shrink-0">📌</span>
                 <input type="text" id="dcCustomEmergencyTitleInput" oninput="saveDcCustomEmergency()"
-                       placeholder="自訂緊急聯絡名稱（例：旅遊保險熱線 / 酒店前台）"
-                       class="w-full text-xs font-black text-blue-950 bg-blue-50/60 hover:bg-blue-50 focus:bg-white border border-blue-200/80 focus:border-blue-600 rounded-lg px-2 py-1 focus:outline-none transition">
+                       placeholder="自訂聯絡名稱（如旅遊保險）"
+                       class="w-full text-[11.5px] font-bold text-slate-900 placeholder:text-slate-400 placeholder:font-medium bg-slate-50/90 hover:bg-slate-100/70 focus:bg-white border border-slate-200 focus:border-blue-500 rounded-lg px-2 py-1 focus:outline-none transition">
               </div>
-              <span class="text-[10px] font-bold text-blue-600 shrink-0">自動儲存</span>
+              <button type="button" id="btnManualSaveCustomEm" onclick="manualSaveDcCustomEmergency()"
+                      class="px-2 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-800 font-extrabold text-[10px] inline-flex items-center gap-1 shrink-0 cursor-pointer transition active:scale-95">
+                <i class="fa-solid fa-floppy-disk text-[9.5px] text-blue-600"></i>
+                <span id="dcCustomEmSaveStatus">儲存</span>
+              </button>
             </div>
 
             <div class="flex items-center gap-1.5">
-              <div class="w-24 shrink-0 relative">
+              <div class="w-28 shrink-0 relative">
                 <input type="text" id="dcCustomEmergencyAreaInput"
                        oninput="saveDcCustomEmergency()"
                        onblur="normalizeDcAreaCodeOnBlur(this)"
                        onkeydown="if(event.key==='Enter'){event.preventDefault(); normalizeDcAreaCodeOnBlur(this); document.getElementById('dcCustomEmergencyPhoneInput')?.focus();}"
-                       placeholder="區號/香港"
-                       class="w-full font-mono font-black text-sm text-center text-blue-950 bg-slate-50 border border-slate-300 rounded-lg px-2 py-1.5 focus:border-blue-600 focus:outline-none">
+                       placeholder="區號/HKG/香港"
+                       class="w-full font-mono font-bold text-xs text-center text-slate-900 placeholder:text-slate-400 placeholder:font-sans placeholder:font-medium bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 focus:border-blue-500 focus:bg-white focus:outline-none transition">
               </div>
               <input type="text" id="dcCustomEmergencyPhoneInput" inputmode="tel"
                      oninput="saveDcCustomEmergency()"
-                     placeholder="輸入電話號碼（例：2888 9999）"
-                     class="w-full font-mono font-black text-base text-blue-950 bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 focus:border-blue-600 focus:outline-none">
+                     placeholder="電話號碼（例：2888 9999）"
+                     class="w-full font-mono font-bold text-sm text-slate-900 placeholder:text-slate-400 placeholder:font-sans placeholder:font-medium bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 focus:border-blue-500 focus:bg-white focus:outline-none transition">
             </div>
 
             <div class="flex items-center justify-between gap-2 pt-1 border-t border-slate-100">
-              <span id="dcCustomEmergencyFullPreview" class="text-[11px] font-mono font-extrabold text-slate-600 truncate">完整號碼：尚未輸入</span>
+              <span id="dcCustomEmergencyFullPreview" class="text-[11px] font-mono font-bold text-slate-500 truncate">完整號碼：尚未輸入</span>
               <div class="flex items-center gap-1.5 shrink-0">
                 <button type="button" onclick="copyDcCustomEmergency()"
                         class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-[11px] cursor-pointer transition active:scale-95">
                   複製
                 </button>
                 <button type="button" onclick="dialDcCustomEmergency()"
-                        class="px-3 py-1.5 rounded-xl bg-blue-950 hover:bg-blue-800 text-white font-black text-xs flex items-center gap-1 shadow-2xs cursor-pointer transition active:scale-95">
+                        class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs flex items-center gap-1 shadow-2xs cursor-pointer transition active:scale-95">
                   <i class="fa-solid fa-phone text-[11px]"></i>
                   <span>撥打</span>
                 </button>
@@ -33762,7 +33928,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-blue-700 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-black text-blue-950 tracking-tight">版本更新日誌</span>
             </span>
-            <span class="text-[10.5px] font-mono font-bold text-blue-700">v5.11.9</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-blue-700">v5.11.21</span>
           </button>
         </div>
 
