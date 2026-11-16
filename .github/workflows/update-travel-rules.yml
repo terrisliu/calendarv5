@@ -38,10 +38,11 @@ jobs:
           data["lastUpdated"] = today_str
           data["source"] = "GitHub Actions 自動更新（保安局官方警示 ＋ 嚴格核實去重動態 ＋ 旅遊實戰社群 · 31 國）"
 
-          # 全局排除詞：非香港對象、未定案傳聞、軟文廣告，以及底層已收錄之常設法規（防止重複）
+          # 全局排除詞：非香港對象、未定案傳聞、促銷機票廣告軟文，以及底層已收錄之常設法規（防止重複）
           GLOBAL_EXCLUDE_KW = (
               '台灣旅客', '台灣人', '台胞', '持台灣護照', '陸客', '內地旅客', '大陸旅客',
               '擬議', '擬徵', '或將', '有望', '傳將', '建議徵收', '完整教學', '優惠碼', '折扣碼',
+              '優惠', '最平', '劈價', '機票', '酒店推介', '開航', '限時',
               '沙灘禁煙', '海灘禁煙', '電子煙', '加熱煙', '王室', '禁酒時段', '200支', '20,000泰銖'
           )
 
@@ -53,7 +54,7 @@ jobs:
                   with urllib.request.urlopen(req, timeout=10) as resp:
                       xml_bytes = resp.read()
                   root = ET.fromstring(xml_bytes)
-                  for item in root.findall('.//item')[:12]:
+                  for item in root.findall('.//item')[:15]:
                       raw_title = (item.findtext('title') or '').strip()
                       parts = raw_title.rsplit(' - ', 1)
                       title = parts[0].strip()
@@ -79,7 +80,7 @@ jobs:
               if not subreddit:
                   return [], []
               url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=15"
-              req = urllib.request.Request(url, headers={'User-Agent': 'HKLeaveManagerBot/3.1'})
+              req = urllib.request.Request(url, headers={'User-Agent': 'HKLeaveManagerBot/3.2'})
               news_tips, scam_tips = [], []
               news_kw = ('closed', 'closure', 'booking', 'reservation', 'strike', 'delay', 'airport', 'train', 'tax', 'fee', 'new rule', 'construction')
               scam_kw = ('scam', 'fake', 'overcharge', 'trap', 'taxi', 'tuk', 'pickpocket', 'theft', 'warning', 'avoid')
@@ -121,7 +122,7 @@ jobs:
           except Exception as e:
               print("HK OTA fetch skipped:", e)
 
-          # 2. 31 個國家專屬白名單與排他過濾設定（騙案查詢已移除「罰款」字眼，避免誤抓正規法例）
+          # 2. 31 個國家專屬白名單與排他過濾設定
           targets = {
               "CN": ("中國 內地 景區 預約 高鐵", "中國 旅遊 騙案 陷阱", ("中國", "內地", "北京", "上海", "廣州", "深圳", "成都", "重慶", "西安", "新疆", "西藏", "高鐵"), "chinatravel"),
               "TW": ("台灣 台北 景點 交通 颱風", "台灣 旅遊 騙案 陷阱", ("台灣", "台北", "台中", "台南", "高雄", "花蓮", "宜蘭", "墾丁"), "taiwan"),
