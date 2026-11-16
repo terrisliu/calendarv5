@@ -357,16 +357,29 @@
       z-index: 45;
     }
     @media (max-width: 1023px) {
-      body.dc-mobile-sheet-lock {
-        overflow: hidden !important;
-        overscroll-behavior: none !important;
+      #mobileTopTripRibbon.is-dc-expanded.is-dc-fullscreen {
+        position: fixed !important;
+        top: 6px !important;
+        left: 6px !important;
+        right: 6px !important;
+        z-index: 65 !important;
+        margin-bottom: 0 !important;
+        box-shadow: 0 22px 50px -12px rgba(15, 23, 42, 0.38) !important;
+      }
+      #mobileTopTripRibbon.is-dc-expanded.is-dc-fullscreen #mobileRibbonCardsTrack,
+      #mobileTopTripRibbon.is-dc-expanded.is-dc-fullscreen #mobileSmartBannerFooter,
+      #mobileTopTripRibbon.is-dc-expanded.is-dc-fullscreen #mobileRibbonInlineStudioSlot {
+        display: none !important;
+      }
+      #mobileTopTripRibbon.is-dc-expanded.is-dc-fullscreen #mobileRibbonDualCapsuleSlot {
+        padding-top: 2px !important;
       }
     }
     .dc-scroll-viewport {
-      height: var(--dc-avail-h, calc(100dvh - 195px));
-      max-height: var(--dc-avail-h, calc(100dvh - 195px));
-      min-height: 220px;
-      padding-bottom: calc(3.25rem + env(safe-area-inset-bottom, 0px)) !important;
+      height: var(--dc-avail-h, calc(100dvh - 180px));
+      max-height: var(--dc-avail-h, calc(100dvh - 180px));
+      min-height: 240px;
+      padding-bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px)) !important;
       overflow-y: auto !important;
       overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch;
@@ -2861,7 +2874,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.9.4</span>
+      <span>v5.9.5</span>
     </button>
   </footer>
 
@@ -3103,7 +3116,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.9.4</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.9.5</span>
             </h3>
           </div>
         </div>
@@ -3113,10 +3126,24 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <!-- v5.9.5 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.9.5（手機版橫掃旅程卡片即時聯動同步雙錦囊資料 · 支援一鍵放大近全屏／暫時縮細底部浮動膠囊 ＋ 自由滑動後方月曆）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">MOBILE SWIPE SYNC & EXPAND</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-800">📱 手機版左右橫掃切換第二、三趟旅程卡片時即時同步更新「出行須知／城市指南」內容，並可隨時放大全屏或縮細檢視月曆</div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 左右橫掃旅程卡片即時同步資料</b>：展開「出行須知」或「城市指南」後，左右橫掃上方旅程卡片或點擊分頁圓點，下方雙錦囊內容即自動同步切換至該旅程的目的地天氣、匯率、入境與城市指南。</li>
+            <li><b>② 半屏 ⇄ 近全屏放大展開（拖拉把手 ＋ <code>⤢</code> 按鈕）</b>：向上拖拉頂部把手或點擊放大鈕即展開至近全屏高度，長篇攻略一覽無遺。</li>
+            <li><b>③ 解除整頁鎖死 ＋ 一鍵縮細至底部浮動膠囊（<code>—</code>）</b>：手指點於雙錦囊外面即可直接上下捲動後方月曆；點擊縮細鈕則暫時收成底部浮動列，保留已輸入銀碼與勾選狀態，隨時點擊還原且絕不影響已排假期方案。</li>
+          </ul>
+        </div>
+
         <!-- v5.9.4 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.9.4（電腦版雙錦囊滑鼠滾輪流暢聯動 · 修正泰國「TDAC 或 THIM 任選其一」· 城市指南精簡「更多／收起」· 視窗縮放自動保留開啟狀態）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">DESKTOP & RESPONSIVE FIX</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.9.4（電腦版雙錦囊滑鼠滾輪流暢聯動 · 修正泰國「TDAC 或 THIM 任選其一」· 城市指南精簡「更多／收起」· 視窗縮放自動保留開啟狀態）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">DESKTOP & RESPONSIVE FIX</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-16</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🖥️ 修復電腦端游標停留於雙錦囊時滾輪無反應、視窗縮放後消失問題，並修正泰國入境申報為「TDAC 或 THIM 二選一」</div>
@@ -6640,7 +6667,7 @@
   </div>
 
   <script>
-    const APP_VERSION = '5.9.4';
+    const APP_VERSION = '5.9.5';
     const APP_UPDATED_AT = '2026-11-12';
 
     // === v3.0.0 旅遊目的地精選地標圖庫與解析庫 (方式 A：淡入淡出輪播) ===
@@ -13252,12 +13279,19 @@
       const total = cards.length;
       if (total === 0) return;
       const clampedIdx = Math.max(0, Math.min(total - 1, idx));
+      const prevIdx = mobileRibbonActiveCardIdx;
       mobileRibbonActiveCardIdx = clampedIdx;
       const card = track.querySelector(`[data-ribbon-idx="${clampedIdx}"]`);
       if (card) {
         const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
         const targetLeft = (clampedIdx === total - 1) ? maxScroll : Math.min(maxScroll, Math.max(0, card.offsetLeft - 8));
         track.scrollTo({ left: targetLeft, behavior: 'smooth' });
+        if (clampedIdx !== prevIdx && dcCurrentTripKey && window.innerWidth < 1024) {
+          const nextTripKey = card.getAttribute('data-ribbon-trip-key');
+          if (nextTripKey && nextTripKey !== dcCurrentTripKey && typeof toggleTripDualCapsule === 'function') {
+            toggleTripDualCapsule(nextTripKey, dcCurrentTab || 'prep', null, 'ribbon');
+          }
+        }
       }
       updateMobileRibbonDotsUI(clampedIdx, total);
     }
@@ -13285,8 +13319,19 @@
         });
       }
 
+      const prevIdx = mobileRibbonActiveCardIdx;
       mobileRibbonActiveCardIdx = activeIdx;
       updateMobileRibbonDotsUI(activeIdx, total);
+
+      // 手機版左右橫掃旅程卡片時，若正展開「出行須知」或「城市指南」，即時同步切換至該旅程之最新資料！
+      if (activeIdx !== prevIdx && dcCurrentTripKey && window.innerWidth < 1024) {
+        const activeCardEl = cards[activeIdx];
+        const nextTripKey = activeCardEl ? activeCardEl.getAttribute('data-ribbon-trip-key') : null;
+        if (nextTripKey && nextTripKey !== dcCurrentTripKey && typeof toggleTripDualCapsule === 'function') {
+          const curTab = dcCurrentTab || 'prep';
+          toggleTripDualCapsule(nextTripKey, curTab, null, 'ribbon');
+        }
+      }
     }
 
     function renderMobileTopTripRibbon(trips) {
@@ -13480,7 +13525,7 @@
         }
 
         html += `
-          <div data-ribbon-idx="${idx}" onclick="jumpToTripOnCalendar('${trip.startDate}', '${safeTitle}', ${trip.totalDays})"
+          <div data-ribbon-idx="${idx}" data-ribbon-trip-key="${tripKey}" onclick="jumpToTripOnCalendar('${trip.startDate}', '${safeTitle}', ${trip.totalDays})"
                class="snap-start shrink-0 ${cardWidthCls} bg-white border border-slate-200/90 rounded-xl p-2 shadow-2xs flex items-stretch gap-2.5 cursor-pointer active:scale-[0.99] transition">
             <!-- 左側拍立得相框（96px 寬，與右側 92px+padding 票根區左右視覺對稱） -->
             ${leftPolaroidHtml}
@@ -22249,6 +22294,70 @@ function setupYearOverviewToggle() {
       }
     }
 
+    let dcIsMobileFullscreen = false;
+    let dcMinimizedState = null;
+
+    function toggleDcMobileFullscreen(forceVal = null) {
+      if (window.innerWidth >= 1024) return;
+      dcIsMobileFullscreen = (forceVal !== null) ? Boolean(forceVal) : !dcIsMobileFullscreen;
+      const mobRibbon = document.getElementById('mobileTopTripRibbon');
+      if (mobRibbon) {
+        mobRibbon.classList.toggle('is-dc-fullscreen', dcIsMobileFullscreen);
+      }
+      const icon = document.getElementById('dcMobileExpandIcon');
+      if (icon) {
+        icon.className = dcIsMobileFullscreen
+          ? 'fa-solid fa-down-left-and-up-right-to-center text-[10px]'
+          : 'fa-solid fa-up-right-and-down-left-from-center text-[10px]';
+      }
+      requestAnimationFrame(syncDcViewportHeight);
+      setTimeout(syncDcViewportHeight, 60);
+    }
+
+    function minimizeTripDualCapsule() {
+      if (!dcCurrentTripKey || window.innerWidth >= 1024) return;
+      const flagEl = document.getElementById('dcHeaderFlag');
+      const titleEl = document.getElementById('dcHeaderTitle');
+      const tabLabel = (dcCurrentTab === 'tips') ? '🛡️ 城市指南' : '🧭 出行須知';
+      dcMinimizedState = {
+        tripKey: dcCurrentTripKey,
+        tab: dcCurrentTab || 'prep',
+        wasFullscreen: dcIsMobileFullscreen
+      };
+      const minFlag = document.getElementById('dcMinBarFlag');
+      const minText = document.getElementById('dcMinBarText');
+      if (minFlag && flagEl) minFlag.textContent = flagEl.textContent;
+      if (minText) minText.textContent = `${titleEl ? titleEl.textContent : '旅程'} · ${tabLabel}（點擊還原）`;
+
+      const drawer = document.getElementById('dualCapsuleStudioDrawer');
+      const bay = document.getElementById('dualCapsuleParkingBay');
+      if (drawer && bay) bay.appendChild(drawer);
+      const mobRibbon = document.getElementById('mobileTopTripRibbon');
+      if (mobRibbon) {
+        mobRibbon.classList.remove('is-dc-expanded', 'is-dc-fullscreen');
+      }
+      dcCurrentTripKey = null;
+      const minBar = document.getElementById('dcMobileMinBar');
+      if (minBar) minBar.classList.remove('hidden');
+    }
+
+    function restoreMinimizedTripDualCapsule() {
+      const st = dcMinimizedState;
+      const minBar = document.getElementById('dcMobileMinBar');
+      if (minBar) minBar.classList.add('hidden');
+      if (!st || !st.tripKey) return;
+      dcMinimizedState = null;
+      if (typeof toggleMobileTripRibbonDrawer === 'function') {
+        toggleMobileTripRibbonDrawer(1);
+      }
+      if (typeof toggleTripDualCapsule === 'function') {
+        toggleTripDualCapsule(st.tripKey, st.tab || 'prep', null, 'ribbon');
+        if (st.wasFullscreen) {
+          toggleDcMobileFullscreen(true);
+        }
+      }
+    }
+
     function syncDcViewportHeight() {
       if (window.innerWidth >= 1024) return;
       const prepP = document.getElementById('dcPanelPrep');
@@ -22257,8 +22366,9 @@ function setupYearOverviewToggle() {
       if (!activePanel) return;
       const rect = activePanel.getBoundingClientRect();
       const vh = (window.visualViewport && window.visualViewport.height) ? window.visualViewport.height : window.innerHeight;
-      if (rect.top > 0 && rect.top < vh - 120) {
-        const avail = Math.max(220, Math.floor(vh - rect.top - 10));
+      if (rect.top > 0 && rect.top < vh - 100) {
+        const bottomGap = dcIsMobileFullscreen ? 8 : 10;
+        const avail = Math.max(240, Math.floor(vh - rect.top - bottomGap));
         if (prepP) prepP.style.setProperty('--dc-avail-h', `${avail}px`);
         if (tipsP) tipsP.style.setProperty('--dc-avail-h', `${avail}px`);
       }
@@ -22271,8 +22381,14 @@ function setupYearOverviewToggle() {
       const bay = document.getElementById('dualCapsuleParkingBay');
       if (drawer && bay) bay.appendChild(drawer);
       const mobRibbon = document.getElementById('mobileTopTripRibbon');
-      if (mobRibbon) mobRibbon.classList.remove('is-dc-expanded');
+      if (mobRibbon) mobRibbon.classList.remove('is-dc-expanded', 'is-dc-fullscreen');
       document.body.classList.remove('dc-mobile-sheet-lock');
+      dcIsMobileFullscreen = false;
+      dcMinimizedState = null;
+      const minBar = document.getElementById('dcMobileMinBar');
+      if (minBar) minBar.classList.add('hidden');
+      const icon = document.getElementById('dcMobileExpandIcon');
+      if (icon) icon.className = 'fa-solid fa-up-right-and-down-left-from-center text-[10px]';
 
       dcCurrentTripKey = null;
       if (isFromMobileRibbon) {
@@ -22284,6 +22400,30 @@ function setupYearOverviewToggle() {
 
     // 手機版左右手指橫掃切換「🧭 出行須知」與「🛡️ 城市指南」＋ 隔離垂直滑動防止穿透背景月曆
     (function initDualCapsuleTouchSwipe() {
+      // 手機版頂部拖拉把手：向上拖拉展開近全屏，向下拖拉縮回標準半屏
+      let handleStartY = 0, isDraggingHandle = false;
+      document.addEventListener('touchstart', (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        const target = e.target;
+        if (!target || !target.closest || !target.closest('#dcMobileDragHandle')) return;
+        handleStartY = e.touches[0].clientY;
+        isDraggingHandle = true;
+      }, { passive: true });
+      document.addEventListener('touchend', (e) => {
+        if (!isDraggingHandle || !e.changedTouches || e.changedTouches.length !== 1) return;
+        isDraggingHandle = false;
+        const dy = e.changedTouches[0].clientY - handleStartY;
+        if (dy < -28) {
+          toggleDcMobileFullscreen(true);
+        } else if (dy > 28) {
+          if (dcIsMobileFullscreen) {
+            toggleDcMobileFullscreen(false);
+          } else {
+            minimizeTripDualCapsule();
+          }
+        }
+      }, { passive: true });
+
       let startX = 0, startY = 0, isTracking = false;
       document.addEventListener('touchstart', (e) => {
         if (!e.touches || e.touches.length !== 1) return;
@@ -23927,12 +24067,15 @@ function setupYearOverviewToggle() {
       const mobRibbon = document.getElementById('mobileTopTripRibbon');
       if (mobRibbon) {
         mobRibbon.classList.toggle('is-dc-expanded', isMobileRibbonSlot);
+        if (!isMobileRibbonSlot) {
+          mobRibbon.classList.remove('is-dc-fullscreen');
+          dcIsMobileFullscreen = false;
+        }
       }
-      if (isMobileRibbonSlot && window.innerWidth < 1024) {
-        document.body.classList.add('dc-mobile-sheet-lock');
-      } else {
-        document.body.classList.remove('dc-mobile-sheet-lock');
-      }
+      document.body.classList.remove('dc-mobile-sheet-lock');
+      dcMinimizedState = null;
+      const minBarEl = document.getElementById('dcMobileMinBar');
+      if (minBarEl) minBarEl.classList.add('hidden');
       requestAnimationFrame(syncDcViewportHeight);
       setTimeout(syncDcViewportHeight, 120);
       if (!isMobileRibbonSlot) {
@@ -24564,26 +24707,54 @@ function setupYearOverviewToggle() {
 
       <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.45 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
   
+  <!-- 手機版雙錦囊暫時縮細底部浮動還原膠囊（保留分頁、匯率銀碼與勾選進度，同時可自由滑動後方月曆） -->
+  <div id="dcMobileMinBar" onclick="restoreMinimizedTripDualCapsule()"
+       class="lg:hidden hidden fixed bottom-3 left-3 right-3 z-[70] px-3.5 py-2.5 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-800 text-white shadow-[0_14px_34px_-6px_rgba(30,58,138,0.5)] border border-white/25 flex items-center justify-between gap-2 cursor-pointer active:scale-[0.99] transition">
+    <div class="flex items-center gap-2 min-w-0">
+      <span id="dcMinBarFlag" class="text-base leading-none shrink-0">🌏</span>
+      <span id="dcMinBarText" class="font-black text-xs text-white truncate">出行須知（點擊還原）</span>
+    </div>
+    <div class="flex items-center gap-1.5 shrink-0">
+      <span class="px-2 py-0.5 rounded-full bg-white/20 text-white font-extrabold text-[10px]">展開</span>
+      <button type="button" onclick="event.stopPropagation(); closeTripDualCapsule()" aria-label="關閉雙錦囊"
+              class="w-6 h-6 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition cursor-pointer">
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+    </div>
+  </div>
+
   <!-- ==================== v5.5.0 雙錦囊系統（🧭 出行須知 ＋ 🛡️ 城市指南） ==================== -->
   <div id="dualCapsuleParkingBay" class="hidden">
     <div id="dualCapsuleStudioDrawer" class="mt-2 bg-white rounded-2xl border border-slate-200/95 shadow-sm overflow-hidden transition-all duration-200">
-      <!-- 頂部雙錦囊切換列與關閉鈕 -->
-      <div class="px-3 py-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-800 text-white flex items-center justify-between gap-2">
+      <!-- 手機版頂部拖拉把手列（向上拖拉近全屏、向下拖拉縮回） -->
+      <div id="dcMobileDragHandle" class="lg:hidden pt-1.5 pb-0.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-800 flex items-center justify-center cursor-ns-resize select-none">
+        <span class="w-9 h-1 rounded-full bg-white/45"></span>
+      </div>
+      <!-- 頂部雙錦囊切換列與放大／縮細／關閉鈕 -->
+      <div class="px-2.5 sm:px-3 py-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-800 text-white flex items-center justify-between gap-1.5">
         <div class="flex items-center gap-1.5 min-w-0">
-          <span id="dcHeaderFlag" class="text-base leading-none">🌏</span>
+          <span id="dcHeaderFlag" class="text-base leading-none shrink-0">🌏</span>
           <span id="dcHeaderTitle" class="font-black text-xs text-white truncate">雙錦囊旅遊助手</span>
         </div>
         <div class="flex items-center gap-1 shrink-0">
           <button type="button" id="dcTabPrep" onclick="switchDualCapsuleTab('prep')"
-                  class="px-2.5 py-1 rounded-lg text-[10.5px] font-black bg-white text-blue-950 shadow-2xs transition cursor-pointer">
+                  class="px-2 sm:px-2.5 py-1 rounded-lg text-[10px] sm:text-[10.5px] font-black bg-white text-blue-950 shadow-2xs transition cursor-pointer">
             🧭 出行須知
           </button>
           <button type="button" id="dcTabTips" onclick="switchDualCapsuleTab('tips')"
-                  class="px-2.5 py-1 rounded-lg text-[10.5px] font-black bg-white/15 text-white hover:bg-white/25 transition cursor-pointer">
+                  class="px-2 sm:px-2.5 py-1 rounded-lg text-[10px] sm:text-[10.5px] font-black bg-white/15 text-white hover:bg-white/25 transition cursor-pointer">
             🛡️ 城市指南
           </button>
+          <button type="button" id="btnDcMobileExpand" onclick="toggleDcMobileFullscreen()" aria-label="放大或還原視窗"
+                  class="lg:hidden w-6 h-6 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition cursor-pointer ml-0.5">
+            <i id="dcMobileExpandIcon" class="fa-solid fa-up-right-and-down-left-from-center text-[10px]"></i>
+          </button>
+          <button type="button" onclick="minimizeTripDualCapsule()" aria-label="暫時縮細至底部"
+                  class="lg:hidden w-6 h-6 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition cursor-pointer">
+            <i class="fa-solid fa-minus text-[10px]"></i>
+          </button>
           <button type="button" onclick="closeTripDualCapsule()" aria-label="收起雙錦囊"
-                  class="w-6 h-6 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition cursor-pointer ml-0.5">
+                  class="w-6 h-6 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center transition cursor-pointer">
             <i class="fa-solid fa-xmark text-xs"></i>
           </button>
         </div>
