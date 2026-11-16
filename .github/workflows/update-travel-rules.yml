@@ -1,0 +1,103 @@
+name: Auto Update Travel Rules & Practical Insights
+
+on:
+  schedule:
+    # 每日香港時間早上 08:00 (UTC 00:00) 自動運行一次
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-travel-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch latest HK OTA alerts, Google News RSS & Reddit practical travel tips
+        run: |
+          python3 - << 'EOF'
+          import json, datetime, urllib.request, urllib.parse, xml.etree.ElementTree as ET
+
+          hk_tz = datetime.timezone(datetime.timedelta(hours=8))
+          today_str = datetime.datetime.now(hk_tz).strftime('%Y-%m-%d')
+
+          try:
+              with open('travel_rules.json', 'r', encoding='utf-8') as f:
+                  data = json.load(f)
+          except Exception:
+              data = {"lastUpdated": today_str, "source": "GitHub Actions 自動更新", "countries": {}}
+
+          data["lastUpdated"] = today_str
+          data["source"] = "GitHub Actions 自動更新（保安局外遊警示 ＋ Google News RSS ＋ Reddit 旅遊實戰情報）"
+
+          def fetch_rss_items(query, max_items=3):
+              url = f"https://news.google.com/rss/search?q={urllib.parse.quote(query)}&hl=zh-HK&gl=HK&ceid=HK:zh-Hant"
+              req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+              items = []
+              try:
+                  with urllib.request.urlopen(req, timeout=12) as resp:
+                      xml_bytes = resp.read()
+                  root = ET.fromstring(xml_bytes)
+                  for item in root.findall('.//item')[:max_items]:
+                      title = (item.findtext('title') or '').split(' - ')[0].strip()
+                      if title:
+                          items.append(f"<b>[{today_str}] 實戰動態</b>：{title}")
+              except Exception as e:
+                  print("RSS fetch skipped:", query, e)
+              return items
+
+          def fetch_reddit_tips(subreddit, max_items=2):
+              url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=8"
+              req = urllib.request.Request(url, headers={'User-Agent': 'HKLeaveManagerBot/1.0'})
+              tips = []
+              keywords = ('visa', 'tdac', 'e-gate', 'autogate', 'customs', 'cash', 'scam', 'closed', 'booking', 'reservation', 'tax', 'vape')
+              try:
+                  with urllib.request.urlopen(req, timeout=12) as resp:
+                      payload = json.loads(resp.read().decode('utf-8'))
+                  for post in payload.get('data', {}).get('children', []):
+                      pdata = post.get('data', {})
+                      title = str(pdata.get('title', '')).strip()
+                      if title and any(k in title.lower() for k in keywords):
+                          tips.append(f"<b>[{today_str}] 旅客實測</b>：{title}")
+                          if len(tips) >= max_items:
+                              break
+              except Exception as e:
+                  print("Reddit fetch skipped:", subreddit, e)
+              return tips
+
+          queries = {
+              "TH": ("泰國 入境 免簽 e-Gate 機場 預約 關閉", "ThailandTourism"),
+              "JP": ("日本 入境 Visit Japan Web 預約 關閉 退稅", "JapanTravelTips"),
+              "KR": ("韓國 入境 e-Arrival 預約 交通", "koreatravel"),
+              "TW": ("台灣 入境 入台證 海關 罰款", ""),
+              "SG": ("新加坡 入境 SGAC 樟宜 罰款", ""),
+              "VN": ("越南 入境 電子簽證 富國島", "")
+          }
+
+          for code, (q, sub) in queries.items():
+              if code not in data["countries"]:
+                  data["countries"][code] = {}
+              combined = fetch_rss_items(q, max_items=3)
+              if sub:
+                  combined.extend(fetch_reddit_tips(sub, max_items=2))
+              if combined:
+                  data["countries"][code]["liveNews"] = combined
+
+          with open('travel_rules.json', 'w', encoding='utf-8') as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+          EOF
+
+      - name: Commit and push updated travel_rules.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add travel_rules.json
+          git diff --staged --quiet || (git commit -m "chore: auto-update travel_rules.json ($(date -u +'%Y-%m-%d'))" && git push)
