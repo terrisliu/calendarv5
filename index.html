@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700;800;900&family=Space+Grotesk:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap');
     
     body {
       font-family: "Plus Jakarta Sans", "PingFang HK", "Hiragino Sans GB", "Noto Sans TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -477,9 +477,10 @@
       touch-action: pan-y;
       transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
-      border-radius: 6px !important; /* 方形微圓角，杜絕縮小變圓形 */
-      border: 1px solid rgba(226, 232, 240, 0.8) !important;
-      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: clamp(8.5px, 24%, 13px) !important; /* 隨格仔大小等比圓潤（小格如按鈕圓潤、大格如 iPad 溫潤方圓） */
+      border: 1px solid rgba(203, 213, 225, 0.72) !important;
+      background-color: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
@@ -488,9 +489,13 @@
     }
     .calendar-cell:hover {
       transform: translateY(-1.5px) scale(1.03);
-      box-shadow: 0 6px 16px -2px rgba(15, 23, 42, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-      border-color: rgba(147, 197, 253, 0.9) !important;
+      box-shadow: 0 6px 16px -2px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      border-color: rgba(147, 197, 253, 0.95) !important;
       z-index: 5;
+    }
+    .calendar-cell:active {
+      transform: scale(0.95);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
     }
 
     .half-slot {
@@ -769,11 +774,11 @@
     body.year-overview-mode .calendar-cell { 
       height: auto !important; 
       aspect-ratio: 1 / 1 !important;
-      border: 1px solid rgba(226, 232, 240, 0.8) !important; 
-      background-color: rgba(255, 255, 255, 0.75) !important;
-      border-radius: 6px !important; /* 柔和方形圓角，絕不僵硬 */
+      border: 1px solid rgba(203, 213, 225, 0.72) !important; 
+      background-color: rgba(255, 255, 255, 0.8) !important;
+      border-radius: 7.5px !important; /* 手機年曆全覽微縮亦溫潤圓角，如精緻按鍵 */
       overflow: hidden !important;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), inset 0 0.5px 0 rgba(255, 255, 255, 0.9) !important;
       cursor: pointer;
     }
     
@@ -863,7 +868,7 @@
         gap: 3.5px !important; 
       }
       body.year-overview-mode .calendar-cell { 
-        border-radius: 8px !important; /* 電腦版適度圓角，圓潤大器 */
+        border-radius: 10px !important; /* 平板及中型視窗溫潤按鍵圓角 */
       }
       body.year-overview-mode .day-number,
       body.year-overview-mode .roster-ph-number,
@@ -904,7 +909,7 @@
         gap: 4.5px !important; 
       }
       body.year-overview-mode .calendar-cell { 
-        border-radius: 9.5px !important; /* 大螢幕圓潤圓邊 */
+        border-radius: 12px !important; /* 電腦最大螢幕圓潤按鍵方圓角 */
       }
       body.year-overview-mode .day-number,
       body.year-overview-mode .roster-ph-number,
@@ -2152,6 +2157,73 @@
       pointer-events: none;
       z-index: 1;
     }
+    /* === Apple 日曆單日時間軸與備忘微點／M 徽章指示器 (v5.13.1) === */
+    .day-memo-dots {
+      position: absolute;
+      bottom: 3px;
+      left: 3.5px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      z-index: 16;
+      pointer-events: none;
+    }
+    .day-memo-dot {
+      width: 6.5px;
+      height: 6.5px;
+      border-radius: 9999px;
+      box-shadow: 0 0 0 1.2px rgba(255, 255, 255, 0.95);
+    }
+    .day-memo-m-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 12px;
+      height: 12px;
+      padding: 0 2px;
+      border-radius: 3.5px;
+      font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif;
+      font-size: 8.5px;
+      font-weight: 950;
+      line-height: 1;
+      color: #ffffff;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.92);
+      letter-spacing: -0.02em;
+    }
+    body.year-overview-mode .day-memo-dots {
+      bottom: 1.5px;
+      left: 2px;
+      gap: 1px;
+    }
+    body.year-overview-mode .day-memo-dot {
+      width: 4px;
+      height: 4px;
+      box-shadow: none;
+    }
+    body.year-overview-mode .day-memo-m-badge {
+      min-width: 8.5px;
+      height: 8.5px;
+      font-size: 6.5px;
+      padding: 0 1px;
+      border-radius: 2px;
+      box-shadow: none;
+    }
+    .apple-timeline-card {
+      position: relative;
+      border-left-width: 3.5px;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+    }
+    .apple-timeline-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px -4px rgba(15, 23, 42, 0.1);
+    }
+    /* 計算機主顯示屏黑色數字專用：高級現代無襯線幾何顯示字體（Outfit）＋ 疏爽字距 ＋ 右側防裁切緩衝 */
+    .calc-lcd-hero-font {
+      font-family: "Outfit", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif !important;
+      font-weight: 800 !important;
+      font-variant-numeric: tabular-nums !important;
+      letter-spacing: 0.045em !important;
+    }
 </style>
   <!-- Leaflet.js 開源免金鑰地圖庫 -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -2405,12 +2477,17 @@
 
       <!-- 頂部彈出小窗（吸頂展開、無阻擋遮罩、完整保留假別卡片所有功能/輸入框/顯示 ＋ 清除排程） -->
       <div id="topApplyLeavePopupBar" class="hidden bg-white/95 backdrop-blur-md border border-blue-200 rounded-2xl p-2 md:p-3 mb-2 shadow-lg animate-in slide-in-from-top duration-200">
-        <div class="flex items-center justify-between pb-1.5 mb-2 border-b border-slate-100 text-xs text-slate-500">
-          <span class="font-bold text-slate-800 flex items-center gap-1.5 text-[11px] md:text-xs">
-            <i class="fa-solid fa-pen-to-square text-blue-600"></i>
-            休假類別與年度配額
-          </span>
-          <button type="button" id="btnCloseTopBarApplyLeave" class="px-2.5 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg font-bold text-[11px] transition active:scale-95 cursor-pointer">
+        <div class="flex items-center justify-between pb-1.5 mb-2 border-b border-slate-100 text-xs text-slate-500 gap-2">
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span class="font-bold text-slate-800 flex items-center gap-1.5 text-[11px] md:text-xs shrink-0">
+              <i class="fa-solid fa-pen-to-square text-blue-600"></i>
+              休假類別與年度配額
+            </span>
+            <span id="topApplyModeIndicatorPill" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 font-bold text-[10px] truncate">
+              <span>假期模式 · 點擊日期塗色</span>
+            </span>
+          </div>
+          <button type="button" id="btnCloseTopBarApplyLeave" class="px-2.5 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg font-bold text-[11px] transition active:scale-95 cursor-pointer shrink-0">
             <i class="fa-solid fa-chevron-up mr-0.5"></i> 收回
           </button>
         </div>
@@ -2699,7 +2776,7 @@
                     <th class="py-1.5 px-2 rounded-l whitespace-nowrap">日期</th>
                     <th class="py-1.5 px-1 text-center whitespace-nowrap">時段</th>
                     <th class="py-1.5 px-1 whitespace-nowrap">假別</th>
-                    <th class="py-1.5 px-1.5">備註</th>
+                    <th class="py-1.5 px-1.5">旅程</th>
                     <th class="py-1.5 px-1 text-right rounded-r whitespace-nowrap">操作</th>
                   </tr>
                 </thead>
@@ -2920,7 +2997,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.12.13</span>
+      <span>v5.14.11</span>
     </button>
   </footer>
 
@@ -3162,7 +3239,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.12.13</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.14.11</span>
             </h3>
           </div>
         </div>
@@ -3172,10 +3249,212 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <!-- v5.14.11 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.11（加入語音報讀圓形按鈕置於「代入上方換算 ↗」左側並排佈局功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">VOICE BUTTON ALIGN</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入將純圖示圓形當地語言結果報讀開關按鈕（🔊）移至右上「代入上方換算 ↗」左側並排對齊功能，操作更順手。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.10 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.10（加入計算機當地語言無語音包自動雲端真人母語備援發音功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">CLOUD TTS FALLBACK</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入智能語音包偵測與雲端真人母語備援引擎，即使電腦未安裝越南文（<code>vi-VN</code>）、泰文或韓文等系統語音包，按等號得出計算結果時仍自動以純正當地母語清晰報讀。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.9 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.9（加入旅行連算計算機右側純圖示圓形當地語言結果報讀開關功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">LOCAL VOICE RESULT</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入「旅行連算計算機」標題右側純圖示圓形語音開關按鈕（開啟後僅於得出計算結果時以目的地當地語言自動讀出銀碼，重複按等號可重複報讀，數字與運算鍵保持靜音）。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.8 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.8（加入計算機顯示屏疏爽字距及右側防裁切緩衝空間功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">DISPLAY SPACING</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入旅行連算計算機主顯示屏數字字距（<code>letter-spacing: 0.045em</code>）疏朗排版及右側防裁切內邊距緩衝功能，確保最右端「0」完整圓潤顯示。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.7 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.7（加入計算機顯示屏 Outfit 高級現代圓潤幾何字體及 42px 特大黑色數字顯示功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">OUTFIT DISPLAY</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入旅行連算計算機淺灰顯示屏黑色主數字專用 <code>Outfit</code> 高級現代圓潤幾何字體及 <code>36px–42px</code> 特大清晰顯示功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.6 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.6（加入計算機顯示屏 Orbitron 液晶科技字體及 42px 特大黑色數字顯示功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">LCD HERO DISPLAY</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入旅行連算計算機淺灰顯示屏黑色主數字專用 <code>Orbitron</code> 液晶科技幾何字體及放大至 <code>36px–42px</code> 特粗高對比顯示功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.5 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.5（加入 CASIO 經典 5 列按鍵佈局、紅色 C／AC 雙清除鍵、+/− 正負號切換及超大清晰鍵面字體功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">CASIO LAYOUT</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入 CASIO 經典 5 列純淨按鍵佈局（<code>% / +/− / C / AC</code> 置左、<code>7–9 / 4–6 / 1–3 / 0 . =</code> 居中、<code>÷ × − +</code> 置右，精簡無多餘記憶鍵）及超大字體按鍵設計功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.4 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.4（加入計算機紅色 AC 鍵左下角佈局及全鍵盤超大清晰字體功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">XL KEYPAD</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入旅行連算計算機紅色 AC 清除鍵置於左下角（<code>AC</code> · <code>0</code> · <code>.</code> · <code>=</code>）及全鍵盤按鍵超大字體顯示功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.3 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.3（加入圓形計算機圖示按鈕及淺灰顯示屏、橙色四則運算、深橙等號與紅色 AC 經典按鍵配色功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">CLASSIC CALC</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入實時外幣匯率右側純計算機圖示圓形觸發按鈕，以及淺灰色大字顯示屏、橙色加減乘除（÷ × − +）、深橙色等號（=）及紅色清除（AC）按鍵配色功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.2 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.2（加入單日／半日快閃旅程按需一鍵升級及中國／海外目的地自動識別成卡功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">FLASH TRIP 1D</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入單日備註視窗「🚄 快閃一日遊 / 北上短途？設為旅程 ↗」一鍵升級功能，及單日備註輸入中國／海外旅遊城市自動升級為連續假期旅程卡片（支援修改目的地與出行雙錦囊）功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.1 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.1（加入詳細清單多日連假與單日假期智慧分流編輯、全白明亮大字計算機版面，以及推薦必用程式自動辨識 iOS / Android 一鍵直達下載功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SMART ROUTE & CLEAN UI</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入詳細清單「旅程」欄位智慧分流功能（多日連續假期開啟「修改旅程標題與目的地」版面；一日或半日散假自動返回單日備註與鎖定輸入視窗）。</li>
+            <li>加入全白亮雅一體化旅行連算計算機版面（放大數字顯示屏、統一柔和翡翠白調無黑色元素及加寬按鍵間距）。</li>
+            <li>加入「[國家名] 推薦必用程式」精簡單行卡片與系統自動辨識 App Store / Google Play 單一「下載」按鈕功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.14.0 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.0（加入實時外幣匯率向下延伸旅行連算計算機、出行須知「[國家名] 推薦必用程式」下載清單，以及詳細清單「旅程」欄位直達修改旅程目的地功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">FX CALC & APPS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入「2. 實時外幣匯率與換算」右側「🧮 計算機」原位向下延伸旅行連算計算機功能（支援四則運算、即時港幣／外幣同步折算、一鍵加稅／服務費、AA 制除人數分帳及一鍵代入上方匯率框）。</li>
+            <li>加入出行須知「📱 [國家名] 推薦必用程式」卡片功能（附用途標籤、香港人防中伏貼士、App Store / Google Play 一鍵直達下載及已安裝標記）。</li>
+            <li>加入詳細清單「備註」欄位更名為「旅程」，並統一點擊直接開啟「修改旅程標題與目的地」全功能版面功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.13.5 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.13.5（加入日期方格等比溫潤按鍵圓角與微光立體邊框自適應修飾功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">SQUIRCLE CELLS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入主年曆及年曆全覽模式由手機微縮至電腦最大螢幕之等比溫潤按鍵圓角（<code>clamp(8.5px, 24%, 13px)</code>）與細膩內高光實體按鍵質感修飾功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.13.4 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.13.4（加入修改旅程標題「② 選擇城市」及「③ 加入標題結尾句」三行固定高度防跳格鎖定功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">FIXED-HEIGHT BOX</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入修改旅程標題視窗「② 選擇城市」三行固定高度（<code>88px</code>）及「③ 加入標題結尾句」固定高度（<code>84px</code>）防跳格鎖定功能，切換任何國家或極地太空目的地均保持版面零位移。</li>
+          </ul>
+        </div>
+
+        <!-- v5.13.3 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.13.3（加入設定選單「假期模式 ／ 日程模式」獨立切換開關，預設關閉維持原版假期模式功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">MODE SWITCH</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入右上角設定選單「互動操作模式」獨立開關（預設關閉為原版「假期模式」，開啟後切換為「日程模式」單擊開啟時間軸與 M 備忘）功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.13.2 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.13.2（加入點擊時間軸方框直接修改更新、日期懸停／長按即時預覽日程與備忘摘要，以及 iCal 行事曆同步匯出功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">TIMELINE EDIT & ICS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入點選已有時間軸日程方框直接回填編輯更新、日曆格仔懸停／長按浮動視窗同步預覽當日時間軸日程與 M 備忘摘要，以及匯出 <code>.ics</code> 行事曆時一併帶出精準時段日程與待辦筆記功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.13.1 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.13.1（加入純白明亮單日時間軸視窗、左下角彩色「M」備忘徽章與大圓點並存標記、極速選鐘快捷膠囊及國家膠囊原地防跳格雙擊／長按選取功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">TIMELINE & NO-JUMP</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入純白明亮單日時間軸彈窗、月曆左下角彩色方圓「M」文字備忘徽章與放大時間軸圓點並存顯示、一按即選常用時間膠囊（支援直接輸入如 1430 自動轉換與 +30m 微調），以及修改旅程標題國家膠囊原地防跳格雙擊／長按直接選取功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.13.0 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.13.0（加入 Apple 級單日時間軸日程、四色方框標記、可剔選待辦清單與純文字備忘功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">APPLE DAY TIMELINE</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入預設檢視態單擊任何日期開啟 Apple 級單日時間軸與備忘工作台（含全日請假橫幅、自動聯動航班時段方框、自訂四色日程方框、可剔選待辦清單及隨手文字筆記），並支援點擊「登記假期」自動進入排假畫筆模式、按「收回」自動返回日程檢視功能。</li>
+          </ul>
+        </div>
+
         <!-- v5.12.13 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.12.13（加入「🌌 探索銀河」分類名稱與自動聯想關鍵字識別功能）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">EXPLORE GALAXY</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.12.13（加入「🌌 探索銀河」分類名稱與自動聯想關鍵字識別功能）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">EXPLORE GALAXY</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
           </div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
@@ -7141,6 +7420,21 @@
         </div>
         <button id="btnResetSmartPrefInline" type="button" class="shrink-0 text-[10px] font-bold text-amber-700 hover:text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-lg transition active:scale-95 shadow-2xs hidden">
           <i class="fa-solid fa-rotate-left mr-0.5"></i> 重設
+        </button>
+      </div>
+
+      <!-- 單日／半日散假按需一鍵升級為快閃旅程（支援快閃返中國深圳／廣州／珠海或海外短途，啟用後即享有目的地選單與雙錦囊） -->
+      <div id="boxPromoteFlashTrip" class="p-2.5 rounded-2xl bg-gradient-to-r from-sky-50 to-blue-50 border border-blue-200/90 flex items-center justify-between gap-2">
+        <div class="min-w-0">
+          <div class="text-[11px] font-black text-blue-950 flex items-center gap-1">
+            <span>🚄</span>
+            <span>快閃一日遊 / 北上短途？</span>
+          </div>
+          <p class="text-[10px] text-slate-600 leading-tight mt-0.5">升級為旅程後可揀選中國／海外城市並使用雙錦囊</p>
+        </div>
+        <button id="btnPromoteSingleDayToTrip" type="button"
+                class="shrink-0 px-2.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-[10.5px] shadow-2xs transition active:scale-95 cursor-pointer">
+          設為旅程 ↗
         </button>
       </div>
 
@@ -15200,6 +15494,7 @@
 
     let customTripTitles = {};
     let tripBookings = {}; // v4.3.14 Travel Wallet
+    let daySchedules = {}; // v5.13.0 Apple-style Day Timeline & Memo
     let tripDestState = {}; // v5.7.0 目的地階層仲裁與雙重保險狀態
 
     let toggleMaxWithoutDec = false;
@@ -15323,6 +15618,7 @@
         rosterModeConfig: rosterModeConfig || null,
         customTripTitles: customTripTitles || {},
         tripBookings: tripBookings || {}, // v4.3.1
+        daySchedules: daySchedules || {}, // v5.13.0
         tripDestState: tripDestState || {},
         pin: remoteRoomPin || null,
         timestamp: lastLocalEditTime
@@ -15361,6 +15657,7 @@
         hm: data.holidayModulesConfig,
         ct: data.customTripTitles,
         tb: data.tripBookings,
+        ds: data.daySchedules,
         tds: data.tripDestState // v5.7.0
       });
       if (dataSignature === lastAppliedDataSignature) {
@@ -15372,6 +15669,7 @@
       leaveData = data.leaveData || {};
       customTripTitles = data.customTripTitles || {};
       tripBookings = data.tripBookings || {}; // v4.3.1
+      daySchedules = (data.daySchedules && typeof data.daySchedules === 'object') ? data.daySchedules : {};
       tripDestState = data.tripDestState || {};
 
       if (data.quotasByYear && typeof data.quotasByYear === 'object') {
@@ -16754,10 +17052,22 @@
 
         const totalDays = cluster.length * 0.5;
 
-        // 【全模式連假門檻（2天或以上）】：
-        // 嚴格規範：無論普通模式或輪休模式，未滿 2 日（0.5天或1天）的單純休假絕對不屬於「連假旅程」！
-        // 單日或半日請假不畫藍色連線徽章，亦不生成旅程卡片或走廊色塊，僅歸入「詳細清單」，保證主畫面清爽聚焦。
-        if (totalDays < 2) {
+        // 【全模式連假門檻（2天或以上）＋ 單日快閃旅程按需升級】：
+        // 一般未滿 2 日（0.5天或1天）的單純散假僅歸入「詳細清單」；
+        // 但若使用者於單日備註啟用「🚄 設為快閃旅程（flashTrip）」或輸入內地／海外旅遊目的地（如深圳、廣州、珠海、日本等），即自動升級為完整旅程卡片！
+        const hasFlashTripFlag = cluster.some(s => {
+          const rec = leaveData[s.dateStr];
+          if (!rec) return false;
+          if (rec.flashTrip === true) return true;
+          const noteTxt = String(rec.note || '').trim();
+          if (!noteTxt || noteTxt === '個人假期') return false;
+          if (typeof detectTripRegionAndCountry === 'function') {
+            const det = detectTripRegionAndCountry(noteTxt);
+            if (det && det.code && det.code !== 'HK') return true;
+          }
+          return false;
+        });
+        if (totalDays < 2 && !hasFlashTripFlag) {
           return;
         }
 
@@ -17152,6 +17462,7 @@
             spanRailHtml = `<div class="${railClasses.join(' ')}"></div>${badgeHtml}`;
           }
 
+          const dayDotHtml = (typeof getDayMemoDotsHtml === 'function') ? getDayMemoDotsHtml(dateStr) : '';
           html += `
             <div class="calendar-cell border rounded ${baseBg} ${isPending}" data-date="${dateStr}">
               ${phBadgeHtml}
@@ -17159,6 +17470,7 @@
               <div class="half-slot slot-am ${amClass}"></div>
               <div class="half-slot slot-pm ${pmClass}"></div>
               <span class="day-number ${numColor}">${d}</span>
+              ${dayDotHtml}
               ${spanRailHtml}
             </div>
           `;
@@ -17269,7 +17581,15 @@
             showUnlockModal();
             return;
           }
-          // 智慧消除檢視衝突：點擊日曆格子時若處於檢視模式，自動無感啟動編輯模式並即時完成排假，絕不阻擋！
+          // 若已喺設定開啟「日程模式」且處於檢視態：單擊打開單日時間軸與 M 備忘
+          if (typeof isScheduleModeEnabled !== 'undefined' && isScheduleModeEnabled && !isEditMode) {
+            hideDayTooltip();
+            if (typeof openAppleDayTimelineModal === 'function') {
+              openAppleDayTimelineModal(dateStr);
+            }
+            return;
+          }
+          // 預設關閉「日程模式」（即原版「假期模式」）：點擊日曆格子自動無感啟動編輯並即時排假
           if (!isEditMode) {
             setEditModeState(true, false);
             showToast('✏️ 已自動為你切換至編輯模式！');
@@ -17515,6 +17835,35 @@
           leaveRow.classList.remove('hidden');
         } else {
           leaveRow.classList.add('hidden');
+        }
+
+        // 2.5 單日時間軸與備忘快速預覽
+        const schedRow = document.getElementById('tipScheduleRow');
+        const schedEvBox = document.getElementById('tipScheduleEvents');
+        const schedMemoBox = document.getElementById('tipScheduleMemo');
+        if (schedRow && schedEvBox && schedMemoBox) {
+          const rec = (typeof daySchedules === 'object' && daySchedules) ? daySchedules[dateStr] : null;
+          const evs = (rec && Array.isArray(rec.events)) ? [...rec.events].sort((a, b) => (a.time || '').localeCompare(b.time || '')) : [];
+          const todos = (rec && Array.isArray(rec.todos)) ? rec.todos : [];
+          const memoStr = (rec && typeof rec.memo === 'string') ? rec.memo.trim() : '';
+          if (evs.length > 0 || todos.length > 0 || memoStr) {
+            schedEvBox.innerHTML = evs.slice(0, 2).map(ev =>
+              `<div class="flex items-center gap-1.5 truncate"><span class="font-mono font-black text-blue-700">${ev.time}</span><span class="font-bold text-slate-800 truncate">${ev.title}</span></div>`
+            ).join('') + (evs.length > 2 ? `<div class="text-[9px] text-slate-400 font-semibold">⋯ 另有 ${evs.length - 2} 項日程</div>` : '');
+            const pendingTodos = todos.filter(t => !t.done).length;
+            const summaryParts = [];
+            if (todos.length > 0) summaryParts.push(`待辦 ${todos.length - pendingTodos}/${todos.length}`);
+            if (memoStr) summaryParts.push(memoStr);
+            if (summaryParts.length > 0) {
+              schedMemoBox.textContent = `M · ${summaryParts.join('｜')}`;
+              schedMemoBox.classList.remove('hidden');
+            } else {
+              schedMemoBox.classList.add('hidden');
+            }
+            schedRow.classList.remove('hidden');
+          } else {
+            schedRow.classList.add('hidden');
+          }
         }
       }
 
@@ -19672,14 +20021,15 @@
 
     function doExportIcalFile() {
       const yearPrefix = `${selectedYear}-`;
-      const keys = Object.keys(leaveData).filter(d => d.startsWith(yearPrefix) && leaveData[d] && (leaveData[d].am || leaveData[d].pm)).sort();
-      if (keys.length === 0) {
-        showToast(`💡 ${selectedYear} 年尚未有任何假期排程可供匯出`);
+      const leaveKeys = Object.keys(leaveData || {}).filter(d => d.startsWith(yearPrefix) && leaveData[d] && (leaveData[d].am || leaveData[d].pm)).sort();
+      const schedKeys = Object.keys(daySchedules || {}).filter(d => d.startsWith(yearPrefix) && daySchedules[d]).sort();
+      if (leaveKeys.length === 0 && schedKeys.length === 0) {
+        showToast(`💡 ${selectedYear} 年尚未有任何假期或日程可供匯出`);
         return;
       }
 
       let ics = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//${selectedYear} HK Leave System//ZH\r\nCALSCALE:GREGORIAN\r\n`;
-      keys.forEach(dateStr => {
+      leaveKeys.forEach(dateStr => {
         const item = leaveData[dateStr];
         const dateClean = dateStr.replace(/-/g, '');
         const noteText = item.note || '個人假期';
@@ -19700,6 +20050,39 @@
         ics += `STATUS:CONFIRMED\r\n`;
         ics += "END:VEVENT\r\n";
       });
+
+      // 同步匯出 Apple 單日時間軸精準時段日程 ＋ 文字備忘／待辦
+      schedKeys.forEach(dateStr => {
+        const rec = daySchedules[dateStr];
+        if (!rec) return;
+        const dateClean = dateStr.replace(/-/g, '');
+        const evs = Array.isArray(rec.events) ? rec.events : [];
+        evs.forEach(ev => {
+          const hhmm = (ev.time || '10:00').replace(':', '');
+          const startStamp = `${dateClean}T${hhmm.padEnd(4, '0')}00`;
+          const endHour = String(Math.min(23, parseInt(hhmm.slice(0, 2) || '10', 10) + 1)).padStart(2, '0');
+          const endStamp = `${dateClean}T${endHour}${hhmm.slice(2, 4) || '00'}00`;
+          ics += "BEGIN:VEVENT\r\n";
+          ics += `DTSTART:${startStamp}\r\n`;
+          ics += `DTEND:${endStamp}\r\n`;
+          ics += `SUMMARY:${(ev.title || '日程').replace(/\r?\n/g, ' ')}\r\n`;
+          ics += `STATUS:CONFIRMED\r\n`;
+          ics += "END:VEVENT\r\n";
+        });
+        const todos = Array.isArray(rec.todos) ? rec.todos : [];
+        const memoStr = (rec.memo || '').trim();
+        if (todos.length > 0 || memoStr) {
+          const lines = [];
+          todos.forEach(t => lines.push(`${t.done ? '[✓]' : '[ ]'} ${t.text}`));
+          if (memoStr) lines.push(memoStr);
+          ics += "BEGIN:VEVENT\r\n";
+          ics += `DTSTART;VALUE=DATE:${dateClean}\r\n`;
+          ics += `SUMMARY:📝 備忘：${(memoStr || (todos[0] && todos[0].text) || '單日備忘').slice(0, 32).replace(/\r?\n/g, ' ')}\r\n`;
+          ics += `DESCRIPTION:${lines.join(' | ').replace(/\r?\n/g, ' ')}\r\n`;
+          ics += `STATUS:CONFIRMED\r\n`;
+          ics += "END:VEVENT\r\n";
+        }
+      });
       ics += "END:VCALENDAR";
 
       const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8;' });
@@ -19709,7 +20092,7 @@
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      showToast('📥 已下載 iCal 行事曆檔案！');
+      showToast('📥 已匯出假期及時間軸日程 (.ics)！');
     }
 
     async function captureYearOverviewCanvas() {
@@ -21548,7 +21931,7 @@ function setupYearOverviewToggle() {
               <th class="py-1.5 px-1.5 rounded-l whitespace-nowrap">日期</th>
               <th class="py-1.5 px-0.5 text-center whitespace-nowrap">時段</th>
               <th class="py-1.5 px-0.5 whitespace-nowrap">假別</th>
-              <th class="py-1.5 px-1">備註</th>
+              <th class="py-1.5 px-1">旅程</th>
               <th class="py-1.5 px-1 text-right rounded-r whitespace-nowrap">操作</th>
             </tr>
           </thead>
@@ -21916,7 +22299,8 @@ function setupYearOverviewToggle() {
               holidayModulesConfig: holidayModulesConfig || null,
               rosterModeConfig: rosterModeConfig || null,
               customTripTitles: customTripTitles || {},
-              tripBookings: tripBookings || {}
+              tripBookings: tripBookings || {},
+              daySchedules: daySchedules || {}
             };
             const jsonStr = JSON.stringify(backupPayload, null, 2);
             const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8' });
@@ -21951,13 +22335,14 @@ function setupYearOverviewToggle() {
           reader.onload = (ev) => {
             try {
               const parsed = JSON.parse(ev.target.result);
-              if (!parsed || typeof parsed !== 'object' || (!parsed.leaveData && !parsed.tripBookings && !parsed.quotasByYear)) {
+              if (!parsed || typeof parsed !== 'object' || (!parsed.leaveData && !parsed.tripBookings && !parsed.quotasByYear && !parsed.daySchedules)) {
                 showToast('❌ 無效的備份檔案格式');
                 return;
               }
               leaveData = parsed.leaveData || {};
               customTripTitles = parsed.customTripTitles || {};
               tripBookings = parsed.tripBookings || {};
+              daySchedules = (parsed.daySchedules && typeof parsed.daySchedules === 'object') ? parsed.daySchedules : {};
               if (parsed.quotasByYear && typeof parsed.quotasByYear === 'object') {
                 quotasByYear = Object.assign({}, parsed.quotasByYear);
               }
@@ -22707,19 +23092,46 @@ function setupYearOverviewToggle() {
       // 假期標題小筆頭修改：開啟美化彈窗與同步備註開關 (v2.9.1)
       let currentEditingTripKey = null;
 
+      window.openEditTripModalByDate = (dateStr) => {
+        if (!dateStr) return;
+        const { tripsList } = getActiveLeaveSpansMap(leaveData);
+        const matchedTrip = tripsList.find(t => dateStr >= t.startDate && dateStr <= t.endDate);
+        if (matchedTrip) {
+          window.openEditTripTitleModal(`${matchedTrip.startDate}_${matchedTrip.endDate}`);
+        } else {
+          openMobileNoteModal(dateStr);
+        }
+      };
+
       window.openEditTripTitleModal = (tripKey) => {
         if (!tripKey) return;
         currentEditingTripKey = tripKey;
         const [startDate, endDate] = currentEditingTripKey.split('_');
         const { tripsList } = getActiveLeaveSpansMap(leaveData);
-        const trip = tripsList.find(t => t.startDate === startDate && t.endDate === endDate);
+        let trip = tripsList.find(t => t.startDate === startDate && t.endDate === endDate);
+
+        if (!trip && startDate) {
+          const singleItem = leaveData[startDate] || {};
+          const singleDays = (singleItem.am && singleItem.pm) ? 1.0 : ((singleItem.am || singleItem.pm) ? 0.5 : 1.0);
+          trip = {
+            startDate,
+            endDate: endDate || startDate,
+            title: customTripTitles[currentEditingTripKey] || singleItem.note || '個人假期',
+            totalDays: singleDays,
+            userDays: singleDays
+          };
+        }
         if (!trip) return;
 
         const inputEl = document.getElementById('inputEditTripTitle');
         if (inputEl) inputEl.value = trip.title;
 
         const subEl = document.getElementById('editTripSubtitle');
-        if (subEl) subEl.textContent = `${formatHKDate(trip.startDate)} 至 ${formatHKDate(trip.endDate)} · 連放 ${trip.totalDays} 日`;
+        if (subEl) {
+          subEl.textContent = (trip.startDate === trip.endDate)
+            ? `${formatHKDate(trip.startDate)} · 單日假期 (${trip.userDays} 日)`
+            : `${formatHKDate(trip.startDate)} 至 ${formatHKDate(trip.endDate)} · 連放 ${trip.totalDays} 日`;
+        }
 
         const cntEl = document.getElementById('editTripDaysCount');
         if (cntEl) cntEl.textContent = trip.userDays;
@@ -23392,16 +23804,28 @@ function setupYearOverviewToggle() {
             input.focus();
           };
           let regTapTs = 0;
-          cBtn.onclick = () => {
+          let regHoldTimer = null;
+          cBtn.addEventListener('pointerdown', () => {
+            clearTimeout(regHoldTimer);
+            regHoldTimer = setTimeout(() => { commitRegCountryDirect(); }, 460);
+          }, { passive: true });
+          cBtn.addEventListener('pointerup', () => clearTimeout(regHoldTimer), { passive: true });
+          cBtn.addEventListener('pointerleave', () => clearTimeout(regHoldTimer), { passive: true });
+          cBtn.onclick = (e) => {
+            e.preventDefault();
             const nowTs = Date.now();
-            const isDbl = (nowTs - regTapTs) < 360;
+            const isDbl = (nowTs - regTapTs) < 420;
             regTapTs = nowTs;
-            currentSelectedCountryId = cItem.id;
-            currentSelectedCity = '';
-            renderTripCountryPills(false);
-            openTripRegionDrawer(regionId, map, stats);
-            renderTripCityChips(cItem.id);
-            renderTripSuffixChips(cItem.id);
+            if (currentSelectedCountryId !== cItem.id) {
+              currentSelectedCountryId = cItem.id;
+              currentSelectedCity = '';
+              listEl.querySelectorAll('button').forEach(b => {
+                b.className = 'px-2 py-1 rounded-lg text-[11px] font-bold transition active:scale-95 cursor-pointer shadow-2xs flex items-center gap-1 border bg-white hover:bg-blue-100/80 text-slate-800 border-blue-200/80';
+              });
+              cBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-bold transition active:scale-95 cursor-pointer shadow-2xs flex items-center gap-1 border bg-blue-600 text-white border-blue-700 shadow-xs';
+              renderTripCityChips(cItem.id);
+              renderTripSuffixChips(cItem.id);
+            }
             if (isDbl) commitRegCountryDirect();
           };
           cBtn.ondblclick = (e) => {
@@ -23754,18 +24178,51 @@ function setupYearOverviewToggle() {
           };
 
           let lastTapTs = 0;
-          btn.onclick = () => {
+          let pillHoldTimer = null;
+          btn.addEventListener('pointerdown', () => {
+            clearTimeout(pillHoldTimer);
+            pillHoldTimer = setTimeout(() => {
+              commitCountryDirectToTitle();
+            }, 460);
+          }, { passive: true });
+          btn.addEventListener('pointerup', () => clearTimeout(pillHoldTimer), { passive: true });
+          btn.addEventListener('pointerleave', () => clearTimeout(pillHoldTimer), { passive: true });
+          btn.addEventListener('pointercancel', () => clearTimeout(pillHoldTimer), { passive: true });
+
+          btn.onclick = (e) => {
+            e.preventDefault();
             const nowTs = Date.now();
-            const isDoubleTap = (nowTs - lastTapTs) < 360;
+            const isDoubleTap = (nowTs - lastTapTs) < 420;
             lastTapTs = nowTs;
+            const prevId = currentSelectedCountryId;
             currentSelectedCountryId = cat.id;
             currentSelectedCity = '';
-            activeRegionDrawerId = '';
-            const drawer = document.getElementById('tripRegionDrawer');
-            if (drawer) drawer.classList.add('hidden');
-            renderTripCountryPills(true);
-            renderTripCityChips(cat.id);
-            renderTripSuffixChips(cat.id);
+            if (activeRegionDrawerId) {
+              activeRegionDrawerId = '';
+              const drawer = document.getElementById('tripRegionDrawer');
+              if (drawer) drawer.classList.add('hidden');
+            }
+            // 原地切換膠囊高亮狀態，絕不重建橫向列亦不觸發 scrollIntoView，徹底消除雙擊「跳格」跑位！
+            if (prevId !== cat.id) {
+              container.querySelectorAll('.trip-country-pill').forEach(pEl => {
+                const pid = pEl.getAttribute('data-country-id');
+                if (pid === cat.id) {
+                  pEl.className = 'trip-country-pill px-2.5 py-1 rounded-lg text-xs font-bold shrink-0 transition active:scale-95 cursor-pointer shadow-2xs flex items-center gap-1 bg-blue-600 text-white shadow-xs ring-1 ring-blue-700';
+                } else if (pid === 'FAV') {
+                  pEl.className = 'trip-country-pill px-2.5 py-1 rounded-lg text-xs font-bold shrink-0 transition active:scale-95 cursor-pointer shadow-2xs flex items-center gap-1 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300/90';
+                } else {
+                  pEl.className = 'trip-country-pill px-2.5 py-1 rounded-lg text-xs font-bold shrink-0 transition active:scale-95 cursor-pointer shadow-2xs flex items-center gap-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200';
+                }
+              });
+              container.querySelectorAll('.trip-region-pill').forEach(rEl => {
+                rEl.className = 'trip-region-pill px-2.5 py-1 rounded-lg text-xs font-extrabold shrink-0 transition active:scale-95 cursor-pointer shadow-2xs flex items-center gap-1 border bg-indigo-50/90 hover:bg-indigo-100 text-indigo-800 border-indigo-200/90';
+              });
+              container.querySelectorAll('.trip-terrain-pill').forEach(tEl => {
+                tEl.className = 'trip-terrain-pill px-2.5 py-1 rounded-lg text-xs font-extrabold shrink-0 transition active:scale-95 cursor-pointer shadow-2xs flex items-center gap-1 border bg-emerald-50/90 hover:bg-emerald-100 text-emerald-900 border-emerald-200/90';
+              });
+              renderTripCityChips(cat.id);
+              renderTripSuffixChips(cat.id);
+            }
             if (isDoubleTap) {
               commitCountryDirectToTitle();
             }
@@ -24441,6 +24898,8 @@ function setupYearOverviewToggle() {
                 leaveData[d.dateStr].note = inputVal;
               }
             });
+          } else if (startDate && leaveData[startDate]) {
+            leaveData[startDate].note = inputVal;
           }
         }
 
@@ -27383,6 +27842,35 @@ function setupYearOverviewToggle() {
 
       document.getElementById('btnCloseMobileNoteModal').onclick = closeMobileNoteModal;
       document.getElementById('btnCancelMobileNote').onclick = closeMobileNoteModal;
+
+      const btnPromoteSingleDay = document.getElementById('btnPromoteSingleDayToTrip');
+      if (btnPromoteSingleDay) {
+        btnPromoteSingleDay.onclick = () => {
+          if (!editingNoteDate || !leaveData[editingNoteDate]) return;
+          const targetDate = editingNoteDate;
+          const curInputVal = mobileNoteInput.value.trim();
+          leaveData[targetDate].flashTrip = true;
+          if (curInputVal && curInputVal !== '個人假期') {
+            leaveData[targetDate].note = curInputVal;
+          }
+          clearTripBgIntervals();
+          pushData();
+          renderMonthGrid();
+          updateDashboard();
+          if (typeof renderModalLeavesContent === 'function') {
+            renderModalLeavesContent();
+          }
+          closeMobileNoteModal();
+          // 自動尋找包含此日的連假（例如週五下午＋週六日會自動併成 2.5 日連假，純平日單日則為 1 日快閃旅程）
+          const { tripsList } = getActiveLeaveSpansMap(leaveData);
+          const matchedTrip = tripsList.find(t => targetDate >= t.startDate && targetDate <= t.endDate);
+          if (matchedTrip) {
+            window.openEditTripTitleModal(`${matchedTrip.startDate}_${matchedTrip.endDate}`);
+          } else {
+            window.openEditTripTitleModal(`${targetDate}_${targetDate}`);
+          }
+        };
+      }
       document.getElementById('btnCloseSmartDecisionModal').onclick = closeSmartDecisionModal;
 
       // 執行備註更新與雙向即時原地刷新（所見即所得，毫秒級全域重繪）
@@ -27481,12 +27969,16 @@ function setupYearOverviewToggle() {
         closeMobileNoteModal();
       };
 
-      // 全域監聽手機版備註點擊
+      // 全域監聽詳細清單「旅程」欄位點擊，統一開啟「修改旅程標題與目的地」版面
       document.addEventListener('click', (e) => {
         const btn = e.target.closest('.btn-mobile-note');
         if (btn) {
           const d = btn.getAttribute('data-date');
-          openMobileNoteModal(d);
+          if (typeof window.openEditTripModalByDate === 'function') {
+            window.openEditTripModalByDate(d);
+          } else {
+            openMobileNoteModal(d);
+          }
         }
       });
 
@@ -29723,6 +30215,490 @@ function setupYearOverviewToggle() {
           outEl.textContent = res.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
         }
       }
+    }
+
+    // === 旅行外幣連算計算機邏輯 ===
+    let dcCalcTokens = [];
+    let dcCalcCurrentInput = '0';
+    let dcCalcJustEvaluated = false;
+
+    function toggleDcFxCalculatorPanel() {
+      const drawer = document.getElementById('dcFxCalculatorDrawer');
+      const btn = document.getElementById('btnToggleDcFxCalculator');
+      if (!drawer) return;
+      const willOpen = drawer.classList.contains('hidden');
+      drawer.classList.toggle('hidden', !willOpen);
+      if (btn) {
+        btn.className = willOpen
+          ? 'w-6 h-6 rounded-full bg-emerald-600 text-white border border-emerald-700 inline-flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-90 shrink-0'
+          : 'w-6 h-6 rounded-full bg-white hover:bg-emerald-100 text-emerald-700 border border-emerald-300 inline-flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-90 shrink-0';
+      }
+      if (willOpen) updateDcCalcDisplay();
+    }
+
+    function computeDcCalcValue() {
+      const seq = [...dcCalcTokens];
+      const curNum = parseFloat(dcCalcCurrentInput);
+      if (!Number.isNaN(curNum)) {
+        seq.push(curNum);
+      } else if (seq.length > 0 && typeof seq[seq.length - 1] === 'string') {
+        seq.pop();
+      }
+      if (seq.length === 0) return 0;
+      const pass1 = [seq[0]];
+      for (let i = 1; i < seq.length; i += 2) {
+        const op = seq[i];
+        const rhs = Number(seq[i + 1] ?? 0);
+        if (op === '×') {
+          pass1[pass1.length - 1] = Number(pass1[pass1.length - 1]) * rhs;
+        } else if (op === '÷') {
+          pass1[pass1.length - 1] = rhs === 0 ? 0 : Number(pass1[pass1.length - 1]) / rhs;
+        } else {
+          pass1.push(op, rhs);
+        }
+      }
+      let total = Number(pass1[0] || 0);
+      for (let i = 1; i < pass1.length; i += 2) {
+        const op = pass1[i];
+        const rhs = Number(pass1[i + 1] || 0);
+        if (op === '+') total += rhs;
+        else if (op === '-') total -= rhs;
+      }
+      return Number.isFinite(total) ? total : 0;
+    }
+
+    function formatDcCalcNum(n) {
+      if (!Number.isFinite(n)) return '0';
+      const rounded = Math.round(n * 10000) / 10000;
+      return rounded.toLocaleString('en-US', { maximumFractionDigits: 4 });
+    }
+
+    function updateDcCalcDisplay() {
+      const exprEl = document.getElementById('dcCalcExprDisplay');
+      const mainEl = document.getElementById('dcCalcMainDisplay');
+      const hintEl = document.getElementById('dcCalcConvertedHint');
+      if (!mainEl) return;
+
+      const exprParts = dcCalcTokens.map(t => typeof t === 'number' ? formatDcCalcNum(t) : t);
+      if (!dcCalcJustEvaluated || dcCalcTokens.length > 0) {
+        exprParts.push(dcCalcCurrentInput);
+      }
+      if (exprEl) exprEl.textContent = exprParts.join(' ') || '0';
+
+      const curVal = dcCalcTokens.length > 0 ? computeDcCalcValue() : (parseFloat(dcCalcCurrentInput) || 0);
+      mainEl.textContent = dcCalcJustEvaluated ? formatDcCalcNum(curVal) : (Number(dcCalcCurrentInput).toLocaleString('en-US', { maximumFractionDigits: 4 }) || '0');
+
+      const baseRate = dcLiveRatesMap[dcSelectedCurr] || DC_FALLBACK_RATES[dcSelectedCurr] || 1;
+      const rate = dcIsCashMode ? baseRate * 0.99 : baseRate;
+      if (hintEl) {
+        if (dcSelectedCurr === 'HKD') {
+          hintEl.textContent = `= ${formatDcCalcNum(curVal)} HKD`;
+        } else {
+          const hkdFromLocal = rate > 0 ? (curVal / rate) : 0;
+          hintEl.textContent = `${formatDcCalcNum(curVal)} ${dcSelectedCurr} ≈ ${hkdFromLocal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} HKD`;
+        }
+      }
+    }
+
+    function dcCalcAppendDigit(d) {
+      if (dcCalcJustEvaluated) {
+        dcCalcTokens = [];
+        dcCalcCurrentInput = '0';
+        dcCalcJustEvaluated = false;
+      }
+      if (dcCalcCurrentInput === '0') {
+        dcCalcCurrentInput = (d === '00') ? '0' : d;
+      } else if (dcCalcCurrentInput.replace('.', '').length < 12) {
+        dcCalcCurrentInput += d;
+      }
+      updateDcCalcDisplay();
+    }
+
+    function dcCalcAppendDot() {
+      if (dcCalcJustEvaluated) {
+        dcCalcTokens = [];
+        dcCalcCurrentInput = '0.';
+        dcCalcJustEvaluated = false;
+      } else if (!dcCalcCurrentInput.includes('.')) {
+        dcCalcCurrentInput += '.';
+      }
+      updateDcCalcDisplay();
+    }
+
+    function dcCalcAppendOp(op) {
+      if (dcCalcJustEvaluated) {
+        const res = computeDcCalcValue();
+        dcCalcTokens = [res, op];
+        dcCalcCurrentInput = '0';
+        dcCalcJustEvaluated = false;
+      } else {
+        const val = parseFloat(dcCalcCurrentInput) || 0;
+        dcCalcTokens.push(val, op);
+        dcCalcCurrentInput = '0';
+      }
+      updateDcCalcDisplay();
+    }
+
+    function dcCalcBackspace() {
+      if (dcCalcJustEvaluated) {
+        dcCalcJustEvaluated = false;
+      }
+      if (dcCalcCurrentInput.length <= 1) {
+        dcCalcCurrentInput = '0';
+      } else {
+        dcCalcCurrentInput = dcCalcCurrentInput.slice(0, -1);
+      }
+      updateDcCalcDisplay();
+    }
+
+    function dcCalcClearEntry() {
+      dcCalcCurrentInput = '0';
+      dcCalcJustEvaluated = false;
+      updateDcCalcDisplay();
+    }
+
+    function dcCalcToggleSign() {
+      if (dcCalcCurrentInput === '0' || dcCalcCurrentInput === '0.') return;
+      if (dcCalcCurrentInput.startsWith('-')) {
+        dcCalcCurrentInput = dcCalcCurrentInput.slice(1);
+      } else {
+        dcCalcCurrentInput = '-' + dcCalcCurrentInput;
+      }
+      updateDcCalcDisplay();
+    }
+
+    function dcCalcClearAll() {
+      dcCalcTokens = [];
+      dcCalcCurrentInput = '0';
+      dcCalcJustEvaluated = false;
+      updateDcCalcDisplay();
+    }
+
+    function dcCalcPercent() {
+      const val = (parseFloat(dcCalcCurrentInput) || 0) / 100;
+      dcCalcCurrentInput = String(Math.round(val * 1000000) / 1000000);
+      updateDcCalcDisplay();
+    }
+
+    let dcCalcVoiceEnabled = false;
+
+    const DC_CURR_SPEECH_LOCALE = {
+      JPY: 'ja-JP', KRW: 'ko-KR', THB: 'th-TH', TWD: 'zh-TW', CNY: 'zh-CN', RMB: 'zh-CN',
+      HKD: 'zh-HK', MOP: 'zh-HK', SGD: 'en-SG', MYR: 'ms-MY', VND: 'vi-VN', IDR: 'id-ID',
+      PHP: 'en-PH', INR: 'hi-IN', AED: 'ar-AE', SAR: 'ar-SA', TRY: 'tr-TR',
+      USD: 'en-US', CAD: 'en-CA', AUD: 'en-AU', NZD: 'en-NZ', GBP: 'en-GB',
+      EUR: 'fr-FR', CHF: 'de-CH', SEK: 'sv-SE', NOK: 'nb-NO', DKK: 'da-DK',
+      ISK: 'is-IS', PLN: 'pl-PL', CZK: 'cs-CZ', HUF: 'hu-HU',
+      MXN: 'es-MX', BRL: 'pt-BR', ZAR: 'en-ZA', EGP: 'ar-EG'
+    };
+
+    const DC_COUNTRY_SPEECH_LOCALE = {
+      JP: 'ja-JP', KR: 'ko-KR', TH: 'th-TH', TW: 'zh-TW', CN: 'zh-CN',
+      HK: 'zh-HK', MO: 'zh-HK', SG: 'en-SG', MY: 'ms-MY', VN: 'vi-VN', ID: 'id-ID',
+      PH: 'en-PH', IN: 'hi-IN', AE: 'ar-AE', SA: 'ar-SA', TR: 'tr-TR',
+      US: 'en-US', CA: 'en-CA', AU: 'en-AU', NZ: 'en-NZ', GB: 'en-GB', UK: 'en-GB',
+      FR: 'fr-FR', DE: 'de-DE', IT: 'it-IT', ES: 'es-ES', PT: 'pt-PT', NL: 'nl-NL',
+      BE: 'fr-BE', AT: 'de-AT', CH: 'de-CH', SE: 'sv-SE', NO: 'nb-NO', DK: 'da-DK',
+      FI: 'fi-FI', IS: 'is-IS', GR: 'el-GR', PL: 'pl-PL', CZ: 'cs-CZ', HU: 'hu-HU',
+      RU: 'ru-RU', MX: 'es-MX', BR: 'pt-BR', AR: 'es-AR', CL: 'es-CL', PE: 'es-PE',
+      ZA: 'en-ZA', EG: 'ar-EG', MA: 'ar-MA'
+    };
+
+    function getDcCalcSpeechLang() {
+      const cCode = (typeof dcSelectedCountryCode !== 'undefined' && dcSelectedCountryCode)
+        ? String(dcSelectedCountryCode).toUpperCase()
+        : '';
+      if (cCode && DC_COUNTRY_SPEECH_LOCALE[cCode]) {
+        return DC_COUNTRY_SPEECH_LOCALE[cCode];
+      }
+      const curr = (typeof dcSelectedCurr !== 'undefined' && dcSelectedCurr)
+        ? String(dcSelectedCurr).toUpperCase()
+        : 'HKD';
+      return DC_CURR_SPEECH_LOCALE[curr] || 'en-US';
+    }
+
+    let dcCalcAudioCtx = null;
+
+    function playDcCalcCloudAudioFallback(textStr, targetLang) {
+      try {
+        if (dcCalcAudioCtx) {
+          dcCalcAudioCtx.pause();
+          dcCalcAudioCtx = null;
+        }
+        const tl = encodeURIComponent(targetLang);
+        const q = encodeURIComponent(textStr);
+        const urls = [
+          `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${tl}&q=${q}`,
+          `https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=${tl}&q=${q}`
+        ];
+        let idx = 0;
+        const tryNext = () => {
+          if (idx >= urls.length) return;
+          const audio = new Audio();
+          audio.referrerPolicy = 'no-referrer';
+          audio.src = urls[idx++];
+          audio.playbackRate = 0.96;
+          dcCalcAudioCtx = audio;
+          audio.onerror = () => { tryNext(); };
+          const p = audio.play();
+          if (p && typeof p.catch === 'function') {
+            p.catch(() => { tryNext(); });
+          }
+        };
+        tryNext();
+      } catch (e) {}
+    }
+
+    function speakDcCalcResult(numVal) {
+      if (!dcCalcVoiceEnabled) return;
+      if (!Number.isFinite(numVal)) return;
+      const rounded = Math.round(numVal * 10000) / 10000;
+      const textStr = String(rounded);
+      const targetLang = getDcCalcSpeechLang();
+      const basePrefix = targetLang.split('-')[0].toLowerCase();
+
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        try {
+          window.speechSynthesis.cancel();
+          const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+          const exactVoice = voices.find(v => (v.lang || '').toLowerCase() === targetLang.toLowerCase());
+          const prefixVoice = voices.find(v => (v.lang || '').toLowerCase().startsWith(basePrefix));
+          const matchedVoice = exactVoice || prefixVoice;
+
+          if (matchedVoice) {
+            const utter = new SpeechSynthesisUtterance(textStr);
+            utter.lang = targetLang;
+            utter.voice = matchedVoice;
+            utter.rate = 0.95;
+            utter.onerror = () => playDcCalcCloudAudioFallback(textStr, targetLang);
+            window.speechSynthesis.speak(utter);
+            return;
+          }
+        } catch (e) {}
+      }
+      // 本機系統未安裝該國語音包（如電腦未裝越南文 vi-VN）時，自動啟用雲端真人母語備援發音
+      playDcCalcCloudAudioFallback(textStr, targetLang);
+    }
+
+    function toggleDcCalcVoiceMode() {
+      dcCalcVoiceEnabled = !dcCalcVoiceEnabled;
+      const btn = document.getElementById('btnToggleDcCalcVoice');
+      const icon = document.getElementById('dcCalcVoiceIcon');
+      if (btn) {
+        btn.className = dcCalcVoiceEnabled
+          ? 'w-6 h-6 rounded-full bg-emerald-600 text-white border border-emerald-700 inline-flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-90 shrink-0'
+          : 'w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 border border-slate-200/90 inline-flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-90 shrink-0';
+      }
+      if (icon) {
+        icon.className = dcCalcVoiceEnabled
+          ? 'fa-solid fa-volume-high text-[10px]'
+          : 'fa-solid fa-volume-xmark text-[10px]';
+      }
+      if (!dcCalcVoiceEnabled) {
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+          try { window.speechSynthesis.cancel(); } catch (e) {}
+        }
+        if (dcCalcAudioCtx) {
+          try { dcCalcAudioCtx.pause(); dcCalcAudioCtx = null; } catch (e) {}
+        }
+      }
+    }
+
+    function dcCalcEvaluate() {
+      const res = computeDcCalcValue();
+      const rounded = Math.round(res * 10000) / 10000;
+      dcCalcTokens = [];
+      dcCalcCurrentInput = String(rounded);
+      dcCalcJustEvaluated = true;
+      updateDcCalcDisplay();
+      speakDcCalcResult(rounded);
+    }
+
+    function applyDcCalcTaxOrTip(multiplier) {
+      const base = dcCalcTokens.length > 0 ? computeDcCalcValue() : (parseFloat(dcCalcCurrentInput) || 0);
+      const next = Math.round(base * multiplier * 100) / 100;
+      dcCalcTokens = [];
+      dcCalcCurrentInput = String(next);
+      dcCalcJustEvaluated = true;
+      updateDcCalcDisplay();
+      speakDcCalcResult(next);
+    }
+
+    function applyDcCalcSplitPeople(fixedCount) {
+      let n = fixedCount;
+      if (!n) {
+        const raw = prompt('請輸入分帳人數（例如 3 或 4）：', '4');
+        if (!raw) return;
+        n = parseInt(raw, 10);
+      }
+      if (!Number.isFinite(n) || n <= 0) return;
+      const base = dcCalcTokens.length > 0 ? computeDcCalcValue() : (parseFloat(dcCalcCurrentInput) || 0);
+      const each = Math.round((base / n) * 100) / 100;
+      dcCalcTokens = [];
+      dcCalcCurrentInput = String(each);
+      dcCalcJustEvaluated = true;
+      updateDcCalcDisplay();
+      speakDcCalcResult(each);
+      if (typeof showToast === 'function') showToast(`👥 已按 ${n} 人平分：每人 ${formatDcCalcNum(each)}`);
+    }
+
+    function applyDcCalcResultToFxInput() {
+      const val = dcCalcTokens.length > 0 ? computeDcCalcValue() : (parseFloat(dcCalcCurrentInput) || 0);
+      const inp = document.getElementById('dcFxCalcInput');
+      if (inp) {
+        inp.value = formatDcFxFormattedInput(val);
+        recalcDcFx(val);
+      }
+      if (typeof showToast === 'function') showToast(`✅ 已將計算結果 ${formatDcCalcNum(val)} 代入上方匯率換算`);
+    }
+
+    // === 各國家／地區推薦必用程式資料庫與渲染 ===
+    const DC_RECOMMENDED_APPS_BY_COUNTRY = {
+      TH: [
+        { id: 'grab', name: 'Grab', tag: '🚗 叫車・外賣', desc: '東南亞必備叫車及外賣平台，明碼實價免議價。', tip: '建議出發前喺香港用香港手機號碼註冊並綁定信用卡，落機即刻叫車。', iosQuery: 'Grab', androidPkg: 'com.grabtaxi.passenger' },
+        { id: 'bolt', name: 'Bolt', tag: '🚕 平價叫車', desc: '曼谷、清邁、布吉常比 Grab 便宜 15%–30%，適合短途。', tip: '支援現金或綁卡付款，高峰時段可與 Grab 雙開比價。', iosQuery: 'Bolt', androidPkg: 'ee.mtakso.client' },
+        { id: 'google_maps', name: 'Google Maps', tag: '🗺️ 導航・搵食', desc: '查詢 BTS / MRT 轉乘、商場步行路線及餐廳真實評分。', tip: '可預先下載曼谷或清邁離線地圖以防郊區訊號弱。', iosQuery: 'Google Maps', androidPkg: 'com.google.android.apps.maps' },
+        { id: 'superrich', name: 'SuperRich TH', tag: '💱 找換匯率', desc: '即時查詢曼谷綠色／橙色 SuperRich 各分店港幣兌泰銖牌價。', tip: '帶備整潔無摺痕 HK$500 / HK$1,000 大鈔換匯率最靚。', iosQuery: 'SuperRich', androidPkg: 'com.superrich1965.app' }
+      ],
+      JP: [
+        { id: 'vjw', name: 'Visit Japan Web', tag: '🛂 入境・海關', desc: '官方網頁版入境審查與海關申報二維碼（可加至主畫面）。', tip: '出發前 6 小時完成填報並截圖保存 QR Code 離線備用。', webUrl: 'https://www.vjw.digital.go.jp/' },
+        { id: 'google_maps', name: 'Google Maps', tag: '🚆 鐵路轉乘', desc: '精準顯示日本 JR、私鐵、地鐵月台編號、車資及末班車時間。', tip: '配合 Apple Wallet / Google Pay 內置 Suica 或 ICOCA 拍卡最順手。', iosQuery: 'Google Maps', androidPkg: 'com.google.android.apps.maps' },
+        { id: 'tabelog', name: 'Tabelog 食べログ', tag: '🍜 權威搵食', desc: '日本國民級餐廳評分榜，3.5 分以上已屬當地高水準名店。', tip: '支援網頁及 App 預約人氣燒肉、壽司及居酒屋。', iosQuery: 'Tabelog', androidPkg: 'com.kakaku.tabelog' },
+        { id: 'go_taxi', name: 'GO / Uber Japan', tag: '🚕 日本叫車', desc: '覆蓋東京、大阪、京都、北海道等主流的士預約平台。', tip: '日本的士車門全自動開關，上落車切勿手動拉門。', iosQuery: 'GO Taxi Japan', androidPkg: 'com.dena.automotive.taxibell' },
+        { id: 'payke', name: 'Payke / Google 翻譯', tag: '📷 藥妝翻譯', desc: '掃描日本藥妝及零食條碼即時顯示繁體中文成分與用法。', tip: '買滿 5,000 日圓（未稅）記得帶護照正本辦理即時退稅。', iosQuery: 'Payke', androidPkg: 'jp.co.payke.Payke' }
+      ],
+      KR: [
+        { id: 'naver_map', name: 'NAVER Map', tag: '🗺️ 韓國必備地圖', desc: 'Google Maps 在韓國無法步行與駕車導航，NAVER Map 為當地唯一首選。', tip: '支援繁體中文介面，輸入英文或韓文店名即可精準導航。', iosQuery: 'NAVER Map', androidPkg: 'com.nhn.android.nmap' },
+        { id: 'kakao_t', name: 'Kakao T', tag: '🚕 韓國叫車', desc: '韓國最大叫車平台，支援海外信用卡及現金向司機付款。', tip: '可用香港手機號碼接收 SMS 驗證碼註冊。', iosQuery: 'Kakao T', androidPkg: 'com.kakao.taxi' },
+        { id: 'papago', name: 'Naver Papago', tag: '💬 韓文翻譯神器', desc: '韓文翻譯準確度遠高於一般翻譯工具，支援餐牌拍照即時翻譯。', tip: '點餐時用「圖片翻譯」對準韓文餐牌一掃即懂。', iosQuery: 'Naver Papago', androidPkg: 'com.naver.labs.translator' },
+        { id: 'catchtable', name: 'CatchTable 全球版', tag: '🍽️ 網紅餐廳排隊', desc: '首爾聖水洞、弘大、明洞人氣餐廳遠端取籌及訂座必備。', tip: '下載國際版（Global）即可用電郵登入免韓國電話號碼。', iosQuery: 'CATCH TABLE', androidPkg: 'co.kr.catchtable.global.catchtable_global' }
+      ],
+      TW: [
+        { id: 'uber_tw', name: 'Uber / 55688 台灣大車隊', tag: '🚕 叫車出行', desc: '台北、台中、高雄叫車首選，亦可用 7-Eleven ibon 叫車。', tip: '市區短途跳錶計費透明，亦可直接綁定港幣信用卡。', iosQuery: 'Uber', androidPkg: 'com.ubercab' },
+        { id: 'google_maps', name: 'Google Maps', tag: '🚌 捷運公車', desc: '即時顯示台北捷運、台鐵、高鐵及台灣公車到站倒數。', tip: '悠遊卡或一卡通於四大超商及捷運站均可增值。', iosQuery: 'Google Maps', androidPkg: 'com.google.android.apps.maps' },
+        { id: 'thsrc', name: '台灣高鐵 T-EX 行動購票', tag: '🚄 高鐵電子票', desc: '手機直接購買台灣高鐵車票並刷二維碼進站，免排隊換票。', tip: '外籍旅客購買「高鐵周遊券」或早鳥票更划算。', iosQuery: 'T-EX行動購票', androidPkg: 'tw.com.thsrc.texpress' }
+      ],
+      SG: [
+        { id: 'grab', name: 'Grab', tag: '🚗 叫車・支付', desc: '新加坡全方位出行及外賣 App，機場及市區叫車最方便。', tip: '新加坡巴士與地鐵（MRT）可直接拍 Visa / Mastercard 感應式信用卡或 Apple Pay，無需另買車卡。', iosQuery: 'Grab', androidPkg: 'com.grabtaxi.passenger' },
+        { id: 'citymapper', name: 'Citymapper / Google Maps', tag: '🚇 地鐵巴士', desc: '精準提示新加坡地鐵出口及冷氣巴士轉乘路線。', tip: '上車拍卡、落車亦必須再拍一次卡，否則會扣全程最高車資。', iosQuery: 'Citymapper', androidPkg: 'com.citymapper.app.release' }
+      ],
+      MY: [
+        { id: 'grab', name: 'Grab', tag: '🚗 全能出行', desc: '吉隆坡、檳城、亞庇叫車與外賣必裝，收費極實惠。', tip: '建議綁定免海外交易手續費信用卡，免找續零錢麻煩。', iosQuery: 'Grab', androidPkg: 'com.grabtaxi.passenger' },
+        { id: 'tng', name: 'Touch ’n Go eWallet', tag: '💳 當地電子錢包', desc: '馬來西亞最普及二維碼支付，支援香港 AlipayHK 跨境直掃。', tip: '其實直接用香港 AlipayHK 掃當地 DuitNow QR 即可自動港幣結算，無需另開戶。', iosQuery: 'Touch n Go eWallet', androidPkg: 'my.com.tngdigital.ewallet' }
+      ],
+      VN: [
+        { id: 'grab', name: 'Grab', tag: '🚗 叫車・外賣', desc: '胡志明市、河內、峴港、富國島防被濫收車資必備神器。', tip: '越南盾零位多（10,000 VND ≈ 3.1 HKD），付款前務必核對清楚零位數目。', iosQuery: 'Grab', androidPkg: 'com.grabtaxi.passenger' },
+        { id: 'google_translate', name: 'Google 翻譯', tag: '💬 越南語溝通', desc: '支持越南語對話與餐牌鏡頭即時翻譯，離線亦可下載語言包。', tip: '建議預先下載越南語離線包，街市或海島無網絡亦可用。', iosQuery: 'Google Translate', androidPkg: 'com.google.android.apps.translate' }
+      ],
+      CN: [
+        { id: 'alipay', name: 'AlipayHK / 支付寶', tag: '💳 支付・乘車碼', desc: '內地食買玩及全境地鐵巴士掃碼乘車，直接港幣結算零手續費。', tip: '於「出行」分頁預先開通目的地城市（如深圳、廣州、上海、北京）乘車碼。', iosQuery: 'AlipayHK', androidPkg: 'hk.alipay.wallet' },
+        { id: 'amap', name: '高德地圖', tag: '🗺️ 導航・一鍵叫車', desc: '內地最準確導航與聚合打車平台，同時呼叫多個網約車品牌。', tip: '可直接使用香港手機號碼登入並用 AlipayHK 支付車資。', iosQuery: '高德地圖', androidPkg: 'com.autonavi.minimap' },
+        { id: 'dianping', name: '大眾點評 / 美團', tag: '🍜 搵食團購', desc: '查看餐廳真實排名、領取優惠套餐及線上遙距取號排隊。', tip: '熱門餐廳出發前 30 分鐘先在 App 取號可省大量輪候時間。', iosQuery: '大眾點評', androidPkg: 'com.dianping.v1' },
+        { id: 'railway12306', name: '鐵路 12306', tag: '🚄 高鐵購票', desc: '官方高鐵訂票平台，支援回鄉證實名認證及直接刷證件進站。', tip: '跨境往返香港西九龍站亦支援電子票直接入閘。', iosQuery: '鐵路12306', androidPkg: 'com.MobileTicket' }
+      ],
+      GB: [
+        { id: 'citymapper', name: 'Citymapper', tag: '🚇 倫敦交通神兵', desc: '精準提示倫敦地鐵（Tube）罷工/延誤、最佳車廂位置及巴士路線。', tip: '乘搭倫敦地鐵及巴士直接拍 Apple Pay 或感應式信用卡即享每日車資封頂優惠。', iosQuery: 'Citymapper', androidPkg: 'com.citymapper.app.release' },
+        { id: 'trainline', name: 'Trainline', tag: '🚆 英國火車票', desc: '查詢全英城際火車班次、月台變動及預訂電子車票（E-ticket）。', tip: '提前預訂 Advance 車票或購買 Railcard 可慳高達 1/3 車費。', iosQuery: 'Trainline', androidPkg: 'com.thetrainline' },
+        { id: 'uber', name: 'Uber / Bolt', tag: '🚕 網約叫車', desc: '深夜或攜帶大型行李往返機場及火車站首選。', tip: '倫敦希斯路機場接送亦可預先比較 Heathrow Express 與 Elizabeth Line。', iosQuery: 'Uber', androidPkg: 'com.ubercab' }
+      ],
+      FR: [
+        { id: 'bonjour_ratp', name: 'Bonjour RATP / Citymapper', tag: '🚇 巴黎地鐵通行', desc: '查詢巴黎地鐵、RER 郊區快線（往機場/凡爾賽宮）及即時車票購買。', tip: 'iPhone 用戶可直接在 Apple Wallet 加入 Navigo 交通卡拍卡入閘，免排隊買實體票。', iosQuery: 'Bonjour RATP', androidPkg: 'com.fabernovel.ratp' },
+        { id: 'uber', name: 'Uber / Bolt / G7 Taxi', tag: '🚕 巴黎叫車', desc: '巴黎市區及機場點對點接送，G7 為巴黎最大官方的士平台。', tip: '地鐵站及景點人多擠迫，手機及隨身財物務必貼身保管防盜。', iosQuery: 'Uber', androidPkg: 'com.ubercab' }
+      ],
+      DEFAULT: [
+        { id: 'google_maps', name: 'Google Maps', tag: '🗺️ 全球導航・搵食', desc: '查詢公共交通路線、步行導航、營業時間及周邊高評分餐廳。', tip: '出發前可先下載目的地離線地圖，無數據時仍可定位導航。', iosQuery: 'Google Maps', androidPkg: 'com.google.android.apps.maps' },
+        { id: 'google_translate', name: 'Google 翻譯', tag: '💬 鏡頭即時翻譯', desc: '支援多國語音對話與餐牌、指示牌鏡頭即時翻譯。', tip: '建議預先下載目的地語言離線包以備不時之需。', iosQuery: 'Google Translate', androidPkg: 'com.google.android.apps.translate' },
+        { id: 'uber', name: 'Uber / 當地網約車', tag: '🚕 點對點出行', desc: '全球多國通用叫車平台，行程路線與車資透明可追蹤。', tip: '建議於香港出發前完成手機驗證及信用卡綁定。', iosQuery: 'Uber', androidPkg: 'com.ubercab' }
+      ]
+    };
+
+    function getRecommendedAppsForCountry(code) {
+      const c = String(code || '').toUpperCase();
+      if (c === 'HK' || c === 'MO') {
+        return [
+          { id: 'mtr', name: 'MTR Mobile / 九巴 App1933', tag: '🚇 本地交通', desc: '查詢港鐵及巴士實時到站時間與轉乘路線。', tip: '支援八達通及感應式信用卡拍卡乘車。', iosQuery: 'MTR Mobile', androidPkg: 'com.mtr.mtrmobile' },
+          { id: 'openrice', name: 'OpenRice 開飯喇', tag: '🍜 本地搵食訂座', desc: '查詢全港餐廳食評、優惠券及即時網上訂座。', tip: '週末 Staycation 預約酒店自助餐或人氣餐廳極方便。', iosQuery: 'OpenRice', androidPkg: 'com.openrice.android' }
+        ];
+      }
+      return DC_RECOMMENDED_APPS_BY_COUNTRY[c] || DC_RECOMMENDED_APPS_BY_COUNTRY.DEFAULT;
+    }
+
+    function toggleDcAppInstalled(appId) {
+      if (!dcCurrentTripKey) return;
+      const st = getDcTripStore(dcCurrentTripKey);
+      if (!st.installedApps) st.installedApps = {};
+      st.installedApps[appId] = !st.installedApps[appId];
+      saveDcTripStore(dcCurrentTripKey, st);
+      renderDcRecommendedAppsSection(dcCurrentTripKey, dcCurrentCountryCodeForApps);
+    }
+
+    let dcCurrentCountryCodeForApps = '';
+
+    function detectUserAppStorePlatform() {
+      const ua = navigator.userAgent || '';
+      const platform = navigator.platform || '';
+      const isAndroid = /Android/i.test(ua);
+      const isIOS = /iPhone|iPad|iPod/i.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (isAndroid) return 'android';
+      if (isIOS) return 'ios';
+      // 桌面裝置預設對應 Apple App Store（Mac）或 Google Play（Windows/Linux）
+      if (/Win|Linux/i.test(platform) && !/Mac/i.test(platform)) return 'android';
+      return 'ios';
+    }
+
+    function renderDcRecommendedAppsSection(tripKey, countryCode) {
+      dcCurrentCountryCodeForApps = countryCode || '';
+      const cardEl = document.getElementById('dcRecommendedAppsCard');
+      const titleEl = document.getElementById('dcRecommendedAppsTitle');
+      const progEl = document.getElementById('dcRecommendedAppsProgress');
+      const listEl = document.getElementById('dcRecommendedAppsList');
+      if (!cardEl || !listEl) return;
+
+      const meta = typeof getCountryMetaByCode === 'function' ? getCountryMetaByCode(countryCode) : null;
+      const cName = meta ? `${meta.flag} ${meta.name}` : '當地';
+      if (titleEl) titleEl.textContent = `${cName} 推薦必用程式`;
+
+      const apps = getRecommendedAppsForCountry(countryCode);
+      const st = getDcTripStore(tripKey);
+      const installedMap = st.installedApps || {};
+      const osType = detectUserAppStorePlatform();
+
+      let doneCount = 0;
+      apps.forEach(a => { if (installedMap[a.id]) doneCount++; });
+      if (progEl) progEl.textContent = `${doneCount} / ${apps.length} 已裝`;
+
+      listEl.innerHTML = apps.map(app => {
+        const isInstalled = Boolean(installedMap[app.id]);
+        const iosUrl = app.webUrl || `https://apps.apple.com/hk/search?term=${encodeURIComponent(app.iosQuery || app.name)}`;
+        const androidUrl = app.webUrl || (app.androidPkg
+          ? `https://play.google.com/store/apps/details?id=${encodeURIComponent(app.androidPkg)}`
+          : `https://play.google.com/store/search?q=${encodeURIComponent(app.name)}&c=apps`);
+        const directUrl = app.webUrl ? app.webUrl : (osType === 'android' ? androidUrl : iosUrl);
+        const storeIcon = app.webUrl ? 'fa-solid fa-globe' : (osType === 'android' ? 'fa-brands fa-google-play' : 'fa-brands fa-apple');
+
+        return `
+          <div class="px-2.5 py-2 rounded-xl bg-white border ${isInstalled ? 'border-emerald-300 bg-emerald-50/20' : 'border-violet-200/80'} shadow-2xs flex items-center justify-between gap-2 transition">
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="font-black text-[12px] ${isInstalled ? 'text-emerald-900' : 'text-blue-950'} truncate">${app.name}</span>
+                <span class="px-1.5 py-0.2 rounded-md bg-violet-100/90 text-violet-800 font-bold text-[9.5px] shrink-0">${app.tag}</span>
+              </div>
+              <p class="text-[10.5px] text-slate-600 truncate mt-0.5">${app.tip}</p>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <a href="${directUrl}" target="_blank" rel="noopener"
+                 class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-violet-600 hover:bg-violet-700 text-white font-extrabold text-[10.5px] shadow-2xs transition active:scale-95">
+                <i class="${storeIcon} text-[10px]"></i>
+                <span>${app.webUrl ? '開啟' : '下載'}</span>
+              </a>
+              <button type="button" onclick="toggleDcAppInstalled('${app.id}')" aria-label="標記已安裝"
+                      class="w-7 h-7 rounded-lg border inline-flex items-center justify-center cursor-pointer transition active:scale-90 ${isInstalled ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs' : 'bg-slate-50 hover:bg-violet-50 text-slate-400 hover:text-violet-700 border-slate-200'}">
+                <i class="fa-solid fa-check text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     async function fetchAndRenderDcFxRates() {
@@ -32586,7 +33562,9 @@ function setupYearOverviewToggle() {
       document.getElementById('dcLocalFestivalBox').innerHTML = buildDynamicCountryFestivalsHtml(resolved.code, tripKey, spec);
 
       document.getElementById('dcPlugSpecText').textContent = spec.plug || '220V · 萬能轉插';
+      renderDcRecommendedAppsSection(tripKey, resolved.code);
       renderDcChecklistSection(tripKey);
+      updateDcCalcDisplay();
 
       renderDcHkTravelAlertBox(spec.hkAlert);
 
@@ -33345,6 +34323,10 @@ function setupYearOverviewToggle() {
         </div>
       </div>
       <!-- 3. 農曆歲次與節氣 -->
+      <div id="tipScheduleRow" class="text-[10px] text-slate-700 space-y-1 pt-1 border-t border-slate-100 hidden">
+        <div id="tipScheduleEvents" class="space-y-0.5"></div>
+        <div id="tipScheduleMemo" class="text-[9.5px] text-amber-800 bg-amber-50/80 border border-amber-200/80 rounded-md px-1.5 py-0.5 truncate font-semibold hidden"></div>
+      </div>
       <div id="tipLunarRow" class="text-[10.5px] text-amber-900 flex items-center gap-1.5 pt-1 border-t border-slate-100 hidden">
         <i class="fa-solid fa-moon text-[9px] text-amber-600"></i>
         <span id="tipLunarText" class="truncate font-semibold"></span>
@@ -33448,7 +34430,7 @@ function setupYearOverviewToggle() {
             </div>
             <!-- 內地名勝 / 中國專用：極簡 7 大地理片區快選列 -->
             <div id="cnSubregionFilterBar" class="hidden flex gap-1 overflow-x-auto custom-scroll pb-1.5 mb-1 select-none"></div>
-            <div class="flex flex-wrap gap-1 max-h-[85px] overflow-y-auto custom-scroll bg-white/70 rounded-xl border border-slate-200/70 p-1.5" id="tripCityChips">
+            <div class="flex flex-wrap content-start gap-1 h-[88px] min-h-[88px] max-h-[88px] overflow-y-auto custom-scroll bg-white/70 rounded-xl border border-slate-200/70 p-1.5" id="tripCityChips">
               <!-- 由 JS 根據選中國家動態更新 -->
             </div>
           </div>
@@ -33464,7 +34446,7 @@ function setupYearOverviewToggle() {
               </span>
               <span class="text-[9.5px] text-indigo-600 font-bold">點選串接</span>
             </div>
-            <div class="flex flex-wrap gap-1 max-h-[120px] overflow-y-auto custom-scroll p-0.5" id="tripSuffixChips">
+            <div class="flex flex-wrap content-start gap-1 h-[84px] min-h-[84px] max-h-[84px] overflow-y-auto custom-scroll p-0.5" id="tripSuffixChips">
               <button type="button" data-suffix="放鬆慢活之旅" class="chip-suffix px-2 py-0.5 bg-indigo-50/80 hover:bg-indigo-100 text-indigo-800 border border-indigo-200/90 rounded-md text-[11px] font-semibold transition active:scale-95 shadow-2xs">放鬆慢活之旅</button>
               <button type="button" data-suffix="溫泉美食放鬆遊" class="chip-suffix px-2 py-0.5 bg-indigo-50/80 hover:bg-indigo-100 text-indigo-800 border border-indigo-200/90 rounded-md text-[11px] font-semibold transition active:scale-95 shadow-2xs">溫泉美食放鬆遊</button>
               <button type="button" data-suffix="特色美食之旅" class="chip-suffix px-2 py-0.5 bg-indigo-50/80 hover:bg-indigo-100 text-indigo-800 border border-indigo-200/90 rounded-md text-[11px] font-semibold transition active:scale-95 shadow-2xs">特色美食之旅</button>
@@ -33674,7 +34656,11 @@ function setupYearOverviewToggle() {
               <span>2. 實時外幣匯率與換算</span>
             </span>
 
-            <div class="flex items-center gap-1 relative">
+            <div class="flex items-center gap-1 relative flex-wrap justify-end">
+              <button type="button" id="btnToggleDcFxCalculator" onclick="toggleDcFxCalculatorPanel()" aria-label="展開或收起旅行計算機"
+                      class="w-6 h-6 rounded-full bg-white hover:bg-emerald-100 text-emerald-700 border border-emerald-300 inline-flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-90 shrink-0">
+                <i class="fa-solid fa-calculator text-[11px]"></i>
+              </button>
               <div class="inline-flex items-center bg-white border border-emerald-200 rounded-full px-1.5 py-0.5 shadow-2xs gap-1 relative"
                    onmouseenter="openDcHoverMenu('dcFxCurrMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcFxCurrMenu')">
                 <span id="dcFxLeftCode" class="text-[10px] font-mono font-black text-blue-950">HKD</span>
@@ -33741,6 +34727,75 @@ function setupYearOverviewToggle() {
               </button>
               <span class="text-[9.5px] font-semibold text-emerald-700/80 shrink-0">點擊銀碼直接換算</span>
             </div>
+
+            <!-- 向下延伸：全白亮雅一體化旅行連算計算機（大字清晰顯示屏 · 零黑色 · 疏爽實體按鍵間距） -->
+            <div id="dcFxCalculatorDrawer" class="hidden mt-2.5 p-3 rounded-2xl bg-white border border-emerald-200/90 shadow-xs space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[11px] font-black text-emerald-950 flex items-center gap-1.5">
+                  <i class="fa-solid fa-calculator text-emerald-600"></i>
+                  <span>旅行連算計算機</span>
+                </span>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button type="button" id="btnToggleDcCalcVoice" onclick="toggleDcCalcVoiceMode()" aria-label="開關計算結果當地語言讀出"
+                          class="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-400 border border-slate-200/90 inline-flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-90 shrink-0">
+                    <i id="dcCalcVoiceIcon" class="fa-solid fa-volume-xmark text-[10px]"></i>
+                  </button>
+                  <button type="button" onclick="applyDcCalcResultToFxInput()"
+                          class="px-2.5 py-1 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[10px] shadow-2xs transition active:scale-95 cursor-pointer">
+                    代入上方換算 ↗
+                  </button>
+                </div>
+              </div>
+
+              <!-- 淺灰色大字雙幣顯示屏 -->
+              <div class="px-3.5 py-3 rounded-2xl bg-slate-100 border border-slate-200/90 space-y-1">
+                <div id="dcCalcExprDisplay" class="text-xs font-mono font-bold text-slate-400 text-right truncate min-h-[18px] tabular-nums pr-1">0</div>
+                <div id="dcCalcMainDisplay" class="calc-lcd-hero-font text-4xl sm:text-[42px] text-slate-950 text-right leading-tight py-1 pr-1.5 overflow-x-auto no-scrollbar whitespace-nowrap">0</div>
+                <div class="pt-1 border-t border-slate-200/80 flex items-center justify-between gap-2">
+                  <span class="text-[10px] font-bold text-slate-500">即時港幣參考</span>
+                  <span id="dcCalcConvertedHint" class="text-xs font-mono font-black text-emerald-700 truncate tabular-nums">≈ 0.00 HKD</span>
+                </div>
+              </div>
+
+              <!-- 統一素雅功能微調列（稅率/小費 ＋ AA制除人數） -->
+              <div class="grid grid-cols-4 gap-2 text-[11px] font-extrabold">
+                <button type="button" onclick="applyDcCalcTaxOrTip(1.07)" class="py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200/90 cursor-pointer active:scale-95 transition">+7% 稅</button>
+                <button type="button" onclick="applyDcCalcTaxOrTip(1.10)" class="py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200/90 cursor-pointer active:scale-95 transition">+10% 服務</button>
+                <button type="button" onclick="applyDcCalcSplitPeople(2)" class="py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200/90 cursor-pointer active:scale-95 transition">÷2 人AA</button>
+                <button type="button" onclick="applyDcCalcSplitPeople()" class="py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200/90 cursor-pointer active:scale-95 transition">÷N 人分帳</button>
+              </div>
+
+              <!-- CASIO 經典佈局 5列×4行按鍵盤（無多餘記憶鍵 · 左側 C/AC 紅色雙清 · 右側雙格高 + 鍵 · 鍵面超大字體） -->
+              <div class="grid grid-cols-5 gap-2 font-mono text-2xl sm:text-[26px] font-black select-none leading-none">
+                <!-- 第 1 行：%  7  8  9  ÷ -->
+                <button type="button" onclick="dcCalcPercent()" class="py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">%</button>
+                <button type="button" onclick="dcCalcAppendDigit('7')" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">7</button>
+                <button type="button" onclick="dcCalcAppendDigit('8')" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">8</button>
+                <button type="button" onclick="dcCalcAppendDigit('9')" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">9</button>
+                <button type="button" onclick="dcCalcAppendOp('÷')" class="py-3.5 rounded-xl bg-orange-400 hover:bg-orange-500 text-white border border-orange-500 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">÷</button>
+
+                <!-- 第 2 行：+/−  4  5  6  × -->
+                <button type="button" onclick="dcCalcToggleSign()" class="py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center text-xl sm:text-2xl">+/−</button>
+                <button type="button" onclick="dcCalcAppendDigit('4')" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">4</button>
+                <button type="button" onclick="dcCalcAppendDigit('5')" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">5</button>
+                <button type="button" onclick="dcCalcAppendDigit('6')" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">6</button>
+                <button type="button" onclick="dcCalcAppendOp('×')" class="py-3.5 rounded-xl bg-orange-400 hover:bg-orange-500 text-white border border-orange-500 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">×</button>
+
+                <!-- 第 3 行：C  1  2  3  − -->
+                <button type="button" onclick="dcCalcClearEntry()" class="py-3.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white border border-rose-600 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">C</button>
+                <button type="button" onclick="dcCalcAppendDigit('1')" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">1</button>
+                <button type="button" onclick="dcCalcAppendDigit('2')" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">2</button>
+                <button type="button" onclick="dcCalcAppendDigit('3')" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">3</button>
+                <button type="button" onclick="dcCalcAppendOp('-')" class="py-3.5 rounded-xl bg-orange-400 hover:bg-orange-500 text-white border border-orange-500 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">−</button>
+
+                <!-- 第 4 行：AC  0  .  =  +（直跨） -->
+                <button type="button" onclick="dcCalcClearAll()" class="py-3.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white border border-rose-600 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center text-xl sm:text-2xl">AC</button>
+                <button type="button" onclick="dcCalcAppendDigit('0')" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">0</button>
+                <button type="button" onclick="dcCalcAppendDot()" class="py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-900 border border-slate-200/90 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">.</button>
+                <button type="button" onclick="dcCalcEvaluate()" class="py-3.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white border border-orange-700 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">=</button>
+                <button type="button" onclick="dcCalcAppendOp('+')" class="py-3.5 rounded-xl bg-orange-400 hover:bg-orange-500 text-white border border-orange-500 cursor-pointer active:scale-95 shadow-2xs transition flex items-center justify-center">+</button>
+              </div>
+            </div>
           </div>
 
           <p id="dcFxTipText" class="text-[11px] text-slate-700 leading-relaxed"></p>
@@ -33794,6 +34849,18 @@ function setupYearOverviewToggle() {
             <div class="text-[10.5px] font-black text-amber-950 mb-1">🗓️ 當地公眾假期及節慶對行程影響：</div>
             <div id="dcLocalFestivalBox" class="text-[11px] text-slate-700 space-y-1 leading-relaxed"></div>
           </div>
+        </div>
+
+        <!-- 第 3.5 層：[國家名] 推薦必用程式（一鍵跳轉 App Store / Google Play ＋ 香港人防中伏貼士 ＋ 已裝打勾） -->
+        <div id="dcRecommendedAppsCard" class="p-3 rounded-2xl bg-violet-50/65 border border-violet-200/90 space-y-2.5">
+          <div class="flex items-center justify-between gap-1.5 flex-wrap">
+            <span class="font-black text-blue-950 text-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-mobile-screen-button text-violet-600"></i>
+              <span id="dcRecommendedAppsTitle">推薦必用程式</span>
+            </span>
+            <span id="dcRecommendedAppsProgress" class="text-[10px] tabular-nums font-extrabold px-2 py-0.5 rounded-full bg-violet-100 text-violet-800 border border-violet-200">0 / 0 已安裝</span>
+          </div>
+          <div id="dcRecommendedAppsList" class="space-y-2"></div>
         </div>
 
         <!-- 第 4 層：出發前準備（電壓歸位 ＋ 當地國家專屬細心物品 ＋ 預留 3 行自訂空白行） -->
@@ -35004,6 +36071,29 @@ function setupYearOverviewToggle() {
               </div>
             </div>
 
+            <!-- 2.5 操作模式：假期模式 vs 日程模式（實驗室開關，預設關閉） -->
+            <div class="space-y-2 pt-2 border-t border-slate-200/80">
+              <span class="text-[10.5px] font-bold text-slate-600 uppercase tracking-wider block">互動操作模式</span>
+
+              <div class="py-2.5 px-2.5 bg-blue-50/55 border border-blue-200/85 rounded-xl space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2 min-w-0">
+                    <span class="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0"></span>
+                    <span class="font-bold text-blue-950 truncate">日程模式</span>
+                    <span id="scheduleModeStateBadge" class="px-1.5 py-0.2 rounded-full bg-slate-200/90 text-slate-700 font-extrabold text-[9.5px] shrink-0">目前：假期模式</span>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                    <input type="checkbox" id="toggleScheduleModeEnable" onchange="toggleScheduleModeState(this.checked)" class="sr-only peer">
+                    <div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                  </label>
+                </div>
+
+                <p class="text-[10.5px] text-slate-600 leading-relaxed">
+                  預設關閉（維持原版<b class="text-slate-800">假期模式</b>直接點選排假）；開啟後進入<b class="text-blue-700">日程模式</b>，單擊日期開啟單日時間軸與 M 備忘，按「登記假期」先切換排假。
+                </p>
+              </div>
+            </div>
+
             <!-- 3. 專項制度：排班輪休模式 -->
             <div class="space-y-2 pt-2 border-t border-slate-200/80">
               <span class="text-[10.5px] font-bold text-slate-600 uppercase tracking-wider block">專項工作制度</span>
@@ -35131,7 +36221,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-blue-700 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-black text-blue-950 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-blue-700">v5.12.13</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-blue-700">v5.14.11</span>
           </button>
         </div>
 
@@ -35287,5 +36377,702 @@ function setupYearOverviewToggle() {
       </div>
     </div>
   </div>
+
+  <!-- Apple 級單日時間軸與備忘工作台彈窗 (v5.13.1 純白明亮版 ＋ 彩色 M 徽章 ＋ 極速選鐘) -->
+  <div id="modalAppleDayTimeline" class="fixed inset-0 z-[94] flex items-end sm:items-center justify-center bg-slate-900/25 backdrop-blur-[3px] hidden p-0 sm:p-4" onclick="if(event.target===this) closeAppleDayTimelineModal()">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl shadow-[0_24px_60px_-12px_rgba(15,23,42,0.18)] border border-slate-200/95 max-w-lg w-full overflow-hidden flex flex-col max-h-[90dvh] animate-in fade-in slide-in-from-bottom sm:zoom-in-95 duration-200">
+      
+      <!-- 頂部純白明亮 Apple 日曆日期導航列 -->
+      <div class="px-4 py-3 border-b border-slate-100 bg-white flex items-center justify-between gap-2 shrink-0">
+        <div class="flex items-center gap-2 min-w-0">
+          <button type="button" onclick="stepAppleDayTimeline(-1)" aria-label="前一日"
+                  class="w-7 h-7 rounded-full bg-slate-50 hover:bg-blue-50 text-slate-600 hover:text-blue-600 border border-slate-200/90 flex items-center justify-center transition active:scale-90 cursor-pointer shrink-0">
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+          </button>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <h3 id="appleDayTitleText" class="font-black text-slate-900 text-base tracking-tight truncate">2027年1月1日</h3>
+              <span id="appleDayWeekdayBadge" class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold text-[10px] shrink-0">星期五</span>
+            </div>
+            <p id="appleDayLunarSubtext" class="text-[10.5px] text-slate-400 font-medium truncate mt-0.5">農曆資訊</p>
+          </div>
+          <button type="button" onclick="stepAppleDayTimeline(1)" aria-label="後一日"
+                  class="w-7 h-7 rounded-full bg-slate-50 hover:bg-blue-50 text-slate-600 hover:text-blue-600 border border-slate-200/90 flex items-center justify-center transition active:scale-90 cursor-pointer shrink-0">
+            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <button type="button" onclick="closeAppleDayTimelineModal()" aria-label="關閉"
+                class="w-8 h-8 rounded-full bg-slate-50 hover:bg-slate-100 border border-slate-200/80 text-slate-500 flex items-center justify-center transition active:scale-90 cursor-pointer shrink-0">
+          <i class="fa-solid fa-xmark text-xs"></i>
+        </button>
+      </div>
+
+      <!-- 主滾動內容區（純白通透基底） -->
+      <div class="p-3.5 sm:p-4 overflow-y-auto custom-scroll space-y-3 flex-1 bg-slate-50/45">
+        
+        <!-- ① 全日事項橫幅 (All-Day Banner) + 快捷排假直達按鈕 -->
+        <div class="rounded-2xl bg-white border border-slate-200/85 p-2.5 space-y-2 shadow-2xs">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10.5px] font-extrabold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+              <i class="fa-regular fa-sun text-amber-500"></i>
+              <span>全日狀態 · All-Day</span>
+            </span>
+            <button type="button" onclick="jumpFromTimelineToLeaveBrush()"
+                    class="px-2.5 py-1 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10.5px] flex items-center gap-1 shadow-2xs transition active:scale-95 cursor-pointer">
+              <i class="fa-solid fa-pen-to-square text-[9px]"></i>
+              <span>登記／修改假期</span>
+            </button>
+          </div>
+          <div id="appleDayAllDayBanners" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <!-- ② Apple 風格直向時間軸 + 極速點選時間膠囊 -->
+        <div class="rounded-2xl border border-slate-200/90 bg-white p-3 space-y-2.5 shadow-2xs">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black text-slate-800 flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-lg bg-blue-600 text-white inline-flex items-center justify-center text-[10px]">
+                <i class="fa-regular fa-clock"></i>
+              </span>
+              <span>當日時間軸日程</span>
+            </span>
+            <span id="appleTimelineCountBadge" class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full tabular-nums">0 項</span>
+          </div>
+
+          <!-- 時間軸事件列表 -->
+          <div id="appleDayTimelineList" class="relative pl-3 border-l-2 border-slate-200/90 space-y-2 ml-1.5"></div>
+
+          <!-- 極速選鐘快捷列（一按即選常用時段 ＋ +30m 微調，免開原生慢速滾輪） -->
+          <div class="pt-2 border-t border-slate-100 space-y-2">
+            <div class="flex items-center gap-1 overflow-x-auto no-scrollbar pb-0.5">
+              <span class="text-[10px] font-bold text-slate-400 shrink-0 mr-0.5">快選：</span>
+              <button type="button" onclick="setQuickAppleTime('09:00')" class="quick-time-chip px-2 py-0.5 rounded-md bg-slate-50 hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 font-mono font-bold text-[10px] shrink-0 cursor-pointer">09:00</button>
+              <button type="button" onclick="setQuickAppleTime('10:00')" class="quick-time-chip px-2 py-0.5 rounded-md bg-blue-50 border border-blue-300 text-blue-700 font-mono font-bold text-[10px] shrink-0 cursor-pointer">10:00</button>
+              <button type="button" onclick="setQuickAppleTime('12:30')" class="quick-time-chip px-2 py-0.5 rounded-md bg-slate-50 hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 font-mono font-bold text-[10px] shrink-0 cursor-pointer">12:30</button>
+              <button type="button" onclick="setQuickAppleTime('14:00')" class="quick-time-chip px-2 py-0.5 rounded-md bg-slate-50 hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 font-mono font-bold text-[10px] shrink-0 cursor-pointer">14:00</button>
+              <button type="button" onclick="setQuickAppleTime('15:30')" class="quick-time-chip px-2 py-0.5 rounded-md bg-slate-50 hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 font-mono font-bold text-[10px] shrink-0 cursor-pointer">15:30</button>
+              <button type="button" onclick="setQuickAppleTime('18:30')" class="quick-time-chip px-2 py-0.5 rounded-md bg-slate-50 hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 font-mono font-bold text-[10px] shrink-0 cursor-pointer">18:30</button>
+              <button type="button" onclick="setQuickAppleTime('20:00')" class="quick-time-chip px-2 py-0.5 rounded-md bg-slate-50 hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 font-mono font-bold text-[10px] shrink-0 cursor-pointer">20:00</button>
+              <button type="button" onclick="bumpQuickAppleMinutes(30)" class="px-2 py-0.5 rounded-md bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-700 font-mono font-extrabold text-[10px] shrink-0 cursor-pointer">+30m</button>
+            </div>
+
+            <!-- 支援直接輸入如 1430 自動轉 14:30 ＋ 隱藏原生鐘鈕 -->
+            <div class="flex items-center gap-1.5">
+              <div class="relative flex items-center shrink-0">
+                <input type="text" id="inputAppleEventTimeText" value="10:00" maxlength="5" inputmode="numeric"
+                       onblur="normalizeAppleTimeTextInput()"
+                       onkeydown="if(event.key==='Enter'){ event.preventDefault(); normalizeAppleTimeTextInput(); document.getElementById('inputAppleEventTitle')?.focus(); }"
+                       class="w-[68px] pl-2 pr-5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white focus:outline-none text-xs font-mono font-black text-slate-800 tabular-nums text-center">
+                <label aria-label="開啟時鐘選擇器" class="absolute right-1 text-slate-400 hover:text-blue-600 cursor-pointer text-[10px]">
+                  <i class="fa-regular fa-clock"></i>
+                  <input type="time" id="inputAppleEventTime" value="10:00" onchange="syncAppleTimeFromNative(this.value)" class="sr-only">
+                </label>
+              </div>
+              <input type="text" id="inputAppleEventTitle" placeholder="輸入日程（或點下方常用詞）"
+                     onkeydown="if(event.key==='Enter'){ event.preventDefault(); addAppleTimelineEvent(); }"
+                     class="flex-1 min-w-0 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white focus:outline-none text-xs font-semibold text-slate-800">
+              <button type="button" id="btnSubmitAppleTimelineEvent" onclick="addAppleTimelineEvent()"
+                      class="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs shadow-2xs transition active:scale-95 cursor-pointer shrink-0">
+                加入
+              </button>
+            </div>
+
+            <!-- 常用行程詞一鍵填入 ＋ 4 色方框色標 -->
+            <div class="flex flex-wrap items-center justify-between gap-1.5 pt-0.5">
+              <div class="flex items-center gap-1 overflow-x-auto no-scrollbar">
+                <button type="button" onclick="fillQuickAppleEventWord('機場集合')" class="px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[10px] cursor-pointer shrink-0">機場集合</button>
+                <button type="button" onclick="fillQuickAppleEventWord('覆診')" class="px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[10px] cursor-pointer shrink-0">覆診</button>
+                <button type="button" onclick="fillQuickAppleEventWord('聚餐')" class="px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[10px] cursor-pointer shrink-0">聚餐</button>
+                <button type="button" onclick="fillQuickAppleEventWord('會議')" class="px-1.5 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[10px] cursor-pointer shrink-0">會議</button>
+              </div>
+              <div class="flex items-center gap-1" id="appleEventColorPicker">
+                <button type="button" data-evcolor="blue" onclick="selectAppleEventColor('blue')" class="ev-color-btn px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border-2 border-blue-500 font-bold text-[10px] cursor-pointer">藍</button>
+                <button type="button" data-evcolor="emerald" onclick="selectAppleEventColor('emerald')" class="ev-color-btn px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold text-[10px] cursor-pointer">綠</button>
+                <button type="button" data-evcolor="amber" onclick="selectAppleEventColor('amber')" class="ev-color-btn px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 font-bold text-[10px] cursor-pointer">橙</button>
+                <button type="button" data-evcolor="rose" onclick="selectAppleEventColor('rose')" class="ev-color-btn px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200 font-bold text-[10px] cursor-pointer">紅</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③ 隨手備忘錄 ＋ 可剔選待辦清單 (Notes & Checklist · 對應月曆左下角彩色 M 徽章) -->
+        <div class="rounded-2xl border border-slate-200/90 bg-white p-3 space-y-2.5 shadow-2xs">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs font-black text-slate-800 flex items-center gap-1.5">
+              <span id="appleMemoTitleIconBox" class="w-5 h-5 rounded-lg bg-amber-500 text-white inline-flex items-center justify-center text-[10px] font-black">M</span>
+              <span>文字備忘 ＆ 待辦清單</span>
+            </span>
+            <!-- 彩色 M 徽章底色選擇器（用顏色包住 M，與任何底色高對比不衝突） -->
+            <div class="flex items-center gap-1" id="appleMemoColorPicker" title="選擇月曆左下角 M 徽章顏色">
+              <button type="button" data-mcolor="amber" onclick="selectAppleMemoColor('amber')" class="memo-color-btn w-4 h-4 rounded-full bg-amber-500 ring-2 ring-offset-1 ring-amber-500 cursor-pointer" aria-label="琥珀橙 M"></button>
+              <button type="button" data-mcolor="indigo" onclick="selectAppleMemoColor('indigo')" class="memo-color-btn w-4 h-4 rounded-full bg-indigo-600 opacity-75 hover:opacity-100 cursor-pointer" aria-label="靛藍 M"></button>
+              <button type="button" data-mcolor="emerald" onclick="selectAppleMemoColor('emerald')" class="memo-color-btn w-4 h-4 rounded-full bg-emerald-600 opacity-75 hover:opacity-100 cursor-pointer" aria-label="翠綠 M"></button>
+              <button type="button" data-mcolor="rose" onclick="selectAppleMemoColor('rose')" class="memo-color-btn w-4 h-4 rounded-full bg-rose-600 opacity-75 hover:opacity-100 cursor-pointer" aria-label="玫瑰紅 M"></button>
+            </div>
+          </div>
+
+          <!-- 可剔選待辦清單 -->
+          <div id="appleDayChecklist" class="space-y-1.5"></div>
+          <div class="flex items-center gap-1.5">
+            <input type="text" id="inputAppleTodoText" placeholder="新增待辦勾選項目（如：唱外幣、帶充電器、交水費）"
+                   onkeydown="if(event.key==='Enter'){ event.preventDefault(); addAppleDayTodo(); }"
+                   class="flex-1 min-w-0 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-amber-500 focus:bg-white focus:outline-none text-xs font-medium text-slate-800">
+            <button type="button" onclick="addAppleDayTodo()"
+                    class="px-2.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs shadow-2xs transition active:scale-95 cursor-pointer shrink-0">
+              ＋待辦
+            </button>
+          </div>
+
+          <!-- 自由隨手備忘文字框 -->
+          <textarea id="inputAppleDayMemo" rows="3" placeholder="在此隨手記錄當日筆記、地址、電話或重要事項..."
+                    oninput="saveAppleDayMemoDebounced()"
+                    class="w-full p-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:border-amber-500 focus:bg-white focus:outline-none text-xs text-slate-700 leading-relaxed resize-none"></textarea>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 預設關閉「日程模式」（false = 原版「假期模式」，true = 「日程模式」）
+    let isScheduleModeEnabled = localStorage.getItem('hk_schedule_mode_enabled') === '1';
+
+    function syncScheduleModeUI() {
+      const toggleEl = document.getElementById('toggleScheduleModeEnable');
+      const badgeEl = document.getElementById('scheduleModeStateBadge');
+      const applyPillEl = document.getElementById('topApplyModeIndicatorPill');
+      if (toggleEl) toggleEl.checked = !!isScheduleModeEnabled;
+      if (badgeEl) {
+        if (isScheduleModeEnabled) {
+          badgeEl.textContent = '目前：日程模式';
+          badgeEl.className = 'px-1.5 py-0.2 rounded-full bg-blue-600 text-white font-extrabold text-[9.5px] shrink-0';
+        } else {
+          badgeEl.textContent = '目前：假期模式';
+          badgeEl.className = 'px-1.5 py-0.2 rounded-full bg-slate-200/90 text-slate-700 font-extrabold text-[9.5px] shrink-0';
+        }
+      }
+      if (applyPillEl) {
+        applyPillEl.innerHTML = isScheduleModeEnabled
+          ? '<span>日程模式 · 排假中（按收回返回日程）</span>'
+          : '<span>假期模式 · 點擊日期塗色</span>';
+      }
+    }
+
+    window.toggleScheduleModeState = function(enabled) {
+      isScheduleModeEnabled = !!enabled;
+      localStorage.setItem('hk_schedule_mode_enabled', isScheduleModeEnabled ? '1' : '0');
+      syncScheduleModeUI();
+      if (typeof showToast === 'function') {
+        if (isScheduleModeEnabled) {
+          showToast('🗓️ 已切換至「日程模式」：單擊日期可開啟單日時間軸與 M 備忘');
+        } else {
+          showToast('🏖️ 已還原為「假期模式」：點擊日期直接塗色排假');
+        }
+      }
+    };
+
+    (function() {
+      let currentAppleTimelineDate = null;
+      let editingAppleEventId = null;
+      let selectedAppleEventColor = 'blue';
+      let selectedAppleMemoColor = 'amber';
+      let appleMemoSaveTimer = null;
+
+      const COLOR_STYLES = {
+        blue:    { border: 'border-l-blue-500',    bg: 'bg-blue-50/75 border-blue-200/80',       badge: 'bg-blue-600 text-white',    dot: 'bg-blue-600' },
+        emerald: { border: 'border-l-emerald-500', bg: 'bg-emerald-50/75 border-emerald-200/80', badge: 'bg-emerald-600 text-white', dot: 'bg-emerald-600' },
+        amber:   { border: 'border-l-amber-500',   bg: 'bg-amber-50/80 border-amber-200/80',     badge: 'bg-amber-500 text-white',   dot: 'bg-amber-500' },
+        rose:    { border: 'border-l-rose-500',    bg: 'bg-rose-50/75 border-rose-200/80',       badge: 'bg-rose-600 text-white',    dot: 'bg-rose-600' }
+      };
+
+      const MEMO_BADGE_BG = {
+        amber:   'bg-amber-500',
+        indigo:  'bg-indigo-600',
+        emerald: 'bg-emerald-600',
+        rose:    'bg-rose-600'
+      };
+
+      function ensureDayScheduleObj(dateStr) {
+        if (!daySchedules || typeof daySchedules !== 'object') daySchedules = {};
+        if (!daySchedules[dateStr]) {
+          daySchedules[dateStr] = { events: [], todos: [], memo: '', memoColor: 'amber' };
+        }
+        if (!Array.isArray(daySchedules[dateStr].events)) daySchedules[dateStr].events = [];
+        if (!Array.isArray(daySchedules[dateStr].todos)) daySchedules[dateStr].todos = [];
+        if (typeof daySchedules[dateStr].memo !== 'string') daySchedules[dateStr].memo = '';
+        if (!daySchedules[dateStr].memoColor) daySchedules[dateStr].memoColor = 'amber';
+        return daySchedules[dateStr];
+      }
+
+      function cleanupDayScheduleIfEmpty(dateStr) {
+        if (!daySchedules || !daySchedules[dateStr]) return;
+        const rec = daySchedules[dateStr];
+        if ((!rec.events || rec.events.length === 0) && (!rec.todos || rec.todos.length === 0) && !(rec.memo || '').trim()) {
+          delete daySchedules[dateStr];
+        }
+      }
+
+      function getLinkedTripFlightEventsForDate(dateStr) {
+        const autoEvents = [];
+        if (typeof tripBookings !== 'object' || !tripBookings) return autoEvents;
+        Object.keys(tripBookings).forEach(tripKey => {
+          const b = tripBookings[tripKey];
+          if (!b) return;
+          const parts = tripKey.split('_');
+          const tripStart = parts[0] || '';
+          const tripEnd = parts[1] || '';
+          const tripName = (typeof customTripTitles === 'object' && customTripTitles && customTripTitles[tripKey]) ? customTripTitles[tripKey] : '已規劃旅程';
+
+          if (b.flightOutDate === dateStr || (!b.flightOutDate && tripStart === dateStr && (b.flightOutNo || b.flightOutDep))) {
+            const depTime = (b.flightOutDep && b.flightOutDep !== '00:00') ? b.flightOutDep : '09:00';
+            const routeTxt = [b.flightOutFrom, b.flightOutTo].filter(Boolean).join(' → ');
+            const label = `🛫 去程航班 ${b.flightOutNo || ''} ${routeTxt ? '(' + routeTxt + ')' : ''} · ${tripName}`.trim();
+            autoEvents.push({ id: 'auto_out_' + tripKey, time: depTime, title: label, color: 'blue', isAutoTrip: true });
+          }
+          if (b.flightInDate === dateStr || (!b.flightInDate && tripEnd === dateStr && (b.flightInNo || b.flightInDep))) {
+            const depTime = (b.flightInDep && b.flightInDep !== '00:00') ? b.flightInDep : '18:00';
+            const routeTxt = [b.flightInFrom, b.flightInTo].filter(Boolean).join(' → ');
+            const label = `🛬 回程航班 ${b.flightInNo || ''} ${routeTxt ? '(' + routeTxt + ')' : ''} · ${tripName}`.trim();
+            autoEvents.push({ id: 'auto_in_' + tripKey, time: depTime, title: label, color: 'emerald', isAutoTrip: true });
+          }
+        });
+        return autoEvents;
+      }
+
+      // 月曆左下角：用彩色方圓包住「M」代表文字備忘／待辦，旁邊彩色大圓點代表時間軸日程，兩者並存零衝突！
+      window.getDayMemoDotsHtml = function(dateStr) {
+        const rec = (typeof daySchedules === 'object' && daySchedules) ? daySchedules[dateStr] : null;
+        if (!rec) return '';
+        const events = Array.isArray(rec.events) ? rec.events : [];
+        const hasEvents = events.length > 0;
+        const hasMemoOrTodo = (rec.memo && rec.memo.trim().length > 0) || (Array.isArray(rec.todos) && rec.todos.length > 0);
+        if (!hasEvents && !hasMemoOrTodo) return '';
+
+        let badges = '';
+        if (hasMemoOrTodo) {
+          const mCol = MEMO_BADGE_BG[rec.memoColor] || 'bg-amber-500';
+          badges += `<span class="day-memo-m-badge ${mCol}">M</span>`;
+        }
+        if (hasEvents) {
+          const firstEvColor = events[0].color || 'blue';
+          const dotCol = (COLOR_STYLES[firstEvColor] && COLOR_STYLES[firstEvColor].dot) || 'bg-blue-600';
+          badges += `<span class="day-memo-dot ${dotCol}"></span>`;
+        }
+        return `<div class="day-memo-dots">${badges}</div>`;
+      };
+
+      // 極速選鐘輔助函數
+      function applyTimeToInputs(hhmm) {
+        const txtEl = document.getElementById('inputAppleEventTimeText');
+        const natEl = document.getElementById('inputAppleEventTime');
+        if (txtEl) txtEl.value = hhmm;
+        if (natEl) natEl.value = hhmm;
+        document.querySelectorAll('#modalAppleDayTimeline .quick-time-chip').forEach(chip => {
+          if (chip.textContent.trim() === hhmm) {
+            chip.className = 'quick-time-chip px-2 py-0.5 rounded-md bg-blue-50 border border-blue-300 text-blue-700 font-mono font-bold text-[10px] shrink-0 cursor-pointer';
+          } else {
+            chip.className = 'quick-time-chip px-2 py-0.5 rounded-md bg-slate-50 hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-blue-700 font-mono font-bold text-[10px] shrink-0 cursor-pointer';
+          }
+        });
+      }
+
+      window.setQuickAppleTime = function(hhmm) {
+        applyTimeToInputs(hhmm);
+        const titleEl = document.getElementById('inputAppleEventTitle');
+        if (titleEl) titleEl.focus();
+      };
+
+      window.bumpQuickAppleMinutes = function(deltaMins) {
+        const txtEl = document.getElementById('inputAppleEventTimeText');
+        const cur = normalizeTimeString(txtEl ? txtEl.value : '10:00');
+        const [hh, mm] = cur.split(':').map(Number);
+        let total = (hh * 60 + mm + deltaMins + 1440) % 1440;
+        const nh = String(Math.floor(total / 60)).padStart(2, '0');
+        const nm = String(total % 60).padStart(2, '0');
+        applyTimeToInputs(`${nh}:${nm}`);
+      };
+
+      function normalizeTimeString(raw) {
+        const digits = String(raw || '').replace(/\D/g, '');
+        let hh = 10, mm = 0;
+        if (digits.length === 4) {
+          hh = parseInt(digits.slice(0, 2), 10);
+          mm = parseInt(digits.slice(2, 4), 10);
+        } else if (digits.length === 3) {
+          hh = parseInt(digits.slice(0, 1), 10);
+          mm = parseInt(digits.slice(1, 3), 10);
+        } else if (digits.length === 1 || digits.length === 2) {
+          hh = parseInt(digits, 10);
+          mm = 0;
+        }
+        if (isNaN(hh) || hh < 0 || hh > 23) hh = 10;
+        if (isNaN(mm) || mm < 0 || mm > 59) mm = 0;
+        return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
+      }
+
+      window.normalizeAppleTimeTextInput = function() {
+        const txtEl = document.getElementById('inputAppleEventTimeText');
+        if (!txtEl) return;
+        applyTimeToInputs(normalizeTimeString(txtEl.value));
+      };
+
+      window.syncAppleTimeFromNative = function(val) {
+        if (val) applyTimeToInputs(val);
+      };
+
+      window.fillQuickAppleEventWord = function(word) {
+        const titleEl = document.getElementById('inputAppleEventTitle');
+        if (!titleEl) return;
+        titleEl.value = word;
+        titleEl.focus();
+      };
+
+      window.selectAppleEventColor = function(colorKey) {
+        selectedAppleEventColor = colorKey;
+        document.querySelectorAll('#appleEventColorPicker .ev-color-btn').forEach(btn => {
+          const c = btn.getAttribute('data-evcolor');
+          if (c === colorKey) {
+            btn.classList.add('border-2', 'scale-105');
+            btn.classList.remove('border');
+          } else {
+            btn.classList.remove('border-2', 'scale-105');
+            btn.classList.add('border');
+          }
+        });
+      };
+
+      function syncMemoColorPickerUI(colorKey) {
+        selectedAppleMemoColor = colorKey || 'amber';
+        const iconBox = document.getElementById('appleMemoTitleIconBox');
+        if (iconBox) {
+          iconBox.className = `w-5 h-5 rounded-lg ${MEMO_BADGE_BG[selectedAppleMemoColor] || 'bg-amber-500'} text-white inline-flex items-center justify-center text-[10px] font-black`;
+        }
+        document.querySelectorAll('#appleMemoColorPicker .memo-color-btn').forEach(btn => {
+          const mc = btn.getAttribute('data-mcolor');
+          if (mc === selectedAppleMemoColor) {
+            btn.classList.add('ring-2', 'ring-offset-1', 'ring-slate-500', 'opacity-100');
+            btn.classList.remove('opacity-75');
+          } else {
+            btn.classList.remove('ring-2', 'ring-offset-1', 'ring-slate-500', 'opacity-100');
+            btn.classList.add('opacity-75');
+          }
+        });
+      }
+
+      window.selectAppleMemoColor = function(colorKey) {
+        syncMemoColorPickerUI(colorKey);
+        if (!currentAppleTimelineDate) return;
+        if (daySchedules && daySchedules[currentAppleTimelineDate]) {
+          daySchedules[currentAppleTimelineDate].memoColor = colorKey;
+          if (typeof pushData === 'function') pushData();
+          if (typeof renderMonthGrid === 'function') renderMonthGrid();
+        }
+      };
+
+      function renderAppleDayTimelineContent() {
+        const dateStr = currentAppleTimelineDate;
+        if (!dateStr) return;
+
+        const [y, m, d] = dateStr.split('-').map(Number);
+        const dt = new Date(y, m - 1, d);
+        const wkNames = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        const titleEl = document.getElementById('appleDayTitleText');
+        const wkEl = document.getElementById('appleDayWeekdayBadge');
+        const lunarEl = document.getElementById('appleDayLunarSubtext');
+
+        if (titleEl) titleEl.textContent = `${y}年${m}月${d}日`;
+        if (wkEl) {
+          wkEl.textContent = wkNames[dt.getDay()];
+          wkEl.className = (dt.getDay() === 0 || dt.getDay() === 6)
+            ? 'px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200 font-bold text-[10px] shrink-0'
+            : 'px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold text-[10px] shrink-0';
+        }
+        if (lunarEl) {
+          const lunarTxt = (typeof getLunarDisplay === 'function') ? getLunarDisplay(dateStr) : '';
+          lunarEl.textContent = lunarTxt || `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        }
+
+        // ① 全日狀態橫幅
+        const allDayEl = document.getElementById('appleDayAllDayBanners');
+        if (allDayEl) {
+          const pills = [];
+          const phName = (typeof getPublicHolidayName === 'function') ? getPublicHolidayName(dateStr) : null;
+          if (phName) {
+            pills.push(`<span class="px-2.5 py-1 rounded-xl bg-orange-100 text-orange-800 border border-orange-200 font-extrabold text-[11px] flex items-center gap-1"><i class="fa-solid fa-flag text-orange-500 text-[10px]"></i> ${phName}</span>`);
+          }
+          const lv = (typeof leaveData === 'object' && leaveData) ? leaveData[dateStr] : null;
+          const leaveNameMap = {
+            annual: 'AL 年假',
+            wb: 'WB 身心假',
+            birthday: 'BL 生日假',
+            special: 'SP 特別假',
+            custom: (typeof customLeaveConfig === 'object' && customLeaveConfig && customLeaveConfig.name) ? customLeaveConfig.name : 'CL 自訂假',
+            roster: 'OFF 例休'
+          };
+          const leaveColorMap = {
+            annual: 'bg-sky-100 text-sky-800 border-sky-200',
+            wb: 'bg-purple-100 text-purple-800 border-purple-200',
+            birthday: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+            special: 'bg-slate-200 text-slate-800 border-slate-300',
+            custom: 'bg-amber-100 text-amber-800 border-amber-200',
+            roster: 'bg-rose-100 text-rose-800 border-rose-200'
+          };
+          if (lv && (lv.am || lv.pm)) {
+            if (lv.am === lv.pm && lv.am) {
+              pills.push(`<span class="px-2.5 py-1 rounded-xl border ${leaveColorMap[lv.am] || 'bg-blue-100 text-blue-800'} font-extrabold text-[11px]">全日：${leaveNameMap[lv.am] || lv.am}${lv.locked ? ' 🔒' : ''}</span>`);
+            } else {
+              if (lv.am) pills.push(`<span class="px-2.5 py-1 rounded-xl border ${leaveColorMap[lv.am] || 'bg-blue-100 text-blue-800'} font-extrabold text-[11px]">上午 AM：${leaveNameMap[lv.am] || lv.am}</span>`);
+              if (lv.pm) pills.push(`<span class="px-2.5 py-1 rounded-xl border ${leaveColorMap[lv.pm] || 'bg-blue-100 text-blue-800'} font-extrabold text-[11px]">下午 PM：${leaveNameMap[lv.pm] || lv.pm}</span>`);
+            }
+          }
+          if (pills.length === 0) {
+            const isWknd = (dt.getDay() === 0 || dt.getDay() === 6);
+            pills.push(`<span class="px-2.5 py-1 rounded-xl bg-slate-50 text-slate-500 border border-slate-200 font-semibold text-[11px]">${isWknd ? '週末例假（未登記額外請假）' : '一般工作日（無請假紀錄）'}</span>`);
+          }
+          allDayEl.innerHTML = pills.join('');
+        }
+
+        // ② 時間軸日程列表
+        const rec = (typeof daySchedules === 'object' && daySchedules && daySchedules[dateStr]) ? daySchedules[dateStr] : { events: [], todos: [], memo: '', memoColor: 'amber' };
+        syncMemoColorPickerUI(rec.memoColor || 'amber');
+
+        const userEvents = Array.isArray(rec.events) ? rec.events : [];
+        const autoTripEvents = getLinkedTripFlightEventsForDate(dateStr);
+        const allEvents = [...autoTripEvents, ...userEvents].sort((a, b) => (a.time || '00:00').localeCompare(b.time || '00:00'));
+
+        const countBadge = document.getElementById('appleTimelineCountBadge');
+        if (countBadge) countBadge.textContent = `${allEvents.length} 項`;
+
+        const listEl = document.getElementById('appleDayTimelineList');
+        if (listEl) {
+          if (allEvents.length === 0) {
+            listEl.innerHTML = `<div class="py-2.5 text-center text-[11px] text-slate-400 font-medium">暫無指定時段日程，可點選下方快捷時間加入</div>`;
+          } else {
+            listEl.innerHTML = allEvents.map(ev => {
+              const st = COLOR_STYLES[ev.color] || COLOR_STYLES.blue;
+              const isEditingThis = editingAppleEventId === ev.id;
+              const delBtn = ev.isAutoTrip
+                ? `<span class="px-1.5 py-0.5 rounded bg-white text-slate-500 text-[9.5px] font-bold border border-slate-200 shrink-0">行程聯動</span>`
+                : `<div class="flex items-center gap-1 shrink-0">
+                     <button type="button" onclick="startEditAppleTimelineEvent('${ev.id}')" aria-label="編輯日程" class="w-6 h-6 rounded-full hover:bg-blue-100 text-slate-400 hover:text-blue-600 flex items-center justify-center transition cursor-pointer"><i class="fa-solid fa-pen text-[9.5px]"></i></button>
+                     <button type="button" onclick="deleteAppleTimelineEvent('${ev.id}')" aria-label="刪除日程" class="w-6 h-6 rounded-full hover:bg-rose-100 text-slate-400 hover:text-rose-600 flex items-center justify-center transition cursor-pointer"><i class="fa-solid fa-trash-can text-[10px]"></i></button>
+                   </div>`;
+              return `
+                <div class="relative flex items-center justify-between gap-2 p-2 rounded-xl border ${st.bg} ${st.border} ${isEditingThis ? 'ring-2 ring-blue-500' : ''} apple-timeline-card">
+                  <span class="absolute -left-[19px] w-2.5 h-2.5 rounded-full ${st.dot} ring-2 ring-white"></span>
+                  <div onclick="${ev.isAutoTrip ? '' : `startEditAppleTimelineEvent('${ev.id}')`}" class="flex items-center gap-2 min-w-0 flex-1 ${ev.isAutoTrip ? '' : 'cursor-pointer'}">
+                    <span class="px-1.5 py-0.5 rounded-md ${st.badge} font-mono font-black text-[10.5px] tabular-nums shrink-0">${ev.time || '--:--'}</span>
+                    <span class="text-xs font-bold text-slate-800 truncate">${ev.title}</span>
+                  </div>
+                  ${delBtn}
+                </div>
+              `;
+            }).join('');
+          }
+        }
+
+        // ③ 待辦清單與隨手備忘
+        const todoEl = document.getElementById('appleDayChecklist');
+        if (todoEl) {
+          const todos = Array.isArray(rec.todos) ? rec.todos : [];
+          if (todos.length === 0) {
+            todoEl.innerHTML = '';
+          } else {
+            todoEl.innerHTML = todos.map((td, i) => `
+              <div class="flex items-center justify-between gap-2 px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <label class="flex items-center gap-2 min-w-0 flex-1 cursor-pointer select-none">
+                  <input type="checkbox" ${td.done ? 'checked' : ''} onchange="toggleAppleDayTodo(${i})" class="w-3.5 h-3.5 rounded accent-amber-500 cursor-pointer shrink-0">
+                  <span class="text-xs font-semibold truncate ${td.done ? 'line-through text-slate-400' : 'text-slate-800'}">${td.text}</span>
+                </label>
+                <button type="button" onclick="deleteAppleDayTodo(${i})" aria-label="刪除待辦" class="w-5 h-5 rounded-full hover:bg-rose-50 text-slate-400 hover:text-rose-500 flex items-center justify-center text-[10px] cursor-pointer shrink-0">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            `).join('');
+          }
+        }
+
+        const memoInput = document.getElementById('inputAppleDayMemo');
+        if (memoInput && document.activeElement !== memoInput) {
+          memoInput.value = rec.memo || '';
+        }
+      }
+
+      window.openAppleDayTimelineModal = function(dateStr) {
+        editingAppleEventId = null;
+        const sb = document.getElementById('btnSubmitAppleTimelineEvent'); if (sb) sb.textContent = '加入';
+        currentAppleTimelineDate = dateStr;
+        renderAppleDayTimelineContent();
+        const modal = document.getElementById('modalAppleDayTimeline');
+        if (modal) modal.classList.remove('hidden');
+      };
+
+      window.closeAppleDayTimelineModal = function() {
+        if (appleMemoSaveTimer) {
+          clearTimeout(appleMemoSaveTimer);
+          appleMemoSaveTimer = null;
+          saveAppleDayMemoImmediate();
+        }
+        const modal = document.getElementById('modalAppleDayTimeline');
+        if (modal) modal.classList.add('hidden');
+        currentAppleTimelineDate = null;
+      };
+
+      window.stepAppleDayTimeline = function(deltaDays) {
+        if (!currentAppleTimelineDate) return;
+        const [y, m, d] = currentAppleTimelineDate.split('-').map(Number);
+        const nextDt = new Date(y, m - 1, d + deltaDays);
+        const ny = nextDt.getFullYear();
+        const nm = String(nextDt.getMonth() + 1).padStart(2, '0');
+        const nd = String(nextDt.getDate()).padStart(2, '0');
+        const nextStr = `${ny}-${nm}-${nd}`;
+        if (ny !== selectedYear && typeof changeCalendarYear === 'function') {
+          changeCalendarYear(ny, deltaDays > 0 ? 1 : -1);
+        }
+        editingAppleEventId = null;
+        const sb = document.getElementById('btnSubmitAppleTimelineEvent'); if (sb) sb.textContent = '加入';
+        currentAppleTimelineDate = nextStr;
+        renderAppleDayTimelineContent();
+      };
+
+      window.startEditAppleTimelineEvent = function(evId) {
+        if (!currentAppleTimelineDate || !daySchedules || !daySchedules[currentAppleTimelineDate]) return;
+        const ev = (daySchedules[currentAppleTimelineDate].events || []).find(e => e.id === evId);
+        if (!ev) return;
+        editingAppleEventId = evId;
+        applyTimeToInputs(ev.time || '10:00');
+        const titleEl = document.getElementById('inputAppleEventTitle');
+        if (titleEl) {
+          titleEl.value = ev.title || '';
+          titleEl.focus();
+        }
+        selectAppleEventColor(ev.color || 'blue');
+        const submitBtn = document.getElementById('btnSubmitAppleTimelineEvent');
+        if (submitBtn) submitBtn.textContent = '更新';
+        renderAppleDayTimelineContent();
+      };
+
+      window.addAppleTimelineEvent = function() {
+        if (!currentAppleTimelineDate) return;
+        normalizeAppleTimeTextInput();
+        const txtEl = document.getElementById('inputAppleEventTimeText');
+        const titleEl = document.getElementById('inputAppleEventTitle');
+        const title = (titleEl ? titleEl.value : '').trim();
+        if (!title) {
+          if (typeof showToast === 'function') showToast('💡 請先輸入日程事項內容');
+          if (titleEl) titleEl.focus();
+          return;
+        }
+        const timeVal = (txtEl && txtEl.value) ? txtEl.value : '10:00';
+        const rec = ensureDayScheduleObj(currentAppleTimelineDate);
+        if (editingAppleEventId) {
+          const target = rec.events.find(e => e.id === editingAppleEventId);
+          if (target) {
+            target.time = timeVal;
+            target.title = title;
+            target.color = selectedAppleEventColor || 'blue';
+          }
+          editingAppleEventId = null;
+        } else {
+          rec.events.push({
+            id: 'ev_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+            time: timeVal,
+            title: title,
+            color: selectedAppleEventColor || 'blue'
+          });
+        }
+        const submitBtn = document.getElementById('btnSubmitAppleTimelineEvent');
+        if (submitBtn) submitBtn.textContent = '加入';
+        if (titleEl) titleEl.value = '';
+        if (typeof pushData === 'function') pushData();
+        if (typeof renderMonthGrid === 'function') renderMonthGrid();
+        renderAppleDayTimelineContent();
+      };
+
+      window.deleteAppleTimelineEvent = function(evId) {
+        if (!currentAppleTimelineDate || !daySchedules || !daySchedules[currentAppleTimelineDate]) return;
+        const rec = daySchedules[currentAppleTimelineDate];
+        rec.events = (rec.events || []).filter(e => e.id !== evId);
+        cleanupDayScheduleIfEmpty(currentAppleTimelineDate);
+        if (typeof pushData === 'function') pushData();
+        if (typeof renderMonthGrid === 'function') renderMonthGrid();
+        renderAppleDayTimelineContent();
+      };
+
+      window.addAppleDayTodo = function() {
+        if (!currentAppleTimelineDate) return;
+        const todoInput = document.getElementById('inputAppleTodoText');
+        const text = (todoInput ? todoInput.value : '').trim();
+        if (!text) return;
+        const rec = ensureDayScheduleObj(currentAppleTimelineDate);
+        rec.memoColor = selectedAppleMemoColor || rec.memoColor || 'amber';
+        rec.todos.push({ text: text, done: false });
+        if (todoInput) todoInput.value = '';
+        if (typeof pushData === 'function') pushData();
+        if (typeof renderMonthGrid === 'function') renderMonthGrid();
+        renderAppleDayTimelineContent();
+      };
+
+      window.toggleAppleDayTodo = function(idx) {
+        if (!currentAppleTimelineDate || !daySchedules || !daySchedules[currentAppleTimelineDate]) return;
+        const todos = daySchedules[currentAppleTimelineDate].todos || [];
+        if (todos[idx]) {
+          todos[idx].done = !todos[idx].done;
+          if (typeof pushData === 'function') pushData();
+          if (typeof renderMonthGrid === 'function') renderMonthGrid();
+          renderAppleDayTimelineContent();
+        }
+      };
+
+      window.deleteAppleDayTodo = function(idx) {
+        if (!currentAppleTimelineDate || !daySchedules || !daySchedules[currentAppleTimelineDate]) return;
+        const rec = daySchedules[currentAppleTimelineDate];
+        rec.todos.splice(idx, 1);
+        cleanupDayScheduleIfEmpty(currentAppleTimelineDate);
+        if (typeof pushData === 'function') pushData();
+        if (typeof renderMonthGrid === 'function') renderMonthGrid();
+        renderAppleDayTimelineContent();
+      };
+
+      function saveAppleDayMemoImmediate() {
+        if (!currentAppleTimelineDate) return;
+        const memoInput = document.getElementById('inputAppleDayMemo');
+        if (!memoInput) return;
+        const val = memoInput.value;
+        if (val.trim().length > 0 || (daySchedules && daySchedules[currentAppleTimelineDate])) {
+          const rec = ensureDayScheduleObj(currentAppleTimelineDate);
+          rec.memoColor = selectedAppleMemoColor || rec.memoColor || 'amber';
+          rec.memo = val;
+          cleanupDayScheduleIfEmpty(currentAppleTimelineDate);
+          if (typeof pushData === 'function') pushData();
+          if (typeof renderMonthGrid === 'function') renderMonthGrid();
+        }
+      }
+
+      window.saveAppleDayMemoDebounced = function() {
+        clearTimeout(appleMemoSaveTimer);
+        appleMemoSaveTimer = setTimeout(saveAppleDayMemoImmediate, 400);
+      };
+
+      window.jumpFromTimelineToLeaveBrush = function() {
+        const targetDate = currentAppleTimelineDate;
+        closeAppleDayTimelineModal();
+        const toggleBtn = document.getElementById('btnToggleMainApplyBar');
+        const bar = document.getElementById('topApplyLeavePopupBar');
+        if (bar && bar.classList.contains('hidden') && toggleBtn) {
+          toggleBtn.click();
+        } else if (typeof setEditModeState === 'function' && !isEditMode) {
+          setEditModeState(true, false);
+        }
+        if (targetDate && typeof onCellClick === 'function') {
+          onCellClick(targetDate);
+          if (typeof scrollToDateAndHighlight === 'function') {
+            scrollToDateAndHighlight(targetDate);
+          }
+        }
+      };
+      syncScheduleModeUI();
+    })();
+  </script>
 </body>
 </html>
