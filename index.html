@@ -2997,7 +2997,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.14.11</span>
+      <span>v5.14.12</span>
     </button>
   </footer>
 
@@ -3239,7 +3239,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.14.11</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.14.12</span>
             </h3>
           </div>
         </div>
@@ -3249,10 +3249,21 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <!-- v5.14.12 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.14.12（加入零延遲語音記憶體快取、1.2秒極速超時切換及當地母語數字詞庫直讀保底引擎）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">INSTANT TTS ENGINE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入同一結果記憶體 Blob 瞬時快取（連按 <code>=</code> 0ms 零延遲即時重播、不卡頓吞音）、1.2 秒雲端超時自動切換及越／泰／韓當地母語數字詞庫本機直讀保底引擎，徹底消除發音延遲或無聲問題。</li>
+          </ul>
+        </div>
+
         <!-- v5.14.11 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.14.11（加入語音報讀圓形按鈕置於「代入上方換算 ↗」左側並排佈局功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">VOICE BUTTON ALIGN</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.14.11（加入語音報讀圓形按鈕置於「代入上方換算 ↗」左側並排佈局功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">VOICE BUTTON ALIGN</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
           </div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
@@ -30418,66 +30429,285 @@ function setupYearOverviewToggle() {
     }
 
     let dcCalcAudioCtx = null;
+    let dcCalcSpeakGenId = 0;
+    let dcCalcLastCloudKey = '';
+    let dcCalcLastCloudBlobUrl = '';
 
-    function playDcCalcCloudAudioFallback(textStr, targetLang) {
+    // 預載本機語音清單，避免首次發音時 getVoices() 為空
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       try {
-        if (dcCalcAudioCtx) {
-          dcCalcAudioCtx.pause();
-          dcCalcAudioCtx = null;
-        }
-        const tl = encodeURIComponent(targetLang);
-        const q = encodeURIComponent(textStr);
-        const urls = [
-          `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${tl}&q=${q}`,
-          `https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=${tl}&q=${q}`
-        ];
-        let idx = 0;
-        const tryNext = () => {
-          if (idx >= urls.length) return;
-          const audio = new Audio();
-          audio.referrerPolicy = 'no-referrer';
-          audio.src = urls[idx++];
-          audio.playbackRate = 0.96;
-          dcCalcAudioCtx = audio;
-          audio.onerror = () => { tryNext(); };
-          const p = audio.play();
-          if (p && typeof p.catch === 'function') {
-            p.catch(() => { tryNext(); });
-          }
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => {
+          try { window.speechSynthesis.getVoices(); } catch (e) {}
         };
-        tryNext();
       } catch (e) {}
+    }
+
+    // 當地母語數位讀法詞庫（當本機無該國語音包且網絡受限時，透過本機引擎直接以當地母語音節零延遲拼讀）
+    function convertNumberToLocalWords(numVal, basePrefix) {
+      if (!Number.isFinite(numVal)) return '0';
+      const isNeg = numVal < 0;
+      const absVal = Math.abs(Math.round(numVal * 10000) / 10000);
+      const parts = String(absVal).split('.');
+      const intPart = parseInt(parts[0], 10) || 0;
+      const decPart = parts[1] || '';
+
+      if (basePrefix === 'vi') {
+        const d = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+        const readTriple = (n, full) => {
+          const h = Math.floor(n / 100);
+          const t = Math.floor((n % 100) / 10);
+          const u = n % 10;
+          let res = [];
+          if (h > 0 || full) {
+            res.push(d[h] + ' trăm');
+            if (t === 0 && u > 0) res.push('lẻ');
+          }
+          if (t > 1) {
+            res.push(d[t] + ' mươi');
+            if (u === 1) res.push('mốt');
+            else if (u === 4) res.push('tư');
+            else if (u === 5) res.push('lăm');
+            else if (u > 0) res.push(d[u]);
+          } else if (t === 1) {
+            res.push('mười');
+            if (u === 5) res.push('lăm');
+            else if (u > 0) res.push(d[u]);
+          } else if (t === 0 && u > 0) {
+            res.push(d[u]);
+          }
+          return res.join(' ');
+        };
+        const units = ['', 'nghìn', 'triệu', 'tỷ', 'nghìn tỷ'];
+        let intWords = '';
+        if (intPart === 0) {
+          intWords = 'không';
+        } else {
+          let n = intPart;
+          let chunks = [];
+          while (n > 0) {
+            chunks.push(n % 1000);
+            n = Math.floor(n / 1000);
+          }
+          let out = [];
+          for (let i = chunks.length - 1; i >= 0; i--) {
+            if (chunks[i] > 0) {
+              const needFull = i < chunks.length - 1;
+              out.push(readTriple(chunks[i], needFull) + (units[i] ? ' ' + units[i] : ''));
+            }
+          }
+          intWords = out.join(' ');
+        }
+        let fullStr = (isNeg ? 'âm ' : '') + intWords;
+        if (decPart) {
+          fullStr += ' phẩy ' + decPart.split('').map(ch => d[parseInt(ch, 10)] || ch).join(' ');
+        }
+        return fullStr.trim();
+      }
+
+      if (basePrefix === 'th') {
+        const d = ['ศูนย์', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
+        const pos = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน'];
+        const readGroup = (n) => {
+          if (n === 0) return '';
+          const s = String(n);
+          let out = '';
+          for (let i = 0; i < s.length; i++) {
+            const digit = parseInt(s[i], 10);
+            const p = s.length - 1 - i;
+            if (digit === 0) continue;
+            if (p === 1 && digit === 1) out += 'สิบ';
+            else if (p === 1 && digit === 2) out += 'ยี่สิบ';
+            else if (p === 0 && digit === 1 && s.length > 1) out += 'เอ็ด';
+            else out += d[digit] + pos[p];
+          }
+          return out;
+        };
+        let intWords = '';
+        if (intPart === 0) {
+          intWords = 'ศูนย์';
+        } else if (intPart >= 1000000) {
+          const millions = Math.floor(intPart / 1000000);
+          const rest = intPart % 1000000;
+          intWords = readGroup(millions) + 'ล้าน' + (rest > 0 ? readGroup(rest) : '');
+        } else {
+          intWords = readGroup(intPart);
+        }
+        let fullStr = (isNeg ? 'ลบ' : '') + intWords;
+        if (decPart) {
+          fullStr += 'จุด' + decPart.split('').map(ch => d[parseInt(ch, 10)] || ch).join('');
+        }
+        return fullStr;
+      }
+
+      if (basePrefix === 'ko') {
+        const d = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
+        const sub = ['', '십', '백', '천'];
+        const big = ['', '만', '억', '조'];
+        const readChunk = (n) => {
+          let out = '';
+          for (let i = 0; i < 4; i++) {
+            const digit = Math.floor(n / Math.pow(10, 3 - i)) % 10;
+            if (digit === 0) continue;
+            out += (digit === 1 && i < 3 ? '' : d[digit]) + sub[3 - i];
+          }
+          return out;
+        };
+        let intWords = '';
+        if (intPart === 0) {
+          intWords = '영';
+        } else {
+          let n = intPart;
+          let idx = 0;
+          let partsArr = [];
+          while (n > 0) {
+            const c = n % 10000;
+            if (c > 0) partsArr.unshift(readChunk(c) + big[idx]);
+            n = Math.floor(n / 10000);
+            idx++;
+          }
+          intWords = partsArr.join(' ');
+        }
+        let fullStr = (isNeg ? '마이너스 ' : '') + intWords;
+        if (decPart) {
+          const decD = ['영', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
+          fullStr += ' 점 ' + decPart.split('').map(ch => decD[parseInt(ch, 10)] || ch).join(' ');
+        }
+        return fullStr.trim();
+      }
+
+      return String(numVal);
+    }
+
+    function speakWithNativeSynth(textToSpeak, targetLang, genId, allowFallback) {
+      if (typeof window === 'undefined' || !('speechSynthesis' in window)) return false;
+      try {
+        window.speechSynthesis.cancel();
+        // Chrome 已知 bug：cancel() 後緊接 speak() 偶發吞音或卡死，resume() 確保引擎處於活躍狀態
+        if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+
+        const utter = new SpeechSynthesisUtterance(textToSpeak);
+        utter.lang = targetLang;
+        utter.rate = 0.98;
+        const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+        if (voices && voices.length > 0) {
+          const basePrefix = targetLang.split('-')[0].toLowerCase();
+          const exactVoice = voices.find(v => (v.lang || '').toLowerCase() === targetLang.toLowerCase());
+          const prefixVoice = voices.find(v => (v.lang || '').toLowerCase().startsWith(basePrefix));
+          if (exactVoice) utter.voice = exactVoice;
+          else if (prefixVoice) utter.voice = prefixVoice;
+          else if (allowFallback) {
+            // 本機無該國語音包時，若要由本機拼讀當地詞彙，改用與該語言發音接近的本地聲線避免英文口音過重
+            const neutralVoice = voices.find(v => /^(zh|ja|en)/i.test(v.lang || ''));
+            if (neutralVoice) utter.voice = neutralVoice;
+          }
+        }
+        if (genId !== dcCalcSpeakGenId) return true;
+        window.speechSynthesis.speak(utter);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function stopAllDcCalcSpeech() {
+      dcCalcSpeakGenId++;
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+      }
+      if (dcCalcAudioCtx) {
+        try {
+          dcCalcAudioCtx.pause();
+          dcCalcAudioCtx.currentTime = 0;
+        } catch (e) {}
+      }
+    }
+
+    async function playDcCalcFastCloudOrLocal(numVal, textStr, targetLang, genId) {
+      const basePrefix = targetLang.split('-')[0].toLowerCase();
+      const cacheKey = `${targetLang}|${textStr}`;
+
+      // 1. 若剛報讀過同一組數字（例如連按 = 重播），0ms 記憶體快取即時重播，零網絡延遲！
+      if (dcCalcLastCloudKey === cacheKey && dcCalcLastCloudBlobUrl) {
+        if (genId !== dcCalcSpeakGenId) return;
+        const audio = new Audio(dcCalcLastCloudBlobUrl);
+        audio.playbackRate = 1.0;
+        dcCalcAudioCtx = audio;
+        audio.play().catch(() => {
+          const localWords = convertNumberToLocalWords(numVal, basePrefix);
+          speakWithNativeSynth(localWords, targetLang, genId, true);
+        });
+        return;
+      }
+
+      // 2. 設定 1.2 秒極速超時競速：1.2 秒內取到雲端真人母語音頻即刻播放並快取；超時或被攔截則毫秒級切換本機當地詞庫直讀，絕不卡頓吞音！
+      const tl = encodeURIComponent(targetLang);
+      const q = encodeURIComponent(textStr);
+      const ttsUrl = `https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=${tl}&q=${q}`;
+
+      let settled = false;
+      const fallbackTimer = setTimeout(() => {
+        if (settled || genId !== dcCalcSpeakGenId) return;
+        settled = true;
+        const localWords = convertNumberToLocalWords(numVal, basePrefix);
+        speakWithNativeSynth(localWords, targetLang, genId, true);
+      }, 1200);
+
+      try {
+        const resp = await fetch(ttsUrl, { referrerPolicy: 'no-referrer' });
+        if (!resp.ok) throw new Error('TTS HTTP ' + resp.status);
+        const blob = await resp.blob();
+        if (settled || genId !== dcCalcSpeakGenId) return;
+        settled = true;
+        clearTimeout(fallbackTimer);
+
+        if (dcCalcLastCloudBlobUrl) {
+          try { URL.revokeObjectURL(dcCalcLastCloudBlobUrl); } catch (e) {}
+        }
+        dcCalcLastCloudBlobUrl = URL.createObjectURL(blob);
+        dcCalcLastCloudKey = cacheKey;
+
+        const audio = new Audio(dcCalcLastCloudBlobUrl);
+        audio.playbackRate = 1.0;
+        dcCalcAudioCtx = audio;
+        await audio.play();
+      } catch (e) {
+        if (settled || genId !== dcCalcSpeakGenId) return;
+        settled = true;
+        clearTimeout(fallbackTimer);
+        const localWords = convertNumberToLocalWords(numVal, basePrefix);
+        speakWithNativeSynth(localWords, targetLang, genId, true);
+      }
     }
 
     function speakDcCalcResult(numVal) {
       if (!dcCalcVoiceEnabled) return;
       if (!Number.isFinite(numVal)) return;
+
+      // 立即中斷任何未完播的舊語音（解決連按 = 時重叠/卡死問題）
+      stopAllDcCalcSpeech();
+      const genId = dcCalcSpeakGenId;
+
       const rounded = Math.round(numVal * 10000) / 10000;
       const textStr = String(rounded);
       const targetLang = getDcCalcSpeechLang();
       const basePrefix = targetLang.split('-')[0].toLowerCase();
 
+      // 優先檢查本機是否已安裝對應母語語音包（如日文、英文、粵語、國語等），有則 0ms 零延遲瞬發！
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        try {
-          window.speechSynthesis.cancel();
-          const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
-          const exactVoice = voices.find(v => (v.lang || '').toLowerCase() === targetLang.toLowerCase());
-          const prefixVoice = voices.find(v => (v.lang || '').toLowerCase().startsWith(basePrefix));
-          const matchedVoice = exactVoice || prefixVoice;
-
-          if (matchedVoice) {
-            const utter = new SpeechSynthesisUtterance(textStr);
-            utter.lang = targetLang;
-            utter.voice = matchedVoice;
-            utter.rate = 0.95;
-            utter.onerror = () => playDcCalcCloudAudioFallback(textStr, targetLang);
-            window.speechSynthesis.speak(utter);
-            return;
-          }
-        } catch (e) {}
+        const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+        const hasNativeVoice = voices.some(v => {
+          const vl = (v.lang || '').toLowerCase();
+          return vl === targetLang.toLowerCase() || vl.startsWith(basePrefix + '-') || vl === basePrefix;
+        });
+        if (hasNativeVoice) {
+          speakWithNativeSynth(textStr, targetLang, genId, false);
+          return;
+        }
       }
-      // 本機系統未安裝該國語音包（如電腦未裝越南文 vi-VN）時，自動啟用雲端真人母語備援發音
-      playDcCalcCloudAudioFallback(textStr, targetLang);
+
+      // 本機無該國語音包時，執行「快取瞬播 ＋ 1.2s 極速雲端真人母語 ＋ 本機當地詞庫零延遲保底」雙引擎
+      playDcCalcFastCloudOrLocal(rounded, textStr, targetLang, genId);
     }
 
     function toggleDcCalcVoiceMode() {
@@ -30495,12 +30725,10 @@ function setupYearOverviewToggle() {
           : 'fa-solid fa-volume-xmark text-[10px]';
       }
       if (!dcCalcVoiceEnabled) {
-        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-          try { window.speechSynthesis.cancel(); } catch (e) {}
-        }
-        if (dcCalcAudioCtx) {
-          try { dcCalcAudioCtx.pause(); dcCalcAudioCtx = null; } catch (e) {}
-        }
+        stopAllDcCalcSpeech();
+      } else if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        // 用戶點擊開啟喇叭瞬間預熱音頻上下文，消除首次播放延遲
+        try { window.speechSynthesis.getVoices(); } catch (e) {}
       }
     }
 
@@ -36221,7 +36449,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-blue-700 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-black text-blue-950 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-blue-700">v5.14.11</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-blue-700">v5.14.12</span>
           </button>
         </div>
 
