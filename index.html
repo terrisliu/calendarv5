@@ -1231,14 +1231,28 @@
     }
     .trip-pure-flag {
       font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", sans-serif !important;
-      font-size: 21px !important;
+      font-size: 17px !important;
       line-height: 1 !important;
+      height: 20px !important;
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.18));
+      transform: translateY(-0.5px);
+      filter: drop-shadow(0 1px 1.5px rgba(0,0,0,0.15));
       vertical-align: middle;
       cursor: default;
+    }
+    .ribbon-flag-align {
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", sans-serif !important;
+      font-size: 15.5px !important;
+      line-height: 1 !important;
+      height: 18px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transform: translateY(-0.5px);
+      vertical-align: middle;
+      flex-shrink: 0;
     }
     .trip-card-inner {
       position: relative;
@@ -2217,7 +2231,7 @@
               <span class="w-2 h-2 rounded-full bg-[#86efac] border border-emerald-400"></span>
               <span>BL</span>
             </span>
-            <span id="overviewBdayStats" class="font-bold font-mono">0次</span>
+            <span id="overviewBdayStats" class="font-bold tabular-nums">0次</span>
           </button>
 
           <!-- 4. CL (Company/Custom Leave) -->
@@ -2226,7 +2240,7 @@
               <span class="w-2 h-2 rounded-full bg-amber-500"></span>
               <span id="overviewCustomTag">CL</span>
             </span>
-            <span id="overviewCustomStats" class="font-bold font-mono">0.0日</span>
+            <span id="overviewCustomStats" class="font-bold tabular-nums">0.0日</span>
           </button>
 
           <!-- 5. SP (Special Leave) -->
@@ -2235,7 +2249,7 @@
               <span class="w-2 h-2 rounded-full bg-slate-300"></span>
               <span>SP</span>
             </span>
-            <span id="overviewSpecialStats" class="font-bold font-mono">0.0日</span>
+            <span id="overviewSpecialStats" class="font-bold tabular-nums">0.0日</span>
           </button>
 
           <!-- 6. OFF (Day Off) -->
@@ -2244,7 +2258,7 @@
               <span class="w-2 h-2 rounded-full bg-rose-500"></span>
               <span class="font-bold text-rose-600">OFF</span>
             </span>
-            <span id="overviewRosterStats" class="font-bold font-mono text-rose-600">0.0日</span>
+            <span id="overviewRosterStats" class="font-bold tabular-nums text-rose-600">0.0日</span>
           </button>
         </div>
 
@@ -2425,18 +2439,18 @@
                   <div class="flex items-baseline justify-between text-[9px] md:text-[11px] text-slate-500">
                     <span class="hidden md:inline">配額：</span>
                     <span class="md:hidden">額：</span>
-                    <span id="cardAnnualQuotaLabel" class="font-bold text-slate-700 font-mono">14.0日</span>
+                    <span id="cardAnnualQuotaLabel" class="font-bold text-slate-700 tabular-nums">14.0日</span>
                   </div>
                   <div class="flex items-baseline justify-between text-[9px] md:text-[11px] text-slate-500">
                     <span class="hidden md:inline">已使用：</span>
                     <span class="md:hidden">已用：</span>
-                    <span id="annualUsedText" class="font-semibold text-slate-600 font-mono">0.0日</span>
+                    <span id="annualUsedText" class="font-semibold text-slate-600 tabular-nums">0.0日</span>
                   </div>
                 </div>
               </div>
               <div class="mt-1.5 pt-1 border-t border-sky-100 flex items-baseline justify-between">
                 <span class="text-[9px] md:text-[11px] font-bold text-slate-500">剩餘</span>
-                <span id="annualRemainText" class="text-xs md:text-base font-black text-sky-600 font-mono">14.0日</span>
+                <span id="annualRemainText" class="text-xs md:text-base font-black text-sky-600 tabular-nums">14.0日</span>
               </div>
             </div>
 
@@ -2459,18 +2473,18 @@
                   <div class="flex items-baseline justify-between text-[9px] md:text-[11px] text-slate-500">
                     <span class="hidden md:inline">配額：</span>
                     <span class="md:hidden">額：</span>
-                    <span id="cardWbQuotaLabel" class="font-bold text-slate-700 font-mono">4.0次</span>
+                    <span id="cardWbQuotaLabel" class="font-bold text-slate-700 tabular-nums">4.0次</span>
                   </div>
                   <div class="flex items-baseline justify-between text-[9px] md:text-[11px] text-slate-500">
                     <span class="hidden md:inline">已使用：</span>
                     <span class="md:hidden">已用：</span>
-                    <span id="wbUsedText" class="font-semibold text-slate-600 font-mono">0.0次</span>
+                    <span id="wbUsedText" class="font-semibold text-slate-600 tabular-nums">0.0次</span>
                   </div>
                 </div>
               </div>
               <div class="mt-1.5 pt-1 border-t border-purple-100 flex items-baseline justify-between">
                 <span class="text-[9px] md:text-[11px] font-bold text-slate-500">剩餘</span>
-                <span id="wbRemainText" class="text-xs md:text-base font-black text-purple-600 font-mono">4.0次</span>
+                <span id="wbRemainText" class="text-xs md:text-base font-black text-purple-600 tabular-nums">4.0次</span>
               </div>
             </div>
 
@@ -2491,7 +2505,7 @@
               </div>
               <div class="mt-1.5 pt-1 border-t border-emerald-100 flex items-baseline justify-between">
                 <span class="text-[9px] md:text-[11px] font-bold text-slate-500">已用</span>
-                <span id="bdayUsedText" class="text-xs md:text-base font-black text-emerald-700 font-mono">0次</span>
+                <span id="bdayUsedText" class="text-xs md:text-base font-black text-emerald-700 tabular-nums">0次</span>
               </div>
             </div>
 
@@ -2505,12 +2519,12 @@
                 <div id="customCardTitle" class="text-[9px] md:text-[11px] font-bold text-slate-700 truncate mt-0.5">公司假</div>
                 <div id="customCardQuotaRow" class="hidden text-[9px] md:text-[11px] text-slate-500 mt-0.5 flex justify-between">
                   <span>配額：</span>
-                  <span id="customQuotaText" class="font-bold text-slate-700 font-mono">0.0日</span>
+                  <span id="customQuotaText" class="font-bold text-slate-700 tabular-nums">0.0日</span>
                 </div>
               </div>
               <div class="mt-1.5 pt-1 border-t border-amber-100 flex items-baseline justify-between">
                 <span id="customRemainLabel" class="text-[9px] md:text-[11px] font-bold text-slate-500">已用</span>
-                <span id="customStatText" class="text-xs md:text-base font-black text-amber-600 font-mono">0.0日</span>
+                <span id="customStatText" class="text-xs md:text-base font-black text-amber-600 tabular-nums">0.0日</span>
               </div>
             </div>
 
@@ -2529,7 +2543,7 @@
               </div>
               <div class="mt-1.5 pt-1 border-t border-slate-100 flex items-baseline justify-between">
                 <span class="text-[9px] md:text-[11px] font-bold text-slate-500">已用</span>
-                <span id="specialUsedText" class="text-xs md:text-base font-black text-slate-700 font-mono">0.0日</span>
+                <span id="specialUsedText" class="text-xs md:text-base font-black text-slate-700 tabular-nums">0.0日</span>
               </div>
             </div>
 
@@ -2543,12 +2557,12 @@
                 <div class="text-[9px] md:text-[11px] font-bold text-slate-700 truncate mt-0.5">每月例休 (OFF)</div>
                 <div id="rosterMonthQuotaRow" class="text-[9px] md:text-[11px] text-slate-500 mt-0.5 flex justify-between">
                   <span class="hidden md:inline">基準：</span>
-                  <span id="rosterQuotaText" class="font-bold text-slate-700 font-mono">8.0日</span>
+                  <span id="rosterQuotaText" class="font-bold text-slate-700 tabular-nums">8.0日</span>
                 </div>
               </div>
               <div class="mt-1.5 pt-1 border-t border-rose-100 flex items-baseline justify-between">
                 <span class="text-[9px] md:text-[11px] font-bold text-slate-500">總排</span>
-                <span id="rosterStatText" class="text-xs md:text-base font-black text-rose-600 font-mono">0.0日</span>
+                <span id="rosterStatText" class="text-xs md:text-base font-black text-rose-600 tabular-nums">0.0日</span>
               </div>
             </div>
 
@@ -2586,7 +2600,11 @@
                 <div id="mobileRibbonMiniTripPreview" class="hidden mobile-ribbon-marquee-viewport text-[10.5px] font-bold text-slate-600"></div>
               </div>
               <div class="flex items-center gap-1.5 shrink-0">
-                <button type="button" onclick="event.stopPropagation(); document.getElementById('btnHeaderLeaves')?.click()" aria-label="編輯假期"
+                <button type="button" id="btnMobileRibbonStepClose" onclick="event.stopPropagation(); stepCloseMobileTripRibbon()" aria-label="分階段收起假期規劃"
+                        class="w-6 h-6 rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-500 hover:text-slate-700 inline-flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
+                  <i id="mobileRibbonStepCloseIcon" class="fa-solid fa-chevron-up text-[9.5px] text-slate-500"></i>
+                </button>
+                <button type="button" id="btnMobileRibbonEditLeaves" onclick="event.stopPropagation(); document.getElementById('btnHeaderLeaves')?.click()" aria-label="編輯假期"
                         class="w-6 h-6 rounded-full bg-slate-200/80 hover:bg-slate-300/80 text-slate-700 inline-flex items-center justify-center transition active:scale-90 cursor-pointer">
                   <i class="fa-solid fa-pen text-[9.5px]"></i>
                 </button>
@@ -2643,7 +2661,7 @@
                   <i class="fa-solid fa-list text-[10px]"></i> 詳細清單
                 </button>
               </div>
-              <span id="leavesSummaryKpi" class="text-[10px] font-bold text-slate-500 mr-1.5 font-mono">0 個連續假期</span>
+              <span id="leavesSummaryKpi" class="text-[10px] font-bold text-slate-500 mr-1.5 tabular-nums">0 個連續假期</span>
             </div>
 
             <!-- 全年假期分佈走廊甘特圖 (高精度 365 日年軸比例 + 天數徽章) -->
@@ -2902,7 +2920,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v5.11.21</span>
+      <span>v5.12.13</span>
     </button>
   </footer>
 
@@ -3144,7 +3162,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.11.21</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v5.12.13</span>
             </h3>
           </div>
         </div>
@@ -3154,10 +3172,159 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <!-- v5.12.13 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.13（加入「🌌 探索銀河」分類名稱與自動聯想關鍵字識別功能）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">EXPLORE GALAXY</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入「🌌 探索銀河」分類名稱（取代原「漫遊銀河系」顯示名）及雙向關鍵字識別與全部 70 款星際探索標題結尾句連動功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.12 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.12（加入「🚀 漫遊太空」及「🌌 漫遊銀河系」70 款星際探索與浪漫標題結尾句功能）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">COSMIC TAGS</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入「🚀 漫遊太空」與「🌌 漫遊銀河系」專屬 70 款星際探索與浪漫標題結尾句（包含採集星雲微光、漫步土星光環、露營在火星上、帶你去看銀河等）功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.11 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.11（加入手機版假期規劃走馬燈頂欄圓形向上箭嘴與編輯筆頭左右位置對調及單行自動右靠功能）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">BUTTON ORDER</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入手機版假期規劃走馬燈頂欄圓形向上箭嘴置左、編輯筆頭置右之排列順序，縮細一格時編輯筆頭自動隱藏並令圓形向上箭嘴自動貼齊最右邊功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.10 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.10（加入手機版假期規劃縮細單行跑馬燈時自動隱藏編輯筆頭及圓形向上箭嘴右置固定方向功能）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">RIBBON MINI BAR</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入手機版假期規劃走馬燈縮細至單行跑馬燈狀態時自動隱藏編輯筆頭按鈕，令圓形向上箭嘴自動貼齊最盡右邊且保持箭嘴向上方向不倒轉功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.9 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.9（加入手機版假期規劃走馬燈頂欄圓形向上分階段關閉箭嘴按鈕功能）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">RIBBON STEP CLOSE</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入手機版假期規劃走馬燈頂欄右側編輯鈕旁之淺灰框白底圓形向上箭嘴按鈕功能，第一下按縮細為單行跑馬燈、第二下按完全收合，並完整保留頂部飛機圓鈕原有三態切換功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.8 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.8（加入手機版規劃限定小卡片及全站中文字體格式統一規範功能）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">FONT UNIFY</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入手機版假期規劃走馬燈小卡片及全站含中文標籤之統一香港繁體黑體字型規範（<code>tabular-nums</code>），消除等寬字體（<code>font-mono</code>）混入中文顯示的差異。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.7 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.7（加入手機版及電腦版旅程卡片頂部郵票編號、國旗與中文標題水平中軸線精準對齊功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">BASELINE SYNC</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入手機版走馬燈小卡片及電腦版連續假期卡片頂部「郵票編號 ＋ 國旗 ＋ 中文標題 ＋ 右上選項鈕」統一水平中軸線對齊功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.6 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.6（加入手機版頂部假期規劃走馬燈小卡片全寬長標題橫梁及分層對齊功能）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">MOBILE RIBBON</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入手機版頂部假期規劃走馬燈小卡片最頂全寬長標題橫排佈局功能（含航空郵票編號、國旗水平對齊及右上角編輯鈕）。</li>
+            <li>加入手機版走馬燈下層左側相片與右側機票住宿票根同步下移對齊，以及中間放大單行日期顯示功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.5 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.5（加入航空郵票編號徽章、頂部標題水平對齊及橫向放大單行日期顯示功能）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">STAMP & DATE</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入航空郵票齒孔編號徽章（✈️ #01）並與國旗、中文標題及右上選項圓鈕水平置中對齊功能。</li>
+            <li>加入中層橫向單行放大出發至回程日期顯示功能，消除多餘換行空白。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.4 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.4（加入連續假期卡片全寬長標題橫排及分層排版佈局功能）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">CARD LAYOUT</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入連續假期卡片頂部全寬標題橫排佈局功能，完整呈現多城市長標題並保留右上角圓形修改／刪除按鈕與原尺寸拍立得相框。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.3 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.3（加入彈性多城市連續串遊選擇、連接符號切換及「出行須知」多站點天氣一鍵切換功能）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">MULTI-CITY ROUTE</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入預設「＋串遊中」多城市連續累加點選、再點取消、連接符號切換（・ / → / 、）及一鍵退一城功能（最多支援 8 個城市）。</li>
+            <li>加入「出行須知」當地氣象預測多站點行程路線膠囊列與多城市封面相片交替輪播功能。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.2 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.2（加入跨國行程「出行須知」與「城市指南」多國一鍵切換功能，最多支援 5 個國家）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">MULTI-COUNTRY GUIDE</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入跨國行程「出行須知」及「城市指南」頂部多國切換列功能（最多支援 5 個國家／地區即時切換天氣、匯率、入境須知及緊急求助）。</li>
+          </ul>
+        </div>
+
+        <!-- v5.12.1 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v5.12.1（加入雙擊國家直填、跨國串遊多國旗輪播、主題地貌分類及極地探索功能）<span class="ml-1.5 px-1.5 py-0.2 bg-indigo-600 text-white rounded text-[9px] font-bold">MULTI-COUNTRY & POLAR</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li>加入雙擊國家膠囊直接填入國家名稱功能（支援繼續追加城市與副標題）。</li>
+            <li>加入「國家對國家」跨國串遊多國旗並列及多國代表相片交替輪播功能。</li>
+            <li>加入 7 大主題地貌分類探索功能（熱帶海島、火山地熱、千年古蹟、大漠絲路、雪山冰川、絕美湖區、秘境森林）。</li>
+            <li>加入南極及北極極地探險目的地與專屬風景圖庫功能。</li>
+          </ul>
+        </div>
+
         <!-- v5.11.21 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v5.11.21（設定選單版本號同步更新 · 情報機構列表改為單行完整顯示 · 緊急求助淡雅分層配色、ISO 三位碼區號轉換及翠綠撥打鍵）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">UX & SOS POLISH</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v5.11.21（設定選單版本號同步更新 · 情報機構列表改為單行完整顯示 · 緊急求助淡雅分層配色、ISO 三位碼區號轉換及翠綠撥打鍵）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">UX & SOS POLISH</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
           </div>
           <div class="text-[11px] font-semibold text-slate-800">🎨 全面微調資訊機構列表可讀性、緊急求助卡片色階與自訂熱線互動體驗</div>
@@ -7088,7 +7255,7 @@
               <i class="fa-solid fa-list text-[10px]"></i> 詳細清單
             </button>
           </div>
-          <span class="text-[10px] text-slate-400 font-mono hidden sm:inline">雙視角即時切換</span>
+          <span class="text-[10px] text-slate-400 hidden sm:inline">雙視角即時切換</span>
         </div>
 
         <!-- 彈窗微縮全年走廊甘特圖 (高精度實體月格對齊) -->
@@ -7419,7 +7586,49 @@
 
       // --- 中東與非洲 ---
       'EG': { name: '埃及', flag: '🇪🇬', keywords: ['埃及', 'egypt'], images: ['https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=85'] },
-      'MA': { name: '摩洛哥', flag: '🇲🇦', keywords: ['摩洛哥', 'morocco'], images: ['https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=800&q=85'] }
+      'MA': { name: '摩洛哥', flag: '🇲🇦', keywords: ['摩洛哥', 'morocco'], images: ['https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=800&q=85'] },
+
+      // --- 極地探險（南極 ＆ 北極） ---
+      'AQ': {
+        name: '南極', flag: '🐧',
+        keywords: ['南極', '南極洲', 'antarctica', 'south pole', '南極半島', '羅斯海', '南設得蘭群島', '企鵝', '破冰船'],
+        images: [
+          'https://images.unsplash.com/photo-1517783999520-f068d7431a60?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1516912481808-3406841bd33c?auto=format&fit=crop&w=800&q=85'
+        ]
+      },
+      'AR': {
+        name: '北極', flag: '🐻‍❄️',
+        keywords: ['北極', '北極圈', 'arctic', 'north pole', '斯瓦爾巴', 'svalbard', '格陵蘭', 'greenland', '朗伊爾城', '羅瓦涅米', '黃刀鎮', '極光', '北極熊'],
+        images: [
+          'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1483347756197-71ef80e95f73?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1517783999520-f068d7431a60?auto=format&fit=crop&w=800&q=85'
+        ]
+      },
+
+      // --- 星際漫遊（漫遊太空 ＆ 漫遊銀河系） ---
+      'SPACE': {
+        name: '漫遊太空', flag: '🚀',
+        keywords: ['漫遊太空', '太空', '外太空', '宇宙', 'space', 'outer space', '月球', 'moon', '廣寒宮', '嫦娥', '寧靜海', '火星', 'mars', '奧林帕斯山', '土星', 'saturn', '木衛二', '國際太空站', 'iss', '小行星帶', '隕石', '插旗', '飛行碎片'],
+        images: [
+          'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1532693322450-2cb5c511067d?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=800&q=85'
+        ]
+      },
+      'GALAXY': {
+        name: '探索銀河', flag: '🌌',
+        keywords: ['探索銀河', '漫遊銀河系', '銀河系', '銀河', 'galaxy', 'milky way', '獵戶座星雲', '仙女座星系', '創生之柱', '半人馬座', '天鵝座', '黑洞', '蟲洞', '星星', '摘星'],
+        images: [
+          'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=85',
+          'https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=800&q=85'
+        ]
+      }
     };
 
     // === v3.2.1 全球著名城市與東南亞各城市專屬圖庫（城市無圖自動由所屬國家大片代替） ===
@@ -12923,6 +13132,26 @@
         iconSvg = `
           <path d="M45 55 Q80 40 115 55 L110 65 L50 65 Z M52 65 L108 65 L104 80 L56 80 Z M40 80 Q80 68 120 80 L115 95 L45 95 Z" fill="#ffffff" opacity="0.95"/>
         `;
+      } else if (countryCode === 'SPACE' || countryCode === 'GALAXY' || /(太空|銀河|月球|火星|土星|星雲|星星|嫦娥|隕石|宇宙)/.test(cleanName)) {
+        themeColor1 = '#090d16';
+        themeColor2 = '#312e81';
+        subText = countryCode === 'GALAXY' ? 'MILKY WAY · 銀河漫遊' : 'SPACE ODYSSEY · 星際探索';
+        iconSvg = `
+          <circle cx="80" cy="46" r="16" fill="#fde047" opacity="0.92"/>
+          <ellipse cx="80" cy="46" rx="34" ry="8" fill="none" stroke="#93c5fd" stroke-width="2.5" transform="rotate(-18 80 46)"/>
+          <circle cx="38" cy="24" r="1.8" fill="#ffffff"/>
+          <circle cx="122" cy="22" r="2.2" fill="#fde68a"/>
+          <circle cx="116" cy="64" r="1.5" fill="#ffffff"/>
+          <circle cx="44" cy="62" r="1.6" fill="#c4b5fd"/>
+        `;
+      } else if (countryCode === 'AQ' || countryCode === 'AR' || /(南極|北極|極光|冰川)/.test(cleanName)) {
+        themeColor1 = '#0f172a';
+        themeColor2 = '#0284c7';
+        subText = countryCode === 'AQ' ? 'ANTARCTICA · 南極大陸' : 'ARCTIC CIRCLE · 北極圈';
+        iconSvg = `
+          <path d="M25 72 L55 34 L75 56 L102 26 L135 72 Z" fill="#e0f2fe" opacity="0.92"/>
+          <path d="M55 34 L67 48 L58 52 L48 45 Z M102 26 L114 43 L103 47 L95 40 Z" fill="#ffffff"/>
+        `;
       } else if (countryCode === 'GB' || countryCode === 'FR' || cleanName.includes('倫敦') || cleanName.includes('巴黎') || cleanName.includes('歐洲')) {
         themeColor1 = '#1e1b4b';
         themeColor2 = '#4338ca';
@@ -12959,9 +13188,140 @@
       imgEl.src = getDestinationSvgFallback(destName, countryCode);
     }
 
+        function detectAllCountriesInText(textLower) {
+      if (!textLower || typeof GLOBAL_COUNTRY_DATABASE === 'undefined') return [];
+      const hits = [];
+      for (const countryCode in GLOBAL_COUNTRY_DATABASE) {
+        const country = GLOBAL_COUNTRY_DATABASE[countryCode];
+        if (!country) continue;
+        const countryName = (country.name || '').toLowerCase();
+        const cKeywords = Array.isArray(country.keywords) ? country.keywords : [];
+        let firstPos = -1;
+        if (countryName && textLower.includes(countryName)) {
+          firstPos = textLower.indexOf(countryName);
+        } else {
+          for (const kw of cKeywords) {
+            const k = String(kw || '').toLowerCase().trim();
+            if (!k) continue;
+            if (/^[a-z]{2}$/.test(k)) {
+              const m = textLower.match(new RegExp(`(^|[^a-z])${k}([^a-z]|$)`, 'i'));
+              if (m) { firstPos = m.index || 0; break; }
+            } else if (textLower.includes(k)) {
+              firstPos = textLower.indexOf(k);
+              break;
+            }
+          }
+        }
+        if (firstPos !== -1) {
+          hits.push({
+            countryCode,
+            name: country.name,
+            flag: country.flag || '',
+            images: Array.isArray(country.images) ? country.images : [],
+            pos: firstPos
+          });
+        }
+      }
+      if (typeof GLOBAL_CITY_DATABASE !== 'undefined') {
+        for (const cityKey in GLOBAL_CITY_DATABASE) {
+          const city = GLOBAL_CITY_DATABASE[cityKey];
+          if (!city || !city.countryCode) continue;
+          const cleanCn = (city.name || '').toLowerCase().replace(/（.*?）/g, '').trim();
+          if (cleanCn && cleanCn.length >= 2 && textLower.includes(cleanCn)) {
+            if (!hits.some(h => h.countryCode === city.countryCode)) {
+              const cObj = GLOBAL_COUNTRY_DATABASE[city.countryCode];
+              if (cObj) {
+                hits.push({
+                  countryCode: city.countryCode,
+                  name: cObj.name,
+                  flag: cObj.flag || '',
+                  images: Array.isArray(city.images) && city.images.length > 0 ? city.images : (cObj.images || []),
+                  pos: textLower.indexOf(cleanCn)
+                });
+              }
+            }
+          }
+        }
+      }
+      hits.sort((a, b) => a.pos - b.pos);
+      return hits;
+    }
+
         function matchDestination(title, trip) {
       // 1. 以目前使用者修改的標題（Title）為第一最高優先級！
       const titleClean = (title || '').toLowerCase().trim();
+
+      // 【跨國國家對國家優先檢測】：若標題同時包含 2 個或以上國家／星球，自動組合多國旗幟並交替輪播各國代表風景相片
+      if (titleClean) {
+        const multiCountries = detectAllCountriesInText(titleClean);
+        // 若標題包含多個城市（如「曼谷・芭堤雅・華欣」或跨國多城），依序交替輪播各城市代表風景相片
+        const matchedCityCoverObjs = [];
+        const seenCoverCity = new Set();
+        for (const cityKey in GLOBAL_CITY_DATABASE) {
+          const cObj = GLOBAL_CITY_DATABASE[cityKey];
+          if (!cObj || !cObj.name) continue;
+          const full = cObj.name.toLowerCase();
+          const clean = full.replace(/（.*?）/g, '').trim();
+          const posIdx = clean ? titleClean.indexOf(clean) : -1;
+          if (posIdx !== -1 && !seenCoverCity.has(clean)) {
+            seenCoverCity.add(clean);
+            const countryObj = GLOBAL_COUNTRY_DATABASE[cObj.countryCode] || {};
+            const imgs = (Array.isArray(cObj.images) && cObj.images.length > 0) ? cObj.images : (countryObj.images || []);
+            if (imgs.length > 0) {
+              matchedCityCoverObjs.push({
+                pos: posIdx,
+                name: cObj.name,
+                country: countryObj.name || '',
+                countryCode: cObj.countryCode || '',
+                flag: countryObj.flag || null,
+                images: imgs
+              });
+            }
+          }
+        }
+        matchedCityCoverObjs.sort((a, b) => a.pos - b.pos);
+        if (matchedCityCoverObjs.length >= 2 && multiCountries.length <= 1) {
+          const primaryC = matchedCityCoverObjs[0];
+          const interleavedCityImgs = [];
+          const maxLen = Math.max(...matchedCityCoverObjs.map(m => m.images.length), 0);
+          for (let idx = 0; idx < maxLen; idx++) {
+            matchedCityCoverObjs.forEach(m => {
+              if (m.images[idx] && !interleavedCityImgs.includes(m.images[idx])) {
+                interleavedCityImgs.push(m.images[idx]);
+              }
+            });
+          }
+          return {
+            name: matchedCityCoverObjs.map(m => m.name).join('・'),
+            country: primaryC.country,
+            countryCode: primaryC.countryCode,
+            flag: primaryC.flag,
+            images: interleavedCityImgs.length > 0 ? interleavedCityImgs : FESTIVAL_FALLBACK_DATABASE['season_spring'].images
+          };
+        }
+
+        if (multiCountries.length >= 2) {
+          const combinedFlags = multiCountries.map(c => c.flag).filter(Boolean).join('');
+          const combinedNames = multiCountries.map(c => c.name).join('・');
+          const interleavedImages = [];
+          const maxImgLen = Math.max(...multiCountries.map(c => c.images.length), 0);
+          for (let idx = 0; idx < maxImgLen; idx++) {
+            multiCountries.forEach(c => {
+              if (c.images[idx] && !interleavedImages.includes(c.images[idx])) {
+                interleavedImages.push(c.images[idx]);
+              }
+            });
+          }
+          return {
+            name: combinedNames,
+            country: combinedNames,
+            countryCode: multiCountries[0].countryCode,
+            countryCodes: multiCountries.map(c => c.countryCode),
+            flag: combinedFlags || multiCountries[0].flag || null,
+            images: interleavedImages.length > 0 ? interleavedImages : FESTIVAL_FALLBACK_DATABASE['season_spring'].images
+          };
+        }
+      }
       
       let extraText = '';
       let clusterDates = [];
@@ -17845,7 +18205,7 @@
               <span class="text-[11px] font-semibold text-slate-500">工作日間隔</span>
               <span class="interval-num-hero">${diffDays}</span>
               <span class="text-[11px] font-semibold text-slate-500">天</span>
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-200/70 border border-slate-300/80 text-slate-700 shadow-2xs">
+              <span class="text-[10px] font-bold tabular-nums px-2 py-0.5 rounded-full bg-slate-200/70 border border-slate-300/80 text-slate-700 shadow-2xs">
                 ${diffWeeks} 週
               </span>
             </div>
@@ -18166,9 +18526,9 @@
         }
 
         bookingSectionHtml = `
-          <div class="pt-2 border-t border-slate-100 text-[11px] trip-booking-inline-host" data-trip-key="${tripKey}">
+          <div class="pt-1.5 border-t border-slate-100 text-[10.5px] trip-booking-inline-host" data-trip-key="${tripKey}">
             <div class="flex items-center justify-between gap-1.5">
-              <button type="button" class="btn-open-booking-modal flex-1 min-w-0 flex items-center justify-between gap-1.5 font-bold text-sky-950 bg-gradient-to-r from-slate-50 via-sky-50/90 to-blue-50/90 hover:from-sky-100/80 hover:to-blue-100/80 border border-sky-300/80 px-2.5 py-1.5 rounded-xl transition active:scale-[0.99] shadow-2xs cursor-pointer" data-trip-key="${tripKey}">
+              <button type="button" class="btn-open-booking-modal flex-1 min-w-0 flex items-center justify-between gap-1.5 font-bold text-sky-950 bg-gradient-to-r from-slate-50 via-sky-50/90 to-blue-50/90 hover:from-sky-100/80 hover:to-blue-100/80 border border-sky-300/80 px-2.5 py-1 rounded-xl transition active:scale-[0.99] shadow-2xs cursor-pointer" data-trip-key="${tripKey}">
                 <span class="flex items-center gap-1.5 min-w-0 truncate">
                   ${summaryInnerHtml}
                 </span>
@@ -18185,9 +18545,9 @@
         `;
       } else {
         bookingSectionHtml = `
-          <div class="pt-2 border-t border-slate-100 text-[11px] trip-booking-inline-host" data-trip-key="${tripKey}">
+          <div class="pt-1.5 border-t border-slate-100 text-[10.5px] trip-booking-inline-host" data-trip-key="${tripKey}">
             <div class="flex items-center justify-between">
-              <button type="button" class="btn-open-booking-modal flex items-center justify-between gap-2 font-bold text-blue-700 hover:text-blue-800 bg-blue-50/70 hover:bg-blue-100 border border-blue-200/90 px-2.5 py-1.5 rounded-xl transition active:scale-[0.99] shadow-2xs cursor-pointer" data-trip-key="${tripKey}">
+              <button type="button" class="btn-open-booking-modal flex items-center justify-between gap-2 font-bold text-blue-700 hover:text-blue-800 bg-blue-50/70 hover:bg-blue-100 border border-blue-200/90 px-2.5 py-1 rounded-xl transition active:scale-[0.99] shadow-2xs cursor-pointer" data-trip-key="${tripKey}">
                 <span class="flex items-center gap-1.5">
                   <i class="fa-solid fa-plus text-blue-600 text-[10px]"></i>
                   <span class="inline-booking-toggle-label" data-default-label="登記預訂">登記預訂</span>
@@ -18201,79 +18561,87 @@
         `;
       }
 
+      const stampOrderNo = String(idx + 1).padStart(2, '0');
       const cardHtml = `
         ${gapHtml}
-        <div class="trip-card p-3 space-y-2.5 bg-white" data-trip-id="${trip.startDate}_${trip.endDate}">
+        <div class="trip-card p-3 space-y-2 bg-white" data-trip-id="${trip.startDate}_${trip.endDate}">
           <div class="trip-card-inner space-y-2">
-            <div class="flex items-center gap-2.5 sm:gap-3">
-              <!-- 1. 放大版巨型月份章戳 -->
-              <div class="month-stamp-box">
-                <div class="month-stamp-header ${theme.bg}">
-                  <span class="w-1.5 h-1.5 rounded-full bg-white/70"></span>
-                  <span>${headerLabel}</span>
-                  <span class="w-1.5 h-1.5 rounded-full bg-white/70"></span>
-                </div>
-                <div class="month-stamp-body">
-                  ${megaNumberHtml}
+            <!-- 1. 頂部全寬標題橫梁：實體郵票編號徽章 ＋ 國旗 ＋ 中文標題 100% 同一水平線對齊，右上角固定（•••）圓鈕 -->
+            <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-slate-100/90 h-[28px]">
+              <div class="flex items-center gap-1.5 flex-1 min-w-0 h-[20px]">
+                <!-- 實體航空郵票圖章（齒孔虛線外框 ＋ 飛機小圖示 ＋ 編號 #01） -->
+                <span class="inline-flex items-center justify-center gap-1 px-1.5 rounded-[5px] bg-gradient-to-b from-sky-50 to-blue-50/90 text-blue-800 border border-dashed border-blue-400/90 shadow-2xs shrink-0 select-none h-[20px] leading-none" title="第 ${idx + 1} 段連續假期">
+                  <i class="fa-solid fa-plane-up text-[8.5px] text-blue-600 leading-none"></i>
+                  <span class="font-mono font-black text-[9.5px] tracking-tight leading-none">#${stampOrderNo}</span>
+                </span>
+                ${pureFlagHtml ? `<span class="inline-flex items-center justify-center shrink-0 h-[20px] leading-none">${pureFlagHtml}</span>` : ''}
+                <h4 class="inline-flex items-center h-[20px] flex-1 min-w-0">
+                  <span class="font-black text-[13px] sm:text-[14px] text-slate-900 leading-none truncate block w-full">${trip.title}</span>
+                </h4>
+              </div>
+              <div class="flex items-center gap-1 shrink-0">
+                ${renderTripConflictBadgeHtml(`${trip.startDate}_${trip.endDate}`, 'card')}
+                <!-- 極簡小圓點 (•••) ➔ 點擊橫向平滑伸展為鵝蛋形膠囊，露出純圖示 [✎] 與 [🗑] -->
+                <div class="trip-morph-pill shrink-0" onclick="event.stopPropagation()">
+                  <div class="trip-morph-actions">
+                    <button type="button" onclick="event.stopPropagation(); window.openEditTripTitleModal('${trip.startDate}_${trip.endDate}')"
+                            class="btn-edit-trip-title w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90"
+                            data-trip-key="${trip.startDate}_${trip.endDate}" aria-label="修改旅程標題">
+                      <i class="fa-solid fa-pen text-[9px]"></i>
+                    </button>
+                    <button type="button" onclick="event.stopPropagation(); window.deleteSingleTripByKey('${trip.startDate}_${trip.endDate}')"
+                            class="btn-delete-trip-card w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90"
+                            data-trip-key="${trip.startDate}_${trip.endDate}" aria-label="刪除此旅程">
+                      <i class="fa-solid fa-trash-can text-[9px]"></i>
+                    </button>
+                  </div>
+                  <button type="button" onclick="event.stopPropagation(); toggleTripMorphPill(this)" aria-label="展開或收起旅程選項"
+                          class="w-4 h-4 rounded-full bg-slate-200/85 hover:bg-blue-100 text-slate-600 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer transition">
+                    <i class="fa-solid fa-ellipsis text-[9px]"></i>
+                  </button>
                 </div>
               </div>
+            </div>
 
-              <!-- 2. 中間文字與行程資訊 (自適應排版，完整顯示字樣) -->
-              <div class="flex-1 min-w-0 px-1 sm:px-1.5 flex flex-col justify-between self-stretch py-0.5">
-                <div>
-                  <div class="flex items-center justify-between gap-1.5 mb-1">
-                    <div class="flex items-center gap-1.5 min-w-0">
-                      <span class="text-[9px] font-bold px-1.5 py-0.5 bg-slate-100 text-slate-500 border border-slate-200/80 rounded tracking-tight shrink-0">旅程 #${idx + 1}</span>
-                      ${pureFlagHtml}
-                    </div>
-                    <div class="flex items-center gap-1 shrink-0">
-                      ${renderTripConflictBadgeHtml(`${trip.startDate}_${trip.endDate}`, 'card')}
-                    <!-- 極簡小圓點 (•••) ➔ 點擊橫向平滑伸展為鵝蛋形膠囊，露出純圖示 [✎] 與 [🗑] -->
-                    <div class="trip-morph-pill shrink-0" onclick="event.stopPropagation()">
-                      <div class="trip-morph-actions">
-                        <button type="button" onclick="event.stopPropagation(); window.openEditTripTitleModal('${trip.startDate}_${trip.endDate}')"
-                                class="btn-edit-trip-title w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90"
-                                data-trip-key="${trip.startDate}_${trip.endDate}" aria-label="修改旅程標題">
-                          <i class="fa-solid fa-pen text-[9px]"></i>
-                        </button>
-                        <button type="button" onclick="event.stopPropagation(); window.deleteSingleTripByKey('${trip.startDate}_${trip.endDate}')"
-                                class="btn-delete-trip-card w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90"
-                                data-trip-key="${trip.startDate}_${trip.endDate}" aria-label="刪除此旅程">
-                          <i class="fa-solid fa-trash-can text-[9px]"></i>
-                        </button>
-                      </div>
-                      <button type="button" onclick="event.stopPropagation(); toggleTripMorphPill(this)" aria-label="展開或收起旅程選項"
-                              class="w-4 h-4 rounded-full bg-slate-200/85 hover:bg-blue-100 text-slate-600 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer transition">
-                        <i class="fa-solid fa-ellipsis text-[9px]"></i>
-                      </button>
-                    </div>
-                    </div>
+            <!-- 2. 中層主體區：左側「月份章戳 ＋ 橫向單行放大日期與請假比」與右側「原尺寸拍立得相框」 -->
+            <div class="flex items-center justify-between gap-2 sm:gap-2.5">
+              <div class="flex items-center gap-2.5 flex-1 min-w-0">
+                <!-- 放大版巨型月份章戳 -->
+                <div class="month-stamp-box">
+                  <div class="month-stamp-header ${theme.bg}">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/70"></span>
+                    <span>${headerLabel}</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-white/70"></span>
                   </div>
-                  <h4 class="font-black text-xs sm:text-sm text-slate-900 leading-snug">
-                    <span class="line-clamp-2 break-words">${trip.title}</span>
-                  </h4>
+                  <div class="month-stamp-body">
+                    ${megaNumberHtml}
+                  </div>
                 </div>
-                <div class="mt-1 space-y-1">
-                  <p class="text-[10px] sm:text-[11px] font-bold text-slate-600 leading-tight">${formatHKDate(trip.startDate)} 至 ${formatHKDate(trip.endDate)}</p>
-                  <div class="flex items-center gap-1">
-                    <span class="text-[8.5px] sm:text-[9px] font-bold px-1.5 py-0.5 bg-slate-100 text-slate-700 rounded-md border border-slate-200 whitespace-nowrap inline-block">
+
+                <!-- 橫向單行放大出發至回程日期 ＋ 請假比膠囊 -->
+                <div class="flex-1 min-w-0 flex flex-col justify-center space-y-1.5">
+                  <p class="text-[11.5px] sm:text-[12.5px] font-extrabold text-slate-800 tracking-tight whitespace-nowrap truncate" title="${formatHKDate(trip.startDate)} 至 ${formatHKDate(trip.endDate)}">
+                    ${formatHKDate(trip.startDate)} <span class="text-slate-400 font-bold">至</span> ${formatHKDate(trip.endDate)}
+                  </p>
+                  <div class="flex flex-wrap items-center gap-1">
+                    <span class="text-[9px] sm:text-[9.5px] font-bold px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md border border-slate-200 whitespace-nowrap inline-block">
                       請 ${trip.userDays % 1 === 0 ? trip.userDays.toFixed(0) : trip.userDays.toFixed(1)} 放 ${trip.totalDays % 1 === 0 ? trip.totalDays.toFixed(0) : trip.totalDays.toFixed(1)}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <!-- 3. 右側：16:9 電影寬幅拍立得相框 ＋ 上中下「X日 / DAYS」極簡海報字型 -->
+              <!-- 右側：原尺寸 16:9 電影寬幅拍立得相框（位置下移至標題下方，尺寸 100% 維持原設定） -->
               ${rightWidePhotoHtml}
             </div>
 
-            <!-- 4. 保留現有微型小日曆設計 -->
+            <!-- 3. 保留現有微型小日曆設計 -->
             ${ribbon}
-            <!-- 5. 保留現有彩色公式 -->
+            <!-- 4. 保留現有彩色公式 -->
             ${formula}
-            <!-- 6. v4.3.14 Travel Wallet 預訂憑證與登記入口 -->
+            <!-- 5. Travel Wallet 預訂憑證與登記入口（精緻緊湊高度） -->
             ${bookingSectionHtml}
-            <!-- 7. v5.5.0 雙錦囊（🧭 出行須知 ＋ 🛡️ 城市指南） -->
+            <!-- 6. 雙錦囊（🧭 出行須知 ＋ 🛡️ 城市指南） -->
             ${dualCapsuleBarHtml}
           </div>
         </div>
@@ -18574,7 +18942,8 @@
       trips.forEach((trip, idx) => {
         const tripKey = `${trip.startDate}_${trip.endDate}`;
         const matchedDest = matchDestination(trip.title, trip);
-        const flagHtml = (matchedDest && matchedDest.flag) ? `<span class="text-sm leading-none mr-1 shrink-0">${matchedDest.flag}</span>` : '';
+        const flagHtml = (matchedDest && matchedDest.flag) ? `<span class="ribbon-flag-align">${matchedDest.flag}</span>` : '';
+        const ribbonStampNo = String(idx + 1).padStart(2, '0');
         const bData = (typeof tripBookings !== 'undefined' && tripBookings[tripKey]) ? tripBookings[tripKey] : null;
         const outNo = bData ? (bData.flightOutNo || (bData.flightOut ? bData.flightOut.split(' ')[0] : '')).toUpperCase() : '';
         const outDep = bData && bData.flightOutDep ? bData.flightOutDep : '';
@@ -18646,7 +19015,7 @@
                </div>
                <div class="flex items-center gap-1.5 min-w-0 leading-tight">
                  <i class="fa-regular fa-clock w-3 text-center text-[8.5px] ${clockIconCls} shrink-0"></i>
-                 <span class="font-mono font-extrabold text-[10px] ${timeTxtCls} tracking-tight truncate">${(outDep && outDep !== '00:00') ? outDep : '已登記'}</span>
+                 <span class="${(outDep && outDep !== '00:00') ? 'font-mono' : ''} font-extrabold text-[10px] ${timeTxtCls} tracking-tight truncate">${(outDep && outDep !== '00:00') ? outDep : '已登記'}</span>
                </div>`
             : (hotelName
               ? `<div class="flex items-center gap-1.5 min-w-0 leading-tight">
@@ -18692,36 +19061,51 @@
 
         html += `
           <div data-ribbon-idx="${idx}" data-ribbon-trip-key="${tripKey}" onclick="jumpToTripOnCalendar('${trip.startDate}', '${safeTitle}', ${trip.totalDays})"
-               class="snap-start shrink-0 ${cardWidthCls} bg-white border border-slate-200/90 rounded-xl p-2 shadow-2xs flex items-stretch gap-2.5 cursor-pointer active:scale-[0.99] transition">
-            <!-- 左側拍立得相框（96px 寬，與右側 92px+padding 票根區左右視覺對稱） -->
-            ${leftPolaroidHtml}
-
-            <!-- 中間文字區：第一行純淨完整標題，第二行出發終結日＋緊貼編輯筆頭，第三行倒數徽章 -->
-            <div class="flex-1 min-w-0 flex flex-col justify-between py-0.5">
-              <div class="flex items-center justify-between gap-1 min-w-0">
-                <div class="flex items-center min-w-0">
+               class="snap-start shrink-0 ${cardWidthCls} bg-white border border-slate-200/90 rounded-xl p-2 shadow-2xs flex flex-col gap-1.5 cursor-pointer active:scale-[0.99] transition">
+            <!-- 1. 頂部全寬長標題橫梁：郵票編號、國旗、中文標題與右上編輯鈕鎖定同一水平中軸線 -->
+            <div class="flex items-center justify-between gap-1.5 pb-1 border-b border-slate-100 h-[24px]">
+              <div class="flex items-center gap-1.5 flex-1 min-w-0 h-[18px]">
+                <span class="inline-flex items-center justify-center gap-0.5 px-1.5 rounded-[4px] bg-gradient-to-b from-sky-50 to-blue-50/90 text-blue-800 border border-dashed border-blue-400/90 shrink-0 select-none h-[18px] leading-none">
+                  <i class="fa-solid fa-plane-up text-[7.5px] text-blue-600 leading-none"></i>
+                  <span class="font-mono font-black text-[8.5px] tracking-tight leading-none">#${ribbonStampNo}</span>
+                </span>
                 ${flagHtml}
-                <span class="font-black text-xs text-slate-900 truncate">${trip.title || '連假旅程'}</span>
+                <span class="inline-flex items-center h-[18px] flex-1 min-w-0">
+                  <span class="font-black text-[12.5px] text-slate-900 leading-none truncate block w-full">${trip.title || '連假旅程'}</span>
+                </span>
               </div>
+              <div class="flex items-center gap-1 shrink-0 h-[18px]">
                 ${renderTripConflictBadgeHtml(tripKey, 'ribbon')}
-              </div>
-              <div class="flex items-center gap-1 min-w-0">
-                <span class="text-[10px] font-bold text-slate-500 font-mono truncate">${formatHKDate(trip.startDate)} – ${formatHKDate(trip.endDate)}</span>
                 <button type="button" onclick="event.stopPropagation(); openEditTripTitleModal('${tripKey}')" data-trip-key="${tripKey}"
-                        class="btn-edit-trip-title w-5 h-5 rounded-md hover:bg-blue-50 active:bg-blue-100 text-slate-400 hover:text-blue-600 inline-flex items-center justify-center shrink-0 cursor-pointer transition"
+                        class="btn-edit-trip-title w-[18px] h-[18px] rounded-full bg-slate-100 hover:bg-blue-50 active:bg-blue-100 text-slate-500 hover:text-blue-600 inline-flex items-center justify-center shrink-0 cursor-pointer transition"
                         aria-label="修改旅程標題">
-                  <i class="fa-solid fa-pen text-[9px]"></i>
+                  <i class="fa-solid fa-pen text-[8px] leading-none"></i>
                 </button>
-              </div>
-              <div class="flex items-center gap-1 flex-wrap">
-                ${cdBadge}
-                <button type="button" onclick="event.stopPropagation(); toggleTripDualCapsule('${tripKey}', 'prep', this, 'ribbon')" class="px-1.5 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-950 font-extrabold text-[8.5px] inline-flex items-center gap-0.5 cursor-pointer"><span>🧭</span><span>出行須知</span></button>
-                <button type="button" onclick="event.stopPropagation(); toggleTripDualCapsule('${tripKey}', 'tips', this, 'ribbon')" class="px-1.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-950 font-extrabold text-[8.5px] inline-flex items-center gap-0.5 cursor-pointer"><span>🛡️</span><span>城市指南</span></button>
               </div>
             </div>
 
-            <!-- 右側票根框：內部靠左對齊（items-start text-left），拉闊至與左側相框左右對稱 -->
-            ${rightTicketColHtml}
+            <!-- 2. 下層主體區：左右拍立得相框與右側機票住宿票根齊齊「彈低少少」對齊標題下方，中間專注顯示大字日期與雙錦囊 -->
+            <div class="flex items-stretch gap-2">
+              <!-- 左側拍立得相框（維持原設定 96×60px 比例與 X日 / DAYS 疊字） -->
+              ${leftPolaroidHtml}
+
+              <!-- 中間資訊區：橫向放大單行出發至回程日期 ＋ 倒數／請假比徽章 ＋ 雙錦囊 -->
+              <div class="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+                <div class="text-[11px] font-extrabold text-slate-800 tracking-tight whitespace-nowrap truncate" title="${formatHKDate(trip.startDate)} 至 ${formatHKDate(trip.endDate)}">
+                  ${formatHKDate(trip.startDate)} <span class="text-slate-400 font-bold">至</span> ${formatHKDate(trip.endDate)}
+                </div>
+                <div class="flex items-center gap-1 flex-wrap">
+                  ${cdBadge}
+                </div>
+                <div class="flex items-center gap-1 flex-wrap">
+                  <button type="button" onclick="event.stopPropagation(); toggleTripDualCapsule('${tripKey}', 'prep', this, 'ribbon')" class="px-1.5 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-950 font-extrabold text-[8.5px] inline-flex items-center gap-0.5 cursor-pointer"><span>🧭</span><span>出行須知</span></button>
+                  <button type="button" onclick="event.stopPropagation(); toggleTripDualCapsule('${tripKey}', 'tips', this, 'ribbon')" class="px-1.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-950 font-extrabold text-[8.5px] inline-flex items-center gap-0.5 cursor-pointer"><span>🛡️</span><span>城市指南</span></button>
+                </div>
+              </div>
+
+              <!-- 右側機票住宿票根框（下移對齊標題下方，維持原尺寸與雙主題） -->
+              ${rightTicketColHtml}
+            </div>
           </div>
         `;
       });
@@ -18975,7 +19359,7 @@
         const d1 = t && t.startDate ? formatHKDate(t.startDate) : '';
         const d2 = t && t.endDate ? formatHKDate(t.endDate) : '';
         const dateStr = (d1 && d2) ? `${d1}–${d2}` : d1;
-        return `<span class="inline-flex items-center gap-1 shrink-0"><span class="text-slate-400">·</span>${flagHtml}<span class="font-extrabold text-blue-950">${title}</span><span class="font-mono text-[9.5px] font-bold text-blue-600">(${dateStr})</span></span>`;
+        return `<span class="inline-flex items-center gap-1 shrink-0"><span class="text-slate-400">·</span>${flagHtml}<span class="font-extrabold text-blue-950">${title}</span><span class="text-[9.5px] font-bold text-blue-600 tabular-nums">(${dateStr})</span></span>`;
       };
 
       miniPreview.classList.remove('hidden');
@@ -19000,16 +19384,24 @@
       const headerBar = document.getElementById('mobileRibbonHeaderBar');
       const miniPreview = document.getElementById('mobileRibbonMiniTripPreview');
       const planeBtn = document.getElementById('btnToggleMobileTripRibbon');
+      const editPenBtn = document.getElementById('btnMobileRibbonEditLeaves');
+      const stepCloseIcon = document.getElementById('mobileRibbonStepCloseIcon');
       if (!ribbon) return;
 
       mobileTripRibbonStage = stage;
       isMobileTripRibbonOpen = stage > 0;
+
+      // 向上關閉箭嘴方向全程鎖定向上（絕不倒轉）
+      if (stepCloseIcon) {
+        stepCloseIcon.className = 'fa-solid fa-chevron-up text-[9.5px] text-slate-500';
+      }
 
       if (stage === 1) {
         ribbon.classList.remove('hidden');
         if (bodyEl) bodyEl.classList.remove('hidden');
         if (headerBar) headerBar.classList.add('border-b', 'border-slate-100');
         if (miniPreview) miniPreview.classList.add('hidden');
+        if (editPenBtn) editPenBtn.classList.remove('hidden');
         if (planeBtn) planeBtn.classList.add('is-active');
         syncStickyRibbonTopOffset();
         requestAnimationFrame(() => {
@@ -19019,9 +19411,11 @@
           }
         });
       } else if (stage === 2) {
+        // 縮細一格跑馬燈狀態：隱藏編輯筆頭，圓形向上箭嘴自動貼齊最盡右邊，且方向保持向上不倒轉
         ribbon.classList.remove('hidden');
         if (bodyEl) bodyEl.classList.add('hidden');
         if (headerBar) headerBar.classList.remove('border-b', 'border-slate-100');
+        if (editPenBtn) editPenBtn.classList.add('hidden');
         if (planeBtn) planeBtn.classList.add('is-active');
         if (typeof closeInlineBookingStudio === 'function') {
           try { closeInlineBookingStudio(); } catch (e) {}
@@ -19033,6 +19427,7 @@
         if (bodyEl) bodyEl.classList.remove('hidden');
         if (headerBar) headerBar.classList.add('border-b', 'border-slate-100');
         if (miniPreview) miniPreview.classList.add('hidden');
+        if (editPenBtn) editPenBtn.classList.remove('hidden');
         if (planeBtn) planeBtn.classList.remove('is-active');
         if (typeof closeInlineBookingStudio === 'function') {
           try { closeInlineBookingStudio(); } catch (e) {}
@@ -19044,6 +19439,15 @@
             { transform: 'scale(1)' }
           ], { duration: 280, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
         }
+      }
+    }
+
+    function stepCloseMobileTripRibbon() {
+      // 分階段向上關閉：第 1 次按縮細至單行頂欄（stage 2），第 2 次按完全收起（stage 0）
+      if (mobileTripRibbonStage === 1) {
+        applyMobileTripRibbonStage(2);
+      } else {
+        applyMobileTripRibbonStage(0);
       }
     }
 
@@ -21998,7 +22402,7 @@ function setupYearOverviewToggle() {
             <span class="font-mono font-bold text-[11px] text-rose-600">${currentVal.toFixed(1)}</span>
             <button type="button" class="btn-step-plus w-4 h-4 rounded bg-slate-100 hover:bg-rose-100 hover:text-rose-600 text-slate-600 font-bold text-[10px] flex items-center justify-center transition active:scale-90 cursor-pointer">+</button>
           </div>
-          <span class="text-[8.5px] font-mono ${actualVal >= currentVal ? 'text-emerald-600 font-bold' : 'text-slate-400'}">已排 ${actualVal.toFixed(1)}</span>
+          <span class="text-[8.5px] tabular-nums ${actualVal >= currentVal ? 'text-emerald-600 font-bold' : 'text-slate-400'}">已排 ${actualVal.toFixed(1)}</span>
         `;
 
         const btnMinus = card.querySelector('.btn-step-minus');
@@ -22326,12 +22730,12 @@ function setupYearOverviewToggle() {
         reshuffleSecondaryPopularCountries();
         activeRegionDrawerId = '';
         currentCnSubregionId = 'FEATURED';
-        isTripMultiCityChainMode = false;
+        isTripMultiCityChainMode = true;
         const chainBtn = document.getElementById('btnToggleMultiCityChain');
         const chainLbl = document.getElementById('btnMultiCityChainLabel');
         if (chainBtn && chainLbl) {
-          chainBtn.className = 'shrink-0 px-2 py-0.5 rounded-full text-[9.5px] font-extrabold border transition active:scale-95 cursor-pointer flex items-center gap-1 bg-white hover:bg-blue-50 text-slate-600 border-slate-300';
-          chainLbl.textContent = '單選';
+          chainBtn.className = 'px-2 py-0.5 rounded-full text-[9.5px] font-extrabold border transition active:scale-95 cursor-pointer flex items-center gap-1 bg-blue-600 text-white border-blue-700 shadow-2xs';
+          chainLbl.textContent = '＋串遊中';
         }
         const regDrawerEl = document.getElementById('tripRegionDrawer');
         if (regDrawerEl) regDrawerEl.classList.add('hidden');
@@ -22578,14 +22982,67 @@ function setupYearOverviewToggle() {
       const TOP_PRIORITY_COUNTRIES = ['TH', 'JP', 'KR'];
       const SECONDARY_POPULAR_COUNTRIES = ['TW', 'SG', 'MY', 'VN', 'PH', 'ID', 'GBA', 'CN', 'GB', 'FR', 'CH', 'IT', 'AU', 'US', 'CA', 'LOCAL'];
 
+      let isCosmosSecretUnlocked = false;
+      try {
+        isCosmosSecretUnlocked = localStorage.getItem('hk_leave_cosmos_unlocked') === 'true';
+      } catch (e) {}
+
+      function setCosmosSecretUnlocked(unlocked, opts = {}) {
+        isCosmosSecretUnlocked = Boolean(unlocked);
+        try {
+          localStorage.setItem('hk_leave_cosmos_unlocked', isCosmosSecretUnlocked ? 'true' : 'false');
+        } catch (e) {}
+        cachedTripSuggestIndex = null; // 重新生成聯想索引
+        if (!isCosmosSecretUnlocked) {
+          if (currentSelectedCountryId === 'SPACE' || currentSelectedCountryId === 'GALAXY') {
+            currentSelectedCountryId = 'TH';
+            currentSelectedCity = '';
+          }
+          if (activeRegionDrawerId === 'REG_SPACE' || activeRegionDrawerId === 'TER_GALAXY') {
+            activeRegionDrawerId = '';
+            const drawer = document.getElementById('tripRegionDrawer');
+            if (drawer) drawer.classList.add('hidden');
+          }
+          renderTripCountryPills(false);
+          renderTripCityChips(currentSelectedCountryId);
+          renderTripSuffixChips(currentSelectedCountryId);
+          if (!opts.silent && typeof showToast === 'function') {
+            showToast('🌍 已返回地球模式，星際與銀河航線已隱藏');
+          }
+        } else {
+          currentSelectedCountryId = 'SPACE';
+          currentSelectedCity = '';
+          renderTripCountryPills(true);
+          openTripRegionDrawer('REG_SPACE');
+          renderTripCityChips('SPACE');
+          renderTripSuffixChips('SPACE');
+          if (!opts.silent && typeof showToast === 'function') {
+            showToast('🚀 密碼 19690720 驗證成功！已解鎖【阿波羅神秘星際模式】');
+          }
+        }
+      }
+
       const REGIONAL_COUNTRY_GROUPS = [
-        { id: 'REG_EA',   name: '東亞地區', flag: '🧭', codes: ['JP', 'KR', 'TW', 'CN', 'HK', 'MO', 'MN'] },
-        { id: 'REG_SEA',  name: '東南亞地區', flag: '🌴', codes: ['TH', 'SG', 'MY', 'VN', 'ID', 'PH', 'KH', 'LA', 'MM', 'BN', 'TL'] },
-        { id: 'REG_SA',   name: '南亞地區', flag: '🕌', codes: ['IN', 'NP', 'LK', 'MV', 'BT', 'BD', 'PK'] },
-        { id: 'REG_CA',   name: '中亞地區', flag: '🏔️', codes: ['KZ', 'UZ', 'KG', 'TJ', 'TM'] },
-        { id: 'REG_ME',   name: '中東地區', flag: '🏜️', codes: ['AE', 'QA', 'SA', 'JO', 'TR'] },
-        { id: 'REG_EU',   name: '歐洲地區', flag: '🏰', codes: ['GB', 'FR', 'IT', 'CH', 'ES', 'DE', 'AT', 'NL', 'IS', 'GR', 'PT', 'CZ', 'HU', 'NO', 'FI'] },
+        { id: 'REG_SPACE', name: '漫遊太空・探索銀河', flag: '🚀', codes: ['SPACE', 'GALAXY'] },
+        { id: 'REG_POLAR', name: '南極・北極極地', flag: '🐧', codes: ['AQ', 'AR'] },
+        { id: 'REG_EA',    name: '東亞地區', flag: '🧭', codes: ['JP', 'KR', 'TW', 'CN', 'HK', 'MO', 'MN'] },
+        { id: 'REG_SEA',   name: '東南亞地區', flag: '🌴', codes: ['TH', 'SG', 'MY', 'VN', 'ID', 'PH', 'KH', 'LA', 'MM', 'BN', 'TL'] },
+        { id: 'REG_SA',    name: '南亞地區', flag: '🕌', codes: ['IN', 'NP', 'LK', 'MV', 'BT', 'BD', 'PK'] },
+        { id: 'REG_CA',    name: '中亞地區', flag: '🏔️', codes: ['KZ', 'UZ', 'KG', 'TJ', 'TM'] },
+        { id: 'REG_ME',    name: '中東地區', flag: '🏜️', codes: ['AE', 'QA', 'SA', 'JO', 'TR'] },
+        { id: 'REG_EU',    name: '歐洲地區', flag: '🏰', codes: ['GB', 'FR', 'IT', 'CH', 'ES', 'DE', 'AT', 'NL', 'IS', 'GR', 'PT', 'CZ', 'HU', 'NO', 'FI'] },
         { id: 'REG_AMER_OC_AF', name: '美洲・澳紐・非洲', flag: '🌎', codes: ['US', 'CA', 'AU', 'NZ', 'EG', 'MA'] }
+      ];
+
+      const TERRAIN_THEME_GROUPS = [
+        { id: 'TER_ISLAND', name: '熱帶海島', flag: '🏝️', cities: ['布吉', '蘇梅', '馬爾代夫', '長灘島', '峇里島', '沖繩', '石垣島', '宿霧', '薄荷島', '富國島', '浮羅交怡'] },
+        { id: 'TER_VOLCANO', name: '火山地熱', flag: '🌋', cities: ['冰島', '雷克雅未克', '富士山', '箱根', '阿蘇山', '別府', '峇里島', '日惹', '大雅台'] },
+        { id: 'TER_HISTORY', name: '千年古蹟', flag: '🏛️', cities: ['吳哥窟', '京都', '奈良', '開羅', '雅典', '羅馬', '伊斯坦堡', '佩特拉', '西安', '北京'] },
+        { id: 'TER_DESERT', name: '大漠絲路', flag: '🏜️', cities: ['杜拜', '阿布扎比', '撒哈拉沙漠', '馬拉喀什', '瓦迪倫', '敦煌', '喀什', '撒馬爾罕', '烏蘭巴托'] },
+        { id: 'TER_GLACIER', name: '雪山冰川', flag: '🏔️', cities: ['少女峰', '策馬特', '二世古', '白馬村', '加德滿都', '皇后鎮', '班夫', '南極半島', '格陵蘭'] },
+        { id: 'TER_LAKE', name: '絕美湖區', flag: '🏞️', cities: ['九寨溝', '日月潭', '河口湖', '洞爺湖', '哈爾施塔特', '琉森', '因特拉肯', '伊塞克湖'] },
+        { id: 'TER_FOREST', name: '秘境森林', flag: '🌲', cities: ['屋久島', '嵐山', '張家界', '阿里山', '長白山', '黑森林', '神山公園', '清邁'] },
+        { id: 'TER_GALAXY', name: '星際銀河', flag: '🌌', cities: ['國際太空站 ISS', '月球寧靜海', '月球廣寒宮', '火星奧林帕斯山', '土星光環帶', '銀河系中心', '獵戶座星雲', '仙女座星系', '創生之柱', '半人馬座 α 星'] }
       ];
 
       const CN_SUBREGION_TABS = [
@@ -22601,7 +23058,11 @@ function setupYearOverviewToggle() {
       const EXTRA_PRESET_CATALOG = {
         GBA: { id: 'GBA', name: '大灣區', flag: '🚄', cities: ['深圳', '廣州', '珠海', '佛山', '順德', '潮汕', '江門', '惠州', '東莞', '中山', '澳門'] },
         CN:  { id: 'CN',  name: '內地名勝', flag: '🇨🇳', cities: ["北京", "上海", "成都", "重慶", "杭州", "西安", "南京", "蘇州", "武漢", "長沙", "廈門", "青島", "大連", "哈爾濱", "桂林", "三亞", "張家界", "大理", "麗江", "昆明", "香格里拉", "西雙版納", "拉薩", "林芝", "烏魯木齊", "喀什", "伊犁", "阿勒泰", "黃山", "九寨溝", "稻城", "敦煌", "張掖", "西寧", "呼倫貝爾", "長白山", "貴陽", "鳳凰"] },
-        LOCAL: { id: 'LOCAL', name: '本地休閒', flag: '🇭🇰', cities: ['香港', 'Staycation', '放假休息', '宅家充電', '露營Glamping'] }
+        LOCAL: { id: 'LOCAL', name: '本地休閒', flag: '🇭🇰', cities: ['香港', 'Staycation', '放假休息', '宅家充電', '露營Glamping'] },
+        AQ:  { id: 'AQ',  name: '南極', flag: '🐧', cities: ['南極半島', '南極點', '南設得蘭群島', '羅斯海', '欺騙島', '洛克羅伊港'] },
+        AR:  { id: 'AR',  name: '北極', flag: '🐻‍❄️', cities: ['北極點', '斯瓦爾巴群島', '朗伊爾城', '格陵蘭', '伊盧利薩特', '羅瓦涅米', '黃刀鎮'] },
+        SPACE: { id: 'SPACE', name: '漫遊太空', flag: '🚀', cities: ['🦅 寧靜海基地（阿波羅11號）', '國際太空站 ISS', '月球寧靜海', '月球廣寒宮', '火星奧林帕斯山', '火星水手號峽谷', '土星光環帶', '木衛二歐羅巴', '小行星帶'] },
+        GALAXY: { id: 'GALAXY', name: '探索銀河', flag: '🌌', cities: ['銀河系中心', '獵戶座星雲', '仙女座星系', '創生之柱', '半人馬座 α 星', '天鵝座星域', '蟲洞視界邊緣'] }
       };
 
       const UNIVERSAL_TRIP_SUFFIXES = [
@@ -22709,16 +23170,49 @@ function setupYearOverviewToggle() {
         }
       }
 
+      let tripCityJoinerSymbol = '・';
+      const TRIP_CITY_JOINERS = ['・', ' → ', '、'];
+
+      window.cycleTripCityJoiner = () => {
+        const prevJoiner = tripCityJoinerSymbol;
+        const nextIdx = (TRIP_CITY_JOINERS.indexOf(tripCityJoinerSymbol) + 1) % TRIP_CITY_JOINERS.length;
+        tripCityJoinerSymbol = TRIP_CITY_JOINERS[nextIdx];
+        const lbl = document.getElementById('btnCityJoinerLabel');
+        if (lbl) lbl.textContent = tripCityJoinerSymbol.trim();
+        const input = document.getElementById('inputEditTripTitle');
+        if (input && input.value.includes(prevJoiner)) {
+          input.value = input.value.split(prevJoiner).join(tripCityJoinerSymbol);
+        }
+      };
+
+      window.popLastTripCityFromInput = () => {
+        const input = document.getElementById('inputEditTripTitle');
+        if (!input) return;
+        const cur = input.value.trim();
+        if (!cur) return;
+        const parts = cur.split(/\s*(?:・|→|->|、|\/|\+|＋)\s*/).filter(Boolean);
+        if (parts.length <= 1) {
+          input.value = '';
+          currentSelectedCity = '';
+        } else {
+          parts.pop();
+          input.value = parts.join(tripCityJoinerSymbol);
+          currentSelectedCity = parts[parts.length - 1] || '';
+        }
+        renderTripCityChips(currentSelectedCountryId);
+        input.focus();
+      };
+
       window.toggleTripMultiCityChainMode = () => {
         isTripMultiCityChainMode = !isTripMultiCityChainMode;
         const btn = document.getElementById('btnToggleMultiCityChain');
         const lbl = document.getElementById('btnMultiCityChainLabel');
         if (btn && lbl) {
           if (isTripMultiCityChainMode) {
-            btn.className = 'shrink-0 px-2 py-0.5 rounded-full text-[9.5px] font-extrabold border transition active:scale-95 cursor-pointer flex items-center gap-1 bg-blue-600 text-white border-blue-700 shadow-2xs';
+            btn.className = 'px-2 py-0.5 rounded-full text-[9.5px] font-extrabold border transition active:scale-95 cursor-pointer flex items-center gap-1 bg-blue-600 text-white border-blue-700 shadow-2xs';
             lbl.textContent = '＋串遊中';
           } else {
-            btn.className = 'shrink-0 px-2 py-0.5 rounded-full text-[9.5px] font-extrabold border transition active:scale-95 cursor-pointer flex items-center gap-1 bg-white hover:bg-blue-50 text-slate-600 border-slate-300';
+            btn.className = 'px-2 py-0.5 rounded-full text-[9.5px] font-extrabold border transition active:scale-95 cursor-pointer flex items-center gap-1 bg-white hover:bg-blue-50 text-slate-600 border-slate-300';
             lbl.textContent = '單選';
           }
         }
@@ -22738,6 +23232,7 @@ function setupYearOverviewToggle() {
         if (typeof GLOBAL_COUNTRY_DATABASE !== 'undefined') {
           Object.entries(GLOBAL_COUNTRY_DATABASE).forEach(([code, cObj]) => {
             if (!cObj || !cObj.name) return;
+            if (!isCosmosSecretUnlocked && (code === 'SPACE' || code === 'GALAXY')) return;
             map[code] = {
               id: code,
               name: cObj.name,
@@ -22799,6 +23294,53 @@ function setupYearOverviewToggle() {
         renderTripCountryPills(false);
       };
 
+      function openTripTerrainDrawer(terrainId) {
+        const drawer = document.getElementById('tripRegionDrawer');
+        const titleEl = document.getElementById('tripRegionDrawerTitle');
+        const listEl = document.getElementById('tripRegionDrawerCountries');
+        if (!drawer || !titleEl || !listEl) return;
+
+        const ter = TERRAIN_THEME_GROUPS.find(t => t.id === terrainId);
+        if (!ter) {
+          drawer.classList.add('hidden');
+          return;
+        }
+        activeRegionDrawerId = terrainId;
+        titleEl.innerHTML = `<span>${ter.flag}</span><span>主題地貌：${ter.name}（點選直填目的地）</span>`;
+        listEl.innerHTML = '';
+
+        ter.cities.forEach(placeName => {
+          const pBtn = document.createElement('button');
+          pBtn.type = 'button';
+          pBtn.className = 'px-2 py-1 rounded-lg text-[11px] font-bold transition active:scale-95 cursor-pointer shadow-2xs flex items-center gap-1 border bg-white hover:bg-emerald-100/80 text-slate-800 border-emerald-200/80';
+          pBtn.textContent = placeName;
+          pBtn.onclick = () => {
+            currentSelectedCity = placeName;
+            const input = document.getElementById('inputEditTripTitle');
+            if (input) {
+              const cur = input.value.trim();
+              if (isTripMultiCityChainMode && cur) {
+                const parts = cur.split(/[・\/、\s]+/).filter(Boolean);
+                if (!parts.includes(placeName)) input.value = `${cur}・${placeName}`;
+              } else {
+                input.value = placeName;
+              }
+              if (typeof hideTripTitleAutocomplete === 'function') hideTripTitleAutocomplete();
+              input.focus();
+            }
+            if (terrainId === 'TER_GALAXY') {
+              const isGal = /(銀河|星雲|星系|創生|半人馬|天鵝|蟲洞)/.test(placeName);
+              currentSelectedCountryId = isGal ? 'GALAXY' : 'SPACE';
+              renderTripCityChips(currentSelectedCountryId);
+              renderTripSuffixChips(currentSelectedCountryId);
+            }
+          };
+          listEl.appendChild(pBtn);
+        });
+
+        drawer.classList.remove('hidden');
+      }
+
       function openTripRegionDrawer(regionId, mapCache, statsCache) {
         const drawer = document.getElementById('tripRegionDrawer');
         const titleEl = document.getElementById('tripRegionDrawerTitle');
@@ -22832,13 +23374,39 @@ function setupYearOverviewToggle() {
             ? `<span class="px-1 py-0.2 rounded text-[9px] font-black ${isSel ? 'bg-emerald-400 text-slate-950' : 'bg-emerald-100 text-emerald-800 border border-emerald-300'}">✓×${stampCnt}</span>`
             : '';
           cBtn.innerHTML = `<span>${cItem.flag}</span><span>${cItem.name}</span>${stampHtml}`;
+          const commitRegCountryDirect = () => {
+            const input = document.getElementById('inputEditTripTitle');
+            if (!input) return;
+            const cur = input.value.trim();
+            const existingParts = cur.split(/[・\/、\s]+/).filter(Boolean);
+            if (cur && !existingParts.includes(cItem.name) && (isTripMultiCityChainMode || existingParts.some(p => Object.values(map).some(m => m.name === p)))) {
+              input.value = `${cur}・${cItem.name}`;
+            } else {
+              input.value = cItem.name;
+            }
+            currentSelectedCity = '';
+            if (typeof hideTripTitleAutocomplete === 'function') hideTripTitleAutocomplete();
+            if (typeof showToast === 'function') {
+              showToast(`🌍 已將「${cItem.name}」填入標題，可繼續點選城市或副標題`);
+            }
+            input.focus();
+          };
+          let regTapTs = 0;
           cBtn.onclick = () => {
+            const nowTs = Date.now();
+            const isDbl = (nowTs - regTapTs) < 360;
+            regTapTs = nowTs;
             currentSelectedCountryId = cItem.id;
             currentSelectedCity = '';
             renderTripCountryPills(false);
             openTripRegionDrawer(regionId, map, stats);
             renderTripCityChips(cItem.id);
             renderTripSuffixChips(cItem.id);
+            if (isDbl) commitRegCountryDirect();
+          };
+          cBtn.ondblclick = (e) => {
+            e.preventDefault();
+            commitRegCountryDirect();
           };
           listEl.appendChild(cBtn);
         });
@@ -22858,8 +23426,188 @@ function setupYearOverviewToggle() {
         }
 
         const specific = [];
+        const spaceIds = new Set(['SPACE', 'GALAXY']);
+        const polarIds = new Set(['AQ', 'AR']);
         const tropicalIds = new Set(['TH', 'PH', 'ID', 'MV', 'MY', 'SG', 'VN', 'KH', 'LA', 'MM', 'BN', 'TL', 'LK']);
         const jpKrIds = new Set(['JP', 'KR']);
+
+        if (spaceIds.has(countryId)) {
+          if (countryId === 'GALAXY') {
+            specific.push(
+              '尋找星星搵嫦娥',
+              '擲粒星星俾女友',
+              '銀河系摘星告白之旅',
+              '穿越星海陪你睇流星',
+              '月光下與嫦娥共舞',
+              '蟲洞穿越時空旅行',
+              '外星文明建交考察團',
+              '星際緊急支援任務',
+              '採集星雲微光',
+              '拜訪外星市集',
+              '觀賞木星風暴',
+              '穿越小行星帶',
+              '尋找失落衛星',
+              '記錄宇宙電波',
+              '觸摸極光絲帶',
+              '探索水星日出',
+              '體驗星際跳島',
+              '收集隕石碎片',
+              '漫遊銀河盡頭',
+              '聆聽黑洞回音',
+              '觀察雙星共舞',
+              '搭乘光子飛船',
+              '尋找外星花園',
+              '拍攝星團寫真',
+              '跨越光年邊界',
+              '造訪太空燈塔',
+              '品嚐星際特飲',
+              '追蹤超新星光',
+              '登陸冰封衛星',
+              '學習外星語言',
+              '守望星海潮汐',
+              '繪畫宇宙日誌',
+              '探索地下星河',
+              '收集彗星冰晶',
+              '參加銀河慶典',
+              '尋找平行地球',
+              '駕駛月球漫遊車',
+              '捕捉太陽耀斑',
+              '探索氣態巨星',
+              '交換星際禮物',
+              '仰望異星星空',
+              '穿越時空裂縫',
+              '記錄行星軌跡',
+              '探秘太空遺蹟',
+              '尋找宇宙邊緣',
+              '感受星風吹拂',
+              '與你漫步銀河',
+              '帶你收集星光',
+              '收集太陽粒子',
+              '與外星人會面',
+              '採集月球塵埃',
+              '追逐彗星尾巴',
+              '捕捉流星碎片',
+              '探訪外星小鎮',
+              '乘坐銀河列車',
+              '穿越星雲秘境',
+              '登陸未知星球',
+              '記錄外星日落',
+              '漫步土星光環',
+              '尋找宇宙綠洲',
+              '聆聽星辰低語',
+              '收集星光標本',
+              '體驗無重漂浮',
+              '拜訪月球居民',
+              '探索隕石峽谷',
+              '觀賞雙日奇景',
+              '寄出星際明信片',
+              '繪製銀河地圖',
+              '尋找外星美食',
+              '潛入星海深處',
+              '守候極光爆發',
+              '帶走一瓶星塵',
+              '穿梭蟲洞隧道',
+              '露營在火星上',
+              '認識異星朋友',
+              '收集行星印章',
+              '眺望地球藍點',
+              '帶你去看銀河'
+            );
+          } else {
+            specific.push(
+              '「個人一小步，人類一大步」之旅',
+              '插旗宣示主權之旅',
+              '尋找墜落隕石行動',
+              '尋找太空飛行碎片',
+              '星際緊急支援遠征',
+              '尋找星星搵嫦娥',
+              '擲粒星星俾女友',
+              '無重力飄浮放空假期',
+              '太空艙浪漫燭光晚餐',
+              '採集星雲微光',
+              '拜訪外星市集',
+              '觀賞木星風暴',
+              '穿越小行星帶',
+              '尋找失落衛星',
+              '記錄宇宙電波',
+              '觸摸極光絲帶',
+              '探索水星日出',
+              '體驗星際跳島',
+              '收集隕石碎片',
+              '漫遊銀河盡頭',
+              '聆聽黑洞回音',
+              '觀察雙星共舞',
+              '搭乘光子飛船',
+              '尋找外星花園',
+              '拍攝星團寫真',
+              '跨越光年邊界',
+              '造訪太空燈塔',
+              '品嚐星際特飲',
+              '追蹤超新星光',
+              '登陸冰封衛星',
+              '學習外星語言',
+              '守望星海潮汐',
+              '繪畫宇宙日誌',
+              '探索地下星河',
+              '收集彗星冰晶',
+              '參加銀河慶典',
+              '尋找平行地球',
+              '駕駛月球漫遊車',
+              '捕捉太陽耀斑',
+              '探索氣態巨星',
+              '交換星際禮物',
+              '仰望異星星空',
+              '穿越時空裂縫',
+              '記錄行星軌跡',
+              '探秘太空遺蹟',
+              '尋找宇宙邊緣',
+              '感受星風吹拂',
+              '與你漫步銀河',
+              '帶你收集星光',
+              '收集太陽粒子',
+              '與外星人會面',
+              '採集月球塵埃',
+              '追逐彗星尾巴',
+              '捕捉流星碎片',
+              '探訪外星小鎮',
+              '乘坐銀河列車',
+              '穿越星雲秘境',
+              '登陸未知星球',
+              '記錄外星日落',
+              '漫步土星光環',
+              '尋找宇宙綠洲',
+              '聆聽星辰低語',
+              '收集星光標本',
+              '體驗無重漂浮',
+              '拜訪月球居民',
+              '探索隕石峽谷',
+              '觀賞雙日奇景',
+              '寄出星際明信片',
+              '繪製銀河地圖',
+              '尋找外星美食',
+              '潛入星海深處',
+              '守候極光爆發',
+              '帶走一瓶星塵',
+              '穿梭蟲洞隧道',
+              '露營在火星上',
+              '認識異星朋友',
+              '收集行星印章',
+              '眺望地球藍點',
+              '帶你去看銀河'
+            );
+          }
+          return specific;
+        }
+
+        if (polarIds.has(countryId)) {
+          specific.push(
+            '破冰船極地遠征',
+            '夢幻極光追尋之旅',
+            '企鵝與北極熊生態遊',
+            '世界盡頭插旗打卡',
+            '冰川雪原探險假期'
+          );
+        }
         const desertSilkIds = new Set(['AE', 'QA', 'SA', 'JO', 'TR', 'MN', 'KZ', 'UZ', 'KG', 'TJ', 'TM', 'IN', 'NP', 'BT', 'PK']);
         const westIds = new Set(['GB', 'FR', 'CH', 'IT', 'DE', 'ES', 'NL', 'AT', 'CZ', 'HU', 'GR', 'PT', 'IS', 'NO', 'FI', 'AU', 'NZ', 'US', 'CA']);
 
@@ -22986,7 +23734,30 @@ function setupYearOverviewToggle() {
             ? `<span class="px-1 py-0.2 rounded text-[9px] font-black leading-none ${isActive ? 'bg-emerald-400 text-slate-950' : 'bg-emerald-100 text-emerald-800 border border-emerald-300'}">✓×${stampCnt}</span>`
             : '';
           btn.innerHTML = `<span>${cat.flag}</span><span>${cat.name}</span>${stampBadge}`;
+          const commitCountryDirectToTitle = () => {
+            if (cat.id === 'FAV') return;
+            const input = document.getElementById('inputEditTripTitle');
+            if (!input) return;
+            const cur = input.value.trim();
+            const existingParts = cur.split(/[・\/、\s]+/).filter(Boolean);
+            if (cur && !existingParts.includes(cat.name) && (isTripMultiCityChainMode || existingParts.some(p => Object.values(map).some(m => m.name === p)))) {
+              input.value = `${cur}・${cat.name}`;
+            } else {
+              input.value = cat.name;
+            }
+            currentSelectedCity = '';
+            if (typeof hideTripTitleAutocomplete === 'function') hideTripTitleAutocomplete();
+            if (typeof showToast === 'function') {
+              showToast(`🌍 已將「${cat.name}」填入標題，可繼續點選城市或副標題`);
+            }
+            input.focus();
+          };
+
+          let lastTapTs = 0;
           btn.onclick = () => {
+            const nowTs = Date.now();
+            const isDoubleTap = (nowTs - lastTapTs) < 360;
+            lastTapTs = nowTs;
             currentSelectedCountryId = cat.id;
             currentSelectedCity = '';
             activeRegionDrawerId = '';
@@ -22995,6 +23766,13 @@ function setupYearOverviewToggle() {
             renderTripCountryPills(true);
             renderTripCityChips(cat.id);
             renderTripSuffixChips(cat.id);
+            if (isDoubleTap) {
+              commitCountryDirectToTitle();
+            }
+          };
+          btn.ondblclick = (e) => {
+            e.preventDefault();
+            commitCountryDirectToTitle();
           };
           container.appendChild(btn);
         });
@@ -23004,8 +23782,8 @@ function setupYearOverviewToggle() {
         sep.className = 'w-px h-5 bg-slate-300/80 mx-0.5 self-center shrink-0';
         container.appendChild(sep);
 
-        // 2. 區域性分類按鈕（東亞、東南亞、南亞、中亞、中東、歐洲、美洲澳紐非洲）
-        REGIONAL_COUNTRY_GROUPS.forEach(reg => {
+        // 2. 區域性分類按鈕（未解鎖 19690720 神秘模式前隱藏 REG_SPACE）
+        REGIONAL_COUNTRY_GROUPS.filter(reg => isCosmosSecretUnlocked || reg.id !== 'REG_SPACE').forEach(reg => {
           const isRegOpen = activeRegionDrawerId === reg.id;
           const containsSelected = reg.codes.includes(currentSelectedCountryId) && !primaryIds.includes(currentSelectedCountryId);
           const unlockedInReg = reg.codes.filter(c => (stats.countryCounts[c] || 0) > 0).length;
@@ -23030,6 +23808,32 @@ function setupYearOverviewToggle() {
             }
           };
           container.appendChild(rBtn);
+        });
+
+        const sep2 = document.createElement('span');
+        sep2.className = 'w-px h-5 bg-slate-300/80 mx-0.5 self-center shrink-0';
+        container.appendChild(sep2);
+
+        TERRAIN_THEME_GROUPS.filter(ter => isCosmosSecretUnlocked || ter.id !== 'TER_GALAXY').forEach(ter => {
+          const isTerOpen = activeRegionDrawerId === ter.id;
+          const tBtn = document.createElement('button');
+          tBtn.type = 'button';
+          tBtn.setAttribute('data-region-id', ter.id);
+          tBtn.className = `trip-terrain-pill px-2.5 py-1 rounded-lg text-xs font-extrabold shrink-0 transition active:scale-95 cursor-pointer shadow-2xs flex items-center gap-1 border ${
+            isTerOpen
+              ? 'bg-emerald-600 text-white border-emerald-700 shadow-xs'
+              : 'bg-emerald-50/90 hover:bg-emerald-100 text-emerald-900 border-emerald-200/90'
+          }`;
+          tBtn.innerHTML = `<span>${ter.flag}</span><span>${ter.name}</span><span class="text-[9px] opacity-80">${isTerOpen ? '▴' : '▾'}</span>`;
+          tBtn.onclick = () => {
+            if (activeRegionDrawerId === ter.id) {
+              window.closeTripRegionDrawer();
+            } else {
+              openTripTerrainDrawer(ter.id);
+              renderTripCountryPills(false);
+            }
+          };
+          container.appendChild(tBtn);
         });
 
         if (autoScrollActive) {
@@ -23116,12 +23920,16 @@ function setupYearOverviewToggle() {
           badge.innerHTML = `${cat.flag} ${cat.name}（${citiesToRender.length} 個）`;
         }
 
+        const inputElNow = document.getElementById('inputEditTripTitle');
+        const curInputText = inputElNow ? inputElNow.value.trim() : '';
+
         container.innerHTML = '';
         citiesToRender.forEach(cityName => {
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.setAttribute('data-city', cityName);
-          const isSelected = currentSelectedCity === cityName;
+          const isInInputChain = isTripMultiCityChainMode && curInputText && curInputText.includes(cityName);
+          const isSelected = (currentSelectedCity === cityName) || isInInputChain;
           const cityStamp = stats.cityCounts[cityName] || 0;
           btn.className = `chip-city px-2 py-0.5 rounded-md text-[11px] font-bold transition active:scale-95 shadow-2xs border cursor-pointer inline-flex items-center gap-1 ${
             isSelected
@@ -23133,26 +23941,47 @@ function setupYearOverviewToggle() {
             : '';
           btn.innerHTML = `<span>${cityName}</span>${cStampHtml}`;
           btn.onclick = () => {
-            currentSelectedCity = cityName;
-            renderTripCityChips(currentSelectedCountryId);
             const input = document.getElementById('inputEditTripTitle');
             if (input) {
               const cur = input.value.trim();
               if (isTripMultiCityChainMode && cur) {
-                // 多城市「＋串遊」累加模式：避免重複加入同一城市，自動以「・」串連
-                const existingParts = cur.split(/[・\/、\s]+/).filter(Boolean);
-                if (!existingParts.includes(cityName)) {
-                  input.value = `${cur}・${cityName}`;
+                // 拆分「主行程站點」與「後方結尾副標題」（若有空格分隔副標題）
+                const spaceIdx = cur.search(/\s+(?![→>])/);
+                let routePart = spaceIdx > 0 ? cur.slice(0, spaceIdx).trim() : cur;
+                const suffixPart = spaceIdx > 0 ? cur.slice(spaceIdx).trim() : '';
+
+                const existingParts = routePart.split(/\s*(?:・|→|->|、|\/|\+|＋)\s*/).filter(Boolean);
+                const existIdx = existingParts.indexOf(cityName);
+                if (existIdx >= 0) {
+                  // 再點一次已選城市 -> 從串遊路線中取消移除
+                  existingParts.splice(existIdx, 1);
+                  const nextRoute = existingParts.join(tripCityJoinerSymbol);
+                  input.value = nextRoute ? (suffixPart ? `${nextRoute} ${suffixPart}` : nextRoute) : suffixPart;
+                  currentSelectedCity = existingParts[existingParts.length - 1] || '';
+                } else if (existingParts.length < 8) {
+                  // 若目前僅有純國名（如「泰國」），點擊城市時可自然銜接為「泰國曼谷」或「曼谷・芭堤雅」
+                  if (existingParts.length === 1 && existingParts[0] === cat.name && cityName !== cat.name) {
+                    existingParts[0] = `${cat.name}${cityName}`;
+                  } else {
+                    existingParts.push(cityName);
+                  }
+                  const nextRoute = existingParts.join(tripCityJoinerSymbol);
+                  input.value = suffixPart ? `${nextRoute} ${suffixPart}` : nextRoute;
+                  currentSelectedCity = cityName;
+                } else if (typeof showToast === 'function') {
+                  showToast('⚠️ 單次行程最多可串連 8 個城市站點');
                 }
-              } else if (cur && cur === cat.name && cityName !== cat.name) {
-                input.value = `${cat.name}${cityName}`;
+              } else if (cur && (cur === cat.name || cur.endsWith(`・${cat.name}`)) && cityName !== cat.name) {
+                input.value = `${cur}${cityName}`;
                 currentSelectedCity = input.value;
               } else {
                 input.value = cityName;
+                currentSelectedCity = cityName;
               }
               if (typeof hideTripTitleAutocomplete === 'function') hideTripTitleAutocomplete();
               input.focus();
             }
+            renderTripCityChips(currentSelectedCountryId);
           };
           container.appendChild(btn);
         });
@@ -23177,10 +24006,20 @@ function setupYearOverviewToggle() {
             const input = document.getElementById('inputEditTripTitle');
             if (!input) return;
             const currentVal = input.value.trim();
-            if (currentSelectedCity && currentVal.startsWith(currentSelectedCity)) {
-              input.value = currentSelectedCity + ' ' + suffix;
-            } else if (currentVal !== '') {
-              input.value = currentVal + ' ' + suffix;
+            if (currentVal !== '') {
+              const spaceIdx = currentVal.search(/\s+(?![→>])/);
+              const routeBase = spaceIdx > 0 ? currentVal.slice(0, spaceIdx).trim() : currentVal;
+              if (routeBase && (routeBase.includes('・') || routeBase.includes('→') || routeBase.includes('、') || routeBase.includes('/') || (currentSelectedCity && routeBase.includes(currentSelectedCity)))) {
+                input.value = routeBase + ' ' + suffix;
+              } else if (currentSelectedCity && currentVal.startsWith(currentSelectedCity)) {
+                input.value = currentSelectedCity + ' ' + suffix;
+              } else {
+                const basePart = currentVal.split(' ')[0];
+                input.value = basePart + ' ' + suffix;
+              }
+            } else if (false) {
+              const basePart = currentVal.split(/\s+/)[0];
+              input.value = basePart + ' ' + suffix;
             } else {
               input.value = suffix;
             }
@@ -23497,8 +24336,32 @@ function setupYearOverviewToggle() {
       const editTripInputEl = document.getElementById('inputEditTripTitle');
       if (editTripInputEl) {
         editTripInputEl.addEventListener('input', (e) => {
-          renderTripTitleAutocomplete(e.target.value);
-          syncEditTripModalContextFromInput(e.target.value, true);
+          const rawVal = e.target.value;
+          const compactCode = rawVal.trim().replace(/[-\/.\s]/g, '');
+          const lowerTrim = rawVal.trim().toLowerCase();
+
+          // 1. 彩蛋密碼 19690720（阿波羅 11 號登月日期）：雙向切換開啟／關閉【阿波羅神秘星際模式】
+          if (compactCode === '19690720') {
+            e.target.value = '';
+            hideTripTitleAutocomplete();
+            setCosmosSecretUnlocked(!isCosmosSecretUnlocked);
+            return;
+          }
+
+          // 2. 方案 A 返回指令：輸入 Earth / EARTH / 地球，立即關閉神秘星際模式並返回地球
+          if (lowerTrim === 'earth' || lowerTrim === '地球') {
+            e.target.value = '';
+            hideTripTitleAutocomplete();
+            if (isCosmosSecretUnlocked) {
+              setCosmosSecretUnlocked(false);
+            } else if (typeof showToast === 'function') {
+              showToast('🌍 目前已處於標準地球模式');
+            }
+            return;
+          }
+
+          renderTripTitleAutocomplete(rawVal);
+          syncEditTripModalContextFromInput(rawVal, true);
         });
         editTripInputEl.addEventListener('keydown', (e) => {
           const dd = document.getElementById('tripTitleAutocompleteDropdown');
@@ -28591,6 +29454,23 @@ function setupYearOverviewToggle() {
         '<b>全國嚴格禁止旅客攜帶無人機入境（摩洛哥國家旅遊局）</b>：摩洛哥法例嚴格禁止未經政府特別授權之無人機入境，卡薩布蘭卡及馬拉喀什機場海關將即場沒收並罰款。',
         '<b>摩洛哥迪拉姆（MAD）貨幣管制法規</b>：摩洛哥迪拉姆屬受管制貨幣，旅客出入境攜帶現金上限為 <b>2,000 迪拉姆（MAD）</b>，外幣超等值 <b>100,000 MAD</b> 須向海關申報。',
         '<b>清真寺及軍事警崗攝影禮儀（香港入境處）</b>：除卡薩布蘭卡哈桑二世清真寺外，其餘清真寺一般不對非穆斯林開放；嚴禁拍攝軍警設施，免簽停留 <b>30 日</b>，遇事致電 <b>(852) 1868</b>。'
+      ],
+      AQ: [
+        '<b>《南極條約》環境保護議定書</b>：嚴禁帶走任何南極石塊、企鵝羽毛或冰雪樣本，與企鵝及海豹必須保持最少 <b>5 米</b>安全距離，絕不可主動觸摸或餵食。',
+        '<b>德雷克海峽風浪與裝備消毒</b>：登陸前所有靴底及行囊必須經過嚴格生物安全吸塵及消毒，防止外來微生物污染南極生態。'
+      ],
+      AR: [
+        '<b>北極熊安全管制法例（斯瓦爾巴總督府）</b>：離開朗伊爾城定居點範圍必須由持牌武裝嚮導陪同，嚴禁近距離追逐北極熊及海象。',
+        '<b>極夜與低溫電池保護</b>：冬季極夜氣溫低至 -25°C 以下，相機及手機電池須貼身保暖以免瞬間斷電。'
+      ],
+      SPACE: [
+        '<b>外層空間條約與月球插旗規範</b>：根據聯合國《外層空間條約》，天體不屬於任何單一國家主權，插旗打卡請使用可回收紀念旗桿，切勿遺留太空垃圾。',
+        '<b>微重力環境防暈與隕石採集守則</b>：進入近地軌道首 24 小時易出現太空適應綜合症；撿拾墜落隕石或太空飛行碎片須先掃描輻射值並向軌道控制中心報備。',
+        '<b>銀河信用點（GCR）與真空艙安全</b>：太空站內嚴禁攜帶易燃液體及碳酸飲料，出艙漫步（EVA）前務必雙重核對宇航服氣密閥。'
+      ],
+      GALAXY: [
+        '<b>銀河系躍遷與星雲觀測守則</b>：穿越獵戶座旋臂及蟲洞視界邊緣時請扣緊五點式重力安全帶，切勿在黑洞事件視界附近關閉曲速引擎。',
+        '<b>廣寒宮尋訪嫦娥與浪漫摘星禮儀</b>：造訪月球廣寒宮請尊重月兔生態保育區；「擲粒星星俾女友」僅限於指定流星雨許願帶進行，切勿隨意改變小行星軌道。'
       ]
     };
 
@@ -29991,7 +30871,7 @@ function setupYearOverviewToggle() {
           <span class="w-1.5 h-1.5 rounded-full ${meta.isCloudSynced ? 'bg-emerald-500' : 'bg-blue-500'}"></span>
           <span>${meta.isCloudSynced ? '雲端規則庫已實時同步' : '已載入完整無遺漏規則庫'}</span>
         </span>
-        <span class="font-mono font-bold text-slate-600">核對：${meta.lastUpdated}</span>
+        <span class="font-bold tabular-nums text-slate-600">核對：${meta.lastUpdated}</span>
       </div>`;
 
       let countdownHtml = '';
@@ -30037,10 +30917,209 @@ function setupYearOverviewToggle() {
       box.innerHTML = syncStatusHtml + countdownHtml;
     }
 
+    let dcSelectedMultiCountryMap = {}; // { [tripKey]: 'KR' }
+
+    function resolveMultiCountriesForTrip(tripKey) {
+      const rawTitle = (typeof customTripTitles !== 'undefined' && customTripTitles[tripKey]) ? String(customTripTitles[tripKey]).trim() : '';
+      const lowerTitle = rawTitle.toLowerCase();
+      const detected = (typeof detectAllCountriesInText === 'function' && lowerTitle)
+        ? detectAllCountriesInText(lowerTitle)
+        : [];
+
+      // 過濾出有效國家／地區並去重，最多支援 5 個國家
+      const uniqueList = [];
+      const seen = new Set();
+      detected.forEach(item => {
+        const code = String(item.countryCode || '').toUpperCase();
+        if (!code || seen.has(code)) return;
+        seen.add(code);
+        uniqueList.push({
+          code,
+          name: item.name || code,
+          flag: item.flag || '🌍'
+        });
+      });
+
+      // 若標題僅得 1 個或 0 個，檢查航班／酒店是否有額外國家（補足跨國機票＋住宿組合，上限 5 個）
+      if (uniqueList.length < 5 && typeof analyzeTripDestinationHierarchy === 'function') {
+        const h = analyzeTripDestinationHierarchy(tripKey);
+        [h.titleCode, h.flightCode, h.hotelCode].forEach(extraCode => {
+          const c = String(extraCode || '').toUpperCase();
+          if (c && !seen.has(c) && uniqueList.length < 5) {
+            const meta = (typeof GLOBAL_COUNTRY_DATABASE !== 'undefined' && GLOBAL_COUNTRY_DATABASE[c])
+              ? GLOBAL_COUNTRY_DATABASE[c]
+              : { name: c, flag: '🌍' };
+            seen.add(c);
+            uniqueList.push({ code: c, name: meta.name || c, flag: meta.flag || '🌍' });
+          }
+        });
+      }
+
+      return uniqueList.slice(0, 5);
+    }
+
+    window.switchDcMultiCountry = (countryCode) => {
+      if (!dcCurrentTripKey || !countryCode) return;
+      dcSelectedMultiCountryMap[dcCurrentTripKey] = String(countryCode).toUpperCase();
+      const currentTab = dcCurrentTab || 'prep';
+      // 強制重新渲染目前開啟的雙錦囊分頁（保留當前「出行須知」或「城市指南」分頁）
+      dcCurrentTab = '';
+      toggleTripDualCapsule(dcCurrentTripKey, currentTab);
+    };
+
+    function renderDcMultiCountrySwitcherBar(tripKey, activeCode) {
+      const bar = document.getElementById('dcMultiCountrySwitcherBar');
+      const track = document.getElementById('dcMultiCountryPillsTrack');
+      if (!bar || !track) return;
+
+      const countries = resolveMultiCountriesForTrip(tripKey);
+      if (countries.length <= 1) {
+        bar.classList.add('hidden');
+        track.innerHTML = '';
+        return;
+      }
+
+      bar.classList.remove('hidden');
+      track.innerHTML = countries.map((c, idx) => {
+        const isAct = c.code === activeCode;
+        return `
+          <button type="button" onclick="switchDcMultiCountry('${c.code}')"
+                  class="px-2.5 py-1 rounded-full text-[11px] font-extrabold shrink-0 transition active:scale-95 cursor-pointer flex items-center gap-1 border ${
+                    isAct
+                      ? 'bg-blue-600 text-white border-blue-700 shadow-2xs'
+                      : 'bg-white hover:bg-blue-50 text-slate-700 border-slate-300/90'
+                  }">
+            <span class="text-xs leading-none">${c.flag}</span>
+            <span>${c.name}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function buildSpecForCountryCode(cCode, infoFallbackPlace = '') {
+      if (cCode && DC_COUNTRY_KNOWLEDGE[cCode]) {
+        return { code: cCode, spec: DC_COUNTRY_KNOWLEDGE[cCode] };
+      }
+      if (cCode && DC_GLOBAL_FALLBACK_BY_COUNTRY[cCode]) {
+        return { code: cCode, spec: DC_GLOBAL_FALLBACK_BY_COUNTRY[cCode] };
+      }
+      if (cCode && DC_GLOBAL_VISA_INDEX[cCode]) {
+        const idxInfo = DC_GLOBAL_VISA_INDEX[cCode];
+        const cObj = (typeof GLOBAL_COUNTRY_DATABASE !== 'undefined' && GLOBAL_COUNTRY_DATABASE[cCode]) || { name: cCode, flag: '🌍' };
+        const ov44 = (typeof DC_44_COUNTRIES_NEWS_OVERRIDE !== 'undefined' && DC_44_COUNTRIES_NEWS_OVERRIDE[cCode]) ? DC_44_COUNTRIES_NEWS_OVERRIDE[cCode] : null;
+        return {
+          code: cCode,
+          spec: {
+            name: cObj.name,
+            flag: cObj.flag || '🌍',
+            curr: idxInfo.curr || 'USD',
+            cities: [{ name: (infoFallbackPlace && infoFallbackPlace !== cObj.name) ? infoFallbackPlace : cObj.name, lat: idxInfo.lat || 22.3193, lon: idxInfo.lon || 114.1694 }],
+            visaPill: idxInfo.pill,
+            entryHtml: `<div>• ${idxInfo.desc}</div>`,
+            portals: idxInfo.portals || [],
+            festivals: '<div>• 出發前建議查閱當地法定公眾假期及大型節慶交通安排。</div>',
+            plug: idxInfo.plug || '220V · 萬能轉插',
+            fxTip: `💡 建議開通海外感應式信用卡消費，並兌換適量 ${idxInfo.curr || 'USD'} 細面額現鈔備用。`,
+            countryPrep: ['確認護照有效期超過 6 個月', '備妥回程機票及酒店預訂確認單', '攜帶適用當地之萬能轉插'],
+            hkAlert: ov44 ? ov44.hkAlert : '外遊警示：出發前核查保安局最新級別',
+            news10: ov44 ? ov44.news10 : [
+              '<b>香港保安局外遊警示（sb.gov.hk）</b>：出發前查閱香港保安局外遊警示制度最新級別。',
+              '<b>ROTI 外遊提示登記及境外支援（香港入境處）</b>：出發前經「香港政府一站通」登記行程，遇事致電 <b>(852) 1868</b>。',
+              '<b>旅遊健康及傳染病情報（香港衞生署）</b>：出發前查閱衞生署旅遊健康服務（travelhealth.gov.hk）最新健康指引。',
+              '<b>海關現金及受管制物品法規</b>：攜帶超額現鈔及受管制物品出入境須主動向海關申報。'
+            ],
+            newsMore: ov44 ? (ov44.newsMore || []) : [],
+            scam10: [
+              '<b>假冒官方電子簽證／入境卡收費網</b>：只透過本頁提供之官方政府網站辦理，慎防高價代辦釣魚網。',
+              '<b>機場外無牌黑車拉客</b>：只於官方的士站排隊或使用正規叫車平台。',
+              '<b>景點外「今日閉館」轉介購物點</b>：切勿輕信陌生人推介轉去高價店舖。',
+              '<b>街頭「免費送手繩／簽名募捐」</b>：保持距離切勿接過陌生人遞來物品。',
+              '<b>假便衣警察要求檢查銀包現金</b>：真警察絕不會喺街頭無故檢查旅客現金。',
+              '<b>餐廳無標價海鮮或隱藏附加費</b>：落單前先確認計價單位及服務費。',
+              '<b>找續大細鈔偷龍轉鳳</b>：大面額付款時確認找續金額無誤。'
+            ],
+            scamMore: [],
+            culture10: [
+              '<b>尊重當地宗教與公共場所禮儀</b>：進入宗教場所留意衣著要求，拍攝當地居民前宜先徵得同意。',
+              '<b>留意小費與消費稅標示</b>：結帳前留意帳單是否已包含服務費及當地消費稅。'
+            ],
+            cultureMore: [],
+            emergency: [
+              { label: '香港入境處 24 小時求助 · HK Immigration 24h Hotline', num: '+852 1868', primary: true },
+              { label: '當地緊急報警及急救熱線 · Local Emergency', num: idxInfo.sos || '112 / 911', primary: false }
+            ]
+          }
+        };
+      }
+      // 支援 SPACE / GALAXY / AQ / AR 等擴展探索目的地
+      if (cCode && typeof GLOBAL_COUNTRY_DATABASE !== 'undefined' && GLOBAL_COUNTRY_DATABASE[cCode]) {
+        const gObj = GLOBAL_COUNTRY_DATABASE[cCode];
+        const ov44 = (typeof DC_44_COUNTRIES_NEWS_OVERRIDE !== 'undefined' && DC_44_COUNTRIES_NEWS_OVERRIDE[cCode]) ? DC_44_COUNTRIES_NEWS_OVERRIDE[cCode] : [];
+        const isSpace = (cCode === 'SPACE' || cCode === 'GALAXY');
+        return {
+          code: cCode,
+          spec: {
+            name: gObj.name,
+            flag: gObj.flag || '🌍',
+            curr: isSpace ? 'GCR' : 'USD',
+            cities: [{ name: gObj.name, lat: isSpace ? 0 : (cCode === 'AQ' ? -77.84 : 78.22), lon: isSpace ? 0 : (cCode === 'AQ' ? 166.68 : 15.62) }],
+            visaPill: isSpace ? '🚀 星際通行證 · 太空艙氣密檢疫' : '🧊 極地探險許可 · 破冰船環保申報',
+            entryHtml: isSpace
+              ? '<div>• 登艦前須完成微重力適應體檢及<b>銀河信用點（GCR）</b>帳戶綁定；月球廣寒宮及空間站嚴禁攜帶易燃液體。</div>'
+              : '<div>• 須持有效護照及極地探險船方環保申報表，登陸前所有靴底及裝備必須經過嚴格生物安全消毒。</div>',
+            portals: [],
+            festivals: isSpace
+              ? '<div>• 留意流星雨高峰期及太陽風暴地磁警報，出艙漫步（EVA）須聽從軌道控制中心指揮。</div>'
+              : '<div>• 極晝（午夜太陽）與極夜（極光季）日照差異極大，出行前核對破冰船航期。</div>',
+            plug: isSpace ? '太空站 28V DC / 標準接口' : '220V · 歐規雙圓腳',
+            fxTip: isSpace ? '💡 銀河系空間站通用銀河信用點（GCR）感應支付。' : '💡 極地郵輪多以美元（USD）或歐元（EUR）結算。',
+            countryPrep: isSpace
+              ? ['檢查宇航服生命維持與氣密閥', '備妥可回收紀念插旗與隕石採樣袋', '下載星際離線星圖']
+              : ['備齊防風防水極地羽絨及雪地護目鏡', '隨身攜帶高熱量防寒裝備與備用電池'],
+            hkAlert: isSpace ? '星際軌道安全：無重力及宇宙輻射警戒' : '極地氣候提示：嚴寒暴風雪與海洋安全',
+            news10: ov44.length > 0 ? ov44 : ['<b>出發前安全確認</b>：請核對最新航線與安全指引。'],
+            newsMore: [],
+            scam10: isSpace
+              ? ['<b>假冒「月球地契 / 星星命名權」推銷</b>：根據《外層空間條約》，任何機構均無權出售天體土地。', '<b>未經認證軌道黑飛船</b>：請選乘星際聯盟認證載人飛船。']
+              : ['<b>無牌極地私人快艇</b>：務必選用 IAATO 國際南極旅遊組織認證船隊。'],
+            scamMore: [],
+            culture10: isSpace
+              ? ['<b>太空艙無重力禮儀</b>：隨身物品務必以魔術貼固定，切勿遺留太空垃圾。']
+              : ['<b>極地生態零痕跡守則</b>：與企鵝、海豹及北極熊保持法定安全距離，絕不干擾野生動物。'],
+            cultureMore: [],
+            emergency: isSpace
+              ? [
+                  { label: '星際聯盟太空總署 24h 緊急救援軌道艙', num: '+852 1868', primary: true },
+                  { label: '地球軌道控制中心緊急頻道 · Mission Control', num: '12308', primary: false }
+                ]
+              : [
+                  { label: '香港入境處 24 小時求助 · HK Immigration 24h Hotline', num: '+852 1868', primary: true },
+                  { label: '極地海事搜救中心 · Polar Rescue', num: '112', primary: false }
+                ]
+          }
+        };
+      }
+      return null;
+    }
+
     function resolveCountrySpecForTrip(tripKey) {
       const BANGKOK_HIDDEN_ALIASES = ['krung thep', 'krung thep maha nakhon', '素萬那普', '廊曼', 'suvarnabhumi', 'don mueang'];
       const info = analyzeTripDestinationHierarchy(tripKey);
+      const multiList = resolveMultiCountriesForTrip(tripKey);
       let cCode = info.effectiveCode || '';
+
+      // 若為跨國行程（2–5 個國家），套用用戶目前選中的國家分頁（預設第 1 個）
+      if (multiList.length >= 2) {
+        const picked = dcSelectedMultiCountryMap[tripKey];
+        if (picked && multiList.some(m => m.code === picked)) {
+          cCode = picked;
+        } else {
+          cCode = multiList[0].code;
+          dcSelectedMultiCountryMap[tripKey] = cCode;
+        }
+        const built = buildSpecForCountryCode(cCode, info.effectivePlace);
+        if (built) return built;
+      }
       const rawAliasScan = [
         (typeof customTripTitles !== 'undefined' && customTripTitles[tripKey]) || '',
         info.effectivePlace || '',
@@ -30122,6 +31201,11 @@ function setupYearOverviewToggle() {
         };
       }
       const rawTitle = (customTripTitles && customTripTitles[tripKey]) || '';
+      if (cCode) {
+        const builtExtra = buildSpecForCountryCode(cCode, info.effectivePlace);
+        if (builtExtra) return builtExtra;
+      }
+
       return {
         code: '',
         isUnknown: true,
@@ -31098,6 +32182,7 @@ function setupYearOverviewToggle() {
       if (lbl) lbl.textContent = found.name;
       const menu = document.getElementById('dcWeatherCityMenu');
       if (menu) menu.classList.add('hidden');
+      renderDcRouteCitiesBar(tripKey);
       renderDcWeatherCityMenu(tripKey);
       fetchAndRenderDcWeather(tripKey);
     }
@@ -31141,6 +32226,82 @@ function setupYearOverviewToggle() {
       if (typeof showToast === 'function') showToast(`⚠️ 未能找到「${q}」之氣象座標，請嘗試輸入鄰近大城市`);
     }
 
+    function extractAllMatchedCitiesForTrip(tripKey, cities) {
+      if (!Array.isArray(cities) || cities.length === 0) return [];
+      const rawTitle = (typeof customTripTitles !== 'undefined' && customTripTitles[tripKey]) ? String(customTripTitles[tripKey]) : '';
+      const hInfo = (typeof analyzeTripDestinationHierarchy === 'function') ? analyzeTripDestinationHierarchy(tripKey) : {};
+      const scanText = [rawTitle, hInfo.effectivePlace || '', hInfo.flightPlace || '', hInfo.hotelPlace || ''].join(' ').toLowerCase();
+      if (!scanText.trim()) return [];
+
+      // 依標題出現先後順序擷取全部匹配城市（支援 曼谷・芭堤雅・華欣 / 曼谷 → 芭堤雅 → 華欣 / 曼谷芭堤雅華欣 等任何寫法）
+      const hits = [];
+      cities.forEach(c => {
+        const full = (c.name || '').toLowerCase();
+        const clean = full.replace(/（.*?）/g, '').trim();
+        const enFull = (c.en || '').toLowerCase();
+        const enClean = enFull.replace(/\(.*?\)/g, '').trim();
+        const tokens = [full, clean, enFull, enClean].filter(t => t && t.length >= 2);
+        if (Array.isArray(c.aliases)) {
+          c.aliases.forEach(al => { if (al && String(al).trim().length >= 2) tokens.push(String(al).toLowerCase().trim()); });
+        }
+        clean.split(/\s*\/\s*|・/).forEach(p => { if (p && p.trim().length >= 2) tokens.push(p.trim()); });
+
+        let bestIdx = -1;
+        tokens.forEach(tok => {
+          const idx = scanText.indexOf(tok);
+          if (idx !== -1 && (bestIdx === -1 || idx < bestIdx)) {
+            bestIdx = idx;
+          }
+        });
+        if (bestIdx !== -1) {
+          hits.push({ city: c, pos: bestIdx });
+        }
+      });
+
+      hits.sort((a, b) => a.pos - b.pos);
+      const uniqueCities = [];
+      const seen = new Set();
+      hits.forEach(h => {
+        if (!seen.has(h.city.name)) {
+          seen.add(h.city.name);
+          uniqueCities.push(h.city);
+        }
+      });
+      return uniqueCities.slice(0, 8);
+    }
+
+    function renderDcRouteCitiesBar(tripKey) {
+      const bar = document.getElementById('dcRouteCitiesBar');
+      const track = document.getElementById('dcRouteCitiesTrack');
+      if (!bar || !track || !dcActiveCountrySpec) return;
+
+      const cities = Array.isArray(dcActiveCountrySpec.cities) ? dcActiveCountrySpec.cities : [];
+      const matchedList = extractAllMatchedCitiesForTrip(tripKey, cities);
+      window.dcTitleMatchedCities = matchedList;
+
+      if (matchedList.length <= 1) {
+        bar.classList.add('hidden');
+        track.innerHTML = '';
+        return;
+      }
+
+      const escKey = String(tripKey).replace(/['"]/g, '');
+      bar.classList.remove('hidden');
+      track.innerHTML = matchedList.map((c, idx) => {
+        const isCur = dcSelectedCity && dcSelectedCity.name === c.name;
+        const safeN = c.name.replace(/['"]/g, '');
+        const arrow = idx > 0 ? '<span class="text-sky-400 text-[9px] font-black mx-0.5">➔</span>' : '';
+        return `${arrow}<button type="button" onclick="selectDcWeatherCityByName('${escKey}', '${safeN}')"
+                class="px-2 py-0.5 rounded-full text-[10px] font-extrabold shrink-0 transition active:scale-95 cursor-pointer border ${
+                  isCur
+                    ? 'bg-sky-600 text-white border-sky-700 shadow-2xs'
+                    : 'bg-white hover:bg-sky-50 text-blue-950 border-sky-200/90'
+                }">
+          ${idx + 1}. ${c.name}
+        </button>`;
+      }).join('');
+    }
+
     function renderDcWeatherCityMenu(tripKey) {
       const menuEl = document.getElementById('dcWeatherCityMenu');
       if (!menuEl || !dcActiveCountrySpec) return;
@@ -31149,18 +32310,27 @@ function setupYearOverviewToggle() {
       const prefName = window.dcPreferredTitleCityName || (cities[0] && cities[0].name) || '';
       const prefCity = cities.find(c => c.name === prefName) || cities[0] || dcSelectedCity;
 
-      // 1. 首選標題城市
+      // 1. 首選標題城市（支援多城市路線全部置頂，例如 曼谷・芭堤雅・華欣）
+      const matchedRouteCities = (Array.isArray(window.dcTitleMatchedCities) && window.dcTitleMatchedCities.length > 0)
+        ? window.dcTitleMatchedCities
+        : (prefCity ? [prefCity] : []);
       let prefHtml = '';
-      if (prefCity) {
-        const safePref = prefCity.name.replace(/['"]/g, '');
-        const isCur = dcSelectedCity && dcSelectedCity.name === prefCity.name;
+      if (matchedRouteCities.length > 0) {
+        const headerLabel = matchedRouteCities.length >= 2
+          ? `🎯 行程路線城市（${matchedRouteCities.length} 站）`
+          : '🎯 首選標題城市';
         prefHtml = `
-          <div class="px-2 py-0.5 text-[9px] font-extrabold text-sky-700">🎯 首選標題城市</div>
-          <button type="button" onclick="selectDcWeatherCityByName('${escKey}', '${safePref}')"
-                  class="w-full text-left px-2.5 py-1.5 rounded-xl ${isCur ? 'bg-sky-100 text-sky-950 font-black' : 'bg-sky-50/70 hover:bg-sky-100 text-blue-950 font-extrabold'} flex items-center justify-between cursor-pointer mb-1">
-            <span class="truncate">${prefCity.name}</span>
-            ${isCur ? '<span class="text-[9px] text-sky-700">✓</span>' : ''}
-          </button>
+          <div class="px-2 py-0.5 text-[9px] font-extrabold text-sky-700">${headerLabel}</div>
+          ${matchedRouteCities.map((mc, idx) => {
+            const safePref = mc.name.replace(/['"]/g, '');
+            const isCur = dcSelectedCity && dcSelectedCity.name === mc.name;
+            const prefixNum = matchedRouteCities.length >= 2 ? `${idx + 1}. ` : '';
+            return `<button type="button" onclick="selectDcWeatherCityByName('${escKey}', '${safePref}')"
+                    class="w-full text-left px-2.5 py-1.5 rounded-xl ${isCur ? 'bg-sky-100 text-sky-950 font-black' : 'bg-sky-50/70 hover:bg-sky-100 text-blue-950 font-extrabold'} flex items-center justify-between cursor-pointer mb-0.5">
+              <span class="truncate">${prefixNum}${mc.name}</span>
+              ${isCur ? '<span class="text-[9px] text-sky-700">✓</span>' : ''}
+            </button>`;
+          }).join('')}
         `;
       }
 
@@ -31325,9 +32495,13 @@ function setupYearOverviewToggle() {
       }
 
       renderDcConflictBanner(tripKey);
+      renderDcMultiCountrySwitcherBar(tripKey, resolved.code);
       const tripTitle = (customTripTitles && customTripTitles[tripKey]) || spec.name;
+      const multiCountries = resolveMultiCountriesForTrip(tripKey);
       document.getElementById('dcHeaderFlag').textContent = spec.flag || '🧭';
-      document.getElementById('dcHeaderTitle').textContent = `${tripTitle}`;
+      document.getElementById('dcHeaderTitle').textContent = (multiCountries.length >= 2)
+        ? `${tripTitle}（${spec.name}）`
+        : `${tripTitle}`;
 
       // 按目的地國家／地區自動選用最佳權威氣象與匯率資料源
       const autoSources = getBestRegionalSources(resolved.code);
@@ -31367,10 +32541,12 @@ function setupYearOverviewToggle() {
         })) || null;
       };
 
-      const titleCityObj = matchCityInList(rawTitleLower) || matchCityInList(effPlaceLower) || cities[0];
+      const matchedCitiesForTrip = extractAllMatchedCitiesForTrip(tripKey, cities);
+      const titleCityObj = matchedCitiesForTrip[0] || matchCityInList(rawTitleLower) || matchCityInList(effPlaceLower) || cities[0];
       dcSelectedCity = titleCityObj;
       window.dcPreferredTitleCityName = titleCityObj ? titleCityObj.name : '';
       document.getElementById('dcWeatherCityLabel').textContent = dcSelectedCity.name;
+      renderDcRouteCitiesBar(tripKey);
       renderDcWeatherCityMenu(tripKey);
 
       document.getElementById('dcFxCurrMenu').innerHTML = DC_CURRENCY_OPTIONS.map(opt => `
@@ -32222,7 +33398,7 @@ function setupYearOverviewToggle() {
             <div class="flex items-center justify-between mb-1.5 gap-1">
               <span class="text-[10.5px] font-bold text-slate-700 flex items-center gap-1.5 shrink-0">
                 <i class="fa-solid fa-earth-asia text-blue-600 text-[11px]"></i>
-                <span>① 選擇國家 / 地區</span>
+                <span>① 選擇國家 / 地區 <span class="text-[9px] font-normal text-slate-400">（雙擊直填國家）</span></span>
               </span>
               <!-- 護照印章 / 全年足跡成就計數 -->
               <span id="tripPassportCounterBadge" class="text-[9.5px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/90 flex items-center gap-1 truncate shadow-2xs">
@@ -32254,11 +33430,21 @@ function setupYearOverviewToggle() {
                 <span class="shrink-0">② 選擇城市</span>
                 <span id="tripSelectedCountryBadge" class="text-[9px] font-bold px-1.5 py-0.2 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-200 truncate"></span>
               </span>
-              <button type="button" id="btnToggleMultiCityChain" onclick="toggleTripMultiCityChainMode()"
-                      class="shrink-0 px-2 py-0.5 rounded-full text-[9.5px] font-extrabold border transition active:scale-95 cursor-pointer flex items-center gap-1 bg-white hover:bg-blue-50 text-slate-600 border-slate-300">
-                <i class="fa-solid fa-route text-[9px]"></i>
-                <span id="btnMultiCityChainLabel">單選</span>
-              </button>
+              <div class="flex items-center gap-1 shrink-0">
+                <button type="button" id="btnCycleCityJoiner" onclick="cycleTripCityJoiner()" title="切換多城市連接符號（・ / → / 、）"
+                        class="px-1.5 py-0.5 rounded-full text-[9.5px] font-black border bg-slate-50 hover:bg-slate-100 text-slate-600 border-slate-300 transition active:scale-95 cursor-pointer">
+                  <span id="btnCityJoinerLabel">・</span>
+                </button>
+                <button type="button" id="btnPopLastTripCity" onclick="popLastTripCityFromInput()" title="移除最後一個城市"
+                        class="px-1.5 py-0.5 rounded-full text-[9.5px] font-extrabold border bg-white hover:bg-rose-50 text-slate-500 hover:text-rose-600 border-slate-300 transition active:scale-95 cursor-pointer">
+                  <i class="fa-solid fa-delete-left text-[9px]"></i>
+                </button>
+                <button type="button" id="btnToggleMultiCityChain" onclick="toggleTripMultiCityChainMode()"
+                        class="px-2 py-0.5 rounded-full text-[9.5px] font-extrabold border transition active:scale-95 cursor-pointer flex items-center gap-1 bg-blue-600 text-white border-blue-700 shadow-2xs">
+                  <i class="fa-solid fa-route text-[9px]"></i>
+                  <span id="btnMultiCityChainLabel">＋串遊中</span>
+                </button>
+              </div>
             </div>
             <!-- 內地名勝 / 中國專用：極簡 7 大地理片區快選列 -->
             <div id="cnSubregionFilterBar" class="hidden flex gap-1 overflow-x-auto custom-scroll pb-1.5 mb-1 select-none"></div>
@@ -32278,7 +33464,7 @@ function setupYearOverviewToggle() {
               </span>
               <span class="text-[9.5px] text-indigo-600 font-bold">點選串接</span>
             </div>
-            <div class="flex flex-wrap gap-1 max-h-[80px] overflow-y-auto custom-scroll p-0.5" id="tripSuffixChips">
+            <div class="flex flex-wrap gap-1 max-h-[120px] overflow-y-auto custom-scroll p-0.5" id="tripSuffixChips">
               <button type="button" data-suffix="放鬆慢活之旅" class="chip-suffix px-2 py-0.5 bg-indigo-50/80 hover:bg-indigo-100 text-indigo-800 border border-indigo-200/90 rounded-md text-[11px] font-semibold transition active:scale-95 shadow-2xs">放鬆慢活之旅</button>
               <button type="button" data-suffix="溫泉美食放鬆遊" class="chip-suffix px-2 py-0.5 bg-indigo-50/80 hover:bg-indigo-100 text-indigo-800 border border-indigo-200/90 rounded-md text-[11px] font-semibold transition active:scale-95 shadow-2xs">溫泉美食放鬆遊</button>
               <button type="button" data-suffix="特色美食之旅" class="chip-suffix px-2 py-0.5 bg-indigo-50/80 hover:bg-indigo-100 text-indigo-800 border border-indigo-200/90 rounded-md text-[11px] font-semibold transition active:scale-95 shadow-2xs">特色美食之旅</button>
@@ -32374,6 +33560,15 @@ function setupYearOverviewToggle() {
         </div>
       </div>
 
+      <!-- 跨國串遊切換列（最多支援 5 個國家／地區 · 單一國家自動隱藏） -->
+      <div id="dcMultiCountrySwitcherBar" class="hidden px-2.5 py-1.5 bg-slate-50/95 border-b border-slate-200/90 flex items-center gap-1.5 overflow-x-auto no-scrollbar select-none">
+        <span class="text-[10px] font-extrabold text-slate-500 shrink-0 flex items-center gap-1">
+          <i class="fa-solid fa-route text-blue-600 text-[9.5px]"></i>
+          <span>跨國切換</span>
+        </span>
+        <div id="dcMultiCountryPillsTrack" class="flex items-center gap-1 flex-1 min-w-0 overflow-x-auto no-scrollbar"></div>
+      </div>
+
       <!-- 錦囊一：🧭 出行須知（4 層黃金編排次序） -->
       <div id="dcPanelPrep" class="p-3 space-y-3 text-xs dc-scroll-viewport custom-scroll">
         <!-- 未有資料空狀態卡片（當目的地不在資料庫或未設定時顯示，絕不誤顯示舊國家資料） -->
@@ -32398,6 +33593,14 @@ function setupYearOverviewToggle() {
         <div id="dcConflictBannerBox" class="hidden"></div>
         <!-- 第 1 層：天氣與穿衣（遠期月份季節大卡片 vs 30日內精裝 5 日氣象卡＋PM2.5 空氣指數） -->
         <div class="p-3 rounded-2xl bg-gradient-to-b from-sky-50/90 to-white border border-sky-200/90 space-y-2 relative shadow-2xs">
+          <!-- 多城市行程路線快捷切換列（如 曼谷 ➔ 芭堤雅 ➔ 華欣 · 單一城市自動隱藏） -->
+          <div id="dcRouteCitiesBar" class="hidden flex items-center gap-1 overflow-x-auto no-scrollbar pb-1 border-b border-sky-100/90 select-none">
+            <span class="text-[9.5px] font-extrabold text-sky-700 shrink-0 flex items-center gap-1">
+              <i class="fa-solid fa-route text-[9px]"></i>
+              <span>行程站點</span>
+            </span>
+            <div id="dcRouteCitiesTrack" class="flex items-center gap-1 flex-1 min-w-0 overflow-x-auto no-scrollbar"></div>
+          </div>
           <div class="flex items-center justify-between gap-1">
             <span class="font-black text-blue-950 text-xs flex items-center gap-1.5 shrink-0">
               <i class="fa-solid fa-cloud-sun text-sky-600"></i>
@@ -32441,7 +33644,7 @@ function setupYearOverviewToggle() {
           <p id="dcWeatherAdvice" class="text-[11px] font-medium text-slate-700 bg-sky-50/70 rounded-xl px-2.5 py-1.5 border border-sky-100 leading-relaxed"></p>
 
           <div class="flex items-center justify-between gap-2 pt-0.5 relative">
-            <span id="dcWeatherUpdatedAt" class="text-[9.5px] font-mono text-slate-500">資料核實：2026-11-15</span>
+            <span id="dcWeatherUpdatedAt" class="text-[9.5px] tabular-nums text-slate-500">資料核實：2026-11-15</span>
             <div class="relative" onmouseenter="openDcHoverMenu('dcWeatherWebMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcWeatherWebMenu')">
               <button type="button" onclick="toggleDcDropdown('dcWeatherWebMenu')" aria-label="開啟外部氣象網站"
                       class="w-6 h-6 rounded-full bg-white hover:bg-sky-100 border border-sky-300 text-sky-700 flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
@@ -32544,7 +33747,7 @@ function setupYearOverviewToggle() {
 
           <!-- 卡片最底列：左側對齊「實時同步」時間戳，右側懸停地球外鏈圓鈕（直達港幣 ⇄ 目標貨幣） -->
           <div class="flex items-center justify-between gap-2 pt-0.5 relative">
-            <span id="dcFxUpdatedAt" class="text-[9.5px] font-mono text-slate-500">資料核實：2026-11-15</span>
+            <span id="dcFxUpdatedAt" class="text-[9.5px] tabular-nums text-slate-500">資料核實：2026-11-15</span>
             <div class="relative shrink-0" onmouseenter="openDcHoverMenu('dcFxWebMenu')" onmouseleave="scheduleCloseDcHoverMenu('dcFxWebMenu')">
               <button type="button" onclick="toggleDcDropdown('dcFxWebMenu')" aria-label="開啟外部匯率格價網站"
                       class="w-6 h-6 rounded-full bg-white hover:bg-emerald-100 border border-emerald-300 text-emerald-700 flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
@@ -32600,7 +33803,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-suitcase-rolling text-blue-600"></i>
               <span>4. 行李與出發前檢查清單</span>
             </span>
-            <span id="dcChecklistProgress" class="text-[10px] font-mono font-bold text-blue-700">0 / 0 已完成</span>
+            <span id="dcChecklistProgress" class="text-[10px] tabular-nums font-bold text-blue-700">0 / 0 已完成</span>
           </div>
 
           <div class="p-2 rounded-xl bg-blue-50/80 border border-blue-200/80 flex items-center justify-between text-[11px]">
@@ -32608,7 +33811,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-plug text-blue-600"></i>
               <span>當地電壓與插頭：</span>
             </span>
-            <span id="dcPlugSpecText" class="font-mono font-black text-blue-900">220V · 萬能轉插</span>
+            <span id="dcPlugSpecText" class="tabular-nums font-black text-blue-900">220V · 萬能轉插</span>
           </div>
 
           <div class="p-2.5 rounded-xl bg-indigo-50/60 border border-indigo-200/80 space-y-1.5">
@@ -32660,7 +33863,7 @@ function setupYearOverviewToggle() {
             </div>
           </div>
           <div class="flex items-center justify-between gap-2 pt-1 border-t border-slate-200/70">
-            <span id="dcTipsGlobalUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
+            <span id="dcTipsGlobalUpdatedAt" class="text-[9px] tabular-nums text-slate-400">最後更新：2026-11-15</span>
             <button type="button" onclick="if(dcCurrentTripKey) fetchLiveWikivoyageAndNews(dcCurrentTripKey, true)"
                     class="shrink-0 px-2 py-0.5 rounded-full bg-white hover:bg-blue-50 border border-slate-300 text-blue-900 font-bold text-[10px] cursor-pointer transition">
               <i class="fa-solid fa-arrows-rotate text-[9px] mr-1 text-blue-600"></i>同步更新
@@ -32694,7 +33897,7 @@ function setupYearOverviewToggle() {
           <ul id="dcNewsTop10" class="list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed"></ul>
           <ul id="dcNewsMore" class="hidden list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed pt-1 border-t border-blue-200/60"></ul>
           <div class="flex items-center justify-between gap-2 pt-0.5">
-            <span id="dcNewsUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
+            <span id="dcNewsUpdatedAt" class="text-[9px] tabular-nums text-slate-400">最後更新：2026-11-15</span>
             <button type="button" onclick="toggleDcMoreList('dcNewsMore', 'dcChevNews', 'dcTxtNews')"
                     class="inline-flex items-center gap-1 text-[10.5px] font-bold text-blue-700 hover:text-blue-900 cursor-pointer">
               <span id="dcTxtNews" data-default-label="更多">更多</span>
@@ -32718,7 +33921,7 @@ function setupYearOverviewToggle() {
           <ul id="dcScamTop10" class="list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed"></ul>
           <ul id="dcScamMore" class="hidden list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed pt-1 border-t border-rose-200/60"></ul>
           <div class="flex items-center justify-between gap-2 pt-0.5">
-            <span id="dcScamUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
+            <span id="dcScamUpdatedAt" class="text-[9px] tabular-nums text-slate-400">最後更新：2026-11-15</span>
             <button type="button" onclick="toggleDcMoreList('dcScamMore', 'dcChevScam', 'dcTxtScam')"
                     class="inline-flex items-center gap-1 text-[10.5px] font-bold text-rose-700 hover:text-rose-900 cursor-pointer">
               <span id="dcTxtScam" data-default-label="更多">更多</span>
@@ -32743,7 +33946,7 @@ function setupYearOverviewToggle() {
           <ul id="dcCultureTop10" class="list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed"></ul>
           <ul id="dcCultureMore" class="hidden list-disc pl-4 space-y-1 text-[11px] text-slate-700 leading-relaxed pt-1 border-t border-indigo-200/60"></ul>
           <div class="flex items-center justify-between gap-2 pt-0.5">
-            <span id="dcCultureUpdatedAt" class="text-[9px] font-mono text-slate-400">最後更新：2026-11-15</span>
+            <span id="dcCultureUpdatedAt" class="text-[9px] tabular-nums text-slate-400">最後更新：2026-11-15</span>
             <button type="button" onclick="toggleDcMoreList('dcCultureMore', 'dcChevCulture', 'dcTxtCulture')"
                     class="inline-flex items-center gap-1 text-[10.5px] font-bold text-indigo-700 hover:text-indigo-900 cursor-pointer">
               <span id="dcTxtCulture" data-default-label="更多">更多</span>
@@ -32795,7 +33998,7 @@ function setupYearOverviewToggle() {
             </div>
 
             <div class="flex items-center justify-between gap-2 pt-1 border-t border-slate-100">
-              <span id="dcCustomEmergencyFullPreview" class="text-[11px] font-mono font-bold text-slate-500 truncate">完整號碼：尚未輸入</span>
+              <span id="dcCustomEmergencyFullPreview" class="text-[11px] tabular-nums font-bold text-slate-500 truncate">完整號碼：尚未輸入</span>
               <div class="flex items-center gap-1.5 shrink-0">
                 <button type="button" onclick="copyDcCustomEmergency()"
                         class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-[11px] cursor-pointer transition active:scale-95">
@@ -33656,7 +34859,7 @@ function setupYearOverviewToggle() {
           <div class="space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[10.5px] font-bold text-slate-700 uppercase tracking-wider">同步代碼管理</span>
-              <span class="text-[9.5px] font-mono font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200/80">4–32 位英數</span>
+              <span class="text-[9.5px] tabular-nums font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200/80">4–32 位英數</span>
             </div>
             <p class="text-[11px] text-slate-600 leading-relaxed">輸入 <b class="text-slate-800">4 至 32 位</b>英文字母、數字、<code>_</code> 或 <code>-</code>（如 <code>HK2027VIP</code>），同代碼裝置即自動雲端同步。</p>
             <div>
@@ -33882,7 +35085,7 @@ function setupYearOverviewToggle() {
             <div class="p-2.5 bg-white border border-slate-200/90 rounded-xl space-y-2">
               <div class="flex items-center justify-between">
                 <span class="text-[11px] font-bold text-blue-950">JSON 備份檔案 (.json)</span>
-                <span class="text-[9.5px] font-mono font-semibold text-slate-600">完整資料</span>
+                <span class="text-[9.5px] font-semibold text-slate-600">完整資料</span>
               </div>
               <div class="grid grid-cols-2 gap-2">
                 <button id="btnDrawerExportJson" type="button" class="w-full py-2 px-2.5 bg-blue-50/80 hover:bg-blue-100/80 border border-blue-200 rounded-lg font-bold text-blue-900 text-xs flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer">
@@ -33928,7 +35131,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-blue-700 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-black text-blue-950 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-blue-700">v5.11.21</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-blue-700">v5.12.13</span>
           </button>
         </div>
 
@@ -33955,11 +35158,11 @@ function setupYearOverviewToggle() {
       <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl space-y-2">
         <div class="flex items-center justify-between text-slate-600">
           <span>全域預設目標：</span>
-          <span id="gearModalGlobalQuota" class="font-bold text-slate-800 font-mono">8 天</span>
+          <span id="gearModalGlobalQuota" class="font-bold text-slate-800 tabular-nums">8 天</span>
         </div>
         <div class="flex items-center justify-between text-slate-600">
           <span>此月已排定：</span>
-          <span id="gearModalMonthActual" class="font-bold text-rose-600 font-mono">0.0 天</span>
+          <span id="gearModalMonthActual" class="font-bold text-rose-600 tabular-nums">0.0 天</span>
         </div>
       </div>
 
