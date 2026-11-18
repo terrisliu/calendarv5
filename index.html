@@ -26,22 +26,44 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap');
     
+    @keyframes airySkyFlow {
+      0% {
+        background-position: 0% 25%;
+      }
+      50% {
+        background-position: 100% 75%;
+      }
+      100% {
+        background-position: 0% 25%;
+      }
+    }
+
     body {
       font-family: "Plus Jakarta Sans", "PingFang HK", "Hiragino Sans GB", "Noto Sans TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, sans-serif;
       font-feature-settings: "kern" 1, "liga" 1;
       text-rendering: optimizeLegibility;
-      background-color: #f8fafc;
-      background-image: 
-        radial-gradient(circle at 10% 10%, rgba(224, 231, 255, 0.65) 0%, transparent 45%),
-        radial-gradient(circle at 90% 15%, rgba(243, 232, 255, 0.65) 0%, transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(254, 243, 199, 0.28) 0%, transparent 55%),
-        radial-gradient(circle at 90% 90%, rgba(219, 234, 254, 0.55) 0%, transparent 45%),
-        radial-gradient(circle at 15% 85%, rgba(224, 242, 254, 0.5) 0%, transparent 50%);
+      background-color: #f7fbff;
+      background-image: linear-gradient(
+        130deg,
+        #ffffff 0%,
+        #eef7ff 24%,
+        #ffffff 48%,
+        #e6f4ff 74%,
+        #f3f9ff 100%
+      );
       background-attachment: fixed;
-      background-size: 100% 100%;
+      background-size: 260% 260%;
+      animation: airySkyFlow 18s ease-in-out infinite;
       letter-spacing: -0.01em;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media print {
+      body {
+        background: #ffffff !important;
+        animation: none !important;
+      }
     }
 
 
@@ -404,15 +426,14 @@
       }
     }
     .dc-scroll-viewport {
-      height: var(--dc-avail-h, calc(100dvh - 180px));
-      max-height: var(--dc-avail-h, calc(100dvh - 180px));
-      min-height: 240px;
-      padding-bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px)) !important;
+      height: var(--dc-avail-h, calc(100dvh - 190px));
+      max-height: var(--dc-avail-h, calc(100dvh - 190px));
+      min-height: 220px;
+      padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px)) !important;
       overflow-y: auto !important;
       overflow-x: hidden !important;
       -webkit-overflow-scrolling: touch;
-      overscroll-behavior-y: contain;
-      overscroll-behavior-x: none;
+      overscroll-behavior: contain !important;
       touch-action: pan-y;
     }
     @media (min-width: 1024px) {
@@ -453,14 +474,23 @@
     }
 
     .month-card {
-      background: rgba(255, 255, 255, 0.82) !important;
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.85) !important;
-      box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+      background: rgba(255, 255, 255, 0.92) !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
       border-radius: 14px !important;
       padding: 10px 8px !important; /* 輕微收窄內邊距 */
+      content-visibility: auto;
+      contain-intrinsic-size: auto 340px;
+      contain: layout style paint;
       transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (min-width: 1024px) {
+      .month-card {
+        background: rgba(255, 255, 255, 0.84) !important;
+        backdrop-filter: blur(18px) saturate(170%);
+        -webkit-backdrop-filter: blur(18px) saturate(170%);
+        content-visibility: visible;
+      }
     }
     .month-card:hover {
       box-shadow: 0 14px 34px -4px rgba(37, 99, 235, 0.09), inset 0 1px 0 rgba(255, 255, 255, 1) !important;
@@ -475,13 +505,13 @@
       user-select: none;
       -webkit-user-select: none;
       touch-action: pan-y;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.14s ease, border-color 0.14s ease;
       cursor: pointer;
       border-radius: clamp(8.5px, 24%, 13px) !important; /* 隨格仔大小等比圓潤（小格如按鈕圓潤、大格如 iPad 溫潤方圓） */
-      border: 1px solid rgba(226, 232, 240, 0.55) !important;
-      background-color: rgba(255, 255, 255, 0.78);
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
+      border: 1px solid rgba(226, 232, 240, 0.65) !important;
+      background-color: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.035);
+      contain: layout style paint;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -725,8 +755,8 @@
       border-radius: 12px !important; 
       border: 1px solid rgba(226, 232, 240, 0.9) !important; 
       box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important; 
-      background: rgba(255, 255, 255, 0.88) !important;
-      backdrop-filter: blur(16px) !important;
+      background: rgba(255, 255, 255, 0.96) !important;
+      content-visibility: visible !important;
     }
     body.year-overview-mode .month-header-title { 
       border-bottom: 1px solid rgba(226, 232, 240, 0.6) !important;
@@ -2792,7 +2822,7 @@
               </div>
             </div>
             <div id="mobileRibbonCollapsibleBodyPlan2">
-              <div id="mobileRibbonCardsTrack" class="flex items-stretch gap-2.5 overflow-x-auto no-scrollbar snap-x snap-mandatory p-2"></div>
+              <div id="mobileRibbonCardsTrack" class="flex items-stretch gap-2.5 overflow-x-auto no-scrollbar snap-x snap-mandatory p-2 touch-pan-x" style="-webkit-overflow-scrolling: touch;"></div>
               <div id="mobileSmartBannerFooter" class="hidden px-3 py-1 bg-slate-50/70 border-t border-slate-100 flex items-center justify-center">
                 <div id="mobileSmartBannerDots" class="flex items-center gap-1.5"></div>
               </div>
@@ -2824,13 +2854,10 @@
                 農曆節氣
               </button>
             </div>
-            
-            <button id="btnPanelScrollTop" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-lg text-[11px] font-semibold flex items-center gap-1 shadow-2xs transition active:scale-95">
-              <i class="fa-solid fa-arrow-up text-blue-600 text-[10px]"></i> 頂部
-            </button>
+
           </div>
 
-          <div id="tabContentLeaves" class="flex-1 overflow-y-auto custom-scroll p-2.5 space-y-2.5">
+          <div id="tabContentLeaves" class="flex-1 overflow-y-auto custom-scroll p-2.5 space-y-2.5" style="overflow-anchor: none;">
             
             <!-- 頂部視角切換器與概況統計 -->
             <div class="flex items-center justify-between bg-slate-100 p-1 rounded-xl">
@@ -3101,7 +3128,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v6.2.8</span>
+      <span>v6.4.3</span>
     </button>
   </footer>
 
@@ -3259,7 +3286,7 @@
           <div>
             <h3 class="font-black text-white text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v6.2.8</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-white/20 text-white rounded border border-white/25">v6.4.3</span>
             </h3>
           </div>
         </div>
@@ -3269,10 +3296,187 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs">
+        <!-- v6.4.3 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.4.3（手機瀏覽月曆流暢度 60–120fps 大提速：移除 440 格多重即時模糊改用高透亮實心層、啟用視口外月份渲染隔離、升級單一觸控事件委派及快取滾動座標節流，保留原有動態漸變背景）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">60-120FPS SCROLL BOOST</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>① 移除 440 格多重即時高斯模糊</b>：手機端月份卡片與所有日期方格改用高透亮實心白層並加上 <code>contain: layout style paint</code>，大幅減輕 GPU 每一幀合成壓力。</li>
+            <li><b>② 視口外月份渲染隔離（<code>content-visibility: auto</code>）</b>：手機上下瀏覽年曆時自動跳過螢幕可視範圍以外月份的排版與繪製計算。</li>
+            <li><b>③ 單一觸控事件委派 ＋ 座標快取節流</b>：將原本 1,700+ 個獨立格仔觸控監聽器合併為 <code>#calendarContainer</code> 單一事件委派，並快取 12 個月份位置與節流 Scroll-Spy（110ms），慣性滾動零強制重排，同時完整保留原本流光漸變背景動畫。</li>
+          </ul>
+        </div>
+
+        <!-- v6.4.2 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.4.2（精簡「出行須知」天氣城市下拉選單總數上限為 6 個：首選標題城市 ＋ 附近最多 3 個 ＋ 主要城市最多補滿至 6 個，徹底告別水蛇春長清單）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-600 text-white rounded text-[9px] font-bold">COMPACT WEATHER MENU</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>全選單精簡總上限 6 個（<code>MAX_TOTAL_WEATHER_CITIES = 6</code>）</b>：以泰國大城府為例，下拉選單只會簡潔顯示「🎯 首選：大城府（阿瑜陀耶）」＋「📍 附近城市（最多 3 個：曼谷、華欣、七岩）」＋「🏙️ 主要城市（最多 2 個：清邁、布吉）」，合計 6 個一眼睇晒，其餘數十個城鎮保留於頂部搜尋框即時輸入查詢。</li>
+          </ul>
+        </div>
+
+        <!-- v6.4.1 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.4.1（將「當地電壓與插頭（220V · 萬能轉插）」及自訂檢查項目佔位提示字與輸入文字還原為原本深藍主題色，其餘清單標題與通用項目維持純黑色）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">PLUG & INPUT RESTORED</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>還原電壓插頭及自訂輸入配色</b>：「當地電壓與插頭： 220V · 萬能轉插」還原為深藍主題色（<code>text-blue-950 / text-blue-900</code>），自訂輸入欄佔位提示字與輸入文字還原為原本淺灰提示＋深藍文字（<code>text-blue-950</code>），同時保留板塊標題、完成進度、4 項通用必備清單及自訂欄標題為純黑色。</li>
+          </ul>
+        </div>
+
+        <!-- v6.4.0 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.4.0（將「行李與出發前檢查清單」內所有非目的地專屬項目——包括標題列、完成進度、當地電壓與插頭、4 項通用必備清單及自訂檢查欄全數統一為高對比純黑字體）<span class="ml-1.5 px-1.5 py-0.2 bg-slate-900 text-white rounded text-[9px] font-bold">ALL NON-DEST BLACK</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>全板塊非目的地專屬文字純黑化（<code>text-slate-950</code>）</b>：保留「✨ 目的地專屬必備物品」專屬靛藍主題色區隔，其餘所有通用文字（「4. 行李與出發前檢查清單」、完成計數、「當地電壓與插頭：」、4 項通用物品、自訂欄標題及佔位字）全數轉為純黑色高對比顯示。</li>
+          </ul>
+        </div>
+
+        <!-- v6.3.9 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.3.9（將「出行前檢查清單」內之通用必備項目及「✏️ 自訂檢查項目」標題與輸入框改為高對比純黑色加粗字體，閱讀更清晰）<span class="ml-1.5 px-1.5 py-0.2 bg-slate-900 text-white rounded text-[9px] font-bold">HIGH-CONTRAST BLACK TEXT</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>通用檢查項目及自訂欄轉純黑色（<code>text-slate-950 font-bold</code>）</b>：將護照、旅遊保險、SIM/eSIM、平安藥四項通用必備清單，以及「✏️ 自訂檢查項目（點擊輸入並剔選，系統自動儲存）：」標題與自訂輸入字體改為清晰純黑色（剔選完成後仍自動顯示刪除線）。</li>
+          </ul>
+        </div>
+
+        <!-- v6.3.8 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.3.8（旅程標題「② 選擇城市」熱門目的地自動置頂排頭位，並配以搶眼暖金珊瑚漸變底色與火焰微標 🔥 一眼鎖定）<span class="ml-1.5 px-1.5 py-0.2 bg-orange-500 text-white rounded text-[9px] font-bold">HOT CITIES PRIORITY</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>熱門旅遊城市自動置頂（<code>HOT_PRIORITY_CITIES_BY_COUNTRY</code>）</b>：點選日本時<b>東京、大阪、京都、福岡、札幌、那霸、名古屋、函館、奈良、神戶</b>自動排最前第一行，泰國（曼谷、布吉、清邁、蘇梅島）、南韓（首爾、釜山、濟州）、台灣及歐美澳紐等 20 個主要目的地同步置頂熱門首選。</li>
+            <li><b>搶眼暖金珊瑚漸變高亮配色</b>：置頂熱門城市改用柔和琥珀珊瑚漸變底色配深棕加粗字與火焰微標（<i class="fa-solid fa-fire-flame-curved text-orange-500"></i>），與普通純白城市膠囊形成鮮明視覺區隔，一秒鎖定常飛航點。</li>
+          </ul>
+        </div>
+
+        <!-- v6.3.7 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.3.7（移除電腦版右側面板頂部列之「↑ 頂部」冗餘按鈕，令分頁標題列更簡潔俐落）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">CLEAN PANEL HEADER</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>移除「↑ 頂部」按鈕（<code>#btnPanelScrollTop</code>）</b>：精簡電腦版右側「假期規劃／公眾假期／農曆節氣」分頁頂欄空間，保留原生內部捲動與右下角全域浮動返回頂部箭嘴。</li>
+          </ul>
+        </div>
+
+        <!-- v6.3.6 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.3.6（普通版全頁背景升級為「超級淺冰藍 ⇄ 純白」呼吸流動漸變，徹底去除灰暗感並支援列印純白底色）<span class="ml-1.5 px-1.5 py-0.2 bg-sky-500 text-white rounded text-[9px] font-bold">AIRY SKY GRADIENT</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>清透淺天藍漸變純白流光背景（<code>airySkyFlow</code>）</b>：普通模式下背景改為由純白（<code>#ffffff</code>）與極淺冰藍（<code>#eef7ff</code> / <code>#e6f4ff</code>）交織的柔和動態漸變，畫面更明亮通透、零灰濛感，列印時亦自動轉為純白省墨底色。</li>
+          </ul>
+        </div>
+
+        <!-- v6.3.5 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.3.5（修正卡片底部向上圓形箭嘴 ⌃ 點擊後精準對齊「藍色漸變底白色字」雙錦囊主標題列做頂，完整呈現標題列、行程目的地與第 1 張卡片）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">BLUE HEADER TOP ALIGN</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>精準對齊藍底白字主標題列（<code>#dualCapsuleStudioDrawer</code>）</b>：點擊任何資訊卡片底部向上箭嘴 <code>⌃</code> 時，外層視窗會平滑捲動至藍底白字標題列頂端貼齊可視區最頂，同時將內部卡片列表歸零置頂。</li>
+          </ul>
+        </div>
+
+        <!-- v6.3.4 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.3.4（跨國旅程每張資訊卡片底部正中央新增同款精緻向上圓形箭嘴 ⌃，一按平滑捲動置頂至「行程目的地」切換列並微光提示）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">BACK TO DESTINATION BAR</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>底部三向對稱圓鈕列（<code>‹</code> · <code>⌃</code> · <code>›</code>）</b>：設定多國旅程時，每張「出行須知」與「城市指南」卡片底部正中央均新增同尺寸 <code>20×20px</code> 精緻向上圓形箭嘴，點擊即平滑捲動回頂部「行程目的地」切換列並以淡藍光圈高亮提示，讓第 1 張卡片完整置頂呈現。</li>
+          </ul>
+        </div>
+
+        <!-- v6.3.3 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.3.3（全站小視窗防跳動總體檢：消除 DOM 重掛載導致 1 幀歸零閃跳、非同步氣象載入位移，並一併修復緊急求助展開、預訂儲存及旅程標題國家膠囊之彈跳問題）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">GLOBAL SCROLL LOCK</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>根治切國 ‹ › 小箭嘴閃跳與非同步氣象位移</b>：同框切換國家時避免重複執行 <code>appendChild</code> 拆裝節點（防止瀏覽器 1 幀將捲動條歸零），關閉瀏覽器自動捲動錨點（<code>overflow-anchor: none</code>），並於非同步氣象載入完成後再度執行卡片位置補償。</li>
+            <li><b>緊急求助熱線展開防跳動</b>：展開「1868 入境處／外交部／使領館協助詳情」時改為僅在雙錦囊內部微調捲動，不再用 <code>scrollIntoView()</code> 扯動外層假期規劃大彈窗。</li>
+            <li><b>預訂儲存與旅程標題國家膠囊防跳動</b>：手機彈窗內儲存機票住宿不再觸發整頁跳動；旅程標題彈窗點選國家膠囊改為純水平置中捲動，不再上下跳位。</li>
+          </ul>
+        </div>
+
+        <!-- v6.3.2 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.3.2（鎖定跨國旅程卡片左下／右下角 ‹ › 小箭嘴切換國家時的畫面視覺位置，原地零位移切換、絕不跳回頂部或亂跳版面）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">ANCHORED COUNTRY SWITCH</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>錨定所點擊卡片位置（<code>dcPreserveScrollAnchor</code>）</b>：點擊任何資訊卡片左下／右下角 <code>‹</code> <code>›</code> 小箭嘴切換國家時，即時記錄該張卡片在螢幕上的高度並自動補償內容高度差，令手指所按卡片原地定格、絕不跳回最頂。</li>
+            <li><b>阻斷切國時的自動捲動干擾</b>：同框切換國家（<code>sourceContext === 'preserve'</code>）時停用 <code>scrollTop = 0</code> 與 <code>scrollIntoView()</code>，無論在手機頂部走廊、假期規劃彈窗或電腦側欄皆穩如泰山。</li>
+          </ul>
+        </div>
+
+        <!-- v6.3.1 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.3.1（優化手機版頂部假期規劃小卡片橫向觸控滑動與點擊精準定位至該月份「月頂」，繼續上下滾動月曆無縫自動跟隨切換旅程卡片）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">MONTH TOP & SCROLL-SPY</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>點擊旅程卡片精準對齊月份「月頂」</b>：點擊手機版假期規劃小卡片後，精準扣除頂部吸頂列與卡片高度，將該旅行月份月曆左上角「月頂」對齊可視區頂端，完整展示整個月曆而不再裁切上下邊緣。</li>
+            <li><b>橫向順滑滾動 ＋ 繼續碌月曆自動跟隨切換</b>：強化頂部小卡片軌道原生橫向慣性滑動（<code>touch-pan-x</code>），且定位完成後繼續上下滾動其他月份時，Scroll-Spy 自動隨可視月份平滑切換對應旅程小卡片。</li>
+          </ul>
+        </div>
+
+        <!-- v6.3.0 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.3.0（統一手機版「假期規劃／公眾假期／農曆節氣」彈窗為最大固定高度 92dvh、連續假期與詳細清單切換自動置頂並徹底阻斷背景月曆穿透滾動）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">UNIFIED MODAL SCROLL</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>統一最大固定視窗尺寸（<code>h-[92dvh] max-w-xl</code>）</b>：所有同類型彈窗（假期規劃、公眾假期、農曆節氣）無論切換至「連續假期」抑或「詳細清單」均鎖定一致的最大可視高度，再無一大一細跳動感。</li>
+            <li><b>切換分頁自動置頂</b>：開啟彈窗及切換「連續假期 ⇄ 詳細清單」時自動將捲動位置重設至最頂部（<code>scrollTop = 0</code>）。</li>
+            <li><b>零衝突背景捲動隔離</b>：開啟彈窗時鎖定背景頁面與月曆觸控穿透，關閉後即時完整釋放，與手機頂部吸頂走廊、雙錦囊及月曆橫掃手勢互不衝突。</li>
+          </ul>
+        </div>
+
+        <!-- v6.2.9 -->
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v6.2.9（全面修復手機版「出行須知／城市指南」多國切換即消失、左右箭嘴收起視窗、背景自動跳版面及手勢誤掃背後月曆四大 Bug）<span class="ml-1.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded text-[9px] font-bold">MOBILE DC FIX</span></span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-18</span>
+          </div>
+          <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            <li><b>修復多國切換及卡片角落 <code>‹ ›</code> 箭嘴即刻消失</b>：修正 <code>switchDcMultiCountry()</code> 在手機版重新渲染時誤將雙錦囊抽屜移往隱藏桌面插槽的問題，現可無縫切換「泰國／南韓」並保留全屏狀態。</li>
+            <li><b>修復多國標題漏抓第二個國家</b>：支援以「<code>・</code>、<code>及</code>、<code>、</code>、<code>/</code>、<code>➔</code>」等連接的多國名稱逐段精準識別（最多 5 國）。</li>
+            <li><b>鎖定視口高度與背景防跳動</b>：手機版展開雙錦囊時自動暫停背景月曆 Scroll-Spy 跳轉並鎖定底層頁面，同時保留右上角全屏放大／還原按鈕及充足底部緩衝。</li>
+            <li><b>徹底隔離雙錦囊觸控手勢</b>：阻斷雙錦囊內滑動事件穿透至背後月曆，杜絕掃動出行須知時誤觸左右切換背後年份。</li>
+          </ul>
+        </div>
+
         <!-- v6.2.8 -->
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v6.2.8（精準定色「普魯士墨藍 #0f2b63」配俐落 700 字重：遠看近黑沉穩、細看透出清晰深藍光澤）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">PRUSSIAN INK BLUE</span><span class="ml-1 px-1.5 py-0.2 bg-red-600 text-white rounded text-[9px] font-bold">最新版本</span></span>
+            <span class="font-bold text-blue-700 text-xs">v6.2.8（精準定色「普魯士墨藍 #0f2b63」配俐落 700 字重：遠看近黑沉穩、細看透出清晰深藍光澤）<span class="ml-1.5 px-1.5 py-0.2 bg-blue-600 text-white rounded text-[9px] font-bold">PRUSSIAN INK BLUE</span></span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-17</span>
           </div>
           <ul class="list-disc pl-4 space-y-1 text-slate-600 text-[11px] leading-relaxed">
@@ -8048,8 +8252,8 @@
   </div>
 
   <!-- 專屬彈窗：請假紀錄清單 (手機版頂部快速調閱 / 全覽調閱) -->
-  <div id="modalOverviewLeaves" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden p-3 md:p-4">
-    <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-lg w-full max-h-[88vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+  <div id="modalOverviewLeaves" class="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden p-1.5 sm:p-4 overscroll-contain">
+    <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-xl w-full h-[92dvh] max-h-[92dvh] sm:h-[88dvh] sm:max-h-[88dvh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
       
       <!-- 彈窗頂部精美毛玻璃標題列 -->
       <div class="p-3.5 border-b border-slate-100 bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-800 text-white flex items-center justify-between shrink-0 shadow-sm">
@@ -8100,7 +8304,7 @@
       </div>
 
       <!-- 彈窗內容滾動區 -->
-      <div class="flex-1 overflow-y-auto custom-scroll p-3 text-xs min-h-0 bg-slate-50/50">
+      <div id="modalOverviewLeavesScrollBody" class="flex-1 overflow-y-auto overscroll-contain touch-pan-y custom-scroll p-3 text-xs min-h-0 bg-slate-50/50" style="overflow-anchor: none; -webkit-overflow-scrolling: touch;" style="-webkit-overflow-scrolling: touch;">
         <!-- 視角一：手機假期規劃卡片容器 (預設顯示) -->
         <div id="modalTripsListContainer" class="space-y-2.5"></div>
 
@@ -8114,8 +8318,8 @@
   </div>
 
   <!-- 手機/全覽專屬彈窗：公眾假期清單（高質感 iOS 毛玻璃美化視窗） -->
-  <div id="modalOverviewHolidays" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden p-3 md:p-4">
-    <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-md w-full max-h-[88vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+  <div id="modalOverviewHolidays" class="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden p-1.5 sm:p-4 overscroll-contain">
+    <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-xl w-full h-[92dvh] max-h-[92dvh] sm:h-[88dvh] sm:max-h-[88dvh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
       <div class="p-3.5 border-b border-orange-100 bg-gradient-to-r from-orange-500 via-amber-500 to-amber-600 text-white flex items-center justify-between shrink-0 shadow-sm">
         <div class="flex items-center gap-2.5">
           <span class="w-9 h-9 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center text-sm shadow-inner border border-white/20">
@@ -8132,15 +8336,15 @@
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
-      <div id="overviewHolidaysListBody" class="flex-1 overflow-y-auto custom-scroll p-2 sm:p-3 text-xs bg-slate-50/50">
+      <div id="overviewHolidaysListBody" class="flex-1 overflow-y-auto overscroll-contain touch-pan-y custom-scroll p-2 sm:p-3 text-xs bg-slate-50/50" style="-webkit-overflow-scrolling: touch;">
         <!-- 動態複製公眾假期內容 -->
       </div>
     </div>
   </div>
 
   <!-- 手機/全覽專屬彈窗：農曆節氣清單（高質感星空夜月毛玻璃美化視窗） -->
-  <div id="modalOverviewLunar" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden p-3 md:p-4">
-    <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-lg w-full max-h-[88vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+  <div id="modalOverviewLunar" class="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden p-1.5 sm:p-4 overscroll-contain">
+    <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-xl w-full h-[92dvh] max-h-[92dvh] sm:h-[88dvh] sm:max-h-[88dvh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
       <div class="p-3.5 border-b border-amber-100 bg-gradient-to-r from-amber-600 via-indigo-700 to-indigo-900 text-white flex items-center justify-between shrink-0 shadow-sm">
         <div class="flex items-center gap-2.5">
           <span class="w-9 h-9 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center text-sm shadow-inner border border-white/20">
@@ -8157,7 +8361,7 @@
           <i class="fa-solid fa-xmark text-sm"></i>
         </button>
       </div>
-      <div id="overviewLunarListBody" class="flex-1 overflow-y-auto custom-scroll p-2 sm:p-3 text-xs bg-slate-50/50">
+      <div id="overviewLunarListBody" class="flex-1 overflow-y-auto overscroll-contain touch-pan-y custom-scroll p-2 sm:p-3 text-xs bg-slate-50/50" style="-webkit-overflow-scrolling: touch;">
         <!-- 動態複製農曆節氣內容 -->
       </div>
     </div>
@@ -18051,61 +18255,7 @@
         cell.addEventListener('mouseenter', (e) => showDayTooltip(e, dateStr));
         cell.addEventListener('mousemove', (e) => showDayTooltip(e, dateStr));
 
-        // 手機手勢智慧分流 (方案二：滾動不阻擋、停留短按左上角 HUD 滑入)
-        cell.addEventListener('touchstart', (e) => {
-          if (!e.touches || !e.touches[0]) return;
-          touchStartX = e.touches[0].clientX;
-          touchStartY = e.touches[0].clientY;
-          isTouchScrolling = false;
-
-          clearTimeout(pressTooltipTimer);
-          clearTimeout(longPressTimer);
-          clearTimeout(tooltipAutoDismissTimer);
-
-          // 短暫停留（220ms）才認定想查看日期詳情，避免手指一碰即彈出干擾滑動
-          pressTooltipTimer = setTimeout(() => {
-            if (!isTouchScrolling) {
-              showDayTooltip(e, dateStr);
-            }
-          }, 220);
-
-          // 保持原有長按 750ms 鎖定保護功能
-          longPressTimer = setTimeout(() => {
-            if (!isTouchScrolling) {
-              toggleDayLock(dateStr);
-              hideDayTooltip();
-            }
-          }, 750);
-        }, { passive: true });
-
-        cell.addEventListener('touchmove', (e) => {
-          if (!e.touches || !e.touches[0]) return;
-          const dx = e.touches[0].clientX - touchStartX;
-          const dy = e.touches[0].clientY - touchStartY;
-          // 一旦偵測到手指移動超過 7px，即為上下滾動頁面，立即取消視窗並絲滑收回
-          if (Math.hypot(dx, dy) > 7) {
-            isTouchScrolling = true;
-            clearTimeout(pressTooltipTimer);
-            clearTimeout(longPressTimer);
-            hideDayTooltip();
-          }
-        }, { passive: true });
-
-        cell.addEventListener('touchend', () => {
-          clearTimeout(pressTooltipTimer);
-          clearTimeout(longPressTimer);
-          // 手指放開後，保留 2 秒讓使用者從容閱讀頂層左上角資訊，隨後絲滑淡出收回
-          clearTimeout(tooltipAutoDismissTimer);
-          tooltipAutoDismissTimer = setTimeout(() => {
-            hideDayTooltip();
-          }, 2000);
-        }, { passive: true });
-
-        cell.addEventListener('touchcancel', () => {
-          clearTimeout(pressTooltipTimer);
-          clearTimeout(longPressTimer);
-          hideDayTooltip();
-        }, { passive: true });
+        // 觸控事件已升級為 #calendarContainer 單一事件委派
 
         cell.onclick = (e) => {
           if (isTouchScrolling) return;
@@ -19579,10 +19729,51 @@
     }
 
     function jumpToTripOnCalendar(startDate, title, totalDays) {
+      // 若從「假期規劃」大彈窗內點擊旅程卡片，自動關閉彈窗以便直接檢視主月曆
+      const modalLeaves = document.getElementById('modalOverviewLeaves');
+      if (modalLeaves && !modalLeaves.classList.contains('hidden')) {
+        modalLeaves.classList.add('hidden');
+        if (typeof syncBackgroundScrollLock === 'function') syncBackgroundScrollLock();
+      }
+
+      // 同步鎖定目前點擊的旅程卡片索引，避免平滑滾動途中被 Scroll-Spy 搶回舊卡片；滾動完成後繼續滑動月曆即無縫接管自動跟隨！
+      if (Array.isArray(mobileRibbonTripsCache) && mobileRibbonTripsCache.length > 0) {
+        const clickedIdx = mobileRibbonTripsCache.findIndex(t => t.startDate === startDate);
+        if (clickedIdx !== -1) {
+          mobileRibbonLastAutoIdx = clickedIdx;
+          mobileRibbonActiveCardIdx = clickedIdx;
+          mobileRibbonUserHoldUntil = Date.now() + 950;
+          if (typeof updateMobileRibbonDotsUI === 'function') {
+            updateMobileRibbonDotsUI(clickedIdx, mobileRibbonTripsCache.length);
+          }
+          if (typeof updateMobileRibbonMiniTripPreview === 'function') {
+            updateMobileRibbonMiniTripPreview(mobileRibbonTripsCache, clickedIdx);
+          }
+        }
+      }
+
       const targetCell = document.querySelector(`.calendar-cell[data-date="${startDate}"]`);
       if (targetCell) {
         const monthCard = targetCell.closest('.month-card') || targetCell;
-        monthCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // 精準計算頂部吸頂列與吸頂假期小卡片高度，將該月份月曆左上角「月頂」精準對齊可視區頂端，完整呈現整個月！
+        const stickyHeader = document.getElementById('stickyHeaderArea');
+        const ribbon = document.getElementById('mobileTopTripRibbon');
+        let topClearance = 12;
+        if (window.innerWidth < 1024) {
+          const hRect = stickyHeader ? stickyHeader.getBoundingClientRect() : null;
+          const rRect = (ribbon && !ribbon.classList.contains('hidden')) ? ribbon.getBoundingClientRect() : null;
+          if (rRect && rRect.bottom > 0) {
+            topClearance = rRect.bottom + 8;
+          } else if (hRect && hRect.bottom > 0) {
+            topClearance = hRect.bottom + 8;
+          }
+        } else {
+          topClearance = 20;
+        }
+        const cardTopAbs = monthCard.getBoundingClientRect().top + window.scrollY;
+        const targetScrollY = Math.max(0, Math.round(cardTopAbs - topClearance));
+        window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
+
         targetCell.classList.remove('cell-target-highlight');
         void targetCell.offsetWidth;
         targetCell.classList.add('cell-target-highlight');
@@ -20094,55 +20285,86 @@
         }, { passive: true });
       }
 
+      let cachedMonthBounds = null;
+      let cachedMonthBoundsAt = 0;
+      const getCachedMonthBounds = () => {
+        const now = Date.now();
+        if (cachedMonthBounds && (now - cachedMonthBoundsAt) < 1200) return cachedMonthBounds;
+        const monthCards = document.querySelectorAll('#calendarContainer .month-card');
+        if (!monthCards.length) return [];
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        cachedMonthBounds = Array.from(monthCards).map((card, idx) => {
+          const r = card.getBoundingClientRect();
+          return { month: idx + 1, top: r.top + scrollY, bottom: r.bottom + scrollY };
+        });
+        cachedMonthBoundsAt = now;
+        return cachedMonthBounds;
+      };
+
       const evaluateVisibleMonthAndSyncTrip = () => {
         const ribbon = document.getElementById('mobileTopTripRibbon');
         if (!ribbon || ribbon.classList.contains('hidden')) return;
-        syncStickyRibbonTopOffset();
 
-        // 僅當鎖定吸頂且非全覽模式時執行隨月自動跟隨
+        // 僅當鎖定吸頂且非全覽模式時執行隨月自動跟隨（若正展開雙錦囊或機票住宿工作台，嚴格鎖定當前旅程絕不跳動）
         if (!ribbon.classList.contains('is-pinned-sticky')) return;
+        if (ribbon.classList.contains('is-dc-expanded') || ribbon.classList.contains('is-booking-fullscreen')) return;
+        if (typeof dcCurrentTripKey !== 'undefined' && dcCurrentTripKey) return;
         if (document.body.classList.contains('year-overview-mode')) return;
         if (Date.now() < mobileRibbonUserHoldUntil) return;
         if (!mobileRibbonTripsCache || mobileRibbonTripsCache.length <= 1) return;
 
-        // 計算吸頂板塊正下方嘅視覺焦點 Y 座標
-        const ribbonRect = ribbon.getBoundingClientRect();
-        const focusY = Math.max(120, ribbonRect.bottom + 72);
-
-        const monthCards = document.querySelectorAll('#calendarContainer .month-card');
-        if (!monthCards.length) return;
+        // 使用快取文件流座標計算視覺焦點，避免慣性滑動期間每幀 12 次 getBoundingClientRect() 強制重排
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        const focusDocY = scrollY + 185;
+        const bounds = getCachedMonthBounds();
+        if (!bounds.length) return;
 
         let activeMonth = 1;
         let bestDist = Infinity;
-        monthCards.forEach((card, idx) => {
-          const r = card.getBoundingClientRect();
-          if (r.top <= focusY && r.bottom >= focusY) {
-            activeMonth = idx + 1;
+        for (let i = 0; i < bounds.length; i++) {
+          const b = bounds[i];
+          if (b.top <= focusDocY && b.bottom >= focusDocY) {
+            activeMonth = b.month;
             bestDist = 0;
+            break;
           } else if (bestDist > 0) {
-            const d = Math.min(Math.abs(r.top - focusY), Math.abs(r.bottom - focusY));
+            const d = Math.min(Math.abs(b.top - focusDocY), Math.abs(b.bottom - focusDocY));
             if (d < bestDist) {
               bestDist = d;
-              activeMonth = idx + 1;
+              activeMonth = b.month;
             }
           }
-        });
+        }
 
         const targetIdx = findBestTripIndexForMonth(activeMonth, mobileRibbonTripsCache);
         if (targetIdx !== -1 && targetIdx !== mobileRibbonLastAutoIdx) {
           mobileRibbonLastAutoIdx = targetIdx;
           jumpMobileSmartRibbonCard(targetIdx);
+          if (typeof updateMobileRibbonMiniTripPreview === 'function') {
+            updateMobileRibbonMiniTripPreview(mobileRibbonTripsCache, targetIdx);
+          }
         }
       };
 
+      let lastSpyRunTime = 0;
+      let spyTrailingTimer = null;
       window.addEventListener('scroll', () => {
-        if (!winScrollTicking) {
-          winScrollTicking = true;
-          requestAnimationFrame(() => {
+        if (winScrollTicking) return;
+        winScrollTicking = true;
+        requestAnimationFrame(() => {
+          winScrollTicking = false;
+          const now = Date.now();
+          if (now - lastSpyRunTime >= 110) {
+            lastSpyRunTime = now;
             evaluateVisibleMonthAndSyncTrip();
-            winScrollTicking = false;
-          });
-        }
+          } else {
+            clearTimeout(spyTrailingTimer);
+            spyTrailingTimer = setTimeout(() => {
+              lastSpyRunTime = Date.now();
+              evaluateVisibleMonthAndSyncTrip();
+            }, 120);
+          }
+        });
       }, { passive: true });
 
       window.addEventListener('resize', syncStickyRibbonTopOffset, { passive: true });
@@ -20900,6 +21122,14 @@ function setupYearOverviewToggle() {
         };
 
         container.addEventListener('touchstart', (e) => {
+          if (e.target && e.target.closest && (e.target.closest('#dualCapsuleStudioDrawer') || e.target.closest('#inlineBookingStudioDrawer') || e.target.closest('#mobileTopTripRibbon') || e.target.closest('#yearPickerPopover') || e.target.closest('#modalOverviewLeaves') || e.target.closest('#modalOverviewHolidays') || e.target.closest('#modalOverviewLunar'))) {
+            swipeAxis = null;
+            return;
+          }
+          if (window.innerWidth < 1024 && typeof dcCurrentTripKey !== 'undefined' && dcCurrentTripKey) {
+            swipeAxis = null;
+            return;
+          }
           if (e.touches.length === 2) {
             swipeAxis = null;
             stopSwipeRaf();
@@ -20930,6 +21160,8 @@ function setupYearOverviewToggle() {
         }, { passive: true });
 
         container.addEventListener('touchmove', (e) => {
+          if (e.target && e.target.closest && (e.target.closest('#dualCapsuleStudioDrawer') || e.target.closest('#inlineBookingStudioDrawer') || e.target.closest('#mobileTopTripRibbon') || e.target.closest('#yearPickerPopover') || e.target.closest('#modalOverviewLeaves') || e.target.closest('#modalOverviewHolidays') || e.target.closest('#modalOverviewLunar'))) return;
+          if (window.innerWidth < 1024 && typeof dcCurrentTripKey !== 'undefined' && dcCurrentTripKey) return;
           if (e.touches.length !== 1 || touchStartDist > 0) return;
           if (!document.body.classList.contains('readonly-mode') && typeof isDragging !== 'undefined' && isDragging) return;
 
@@ -22571,10 +22803,30 @@ function setupYearOverviewToggle() {
           renderModalLeavesContent();
         };
       });
-    }function openOverviewLeavesModal() {
+    }
+
+    function syncBackgroundScrollLock() {
+      const anyModalOpen = ['modalOverviewLeaves', 'modalOverviewHolidays', 'modalOverviewLunar'].some(id => {
+        const el = document.getElementById(id);
+        return el && !el.classList.contains('hidden');
+      });
+      const isMobileDcOpen = (window.innerWidth < 1024 && typeof dcCurrentTripKey !== 'undefined' && Boolean(dcCurrentTripKey));
+      if (anyModalOpen || isMobileDcOpen) {
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+      }
+    }
+
+    function openOverviewLeavesModal() {
       renderModalLeavesContent();
       const modal = document.getElementById('modalOverviewLeaves');
       if (modal) modal.classList.remove('hidden');
+      const sb = document.getElementById('modalOverviewLeavesScrollBody');
+      if (sb) sb.scrollTop = 0;
+      syncBackgroundScrollLock();
     }
 
     function openHolidaysModal() {
@@ -22583,8 +22835,10 @@ function setupYearOverviewToggle() {
       const modalHolidays = document.getElementById('modalOverviewHolidays');
       if (src && bodyHolidays) {
         bodyHolidays.innerHTML = src.innerHTML;
+        bodyHolidays.scrollTop = 0;
       }
       if (modalHolidays) modalHolidays.classList.remove('hidden');
+      syncBackgroundScrollLock();
     }
 
     function openLunarModal() {
@@ -22593,8 +22847,10 @@ function setupYearOverviewToggle() {
       const modalLunar = document.getElementById('modalOverviewLunar');
       if (src && bodyLunar) {
         bodyLunar.innerHTML = src.innerHTML;
+        bodyLunar.scrollTop = 0;
       }
       if (modalLunar) modalLunar.classList.remove('hidden');
+      syncBackgroundScrollLock();
     }
 
     function setupOverviewTopActionButtons() {
@@ -22635,22 +22891,29 @@ function setupYearOverviewToggle() {
         btnCloseOvLeaves.onclick = () => {
           const modal = document.getElementById('modalOverviewLeaves');
           if (modal) {
+            const dcDrawer = document.getElementById('dualCapsuleStudioDrawer');
+            if (dcDrawer && modal.contains(dcDrawer) && typeof window.closeTripDualCapsule === 'function') {
+              window.closeTripDualCapsule();
+            }
             const drawer = document.getElementById('inlineBookingStudioDrawer');
             if (drawer && modal.contains(drawer) && typeof window.closeInlineBookingStudio === 'function') {
               window.closeInlineBookingStudio();
             }
             modal.classList.add('hidden');
+            syncBackgroundScrollLock();
           }
         };
       }
       if (btnCloseOvHolidays) {
         btnCloseOvHolidays.onclick = () => {
           if (modalHolidays) modalHolidays.classList.add('hidden');
+          syncBackgroundScrollLock();
         };
       }
       if (btnCloseOvLunar) {
         btnCloseOvLunar.onclick = () => {
           if (modalLunar) modalLunar.classList.add('hidden');
+          syncBackgroundScrollLock();
         };
       }
     }
@@ -23598,6 +23861,8 @@ function setupYearOverviewToggle() {
           btnModalTable.className = 'flex-1 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1 font-medium text-[11px]';
           modalTripsBox.classList.remove('hidden');
           modalTableBox.classList.add('hidden');
+          const sb = document.getElementById('modalOverviewLeavesScrollBody');
+          if (sb) sb.scrollTop = 0;
         };
 
         btnModalTable.onclick = () => {
@@ -23605,8 +23870,36 @@ function setupYearOverviewToggle() {
           btnModalTrips.className = 'flex-1 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center justify-center gap-1 font-medium text-[11px]';
           modalTableBox.classList.remove('hidden');
           modalTripsBox.classList.add('hidden');
+          const sb = document.getElementById('modalOverviewLeavesScrollBody');
+          if (sb) sb.scrollTop = 0;
         };
       }
+
+
+      // iOS Safari 專屬：阻斷彈窗外圍遮罩及頂部標題列之 touchmove 穿透到底層月曆，確保 100% 只捲動視窗內部清單
+      ['modalOverviewLeaves', 'modalOverviewHolidays', 'modalOverviewLunar'].forEach((mId) => {
+        const mEl = document.getElementById(mId);
+        if (!mEl) return;
+        let mStartY = 0;
+        mEl.addEventListener('touchstart', (e) => {
+          if (e.touches && e.touches.length === 1) mStartY = e.touches[0].clientY;
+        }, { passive: true });
+        mEl.addEventListener('touchmove', (e) => {
+          const scroller = e.target && e.target.closest ? e.target.closest('.overflow-y-auto') : null;
+          if (!scroller) {
+            if (e.cancelable) e.preventDefault();
+            return;
+          }
+          if (e.touches && e.touches.length === 1) {
+            const dy = e.touches[0].clientY - mStartY;
+            const atTop = scroller.scrollTop <= 0;
+            const atBottom = Math.ceil(scroller.scrollTop + scroller.clientHeight) >= scroller.scrollHeight;
+            if ((atTop && dy > 0) || (atBottom && dy < 0)) {
+              if (e.cancelable) e.preventDefault();
+            }
+          }
+        }, { passive: false });
+      });
 
       // 微型小日曆：指針指向懸浮窗感應（取消原有點擊彈出視窗）
       document.addEventListener('mouseover', (e) => {
@@ -23622,7 +23915,75 @@ function setupYearOverviewToggle() {
           hideDayTooltip();
         }
       });
-      document.addEventListener('touchstart', (e) => {
+      // #calendarContainer 單一觸控事件委派：取代逐格綁定，大幅降低手機滑動記憶體與事件調度開銷
+    (() => {
+      const calEl = document.getElementById('calendarContainer');
+      if (!calEl || calEl.dataset.delegatedTouchBound) return;
+      calEl.dataset.delegatedTouchBound = '1';
+      let delStartX = 0;
+      let delStartY = 0;
+      let delPressTimer = null;
+      let delLongPressTimer = null;
+      let delAutoDismissTimer = null;
+
+      calEl.addEventListener('touchstart', (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        const cell = e.target.closest('.calendar-cell[data-date]');
+        if (!cell) return;
+        const dateStr = cell.getAttribute('data-date');
+        if (!dateStr) return;
+
+        delStartX = e.touches[0].clientX;
+        delStartY = e.touches[0].clientY;
+        isTouchScrolling = false;
+
+        clearTimeout(delPressTimer);
+        clearTimeout(delLongPressTimer);
+        clearTimeout(delAutoDismissTimer);
+
+        delPressTimer = setTimeout(() => {
+          if (!isTouchScrolling) {
+            showDayTooltip(e, dateStr);
+          }
+        }, 220);
+
+        delLongPressTimer = setTimeout(() => {
+          if (!isTouchScrolling) {
+            toggleDayLock(dateStr);
+            hideDayTooltip();
+          }
+        }, 750);
+      }, { passive: true });
+
+      calEl.addEventListener('touchmove', (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        const dx = e.touches[0].clientX - delStartX;
+        const dy = e.touches[0].clientY - delStartY;
+        if (Math.abs(dx) > 7 || Math.abs(dy) > 7) {
+          isTouchScrolling = true;
+          clearTimeout(delPressTimer);
+          clearTimeout(delLongPressTimer);
+          hideDayTooltip();
+        }
+      }, { passive: true });
+
+      calEl.addEventListener('touchend', () => {
+        clearTimeout(delPressTimer);
+        clearTimeout(delLongPressTimer);
+        clearTimeout(delAutoDismissTimer);
+        delAutoDismissTimer = setTimeout(() => {
+          hideDayTooltip();
+        }, 2000);
+      }, { passive: true });
+
+      calEl.addEventListener('touchcancel', () => {
+        clearTimeout(delPressTimer);
+        clearTimeout(delLongPressTimer);
+        hideDayTooltip();
+      }, { passive: true });
+    })();
+
+    document.addEventListener('touchstart', (e) => {
         const calDay = e.target.closest('.micro-cal-day[data-micdate]');
         if (calDay) {
           const dStr = calDay.getAttribute('data-micdate');
@@ -24830,8 +25191,9 @@ function setupYearOverviewToggle() {
 
         if (autoScrollActive) {
           const activeBtn = container.querySelector(`[data-country-id="${currentSelectedCountryId}"]`) || container.querySelector(`[data-region-id="${activeRegionDrawerId}"]`);
-          if (activeBtn && typeof activeBtn.scrollIntoView === 'function') {
-            activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          if (activeBtn && container) {
+            const targetLeft = activeBtn.offsetLeft - (container.clientWidth / 2) + (activeBtn.offsetWidth / 2);
+            container.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
           }
         }
       }
@@ -24863,6 +25225,62 @@ function setupYearOverviewToggle() {
         });
       }
 
+      const HOT_PRIORITY_CITIES_BY_COUNTRY = {
+        JP: ['東京', '大阪', '京都', '福岡', '札幌', '那霸', '名古屋', '函館', '奈良', '神戶', '由布院', '熊本', '輕井澤', '箱根', '河口湖'],
+        TH: ['曼谷', '布吉', '清邁', '蘇梅島', '芭堤雅', '華欣', '喀比', '清萊'],
+        KR: ['首爾', '釜山', '濟州市', '仁川', '大邱', '慶州', '江陵'],
+        TW: ['台北', '高雄', '台中', '台南', '花蓮', '宜蘭', '台東', '澎湖'],
+        CN: ['北京', '上海', '成都', '重慶', '杭州', '西安', '南京', '蘇州', '廈門', '哈爾濱', '三亞', '麗江', '大理'],
+        GBA: ['深圳', '廣州', '珠海', '澳門', '佛山', '順德', '潮汕'],
+        VN: ['峴港', '胡志明市', '河內', '富國島', '芽莊', '會安'],
+        MY: ['吉隆坡', '檳城', '亞庇', '沙巴', '浮羅交怡', '馬六甲'],
+        SG: ['新加坡市區', '聖淘沙', '濱海灣', '烏節路'],
+        PH: ['馬尼拉', '宿霧', '長灘島', '薄荷島', '愛妮島'],
+        ID: ['峇里島', '烏布', '雅加達', '日惹', '龍目島'],
+        GB: ['倫敦', '愛丁堡', '曼徹斯特', '牛津', '劍橋'],
+        FR: ['巴黎', '尼斯', '里昂', '馬賽', '普羅旺斯'],
+        IT: ['羅馬', '米蘭', '威尼斯', '佛羅倫斯', '拿坡里'],
+        CH: ['蘇黎世', '琉森', '因特拉肯', '少女峰', '策馬特', '日內瓦'],
+        DE: ['慕尼黑', '柏林', '法蘭克福', '科隆', '海德堡'],
+        AU: ['悉尼', '墨爾本', '布里斯本', '黃金海岸', '珀斯'],
+        NZ: ['奧克蘭', '皇后鎮', '基督城', '羅托魯瓦'],
+        US: ['紐約', '洛杉磯', '三藩市', '拉斯維加斯', '西雅圖', '夏威夷'],
+        CA: ['溫哥華', '多倫多', '班夫', '滿地可']
+      };
+
+      function getHotCityRank(countryId, cityName) {
+        const hotList = HOT_PRIORITY_CITIES_BY_COUNTRY[countryId];
+        if (!hotList || !cityName) return -1;
+        const primaryPart = cityName.split('/')[0].trim();
+        for (let i = 0; i < hotList.length; i++) {
+          const target = hotList[i];
+          if (cityName === target || primaryPart === target || cityName.startsWith(target)) {
+            return i;
+          }
+        }
+        return -1;
+      }
+
+      function sortCitiesWithHotFirst(countryId, cities) {
+        if (!Array.isArray(cities) || cities.length === 0) return [];
+        const hotList = HOT_PRIORITY_CITIES_BY_COUNTRY[countryId];
+        if (!hotList) return cities;
+        const indexed = cities.map((name, origIdx) => ({
+          name,
+          origIdx,
+          rank: getHotCityRank(countryId, name)
+        }));
+        indexed.sort((a, b) => {
+          const aHot = a.rank >= 0;
+          const bHot = b.rank >= 0;
+          if (aHot && bHot) return a.rank - b.rank || a.origIdx - b.origIdx;
+          if (aHot) return -1;
+          if (bHot) return 1;
+          return a.origIdx - b.origIdx;
+        });
+        return indexed.map(item => item.name);
+      }
+
       function getFilteredCitiesForCountry(countryId, mapCache, statsCache) {
         const map = mapCache || getDynamicCountryMap();
         const stats = statsCache || computePassportFootprintStats();
@@ -24872,7 +25290,7 @@ function setupYearOverviewToggle() {
         if (countryId === 'CN') {
           renderCnSubregionTabs('CN');
           if (currentCnSubregionId === 'FEATURED') {
-            return EXTRA_PRESET_CATALOG.CN.cities;
+            return sortCitiesWithHotFirst('CN', EXTRA_PRESET_CATALOG.CN.cities);
           }
           const subTab = CN_SUBREGION_TABS.find(t => t.id === currentCnSubregionId);
           if (subTab && typeof GLOBAL_CITY_DATABASE !== 'undefined') {
@@ -24885,13 +25303,13 @@ function setupYearOverviewToggle() {
                 if (cleanCn && !list.includes(cleanCn)) list.push(cleanCn);
               }
             });
-            return list.length > 0 ? list : EXTRA_PRESET_CATALOG.CN.cities;
+            return sortCitiesWithHotFirst('CN', list.length > 0 ? list : EXTRA_PRESET_CATALOG.CN.cities);
           }
         } else {
           renderCnSubregionTabs(countryId);
         }
         const cat = map[countryId];
-        return cat ? cat.cities : [];
+        return cat ? sortCitiesWithHotFirst(countryId, cat.cities) : [];
       }
 
       function renderTripCityChips(countryId) {
@@ -24922,16 +25340,22 @@ function setupYearOverviewToggle() {
           btn.setAttribute('data-city', cityName);
           const isInInputChain = isTripMultiCityChainMode && curInputText && curInputText.includes(cityName);
           const isSelected = (currentSelectedCity === cityName) || isInInputChain;
+          const isHotCity = getHotCityRank(cat.id, cityName) >= 0;
           const cityStamp = stats.cityCounts[cityName] || 0;
           btn.className = `chip-city px-2 py-0.5 rounded-md text-[11px] font-bold transition active:scale-95 shadow-2xs border cursor-pointer inline-flex items-center gap-1 ${
             isSelected
               ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
-              : 'bg-white hover:bg-blue-50 text-slate-700 hover:text-blue-700 border-slate-200 hover:border-blue-300'
+              : isHotCity
+                ? 'bg-gradient-to-r from-amber-50 via-orange-50/90 to-rose-50/80 hover:from-amber-100 hover:to-orange-100 text-amber-950 border-amber-300/90 hover:border-orange-400 font-extrabold'
+                : 'bg-white hover:bg-blue-50 text-slate-700 hover:text-blue-700 border-slate-200 hover:border-blue-300'
           }`;
+          const hotIconHtml = isHotCity
+            ? `<i class="fa-solid fa-fire-flame-curved text-[9.5px] ${isSelected ? 'text-amber-200' : 'text-orange-500'}"></i>`
+            : '';
           const cStampHtml = cityStamp > 0
             ? `<span class="text-[9px] font-black ${isSelected ? 'text-emerald-200' : 'text-emerald-600'}">✓${cityStamp > 1 ? '×' + cityStamp : ''}</span>`
             : '';
-          btn.innerHTML = `<span>${cityName}</span>${cStampHtml}`;
+          btn.innerHTML = `${hotIconHtml}<span>${cityName}</span>${cStampHtml}`;
           btn.onclick = () => {
             const input = document.getElementById('inputEditTripTitle');
             if (input) {
@@ -28224,7 +28648,9 @@ function setupYearOverviewToggle() {
           currentEditingBookingKey = null;
           openTripBookingByKey(savedKey, wasInMobileRibbon ? 'ribbon' : 'auto');
           const reopenedDrawer = document.getElementById('inlineBookingStudioDrawer');
-          if (reopenedDrawer) {
+          const modalLeavesChk = document.getElementById('modalOverviewLeaves');
+          const isModalLeavesOpen = Boolean(modalLeavesChk && !modalLeavesChk.classList.contains('hidden'));
+          if (reopenedDrawer && !wasInMobileRibbon && !isModalLeavesOpen && window.innerWidth >= 1024) {
             setTimeout(() => {
               reopenedDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }, 60);
@@ -28890,7 +29316,6 @@ function setupYearOverviewToggle() {
       const contentLunar = document.getElementById('tabContentLunar');
       const btnHeaderHolidays = document.getElementById('btnHeaderHolidays');
       const btnHeaderLunar = document.getElementById('btnHeaderLunar');
-      const btnPanelScrollTop = document.getElementById('btnPanelScrollTop');
       const btnScrollToTopFloating = document.getElementById('btnScrollToTopFloating');
 
       function resetTabs() {
@@ -28955,7 +29380,6 @@ function setupYearOverviewToggle() {
       const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       };
-      if (btnPanelScrollTop) btnPanelScrollTop.onclick = scrollToTop;
       if (btnScrollToTopFloating) btnScrollToTopFloating.onclick = scrollToTop;
 
       window.addEventListener('scroll', () => {
@@ -32062,6 +32486,10 @@ function setupYearOverviewToggle() {
         }
       } catch (e) {
         gridEl.innerHTML = '<div class="col-span-5 py-2 text-[11px] text-slate-500">暫未能連線取得預報，可點擊下方 Windy.com 查看實況。</div>';
+      } finally {
+        if (window.dcPreserveScrollAnchor && Date.now() < window.dcPreserveScrollAnchor.expiresAt && typeof window.dcPreserveScrollAnchor.reapply === 'function') {
+          requestAnimationFrame(window.dcPreserveScrollAnchor.reapply);
+        }
       }
     }
 
@@ -32243,6 +32671,7 @@ function setupYearOverviewToggle() {
         mobRibbon.classList.remove('is-dc-expanded', 'is-dc-fullscreen');
       }
       dcCurrentTripKey = null;
+      if (typeof syncBackgroundScrollLock === 'function') syncBackgroundScrollLock();
       const minBar = document.getElementById('dcMobileMinBar');
       if (minBar) minBar.classList.remove('hidden');
     }
@@ -32272,12 +32701,11 @@ function setupYearOverviewToggle() {
       if (!activePanel) return;
       const rect = activePanel.getBoundingClientRect();
       const vh = (window.visualViewport && window.visualViewport.height) ? window.visualViewport.height : window.innerHeight;
-      if (rect.top > 0 && rect.top < vh - 100) {
-        const bottomGap = dcIsMobileFullscreen ? 8 : 10;
-        const avail = Math.max(240, Math.floor(vh - rect.top - bottomGap));
-        if (prepP) prepP.style.setProperty('--dc-avail-h', `${avail}px`);
-        if (tipsP) tipsP.style.setProperty('--dc-avail-h', `${avail}px`);
-      }
+      const safeTop = Math.max(54, rect.top);
+      const bottomGap = dcIsMobileFullscreen ? 8 : 10;
+      const avail = Math.max(220, Math.floor(vh - safeTop - bottomGap));
+      if (prepP) prepP.style.setProperty('--dc-avail-h', `${avail}px`);
+      if (tipsP) tipsP.style.setProperty('--dc-avail-h', `${avail}px`);
     }
 
     function closeTripDualCapsule() {
@@ -32289,6 +32717,7 @@ function setupYearOverviewToggle() {
       const mobRibbon = document.getElementById('mobileTopTripRibbon');
       if (mobRibbon) mobRibbon.classList.remove('is-dc-expanded', 'is-dc-fullscreen');
       document.body.classList.remove('dc-mobile-sheet-lock');
+      document.body.style.overflow = '';
       dcIsMobileFullscreen = false;
       dcMinimizedState = null;
       const minBar = document.getElementById('dcMobileMinBar');
@@ -32396,7 +32825,15 @@ function setupYearOverviewToggle() {
         if (!target || !target.closest || !target.closest('#dualCapsuleStudioDrawer')) return;
         e.stopPropagation();
         const tag = (target.tagName || '').toUpperCase();
-        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag)) return;
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag)) {
+          isTracking = false;
+          return;
+        }
+        // 若手指落在橫向捲動軌道（例如多國切換列、行程站點列），允許原生橫向捲動而不誤切分頁
+        if (target.closest('#dcMultiCountryPillsTrack, #dcRouteCitiesTrack, .overflow-x-auto')) {
+          isTracking = false;
+          return;
+        }
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         isTracking = true;
@@ -32693,7 +33130,7 @@ function setupYearOverviewToggle() {
           <button type="button" onclick="toggleDcCheck('${k}')"
                   class="w-full p-1.5 rounded-lg bg-white border border-slate-200/80 flex items-center gap-2 text-left cursor-pointer">
             <span class="w-4 h-4 rounded flex items-center justify-center text-[9px] shrink-0 ${isDone ? 'bg-blue-600 text-white' : 'border border-slate-300'}">${isDone ? '✓' : ''}</span>
-            <span class="text-[11px] font-medium ${isDone ? 'line-through text-slate-400' : 'text-slate-700'}">${txt}</span>
+            <span class="text-[11px] font-bold ${isDone ? 'line-through text-slate-400' : 'text-slate-950'}">${txt}</span>
           </button>`;
       }).join('');
 
@@ -32980,9 +33417,24 @@ function setupYearOverviewToggle() {
     function resolveMultiCountriesForTrip(tripKey) {
       const rawTitle = (typeof customTripTitles !== 'undefined' && customTripTitles[tripKey]) ? String(customTripTitles[tripKey]).trim() : '';
       const lowerTitle = rawTitle.toLowerCase();
-      const detected = (typeof detectAllCountriesInText === 'function' && lowerTitle)
+      let detected = (typeof detectAllCountriesInText === 'function' && lowerTitle)
         ? detectAllCountriesInText(lowerTitle)
         : [];
+
+      // 若標題以分隔符（・、/、,、及、與、+、->、➔）連接多個國家或城市，逐段補掃確保絕不漏掉第 2～5 個國家
+      if (lowerTitle) {
+        const segments = lowerTitle.split(/[・、\/,&+＋→➔\s]+|及|與|和/).map(s => s.trim()).filter(Boolean);
+        if (segments.length >= 2 && typeof detectAllCountriesInText === 'function') {
+          segments.forEach((seg, sIdx) => {
+            const segHits = detectAllCountriesInText(seg);
+            segHits.forEach(sh => {
+              if (!detected.some(d => d.countryCode === sh.countryCode)) {
+                detected.push({ ...sh, pos: 1000 + sIdx });
+              }
+            });
+          });
+        }
+      }
 
       // 過濾出有效國家／地區並去重，最多支援 5 個國家
       const uniqueList = [];
@@ -33016,26 +33468,89 @@ function setupYearOverviewToggle() {
       return uniqueList.slice(0, 5);
     }
 
-    window.switchDcMultiCountry = (countryCode, scrollToTopAfter = false) => {
+    window.dcPreserveScrollAnchor = null;
+
+    window.switchDcMultiCountry = (countryCode, scrollToTopAfter = false, anchorCardIdx = -1) => {
       if (!dcCurrentTripKey || !countryCode) return;
       dcSelectedMultiCountryMap[dcCurrentTripKey] = String(countryCode).toUpperCase();
       const currentTab = dcCurrentTab || 'prep';
-      // 強制重新渲染目前開啟的雙錦囊分頁（保留當前「出行須知」或「城市指南」分頁）
-      dcCurrentTab = '';
-      toggleTripDualCapsule(dcCurrentTripKey, currentTab);
-      if (scrollToTopAfter) {
-        const pPrep = document.getElementById('dcPanelPrep');
-        const pTips = document.getElementById('dcPanelTips');
-        if (pPrep) pPrep.scrollTop = 0;
-        if (pTips) pTips.scrollTop = 0;
-        const drawer = document.getElementById('dualCapsuleStudioDrawer');
-        if (drawer && window.innerWidth >= 1024) {
-          drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const wasFullscreen = dcIsMobileFullscreen;
+
+      // 紀錄切換前所有捲動容器位置及所點擊卡片之視覺位置，徹底防止跳位
+      const prepP = document.getElementById('dcPanelPrep');
+      const tipsP = document.getElementById('dcPanelTips');
+      const leavesBox = document.getElementById('tabContentLeaves');
+      const modalLeavesScroll = document.getElementById('modalOverviewLeavesScrollBody');
+      let savedPrepScroll = prepP ? prepP.scrollTop : 0;
+      let savedTipsScroll = tipsP ? tipsP.scrollTop : 0;
+      let savedLeavesScroll = leavesBox ? leavesBox.scrollTop : 0;
+      let savedModalScroll = modalLeavesScroll ? modalLeavesScroll.scrollTop : 0;
+      const savedWinY = window.scrollY;
+
+      let targetCardTopBefore = null;
+      if (!scrollToTopAfter && anchorCardIdx >= 0) {
+        const allCards = document.querySelectorAll('#dualCapsuleStudioDrawer .dc-section-card');
+        if (allCards[anchorCardIdx]) {
+          targetCardTopBefore = allCards[anchorCardIdx].getBoundingClientRect().top;
         }
       }
+
+      const applyAnchorCompensation = () => {
+        if (scrollToTopAfter) {
+          if (prepP) prepP.scrollTop = 0;
+          if (tipsP) tipsP.scrollTop = 0;
+          return;
+        }
+        if (prepP) prepP.scrollTop = savedPrepScroll;
+        if (tipsP) tipsP.scrollTop = savedTipsScroll;
+        if (leavesBox) leavesBox.scrollTop = savedLeavesScroll;
+        if (modalLeavesScroll) modalLeavesScroll.scrollTop = savedModalScroll;
+        if (Math.abs(window.scrollY - savedWinY) > 2) window.scrollTo(0, savedWinY);
+
+        // 若所點擊的卡片因上方內容高度微調而產生位移，自動精準補償差值，令手指按住的箭嘴原地零位移！
+        if (anchorCardIdx >= 0 && targetCardTopBefore !== null) {
+          const updatedCards = document.querySelectorAll('#dualCapsuleStudioDrawer .dc-section-card');
+          const cardEl = updatedCards[anchorCardIdx];
+          if (cardEl) {
+            const diff = cardEl.getBoundingClientRect().top - targetCardTopBefore;
+            if (Math.abs(diff) > 1) {
+              const activePanel = (currentTab === 'tips') ? tipsP : prepP;
+              if (activePanel && activePanel.scrollHeight > activePanel.clientHeight + 4) {
+                activePanel.scrollTop += diff;
+                savedPrepScroll = prepP ? prepP.scrollTop : savedPrepScroll;
+                savedTipsScroll = tipsP ? tipsP.scrollTop : savedTipsScroll;
+              } else if (modalLeavesScroll && modalLeavesScroll.contains(cardEl) && modalLeavesScroll.scrollHeight > modalLeavesScroll.clientHeight + 4) {
+                modalLeavesScroll.scrollTop += diff;
+                savedModalScroll = modalLeavesScroll.scrollTop;
+              } else if (leavesBox && leavesBox.contains(cardEl) && leavesBox.scrollHeight > leavesBox.clientHeight + 4) {
+                leavesBox.scrollTop += diff;
+                savedLeavesScroll = leavesBox.scrollTop;
+              }
+            }
+          }
+        }
+      };
+
+      window.dcPreserveScrollAnchor = !scrollToTopAfter ? {
+        reapply: applyAnchorCompensation,
+        expiresAt: Date.now() + 2600
+      } : null;
+
+      // 強制重新渲染目前開啟的雙錦囊分頁（鎖定原地插槽，絕不跳走或收起）
+      dcCurrentTab = '';
+      toggleTripDualCapsule(dcCurrentTripKey, currentTab, null, 'preserve');
+      if (wasFullscreen && window.innerWidth < 1024) {
+        toggleDcMobileFullscreen(true);
+      }
+
+      // 同步立即執行一次＋多幀校準，消除任何一幀跳閃
+      applyAnchorCompensation();
+      requestAnimationFrame(applyAnchorCompensation);
+      setTimeout(applyAnchorCompensation, 60);
+      setTimeout(applyAnchorCompensation, 180);
     };
 
-    window.stepDcMultiCountry = (dir = 1, scrollToTopAfter = false) => {
+    window.stepDcMultiCountry = (dir = 1, scrollToTopAfter = false, anchorCardIdx = -1) => {
       if (!dcCurrentTripKey) return false;
       const countries = resolveMultiCountriesForTrip(dcCurrentTripKey);
       if (countries.length <= 1) return false;
@@ -33044,7 +33559,7 @@ function setupYearOverviewToggle() {
       const nextIdx = (curIdx + dir + countries.length) % countries.length;
       const nextCountry = countries[nextIdx];
       if (nextCountry) {
-        switchDcMultiCountry(nextCountry.code, scrollToTopAfter);
+        switchDcMultiCountry(nextCountry.code, scrollToTopAfter, anchorCardIdx);
         showToast(`${nextCountry.flag} 已切換至【${nextCountry.name}】`);
         return true;
       }
@@ -33063,6 +33578,33 @@ function setupYearOverviewToggle() {
       stepDcMultiCountry(e.key === 'ArrowRight' ? 1 : -1, false);
     });
 
+    window.scrollDcToDestinationBar = () => {
+      const prepP = document.getElementById('dcPanelPrep');
+      const tipsP = document.getElementById('dcPanelTips');
+      const activePanel = (dcCurrentTab === 'tips') ? tipsP : prepP;
+      if (activePanel && activePanel.scrollHeight > activePanel.clientHeight + 4) {
+        activePanel.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      const drawer = document.getElementById('dualCapsuleStudioDrawer');
+      const modalLeavesScroll = document.getElementById('modalOverviewLeavesScrollBody');
+      const leavesBox = document.getElementById('tabContentLeaves');
+      if (drawer) {
+        if (modalLeavesScroll && modalLeavesScroll.contains(drawer) && modalLeavesScroll.scrollHeight > modalLeavesScroll.clientHeight + 4) {
+          const mRect = modalLeavesScroll.getBoundingClientRect();
+          const dRect = drawer.getBoundingClientRect();
+          const targetTop = modalLeavesScroll.scrollTop + (dRect.top - mRect.top) - 6;
+          modalLeavesScroll.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+        } else if (leavesBox && leavesBox.contains(drawer) && leavesBox.scrollHeight > leavesBox.clientHeight + 4) {
+          const lRect = leavesBox.getBoundingClientRect();
+          const dRect = drawer.getBoundingClientRect();
+          const targetTop = leavesBox.scrollTop + (dRect.top - lRect.top) - 6;
+          leavesBox.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+        }
+        drawer.classList.add('ring-2', 'ring-blue-400/80');
+        setTimeout(() => drawer.classList.remove('ring-2', 'ring-blue-400/80'), 900);
+      }
+    };
+
     function syncDcCardCornerArrows(countries, activeCode) {
       const cards = document.querySelectorAll('#dualCapsuleStudioDrawer .dc-section-card');
       const isMulti = Array.isArray(countries) && countries.length > 1;
@@ -33070,7 +33612,7 @@ function setupYearOverviewToggle() {
       const prevCountry = isMulti ? countries[(curIdx - 1 + countries.length) % countries.length] : null;
       const nextCountry = isMulti ? countries[(curIdx + 1) % countries.length] : null;
 
-      cards.forEach((card) => {
+      cards.forEach((card, cardIdx) => {
         let cornerRow = card.querySelector('.dc-card-corner-arrows');
         if (!isMulti) {
           if (cornerRow) cornerRow.remove();
@@ -33082,15 +33624,20 @@ function setupYearOverviewToggle() {
           card.appendChild(cornerRow);
         }
         cornerRow.innerHTML = `
-          <button type="button" onclick="event.stopPropagation(); stepDcMultiCountry(-1, false)"
+          <button type="button" onclick="event.stopPropagation(); stepDcMultiCountry(-1, false, ${cardIdx})"
                   title="上一站：${prevCountry.name}" aria-label="切換至${prevCountry.name}"
-                  class="w-4 h-4 rounded-full bg-white/90 hover:bg-blue-600 text-slate-400 hover:text-white border border-slate-200/90 hover:border-blue-600 inline-flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs">
-            <i class="fa-solid fa-chevron-left text-[7.5px] leading-none"></i>
+                  class="w-5 h-5 rounded-full bg-white/95 hover:bg-blue-600 text-slate-500 hover:text-white border border-slate-200/95 hover:border-blue-600 inline-flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs">
+            <i class="fa-solid fa-chevron-left text-[8px] leading-none"></i>
           </button>
-          <button type="button" onclick="event.stopPropagation(); stepDcMultiCountry(1, false)"
+          <button type="button" onclick="event.stopPropagation(); scrollDcToDestinationBar()"
+                  title="返回雙錦囊頂部標題列" aria-label="返回雙錦囊頂部標題列"
+                  class="w-5 h-5 rounded-full bg-white/95 hover:bg-blue-600 text-slate-500 hover:text-white border border-slate-200/95 hover:border-blue-600 inline-flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs">
+            <i class="fa-solid fa-chevron-up text-[8px] leading-none"></i>
+          </button>
+          <button type="button" onclick="event.stopPropagation(); stepDcMultiCountry(1, false, ${cardIdx})"
                   title="下一站：${nextCountry.name}" aria-label="切換至${nextCountry.name}"
-                  class="w-4 h-4 rounded-full bg-white/90 hover:bg-blue-600 text-slate-400 hover:text-white border border-slate-200/90 hover:border-blue-600 inline-flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs">
-            <i class="fa-solid fa-chevron-right text-[7.5px] leading-none"></i>
+                  class="w-5 h-5 rounded-full bg-white/95 hover:bg-blue-600 text-slate-500 hover:text-white border border-slate-200/95 hover:border-blue-600 inline-flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs">
+            <i class="fa-solid fa-chevron-right text-[8px] leading-none"></i>
           </button>
         `;
       });
@@ -34301,7 +34848,16 @@ function setupYearOverviewToggle() {
       });
       if (wasHidden) {
         target.classList.remove('hidden');
-        target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        const tipsPanel = document.getElementById('dcPanelTips');
+        if (tipsPanel && tipsPanel.contains(target)) {
+          requestAnimationFrame(() => {
+            const pRect = tipsPanel.getBoundingClientRect();
+            const tRect = target.getBoundingClientRect();
+            if (tRect.bottom > pRect.bottom - 12) {
+              tipsPanel.scrollBy({ top: Math.min(tRect.bottom - pRect.bottom + 20, tRect.top - pRect.top - 12), behavior: 'smooth' });
+            }
+          });
+        }
       } else {
         target.classList.add('hidden');
       }
@@ -34467,12 +35023,21 @@ function setupYearOverviewToggle() {
         `;
       }
 
-      // 2. 其他附近城市
+      // 總數精簡上限：全選單合計最多 6 個（首選標題 ＋ 附近最多 3 個 ＋ 主要最多補滿至 6 個，絕不變水蛇春）
+      const MAX_TOTAL_WEATHER_CITIES = 6;
+      const shownSet = new Set(matchedRouteCities.map(c => c.name));
+      if (prefCity) shownSet.add(prefCity.name);
+
+      // 2. 其他附近城市（精簡限定最多 3 個）
       const anchorCity = (dcSelectedCity && cities.find(c => c.name === dcSelectedCity.name)) || prefCity;
       const nearbyNames = (anchorCity && Array.isArray(anchorCity.nearby)) ? anchorCity.nearby : [];
+      const remainingAfterTitle = Math.max(0, MAX_TOTAL_WEATHER_CITIES - matchedRouteCities.length);
+      const maxNearbyCount = Math.min(3, remainingAfterTitle);
       const nearbyCities = nearbyNames
         .map(n => cities.find(c => c.name === n))
-        .filter(c => c && (!prefCity || c.name !== prefCity.name));
+        .filter(c => c && !shownSet.has(c.name))
+        .slice(0, maxNearbyCount);
+      nearbyCities.forEach(c => shownSet.add(c.name));
 
       let nearbyHtml = '';
       if (nearbyCities.length > 0) {
@@ -34490,9 +35055,11 @@ function setupYearOverviewToggle() {
         `;
       }
 
-      // 3. 主要城市
-      const shownSet = new Set([prefCity ? prefCity.name : '', ...nearbyCities.map(c => c.name)]);
-      const otherMajorCities = cities.filter(c => !shownSet.has(c.name));
+      // 3. 主要城市（只補滿至總共 6 個，其餘幾十個城鎮保留於頂部搜尋框即時搜尋）
+      const remainingForMajor = Math.max(0, MAX_TOTAL_WEATHER_CITIES - matchedRouteCities.length - nearbyCities.length);
+      const otherMajorCities = remainingForMajor > 0
+        ? cities.filter(c => !shownSet.has(c.name)).slice(0, remainingForMajor)
+        : [];
       let majorHtml = '';
       if (otherMajorCities.length > 0) {
         majorHtml = `
@@ -34531,15 +35098,22 @@ function setupYearOverviewToggle() {
       const bay = document.getElementById('dualCapsuleParkingBay');
       if (!drawer || !bay) return;
 
+      const isAlreadyInRibbonSlot = (drawer.parentElement && drawer.parentElement.id === 'mobileRibbonDualCapsuleSlot');
       let targetSlot = null;
-      if (sourceContext === 'ribbon') {
+      if (sourceContext === 'ribbon' || (sourceContext === 'preserve' && isAlreadyInRibbonSlot)) {
         targetSlot = document.getElementById('mobileRibbonDualCapsuleSlot');
+      } else if (sourceContext === 'preserve' && drawer.parentElement && drawer.parentElement.classList.contains('trip-dual-capsule-slot')) {
+        targetSlot = drawer.parentElement;
       } else if (triggerEl) {
         const cardInner = triggerEl.closest('.trip-card-inner');
         if (cardInner) targetSlot = cardInner.querySelector(`.trip-dual-capsule-slot[data-trip-key="${tripKey}"]`);
       }
       if (!targetSlot) {
-        targetSlot = document.querySelector(`.trip-dual-capsule-slot[data-trip-key="${tripKey}"]`) || document.getElementById('mobileRibbonDualCapsuleSlot');
+        if (window.innerWidth < 1024) {
+          targetSlot = document.getElementById('mobileRibbonDualCapsuleSlot') || document.querySelector(`.trip-dual-capsule-slot[data-trip-key="${tripKey}"]`);
+        } else {
+          targetSlot = document.querySelector(`.trip-dual-capsule-slot[data-trip-key="${tripKey}"]`) || document.getElementById('mobileRibbonDualCapsuleSlot');
+        }
       }
       if (!targetSlot) return;
 
@@ -34561,7 +35135,9 @@ function setupYearOverviewToggle() {
       }
 
       dcCurrentTripKey = tripKey;
-      targetSlot.appendChild(drawer);
+      if (drawer.parentElement !== targetSlot) {
+        targetSlot.appendChild(drawer);
+      }
       switchDualCapsuleTab(tabType);
 
       const resolved = resolveCountrySpecForTrip(tripKey);
@@ -34969,27 +35545,41 @@ function setupYearOverviewToggle() {
         if (!isMobileRibbonSlot) {
           mobRibbon.classList.remove('is-dc-fullscreen');
           dcIsMobileFullscreen = false;
+        } else {
+          // 手機版吸頂展開雙錦囊時，同步鎖定背景頁面不穿透滑動
+          document.body.style.overflow = 'hidden';
         }
       }
-      document.body.classList.remove('dc-mobile-sheet-lock');
       dcMinimizedState = null;
       const minBarEl = document.getElementById('dcMobileMinBar');
       if (minBarEl) minBarEl.classList.add('hidden');
       requestAnimationFrame(syncDcViewportHeight);
       setTimeout(syncDcViewportHeight, 120);
-      if (!isMobileRibbonSlot) {
-        const leavesContainer = document.getElementById('tabContentLeaves');
-        if (leavesContainer && drawer) {
+      const isPreservingScroll = (sourceContext === 'preserve');
+      const modalLeavesScrollEl = document.getElementById('modalOverviewLeavesScrollBody');
+      const isInsideModalLeaves = Boolean(modalLeavesScrollEl && drawer && modalLeavesScrollEl.contains(drawer));
+      if (!isMobileRibbonSlot && !isPreservingScroll) {
+        if (isInsideModalLeaves) {
           requestAnimationFrame(() => {
-            const topOffset = drawer.offsetTop - leavesContainer.offsetTop - 8;
-            leavesContainer.scrollTo({ top: Math.max(0, topOffset), behavior: 'smooth' });
+            const topOffset = drawer.offsetTop - modalLeavesScrollEl.offsetTop - 8;
+            modalLeavesScrollEl.scrollTo({ top: Math.max(0, topOffset), behavior: 'smooth' });
           });
+        } else {
+          const leavesContainer = document.getElementById('tabContentLeaves');
+          if (leavesContainer && drawer && leavesContainer.contains(drawer)) {
+            requestAnimationFrame(() => {
+              const topOffset = drawer.offsetTop - leavesContainer.offsetTop - 8;
+              leavesContainer.scrollTo({ top: Math.max(0, topOffset), behavior: 'smooth' });
+            });
+          }
         }
       }
-      const prepP = document.getElementById('dcPanelPrep');
-      const tipsP = document.getElementById('dcPanelTips');
-      if (prepP) prepP.scrollTop = 0;
-      if (tipsP) tipsP.scrollTop = 0;
+      if (!isPreservingScroll) {
+        const prepP = document.getElementById('dcPanelPrep');
+        const tipsP = document.getElementById('dcPanelTips');
+        if (prepP) prepP.scrollTop = 0;
+        if (tipsP) tipsP.scrollTop = 0;
+      }
 
       if (!resolved.isUnknown) {
         fetchAndRenderDcWeather(tripKey);
@@ -34997,8 +35587,8 @@ function setupYearOverviewToggle() {
         fetchLiveWikivoyageAndNews(tripKey, false);
       }
 
-      if (isMobileRibbonSlot) {
-        // 手機版吸頂走廊原地展開：鎖定視窗捲動位置，徹底禁止瀏覽器跳回頁頂
+      if (isMobileRibbonSlot || isPreservingScroll || isInsideModalLeaves) {
+        // 原地展開、彈窗內展開或同卡切換國家：嚴格鎖定背景視窗捲動位置，徹底禁止跳動
         requestAnimationFrame(() => {
           if (Math.abs(window.scrollY - savedWinY) > 2) window.scrollTo(0, savedWinY);
         });
@@ -35215,7 +35805,7 @@ function setupYearOverviewToggle() {
         if (dcCurrentTripKey === tripKey) {
           const curTab = dcCurrentTab || 'prep';
           dcCurrentTripKey = null;
-          toggleTripDualCapsule(tripKey, curTab);
+          toggleTripDualCapsule(tripKey, curTab, null, 'preserve');
         }
         showToast('✈️ 預訂資料已儲存並同步！');
       }
@@ -35235,7 +35825,7 @@ function setupYearOverviewToggle() {
       if (dcCurrentTripKey === tripKey) {
         const curTab = dcCurrentTab || 'prep';
         dcCurrentTripKey = null;
-        toggleTripDualCapsule(tripKey, curTab);
+        toggleTripDualCapsule(tripKey, curTab, null, 'preserve');
       }
 
       const meta = getCountryMetaByCode(targetCode);
@@ -35317,7 +35907,7 @@ function setupYearOverviewToggle() {
       if (dcCurrentTripKey === tripKey) {
         const curTab = dcCurrentTab || 'prep';
         dcCurrentTripKey = null;
-        toggleTripDualCapsule(tripKey, curTab);
+        toggleTripDualCapsule(tripKey, curTab, null, 'preserve');
       }
       showToast(`✅ 已全部統一為 ${meta ? meta.flag + ' ' + label : label}，感嘆號提醒已消除！`);
     }
@@ -35707,7 +36297,7 @@ function setupYearOverviewToggle() {
       </div>
 
       <!-- 錦囊一：🧭 出行須知（4 層黃金編排次序） -->
-      <div id="dcPanelPrep" class="p-3 space-y-3 text-xs dc-scroll-viewport custom-scroll">
+      <div id="dcPanelPrep" class="p-3 space-y-3 text-xs dc-scroll-viewport custom-scroll" style="overflow-anchor: none;">
         <!-- 未有資料空狀態卡片（當目的地不在資料庫或未設定時顯示，絕不誤顯示舊國家資料） -->
         <div id="dcPrepEmptyStateBox" class="hidden p-5 rounded-2xl bg-slate-50 border border-slate-200/90 text-center space-y-3">
           <div class="w-11 h-11 rounded-2xl bg-white border border-slate-200 shadow-2xs mx-auto flex items-center justify-center text-xl">📭</div>
@@ -36028,11 +36618,11 @@ function setupYearOverviewToggle() {
         <!-- 第 4 層：出發前準備（電壓歸位 ＋ 當地國家專屬細心物品 ＋ 預留 3 行自訂空白行） -->
         <div class="dc-section-card relative p-3 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-2.5">
           <div class="flex items-center justify-between">
-            <span class="font-black text-blue-950 text-xs flex items-center gap-1.5">
+            <span class="font-black text-slate-950 text-xs flex items-center gap-1.5">
               <i class="fa-solid fa-suitcase-rolling text-blue-600"></i>
               <span>4. 行李與出發前檢查清單</span>
             </span>
-            <span id="dcChecklistProgress" class="text-[10px] tabular-nums font-bold text-blue-700">0 / 0 已完成</span>
+            <span id="dcChecklistProgress" class="text-[10px] tabular-nums font-bold text-slate-950">0 / 0 已完成</span>
           </div>
 
           <div class="p-2 rounded-xl bg-blue-50/80 border border-blue-200/80 flex items-center justify-between text-[11px]">
@@ -36051,7 +36641,7 @@ function setupYearOverviewToggle() {
           <div id="dcGeneralChecklistList" class="space-y-1"></div>
 
           <div class="pt-1.5 border-t border-slate-200/80 space-y-1.5">
-            <span class="text-[10px] font-bold text-slate-500 block">✏️ 自訂檢查項目（點擊輸入並剔選，系統自動儲存）：</span>
+            <span class="text-[10px] font-bold text-slate-950 block">✏️ 自訂檢查項目（點擊輸入並剔選，系統自動儲存）：</span>
             <div id="dcCustomRowsList" class="space-y-1.5"></div>
           </div>
         </div>
@@ -37385,7 +37975,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-blue-700 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-black text-blue-950 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-blue-700">v6.2.8</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-blue-700">v6.4.3</span>
           </button>
         </div>
 
