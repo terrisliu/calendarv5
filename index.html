@@ -3305,29 +3305,32 @@
         <div id="topInlineRefScrollBody" class="max-h-[36vh] min-h-[145px] overflow-y-auto custom-scroll pr-0.5 text-xs rounded-xl"></div>
       </div>
 
-      <!-- 手機版專屬：原地生出之「假期助手」三層摺疊吸頂板塊（預設第 1 層撐滿手機最盡版面；右上角雙箭嘴支援 3 層摺疊釋放空間） -->
-      <div id="topInlineAssistantPanel" class="hidden lg:hidden flex flex-col bg-gradient-to-b from-sky-100/95 via-blue-50/85 to-white backdrop-blur-xl border border-sky-300/90 rounded-2xl p-2 mb-2 shadow-xl transition-all duration-200" style="height: calc(100dvh - 58px);">
-        <!-- 頂列：3 大拼假方案膠囊切換 ＋ 右上角雙箭嘴（縮放切換 / 分階收起） -->
-        <div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-sky-200/80 gap-1.5 min-w-0 shrink-0">
-          <div class="flex items-center gap-0.5 bg-sky-200/65 p-0.5 rounded-xl flex-1 min-w-0">
+      <!-- 手機版專屬：原地生出之「假期助手」三層摺疊吸頂板塊（大字戰績看板 ＋ 清單／年曆雙視圖切換） -->
+      <div id="topInlineAssistantPanel" class="hidden lg:hidden flex flex-col bg-gradient-to-b from-amber-50/55 via-white/98 to-indigo-50/40 backdrop-blur-2xl border border-indigo-200/80 rounded-2xl p-2 mb-2 shadow-[0_14px_34px_-10px_rgba(79,70,229,0.14)] transition-all duration-200" style="height: calc(100dvh - 58px);">
+        <!-- 頂列：3 大拼假方案（內嵌精簡副標）＋ 右上角雙箭嘴 -->
+        <div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-indigo-100/90 gap-1.5 min-w-0 shrink-0">
+          <div class="flex items-stretch gap-1 bg-indigo-50/85 p-0.5 rounded-xl flex-1 min-w-0 border border-indigo-100">
             <button type="button" id="inlineFbSchemeBtn-max" onclick="executeTravelVacation('max')"
-                    class="flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-slate-700 hover:text-sky-900 transition cursor-pointer truncate">
-              🚀 長假首選
+                    class="flex-1 py-0.5 px-1 rounded-lg text-center transition cursor-pointer min-w-0 flex flex-col items-center justify-center">
+              <span class="text-[10px] font-bold text-slate-700 truncate leading-tight">🚀 長假首選</span>
+              <span class="text-[7.5px] font-semibold text-blue-600/85 truncate leading-tight">跨週長假·全用AL</span>
             </button>
             <button type="button" id="inlineFbSchemeBtn-casual" onclick="executeTravelVacation('casual')"
-                    class="flex-1 py-1 px-1 rounded-lg text-[10px] font-extrabold bg-sky-600 text-white shadow-2xs transition cursor-pointer truncate">
-              ☕ 均衡休閒
+                    class="flex-1 py-0.5 px-1 rounded-lg text-center bg-white shadow-xs border border-emerald-200/80 transition cursor-pointer min-w-0 flex flex-col items-center justify-center">
+              <span class="text-[10px] font-black text-emerald-700 truncate leading-tight">☕ 均衡休閒</span>
+              <span class="text-[7.5px] font-bold text-emerald-600 truncate leading-tight">四季放鬆·留備用</span>
             </button>
             <button type="button" id="inlineFbSchemeBtn-minimal" onclick="executeTravelVacation('minimal')"
-                    class="flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-slate-700 hover:text-sky-900 transition cursor-pointer truncate">
-              🌿 週末微休
+                    class="flex-1 py-0.5 px-1 rounded-lg text-center transition cursor-pointer min-w-0 flex flex-col items-center justify-center">
+              <span class="text-[10px] font-bold text-slate-700 truncate leading-tight">🌿 週末微休</span>
+              <span class="text-[7.5px] font-semibold text-amber-600/90 truncate leading-tight">請1-2日·輕巧快閃</span>
             </button>
           </div>
-          <!-- 右上角雙圓形箭嘴按鈕（肌肉記憶對齊：左＝全屏/半屏縮放箭嘴，右＝分階向上摺疊箭嘴） -->
+          <!-- 右上角雙圓形箭嘴按鈕 -->
           <div class="inline-flex items-center gap-1.5 shrink-0">
             <button type="button" id="btnInlineAssistantScaleToggle" onclick="toggleInlineAssistantSizeTier()"
                     aria-label="切換全屏或半屏高度"
-                    class="w-[26px] h-[26px] rounded-full bg-sky-50 hover:bg-sky-100 border border-sky-300 text-sky-700 inline-flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
+                    class="w-[26px] h-[26px] rounded-full bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-700 inline-flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
               <i id="inlineAssistantScaleIcon" class="fa-solid fa-down-left-and-up-right-to-center text-[9.5px]"></i>
             </button>
             <button type="button" id="btnStepCloseInlineAssistant" onclick="stepFoldInlineAssistantPanel()"
@@ -3338,55 +3341,85 @@
           </div>
         </div>
 
-        <!-- 第二列（常駐顯示，第 3 層極簡窄條模式亦保留此操作列！）：KPI 統計 ＋ 階層標籤 ＋「更換 / 套用」快捷鈕 -->
-        <div id="inlineFbActionControlRow" class="flex items-center justify-between gap-1 text-[10px] min-w-0 shrink-0 pb-1.5 mb-1.5 border-b border-sky-200/60">
-          <div class="flex items-center gap-1 min-w-0 overflow-hidden">
-            <span id="inlineFbKpiTotalDays" class="px-1.5 py-0.5 rounded-md bg-amber-100/95 text-amber-900 border border-amber-200/90 font-black tabular-nums shrink-0">放 0 日</span>
-            <span id="inlineFbKpiAlCost" class="px-1.5 py-0.5 rounded-md bg-sky-100/95 text-sky-800 border border-sky-200/90 font-extrabold tabular-nums shrink-0">請 0 AL</span>
-            <span id="inlineFbTierBadge" class="px-1.5 py-0.5 rounded-full bg-slate-200/80 text-slate-700 font-extrabold text-[8.5px] shrink-0">1/3 全屏</span>
+        <!-- 醒目大字戰績三連卡（享受幾多日 · 消耗幾多 AL · 年假使用率 %） -->
+        <div id="inlineFbHeroKpiGrid" class="grid grid-cols-3 gap-1.5 bg-white/95 rounded-xl py-1.5 px-2 mb-1.5 border border-indigo-100/90 text-center shadow-2xs shrink-0">
+          <div class="flex flex-col items-center justify-center">
+            <span class="text-[9px] text-slate-500 font-bold tracking-wide">享受</span>
+            <span id="inlineFbKpiTotalDays" class="text-base sm:text-lg font-black text-amber-600 tabular-nums leading-tight mt-0.5">放 0 日</span>
+          </div>
+          <div class="flex flex-col items-center justify-center border-x border-slate-200/80 px-1">
+            <span class="text-[9px] text-slate-500 font-bold tracking-wide">消耗</span>
+            <span id="inlineFbKpiAlCost" class="text-base sm:text-lg font-black text-blue-700 tabular-nums leading-tight mt-0.5">請 0 日 AL</span>
+          </div>
+          <div class="flex flex-col items-center justify-center">
+            <span class="text-[9px] text-slate-500 font-bold tracking-wide">年假使用率</span>
+            <span id="inlineFbKpiUsageRate" class="text-base sm:text-lg font-black text-emerald-600 tabular-nums leading-tight mt-0.5">0%</span>
+          </div>
+        </div>
+
+        <!-- 操作列（常駐顯示，第 3 層極簡窄條模式亦保留此列！）：階層標籤 ＋「清單 / 年曆」雙分頁 ＋「更換 / 套用」快捷鈕 -->
+        <div id="inlineFbActionControlRow" class="flex items-center justify-between gap-1 text-[10px] min-w-0 shrink-0 pb-1.5 mb-1.5 border-b border-indigo-100/80">
+          <div class="flex items-center gap-1 min-w-0">
+            <span id="inlineFbTierBadge" class="px-1.5 py-0.5 rounded-full bg-indigo-100/75 text-indigo-700 font-extrabold text-[8.5px] shrink-0">1/3 全屏</span>
+            <div id="inlineFbSubViewTabs" class="bg-indigo-50/95 border border-indigo-100 p-0.5 rounded-lg flex items-center gap-0.5 font-bold">
+              <button type="button" id="inlineFbViewTabList" onclick="switchInlineAssistantSubView('list')"
+                      class="px-2 py-0.5 rounded-md bg-white text-indigo-700 shadow-2xs text-[10px] font-extrabold transition cursor-pointer flex items-center gap-1">
+                <i class="fa-solid fa-list-ul text-[8.5px]"></i>
+                <span>清單</span>
+              </button>
+              <button type="button" id="inlineFbViewTabYear" onclick="switchInlineAssistantSubView('year')"
+                      class="px-2 py-0.5 rounded-md text-slate-600 hover:text-indigo-700 text-[10px] font-semibold transition cursor-pointer flex items-center gap-1">
+                <i class="fa-solid fa-calendar-days text-[8.5px]"></i>
+                <span>年曆</span>
+              </button>
+            </div>
           </div>
 
           <div class="flex items-center gap-1 shrink-0">
-            <div id="inlineFbSubViewTabs" class="bg-slate-200/85 p-0.5 rounded-lg flex items-center gap-0.5 font-bold">
-              <button type="button" id="inlineFbViewTabBoth" onclick="switchInlineAssistantSubView('both')"
-                      class="px-1.5 py-0.5 rounded-md bg-white text-sky-800 shadow-2xs text-[9.5px] font-extrabold transition cursor-pointer">
-                全覽
-              </button>
-              <button type="button" id="inlineFbViewTabList" onclick="switchInlineAssistantSubView('list')"
-                      class="px-1.5 py-0.5 rounded-md text-slate-600 hover:text-slate-900 text-[9.5px] font-semibold transition cursor-pointer">
-                清單
-              </button>
-              <button type="button" id="inlineFbViewTabYear" onclick="switchInlineAssistantSubView('year')"
-                      class="px-1.5 py-0.5 rounded-md text-slate-600 hover:text-slate-900 text-[9.5px] font-semibold transition cursor-pointer">
-                年曆
-              </button>
-            </div>
             <button type="button" onclick="executeTravelVacation(currentTravelMode || 'casual')"
-                    class="px-2 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 font-extrabold text-[10px] flex items-center gap-1 transition active:scale-95 cursor-pointer shadow-2xs">
+                    class="px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 font-extrabold text-[10px] flex items-center gap-1 transition active:scale-95 cursor-pointer shadow-2xs">
               <i class="fa-solid fa-rotate text-[9px]"></i>
               <span>更換</span>
             </button>
             <button type="button" onclick="applyCurrentTravelAssistantCombo()"
-                    class="px-2 py-1 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold text-[10px] flex items-center gap-1 transition active:scale-95 cursor-pointer shadow-xs">
+                    class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold text-[10px] flex items-center gap-1 transition active:scale-95 cursor-pointer shadow-xs">
               <i class="fa-solid fa-check text-[9px]"></i>
               <span>套用</span>
             </button>
           </div>
         </div>
 
-        <!-- 內容捲動區（第 1 層撐滿剩餘全部高度 flex-1，第 2 層縮至半屏露出主月曆，第 3 層收起成窄條完全釋放主月曆） -->
-        <div id="topInlineAssistantScrollBody" class="flex-1 min-h-0 overflow-y-auto custom-scroll pr-0.5 space-y-2">
-          <!-- 區塊 A：12 個月全年熱力縮圖（第 1 層「全覽」與「年曆」均顯示，點按任何月份直接跳轉主月曆） -->
-          <div id="inlineFbYearPreviewPane">
-            <div class="flex items-center justify-between text-[9px] font-semibold text-slate-600 mb-1 px-0.5">
-              <div id="inlineFbLegendContainer" class="flex flex-wrap items-center gap-1.5"></div>
-              <span class="text-slate-400 font-mono"><span class="dyn-year-label">2027</span> 全年縮圖</span>
+        <!-- 主內容區：僅保留「清單」與「年曆」兩個專注分頁，各自獨享 100% 剩餘高度 -->
+        <div id="topInlineAssistantScrollBody" class="flex-1 min-h-0 flex flex-col overflow-hidden">
+          <!-- 分頁一：建議連假組合清單（預設顯示，獨享 100% 高度自由垂直捲動） -->
+          <div id="inlineFbListWrapperPane" class="relative flex-1 min-h-0 flex flex-col bg-white/90 rounded-xl border border-indigo-100 p-1.5 shadow-2xs">
+            <div class="flex items-center justify-between px-0.5 mb-1 text-[9.5px] font-bold text-slate-600 shrink-0">
+              <span><i class="fa-solid fa-list-check text-indigo-600 mr-1"></i>建議連假組合（點選跳轉月曆）</span>
+              <span id="inlineFbTripsScrollHint" class="text-indigo-600 font-extrabold hidden">↕ 向下捲動查看全部</span>
             </div>
-            <div id="inlineFbMiniYearGrid" class="grid grid-cols-4 gap-1"></div>
+            <div id="inlineFbListScrollBox" onscroll="updateInlineFbScrollCue()" class="flex-1 min-h-0 overflow-y-auto custom-scroll pr-0.5 pb-4" style="-webkit-overflow-scrolling: touch;">
+              <div id="inlineFbTripListContainer" class="space-y-1.5"></div>
+            </div>
+            <!-- 底部柔和漸層捲動提示浮標 -->
+            <div id="inlineFbBottomScrollCue" onclick="const b = document.getElementById('inlineFbListScrollBox'); if (b) b.scrollBy({ top: 140, behavior: 'smooth' });"
+                 class="hidden pointer-events-auto cursor-pointer absolute bottom-0 left-0 right-0 h-5 rounded-b-xl bg-gradient-to-t from-white via-white/95 to-transparent flex items-end justify-center pb-0.5">
+              <span class="px-2 py-0.2 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-[8.5px] font-extrabold shadow-2xs inline-flex items-center gap-1">
+                <i class="fa-solid fa-angles-down text-[8px] animate-bounce text-indigo-500"></i>
+                <span>向下滑動查看更多假期組合</span>
+              </span>
+            </div>
           </div>
 
-          <!-- 區塊 B：假期日期清單（點按任何卡片直接跳轉主月曆至該月份並高亮日期） -->
-          <div id="inlineFbTripListContainer" class="space-y-1.5"></div>
+          <!-- 分頁二：12 個月全年熱力縮圖（點「年曆」分頁時顯示，獨享 100% 高度展示 3×4 正方形日格） -->
+          <div id="inlineFbYearPreviewPane" class="hidden flex-1 min-h-0 flex flex-col bg-white/90 rounded-xl border border-indigo-100 p-1.5 shadow-2xs">
+            <div class="flex items-center justify-between text-[9px] font-semibold text-slate-600 mb-1 px-0.5 gap-1 shrink-0">
+              <div id="inlineFbLegendContainer" class="flex flex-wrap items-center gap-1.5"></div>
+              <span class="text-slate-400 font-mono shrink-0"><span class="dyn-year-label">2027</span> 全年縮圖</span>
+            </div>
+            <div id="inlineFbMiniYearScrollBox" class="flex-1 min-h-0 overflow-y-auto custom-scroll pr-0.5" style="-webkit-overflow-scrolling: touch;">
+              <div id="inlineFbMiniYearGrid" class="grid grid-cols-3 gap-1.5"></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -3832,7 +3865,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v6.7.28-beta</span>
+      <span>v6.7.35</span>
     </button>
   </footer>
 
@@ -3990,7 +4023,7 @@
           <div>
             <h3 class="font-black text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v6.7.28-beta</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v6.7.35</span>
             </h3>
           </div>
         </div>
@@ -4000,6 +4033,80 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-3.5 text-xs">
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.35（手機版假期助手恢復大字戰績三連卡＋精簡為「清單／年曆」雙分頁）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>還原醒目大字「享受（放 X 日）・消耗（請 Y 日 AL）・年假使用率（Z%）」三連戰績看板，一眼盡顯拼假倍增威力。</li>
+            <li>移除擠迫的「全覽」模式，保留純粹「清單」與「年曆」兩個獨立全高分頁，各自擁有充裕空間清晰閱讀。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.34（手機版假期助手清透晨光白底與藍紫漸層徽章＋方案內嵌簡述零佔空間）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>移除額外佔位說明橫條，將「跨週長假·全用AL / 四季放鬆·留備用 / 請1-2日·輕巧快閃」直接內嵌於頂部三個方案膠囊內，完全不影響原有版面高度。</li>
+            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v6.7.35</code>（移除 beta 字樣）。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.33-beta（手機版假期助手換上高級珍珠白毛玻璃配色＋補回三大方案策略說明列）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>將手機版「假期助手」由原本濃重天藍色背景全面升級為純淨珍珠白毛玻璃質感搭配墨黑月章與精緻分段控制，介面更耐看高雅。</li>
+            <li>於頂部「長假首選／均衡休閒／週末微休」分頁下方補回精簡單行策略說明列，即時顯示當前方案特色與年假配額比例（100% AL / 60%–80% AL / 40%–60% AL），完全不阻礙月曆與清單空間。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.32-beta（修正手機版假期助手「全覽」捲動方向：固定上方 12 個月縮圖，專注捲動下方連假清單）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>在「全覽」全屏模式下，上半部 3×4 正方形全年縮圖完整固定展示 1–12 月（不設月曆內部捲軸），下半部建議連假組合清單佔滿剩餘全部高度並獨立垂直捲動，符合直覺操作習慣。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.31-beta（手機版假期助手「全覽」上下雙獨立捲動分屏，同時看盡月曆與連假清單）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>在現有手機版原地抽屜架構上，將「全覽」模式升級為上下分屏雙獨立捲動區：上半部獨立捲動展示 3×4 純正方形彩色全年縮圖，下半部同時獨立捲動展示建議連假組合清單，打開第一眼即可兼顧靚月曆與連假申請清單，切至「清單」或「年曆」分頁則自動佔滿全屏。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.30-beta（假期助手全年縮圖升級 3×4 正方形日格比例）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>將手機版及電腦版「假期助手」全年縮圖由原本過窄的 4 欄扁平格改為舒展的 3 欄（3×4）比例，每一日改為 1:1 純正方形圓角方格（<code>aspect-square</code>）並補齊月份英文縮寫與對齊空白格，視覺更端正清晰。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.29-beta（假期助手全年縮圖還原各假別專屬顏色＋底部捲動提示浮標）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>升級手機版及電腦版「假期助手」全年縮圖：已鎖定假期 100% 還原各自專屬顏色（AL 天藍、WB 紫、BL 翠綠、CL 琥珀金、SP 銀灰、OFF 玫瑰紅）並支援上下午半日雙色漸層與動態圖例。</li>
+            <li>當假期組合較多超過視窗高度時，手機版「假期助手」自動顯示「↕ 向下捲動查看全部」及底部可點擊捲動浮標，滑動到底部自動隱藏。</li>
+          </ul>
+        </div>
+
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
             <span class="font-bold text-sky-700 text-xs">v6.7.28-beta（新加坡 SG 同步 2026 控煙重罰新例、無紙化退稅及擴充至 16 款 App）</span>
@@ -4523,7 +4630,7 @@
             <span class="text-[9px] lg:text-[10px] text-slate-400 font-mono"><span class="dyn-year-label">2027</span> 全年縮圖</span>
           </div>
           <!-- 12 個月微型網格容器（手機 4 欄 × 3 行超緊湊一屏看盡 12 個月，電腦維持 3 欄 / xl 4 欄不變） -->
-          <div id="fbMiniYearGrid" class="grid grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-1 lg:gap-1.5 flex-1 content-start"></div>
+          <div id="fbMiniYearGrid" class="grid grid-cols-3 xl:grid-cols-4 gap-1.5 flex-1 content-start"></div>
         </div>
 
         <!-- 容器 1（手機置下同屏顯示，電腦置左 lg:order-1）：假期日期清單 -->
@@ -22519,24 +22626,27 @@ function setupYearOverviewToggle() {
       inlineAssistantTier = tier;
       panel.classList.remove('hidden');
 
+      const heroGrid = document.getElementById('inlineFbHeroKpiGrid');
       if (tier === 1) {
         // 第 1 層（預設）：拉到手機最盡全屏版面
         panel.style.height = 'calc(100dvh - 58px)';
+        if (heroGrid) heroGrid.classList.remove('hidden');
         if (body) body.classList.remove('hidden');
         if (subTabs) subTabs.classList.remove('hidden');
         if (actionRow) {
-          actionRow.classList.add('pb-1.5', 'mb-1.5', 'border-b', 'border-sky-200/60');
+          actionRow.classList.add('pb-1.5', 'mb-1.5', 'border-b', 'border-indigo-100/80');
         }
         if (tierBadge) tierBadge.textContent = '1/3 全屏';
         if (scaleIcon) scaleIcon.className = 'fa-solid fa-down-left-and-up-right-to-center text-[9.5px]';
         if (closeIcon) closeIcon.className = 'fa-solid fa-chevron-up text-[10px]';
       } else if (tier === 2) {
-        // 第 2 層：縮細至半屏（約 44dvh），下半部即刻釋放背後主月曆
-        panel.style.height = '44dvh';
+        // 第 2 層：縮細至半屏（約 46dvh），下半部即刻釋放背後主月曆
+        panel.style.height = '46dvh';
+        if (heroGrid) heroGrid.classList.remove('hidden');
         if (body) body.classList.remove('hidden');
         if (subTabs) subTabs.classList.remove('hidden');
         if (actionRow) {
-          actionRow.classList.add('pb-1.5', 'mb-1.5', 'border-b', 'border-sky-200/60');
+          actionRow.classList.add('pb-1.5', 'mb-1.5', 'border-b', 'border-indigo-100/80');
         }
         if (tierBadge) tierBadge.textContent = '2/3 半屏';
         if (scaleIcon) scaleIcon.className = 'fa-solid fa-up-right-and-down-left-from-center text-[9.5px]';
@@ -22555,6 +22665,11 @@ function setupYearOverviewToggle() {
       }
 
       if (typeof syncMobileSingleRowPillState === 'function') syncMobileSingleRowPillState();
+      if (tier > 0 && tier < 3) {
+        requestAnimationFrame(() => {
+          if (typeof updateInlineFbScrollCue === 'function') updateInlineFbScrollCue();
+        });
+      }
     }
 
     function toggleInlineAssistantSizeTier() {
@@ -22582,28 +22697,26 @@ function setupYearOverviewToggle() {
     }
 
     function switchInlineAssistantSubView(view) {
-      const listPane = document.getElementById('inlineFbTripListContainer');
+      const listWrapper = document.getElementById('inlineFbListWrapperPane');
       const yearPane = document.getElementById('inlineFbYearPreviewPane');
-      const tabBoth = document.getElementById('inlineFbViewTabBoth');
       const tabList = document.getElementById('inlineFbViewTabList');
       const tabYear = document.getElementById('inlineFbViewTabYear');
-      if (!listPane || !yearPane) return;
+      if (!listWrapper || !yearPane) return;
 
-      const activeCls = 'px-1.5 py-0.5 rounded-md bg-white text-sky-800 shadow-2xs text-[9.5px] font-extrabold transition cursor-pointer';
-      const idleCls = 'px-1.5 py-0.5 rounded-md text-slate-600 hover:text-slate-900 text-[9.5px] font-semibold transition cursor-pointer';
+      const activeCls = 'px-2 py-0.5 rounded-md bg-white text-indigo-700 shadow-2xs text-[10px] font-extrabold transition cursor-pointer flex items-center gap-1';
+      const idleCls = 'px-2 py-0.5 rounded-md text-slate-600 hover:text-indigo-700 text-[10px] font-semibold transition cursor-pointer flex items-center gap-1';
       if (view === 'year') {
-        listPane.classList.add('hidden');
+        listWrapper.classList.add('hidden');
         yearPane.classList.remove('hidden');
-      } else if (view === 'list') {
-        yearPane.classList.add('hidden');
-        listPane.classList.remove('hidden');
       } else {
-        yearPane.classList.remove('hidden');
-        listPane.classList.remove('hidden');
+        yearPane.classList.add('hidden');
+        listWrapper.classList.remove('hidden');
       }
-      if (tabBoth) tabBoth.className = (view === 'both') ? activeCls : idleCls;
-      if (tabList) tabList.className = (view === 'list') ? activeCls : idleCls;
+      if (tabList) tabList.className = (view !== 'year') ? activeCls : idleCls;
       if (tabYear) tabYear.className = (view === 'year') ? activeCls : idleCls;
+      requestAnimationFrame(() => {
+        if (typeof updateInlineFbScrollCue === 'function') updateInlineFbScrollCue();
+      });
     }
 
     function openTravelModeModal() {
@@ -22736,7 +22849,7 @@ function setupYearOverviewToggle() {
         `;
 
         for (let b = 0; b < firstDay; b++) {
-          daysHtml += `<div class="h-[11px] lg:h-3.5"></div>`;
+          daysHtml += `<div class="aspect-square"></div>`;
         }
 
         for (let d = 1; d <= daysInMonth; d++) {
@@ -22757,17 +22870,25 @@ function setupYearOverviewToggle() {
           } else if (isNewOff) {
             cellClass = 'bg-rose-500 text-white font-black rounded-xs shadow-2xs ring-1 ring-rose-400 animate-in fade-in zoom-in-75 duration-150';
           } else if (isLocked) {
-            const leaveType = dayLeave.am || dayLeave.pm;
-            let leaveBg = leaveType === 'annual' ? 'bg-[#60a5fa]' : (leaveType === 'wb' ? 'bg-[#c084fc]' : (leaveType === 'birthday' ? 'bg-[#86efac]' : 'bg-[#cbd5e1]'));
-            let leaveText = leaveType === 'birthday' ? 'text-emerald-950 font-black' : (leaveType === 'special' ? 'text-slate-800 font-bold' : 'text-white font-bold');
-            cellClass = `${leaveBg} ${leaveText} ring-1 ring-amber-400 shadow-2xs font-black rounded-xs`;
+            const getClr = (t) => t === 'annual' ? '#38bdf8' : (t === 'wb' ? '#c084fc' : (t === 'birthday' ? '#6ee7b7' : (t === 'custom' ? '#f59e0b' : (t === 'roster' ? '#fb7185' : '#cbd5e1'))));
+            const amT = dayLeave.am || null;
+            const pmT = dayLeave.pm || null;
+            const baseBg = isSundayHoliday ? '#fce7f3' : (isHoliday ? '#ffedd5' : (isWeekend ? '#fff1f2' : '#f8fafc'));
+            const topC = amT ? getClr(amT) : baseBg;
+            const botC = pmT ? getClr(pmT) : baseBg;
+            const bgCss = topC === botC ? `background-color:${topC};` : `background:linear-gradient(180deg,${topC} 0%,${topC} 50%,${botC} 50%,${botC} 100%);`;
+            const isFull = Boolean(amT && pmT);
+            const pT = amT || pmT;
+            const darkTxt = !isFull || pT === 'birthday' || pT === 'special';
+            daysHtml += `<div style="${bgCss}" class="mini-cal-cell aspect-square rounded-[4px] flex items-center justify-center text-[6.5px] lg:text-[7.5px] leading-none select-none transition-all duration-100 ${darkTxt ? 'text-slate-900 font-black' : 'text-white font-black'} ring-1 ring-amber-400 shadow-2xs rounded-xs" data-date="${dateStr}">${d}</div>`;
+            continue;
           } else if (isSundayHoliday || isHoliday) {
             cellClass = 'bg-orange-100 text-orange-700 font-bold rounded-xs';
           } else if (isWeekend) {
             cellClass = 'bg-rose-50/80 text-rose-500 font-semibold rounded-xs border border-rose-100/60';
           }
 
-          daysHtml += `<div class="mini-cal-cell h-[11px] lg:h-3.5 flex items-center justify-center text-[6.5px] lg:text-[7.5px] leading-none select-none transition-all duration-100 ${cellClass}" data-date="${dateStr}">${d}</div>`;
+          daysHtml += `<div class="mini-cal-cell aspect-square rounded-[4px] flex items-center justify-center text-[6.5px] lg:text-[7.5px] leading-none select-none transition-all duration-100 ${cellClass}" data-date="${dateStr}">${d}</div>`;
         }
 
         daysHtml += `</div>`;
@@ -22823,21 +22944,33 @@ function setupYearOverviewToggle() {
         }
       }
 
-      // 更新 3 個拼假方案分頁高亮
+      // 更新 3 個拼假方案（內嵌短副標）高亮狀態
+      const schemeBtnActiveCls = {
+        max: 'flex-1 py-0.5 px-1 rounded-lg text-center bg-white shadow-xs border border-blue-200 text-blue-700 transition cursor-pointer min-w-0 flex flex-col items-center justify-center',
+        casual: 'flex-1 py-0.5 px-1 rounded-lg text-center bg-white shadow-xs border border-emerald-200 text-emerald-700 transition cursor-pointer min-w-0 flex flex-col items-center justify-center',
+        minimal: 'flex-1 py-0.5 px-1 rounded-lg text-center bg-white shadow-xs border border-amber-200 text-amber-700 transition cursor-pointer min-w-0 flex flex-col items-center justify-center'
+      };
+      const activeMode = schemeBtnActiveCls[currentTravelMode] ? currentTravelMode : 'casual';
       ['max', 'casual', 'minimal'].forEach(s => {
         const btn = document.getElementById(`inlineFbSchemeBtn-${s}`);
         if (!btn) return;
-        if (s === currentTravelMode) {
-          btn.className = 'flex-1 py-1 px-1 rounded-lg text-[10px] font-extrabold bg-sky-600 text-white shadow-2xs transition cursor-pointer truncate';
+        const titleSpan = btn.querySelector('span:first-child');
+        if (s === activeMode) {
+          btn.className = schemeBtnActiveCls[s];
+          if (titleSpan) titleSpan.className = 'text-[10px] font-black truncate leading-tight';
         } else {
-          btn.className = 'flex-1 py-1 px-1 rounded-lg text-[10px] font-bold text-slate-700 hover:text-sky-900 transition cursor-pointer truncate';
+          btn.className = 'flex-1 py-0.5 px-1 rounded-lg text-center hover:bg-white/60 transition cursor-pointer min-w-0 flex flex-col items-center justify-center';
+          if (titleSpan) titleSpan.className = 'text-[10px] font-bold text-slate-700 truncate leading-tight';
         }
       });
 
       const kpiTotal = document.getElementById('inlineFbKpiTotalDays');
       const kpiAl = document.getElementById('inlineFbKpiAlCost');
+      const kpiUsage = document.getElementById('inlineFbKpiUsageRate');
+      const usagePct = availableAl > 0 ? ((combo.totalAl / availableAl) * 100).toFixed(1) : '0.0';
       if (kpiTotal) kpiTotal.textContent = `放 ${combo.totalDays} 日`;
       if (kpiAl) kpiAl.textContent = `請 ${combo.totalAl} 日 AL`;
+      if (kpiUsage) kpiUsage.textContent = `${usagePct}%`;
 
       // 渲染日期清單（點擊任何一組假期直接跳轉並高亮下面主月曆！）
       const listContainer = document.getElementById('inlineFbTripListContainer');
@@ -22845,26 +22978,26 @@ function setupYearOverviewToggle() {
         listContainer.innerHTML = '';
         combo.trips.forEach((t, idx) => {
           const card = document.createElement('div');
-          card.className = 'bg-white/95 rounded-xl p-1.5 px-2 border border-sky-200/80 hover:border-sky-400 shadow-2xs transition flex items-center gap-2 cursor-pointer active:scale-[0.99]';
+          card.className = 'bg-white rounded-xl p-1.5 px-2 border border-indigo-100 hover:border-indigo-400 shadow-2xs transition flex items-center gap-2 cursor-pointer active:scale-[0.99]';
           card.innerHTML = `
-            <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex flex-col items-center justify-center shrink-0 shadow-2xs">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex flex-col items-center justify-center shrink-0 shadow-2xs">
               <span class="text-[11px] font-black leading-none">${t.month}月</span>
-              <span class="text-[6.5px] font-bold text-sky-100 mt-0.5">拼假</span>
+              <span class="text-[6.5px] font-bold text-indigo-100 mt-0.5">拼假</span>
             </div>
             <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between gap-1 mb-0.5">
-                <h4 class="font-black text-slate-900 text-[11px] truncate">
-                  <span class="text-sky-600 mr-0.5">#${idx + 1}</span>【${t.name}】
+                <h4 class="font-black text-slate-800 text-[11px] truncate">
+                  <span class="text-indigo-600 mr-0.5">#${idx + 1}</span>【${t.name}】
                 </h4>
                 <div class="flex items-center gap-1 shrink-0">
-                  <span class="px-1.5 py-0.2 bg-amber-100 text-amber-900 rounded font-black text-[8.5px] border border-amber-200">放 ${t.totalDays} 日</span>
-                  <span class="px-1.5 py-0.2 bg-sky-100 text-sky-800 rounded font-bold text-[8.5px] border border-sky-200">請 ${t.alCost} AL</span>
+                  <span class="px-1.5 py-0.2 bg-amber-50 text-amber-900 rounded font-black text-[8.5px] border border-amber-200">放 ${t.totalDays} 日</span>
+                  <span class="px-1.5 py-0.2 bg-sky-50 text-sky-800 rounded font-bold text-[8.5px] border border-sky-200">請 ${t.alCost} AL</span>
                 </div>
               </div>
               <div class="text-[9.5px] font-bold text-slate-700 flex items-center gap-1 truncate">
-                <i class="fa-regular fa-calendar-check text-sky-600 text-[9px] shrink-0"></i>
+                <i class="fa-regular fa-calendar-check text-indigo-500 text-[9px] shrink-0"></i>
                 <span class="truncate">${t.range}</span>
-                <span class="text-[8.5px] text-slate-400 font-medium truncate">· ${t.desc}</span>
+                <span class="text-[8.5px] text-slate-500 font-medium truncate">· ${t.desc}</span>
               </div>
             </div>
           `;
@@ -22879,17 +23012,43 @@ function setupYearOverviewToggle() {
         });
       }
 
-      // 渲染 4×3 全年縮圖（點擊任何月份直接平滑捲動下面主月曆到該月！）
+      // 渲染 4×3 全年縮圖（100% 還原每種假期專屬顏色及上下午半日雙色，點擊任何月份直接平滑捲動下面主月曆到該月！）
       const yearGrid = document.getElementById('inlineFbMiniYearGrid');
       const legendBox = document.getElementById('inlineFbLegendContainer');
+      const getLeaveTypeMiniColor = (t) => {
+        if (t === 'annual') return '#38bdf8';
+        if (t === 'wb') return '#c084fc';
+        if (t === 'birthday') return '#6ee7b7';
+        if (t === 'custom') return '#f59e0b';
+        if (t === 'special') return '#cbd5e1';
+        if (t === 'roster') return '#fb7185';
+        return '#38bdf8';
+      };
       if (legendBox) {
         const isRoster = Boolean(rosterModeConfig && rosterModeConfig.enabled);
-        legendBox.innerHTML = `
-          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded bg-blue-600"></span>新排AL</span>
-          ${isRoster
-            ? '<span class="flex items-center gap-1"><span class="w-2 h-2 rounded bg-rose-500"></span>新排OFF</span>'
-            : '<span class="flex items-center gap-1"><span class="w-2 h-2 rounded bg-orange-100 border border-orange-300"></span>公假</span><span class="flex items-center gap-1"><span class="w-2 h-2 rounded bg-rose-100 border border-rose-300"></span>週末</span>'
+        const lockedTypes = new Set();
+        Object.values(leaveData).forEach(dl => {
+          if (dl && dl.locked) {
+            if (dl.am) lockedTypes.add(dl.am);
+            if (dl.pm) lockedTypes.add(dl.pm);
           }
+        });
+        const typeLegendMap = {
+          annual: '<span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded bg-[#38bdf8] ring-1 ring-amber-400"></span>已鎖AL</span>',
+          wb: '<span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded bg-[#c084fc] ring-1 ring-amber-400"></span>已鎖WB</span>',
+          birthday: '<span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded bg-[#6ee7b7] ring-1 ring-amber-400"></span>已鎖BL</span>',
+          custom: '<span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded bg-[#f59e0b] ring-1 ring-amber-400"></span>已鎖CL</span>',
+          special: '<span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded bg-[#cbd5e1] ring-1 ring-amber-400"></span>已鎖SP</span>',
+          roster: '<span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded bg-[#fb7185] ring-1 ring-amber-400"></span>已鎖OFF</span>'
+        };
+        const lockedLegendHtml = Array.from(lockedTypes).map(lt => typeLegendMap[lt] || '').join('');
+        legendBox.innerHTML = `
+          <span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded bg-blue-600"></span>新排AL</span>
+          ${isRoster
+            ? '<span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded bg-rose-500"></span>新排OFF</span>'
+            : '<span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded bg-orange-100 border border-orange-300"></span>公假</span><span class="flex items-center gap-0.5"><span class="w-2 h-2 rounded bg-rose-100 border border-rose-300"></span>週末</span>'
+          }
+          ${lockedLegendHtml}
         `;
       }
       if (yearGrid) {
@@ -22904,18 +23063,22 @@ function setupYearOverviewToggle() {
         }
         const previewYear = Number(selectedYear) || 2027;
         const yearHolData = getHKHolidaysForYear(previewYear);
+        const monthNamesEnShort = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
         for (let m = 0; m < 12; m++) {
           const monthCard = document.createElement('div');
-          monthCard.className = 'bg-white p-0.5 rounded-lg border border-slate-200/90 shadow-2xs cursor-pointer hover:border-sky-400 transition';
+          monthCard.className = 'bg-white p-1 rounded-lg border border-slate-200/95 shadow-2xs cursor-pointer hover:border-sky-400 transition flex flex-col justify-between';
           const firstDay = new Date(previewYear, m, 1).getDay();
           const daysInMonth = new Date(previewYear, m + 1, 0).getDate();
+          const totalSlots = firstDay + daysInMonth;
+          const trailingBlanks = (7 - (totalSlots % 7)) % 7;
           let daysHtml = `
-            <div class="flex items-center justify-between mb-0.5 border-b border-slate-100 px-0.5">
-              <span class="font-extrabold text-[8.5px] text-slate-800 leading-none">${m + 1}月</span>
+            <div class="flex items-center justify-between pb-0.5 mb-0.5 border-b border-slate-100 px-0.5">
+              <span class="font-black text-[10px] text-slate-900 leading-none">${m + 1}月</span>
+              <span class="font-extrabold text-[7.5px] text-slate-400 tracking-wider leading-none">${monthNamesEnShort[m]}</span>
             </div>
-            <div class="grid grid-cols-7 gap-[1px] text-center">
+            <div class="grid grid-cols-7 gap-[1.5px] text-center">
           `;
-          for (let b = 0; b < firstDay; b++) daysHtml += `<div class="h-[10px]"></div>`;
+          for (let b = 0; b < firstDay; b++) daysHtml += `<div class="aspect-square"></div>`;
           for (let d = 1; d <= daysInMonth; d++) {
             const dateStr = `${previewYear}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
             const dayOfWeek = (firstDay + d - 1) % 7;
@@ -22926,14 +23089,37 @@ function setupYearOverviewToggle() {
             const isLocked = Boolean(dayLeave && dayLeave.locked && (dayLeave.am || dayLeave.pm));
             const isNewAl = newLeaveDates.has(dateStr);
             const isNewOff = newOffDates.has(dateStr);
-            let cellClass = 'bg-slate-50 text-slate-500';
-            if (isNewAl) cellClass = 'bg-blue-600 text-white font-black rounded-xs';
-            else if (isNewOff) cellClass = 'bg-rose-500 text-white font-black rounded-xs';
-            else if (isLocked) cellClass = 'bg-amber-400 text-slate-900 font-black rounded-xs';
-            else if (isSundayHoliday || isHoliday) cellClass = 'bg-orange-100 text-orange-700 font-bold rounded-xs';
-            else if (isWeekend) cellClass = 'bg-rose-50/80 text-rose-500 font-semibold rounded-xs';
-            daysHtml += `<div class="h-[10px] flex items-center justify-center text-[6px] leading-none select-none ${cellClass}">${d}</div>`;
+            let cellClass = 'bg-slate-50/90 text-slate-600 font-semibold rounded-[4px]';
+            let inlineBgStyle = '';
+            if (isNewAl) {
+              cellClass = 'bg-blue-600 text-white font-black rounded-[4px] shadow-2xs';
+            } else if (isNewOff) {
+              cellClass = 'bg-rose-500 text-white font-black rounded-[4px] shadow-2xs';
+            } else if (isLocked) {
+              const amType = dayLeave.am || null;
+              const pmType = dayLeave.pm || null;
+              const baseBg = isSundayHoliday ? '#fce7f3' : (isHoliday ? '#ffedd5' : (isWeekend ? '#fff1f2' : '#f8fafc'));
+              const topColor = amType ? getLeaveTypeMiniColor(amType) : baseBg;
+              const botColor = pmType ? getLeaveTypeMiniColor(pmType) : baseBg;
+              if (topColor === botColor) {
+                inlineBgStyle = `background-color: ${topColor};`;
+              } else {
+                inlineBgStyle = `background: linear-gradient(180deg, ${topColor} 0%, ${topColor} 50%, ${botColor} 50%, ${botColor} 100%);`;
+              }
+              const isFullDay = Boolean(amType && pmType);
+              const primaryType = amType || pmType;
+              const darkText = !isFullDay || primaryType === 'birthday' || primaryType === 'special';
+              cellClass = `${darkText ? 'text-slate-900 font-black' : 'text-white font-black'} ring-1 ring-amber-400 rounded-[4px]`;
+            } else if (isSundayHoliday) {
+              cellClass = 'bg-pink-100/90 text-pink-700 font-bold rounded-[4px]';
+            } else if (isHoliday) {
+              cellClass = 'bg-orange-100 text-orange-700 font-bold rounded-[4px]';
+            } else if (isWeekend) {
+              cellClass = 'bg-rose-50/90 text-rose-500 font-bold rounded-[4px]';
+            }
+            daysHtml += `<div style="${inlineBgStyle}" class="aspect-square flex items-center justify-center text-[7.5px] tabular-nums leading-none select-none ${cellClass}">${d}</div>`;
           }
+          for (let tb = 0; tb < trailingBlanks; tb++) daysHtml += `<div class="aspect-square"></div>`;
           daysHtml += `</div>`;
           monthCard.innerHTML = daysHtml;
           monthCard.onclick = () => {
@@ -22949,6 +23135,20 @@ function setupYearOverviewToggle() {
 
       const wasHidden = panel.classList.contains('hidden');
       setInlineAssistantTier(wasHidden ? 1 : (inlineAssistantTier || 1));
+      requestAnimationFrame(() => {
+        if (typeof updateInlineFbScrollCue === 'function') updateInlineFbScrollCue();
+      });
+    }
+
+    function updateInlineFbScrollCue() {
+      const scrollBody = document.getElementById('inlineFbListScrollBox');
+      const bottomCue = document.getElementById('inlineFbBottomScrollCue');
+      const topHint = document.getElementById('inlineFbTripsScrollHint');
+      if (!scrollBody) return;
+      const canScroll = scrollBody.scrollHeight > scrollBody.clientHeight + 6;
+      const atBottom = (scrollBody.scrollTop + scrollBody.clientHeight) >= (scrollBody.scrollHeight - 8);
+      if (topHint) topHint.classList.toggle('hidden', !canScroll);
+      if (bottomCue) bottomCue.classList.toggle('hidden', !canScroll || atBottom);
     }
 
     function applyCurrentTravelAssistantCombo() {
@@ -40259,7 +40459,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-sky-600 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-extrabold text-slate-800 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v6.7.28-beta</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v6.7.35</span>
           </button>
         </div>
 
