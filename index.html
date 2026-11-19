@@ -2038,6 +2038,20 @@
       opacity: 1;
       margin-right: 4px;
     }
+    .trip-morph-pill.is-editing-pill .trip-morph-dots-btn {
+      display: none !important;
+    }
+    .trip-morph-pill.is-editing-pill .trip-morph-actions {
+      margin-right: 0 !important;
+    }
+    .trip-morph-pill.is-editing-pill .trip-morph-reset-btn {
+      background-color: #e11d48 !important;
+      color: #ffffff !important;
+      box-shadow: 0 1px 3px rgba(225, 29, 72, 0.35) !important;
+    }
+    .trip-morph-pill.is-editing-pill .trip-morph-reset-btn:hover {
+      background-color: #be123c !important;
+    }
 
 
     /* 假期間距時間走廊 */
@@ -2706,7 +2720,7 @@
       pointer-events: none;
       z-index: 1;
     }
-    /* === Apple 日曆單日時間軸與備忘微點／M 徽章指示器 (v5.13.1) === */
+    /* === Apple 日曆單日時間軸與備忘微點／M 徽章指示器 (v5.9.1) === */
     .day-memo-dots {
       position: absolute;
       bottom: 2px;
@@ -3865,7 +3879,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v6.7.35</span>
+      <span>v6.8.1</span>
     </button>
   </footer>
 
@@ -4023,7 +4037,7 @@
           <div>
             <h3 class="font-black text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v6.7.35</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v6.8.1</span>
             </h3>
           </div>
         </div>
@@ -4035,7 +4049,124 @@
       <div class="p-4 overflow-y-auto custom-scroll space-y-3.5 text-xs">
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.35（手機版假期助手恢復大字戰績三連卡＋精簡為「清單／年曆」雙分頁）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.8.1（全面修復手機與平板多重滑動／彈窗切換後畫面撠住唔郁之捲動鎖定問題）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>修復關閉「出行須知 / 城市指南」雙錦囊時未同步解鎖最外層 <code>&lt;html&gt;</code> <code>overflow: hidden</code>，導致主月曆上下捲動被鎖死的問題。</li>
+            <li>加入<b>全局捲動安全守衛（Global Scroll Guard）</b>：無論經關閉掣、直接收起頂部走廊、切換假期規劃四態或返回普通月曆，均自動清理殘留抽屜並釋放背景捲動。</li>
+            <li>為雙錦囊及預訂工作台加入<b>單軸手勢方向鎖（Axis-Lock）</b>與 <code>touchcancel</code> 重設，消除斜向滑動時左右切頁與上下捲動互相搶焦點造成的卡頓。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.8.1（全面移除手動修訂與多餘狀態列，升級全自動靜默官方核實與「Verified-Only」嚴格發布閘門）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>徹底移除「3. 入境要求與當地假期影響」頂部冗餘狀態橫幅及「核實更新／補充修訂」按鈕，版面回復純淨直觀，每次開啟自動在背景靜默連線官方頻道核對最新公告。</li>
+            <li>建立<b>嚴格官方核實閘門（Verified-Only Gate）</b>：未經官方政府網域核實之條文一律在背景靜默過濾攔截，絕不寫入或顯示未證實資訊，確保所有用戶閱覽之條文均準確可靠。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.8.1（優化入境要求狀態列為暖琥珀同色系設計，並升級「核實更新」即時雙向核對官方公告與雲端規例）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>將「3. 入境要求與當地假期影響」內之狀態列由白底改為與卡片一致的<b>暖琥珀同色系（<code>bg-amber-100/75</code>）</b>，徹底消除「看似空白輸入框」的錯覺。</li>
+            <li>將文字及按鈕更名為更直觀的「<b>入境資料庫：2026 基準</b>」＋「<b>核實更新</b>」＋「<b>補充修訂</b>」；點選「核實更新」即同時連線雲端規則庫與當地官方頻道即時核對最新入境及海關公告。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.8.1（緊急修復 <code>parseGoogleMapsPastePayload</code> 正則換行語法錯誤，恢復主日曆與右側面板正常顯示）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>修正 <code>v6.7.9</code> 新增 Google Maps 網址解析函式內換行正則轉義字元，主日曆網格、假期統計與右側所有功能面板已全面恢復正常。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.8.1（優化預訂卡片右下角操作膠囊於編輯模式之按鈕邏輯，移除冗餘交叉並突出完成剔號與紅色重設箭嘴）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>當點選「編輯（✎）」進入編輯狀態時，自動隱藏右側收合交叉（<code>×</code>），並將整個操作膠囊鎖定呈現純粹雙圓鈕：<b>藍色圓形剔號（✓ 完成儲存）</b>＋<b>紅色圓形重設箭嘴（↺ 清空重設）</b>，輸入文字時亦不會意外縮回，按 <code>✓</code> 後才自動收合回三圓點（<code>•••</code>）。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.8.1（增強住宿詳情貼上 Google Maps 網頁完整 URL／座標自動解析功能）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>貼上 Google Maps 網頁版完整網址（<code>/maps/place/...</code> 或 <code>?q=...</code>）時，自動解析酒店名稱、門牌地址及精準經緯度座標並填入住宿欄；若貼入不含文字之 <code>maps.app.goo.gl</code> 短網址亦會明確提示改用「複製地址」或完整網址。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.8.1（優化編輯標題欄右側清除交叉掣觸控靈敏度與即時清空回饋）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>將編輯標題欄右側清除按鈕（<code>×</code>）擴大為 <code>32×32px</code> 獨立圓形熱區並提升層級，改以 <code>pointerdown</code> 零延遲觸發（防止手機鍵盤失焦吞掉點擊），一撳即刻清空文字並同步重置已選城市高亮狀態。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.9（單一國家／城市行程於「出行須知」與「城市指南」各專題底部保留正中央向上返回頂部箭嘴）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>當行程只有單一國家或城市時，「出行須知」與「城市指南」每個專題卡片最底部正中央同一位置永久保留向上返回箭嘴（<code>^</code>），不顯示多國切換左右箭嘴，方便長文閱讀後一鍵平滑返回頂部標題列。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.9（打通出行須知＋城市指南全部 6 大動態活更新缺口及全模組熱修工作台）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>自動偵測香港保安局警示顏色</b>：實時掃描保安局官方 RSS 動態，一旦偵測到黃色、紅色或黑色外遊警示（或取消警示），自動切換頂部「香港外遊警示」橫幅級別與顏色。</li>
+            <li><b>全模組接通 Firebase 雲端活規則庫與熱修工作台</b>：開放即時編輯及雲端同步「外幣兌換貼士」、「當地公眾假期節慶補充」、「出行必備 App 清單」、「當地電壓插頭與專屬檢查清單」、「文化禁忌禮儀」以及「當地報警／醫療急救／旅遊警察熱線」，真正實現全頁活數據。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.9（緊急修復上版熱修函式換行符導致主日曆與右側欄空白之語法問題）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>修正 <code>openDcRuleHotPatchModal</code> 與 <code>formatPlainLinesToHtml</code> 內換行正則轉義字元，主日曆、假期統計與右側雙錦囊面板全面恢復正常顯示。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.9（接入 Firebase 雲端活規則庫熱更新引擎＋即時熱修面板＋官方政策快訊雷達）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>突破單一 HTML 檔案（<code>file://</code>）靜態限制，直接接入 Firebase Realtime Database 公共活規則庫（<code>/global_travel_rules.json</code>），每次打開網頁自動背景拉取最新各國入境、海關及防騙補丁並緩存於本機。</li>
+            <li>於「出行須知」狀態列新增「<b>同步</b>」與「<b>熱修</b>」按鈕，隨時可在網頁內直接修改或補充任何國家規例並一鍵推上 Firebase 雲端，手機、iPad 與電腦即時同步生效。</li>
+            <li>新增「<b>官方政策快訊雷達</b>」，當官方頻道發布涉及簽證、免稅、電子煙、入境卡或警示之最新動態時，自動於頂部亮起快訊提示橫幅。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v6.7.9（手機版假期助手恢復大字戰績三連卡＋精簡為「清單／年曆」雙分頁）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4046,18 +4177,18 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.34（手機版假期助手清透晨光白底與藍紫漸層徽章＋方案內嵌簡述零佔空間）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9（手機版假期助手清透晨光白底與藍紫漸層徽章＋方案內嵌簡述零佔空間）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
             <li>移除額外佔位說明橫條，將「跨週長假·全用AL / 四季放鬆·留備用 / 請1-2日·輕巧快閃」直接內嵌於頂部三個方案膠囊內，完全不影響原有版面高度。</li>
-            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v6.7.35</code>（移除 beta 字樣）。</li>
+            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v6.8.1</code>（移除 beta 字樣）。</li>
           </ul>
         </div>
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.33-beta（手機版假期助手換上高級珍珠白毛玻璃配色＋補回三大方案策略說明列）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（手機版假期助手換上高級珍珠白毛玻璃配色＋補回三大方案策略說明列）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4068,7 +4199,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.32-beta（修正手機版假期助手「全覽」捲動方向：固定上方 12 個月縮圖，專注捲動下方連假清單）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（修正手機版假期助手「全覽」捲動方向：固定上方 12 個月縮圖，專注捲動下方連假清單）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4078,7 +4209,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.31-beta（手機版假期助手「全覽」上下雙獨立捲動分屏，同時看盡月曆與連假清單）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（手機版假期助手「全覽」上下雙獨立捲動分屏，同時看盡月曆與連假清單）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4088,7 +4219,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.30-beta（假期助手全年縮圖升級 3×4 正方形日格比例）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（假期助手全年縮圖升級 3×4 正方形日格比例）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4098,7 +4229,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.29-beta（假期助手全年縮圖還原各假別專屬顏色＋底部捲動提示浮標）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（假期助手全年縮圖還原各假別專屬顏色＋底部捲動提示浮標）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4109,7 +4240,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.28-beta（新加坡 SG 同步 2026 控煙重罰新例、無紙化退稅及擴充至 16 款 App）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（新加坡 SG 同步 2026 控煙重罰新例、無紙化退稅及擴充至 16 款 App）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4120,7 +4251,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.27-beta（香港 HK 升級完整雙錦囊深度攻略、33 個分區及離島樂園座標）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（香港 HK 升級完整雙錦囊深度攻略、33 個分區及離島樂園座標）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4131,7 +4262,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.26-beta（精準覆核中國內地海關港澳煙酒限額及 2026 離境退稅 2.0 新政）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（精準覆核中國內地海關港澳煙酒限額及 2026 離境退稅 2.0 新政）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4142,7 +4273,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.25-beta（澳門 MO 升級完整雙錦囊深度攻略、分區座標與 16 款本地 App 庫）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（澳門 MO 升級完整雙錦囊深度攻略、分區座標與 16 款本地 App 庫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4154,7 +4285,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.24-beta（保留並完善中國內地 Google Maps 與 Google 翻譯說明）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（保留並完善中國內地 Google Maps 與 Google 翻譯說明）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4164,7 +4295,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.23-beta（中國內地 CN 升級完整雙錦囊深度攻略與本地生活 App 庫）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（中國內地 CN 升級完整雙錦囊深度攻略與本地生活 App 庫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4175,7 +4306,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.22-beta（統一國家主名稱為「韓國」並保留「南韓」別名搜尋）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（統一國家主名稱為「韓國」並保留「南韓」別名搜尋）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4185,7 +4316,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.21-beta（全站文字規範化與精簡優化）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（全站文字規範化與精簡優化）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4196,7 +4327,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.20-beta（天氣選單與行程路線智能去重）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（天氣選單與行程路線智能去重）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4206,7 +4337,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.19-beta（括號附註城市／機場／景區雙軌分拆與全域同步）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（括號附註城市／機場／景區雙軌分拆與全域同步）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4216,7 +4347,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.18-beta（複合／異譯城市與離島全面獨立分拆）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta（複合／異譯城市與離島全面獨立分拆）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4226,7 +4357,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.16-beta – v6.7.17-beta（東南亞防騙守則與必備 App 擴充）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta – v6.7.9-beta（東南亞防騙守則與必備 App 擴充）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4236,7 +4367,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta – v6.7.15-beta（八大熱門目的地最新入境與海關規例核實）</span>
+            <span class="font-bold text-sky-700 text-xs">v6.7.9-beta – v6.7.9-beta（八大熱門目的地最新入境與海關規例核實）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -16143,8 +16274,8 @@
     }
 
     let customTripTitles = {};
-    let tripBookings = {}; // v4.3.14 Travel Wallet
-    let daySchedules = {}; // v5.13.0 Apple-style Day Timeline & Memo
+    let tripBookings = {}; // v4.3.9 Travel Wallet
+    let daySchedules = {}; // v5.9.0 Apple-style Day Timeline & Memo
     let tripDestState = {}; // v5.7.0 目的地階層仲裁與雙重保險狀態
 
     let toggleMaxWithoutDec = false;
@@ -16268,7 +16399,7 @@
         rosterModeConfig: rosterModeConfig || null,
         customTripTitles: customTripTitles || {},
         tripBookings: tripBookings || {}, // v4.3.1
-        daySchedules: daySchedules || {}, // v5.13.0
+        daySchedules: daySchedules || {}, // v5.9.0
         tripDestState: tripDestState || {},
         pin: remoteRoomPin || null,
         timestamp: lastLocalEditTime
@@ -19405,7 +19536,7 @@
 
       const gapHtml = prevTrip ? buildIntervalGapHtml(trip.startDate, prevTrip.endDate) : '';
 
-            // === v5.3.45 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
+            // === v5.3.9 精簡摘要橫幅 ＋ 原裝完整「旅程預訂資料」流暢原地收放引擎（零彈窗） ===
       const tripKey = `${trip.startDate}_${trip.endDate}`;
       const bData = (typeof tripBookings !== 'undefined' && tripBookings[tripKey]) ? tripBookings[tripKey] : null;
       const cleanOutSummary = bData && bData.flightOut ? bData.flightOut.replace(/\(00:00\s*➔\s*00:00\)/g, '').trim() : '';
@@ -19609,9 +19740,9 @@
     }
 
     
-    // === 手機版頂部旅程走廊共用輔助函式 (v5.0.28) ===
+    // === 手機版頂部旅程走廊共用輔助函式 (v5.0.9) ===
     
-    // === 手機版主工具列伸縮控制 (v5.0.29) ===
+    // === 手機版主工具列伸縮控制 (v5.0.9) ===
     let isMobileToolbarExpanded = false;
 
     let mobileMicroToastTimer = null;
@@ -20002,6 +20133,7 @@
       } else {
         syncMobileSingleRowPillState();
       }
+      if (typeof syncBackgroundScrollLock === 'function') syncBackgroundScrollLock();
       showMobileIconMicroToast('📅 已返回普通月曆');
     }
 
@@ -21406,6 +21538,12 @@
 
       mobileTripRibbonStage = stage;
       isMobileTripRibbonOpen = stage > 0;
+      if (stage !== 1 && typeof dcCurrentTripKey !== 'undefined' && dcCurrentTripKey) {
+        const dcDrawer = document.getElementById('dualCapsuleStudioDrawer');
+        if (dcDrawer && dcDrawer.parentElement && dcDrawer.parentElement.id === 'mobileRibbonDualCapsuleSlot' && typeof closeTripDualCapsule === 'function') {
+          try { closeTripDualCapsule(); } catch (e) {}
+        }
+      }
 
       if (stage === 1) {
         // 第 1 階（一小幅）：橫向快覽小卡片 ＋ 下方完整月曆
@@ -21492,6 +21630,7 @@
           ], { duration: 280, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
         }
       }
+      if (typeof syncBackgroundScrollLock === 'function') syncBackgroundScrollLock();
     }
 
     function stepCloseMobileTripRibbon() {
@@ -24181,19 +24320,34 @@ function setupYearOverviewToggle() {
     }
 
     function syncBackgroundScrollLock() {
-      const anyModalOpen = ['modalOverviewLeaves', 'modalOverviewHolidays', 'modalOverviewLunar'].some(id => {
+      const anyModalOpen = [
+        'modalOverviewLeaves', 'modalOverviewHolidays', 'modalOverviewLunar',
+        'modalQuickQuotaAdjust', 'modalUserGuide', 'modalChangelog', 'modalMapPinPicker'
+      ].some(id => {
         const el = document.getElementById(id);
         return el && !el.classList.contains('hidden');
       });
-      const isMobileDcOpen = (window.innerWidth < 1024 && typeof dcCurrentTripKey !== 'undefined' && Boolean(dcCurrentTripKey));
+      const ribbonEl = document.getElementById('mobileTopTripRibbon');
+      const drawerEl = document.getElementById('dualCapsuleStudioDrawer');
+      const isRibbonVisible = Boolean(ribbonEl && !ribbonEl.classList.contains('hidden'));
+      const isDcMountedInRibbon = Boolean(drawerEl && drawerEl.parentElement && drawerEl.parentElement.id === 'mobileRibbonDualCapsuleSlot');
+      const isMobileDcOpen = (
+        window.innerWidth < 1024 &&
+        typeof dcCurrentTripKey !== 'undefined' &&
+        Boolean(dcCurrentTripKey) &&
+        isRibbonVisible &&
+        isDcMountedInRibbon
+      );
       if (anyModalOpen || isMobileDcOpen) {
         document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
       } else {
         document.documentElement.style.overflow = '';
         document.body.style.overflow = '';
+        document.body.classList.remove('dc-mobile-sheet-lock');
       }
     }
+    window.syncBackgroundScrollLock = syncBackgroundScrollLock;
 
     function openOverviewLeavesModal() {
       renderModalLeavesContent();
@@ -24410,7 +24564,7 @@ function setupYearOverviewToggle() {
       renderHolidayAndLunarTablesForYear(selectedYear);
             renderMonthGrid();
             updateDashboard();
-                  // === v4.3.15 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
+                  // === v4.3.9 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
       try {
         if (tripBookings && Object.keys(tripBookings).length > 0) {
           const bookingKeys = Object.keys(tripBookings).sort();
@@ -24422,7 +24576,7 @@ function setupYearOverviewToggle() {
                 address: b.hotelAddress || '',
                 query: buildCardMapQuery(b.hotelName, b.hotelAddress)
               };
-              console.log('[v4.3.15 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
+              console.log('[v4.3.9 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
               break;
             }
           }
@@ -25200,7 +25354,7 @@ function setupYearOverviewToggle() {
       renderMonthGrid();
       updateDashboard();
 
-            // === v4.3.15 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
+            // === v4.3.9 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
       try {
         if (tripBookings && Object.keys(tripBookings).length > 0) {
           const bookingKeys = Object.keys(tripBookings).sort();
@@ -25212,7 +25366,7 @@ function setupYearOverviewToggle() {
                 address: b.hotelAddress || '',
                 query: buildCardMapQuery(b.hotelName, b.hotelAddress)
               };
-              console.log('[v4.3.15 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
+              console.log('[v4.3.9 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
               break;
             }
           }
@@ -25443,7 +25597,7 @@ function setupYearOverviewToggle() {
       };
 
       window.closeAllMorphPills = () => {
-        document.querySelectorAll('.trip-morph-pill.is-open').forEach(p => {
+        document.querySelectorAll('.trip-morph-pill.is-open:not(.is-editing-pill)').forEach(p => {
           p.classList.remove('is-open');
           const ic = p.querySelector('.trip-morph-dots-btn i, button[aria-label*="展開"] i');
           if (ic) ic.className = 'fa-solid fa-ellipsis text-[9px]';
@@ -25617,11 +25771,11 @@ function setupYearOverviewToggle() {
       };
 
       document.addEventListener('click', (e) => {
-        // 點擊外部空白處自動收起已展開的鵝蛋形膠囊
+        // 點擊外部空白處自動收起已展開的鵝蛋形膠囊（編輯中卡片保持 [✓][↺] 展開不收起）
         if (!e.target.closest('.trip-morph-pill')) {
-          document.querySelectorAll('.trip-morph-pill.is-open').forEach(p => {
+          document.querySelectorAll('.trip-morph-pill.is-open:not(.is-editing-pill)').forEach(p => {
             p.classList.remove('is-open');
-            const ic = p.querySelector('button[aria-label="展開或收起旅程選項"] i');
+            const ic = p.querySelector('.trip-morph-dots-btn i, button[aria-label*="展開"] i');
             if (ic) ic.className = 'fa-solid fa-ellipsis text-[9px]';
           });
         }
@@ -25669,7 +25823,7 @@ function setupYearOverviewToggle() {
         }
       });
 
-      // === v5.11.3 護照印章足跡計數 ＋ 常用置頂 ＋ 內地7大片區快選 ＋ 多城市「＋串遊」累加引擎 ===
+      // === v5.9.3 護照印章足跡計數 ＋ 常用置頂 ＋ 內地7大片區快選 ＋ 多城市「＋串遊」累加引擎 ===
       const TOP_PRIORITY_COUNTRIES = ['TH', 'JP', 'KR'];
       const SECONDARY_POPULAR_COUNTRIES = ['TW', 'SG', 'MY', 'VN', 'PH', 'ID', 'GBA', 'CN', 'GB', 'FR', 'CH', 'IT', 'AU', 'US', 'CA', 'LOCAL'];
 
@@ -26901,7 +27055,7 @@ function setupYearOverviewToggle() {
       renderTripCityChips(currentSelectedCountryId);
       renderTripSuffixChips(currentSelectedCountryId);
 
-      // === 中英文及機場代碼即時預測聯想引擎 (v5.10.9) ===
+      // === 中英文及機場代碼即時預測聯想引擎 (v5.9.9) ===
       let cachedTripSuggestIndex = null;
       let tripSuggestActiveIdx = -1;
       let tripSuggestCurrentItems = [];
@@ -27202,12 +27356,29 @@ function setupYearOverviewToggle() {
 
       const btnClearEditInput = document.getElementById('btnClearEditTripInput');
       if (btnClearEditInput) {
-        btnClearEditInput.onclick = () => {
+        const executeClearEditTripTitle = (e) => {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
           const inputEl = document.getElementById('inputEditTripTitle');
+          if (!inputEl) return;
           inputEl.value = '';
+          currentSelectedCity = '';
           hideTripTitleAutocomplete();
+          if (typeof renderTripCityChips === 'function' && currentSelectedCountryId) {
+            renderTripCityChips(currentSelectedCountryId);
+          }
+          document.querySelectorAll('#tripPrimaryCountriesRow .trip-country-pill, #tripSecondaryCountriesRow .trip-country-pill').forEach(pEl => {
+            const pid = pEl.getAttribute('data-country-id');
+            if (pid && pid !== currentSelectedCountryId && pid !== 'FAV') {
+              pEl.className = 'trip-country-pill px-2.5 py-1 rounded-lg text-xs font-bold shrink-0 transition active:scale-95 cursor-pointer shadow-2xs flex items-center gap-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200';
+            }
+          });
           inputEl.focus();
         };
+        btnClearEditInput.addEventListener('pointerdown', executeClearEditTripTitle);
+        btnClearEditInput.onclick = executeClearEditTripTitle;
       }
 
       // 卡片點擊切換 Checkbox
@@ -27274,7 +27445,7 @@ function setupYearOverviewToggle() {
         }
       };
 
-      // === v4.3.14 旅程預訂資料 Travel Wallet 雙軌智能航班時刻引擎 ===
+      // === v4.3.9 旅程預訂資料 Travel Wallet 雙軌智能航班時刻引擎 ===
       currentEditingBookingKey = null;
 
       // 輔助函式：即時聯動 Flightradar24 超連結
@@ -27302,7 +27473,7 @@ function setupYearOverviewToggle() {
         }
       };
 
-      // === v4.3.14 方案 1 & 2：住宿／屋苑／大廈／Airbnb 地圖導航與地理編碼（智慧名稱優先＋地址輔助） ===
+      // === v4.3.9 方案 1 & 2：住宿／屋苑／大廈／Airbnb 地圖導航與地理編碼（智慧名稱優先＋地址輔助） ===
       function getHotelMapSearchQuery() {
         const hotelName = (document.getElementById('inputHotelName')?.value || '').trim();
         const hotelAddress = (document.getElementById('inputHotelAddress')?.value || '').trim();
@@ -27381,8 +27552,8 @@ function setupYearOverviewToggle() {
       }
 
       // 核心航班快查引擎 (本地 230+ 班次常態庫秒速命中 ➔ 預設 00:00 ➔ 隨時手動修正)
-            // === v4.3.14 航班起降時間狀態與色彩管理（支援手動 00:00 黑色確認） ===
-      // === v4.3.34 航班與時間三態色彩管理（系統藍 #2563eb · 手動黑 #0f172a · 預設灰 #94a3b8） ===
+            // === v4.3.9 航班起降時間狀態與色彩管理（支援手動 00:00 黑色確認） ===
+      // === v4.3.9 航班與時間三態色彩管理（系統藍 #2563eb · 手動黑 #0f172a · 預設灰 #94a3b8） ===
       function setFlightElementStatus(el, val, mode = 'default') {
         if (!el) return;
         if (val !== undefined) el.value = val;
@@ -27434,7 +27605,7 @@ function setupYearOverviewToggle() {
       const flightInputDebounceTimers = {};
       const flightInputComposing = {};
 
-            // === v4.3.42 防誤觸閱讀/編輯雙態引擎 · 航司×機場精準航廈對照 · 自訂UTC與航廈精算 ===
+            // === v4.3.9 防誤觸閱讀/編輯雙態引擎 · 航司×機場精準航廈對照 · 自訂UTC與航廈精算 ===
       const AIRLINE_META_DB = {
         'EK': { zh: '阿聯酋航空', en: 'Emirates', color: 'bg-red-600' },
         'CX': { zh: '國泰航空', en: 'Cathay Pacific', color: 'bg-emerald-700' },
@@ -27770,12 +27941,14 @@ function setupYearOverviewToggle() {
           if (nextState) {
             btn.className = 'w-5 h-5 rounded-full bg-blue-600 text-white inline-flex items-center justify-center cursor-pointer transition active:scale-90 shadow-2xs';
             btn.innerHTML = '<i class="fa-solid fa-check text-[9px]"></i>';
-            if (morphPill) morphPill.classList.add('is-open');
+            if (morphPill) {
+              morphPill.classList.add('is-open', 'is-editing-pill');
+            }
           } else {
             btn.className = 'w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90';
             btn.innerHTML = '<i class="fa-solid fa-pen text-[9px]"></i>';
             if (morphPill) {
-              morphPill.classList.remove('is-open');
+              morphPill.classList.remove('is-editing-pill', 'is-open');
               const dotIc = morphPill.querySelector('.trip-morph-dots-btn i');
               if (dotIc) dotIc.className = 'fa-solid fa-ellipsis text-[9px]';
             }
@@ -28317,7 +28490,7 @@ function setupYearOverviewToggle() {
         });
       });
 
-      // === v4.3.43 HKG 登機閘口柱 vs 簡約登機牌 一鍵雙主題切換與記憶引擎 ===
+      // === v4.3.9 HKG 登機閘口柱 vs 簡約登機牌 一鍵雙主題切換與記憶引擎 ===
       window.setFlightCardTheme = function(themeName, silent = false) {
         const wrapper = document.getElementById('flightSectionWrapper');
         const btnBoarding = document.getElementById('btnFlightThemeBoarding');
@@ -28661,7 +28834,7 @@ function setupYearOverviewToggle() {
         }
       });
 
-      // === v4.3.33 內嵌 ✕ 清除鍵與二合一組合鍵聯動管理 ===
+      // === v4.3.9 內嵌 ✕ 清除鍵與二合一組合鍵聯動管理 ===
       function setupFlightClearAndLinks(inputId, clearBtnId, depId, arrId, hintId, awareIds, radarId) {
         const inputEl = document.getElementById(inputId);
         const clearBtn = document.getElementById(clearBtnId);
@@ -28709,7 +28882,7 @@ function setupYearOverviewToggle() {
       setupFlightClearAndLinks('inputFlightOutNo', 'btnClearFlightOutNoInput', 'inputFlightOutDep', 'inputFlightOutArr', 'hintFlightOutAuto', ['linkFlightAwareOut'], 'linkFlightRadarOut');
       setupFlightClearAndLinks('inputFlightInNo', 'btnClearFlightInNoInput', 'inputFlightInDep', 'inputFlightInArr', 'hintFlightInAuto', ['linkFlightAwareIn'], 'linkFlightRadarIn');
 
-      // === v4.3.40 國際時間直覺輸入引擎（全選覆寫 · 自由輸入/退格 · 4位數字自動轉 HH:MM · 範圍智能校驗） ===
+      // === v4.3.9 國際時間直覺輸入引擎（全選覆寫 · 自由輸入/退格 · 4位數字自動轉 HH:MM · 範圍智能校驗） ===
       function normalizeInternationalTime(rawStr) {
         const clean = (rawStr || '').trim();
         if (!clean) return '00:00';
@@ -28760,8 +28933,8 @@ function setupYearOverviewToggle() {
         }
       }
 
-            // === v4.3.14 監聽住宿物業名稱與地址輸入：即時聯動地圖定位 ＆ 失焦自動 Geocoding ===
-                  // === v4.3.14 住宿物業智慧升級：航班與旅程國家感知＋防抖自動解析＋雙向互動地圖選點器 ===
+            // === v4.3.9 監聽住宿物業名稱與地址輸入：即時聯動地圖定位 ＆ 失焦自動 Geocoding ===
+                  // === v4.3.9 住宿物業智慧升級：航班與旅程國家感知＋防抖自動解析＋雙向互動地圖選點器 ===
       ['inputHotelName', 'inputHotelAddress'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
@@ -28961,31 +29134,114 @@ function setupYearOverviewToggle() {
 
       document.getElementById('inputHotelName')?.addEventListener('input', updateGoogleMapsDirectLookupLink);
 
+      function parseGoogleMapsPastePayload(rawText) {
+        if (!rawText) return null;
+        const text = rawText.trim();
+        if (!text) return null;
+
+        let extractedName = '';
+        let extractedAddr = '';
+        let extractedCoords = '';
+
+        // 1. 解析完整 Google Maps 網頁網址（例：/maps/place/Hotel+Name/@35.6938,139.7034,17z 或 ?q=...）
+        const urlMatch = text.match(/https?:\/\/[^\s]+/i);
+        if (urlMatch) {
+          const urlStr = urlMatch[0];
+          try {
+            const u = new URL(urlStr);
+            const path = decodeURIComponent(u.pathname || '');
+            // 1a. /maps/place/<地點或地址>/@lat,lng
+            const placeMatch = path.match(/\/maps\/place\/([^\/@]+)/i);
+            if (placeMatch && placeMatch[1]) {
+              const decodedPlace = placeMatch[1].replace(/\+/g, ' ').trim();
+              if (decodedPlace) {
+                extractedName = decodedPlace;
+                extractedAddr = decodedPlace;
+              }
+            }
+            // 1b. ?q= / ?query= / ?destination=
+            const qParam = u.searchParams.get('q') || u.searchParams.get('query') || u.searchParams.get('destination');
+            if (qParam && !extractedAddr) {
+              const decodedQ = qParam.replace(/\+/g, ' ').trim();
+              if (/^-?\d+\.\d+\s*,\s*-?\d+\.\d+$/.test(decodedQ)) {
+                extractedCoords = decodedQ.replace(/\s+/g, '');
+              } else {
+                extractedAddr = decodedQ;
+              }
+            }
+            // 1c. 擷取 @lat,lng 或 !3dLAT!4dLNG 精準座標
+            const exactPin = urlStr.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+            const atPin = path.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+            if (exactPin) {
+              extractedCoords = `${exactPin[1]},${exactPin[2]}`;
+            } else if (atPin && !extractedCoords) {
+              extractedCoords = `${atPin[1]},${atPin[2]}`;
+            }
+          } catch (_) {}
+        }
+
+        // 2. 清理網址以外嘅共享文字（例如手機版 Google Maps「分享」連帶酒店名同地址）
+        let nonUrlText = text.replace(/https?:\/\/[^\s]+/gi, '').trim();
+        nonUrlText = nonUrlText.replace(/[\r\n]+/g, ', ').replace(/,+/g, ',').replace(/^,|,$/g, '').trim();
+
+        if (nonUrlText) {
+          if (/^-?\d+\.\d+\s*,\s*-?\d+\.\d+$/.test(nonUrlText)) {
+            extractedCoords = nonUrlText.replace(/\s+/g, '');
+          } else {
+            extractedAddr = nonUrlText;
+          }
+        }
+
+        // 3. 若僅貼入純短網址（例如 https://maps.app.goo.gl/xxxx 不含任何文字），回傳 short_link 標記提示
+        const isPureShortLink = Boolean(urlMatch && !extractedAddr && !extractedCoords && /goo\.gl|maps\.app/i.test(urlMatch[0]));
+        return {
+          name: extractedName,
+          address: extractedAddr || extractedCoords,
+          coords: extractedCoords,
+          isPureShortLink
+        };
+      }
+
       document.getElementById('btnApplyQuickPasteGmapAddress')?.addEventListener('click', () => {
         const pasteInput = document.getElementById('inputQuickPasteGmapAddress');
         const addrInput = document.getElementById('inputHotelAddress');
+        const nameInput = document.getElementById('inputHotelName');
         const hintEl = document.getElementById('hintHotelGeocoding');
         if (!pasteInput || !addrInput) return;
 
-        let raw = pasteInput.value.trim();
+        const raw = pasteInput.value.trim();
         if (!raw) return;
 
-        // 智慧清理：去除可能貼上的 URL 前綴、經緯度說明或冗餘雜訊
-        let cleaned = raw;
-        // 1. 若貼入的是包含地址的字串 (如 "98 Bang Kaeo... https://maps.app.goo.gl/...")
-        cleaned = cleaned.replace(/https?:\/\/[^\s]+/g, '').trim();
-        // 2. 若為 Google Maps 複製之常見多行文字，去除換行為單行逗號
-        cleaned = cleaned.replace(/[\r\n]+/g, ', ').replace(/,+/g, ',').trim();
-        cleaned = cleaned.replace(/^,|,$/g, '').trim();
+        const parsed = parseGoogleMapsPastePayload(raw);
+        if (!parsed) return;
 
-        if (cleaned) {
-          addrInput.value = cleaned;
+        if (parsed.isPureShortLink) {
+          if (hintEl) {
+            hintEl.classList.remove('hidden');
+            hintEl.innerHTML = `<i class="fa-solid fa-circle-info mr-0.5 text-amber-600"></i>短網址不含地址文字，請在 Google Maps 點按「複製地址」或貼上網頁版完整網址`;
+            setTimeout(() => hintEl.classList.add('hidden'), 5500);
+          }
+          if (typeof showToast === 'function') {
+            showToast('⚠️ 短網址（goo.gl）未包含門牌文字，請在 Google Maps 點按「複製地址」或複製瀏覽器完整網址');
+          }
+          return;
+        }
+
+        if (parsed.address) {
+          addrInput.value = parsed.address;
+          if (nameInput && !nameInput.value.trim() && parsed.name) {
+            nameInput.value = parsed.name;
+            if (typeof updateGoogleMapsDirectLookupLink === 'function') updateGoogleMapsDirectLookupLink();
+          }
           pasteInput.value = '';
           if (typeof updateModalHotelMapLink === 'function') updateModalHotelMapLink();
           if (hintEl) {
             hintEl.classList.remove('hidden');
-            hintEl.innerHTML = `<i class="fa-solid fa-circle-check mr-0.5 text-emerald-600"></i>已帶入 Google Maps 門牌`;
+            hintEl.innerHTML = `<i class="fa-solid fa-circle-check mr-0.5 text-emerald-600"></i>已從 Google Maps 解析並帶入${parsed.coords && !parsed.name ? '座標' : '地址'}`;
             setTimeout(() => hintEl.classList.add('hidden'), 4000);
+          }
+          if (typeof showToast === 'function') {
+            showToast('✅ 已解析並套用 Google Maps 地址！');
           }
         }
       });
@@ -29420,12 +29676,14 @@ function setupYearOverviewToggle() {
           if (hotelCardEditActive) {
             btn.className = 'w-5 h-5 rounded-full bg-blue-600 text-white inline-flex items-center justify-center cursor-pointer transition active:scale-90 shadow-2xs';
             btn.innerHTML = '<i class="fa-solid fa-check text-[9px]"></i>';
-            if (morphPill) morphPill.classList.add('is-open');
+            if (morphPill) {
+              morphPill.classList.add('is-open', 'is-editing-pill');
+            }
           } else {
             btn.className = 'w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90';
             btn.innerHTML = '<i class="fa-solid fa-pen text-[9px]"></i>';
             if (morphPill) {
-              morphPill.classList.remove('is-open');
+              morphPill.classList.remove('is-editing-pill', 'is-open');
               const dotIc = morphPill.querySelector('.trip-morph-dots-btn i');
               if (dotIc) dotIc.className = 'fa-solid fa-ellipsis text-[9px]';
             }
@@ -29479,12 +29737,14 @@ function setupYearOverviewToggle() {
           if (notesCardEditActive) {
             btn.className = 'w-5 h-5 rounded-full bg-blue-600 text-white inline-flex items-center justify-center cursor-pointer transition active:scale-90 shadow-2xs';
             btn.innerHTML = '<i class="fa-solid fa-check text-[9px]"></i>';
-            if (morphPill) morphPill.classList.add('is-open');
+            if (morphPill) {
+              morphPill.classList.add('is-open', 'is-editing-pill');
+            }
           } else {
             btn.className = 'w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90';
             btn.innerHTML = '<i class="fa-solid fa-pen text-[9px]"></i>';
             if (morphPill) {
-              morphPill.classList.remove('is-open');
+              morphPill.classList.remove('is-editing-pill', 'is-open');
               const dotIc = morphPill.querySelector('.trip-morph-dots-btn i');
               if (dotIc) dotIc.className = 'fa-solid fa-ellipsis text-[9px]';
             }
@@ -30391,7 +30651,7 @@ function setupYearOverviewToggle() {
           loadLocalFirst();
           renderMonthGrid();
           updateDashboard();
-                // === v4.3.15 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
+                // === v4.3.9 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
       try {
         if (tripBookings && Object.keys(tripBookings).length > 0) {
           const bookingKeys = Object.keys(tripBookings).sort();
@@ -30403,7 +30663,7 @@ function setupYearOverviewToggle() {
                 address: b.hotelAddress || '',
                 query: buildCardMapQuery(b.hotelName, b.hotelAddress)
               };
-              console.log('[v4.3.15 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
+              console.log('[v4.3.9 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
               break;
             }
           }
@@ -30437,7 +30697,7 @@ function setupYearOverviewToggle() {
             loadLocalFirst();
             renderMonthGrid();
             updateDashboard();
-                  // === v4.3.15 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
+                  // === v4.3.9 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
       try {
         if (tripBookings && Object.keys(tripBookings).length > 0) {
           const bookingKeys = Object.keys(tripBookings).sort();
@@ -30449,7 +30709,7 @@ function setupYearOverviewToggle() {
                 address: b.hotelAddress || '',
                 query: buildCardMapQuery(b.hotelName, b.hotelAddress)
               };
-              console.log('[v4.3.15 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
+              console.log('[v4.3.9 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
               break;
             }
           }
@@ -30544,7 +30804,7 @@ function setupYearOverviewToggle() {
             clearThrottle(currentRoom);
             closeResetPinModal();
             showToast(`🎉 同步代碼【${currentRoom}】密碼已清除！將重新進入首次啟用流程。`);
-                  // === v4.3.15 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
+                  // === v4.3.9 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
       try {
         if (tripBookings && Object.keys(tripBookings).length > 0) {
           const bookingKeys = Object.keys(tripBookings).sort();
@@ -30556,7 +30816,7 @@ function setupYearOverviewToggle() {
                 address: b.hotelAddress || '',
                 query: buildCardMapQuery(b.hotelName, b.hotelAddress)
               };
-              console.log('[v4.3.15 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
+              console.log('[v4.3.9 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
               break;
             }
           }
@@ -34448,7 +34708,13 @@ function setupYearOverviewToggle() {
       } else {
         list = DC_RECOMMENDED_APPS_BY_COUNTRY[c] || DC_RECOMMENDED_APPS_BY_COUNTRY.DEFAULT;
       }
-      return Array.isArray(list) ? list.slice(0, MAX_DC_RECOMMENDED_APPS) : [];
+      const specObj = (typeof DC_COUNTRY_KNOWLEDGE !== 'undefined' && DC_COUNTRY_KNOWLEDGE[c]) || (typeof DC_GLOBAL_FALLBACK_BY_COUNTRY !== 'undefined' && DC_GLOBAL_FALLBACK_BY_COUNTRY[c]) || null;
+      const cloudCustomApps = (specObj && Array.isArray(specObj.customApps)) ? specObj.customApps : [];
+      const baseArr = Array.isArray(list) ? list : [];
+      const merged = cloudCustomApps.length > 0
+        ? [...cloudCustomApps, ...baseArr.filter(b => !cloudCustomApps.some(ca => ca.name.toLowerCase() === String(b.name || '').toLowerCase()))]
+        : baseArr;
+      return merged.slice(0, MAX_DC_RECOMMENDED_APPS);
     }
 
     function detectUserAppStorePlatform() {
@@ -35135,6 +35401,9 @@ function setupYearOverviewToggle() {
       if (icon) icon.className = 'fa-solid fa-up-right-and-down-left-from-center text-[10px]';
 
       dcCurrentTripKey = null;
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      if (typeof syncBackgroundScrollLock === 'function') syncBackgroundScrollLock();
       if (isFromMobileRibbon) {
         requestAnimationFrame(() => {
           if (Math.abs(window.scrollY - savedWinY) > 2) window.scrollTo(0, savedWinY);
@@ -35227,25 +35496,27 @@ function setupYearOverviewToggle() {
         }
       }, { passive: true });
 
-      let startX = 0, startY = 0, isTracking = false;
+      let startX = 0, startY = 0, isTracking = false, dcAxisLock = null;
       document.addEventListener('touchstart', (e) => {
         if (!e.touches || e.touches.length !== 1) return;
         const target = e.target;
         if (!target || !target.closest || !target.closest('#dualCapsuleStudioDrawer')) return;
-        e.stopPropagation();
         const tag = (target.tagName || '').toUpperCase();
         if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag)) {
           isTracking = false;
+          dcAxisLock = null;
           return;
         }
         // 若手指落在橫向捲動軌道（例如多國切換列、行程站點列），允許原生橫向捲動而不誤切分頁
         if (target.closest('#dcMultiCountryPillsTrack, #dcRouteCitiesTrack, .overflow-x-auto')) {
           isTracking = false;
+          dcAxisLock = null;
           return;
         }
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         isTracking = true;
+        dcAxisLock = null;
       }, { passive: true });
 
       document.addEventListener('touchmove', (e) => {
@@ -35253,24 +35524,37 @@ function setupYearOverviewToggle() {
         const target = e.target;
         const drawerEl = target && target.closest ? target.closest('#dualCapsuleStudioDrawer') : null;
         if (!drawerEl) return;
-        e.stopPropagation();
+        const curX = e.touches[0].clientX;
+        const curY = e.touches[0].clientY;
+        const dx = curX - startX;
+        const dy = curY - startY;
+        if (isTracking && !dcAxisLock && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+          dcAxisLock = Math.abs(dx) > Math.abs(dy) * 1.25 ? 'x' : 'y';
+          if (dcAxisLock === 'y') isTracking = false;
+        }
         if (window.innerWidth >= 1024) return;
         // 僅當雙錦囊掛載於手機頂部吸頂走廊時隔離背景月曆穿透；若在 iPad 直向下方右側主面板內，允許自然滾動鏈接至外層清單
         const isInTopMobileRibbon = Boolean(drawerEl.closest('#mobileRibbonDualCapsuleSlot'));
         if (!isInTopMobileRibbon) return;
         const scroller = target.closest('.dc-scroll-viewport');
         if (!scroller) {
-          if (e.cancelable) e.preventDefault();
+          if (dcAxisLock !== 'x' && e.cancelable) e.preventDefault();
           return;
         }
-        const curY = e.touches[0].clientY;
-        const deltaY = curY - startY;
         const atTop = scroller.scrollTop <= 0;
         const atBottom = Math.ceil(scroller.scrollTop + scroller.clientHeight) >= scroller.scrollHeight;
-        if ((atTop && deltaY > 0) || (atBottom && deltaY < 0)) {
+        if (dcAxisLock !== 'x' && ((atTop && dy > 0) || (atBottom && dy < 0))) {
           if (e.cancelable) e.preventDefault();
         }
       }, { passive: false });
+
+      document.addEventListener('touchcancel', () => {
+        isTracking = false;
+        dcAxisLock = null;
+        isDraggingHandle = false;
+        isDraggingBkHandle = false;
+        bkTracking = false;
+      }, { passive: true });
 
       document.addEventListener('touchend', (e) => {
         if (!isTracking || !e.changedTouches || e.changedTouches.length !== 1) return;
@@ -35709,56 +35993,176 @@ function setupYearOverviewToggle() {
     };
 
     window.DC_CLOUD_RULES_META = {
-      lastUpdated: '2026-11-16',
-      source: '內置完整規則庫（支援 GitHub Pages 雲端自動同步）',
-      isCloudSynced: false
+      lastUpdated: '2026-11-19',
+      source: 'Firebase 雲端活規則庫 + 本地完整底座',
+      isCloudSynced: false,
+      isSyncing: false,
+      patchedCodes: new Set()
     };
 
-    // 雲端動態規則庫同步器：部署於 GitHub Pages 時，每次開啟自動背景讀取 ./travel_rules.json
-    async function syncExternalTravelRulesJson() {
-      try {
-        if (window.location.protocol === 'file:') return;
-        const resp = await fetch(`./travel_rules.json?t=${Date.now()}`, { cache: 'no-store' });
-        if (!resp.ok) return;
-        const payload = await resp.json();
-        if (!payload || typeof payload !== 'object') return;
-        if (payload.lastUpdated) {
-          window.DC_CLOUD_RULES_META.lastUpdated = payload.lastUpdated;
-          window.DC_CLOUD_RULES_META.source = payload.source || 'GitHub Actions 雲端自動更新';
-          window.DC_CLOUD_RULES_META.isCloudSynced = true;
-        }
-        if (payload.countries && typeof payload.countries === 'object') {
-          Object.entries(payload.countries).forEach(([code, patch]) => {
-            if (!patch || typeof patch !== 'object') return;
-            const target = DC_COUNTRY_KNOWLEDGE[code] || DC_GLOBAL_FALLBACK_BY_COUNTRY[code];
-            if (target) {
-              if (patch.visaPill) target.visaPill = patch.visaPill;
-              if (patch.entryHtml) target.entryHtml = patch.entryHtml;
-              if (patch.entryMoreHtml) target.entryMoreHtml = patch.entryMoreHtml;
-              if (patch.hkAlert) target.hkAlert = patch.hkAlert;
-              if (Array.isArray(patch.liveNews) && patch.liveNews.length > 0) {
-                target.news10 = [...patch.liveNews, ...(target.news10 || [])];
-              }
-              if (Array.isArray(patch.liveScams) && patch.liveScams.length > 0) {
-                target.scam10 = [...patch.liveScams, ...(target.scam10 || [])];
-              }
+    window.DC_BASE_COUNTRY_SNAPSHOTS = window.DC_BASE_COUNTRY_SNAPSHOTS || {};
+    function ensureBaseSnapshot(code) {
+      if (!code || window.DC_BASE_COUNTRY_SNAPSHOTS[code]) return;
+      const src = DC_COUNTRY_KNOWLEDGE[code] || DC_GLOBAL_FALLBACK_BY_COUNTRY[code];
+      if (src) {
+        window.DC_BASE_COUNTRY_SNAPSHOTS[code] = {
+          visaPill: src.visaPill || '',
+          entryHtml: src.entryHtml || '',
+          entryMoreHtml: src.entryMoreHtml || '',
+          festivalsOverrideHtml: src.festivalsOverrideHtml || '',
+          fxTip: src.fxTip || '',
+          plug: src.plug || '',
+          countryPrep: Array.isArray(src.countryPrep) ? src.countryPrep.slice() : [],
+          hkAlert: src.hkAlert || '無警示',
+          news10: Array.isArray(src.news10) ? src.news10.slice() : [],
+          scam10: Array.isArray(src.scam10) ? src.scam10.slice() : [],
+          culture10: Array.isArray(src.culture10) ? src.culture10.slice() : [],
+          emergency: Array.isArray(src.emergency) ? src.emergency.map(x => Object.assign({}, x)) : [],
+          customApps: Array.isArray(src.customApps) ? src.customApps.map(x => Object.assign({}, x)) : []
+        };
+      }
+    }
+
+    function applyCloudTravelRulesPayload(payload, shouldRerender = true) {
+      if (!payload || typeof payload !== 'object') return false;
+      let appliedAny = false;
+      if (payload.lastUpdated) {
+        window.DC_CLOUD_RULES_META.lastUpdated = payload.lastUpdated;
+        window.DC_CLOUD_RULES_META.source = payload.source || 'Firebase 雲端活規則庫';
+        window.DC_CLOUD_RULES_META.isCloudSynced = true;
+      }
+      if (payload.countries && typeof payload.countries === 'object') {
+        Object.entries(payload.countries).forEach(([rawCode, patch]) => {
+          const code = String(rawCode || '').toUpperCase();
+          if (!code || !patch || typeof patch !== 'object') return;
+          // 嚴格官方核實閘門（Verified-Only Gate）：僅接納附帶官方政府來源核證（verifiedOfficial 或官方政府網域）之規例，未經官方證實一律靜默攔截不顯示
+          const srcUrl = String(patch.officialSourceUrl || patch.sourceUrl || '').trim();
+          const hasOfficialDomain = /^https?:\/\/[^\/]+\.(gov|go\.jp|go\.kr|gov\.sg|gov\.hk|gov\.mo|gov\.tw|gov\.cn|europa\.eu|who\.int|iata\.org)(\/|$)/i.test(srcUrl);
+          if (patch.verifiedOfficial !== true && !hasOfficialDomain) return;
+          if (!DC_COUNTRY_KNOWLEDGE[code] && !DC_GLOBAL_FALLBACK_BY_COUNTRY[code] && typeof buildSpecForCountryCode === 'function') {
+            const built = buildSpecForCountryCode(code);
+            if (built && built.spec) {
+              DC_GLOBAL_FALLBACK_BY_COUNTRY[code] = built.spec;
             }
-          });
-          localStorage.setItem('hk_leave_cloud_travel_rules_cache', JSON.stringify(payload));
-          if (typeof dcCurrentTripKey === 'string' && dcCurrentTripKey && typeof openTripDualCapsule === 'function') {
-            openTripDualCapsule(dcCurrentTripKey, window.dcCurrentActiveTab || 'prep');
+          }
+          ensureBaseSnapshot(code);
+          const base = window.DC_BASE_COUNTRY_SNAPSHOTS[code] || {};
+          const target = DC_COUNTRY_KNOWLEDGE[code] || DC_GLOBAL_FALLBACK_BY_COUNTRY[code];
+          if (target) {
+            if (patch.visaPill) target.visaPill = patch.visaPill;
+            if (patch.entryHtml) target.entryHtml = patch.entryHtml;
+            if (patch.entryMoreHtml !== undefined) target.entryMoreHtml = patch.entryMoreHtml;
+            if (patch.festivalsOverrideHtml !== undefined) target.festivalsOverrideHtml = patch.festivalsOverrideHtml;
+            if (patch.fxTip !== undefined) target.fxTip = patch.fxTip;
+            if (patch.plug !== undefined && patch.plug !== '') target.plug = patch.plug;
+            if (Array.isArray(patch.countryPrep) && patch.countryPrep.length > 0) {
+              target.countryPrep = patch.countryPrep.slice();
+            }
+            if (patch.hkAlert) {
+              target.hkAlert = patch.hkAlert;
+              target._manualHkAlert = true;
+            }
+            if (Array.isArray(patch.customApps)) {
+              target.customApps = patch.customApps.slice();
+            }
+            if (Array.isArray(patch.liveNews) && patch.liveNews.length > 0) {
+              const baseNews = Array.isArray(base.news10) ? base.news10 : (target.news10 || []);
+              target.news10 = [...patch.liveNews, ...baseNews.filter(x => !patch.liveNews.includes(x))];
+            }
+            if (Array.isArray(patch.liveScams) && patch.liveScams.length > 0) {
+              const baseScams = Array.isArray(base.scam10) ? base.scam10 : (target.scam10 || []);
+              target.scam10 = [...patch.liveScams, ...baseScams.filter(x => !patch.liveScams.includes(x))];
+            }
+            if (Array.isArray(patch.liveCulture) && patch.liveCulture.length > 0) {
+              const baseCulture = Array.isArray(base.culture10) ? base.culture10 : (target.culture10 || []);
+              target.culture10 = [...patch.liveCulture, ...baseCulture.filter(x => !patch.liveCulture.includes(x))];
+            }
+            if (patch.localEmergency && typeof patch.localEmergency === 'object') {
+              const baseEm = Array.isArray(base.emergency) ? base.emergency.map(x => Object.assign({}, x)) : (Array.isArray(target.emergency) ? target.emergency.map(x => Object.assign({}, x)) : []);
+              const le = patch.localEmergency;
+              const upsertEm = (matchRe, defaultLabel, newNum) => {
+                if (!newNum) return;
+                const idx = baseEm.findIndex(item => matchRe.test(String(item.label || '')));
+                if (idx !== -1) {
+                  baseEm[idx].num = newNum;
+                } else {
+                  baseEm.push({ label: defaultLabel, num: newNum, primary: false });
+                }
+              };
+              if (le.police) upsertEm(/(報警|警察|police)/i, '當地報警熱線 · Local Police', le.police);
+              if (le.amb) upsertEm(/(急救|救護|醫療|ambulance|medical)/i, '醫療急救熱線 · Medical Emergency', le.amb);
+              if (le.tourist) upsertEm(/(旅遊警察|旅遊支援|tourist)/i, '旅遊警察／支援專線 · Tourist Police', le.tourist);
+              target.emergency = baseEm;
+            }
+            window.DC_CLOUD_RULES_META.patchedCodes.add(code);
+            appliedAny = true;
+          }
+        });
+      }
+      if (shouldRerender && appliedAny && typeof dcCurrentTripKey === 'string' && dcCurrentTripKey && typeof toggleTripDualCapsule === 'function') {
+        const drawer = document.getElementById('dualCapsuleStudioDrawer');
+        if (drawer && !drawer.classList.contains('hidden')) {
+          const prevKey = dcCurrentTripKey;
+          dcCurrentTripKey = null;
+          toggleTripDualCapsule(prevKey, dcCurrentTab || 'prep', null, 'preserve');
+        }
+      }
+      return appliedAny;
+    }
+
+    async function syncExternalTravelRulesJson(isManual = false) {
+      window.DC_CLOUD_RULES_META.isSyncing = true;
+      if (typeof dcCurrentTripKey === 'string' && dcCurrentTripKey && dcActiveCountrySpec) {
+        renderDcDynamicTimeAlert(dcCurrentCountryCode, dcCurrentTripKey, dcActiveCountrySpec);
+      }
+      let synced = false;
+      try {
+        if (typeof FIREBASE_BASE_URL === 'string' && FIREBASE_BASE_URL) {
+          const fbUrl = `${FIREBASE_BASE_URL}/global_travel_rules.json?t=${Date.now()}`;
+          const resp = await fetch(fbUrl, { cache: 'no-store' });
+          if (resp.ok) {
+            const payload = await resp.json();
+            if (payload && typeof payload === 'object' && (payload.countries || payload.lastUpdated)) {
+              window.DC_CLOUD_RULES_META.isCloudSynced = true;
+              applyCloudTravelRulesPayload(payload, true);
+              localStorage.setItem('hk_leave_cloud_travel_rules_cache', JSON.stringify(payload));
+              synced = true;
+            }
           }
         }
       } catch (e) {}
+
+      if (!synced && window.location.protocol !== 'file:') {
+        try {
+          const resp2 = await fetch(`./travel_rules.json?t=${Date.now()}`, { cache: 'no-store' });
+          if (resp2.ok) {
+            const payload2 = await resp2.json();
+            if (payload2 && typeof payload2 === 'object') {
+              window.DC_CLOUD_RULES_META.isCloudSynced = true;
+              applyCloudTravelRulesPayload(payload2, true);
+              localStorage.setItem('hk_leave_cloud_travel_rules_cache', JSON.stringify(payload2));
+              synced = true;
+            }
+          }
+        } catch (e) {}
+      }
+
+      window.DC_CLOUD_RULES_META.isSyncing = false;
+      if (typeof dcCurrentTripKey === 'string' && dcCurrentTripKey && dcActiveCountrySpec) {
+        renderDcDynamicTimeAlert(dcCurrentCountryCode, dcCurrentTripKey, dcActiveCountrySpec);
+      }
+      if (isManual && typeof showToast === 'function') {
+        showToast(synced ? '☁️ 已從 Firebase 雲端同步最新全模組規則庫！' : '✅ 已連線核對，目前為最新雲端規則版本');
+      }
+      return synced;
     }
 
     try {
       const cachedRulesRaw = localStorage.getItem('hk_leave_cloud_travel_rules_cache');
       if (cachedRulesRaw) {
         const cachedPayload = JSON.parse(cachedRulesRaw);
-        if (cachedPayload && cachedPayload.lastUpdated) {
-          window.DC_CLOUD_RULES_META.lastUpdated = cachedPayload.lastUpdated;
-          window.DC_CLOUD_RULES_META.isCloudSynced = true;
+        if (cachedPayload && typeof cachedPayload === 'object') {
+          applyCloudTravelRulesPayload(cachedPayload, false);
         }
       }
     } catch (e) {}
@@ -35767,20 +36171,237 @@ function setupYearOverviewToggle() {
         if (k.startsWith('hk_leave_dc_live7_') || k.startsWith('hk_leave_dc_live8_') || k.startsWith('hk_leave_dc_official_v10_') || k.startsWith('hk_leave_dc_official_v11_') || k.startsWith('hk_leave_dc_official_v12_') || k.startsWith('hk_leave_dc_official_v13_') || k.startsWith('hk_leave_dc_official_v14_') || k.startsWith('hk_leave_dc_official_v15_')) localStorage.removeItem(k);
       });
     } catch (e) {}
-    setTimeout(syncExternalTravelRulesJson, 400);
+    setTimeout(() => syncExternalTravelRulesJson(false), 450);
 
-    // 按用戶輸入之旅行日期與目的地計算「時效性倒數提醒 ＋ 雲端核對狀態」
+    function htmlToPlainLines(h) {
+      return String(h || '')
+        .replace(/<\/p>\s*<p[^>]*>/gi, '\n')
+        .replace(/<\/div>\s*<div[^>]*>/gi, '\n')
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<\/?(?:p|div)[^>]*>/gi, '')
+        .trim();
+    }
+
+    function formatPlainLinesToHtml(rawText) {
+      const lines = String(rawText || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+      if (lines.length === 0) return '';
+      return lines.map(line => (line.startsWith('<p') || line.startsWith('<div')) ? line : `<p>${line}</p>`).join('');
+    }
+
+    function openDcRuleHotPatchModal() {
+      const code = String(dcCurrentCountryCode || 'TH').toUpperCase();
+      if (!DC_COUNTRY_KNOWLEDGE[code] && !DC_GLOBAL_FALLBACK_BY_COUNTRY[code] && typeof buildSpecForCountryCode === 'function') {
+        const built = buildSpecForCountryCode(code);
+        if (built && built.spec) DC_GLOBAL_FALLBACK_BY_COUNTRY[code] = built.spec;
+      }
+      ensureBaseSnapshot(code);
+      const spec = DC_COUNTRY_KNOWLEDGE[code] || DC_GLOBAL_FALLBACK_BY_COUNTRY[code] || dcActiveCountrySpec || {};
+      const modal = document.getElementById('modalDcRuleHotPatch');
+      if (!modal) return;
+
+      document.getElementById('hotPatchCountryCode').value = code;
+      document.getElementById('hotPatchCountryTitle').textContent = `${spec.flag || '🌍'} ${spec.name || code}（${code}）`;
+      document.getElementById('hotPatchVisaPill').value = spec.visaPill || '';
+      document.getElementById('hotPatchHkAlert').value = spec.hkAlert || '無警示';
+      document.getElementById('hotPatchFxTip').value = spec.fxTip || '';
+      document.getElementById('hotPatchPlug').value = spec.plug || '';
+      document.getElementById('hotPatchEntryHtml').value = htmlToPlainLines(spec.entryHtml);
+      document.getElementById('hotPatchEntryMoreHtml').value = htmlToPlainLines(spec.entryMoreHtml);
+      document.getElementById('hotPatchFestivalsHtml').value = htmlToPlainLines(spec.festivalsOverrideHtml);
+      document.getElementById('hotPatchCountryPrep').value = Array.isArray(spec.countryPrep) ? spec.countryPrep.join('\n') : '';
+
+      const existingCustomApps = Array.isArray(spec.customApps) ? spec.customApps : [];
+      document.getElementById('hotPatchCustomApps').value = existingCustomApps.map(a => `${a.name || ''} | ${a.tag || '📱 當地實用'} | ${a.tip || ''}`).join('\n');
+
+      const emList = Array.isArray(spec.emergency) ? spec.emergency : [];
+      const policeObj = emList.find(x => /(報警|警察|police)/i.test(String(x.label || '')) && !/旅遊|tourist|1868|12308/i.test(String(x.label || '')));
+      const ambObj = emList.find(x => /(急救|救護|醫療|ambulance|medical)/i.test(String(x.label || '')));
+      const touristObj = emList.find(x => /(旅遊警察|旅遊支援|tourist)/i.test(String(x.label || '')));
+      document.getElementById('hotPatchPoliceNum').value = policeObj ? policeObj.num : '';
+      document.getElementById('hotPatchAmbNum').value = ambObj ? ambObj.num : '';
+      document.getElementById('hotPatchTouristNum').value = touristObj ? touristObj.num : '';
+
+      document.getElementById('hotPatchNewTip').value = '';
+      document.getElementById('hotPatchNewScam').value = '';
+      document.getElementById('hotPatchNewCulture').value = '';
+      modal.classList.remove('hidden');
+    }
+
+    function closeDcRuleHotPatchModal() {
+      const modal = document.getElementById('modalDcRuleHotPatch');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    async function saveAndPushDcRuleHotPatch() {
+      const code = String(document.getElementById('hotPatchCountryCode').value || '').toUpperCase();
+      if (!code) return;
+      ensureBaseSnapshot(code);
+
+      const visaPill = document.getElementById('hotPatchVisaPill').value.trim();
+      const hkAlert = document.getElementById('hotPatchHkAlert').value.trim() || '無警示';
+      const fxTip = document.getElementById('hotPatchFxTip').value.trim();
+      const plug = document.getElementById('hotPatchPlug').value.trim();
+      const entryHtml = formatPlainLinesToHtml(document.getElementById('hotPatchEntryHtml').value);
+      const entryMoreHtml = formatPlainLinesToHtml(document.getElementById('hotPatchEntryMoreHtml').value);
+      const festivalsOverrideHtml = formatPlainLinesToHtml(document.getElementById('hotPatchFestivalsHtml').value);
+      const countryPrepLines = document.getElementById('hotPatchCountryPrep').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+
+      const customAppLines = document.getElementById('hotPatchCustomApps').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+      const parsedCustomApps = customAppLines.map((line, i) => {
+        const segs = line.split('|').map(x => x.trim());
+        const appName = segs[0] || '';
+        const appTag = segs[1] || '📱 雲端推薦';
+        const appTip = segs[2] || '雲端活規則庫新增推薦必備應用程式。';
+        return {
+          id: `cloud_app_${code.toLowerCase()}_${i}`,
+          name: appName,
+          tag: appTag,
+          tip: appTip,
+          iosQuery: appName,
+          androidPkg: ''
+        };
+      }).filter(a => a.name);
+
+      const policeNum = document.getElementById('hotPatchPoliceNum').value.trim();
+      const ambNum = document.getElementById('hotPatchAmbNum').value.trim();
+      const touristNum = document.getElementById('hotPatchTouristNum').value.trim();
+
+      const newTipRaw = document.getElementById('hotPatchNewTip').value.trim();
+      const newScamRaw = document.getElementById('hotPatchNewScam').value.trim();
+      const newCultureRaw = document.getElementById('hotPatchNewCulture').value.trim();
+
+      const now = new Date();
+      const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+      let existingCache = { lastUpdated: todayStr, source: 'Firebase 雲端活規則庫', countries: {} };
+      try {
+        const raw = localStorage.getItem('hk_leave_cloud_travel_rules_cache');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') {
+            existingCache = Object.assign(existingCache, parsed);
+            if (!existingCache.countries) existingCache.countries = {};
+          }
+        }
+      } catch (e) {}
+
+      const prevCountryPatch = existingCache.countries[code] || {};
+      const liveNewsList = Array.isArray(prevCountryPatch.liveNews) ? prevCountryPatch.liveNews.slice() : [];
+      if (newTipRaw) {
+        const formattedTip = newTipRaw.includes('<b>') ? newTipRaw : `<b>最新動態補充（${todayStr.split(' ')[0]}）</b>：${newTipRaw}`;
+        liveNewsList.unshift(formattedTip);
+      }
+      const liveScamList = Array.isArray(prevCountryPatch.liveScams) ? prevCountryPatch.liveScams.slice() : [];
+      if (newScamRaw) {
+        const formattedScam = newScamRaw.includes('<b>') ? newScamRaw : `<b>最新防騙補充（${todayStr.split(' ')[0]}）</b>：${newScamRaw}`;
+        liveScamList.unshift(formattedScam);
+      }
+      const liveCultureList = Array.isArray(prevCountryPatch.liveCulture) ? prevCountryPatch.liveCulture.slice() : [];
+      if (newCultureRaw) {
+        const formattedCulture = newCultureRaw.includes('<b>') ? newCultureRaw : `<b>最新文化禮儀補充（${todayStr.split(' ')[0]}）</b>：${newCultureRaw}`;
+        liveCultureList.unshift(formattedCulture);
+      }
+
+      const countryPatch = {
+        visaPill: visaPill || undefined,
+        hkAlert: hkAlert || undefined,
+        fxTip: fxTip,
+        plug: plug || undefined,
+        entryHtml: entryHtml || undefined,
+        entryMoreHtml: entryMoreHtml,
+        festivalsOverrideHtml: festivalsOverrideHtml,
+        countryPrep: countryPrepLines,
+        customApps: parsedCustomApps,
+        localEmergency: {
+          police: policeNum || '',
+          amb: ambNum || '',
+          tourist: touristNum || ''
+        },
+        liveNews: liveNewsList,
+        liveScams: liveScamList,
+        liveCulture: liveCultureList,
+        updatedAt: todayStr
+      };
+
+      existingCache.lastUpdated = todayStr;
+      existingCache.source = 'Firebase 雲端活規則庫（全模組即時熱修）';
+      existingCache.countries[code] = countryPatch;
+
+      localStorage.setItem('hk_leave_cloud_travel_rules_cache', JSON.stringify(existingCache));
+      applyCloudTravelRulesPayload(existingCache, true);
+      closeDcRuleHotPatchModal();
+
+      try {
+        await fetch(`${FIREBASE_BASE_URL}/global_travel_rules/lastUpdated.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(todayStr)
+        });
+        await fetch(`${FIREBASE_BASE_URL}/global_travel_rules/source.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify('Firebase 雲端活規則庫（跨裝置全模組即時熱修）')
+        });
+        const res = await fetch(`${FIREBASE_BASE_URL}/global_travel_rules/countries/${code}.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(countryPatch)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        if (typeof showToast === 'function') showToast(`☁️ 已將「${code}」全模組最新規則推上 Firebase 雲端並全域生效！`);
+      } catch (err) {
+        console.error('Firebase hot-patch error:', err);
+        if (typeof showToast === 'function') showToast('💾 已儲存於本機規則庫（離線狀態，連線後可再同步上雲端）');
+      }
+    }
+
+    async function resetDcCountryRuleToDefault() {
+      const code = String(document.getElementById('hotPatchCountryCode').value || '').toUpperCase();
+      if (!code) return;
+      const snap = window.DC_BASE_COUNTRY_SNAPSHOTS[code];
+      const target = DC_COUNTRY_KNOWLEDGE[code] || DC_GLOBAL_FALLBACK_BY_COUNTRY[code];
+      if (snap && target) {
+        target.visaPill = snap.visaPill;
+        target.entryHtml = snap.entryHtml;
+        target.entryMoreHtml = snap.entryMoreHtml;
+        target.festivalsOverrideHtml = snap.festivalsOverrideHtml || '';
+        target.fxTip = snap.fxTip;
+        target.plug = snap.plug;
+        target.countryPrep = snap.countryPrep.slice();
+        target.hkAlert = snap.hkAlert;
+        target._manualHkAlert = false;
+        target.news10 = snap.news10.slice();
+        target.scam10 = snap.scam10.slice();
+        target.culture10 = snap.culture10.slice();
+        target.emergency = snap.emergency.map(x => Object.assign({}, x));
+        target.customApps = snap.customApps.map(x => Object.assign({}, x));
+      }
+      window.DC_CLOUD_RULES_META.patchedCodes.delete(code);
+      try {
+        const raw = localStorage.getItem('hk_leave_cloud_travel_rules_cache');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.countries && parsed.countries[code]) {
+            delete parsed.countries[code];
+            localStorage.setItem('hk_leave_cloud_travel_rules_cache', JSON.stringify(parsed));
+          }
+        }
+        await fetch(`${FIREBASE_BASE_URL}/global_travel_rules/countries/${code}.json`, { method: 'DELETE' });
+      } catch (e) {}
+      closeDcRuleHotPatchModal();
+      if (typeof dcCurrentTripKey === 'string' && dcCurrentTripKey && typeof toggleTripDualCapsule === 'function') {
+        const prevKey = dcCurrentTripKey;
+        dcCurrentTripKey = null;
+        toggleTripDualCapsule(prevKey, dcCurrentTab || 'prep', null, 'preserve');
+      }
+      if (typeof showToast === 'function') showToast(`↺ 已還原「${code}」全部欄位為內置 2026 基準規則`);
+    }
+
+    // 按用戶輸入之旅行日期與目的地計算「時效性出發倒數提醒」（純淨零冗餘狀態列，背景全自動靜默核對官方公告）
     function renderDcDynamicTimeAlert(countryCode, tripKey, spec) {
       const box = document.getElementById('dcDynamicTimeAlertBox');
       if (!box) return;
-      const meta = window.DC_CLOUD_RULES_META;
-      const syncStatusHtml = `<div class="flex items-center justify-between text-[9.5px] px-2 py-0.5 rounded-lg bg-white/85 border border-amber-200/80 text-slate-500">
-        <span class="flex items-center gap-1 font-semibold">
-          <span class="w-1.5 h-1.5 rounded-full ${meta.isCloudSynced ? 'bg-emerald-500' : 'bg-blue-500'}"></span>
-          <span>${meta.isCloudSynced ? '雲端規則庫已實時同步' : '已載入完整無遺漏規則庫'}</span>
-        </span>
-        <span class="font-bold tabular-nums text-slate-600">核對：${meta.lastUpdated}</span>
-      </div>`;
+      const syncStatusHtml = '';
 
       let countdownHtml = '';
       if (tripKey && tripKey.includes('_')) {
@@ -36027,26 +36648,31 @@ function setupYearOverviewToggle() {
 
       cards.forEach((card, cardIdx) => {
         let cornerRow = card.querySelector('.dc-card-corner-arrows');
-        if (!isMulti) {
-          if (cornerRow) cornerRow.remove();
-          return;
-        }
         if (!cornerRow) {
           cornerRow = document.createElement('div');
-          cornerRow.className = 'dc-card-corner-arrows flex items-center justify-between pt-1.5 mt-1.5 border-t border-slate-200/50 select-none';
           card.appendChild(cornerRow);
         }
+        cornerRow.className = `dc-card-corner-arrows flex items-center ${isMulti ? 'justify-between' : 'justify-center'} pt-1.5 mt-1.5 border-t border-slate-200/50 select-none`;
+
+        const upBtnHtml = `
+          <button type="button" onclick="event.stopPropagation(); scrollDcToDestinationBar()"
+                  title="返回雙錦囊頂部標題列" aria-label="返回雙錦囊頂部標題列"
+                  class="w-5 h-5 rounded-full bg-white/95 hover:bg-blue-600 text-slate-500 hover:text-white border border-slate-200/95 hover:border-blue-600 inline-flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs">
+            <i class="fa-solid fa-chevron-up text-[8px] leading-none"></i>
+          </button>`;
+
+        if (!isMulti) {
+          cornerRow.innerHTML = upBtnHtml;
+          return;
+        }
+
         cornerRow.innerHTML = `
           <button type="button" onclick="event.stopPropagation(); stepDcMultiCountry(-1, false, ${cardIdx})"
                   title="上一站：${prevCountry.name}" aria-label="切換至${prevCountry.name}"
                   class="w-5 h-5 rounded-full bg-white/95 hover:bg-blue-600 text-slate-500 hover:text-white border border-slate-200/95 hover:border-blue-600 inline-flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs">
             <i class="fa-solid fa-chevron-left text-[8px] leading-none"></i>
           </button>
-          <button type="button" onclick="event.stopPropagation(); scrollDcToDestinationBar()"
-                  title="返回雙錦囊頂部標題列" aria-label="返回雙錦囊頂部標題列"
-                  class="w-5 h-5 rounded-full bg-white/95 hover:bg-blue-600 text-slate-500 hover:text-white border border-slate-200/95 hover:border-blue-600 inline-flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs">
-            <i class="fa-solid fa-chevron-up text-[8px] leading-none"></i>
-          </button>
+          ${upBtnHtml}
           <button type="button" onclick="event.stopPropagation(); stepDcMultiCountry(1, false, ${cardIdx})"
                   title="下一站：${nextCountry.name}" aria-label="切換至${nextCountry.name}"
                   class="w-5 h-5 rounded-full bg-white/95 hover:bg-blue-600 text-slate-500 hover:text-white border border-slate-200/95 hover:border-blue-600 inline-flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs">
@@ -36981,6 +37607,45 @@ function setupYearOverviewToggle() {
         ul.querySelectorAll('.dc-live-wiki-item').forEach(el => el.remove());
       });
 
+      // 缺口 1 自動化：自動解析香港保安局（hk_sb）實時 RSS 公告之警示級別並動態切換頂部「香港外遊警示」橫幅顏色！
+      if (Array.isArray(items) && items.length > 0 && typeof renderDcHkTravelAlertBox === 'function') {
+        const sbItems = items.filter(it => it && (it.srcId === 'hk_sb' || /保安局|外遊警示/i.test(`${it.topic || ''} ${it.badgeLabel || ''} ${it.text || ''}`)));
+        if (sbItems.length > 0) {
+          const combinedSbText = sbItems.map(it => `${it.topic || ''} ${it.text || ''}`).join(' ');
+          let detectedAlert = null;
+          if (/黑色外遊警示/.test(combinedSbText) && !/取消.*黑色外遊警示/.test(combinedSbText)) {
+            detectedAlert = '黑色外遊警示（切勿前赴 · 保安局實時偵測）';
+          } else if (/紅色外遊警示/.test(combinedSbText) && !/取消.*紅色外遊警示/.test(combinedSbText)) {
+            detectedAlert = '紅色外遊警示（調整行程 · 保安局實時偵測）';
+          } else if (/黃色外遊警示/.test(combinedSbText) && !/取消.*黃色外遊警示/.test(combinedSbText)) {
+            detectedAlert = '黃色外遊警示（留意局勢 · 保安局實時偵測）';
+          } else if (/取消.*外遊警示|解除.*外遊警示/.test(combinedSbText)) {
+            detectedAlert = '無警示（保安局已取消警示）';
+          }
+          if (detectedAlert) {
+            if (dcActiveCountrySpec) dcActiveCountrySpec.hkAlert = detectedAlert;
+            renderDcHkTravelAlertBox(detectedAlert);
+          }
+        }
+      }
+
+      // 政策關鍵字自動雷達：偵測到官方渠道發布有關「簽證/免稅/電子煙/入境卡/海關/警示/颱風」最新公告時，自動於頂部亮起實時快訊橫幅
+      const alertBox = document.getElementById('dcDynamicTimeAlertBox');
+      if (alertBox) {
+        const oldRadar = alertBox.querySelector('.dc-official-policy-radar');
+        if (oldRadar) oldRadar.remove();
+        if (Array.isArray(items) && items.length > 0) {
+          const verifiedSrcIds = new Set(['hk_sb', 'hk_dh', 'local_gov', 'advisory']);
+          const urgentHit = items.find(it => it && verifiedSrcIds.has(it.srcId) && /(簽證|免簽|免稅|退稅|電子煙|加熱煙|入境卡|海關|警示|颱風|停飛|禁令|visa|customs|vape|arrival|warning)/i.test(`${it.topic || ''} ${it.text || ''}`));
+          if (urgentHit) {
+            const radarDiv = document.createElement('div');
+            radarDiv.className = 'dc-official-policy-radar p-1.5 px-2 rounded-xl bg-indigo-50/95 border border-indigo-200 text-indigo-950 text-[10px] font-bold flex items-start gap-1.5 shadow-2xs';
+            radarDiv.innerHTML = `<i class="fa-solid fa-satellite-dish text-indigo-600 mt-0.5 shrink-0"></i><div class="min-w-0 leading-snug"><span class="font-black text-indigo-700">官方政策快訊雷達（${urgentHit.badgeLabel || '官方'}）：</span>${urgentHit.text}</div>`;
+            alertBox.appendChild(radarDiv);
+          }
+        }
+      }
+
       const topUl = document.getElementById('dcNewsTop10');
       if (!topUl || !Array.isArray(items) || items.length === 0) return;
 
@@ -37190,11 +37855,15 @@ function setupYearOverviewToggle() {
           '法國國慶日巴士底日（7月14日）', '香榭麗舍大道閱兵及艾菲爾鐵塔夜間煙花期間周邊地鐵站關閉封路。', true);
       }
 
+      const overridePrefix = (spec && spec.festivalsOverrideHtml)
+        ? `<div class="mb-1 pb-1 border-b border-amber-200/70 text-amber-950 font-semibold">${spec.festivalsOverrideHtml}</div>`
+        : '';
       if (events.length === 0) {
+        if (overridePrefix) return overridePrefix;
         const rangeLabel = (startMonth === endMonth) ? `${startMonth} 月` : `${startMonth}–${endMonth} 月`;
         return `<div>• <b>${rangeLabel}期間無撞正當地大型全國法定長假</b>：公共交通、銀行、博物館及各大商圈均按正常平日時間表運作（週日部分歐洲傳統街區小店休息除外）。</div>`;
       }
-      return events.join('');
+      return overridePrefix + events.join('');
     }
 
 
@@ -38593,9 +39262,10 @@ function setupYearOverviewToggle() {
           </label>
           <div class="relative" id="editTripTitleInputWrapper">
             <input type="text" id="inputEditTripTitle" maxlength="30" autocomplete="off" placeholder="例如：日本東京 7 天遊、菲 / Phi / Tokyo" 
-                   class="w-full px-3 py-2.5 pr-8 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800 text-sm focus:outline-blue-500 focus:bg-white transition shadow-inner">
-            <button id="btnClearEditTripInput" type="button" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1">
-              <i class="fa-solid fa-circle-xmark text-xs"></i>
+                   class="w-full px-3 py-2.5 pr-10 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-800 text-sm focus:outline-blue-500 focus:bg-white transition shadow-inner">
+            <button id="btnClearEditTripInput" type="button" aria-label="清空標題"
+                    class="absolute right-1.5 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-rose-600 hover:bg-slate-200/70 active:scale-90 transition cursor-pointer touch-manipulation">
+              <i class="fa-solid fa-circle-xmark text-sm pointer-events-none"></i>
             </button>
             <!-- 中英文及機場代碼即時預測聯想下拉選單 -->
             <div id="tripTitleAutocompleteDropdown"
@@ -38716,7 +39386,7 @@ function setupYearOverviewToggle() {
     </div>
   </div>
 
-      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.45 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
+      <!-- 原裝「旅程預訂資料」流暢原地收放元件停泊區（v5.3.9 純淨憑證卡檢視態 × 一鍵全卡編輯態 × 單一收放開關） -->
   
   <!-- 手機版雙錦囊暫時縮細底部浮動還原膠囊（保留分頁、匯率銀碼與勾選進度，同時可自由滑動後方月曆） -->
   <div id="dcMobileMinBar" onclick="restoreMinimizedTripDualCapsule()"
@@ -39390,7 +40060,7 @@ function setupYearOverviewToggle() {
 
         <!-- 主體內容區（檢視態 100% 零白色輸入框；編輯態平滑切換為完整輸入表單） -->
         <div class="p-3 space-y-2.5 text-xs bg-white">
-          <!-- 1. 航班資料模組 (v4.3.43 HKG 登機閘口柱經典打卡主題 · 一鍵雙介面切換版) -->
+          <!-- 1. 航班資料模組 (v4.3.9 HKG 登機閘口柱經典打卡主題 · 一鍵雙介面切換版) -->
         <div id="flightSectionWrapper" class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 space-y-3 transition-all">
 
 
@@ -39645,7 +40315,7 @@ function setupYearOverviewToggle() {
                     <i class="fa-solid fa-pen text-[9px]"></i>
                   </button>
                   <button type="button" onclick="event.stopPropagation(); resetSingleFlightCard('out')" aria-label="清空去程航班"
-                          class="w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                          class="trip-morph-reset-btn w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
                     <i class="fa-solid fa-rotate-left text-[9px]"></i>
                   </button>
                 </div>
@@ -39918,7 +40588,7 @@ function setupYearOverviewToggle() {
                     <i class="fa-solid fa-pen text-[9px]"></i>
                   </button>
                   <button type="button" onclick="event.stopPropagation(); resetSingleFlightCard('in')" aria-label="清空回程航班"
-                          class="w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                          class="trip-morph-reset-btn w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
                     <i class="fa-solid fa-rotate-left text-[9px]"></i>
                   </button>
                 </div>
@@ -40059,7 +40729,7 @@ function setupYearOverviewToggle() {
                   <i class="fa-solid fa-pen text-[9px]"></i>
                 </button>
                 <button type="button" onclick="event.stopPropagation(); resetHotelSectionCard()" aria-label="清空住宿詳情"
-                        class="w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                        class="trip-morph-reset-btn w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
                   <i class="fa-solid fa-rotate-left text-[9px]"></i>
                 </button>
               </div>
@@ -40100,7 +40770,7 @@ function setupYearOverviewToggle() {
                   <i class="fa-solid fa-pen text-[9px]"></i>
                 </button>
                 <button type="button" onclick="event.stopPropagation(); resetNotesSectionCard()" aria-label="清空行程備忘"
-                        class="w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
+                        class="trip-morph-reset-btn w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90">
                   <i class="fa-solid fa-rotate-left text-[9px]"></i>
                 </button>
               </div>
@@ -40459,7 +41129,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-sky-600 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-extrabold text-slate-800 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v6.7.35</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v6.8.1</span>
           </button>
         </div>
 
@@ -40615,7 +41285,7 @@ function setupYearOverviewToggle() {
     </div>
   </div>
 
-  <!-- Apple 級單日時間軸與備忘工作台彈窗 (v5.13.1 純白明亮版 ＋ 彩色 M 徽章 ＋ 極速選鐘) -->
+  <!-- Apple 級單日時間軸與備忘工作台彈窗 (v5.9.1 純白明亮版 ＋ 彩色 M 徽章 ＋ 極速選鐘) -->
   <div id="modalAppleDayTimeline" class="fixed inset-0 z-[94] flex items-end sm:items-center justify-center bg-slate-900/25 backdrop-blur-[3px] hidden p-0 sm:p-4" onclick="if(event.target===this) closeAppleDayTimelineModal()">
     <div class="bg-white rounded-t-3xl sm:rounded-3xl shadow-[0_24px_60px_-12px_rgba(15,23,42,0.18)] border border-slate-200/95 max-w-lg w-full overflow-hidden flex flex-col max-h-[90dvh] animate-in fade-in slide-in-from-bottom sm:zoom-in-95 duration-200">
       
@@ -41324,5 +41994,146 @@ function setupYearOverviewToggle() {
       syncScheduleModeUI();
     })();
   </script>
+
+  <!-- Firebase 雲端活規則庫：全模組即時熱修與跨裝置同步彈窗（涵蓋出行須知＋城市指南全部 6 大缺口） -->
+  <div id="modalDcRuleHotPatch" class="fixed inset-0 z-[96] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-2.5 md:p-4">
+    <div class="bg-white rounded-3xl shadow-2xl border border-indigo-200 max-w-xl w-full overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-150">
+      <div class="p-3.5 border-b border-indigo-100 bg-gradient-to-r from-amber-50 via-white to-indigo-50 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm shrink-0">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </span>
+          <div class="min-w-0">
+            <h3 class="font-black text-slate-900 text-sm flex items-center gap-1.5 truncate">
+              <span>全模組雲端活規則庫熱修</span>
+              <span id="hotPatchCountryTitle" class="text-xs font-extrabold text-indigo-700">🇹🇭 泰國（TH）</span>
+            </h3>
+            <p class="text-[10px] text-slate-500 truncate">涵蓋出行須知與城市指南全部欄位，修改後一鍵推上 Firebase 跨裝置同步</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeDcRuleHotPatchModal()" aria-label="關閉熱修視窗"
+                class="w-7 h-7 rounded-full bg-white hover:bg-slate-100 text-slate-500 border border-slate-200 flex items-center justify-center transition shrink-0 cursor-pointer">
+          <i class="fa-solid fa-xmark text-xs"></i>
+        </button>
+      </div>
+
+      <input type="hidden" id="hotPatchCountryCode" value="">
+
+      <div class="p-3.5 overflow-y-auto custom-scroll space-y-3 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[10.5px] font-extrabold text-slate-700 mb-1">① 香港保安局外遊警示（亦支援 RSS 自動變色）</label>
+            <input type="text" id="hotPatchHkAlert" placeholder="無警示 / 黃色外遊警示 / 紅色外遊警示"
+                   class="w-full px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-300 focus:border-indigo-500 focus:bg-white focus:outline-none text-slate-900 font-bold text-xs">
+          </div>
+          <div>
+            <label class="block text-[10.5px] font-extrabold text-slate-700 mb-1">簽證狀態標籤</label>
+            <input type="text" id="hotPatchVisaPill" placeholder="例：免簽證 30 日 · 需填 TDAC"
+                   class="w-full px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-300 focus:border-indigo-500 focus:bg-white focus:outline-none text-slate-900 font-bold text-xs">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[10.5px] font-extrabold text-emerald-800 mb-1">② 外幣兌換貼士（出行須知第 2 層）</label>
+            <input type="text" id="hotPatchFxTip" placeholder="例：建議帶港幣大鈔到市區持牌找換店兌換"
+                   class="w-full px-2.5 py-1.5 rounded-xl bg-emerald-50/50 border border-emerald-200 focus:border-emerald-500 focus:bg-white focus:outline-none text-slate-900 text-[11px]">
+          </div>
+          <div>
+            <label class="block text-[10.5px] font-extrabold text-blue-800 mb-1">⑤ 當地電壓與插頭規格（出行須知第 4 層）</label>
+            <input type="text" id="hotPatchPlug" placeholder="例：220V · 兩腳扁插 / 雙圓腳插"
+                   class="w-full px-2.5 py-1.5 rounded-xl bg-blue-50/50 border border-blue-200 focus:border-blue-500 focus:bg-white focus:outline-none text-slate-900 text-[11px]">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[10.5px] font-extrabold text-slate-700 mb-1">入境與簽證核心規定（每行一條）</label>
+          <textarea id="hotPatchEntryHtml" rows="3" placeholder="輸入最新入境免簽日數、電子入境卡時限或護照要求..."
+                    class="w-full px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-300 focus:border-indigo-500 focus:bg-white focus:outline-none text-slate-800 text-[11.5px] leading-relaxed"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[10.5px] font-extrabold text-slate-700 mb-1">海關現金、免稅煙酒及禁運細則（每行一條）</label>
+          <textarea id="hotPatchEntryMoreHtml" rows="2" placeholder="輸入最新免稅香煙支數、酒類公升數、現鈔申報上限或電子煙禁令..."
+                    class="w-full px-2.5 py-1.5 rounded-xl bg-slate-50 border border-slate-300 focus:border-indigo-500 focus:bg-white focus:outline-none text-slate-800 text-[11.5px] leading-relaxed"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[10.5px] font-extrabold text-amber-800 mb-1">③ 當地公眾假期及節慶補充（出行須知第 3 層底部，每行一條）</label>
+          <textarea id="hotPatchFestivalsHtml" rows="2" placeholder="選填：輸入最新當地節慶休市或特別交通管制提醒（留空則使用系統自動年份推算）"
+                    class="w-full px-2.5 py-1.5 rounded-xl bg-amber-50/50 border border-amber-200 focus:border-amber-500 focus:bg-white focus:outline-none text-slate-800 text-[11.5px] leading-relaxed"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[10.5px] font-extrabold text-violet-800 mb-1">④ 雲端置頂「出行必備 App」（每行一款，格式：<code>App名稱 | 分類標籤 | 簡介</code>）</label>
+          <textarea id="hotPatchCustomApps" rows="2" placeholder="例：Bolt | 🚕 網約叫車 | 曼谷清邁叫車比價必備，支援綁定信用卡"
+                    class="w-full px-2.5 py-1.5 rounded-xl bg-violet-50/50 border border-violet-200 focus:border-violet-500 focus:bg-white focus:outline-none text-slate-800 text-[11.5px] leading-relaxed"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[10.5px] font-extrabold text-indigo-800 mb-1">⑤ 目的地專屬必備物品清單（出行須知第 4 層，每行一項）</label>
+          <textarea id="hotPatchCountryPrep" rows="2" placeholder="每行一項必備物品，例如：TDAC 電子入境卡二維碼截圖"
+                    class="w-full px-2.5 py-1.5 rounded-xl bg-indigo-50/40 border border-indigo-200 focus:border-indigo-500 focus:bg-white focus:outline-none text-slate-800 text-[11.5px] leading-relaxed"></textarea>
+        </div>
+
+        <div class="p-2.5 rounded-2xl bg-rose-50/50 border border-rose-200/80 space-y-1.5">
+          <div class="text-[10.5px] font-extrabold text-rose-900">⑥ 當地緊急求助電話（城市指南第 4 層）</div>
+          <div class="grid grid-cols-3 gap-1.5">
+            <div>
+              <label class="block text-[9.5px] font-bold text-slate-600 mb-0.5">報警熱線</label>
+              <input type="text" id="hotPatchPoliceNum" placeholder="如 191 / 110"
+                     class="w-full px-2 py-1 rounded-lg bg-white border border-rose-200 font-mono font-bold text-slate-900 text-[11px]">
+            </div>
+            <div>
+              <label class="block text-[9.5px] font-bold text-slate-600 mb-0.5">醫療急救</label>
+              <input type="text" id="hotPatchAmbNum" placeholder="如 1669 / 119"
+                     class="w-full px-2 py-1 rounded-lg bg-white border border-rose-200 font-mono font-bold text-slate-900 text-[11px]">
+            </div>
+            <div>
+              <label class="block text-[9.5px] font-bold text-slate-600 mb-0.5">旅遊警察／支援</label>
+              <input type="text" id="hotPatchTouristNum" placeholder="如 1155"
+                     class="w-full px-2 py-1 rounded-lg bg-white border border-rose-200 font-mono font-bold text-slate-900 text-[11px]">
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 border-t border-slate-100">
+          <div>
+            <label class="block text-[10px] font-extrabold text-blue-800 mb-1">＋ 新增「法規／交通動態」</label>
+            <input type="text" id="hotPatchNewTip" placeholder="選填：置頂法規快訊"
+                   class="w-full px-2 py-1.5 rounded-xl bg-blue-50/50 border border-blue-200 focus:border-blue-500 focus:bg-white focus:outline-none text-slate-900 text-[11px]">
+          </div>
+          <div>
+            <label class="block text-[10px] font-extrabold text-rose-800 mb-1">＋ 新增「騙案／安全防範」</label>
+            <input type="text" id="hotPatchNewScam" placeholder="選填：置頂防騙警示"
+                   class="w-full px-2 py-1.5 rounded-xl bg-rose-50/50 border border-rose-200 focus:border-rose-500 focus:bg-white focus:outline-none text-slate-900 text-[11px]">
+          </div>
+          <div>
+            <label class="block text-[10px] font-extrabold text-indigo-800 mb-1">＋ 新增「文化禁忌／禮儀」</label>
+            <input type="text" id="hotPatchNewCulture" placeholder="選填：置頂文化禮儀"
+                   class="w-full px-2 py-1.5 rounded-xl bg-indigo-50/50 border border-indigo-200 focus:border-indigo-500 focus:bg-white focus:outline-none text-slate-900 text-[11px]">
+          </div>
+        </div>
+      </div>
+
+      <div class="p-3 border-t border-slate-100 bg-slate-50/90 flex items-center justify-between gap-2 shrink-0">
+        <button type="button" onclick="resetDcCountryRuleToDefault()"
+                class="px-2.5 py-1.5 rounded-xl bg-white hover:bg-rose-50 text-rose-600 border border-rose-200 font-bold text-[11px] inline-flex items-center gap-1 transition active:scale-95 cursor-pointer">
+          <i class="fa-solid fa-rotate-left text-[10px]"></i>
+          <span>還原預設</span>
+        </button>
+        <div class="flex items-center gap-1.5">
+          <button type="button" onclick="closeDcRuleHotPatchModal()"
+                  class="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-bold text-xs transition active:scale-95 cursor-pointer">
+            取消
+          </button>
+          <button type="button" onclick="saveAndPushDcRuleHotPatch()"
+                  class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold text-xs shadow-xs inline-flex items-center gap-1.5 transition active:scale-95 cursor-pointer">
+            <i class="fa-solid fa-cloud-arrow-up text-[10.5px]"></i>
+            <span>儲存並推上雲端</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
-</html>
