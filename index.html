@@ -276,7 +276,7 @@
       box-shadow: inset 3px 0 0 #9333ea;
     }
 
-    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.1.5) === */
+    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.2.0) === */
     @media (max-width: 767px) {
       /* 2027 年份與萬年曆切換掣長期常駐顯示於左側，任何頁面／模式皆不消失 */
       #mainYearSwitcher {
@@ -619,6 +619,116 @@
       font-size: 13px !important;
       height: 33px !important;
       padding: 0 10px !important;
+    }
+    /* 假期規劃：旅遊城市標題、國旗與徽章同步字級放大（標準 / 放大 / 特大） */
+    .trip-city-title-text {
+      font-size: 14px;
+      line-height: 1.25;
+      transition: font-size 0.16s ease;
+    }
+    html.icon-label-lg .trip-city-title-text {
+      font-size: 17px !important;
+      font-weight: 850 !important;
+    }
+    html.icon-label-xl .trip-city-title-text {
+      font-size: 20px !important;
+      font-weight: 900 !important;
+    }
+    .ribbon-city-title-text {
+      font-size: 13px;
+      line-height: 1.25;
+      transition: font-size 0.16s ease;
+    }
+    html.icon-label-lg .ribbon-city-title-text {
+      font-size: 15.5px !important;
+      font-weight: 850 !important;
+    }
+    html.icon-label-xl .ribbon-city-title-text {
+      font-size: 18px !important;
+      font-weight: 900 !important;
+    }
+    html.icon-label-lg .trip-card-header-bar,
+    html.icon-label-lg .ribbon-card-header-bar {
+      min-height: 40px !important;
+    }
+    html.icon-label-xl .trip-card-header-bar,
+    html.icon-label-xl .ribbon-card-header-bar {
+      min-height: 46px !important;
+    }
+    html.icon-label-lg .trip-card-title-row,
+    html.icon-label-lg .ribbon-card-title-row {
+      height: 24px !important;
+    }
+    html.icon-label-xl .trip-card-title-row,
+    html.icon-label-xl .ribbon-card-title-row {
+      height: 28px !important;
+    }
+    html.icon-label-lg .trip-pure-flag,
+    html.icon-label-lg .ribbon-flag-align {
+      font-size: 19px !important;
+    }
+    html.icon-label-xl .trip-pure-flag,
+    html.icon-label-xl .ribbon-flag-align {
+      font-size: 22px !important;
+    }
+
+    /* 雙錦囊（🧭 出行須知 ＋ 🛡️ 城市指南）所有小卡片內文三段縮放（標準 / 放大 / 特大），排除計算機大字按鍵盤 */
+    html.icon-label-lg #dualCapsuleStudioDrawer .dc-section-card {
+      font-size: 13.5px !important;
+      line-height: 1.55 !important;
+    }
+    html.icon-label-lg #dualCapsuleStudioDrawer .dc-section-card .text-xs {
+      font-size: 14.5px !important;
+      line-height: 1.4 !important;
+    }
+    html.icon-label-lg #dualCapsuleStudioDrawer .dc-section-card .text-\[11\.5px\],
+    html.icon-label-lg #dualCapsuleStudioDrawer .dc-section-card .text-\[11px\] {
+      font-size: 13.5px !important;
+      line-height: 1.55 !important;
+    }
+    html.icon-label-lg #dualCapsuleStudioDrawer .dc-section-card .text-\[10\.5px\],
+    html.icon-label-lg #dualCapsuleStudioDrawer .dc-section-card .text-\[10px\] {
+      font-size: 12.5px !important;
+      line-height: 1.45 !important;
+    }
+    html.icon-label-lg #dualCapsuleStudioDrawer .dc-section-card .text-\[9\.5px\],
+    html.icon-label-lg #dualCapsuleStudioDrawer .dc-section-card .text-\[9px\] {
+      font-size: 11px !important;
+      line-height: 1.35 !important;
+    }
+    html.icon-label-lg #dualCapsuleStudioDrawer .dc-section-card ul li {
+      font-size: 13.5px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 4px !important;
+    }
+
+    html.icon-label-xl #dualCapsuleStudioDrawer .dc-section-card {
+      font-size: 15.5px !important;
+      line-height: 1.65 !important;
+    }
+    html.icon-label-xl #dualCapsuleStudioDrawer .dc-section-card .text-xs {
+      font-size: 16.5px !important;
+      line-height: 1.45 !important;
+    }
+    html.icon-label-xl #dualCapsuleStudioDrawer .dc-section-card .text-\[11\.5px\],
+    html.icon-label-xl #dualCapsuleStudioDrawer .dc-section-card .text-\[11px\] {
+      font-size: 15.5px !important;
+      line-height: 1.65 !important;
+    }
+    html.icon-label-xl #dualCapsuleStudioDrawer .dc-section-card .text-\[10\.5px\],
+    html.icon-label-xl #dualCapsuleStudioDrawer .dc-section-card .text-\[10px\] {
+      font-size: 14px !important;
+      line-height: 1.55 !important;
+    }
+    html.icon-label-xl #dualCapsuleStudioDrawer .dc-section-card .text-\[9\.5px\],
+    html.icon-label-xl #dualCapsuleStudioDrawer .dc-section-card .text-\[9px\] {
+      font-size: 12.5px !important;
+      line-height: 1.4 !important;
+    }
+    html.icon-label-xl #dualCapsuleStudioDrawer .dc-section-card ul li {
+      font-size: 15.5px !important;
+      line-height: 1.7 !important;
+      margin-bottom: 6px !important;
     }
 
     /* === 手機版頂部右側：白色實心圓形工具切換鈕（淺灰外框線 ＋ 淺灰箭嘴，與飛機圓鈕完全對稱） === */
@@ -999,19 +1109,7 @@
       -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
       mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
     }
-    .conveyor-center-focus-ring {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 26px;
-      height: 26px;
-      transform: translate(-50%, -50%);
-      border-radius: 8px;
-      border: 1.5px solid rgba(15, 23, 42, 0.22);
-      background: rgba(255, 255, 255, 0.55);
-      pointer-events: none;
-      z-index: 1;
-    }
+
     .conveyor-continuous-track {
       position: absolute;
       left: 50%;
@@ -3113,7 +3211,7 @@
       letter-spacing: 0.045em !important;
     }
 
-    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.1.5） === */
+    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.2.0） === */
     @keyframes orbHaloBreathe {
       0%, 100% {
         opacity: 0.85;
@@ -3407,7 +3505,7 @@
                 </button>
               </div>
 
-              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.1.5) -->
+              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.2.0) -->
               <div class="flex md:hidden items-center gap-1 min-w-0">
                 <!-- 左側即時實色身份膠囊（僅於進入某個功能板塊時顯示對應實色＋白字；選單展開未選前隱藏不干擾） -->
                 <button type="button" id="mobileCapsuleLeftLabel" onclick="triggerPinnedMobileAction()" aria-label="目前功能名稱">登記寫假</button>
@@ -3935,7 +4033,6 @@
 
             <!-- 中間：1:1 跟隨假期卡片捲動速度連續推移之 1–30/31 日子長帶（精準呈現自訂假別 AL/WB/BL/CL/SP/OFF 與公假/週末原色） -->
             <div id="stage2ConveyorViewport" class="conveyor-stage-viewport">
-              <div class="conveyor-center-focus-ring"></div>
               <div id="stage2ConveyorActiveCard" class="conveyor-continuous-track"></div>
             </div>
 
@@ -3969,6 +4066,11 @@
                   <span>個旅程</span>
                 </span>
                 <span id="mobileRibbonStagePill" class="px-1.5 py-0.5 rounded-full bg-slate-200/80 text-slate-700 font-extrabold text-[9px] tracking-tight shrink-0">1/3 一小幅</span>
+                <button type="button" onclick="event.stopPropagation(); cycleIconAndCityFontScale()" aria-label="放大旅遊城市字體"
+                        class="px-1.5 py-0.5 rounded-full bg-white hover:bg-blue-50 border border-slate-300/90 text-[#0f2b63] font-extrabold text-[9.5px] shrink-0 shadow-2xs active:scale-90 transition cursor-pointer inline-flex items-center gap-0.5">
+                  <i class="fa-solid fa-text-height text-blue-600 text-[8.5px]"></i>
+                  <span class="city-font-scale-badge">放大</span>
+                </button>
                 <div id="mobileRibbonMiniTripPreview" class="hidden mobile-ribbon-marquee-viewport text-[10.5px] font-bold text-slate-600"></div>
               </div>
               <!-- 右上角固定雙圓鈕（26×26px + gap-2，與頂部 [✈] [⌄] 嚴格垂直對齊肌肉記憶位） -->
@@ -4092,7 +4194,14 @@
                   <i class="fa-solid fa-list text-[10px]"></i> 詳細清單
                 </button>
               </div>
-              <span id="leavesSummaryKpi" class="text-[10px] font-bold text-slate-500 mr-1.5 tabular-nums">0 個連續假期</span>
+              <div class="flex items-center gap-1.5 mr-1">
+                <button type="button" onclick="cycleIconAndCityFontScale()" title="切換旅遊城市字體大細（標準 / 放大 / 特大）"
+                        class="px-2 py-0.5 rounded-md bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-300 text-[#0f2b63] font-extrabold text-[10.5px] shadow-2xs transition active:scale-95 cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-text-height text-blue-600 text-[9.5px]"></i>
+                  <span class="city-font-scale-badge">放大</span>
+                </button>
+                <span id="leavesSummaryKpi" class="text-[10px] font-bold text-slate-500 tabular-nums">0 個連續假期</span>
+              </div>
             </div>
 
             <!-- 全年假期分佈走廊甘特圖 (高精度 365 日年軸比例 + 天數徽章) -->
@@ -4371,7 +4480,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v7.1.5</span>
+      <span>v7.2.0</span>
     </button>
   </footer>
 
@@ -4529,7 +4638,7 @@
           <div>
             <h3 class="font-black text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.1.5</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.2.0</span>
             </h3>
           </div>
         </div>
@@ -4541,7 +4650,7 @@
       <div class="p-4 overflow-y-auto custom-scroll space-y-3.5 text-xs">
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.1.5（緊急修復網頁開啟時月曆與右側假期規劃空白無法載入之腳本執行錯誤）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.2.0（緊急修復網頁開啟時月曆與右側假期規劃空白無法載入之腳本執行錯誤）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4552,7 +4661,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（全站所有純圖示 Icon 補齊指向／觸控「旁邊即時顯示中文名稱」功能）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（全站所有純圖示 Icon 補齊指向／觸控「旁邊即時顯示中文名稱」功能）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4563,7 +4672,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（年份顯示與萬年曆切換掣長期常駐頂欄左側，任何頁面與模式皆不隱藏）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（年份顯示與萬年曆切換掣長期常駐頂欄左側，任何頁面與模式皆不隱藏）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4574,7 +4683,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（還原頂部圓波左側「即時中文名稱膠囊」，點按、滑動預覽或切換模式皆於旁邊清晰顯示中文名）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（還原頂部圓波左側「即時中文名稱膠囊」，點按、滑動預覽或切換模式皆於旁邊清晰顯示中文名）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4584,7 +4693,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（情境自動鎖定架構 ＋ 主頁長按日期直達寫假編輯 ＋ 移除寫假頂部多餘鎖頭圓波）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（情境自動鎖定架構 ＋ 主頁長按日期直達寫假編輯 ＋ 移除寫假頂部多餘鎖頭圓波）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4596,7 +4705,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（優化綠色月曆圖示內部間距，拉闊方格留白更疏爽清晰）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（優化綠色月曆圖示內部間距，拉闊方格留白更疏爽清晰）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4606,7 +4715,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（訂製「雙活頁環月曆方格」專屬矢量圖示，全面替換所有綠色月曆／年曆全覽／主頁返回圓波）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（訂製「雙活頁環月曆方格」專屬矢量圖示，全面替換所有綠色月曆／年曆全覽／主頁返回圓波）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4616,7 +4725,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（燈籠圖示加肥加大 ＋ 燈籠橙白配色對調 ＋ 移除展開選單外層膠囊框實現全列 36px 圓波 8px 絕對等距）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（燈籠圖示加肥加大 ＋ 燈籠橙白配色對調 ＋ 移除展開選單外層膠囊框實現全列 36px 圓波 8px 絕對等距）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4628,7 +4737,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（徹底清除頂部隱藏情景容器之幽靈 Flex 間距，確保綠色日曆、飛機與箭嘴三個圓波間距 100% 絕對相等）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（徹底清除頂部隱藏情景容器之幽靈 Flex 間距，確保綠色日曆、飛機與箭嘴三個圓波間距 100% 絕對相等）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4638,7 +4747,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（修復查詢抽屜開啟錯誤 ＋ 「寫假／查詢」純圖示放大圓波 ＋ 全站綠色日曆圓波等距對齊飛機旁）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（修復查詢抽屜開啟錯誤 ＋ 「寫假／查詢」純圖示放大圓波 ＋ 全站綠色日曆圓波等距對齊飛機旁）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4650,7 +4759,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（訂製「一高一低雙摺疊節慶燈籠」查詢專用圖示，完美呼應公眾假期與農曆傳統節日）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（訂製「一高一低雙摺疊節慶燈籠」查詢專用圖示，完美呼應公眾假期與農曆傳統節日）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4660,7 +4769,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（訂製「日曆＋飛機」寫假專用圖示，與「日曆＋放大鏡」查詢圖示形成一對對稱識別系統）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（訂製「日曆＋飛機」寫假專用圖示，與「日曆＋放大鏡」查詢圖示形成一對對稱識別系統）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4670,7 +4779,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（全新訂製「日曆＋放大鏡」查詢專用圖示，清晰區分查日曆與主頁日曆）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（全新訂製「日曆＋放大鏡」查詢專用圖示，清晰區分查日曆與主頁日曆）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4680,7 +4789,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（統一套用「2027 右側翠綠九宮格日曆圓波」至全站日曆返回掣與年曆全覽掣）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（統一套用「2027 右側翠綠九宮格日曆圓波」至全站日曆返回掣與年曆全覽掣）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4690,7 +4799,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（反轉白底翠綠線條日曆圓波 ＋ 統一 36px 整齊圓波軌道與加大日曆圖示）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（反轉白底翠綠線條日曆圓波 ＋ 統一 36px 整齊圓波軌道與加大日曆圖示）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4701,7 +4810,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（普通大日曆為主頁 ＋ 全情景常駐「綠色日曆主頁返回波仔」對稱導航架構）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（普通大日曆為主頁 ＋ 全情景常駐「綠色日曆主頁返回波仔」對稱導航架構）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4712,7 +4821,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（情景化頂部副項圓波：「日曆」返回普通月曆並浮現「全年」波仔；「寫假」預設進入編輯並於鎖頭右邊浮現「✨ 假期助手」波仔）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（情景化頂部副項圓波：「日曆」返回普通月曆並浮現「全年」波仔；「寫假」預設進入編輯並於鎖頭右邊浮現「✨ 假期助手」波仔）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4723,7 +4832,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（情景化主從架構：「日曆｜寫假｜查詢」三主項大膠囊 ＋ 情景內嵌副項 ＋ 獨立假期規劃）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（情景化主從架構：「日曆｜寫假｜查詢」三主項大膠囊 ＋ 情景內嵌副項 ＋ 獨立假期規劃）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4735,7 +4844,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（放大手機版頂部開合掣至 36px，並內置方案 A／B／C 三款大按鈕佈局即時切換體驗）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（放大手機版頂部開合掣至 36px，並內置方案 A／B／C 三款大按鈕佈局即時切換體驗）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4746,7 +4855,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（全面修復手機與平板多重滑動／彈窗切換後畫面撠住唔郁之捲動鎖定問題）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（全面修復手機與平板多重滑動／彈窗切換後畫面撠住唔郁之捲動鎖定問題）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4758,7 +4867,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（全面移除手動修訂與多餘狀態列，升級全自動靜默官方核實與「Verified-Only」嚴格發布閘門）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（全面移除手動修訂與多餘狀態列，升級全自動靜默官方核實與「Verified-Only」嚴格發布閘門）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4769,7 +4878,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（優化入境要求狀態列為暖琥珀同色系設計，並升級「核實更新」即時雙向核對官方公告與雲端規例）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（優化入境要求狀態列為暖琥珀同色系設計，並升級「核實更新」即時雙向核對官方公告與雲端規例）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4780,7 +4889,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（緊急修復 <code>parseGoogleMapsPastePayload</code> 正則換行語法錯誤，恢復主日曆與右側面板正常顯示）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（緊急修復 <code>parseGoogleMapsPastePayload</code> 正則換行語法錯誤，恢復主日曆與右側面板正常顯示）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4790,7 +4899,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（優化預訂卡片右下角操作膠囊於編輯模式之按鈕邏輯，移除冗餘交叉並突出完成剔號與紅色重設箭嘴）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（優化預訂卡片右下角操作膠囊於編輯模式之按鈕邏輯，移除冗餘交叉並突出完成剔號與紅色重設箭嘴）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4800,7 +4909,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（增強住宿詳情貼上 Google Maps 網頁完整 URL／座標自動解析功能）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（增強住宿詳情貼上 Google Maps 網頁完整 URL／座標自動解析功能）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4810,7 +4919,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.1.5（優化編輯標題欄右側清除交叉掣觸控靈敏度與即時清空回饋）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.2.0（優化編輯標題欄右側清除交叉掣觸控靈敏度與即時清空回饋）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4879,7 +4988,7 @@
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
             <li>移除額外佔位說明橫條，將「跨週長假·全用AL / 四季放鬆·留備用 / 請1-2日·輕巧快閃」直接內嵌於頂部三個方案膠囊內，完全不影響原有版面高度。</li>
-            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.1.5</code>（移除 beta 字樣）。</li>
+            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.2.0</code>（移除 beta 字樣）。</li>
           </ul>
         </div>
 
@@ -20399,16 +20508,16 @@
         <div class="trip-card p-3 space-y-2 bg-white" data-trip-id="${trip.startDate}_${trip.endDate}">
           <div class="trip-card-inner space-y-2">
             <!-- 1. 頂部全寬標題橫梁：極淺淡冰藍漸變至純白底色 ＋ 實體郵票編號徽章 ＋ 國旗 ＋ 普魯士深藍墨色中文標題 100% 同一水平線對齊 -->
-            <div class="-mx-3 -mt-3 px-3 py-2 rounded-t-[17px] bg-gradient-to-r from-[#eef6ff] via-[#f7fbff] to-white border-b border-sky-100/80 flex items-center justify-between gap-2 min-h-[36px]">
-              <div class="flex items-center gap-1.5 flex-1 min-w-0 h-[20px]">
+            <div class="trip-card-header-bar -mx-3 -mt-3 px-3 py-2 rounded-t-[17px] bg-gradient-to-r from-[#eef6ff] via-[#f7fbff] to-white border-b border-sky-100/80 flex items-center justify-between gap-2 min-h-[36px]">
+              <div class="trip-card-title-row flex items-center gap-1.5 flex-1 min-w-0 h-[20px]">
                 <!-- 實體航空郵票圖章（齒孔虛線外框 ＋ 飛機小圖示 ＋ 編號 #01） -->
                 <span class="inline-flex items-center justify-center gap-1 px-1.5 rounded-[5px] bg-gradient-to-b from-sky-50 to-blue-50/90 text-[#0f2b63] border border-dashed border-[#2b579a]/75 shadow-2xs shrink-0 select-none h-[20px] leading-none" title="第 ${idx + 1} 段連續假期">
                   <i class="fa-solid fa-plane-up text-[8.5px] text-[#163b82] leading-none"></i>
                   <span class="font-mono font-bold text-[9.5px] tracking-tight leading-none text-[#0f2b63]">#${stampOrderNo}</span>
                 </span>
                 ${pureFlagHtml ? `<span class="inline-flex items-center justify-center shrink-0 h-[20px] leading-none">${pureFlagHtml}</span>` : ''}
-                <h4 class="inline-flex items-center h-[20px] flex-1 min-w-0">
-                  <span class="font-bold text-[13px] sm:text-[14px] text-[#0f2b63] tracking-normal leading-none truncate block w-full">${trip.title}</span>
+                <h4 class="trip-card-title-row inline-flex items-center h-[20px] flex-1 min-w-0">
+                  <span class="trip-city-title-text font-bold text-[#0f2b63] tracking-normal leading-tight truncate block w-full">${trip.title}</span>
                 </h4>
               </div>
               <div class="flex items-center gap-1 shrink-0">
@@ -21522,6 +21631,9 @@
         const modalHost = modalLeavesEl.querySelector(`.trip-booking-inline-host[data-trip-key="${tripKey}"]`);
         if (modalHost) targetSlot = modalHost.querySelector('.trip-inline-studio-slot');
       }
+      if (targetSlot && targetSlot.offsetParent === null && targetSlot.id !== 'mobileRibbonInlineStudioSlot') {
+        targetSlot = null;
+      }
       if (!targetSlot) {
         const allHosts = document.querySelectorAll(`.trip-booking-inline-host[data-trip-key="${tripKey}"]`);
         for (const h of allHosts) {
@@ -21879,15 +21991,15 @@
           <div data-ribbon-idx="${idx}" data-ribbon-trip-key="${tripKey}" onclick="jumpToTripOnCalendar('${trip.startDate}', '${safeTitle}', ${trip.totalDays})"
                class="snap-start shrink-0 ${cardWidthCls} bg-white border border-slate-200/90 rounded-xl p-2 shadow-2xs flex flex-col gap-1.5 cursor-pointer active:scale-[0.99] transition">
             <!-- 1. 頂部全寬長標題橫梁：極淺淡冰藍漸變至純白底色 ＋ 郵票編號、國旗、普魯士深藍墨色中文標題與右上編輯鈕鎖定同一水平中軸線 -->
-            <div class="-mx-2 -mt-2 px-2 py-1.5 rounded-t-[11px] bg-gradient-to-r from-[#eef6ff] via-[#f7fbff] to-white border-b border-sky-100/80 flex items-center justify-between gap-1.5 min-h-[30px]">
-              <div class="flex items-center gap-1.5 flex-1 min-w-0 h-[18px]">
+            <div class="ribbon-card-header-bar -mx-2 -mt-2 px-2 py-1.5 rounded-t-[11px] bg-gradient-to-r from-[#eef6ff] via-[#f7fbff] to-white border-b border-sky-100/80 flex items-center justify-between gap-1.5 min-h-[30px]">
+              <div class="ribbon-card-title-row flex items-center gap-1.5 flex-1 min-w-0 h-[18px]">
                 <span class="inline-flex items-center justify-center gap-0.5 px-1.5 rounded-[4px] bg-gradient-to-b from-sky-50 to-blue-50/90 text-[#0f2b63] border border-dashed border-[#2b579a]/75 shrink-0 select-none h-[18px] leading-none">
                   <i class="fa-solid fa-plane-up text-[7.5px] text-[#163b82] leading-none"></i>
                   <span class="font-mono font-bold text-[8.5px] tracking-tight leading-none text-[#0f2b63]">#${ribbonStampNo}</span>
                 </span>
                 ${flagHtml}
-                <span class="inline-flex items-center h-[18px] flex-1 min-w-0">
-                  <span class="font-bold text-[12.5px] text-[#0f2b63] tracking-normal leading-none truncate block w-full">${trip.title || '連假旅程'}</span>
+                <span class="ribbon-card-title-row inline-flex items-center h-[18px] flex-1 min-w-0">
+                  <span class="ribbon-city-title-text font-bold text-[#0f2b63] tracking-normal leading-tight truncate block w-full">${trip.title || '連假旅程'}</span>
                 </span>
               </div>
               <div class="flex items-center gap-1 shrink-0 h-[18px]">
@@ -30050,18 +30162,63 @@ function setupYearOverviewToggle() {
             }
             if (countryCode) queryAttempts.push({ q: name, cc: '' }); // 最後降級備援
 
-            let foundAddress = '';
-            for (const item of queryAttempts) {
-              let url = `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=${encodeURIComponent(item.q)}&limit=1`;
-              if (item.cc) {
-                url += `&countrycodes=${item.cc}`;
+            // 帶超時保護的 fetch 工具（避免某條線路被公司防火牆靜默丟包時卡死）
+            async function fetchJsonWithTimeout(url, options = {}, timeoutMs = 3600) {
+              const controller = new AbortController();
+              const timer = setTimeout(() => controller.abort(), timeoutMs);
+              try {
+                const res = await fetch(url, { ...options, signal: controller.signal });
+                if (!res.ok) return null;
+                return await res.json();
+              } catch (e) {
+                return null;
+              } finally {
+                clearTimeout(timer);
               }
-              const res = await fetch(url, { headers: { 'Accept-Language': acceptLang } });
-              if (res.ok) {
-                const data = await res.json();
+            }
+
+            const primaryQuery = queryAttempts[0] ? queryAttempts[0].q : name;
+            let foundAddress = '';
+            let matchedSource = '';
+
+            // 線路 ①：ArcGIS 世界地理編碼服務（企業級高精度酒店與門牌解析，免金鑰）
+            {
+              const arcQueries = [primaryQuery];
+              if (strippedName && strippedName !== name) {
+                arcQueries.push(cityName ? `${cityName} ${strippedName}` : strippedName);
+              }
+              if (cityName) {
+                arcQueries.push(name);
+              }
+              const arcLang = (countryCode === 'hk' || countryCode === 'cn') ? 'zh-HK' : 'en';
+              for (const aq of arcQueries) {
+                let aUrl = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=${encodeURIComponent(aq)}&f=pjson&maxLocations=1&langCode=${arcLang}`;
+                if (countryCode) {
+                  aUrl += `&sourceCountry=${encodeURIComponent(countryCode.toUpperCase())}`;
+                }
+                const aData = await fetchJsonWithTimeout(aUrl, {}, 3800);
+                if (aData && Array.isArray(aData.candidates) && aData.candidates.length > 0 && aData.candidates[0].address) {
+                  foundAddress = aData.candidates[0].address.trim();
+                  if (foundAddress) {
+                    matchedSource = 'ArcGIS';
+                    break;
+                  }
+                }
+              }
+            }
+
+            // 線路 ②：OpenStreetMap Nominatim 備援（當 ArcGIS 無匹配或線路受限時自動接手）
+            if (!foundAddress) {
+              for (const item of queryAttempts) {
+                let url = `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&q=${encodeURIComponent(item.q)}&limit=1`;
+                if (item.cc) url += `&countrycodes=${item.cc}`;
+                const data = await fetchJsonWithTimeout(url, { headers: { 'Accept-Language': acceptLang } }, 3500);
                 if (Array.isArray(data) && data.length > 0) {
                   foundAddress = formatGeocodedAddressData(data[0]);
-                  if (foundAddress) break;
+                  if (foundAddress) {
+                    matchedSource = 'OSM';
+                    break;
+                  }
                 }
               }
             }
@@ -30072,8 +30229,8 @@ function setupYearOverviewToggle() {
 
               if (hintGeo) {
                 hintGeo.classList.remove('hidden');
-                hintGeo.innerHTML = `<i class="fa-solid fa-circle-check mr-0.5 text-emerald-600"></i>已自動填入地址`;
-                setTimeout(() => hintGeo.classList.add('hidden'), 4000);
+                hintGeo.innerHTML = `<i class="fa-solid fa-circle-check mr-0.5 text-emerald-600"></i>已自動填入地址 <span class="text-[9.5px] text-slate-400 font-mono">(${matchedSource})</span>`;
+                setTimeout(() => hintGeo.classList.add('hidden'), 4200);
               }
             } else {
               if (hintGeo) {
@@ -31136,7 +31293,16 @@ function setupYearOverviewToggle() {
         const modalScrollEl = targetSlot.closest('.overflow-y-auto');
         const savedModalScrollTop = modalScrollEl ? modalScrollEl.scrollTop : 0;
 
+        // 若目標槽位位於手機頂部假期規劃橫幅且目前處於第 3 階收窄橫條，自動展開至第 1 階確保可見
+        if (targetSlot.id === 'mobileRibbonInlineStudioSlot' && typeof mobileTripRibbonStage !== 'undefined' && (mobileTripRibbonStage === 0 || mobileTripRibbonStage === 3)) {
+          if (typeof toggleMobileTripRibbonDrawer === 'function') {
+            toggleMobileTripRibbonDrawer(1);
+          }
+        }
+
         drawer.classList.remove('is-open');
+        drawer.style.maxHeight = '';
+        drawer.style.opacity = '';
         drawer.style.display = 'grid';
         if (drawer.parentElement !== targetSlot) {
           targetSlot.appendChild(drawer);
@@ -31148,6 +31314,8 @@ function setupYearOverviewToggle() {
         }
 
         requestAnimationFrame(() => {
+          drawer.style.maxHeight = 'none';
+          drawer.style.opacity = '1';
           drawer.classList.add('is-open');
           if (modalScrollEl) {
             modalScrollEl.scrollTop = savedModalScrollTop;
@@ -40351,6 +40519,11 @@ function setupYearOverviewToggle() {
                   class="px-2 sm:px-2.5 py-1 rounded-lg text-[10px] sm:text-[10.5px] font-black bg-white/90 text-slate-700 hover:bg-sky-50 border border-sky-200/80 transition cursor-pointer">
             🛡️ 城市指南
           </button>
+          <button type="button" onclick="event.stopPropagation(); cycleIconAndCityFontScale()" title="切換內容字體大細（標準 / 放大 / 特大）"
+                  class="px-1.5 py-1 rounded-lg text-[9.5px] font-extrabold bg-white/90 hover:bg-sky-50 text-[#0f2b63] border border-sky-200/80 transition cursor-pointer inline-flex items-center gap-0.5 shrink-0">
+            <i class="fa-solid fa-text-height text-sky-600 text-[9px]"></i>
+            <span class="city-font-scale-badge">放大</span>
+          </button>
           <button type="button" id="btnDcMobileExpand" onclick="toggleDcMobileFullscreen()" aria-label="放大或還原視窗"
                   class="lg:hidden w-6 h-6 rounded-full bg-white/90 hover:bg-sky-50 text-slate-500 hover:text-slate-800 border border-slate-200/80 flex items-center justify-center transition cursor-pointer ml-0.5">
             <i id="dcMobileExpandIcon" class="fa-solid fa-up-right-and-down-left-from-center text-[10px]"></i>
@@ -42054,7 +42227,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-sky-600 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-extrabold text-slate-800 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.1.5</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.2.0</span>
           </button>
         </div>
 
@@ -42928,10 +43101,14 @@ function setupYearOverviewToggle() {
       if (valid === 'xl') root.classList.add('icon-label-xl');
       try { localStorage.setItem('hk_leave_icon_label_scale_v1', valid); } catch (e) {}
 
+      const labelTxt = valid === 'xl' ? '特大' : (valid === 'lg' ? '放大' : '標準');
       const statusEl = document.getElementById('iconLabelScaleStatusText');
       if (statusEl) {
-        statusEl.textContent = valid === 'xl' ? '特大' : (valid === 'lg' ? '放大' : '標準');
+        statusEl.textContent = labelTxt;
       }
+      document.querySelectorAll('.city-font-scale-badge').forEach(el => {
+        el.textContent = labelTxt;
+      });
       const btnMap = {
         std: document.getElementById('btnIconScaleStd'),
         lg: document.getElementById('btnIconScaleLg'),
@@ -42945,6 +43122,16 @@ function setupYearOverviewToggle() {
         b.classList.toggle('shadow-2xs', active);
         b.classList.toggle('text-slate-600', !active);
       });
+    };
+    window.cycleIconAndCityFontScale = function() {
+      const root = document.documentElement;
+      const cur = root.classList.contains('icon-label-xl') ? 'xl' : (root.classList.contains('icon-label-lg') ? 'lg' : 'std');
+      const next = cur === 'std' ? 'lg' : (cur === 'lg' ? 'xl' : 'std');
+      window.setIconLabelScale(next);
+      if (typeof showToast === 'function') {
+        const name = next === 'xl' ? '特大' : (next === 'lg' ? '放大' : '標準');
+        showToast(`🔠 旅遊城市與提示字級已切換為「${name}」`);
+      }
     };
     (function initIconLabelScale() {
       let saved = 'lg';
@@ -43220,11 +43407,11 @@ function setupYearOverviewToggle() {
           <div class="flex items-center justify-between">
             <span class="flex items-center gap-2 font-extrabold text-slate-800 text-[13px]">
               <i class="fa-solid fa-text-height text-sky-600 text-sm w-4 text-center"></i>
-              <span>圖示中文提示字級</span>
+              <span>旅遊城市與提示字級</span>
             </span>
             <span id="iconLabelScaleStatusText" class="text-[10.5px] font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200">放大</span>
           </div>
-          <p class="text-[11px] text-slate-500 leading-relaxed">調整指住或長按任何純圖示按鍵時，旁邊彈出的中文名稱大細。</p>
+          <p class="text-[11px] text-slate-500 leading-relaxed">同步放大「出行須知／城市指南」小卡片內文、旅遊城市標題及圖示中文提示字級。</p>
           <div class="grid grid-cols-3 gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200/80">
             <button type="button" id="btnIconScaleStd" onclick="setIconLabelScale('std')"
                     class="py-1.5 px-2 rounded-lg text-[11.5px] font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer">
