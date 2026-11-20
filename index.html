@@ -92,32 +92,38 @@
         cursor: pointer;
       }
       #mobileCapsuleLeftLabel.is-visible {
-        max-width: 84px;
+        max-width: 112px;
         opacity: 1;
-        padding: 0 8px;
+        padding: 0 9px;
+      }
+      html.icon-label-lg #mobileCapsuleLeftLabel {
+        height: 28px !important;
+        font-size: 12px !important;
+      }
+      html.icon-label-lg #mobileCapsuleLeftLabel.is-visible {
+        max-width: 128px !important;
+        padding: 0 11px !important;
+      }
+      html.icon-label-xl #mobileCapsuleLeftLabel {
+        height: 31px !important;
+        font-size: 13.5px !important;
+      }
+      html.icon-label-xl #mobileCapsuleLeftLabel.is-visible {
+        max-width: 146px !important;
+        padding: 0 12px !important;
       }
       /* 展開中全部項目之單行純圖示膠囊（內含 ✈ 假期規劃 ＋ 5 大工具 ＋ 解鎖） */
       #mobileHeaderSingleRowPill {
-        display: inline-flex;
+        display: none;
         align-items: center;
-        gap: 3.5px;
-        max-width: 0;
-        opacity: 0;
-        overflow: hidden;
+        gap: 8px;
         padding: 0;
-        border-radius: 9999px;
-        background: rgba(248, 250, 252, 0.96);
-        border: 1px solid transparent;
-        transition: max-width 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.18s ease, padding 0.22s ease, border-color 0.18s ease;
-        pointer-events: none;
+        background: transparent;
+        border: none;
+        box-shadow: none;
       }
       #mobileHeaderSingleRowPill.is-open {
-        max-width: 244px;
-        opacity: 1;
-        padding: 2px 4px;
-        border-color: rgba(203, 213, 225, 0.95);
-        box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
-        pointer-events: auto;
+        display: inline-flex;
       }
       /* 揀選後自動收縮，剩餘嗰個 Icon 留返喺箭嘴旁邊（緊貼 #btnToggleMobileToolbar 左側） */
       #mobilePinnedSelectedSlot {
@@ -155,7 +161,16 @@
       .mobile-pill-icon-btn.is-pointed {
         border-color: #2563eb !important;
         background: #eff6ff !important;
+        color: #1d4ed8 !important;
         box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25), 0 2px 6px rgba(37, 99, 235, 0.2) !important;
+        transform: scale(1.08);
+        z-index: 2;
+      }
+      #mPillBtnHolidays.is-pointed {
+        border-color: #fb923c !important;
+        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 0 2.5px rgba(234, 88, 12, 0.35), 0 3px 10px rgba(234, 88, 12, 0.42) !important;
         transform: scale(1.08);
         z-index: 2;
       }
@@ -179,26 +194,18 @@
       }
       .mobile-pill-icon-btn.is-default-shortcut {
         background: #ffffff !important;
-        border-color: #a7f3d0 !important;
-        color: #059669 !important;
-        box-shadow: 0 2px 5px -1px rgba(5, 150, 105, 0.14) !important;
+        border-color: #93c5fd !important;
+        color: #1e3a8a !important;
+        box-shadow: 0 2px 5px -1px rgba(30, 58, 138, 0.16) !important;
       }
       /* 僅於「編輯日期模式」浮現嘅專屬雙圓鈕：[🧹 擦膠] + [🔓 編輯中(點擊鎖返)] */
       #mobileHeaderEditContextGroup {
-        display: inline-flex;
+        display: none;
         align-items: center;
-        gap: 4px;
-        max-width: 0;
-        opacity: 0;
-        overflow: hidden;
-        pointer-events: none;
-        transition: max-width 0.24s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.16s ease;
+        gap: 8px;
       }
       #mobileHeaderEditContextGroup.is-editing {
-        max-width: 62px;
-        opacity: 1;
-        overflow: visible;
-        pointer-events: auto;
+        display: inline-flex;
       }
       .mobile-context-orb {
         width: 25px;
@@ -269,6 +276,293 @@
       box-shadow: inset 3px 0 0 #9333ea;
     }
 
+    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.1.5) === */
+    @media (max-width: 767px) {
+      /* 2027 年份與萬年曆切換掣長期常駐顯示於左側，任何頁面／模式皆不消失 */
+      #mainYearSwitcher {
+        display: inline-flex !important;
+        flex-shrink: 0 !important;
+      }
+      #btnOpenMainYearPopover {
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+        font-size: 18px !important;
+      }
+      #yearHeaderRow > div.flex.md\:hidden {
+        gap: 4px !important;
+        min-width: 0 !important;
+      }
+
+      /* 統一所有頂部圓波為 31×31px 正圓，整齊等高對齊，確保最多6粒圓波＋標籤絕不爆行 */
+      #btnToggleMobileToolbar,
+      #btnToggleMobileTripRibbon,
+      .mobile-context-orb,
+      #mobileContextYearOverviewBtn,
+      #mobileContextHomeReturnBtn,
+      #mobileStage2RestoreCalBtn,
+      .mobile-master-pill-btn {
+        width: 31px !important;
+        height: 31px !important;
+        border-radius: 9999px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-shrink: 0 !important;
+        transition: transform 0.14s ease, background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease !important;
+      }
+      #btnToggleMobileToolbar .mobile-orb-icon {
+        font-size: 12px !important;
+      }
+
+      /* 左側情景身份實色膠囊：隨當前進入哪個板塊切換對應實色＋白字 */
+      #mobileCapsuleLeftLabel {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        height: 25px;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0;
+        border-radius: 9999px;
+        font-size: 10px;
+        font-weight: 850;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+        transition: max-width 0.22s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.16s ease, padding 0.2s ease, background-color 0.18s ease, color 0.18s ease;
+        flex-shrink: 0;
+        cursor: pointer;
+      }
+      #mobileCapsuleLeftLabel.is-visible {
+        max-width: 84px;
+        opacity: 1;
+        padding: 0 8px;
+      }
+
+      /* 主頁情景（「日曆」普通月曆）：未啟用時徹底 display:none */
+      #mobileHeaderCalendarContextGroup {
+        display: none;
+        align-items: center;
+      }
+      #mobileHeaderCalendarContextGroup.is-cal-context {
+        display: inline-flex;
+      }
+
+      /* 日曆主頁／年曆全覽波仔：煮食器深藍外框及線條 (#1e3a8a) ＋ 純白肉 (#ffffff) */
+      #mobileContextYearOverviewBtn,
+      #mobileContextHomeReturnBtn,
+      #mobileStage2RestoreCalBtn {
+        background: #ffffff !important;
+        border: 1.5px solid #1e3a8a !important;
+        color: #1e3a8a !important;
+        box-shadow: 0 2px 6px -1px rgba(30, 58, 138, 0.18) !important;
+      }
+      #mobileContextYearOverviewBtn:active,
+      #mobileContextHomeReturnBtn:active,
+      #mobileStage2RestoreCalBtn:active {
+        transform: scale(0.92) !important;
+        background: #eff6ff !important;
+      }
+
+      /* 【寫假情景專屬波仔組】：[實心藍色登記寫假圖示] + [擦膠] + [假期助手] */
+      #mobileHeaderEditContextGroup {
+        display: none;
+        align-items: center;
+        gap: 4px !important;
+      }
+      #mobileHeaderEditContextGroup.is-editing {
+        display: inline-flex;
+      }
+      /* 寫假模式駐留實心圖示（未點擦膠/助手時實心寶藍＋白圖示；點選擦膠/助手時退為反向白底藍框） */
+      #mobileContextApplyActiveBtn {
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+        border: 1.5px solid transparent !important;
+        color: #ffffff !important;
+        box-shadow: 0 3px 10px -1px rgba(37, 99, 235, 0.45) !important;
+      }
+      #mobileContextApplyActiveBtn.is-outline-mode {
+        background: #ffffff !important;
+        border: 1.5px solid #2563eb !important;
+        color: #1d4ed8 !important;
+        box-shadow: 0 2px 6px -1px rgba(37, 99, 235, 0.14) !important;
+      }
+      /* 擦膠：未選時反向（白底粉紅框＋紅圖示），選中時實心玫瑰紅＋白圖示 */
+      #mobileContextEraserBtn {
+        background: #ffffff !important;
+        border: 1.5px solid #fda4af !important;
+        color: #e11d48 !important;
+        box-shadow: 0 2px 6px -1px rgba(225, 29, 72, 0.14) !important;
+      }
+      #mobileContextEraserBtn.is-eraser-on {
+        background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%) !important;
+        border-color: transparent !important;
+        color: #ffffff !important;
+        box-shadow: 0 3px 10px -1px rgba(225, 29, 72, 0.45) !important;
+      }
+      /* 假期助手：未選時反向（白底天藍框＋藍圖示），選中時實心靛藍＋白圖示 */
+      #mobileContextAssistantBtn {
+        background: #ffffff !important;
+        border: 1.5px solid #38bdf8 !important;
+        color: #0284c7 !important;
+        box-shadow: 0 2px 6px -1px rgba(2, 132, 199, 0.14) !important;
+      }
+      #mobileContextAssistantBtn.is-assistant-on {
+        background: linear-gradient(135deg, #0ea5e9 0%, #4f46e5 100%) !important;
+        border-color: transparent !important;
+        color: #ffffff !important;
+        box-shadow: 0 3px 10px -1px rgba(79, 70, 229, 0.45) !important;
+      }
+
+      /* 【查詢情景專屬波仔組】：[公眾假期] + [農曆節氣]（當前選中項為實心高亮，未選中項為反向白底彩框） */
+      #mobileHeaderQueryContextGroup {
+        display: none;
+        align-items: center;
+        gap: 4px !important;
+      }
+      #mobileHeaderQueryContextGroup.is-query-context {
+        display: inline-flex;
+      }
+      #mobileContextHolidaysBtn {
+        background: #ffffff !important;
+        border: 1.5px solid #fb923c !important;
+        color: #ea580c !important;
+        box-shadow: 0 2px 6px -1px rgba(234, 88, 12, 0.14) !important;
+      }
+      #mobileContextHolidaysBtn.is-active-q {
+        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+        border-color: transparent !important;
+        color: #ffffff !important;
+        box-shadow: 0 3px 10px -1px rgba(234, 88, 12, 0.45) !important;
+      }
+      #mobileContextLunarBtn {
+        background: #ffffff !important;
+        border: 1.5px solid #c084fc !important;
+        color: #9333ea !important;
+        box-shadow: 0 2px 6px -1px rgba(147, 51, 234, 0.14) !important;
+      }
+      #mobileContextLunarBtn.is-active-q {
+        background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%) !important;
+        border-color: transparent !important;
+        color: #ffffff !important;
+        box-shadow: 0 3px 10px -1px rgba(147, 51, 234, 0.45) !important;
+      }
+
+      /* 返回普通月曆圓波：身處 寫假 / 查詢 / 飛機假期規劃時常駐於飛機左邊 */
+      #mobileHeaderHomeReturnGroup {
+        display: none;
+        align-items: center;
+      }
+      #mobileHeaderHomeReturnGroup.is-away-home {
+        display: inline-flex;
+      }
+
+      /* 點開 `‹` 功能選單時展開的主功能圓波列：未選中一律為「反向顏色（白底＋彩色外框與圖示）」，選中該模式先變實心！ */
+      #mobileHeaderSingleRowPill {
+        display: none;
+        align-items: center;
+        gap: 5px !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      #mobileHeaderSingleRowPill.is-open {
+        display: inline-flex !important;
+      }
+      #mobileHeaderSingleRowPill.is-all-branches {
+        max-width: calc(100vw - 156px) !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding: 2px 3px !important;
+        cursor: grab !important;
+      }
+      #mobileHeaderSingleRowPill.is-all-branches::-webkit-scrollbar {
+        display: none !important;
+      }
+      #mobileHeaderSingleRowPill.is-all-branches:active {
+        cursor: grabbing !important;
+      }
+      #mPillBtnApply {
+        background: #ffffff !important;
+        border: 1.5px solid #2563eb !important;
+        color: #1d4ed8 !important;
+        box-shadow: 0 2px 6px -1px rgba(37, 99, 235, 0.14) !important;
+      }
+      #mPillBtnApply.is-active-master {
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+        border-color: transparent !important;
+        color: #ffffff !important;
+        box-shadow: 0 3px 10px -1px rgba(37, 99, 235, 0.45) !important;
+      }
+      #mPillBtnHolidays {
+        background: #ffffff !important;
+        border: 1.5px solid #f97316 !important;
+        color: #ea580c !important;
+        box-shadow: 0 2px 6px -1px rgba(234, 88, 12, 0.14) !important;
+      }
+      #mPillBtnHolidays.is-active-holidays {
+        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+        border-color: transparent !important;
+        color: #ffffff !important;
+        box-shadow: 0 3px 10px -1px rgba(234, 88, 12, 0.45) !important;
+      }
+      .mobile-master-pill-btn:active {
+        transform: scale(0.92);
+      }
+      /* 副項分支膠囊：僅於長按 `‹` 展開全部分支時顯示 */
+      .mobile-sub-branch-btn {
+        display: none;
+        height: 29px;
+        padding: 0 7px;
+        border-radius: 9999px;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        flex-shrink: 0;
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        font-size: 10px;
+        font-weight: 800;
+        white-space: nowrap;
+        box-shadow: 0 2px 5px rgba(15, 23, 42, 0.06);
+      }
+      #mobileHeaderSingleRowPill.is-all-branches .mobile-sub-branch-btn {
+        display: inline-flex !important;
+      }
+      .mobile-pill-group-divider {
+        display: none;
+        width: 1px;
+        height: 18px;
+        background: rgba(203, 213, 225, 0.9);
+        flex-shrink: 0;
+      }
+      #mobileHeaderSingleRowPill.is-all-branches .mobile-pill-group-divider {
+        display: inline-block !important;
+      }
+    }
+
+    /* 排假完成後無干擾快捷銜接氣泡（填寫目的地 ➔） */
+    #tripDestinationBridgePill {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      z-index: 89;
+      transform: translate(-50%, 18px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+    }
+    #tripDestinationBridgePill.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, 0);
+    }
+
     /* 輕量浮動名牌 Micro-Toast（點選純圖示時短暫顯示功能名稱，1.35 秒自動淡出） */
     #mobileIconMicroToast {
       position: fixed;
@@ -294,6 +588,37 @@
     #mobileIconMicroToast.is-visible {
       opacity: 1;
       transform: translate(-50%, 0) scale(1);
+    }
+    /* 圖示指向中文名稱字級三段縮放（標準 / 放大 / 特大） */
+    #universalIconAdjacentBadge {
+      font-size: 12px !important;
+      padding: 4px 11px !important;
+    }
+    html.icon-label-lg #universalIconAdjacentBadge {
+      font-size: 14.5px !important;
+      padding: 6px 14px !important;
+    }
+    html.icon-label-xl #universalIconAdjacentBadge {
+      font-size: 17px !important;
+      padding: 7px 16px !important;
+    }
+    html.icon-label-lg #mobileIconMicroToast {
+      font-size: 13.5px !important;
+      padding: 6px 15px !important;
+    }
+    html.icon-label-xl #mobileIconMicroToast {
+      font-size: 15.5px !important;
+      padding: 7px 17px !important;
+    }
+    html.icon-label-lg .mobile-sub-branch-btn {
+      font-size: 11.5px !important;
+      height: 31px !important;
+      padding: 0 9px !important;
+    }
+    html.icon-label-xl .mobile-sub-branch-btn {
+      font-size: 13px !important;
+      height: 33px !important;
+      padding: 0 10px !important;
     }
 
     /* === 手機版頂部右側：白色實心圓形工具切換鈕（淺灰外框線 ＋ 淺灰箭嘴，與飛機圓鈕完全對稱） === */
@@ -846,7 +1171,7 @@
       touch-action: pan-y;
       overscroll-behavior-y: auto;
     }
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       .dc-scroll-viewport {
         height: auto !important;
         max-height: none !important;
@@ -2264,16 +2589,16 @@
     }
 
     #btnToggleYearView {
-      background: rgba(236, 253, 245, 0.9) !important;
-      backdrop-filter: blur(12px) !important;
-      border: 1px solid rgba(167, 243, 208, 0.95) !important;
-      box-shadow: 0 2px 6px -1px rgba(5, 150, 105, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+      background: #ffffff !important;
+      border: 1.5px solid #1e3a8a !important;
+      color: #1e3a8a !important;
+      box-shadow: 0 2px 6px -1px rgba(30, 58, 138, 0.16) !important;
     }
     #btnToggleYearView:hover {
-      background: rgba(209, 250, 229, 0.96) !important;
-      border-color: #34d399 !important;
+      background: #eff6ff !important;
+      border-color: #172554 !important;
       transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px -2px rgba(5, 150, 105, 0.16) !important;
+      box-shadow: 0 4px 12px -2px rgba(30, 58, 138, 0.22) !important;
     }
 
     #btnClearAll {
@@ -2787,7 +3112,139 @@
       font-variant-numeric: tabular-nums !important;
       letter-spacing: 0.045em !important;
     }
-</style>
+
+    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.1.5） === */
+    @keyframes orbHaloBreathe {
+      0%, 100% {
+        opacity: 0.85;
+        transform: scale(1.02);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.22);
+      }
+    }
+
+    .mobile-any-orb-btn,
+    .mobile-pill-icon-btn,
+    .mobile-orb-btn,
+    .mobile-plane-orb-btn,
+    .mobile-context-orb,
+    #mobileContextYearOverviewBtn,
+    #mobileContextHomeReturnBtn,
+    #mobileStage2RestoreCalBtn,
+    .mobile-master-pill-btn {
+      position: relative !important;
+      overflow: visible !important;
+      transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease !important;
+      will-change: transform;
+      --orb-halo-ring: rgba(37, 99, 235, 0.36);
+      --orb-halo-glow: rgba(37, 99, 235, 0.28);
+    }
+
+    /* 主題專屬光環色變數 */
+    #mobileContextYearOverviewBtn,
+    #mobileContextHomeReturnBtn,
+    #mobileStage2RestoreCalBtn {
+      --orb-halo-ring: rgba(30, 58, 138, 0.42);
+      --orb-halo-glow: rgba(30, 58, 138, 0.30);
+    }
+    #mPillBtnHolidays,
+    #mobileContextHolidaysBtn {
+      --orb-halo-ring: rgba(249, 115, 22, 0.48);
+      --orb-halo-glow: rgba(234, 88, 12, 0.38);
+    }
+    #mobileContextLunarBtn {
+      --orb-halo-ring: rgba(168, 85, 247, 0.44);
+      --orb-halo-glow: rgba(147, 51, 234, 0.34);
+    }
+    #mobileContextEraserBtn {
+      --orb-halo-ring: rgba(244, 63, 94, 0.44);
+      --orb-halo-glow: rgba(225, 29, 72, 0.34);
+    }
+    #btnToggleMobileToolbar {
+      --orb-halo-ring: rgba(100, 116, 139, 0.36);
+      --orb-halo-glow: rgba(15, 23, 42, 0.22);
+    }
+
+    /* 獨立沿邊呼吸光環偽元素（預設完全隱藏，指向時浮現，離開即刻消失） */
+    .mobile-any-orb-btn::after,
+    .mobile-pill-icon-btn::after,
+    .mobile-orb-btn::after,
+    .mobile-plane-orb-btn::after,
+    .mobile-context-orb::after,
+    #mobileContextYearOverviewBtn::after,
+    #mobileContextHomeReturnBtn::after,
+    #mobileStage2RestoreCalBtn::after,
+    .mobile-master-pill-btn::after {
+      content: "";
+      position: absolute;
+      inset: -3.5px;
+      border-radius: 9999px;
+      border: 2px solid var(--orb-halo-ring);
+      box-shadow: 0 0 10px 2px var(--orb-halo-glow);
+      opacity: 0;
+      transform: scale(0.92);
+      pointer-events: none;
+      transition: opacity 0.12s ease, transform 0.14s ease;
+    }
+
+    /* 指向狀態（.is-pointed）：浮凸放大 + 沿邊呼吸光環 */
+    .mobile-any-orb-btn.is-pointed,
+    .mobile-pill-icon-btn.is-pointed,
+    .mobile-orb-btn.is-pointed,
+    .mobile-plane-orb-btn.is-pointed,
+    .mobile-context-orb.is-pointed,
+    #mobileContextYearOverviewBtn.is-pointed,
+    #mobileContextHomeReturnBtn.is-pointed,
+    #mobileStage2RestoreCalBtn.is-pointed,
+    .mobile-master-pill-btn.is-pointed {
+      transform: translateY(-1.5px) scale(1.09) !important;
+      z-index: 20 !important;
+    }
+    .mobile-any-orb-btn.is-pointed::after,
+    .mobile-pill-icon-btn.is-pointed::after,
+    .mobile-orb-btn.is-pointed::after,
+    .mobile-plane-orb-btn.is-pointed::after,
+    .mobile-context-orb.is-pointed::after,
+    #mobileContextYearOverviewBtn.is-pointed::after,
+    #mobileContextHomeReturnBtn.is-pointed::after,
+    #mobileStage2RestoreCalBtn.is-pointed::after,
+    .mobile-master-pill-btn.is-pointed::after {
+      opacity: 1;
+      animation: orbHaloBreathe 1.4s ease-in-out infinite;
+    }
+
+    /* 僅限支援真正滑鼠懸停的裝置啟用 :hover，徹底杜絕手機/平板觸控後殘留 hover 狀態 */
+    @media (hover: hover) and (pointer: fine) {
+      .mobile-any-orb-btn:hover,
+      .mobile-pill-icon-btn:hover,
+      .mobile-orb-btn:hover,
+      .mobile-plane-orb-btn:hover,
+      .mobile-context-orb:hover,
+      #mobileContextYearOverviewBtn:hover,
+      #mobileContextHomeReturnBtn:hover,
+      #mobileStage2RestoreCalBtn:hover,
+      .mobile-master-pill-btn:hover {
+        transform: translateY(-1.5px) scale(1.09) !important;
+        z-index: 20 !important;
+      }
+      .mobile-any-orb-btn:hover::after,
+      .mobile-pill-icon-btn:hover::after,
+      .mobile-orb-btn:hover::after,
+      .mobile-plane-orb-btn:hover::after,
+      .mobile-context-orb:hover::after,
+      #mobileContextYearOverviewBtn:hover::after,
+      #mobileContextHomeReturnBtn:hover::after,
+      #mobileStage2RestoreCalBtn:hover::after,
+      .mobile-master-pill-btn:hover::after {
+        opacity: 1;
+        animation: orbHaloBreathe 1.4s ease-in-out infinite;
+      }
+    }
+
+
+  </style>
   <!-- Leaflet.js 開源免金鑰地圖庫 -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -2828,9 +3285,9 @@
           <i class="fa-solid fa-lock text-slate-500 text-[10px]"></i>
           <span>檢視</span>
         </button>
-        <button id="btnExitYearViewTop" class="px-2 py-1 bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 rounded-lg text-[11px] font-bold flex items-center gap-1 active:scale-95 transition shadow-2xs">
-          <i class="fa-solid fa-compress text-slate-500 text-[10px]"></i>
-          <span>退出</span>
+        <button id="btnExitYearViewTop" aria-label="返回月曆主頁" class="w-9 h-9 md:w-auto md:h-auto md:px-2.5 md:py-1 bg-white hover:bg-blue-50 border-[1.5px] border-blue-900 text-blue-900 rounded-full md:rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 active:scale-95 transition shadow-2xs cursor-pointer">
+          <svg class="inline-block shrink-0" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.8" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="15.0" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="2.8" y="4" width="18.4" height="17.4" rx="2.8"/><path d="M2.8 8.5h18.4"/><rect x="10.65" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="5.7" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="10.65" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="15.6" width="2.7" height="2.6" rx="0.65"/></svg>
+          <span class="hidden md:inline">退出</span>
         </button>
         <button id="btnOverviewDrawerOpen" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-700 flex items-center justify-center transition active:scale-95">
           <i class="fa-solid fa-bars text-xs"></i>
@@ -2928,9 +3385,9 @@
       </div>
 
     <!-- 主內容雙欄網格佈局 (電腦端完美左右對齊並排) -->
-    <div id="mainContentLayout" class="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-5 mt-1 items-start lg:items-stretch">
+    <div id="mainContentLayout" class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-5 mt-1 items-start md:items-stretch">
       <!-- 左側欄：年曆專屬控制 Bar ＋ 12個月年曆 (與年曆等寬平排！) -->
-      <div id="leftSideColumn" class="lg:col-span-7 xl:col-span-8 flex flex-col gap-1.5 md:gap-2.5">
+      <div id="leftSideColumn" class="md:col-span-7 xl:col-span-8 flex flex-col gap-1.5 md:gap-2.5 min-w-0">
         <div id="stickyHeaderArea" class="sticky top-1 z-30 rounded-[20px] bg-transparent lg:static lg:bg-transparent">
           <div class="glass-surface px-1.5 py-1 md:p-2 rounded-2xl border border-white/80 shadow-xs mb-0 md:mb-2">
             <!-- 純淨左手邊超大年份切換器 ＋ 手機版右側工具列伸縮開關（預設收起釋放螢幕空間） -->
@@ -2950,84 +3407,100 @@
                 </button>
               </div>
 
-              <!-- 手機版專屬：膠囊左側即時名稱標籤 ＋ 統一膠囊 Dock（含飛機掣）＋ 選定圖示駐留箭嘴旁 (v6.6.1) -->
+              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.1.5) -->
               <div class="flex md:hidden items-center gap-1 min-w-0">
-                <!-- 膠囊左邊即時名稱顯示（指向項目時預覽名稱；揀選收縮後繼續顯示所選名稱） -->
-                <span id="mobileCapsuleLeftLabel" onclick="triggerPinnedMobileAction()" role="status" aria-live="polite"></span>
-
-                <!-- 橫向展開統一膠囊（兩段式確認：第 1 點／手指掃過先於左邊亮出名稱預覽，第 2 點確認執行並自動收縮） -->
-                <div id="mobileHeaderSingleRowPill" role="toolbar" aria-label="快捷工具膠囊">
-                  <button type="button" id="btnToggleMobileTripRibbon" data-pill-key="plane" data-pill-label="假期規劃"
-                          onpointerenter="if (event.pointerType === 'mouse') previewMobilePillItem('plane', '假期規劃')"
-                          aria-label="假期規劃（第1按預覽名稱、第2按確認展開；長按切換數量微章）"
-                          class="mobile-pill-icon-btn text-blue-600 hover:bg-blue-50 cursor-pointer select-none">
-                    <i class="fa-solid fa-plane-departure text-[10px]"></i>
-                    <span id="mobileHeaderPlaneBadge" class="mobile-plane-badge is-badge-hidden tabular-nums">0</span>
+                <!-- 左側即時實色身份膠囊（僅於進入某個功能板塊時顯示對應實色＋白字；選單展開未選前隱藏不干擾） -->
+                <button type="button" id="mobileCapsuleLeftLabel" onclick="triggerPinnedMobileAction()" aria-label="目前功能名稱">登記寫假</button>
+                
+                <!-- 點開 `‹` 箭嘴出現兩大反向白底彩框圓波入口（未揀選前：白底藍框「登記寫假」、白底橙框「假期與節氣」） -->
+                <div id="mobileHeaderSingleRowPill" role="toolbar" aria-label="功能快捷列">
+                  <!-- 功能 ①：登記寫假（未選時白底藍框藍圖示，已選中時實心寶藍底白圖示） -->
+                  <button type="button" id="mPillBtnApply" data-pill-key="apply" data-pill-label="登記寫假"
+                          onclick="triggerMobilePillAction('apply')" aria-label="登記寫假（進入登記假期編輯模式）"
+                          class="mobile-master-pill-btn mobile-pill-icon-btn cursor-pointer select-none">
+                    <svg class="inline-block shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.8 1.5v3.3M12 1.5v3.3M17.2 1.5v3.3"/><path d="M2.2 8.3h19.6"/><path d="M10.4 20.9H4.5a2.3 2.3 0 0 1-2.3-2.3V5.7a2.3 2.3 0 0 1 2.3-2.3h15a2.3 2.3 0 0 1 2.3 2.3v5.5"/><rect x="5.7" y="10.7" width="2.6" height="2.6" rx="0.45" fill="currentColor" stroke="none"/><rect x="10.6" y="10.7" width="2.6" height="2.6" rx="0.45" fill="currentColor" stroke="none"/><rect x="5.7" y="15.2" width="2.6" height="2.6" rx="0.45" fill="currentColor" stroke="none"/><path d="M22.2 13.3c.45.45.35 1.2-.2 1.65l-2.55 2.0.92 3.95-1.32 1.02-2.12-3.1-2.55 1.68.22 1.98-1.12.76-1.22-2.08-2.08-1.22.76-1.12 1.98.22 1.68-2.55-3.1-2.12 1.02-1.32 3.95.92 2.0-2.55c.45-.55 1.2-.65 1.65-.2Z" fill="currentColor" stroke="none"/></svg>
                   </button>
-                  <button type="button" id="mPillBtnAssistant" data-pill-key="assistant" data-pill-label="假期助手"
-                          onpointerenter="if (event.pointerType === 'mouse') previewMobilePillItem('assistant', '假期助手')"
-                          onclick="handleMobileCapsuleIconTap('assistant', '假期助手')" aria-label="假期助手"
-                          class="mobile-pill-icon-btn text-sky-600 hover:bg-sky-50 cursor-pointer select-none">
+                  <button type="button" id="mPillBtnAssistant" onclick="triggerMobilePillAction('assistant')"
+                          class="mobile-sub-branch-btn text-sky-700 hover:bg-sky-50 cursor-pointer select-none">
                     <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+                    <span>假期助手</span>
                   </button>
-                  <button type="button" id="mPillBtnApply" data-pill-key="apply" data-pill-label="登記假期"
-                          onpointerenter="if (event.pointerType === 'mouse') previewMobilePillItem('apply', '登記假期')"
-                          onclick="handleMobileCapsuleIconTap('apply', '登記假期')" aria-label="登記假期"
-                          class="mobile-pill-icon-btn text-blue-600 hover:bg-blue-50 cursor-pointer select-none">
-                    <i class="fa-solid fa-paintbrush text-[10px]"></i>
-                    <span id="mPillApplyBrushDot" class="w-1.5 h-1.5 rounded-full bg-sky-400 absolute bottom-0.5 right-0.5 ring-1 ring-white"></span>
+
+                  <span class="mobile-pill-group-divider" aria-hidden="true"></span>
+
+                  <!-- 功能 ②：假期與節氣（未選時白底橙框橙圖示，已選中時實心暖橙底白圖示） -->
+                  <button type="button" id="mPillBtnHolidays" data-pill-key="holidays" data-pill-label="假期與節氣"
+                          onclick="triggerMobilePillAction('holidays')" aria-label="假期與節氣（公眾假期與農曆節氣）"
+                          class="mobile-master-pill-btn mobile-pill-icon-btn cursor-pointer select-none">
+                    <svg class="inline-block shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="17.40,12.00 14.96,13.22 15.82,15.82 13.22,14.96 12.00,17.40 10.78,14.96 8.18,15.82 9.04,13.22 6.60,12.00 9.04,10.78 8.18,8.18 10.78,9.04 12.00,6.60 13.22,9.04 15.82,8.18 14.96,10.78" fill="currentColor" stroke="currentColor" stroke-width="1.2"/><line x1="19.20" y1="12.00" x2="21.80" y2="12.00"/><line x1="17.09" y1="17.09" x2="18.93" y2="18.93"/><line x1="12.00" y1="19.20" x2="12.00" y2="21.80"/><line x1="6.91" y1="17.09" x2="5.07" y2="18.93"/><line x1="4.80" y1="12.00" x2="2.20" y2="12.00"/><line x1="6.91" y1="6.91" x2="5.07" y2="5.07"/><line x1="12.00" y1="4.80" x2="12.00" y2="2.20"/><line x1="17.09" y1="6.91" x2="18.93" y2="5.07"/></svg>
                   </button>
-                  <button type="button" id="mPillBtnHolidays" data-pill-key="holidays" data-pill-label="公眾假期"
-                          onpointerenter="if (event.pointerType === 'mouse') previewMobilePillItem('holidays', '公眾假期')"
-                          onclick="handleMobileCapsuleIconTap('holidays', '公眾假期')" aria-label="公眾假期"
-                          class="mobile-pill-icon-btn text-orange-600 hover:bg-orange-50 cursor-pointer select-none">
-                    <i class="fa-solid fa-calendar-days text-[10px]"></i>
-                  </button>
-                  <button type="button" id="mPillBtnLunar" data-pill-key="lunar" data-pill-label="農曆節氣"
-                          onpointerenter="if (event.pointerType === 'mouse') previewMobilePillItem('lunar', '農曆節氣')"
-                          onclick="handleMobileCapsuleIconTap('lunar', '農曆節氣')" aria-label="農曆節氣"
-                          class="mobile-pill-icon-btn text-purple-600 hover:bg-purple-50 cursor-pointer select-none">
+                  <button type="button" id="mPillBtnLunar" onclick="triggerMobilePillAction('lunar')"
+                          class="mobile-sub-branch-btn text-purple-700 hover:bg-purple-50 cursor-pointer select-none">
                     <i class="fa-solid fa-moon text-[10px]"></i>
+                    <span>農曆節氣</span>
                   </button>
-                  <button type="button" id="mPillBtnOverview" data-pill-key="overview" data-pill-label="年曆全覽"
-                          onpointerenter="if (event.pointerType === 'mouse') previewMobilePillItem('overview', '年曆全覽')"
-                          onclick="handleMobileCapsuleIconTap('overview', '年曆全覽')" aria-label="年曆全覽"
-                          class="mobile-pill-icon-btn text-emerald-600 hover:bg-emerald-50 cursor-pointer select-none">
-                    <i class="fa-solid fa-table-cells text-[10px]"></i>
-                  </button>
-                  <button type="button" id="mPillBtnHome" data-pill-key="home" data-pill-label="普通月曆"
-                          onpointerenter="if (event.pointerType === 'mouse') previewMobilePillItem('home', '普通月曆')"
-                          onclick="handleMobileCapsuleIconTap('home', '普通月曆')" aria-label="返回普通月曆"
-                          class="mobile-pill-icon-btn text-rose-600 hover:bg-rose-50 cursor-pointer select-none">
-                    <i class="fa-regular fa-calendar text-[10.5px]"></i>
-                  </button>
-
-                </div>
-
-                <!-- 普通月曆預設駐留「⊞ 年曆全覽」於箭嘴旁；開啟持續模式（假期規劃/登記假期）時自動切換顯示該運作中圖示 -->
-                <div id="mobilePinnedSelectedSlot" class="has-pinned">
-                  <button type="button" id="mobilePinnedIconBtn" onclick="triggerPinnedMobileAction()" aria-label="年曆全覽 / 目前選定功能"
-                          class="mobile-pill-icon-btn is-default-shortcut cursor-pointer select-none">
-                    <i id="mobilePinnedIconEl" class="fa-solid fa-table-cells text-[10px]"></i>
-                    <span id="mobilePinnedPlaneBadge" class="mobile-plane-badge is-badge-hidden tabular-nums">0</span>
+                  <button type="button" id="mPillBtnOverview" onclick="triggerMobilePillAction('overview')"
+                          class="mobile-sub-branch-btn text-blue-900 hover:bg-blue-50 cursor-pointer select-none">
+                    <svg class="inline-block shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.8" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="15.0" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="2.8" y="4" width="18.4" height="17.4" rx="2.8"/><path d="M2.8 8.5h18.4"/><rect x="10.65" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="5.7" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="10.65" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="15.6" width="2.7" height="2.6" rx="0.65"/></svg>
+                    <span>年曆全覽</span>
                   </button>
                 </div>
 
-                <!-- 編輯日期模式專屬浮現雙微鈕（平常鎖定檢視時完全隱藏）：[🧹 擦膠] + [🔓 編輯中] -->
-                <div id="mobileHeaderEditContextGroup" aria-label="編輯模式快捷控制">
-                  <button type="button" id="mobileContextEraserBtn" onclick="triggerMobilePillAction('eraser')" aria-label="單日擦除模式"
-                          class="mobile-context-orb cursor-pointer select-none">
-                    <i class="fa-solid fa-eraser text-[10.5px]"></i>
-                  </button>
-                  <button type="button" id="mobileContextLockBtn" onclick="triggerMobilePillAction('lock')" aria-label="結束編輯並鎖定"
-                          class="mobile-context-orb cursor-pointer select-none">
-                    <i class="fa-solid fa-lock-open text-[10px]"></i>
+                <!-- 【主頁（普通大日曆）情景】：白底＋煮食器深藍線條「年曆全覽」圓波 -->
+                <div id="mobileHeaderCalendarContextGroup" class="is-cal-context" aria-label="年曆全覽快捷波">
+                  <button type="button" id="mobileContextYearOverviewBtn" data-pill-key="overview" data-pill-label="年曆全覽" onclick="triggerMobilePillAction('overview')" aria-label="年曆全覽"
+                          class="mobile-any-orb-btn cursor-pointer select-none">
+                    <svg class="inline-block shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.8" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="15.0" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="2.8" y="4" width="18.4" height="17.4" rx="2.8"/><path d="M2.8 8.5h18.4"/><rect x="10.65" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="5.7" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="10.65" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="15.6" width="2.7" height="2.6" rx="0.65"/></svg>
                   </button>
                 </div>
+
+                <!-- 【寫假情景】：駐留「實心藍色登記寫假 Icon」＋ 相關功能 [擦膠] + [假期助手]（激活項實心，未選項反向白底彩框） -->
+                <div id="mobileHeaderEditContextGroup" aria-label="寫假編輯模式快捷控制">
+                  <button type="button" id="mobileContextApplyActiveBtn" data-pill-key="apply" data-pill-label="登記寫假" onclick="triggerMobilePillAction('apply')" aria-label="登記寫假"
+                          class="mobile-context-orb mobile-any-orb-btn cursor-pointer select-none">
+                    <svg class="inline-block shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.8 1.5v3.3M12 1.5v3.3M17.2 1.5v3.3"/><path d="M2.2 8.3h19.6"/><path d="M10.4 20.9H4.5a2.3 2.3 0 0 1-2.3-2.3V5.7a2.3 2.3 0 0 1 2.3-2.3h15a2.3 2.3 0 0 1 2.3 2.3v5.5"/><rect x="5.7" y="10.7" width="2.6" height="2.6" rx="0.45" fill="currentColor" stroke="none"/><rect x="10.6" y="10.7" width="2.6" height="2.6" rx="0.45" fill="currentColor" stroke="none"/><rect x="5.7" y="15.2" width="2.6" height="2.6" rx="0.45" fill="currentColor" stroke="none"/><path d="M22.2 13.3c.45.45.35 1.2-.2 1.65l-2.55 2.0.92 3.95-1.32 1.02-2.12-3.1-2.55 1.68.22 1.98-1.12.76-1.22-2.08-2.08-1.22.76-1.12 1.98.22 1.68-2.55-3.1-2.12 1.02-1.32 3.95.92 2.0-2.55c.45-.55 1.2-.65 1.65-.2Z" fill="currentColor" stroke="none"/></svg>
+                  </button>
+                  <button type="button" id="mobileContextEraserBtn" data-pill-key="eraser" data-pill-label="單日清除" onclick="triggerMobilePillAction('eraser')" aria-label="單日清除"
+                          class="mobile-context-orb mobile-any-orb-btn cursor-pointer select-none">
+                    <i class="fa-solid fa-eraser text-[13px]"></i>
+                  </button>
+                  <button type="button" id="mobileContextAssistantBtn" data-pill-key="assistant" data-pill-label="假期助手" onclick="triggerMobilePillAction('assistant')" aria-label="假期助手"
+                          class="mobile-context-orb mobile-any-orb-btn cursor-pointer select-none">
+                    <i class="fa-solid fa-wand-magic-sparkles text-[13px]"></i>
+                  </button>
+                </div>
+
+                <!-- 【查詢情景】：[公眾假期] + [農曆節氣]（激活分頁實心填滿，未選項反向白底彩框） -->
+                <div id="mobileHeaderQueryContextGroup" aria-label="查詢分頁切換波">
+                  <button type="button" id="mobileContextHolidaysBtn" data-pill-key="holidays" data-pill-label="公眾假期" onclick="triggerMobilePillAction('holidays')" aria-label="公眾假期"
+                          class="mobile-context-orb mobile-any-orb-btn cursor-pointer select-none">
+                    <svg class="inline-block shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="17.40,12.00 14.96,13.22 15.82,15.82 13.22,14.96 12.00,17.40 10.78,14.96 8.18,15.82 9.04,13.22 6.60,12.00 9.04,10.78 8.18,8.18 10.78,9.04 12.00,6.60 13.22,9.04 15.82,8.18 14.96,10.78" fill="currentColor" stroke="currentColor" stroke-width="1.2"/><line x1="19.20" y1="12.00" x2="21.80" y2="12.00"/><line x1="17.09" y1="17.09" x2="18.93" y2="18.93"/><line x1="12.00" y1="19.20" x2="12.00" y2="21.80"/><line x1="6.91" y1="17.09" x2="5.07" y2="18.93"/><line x1="4.80" y1="12.00" x2="2.20" y2="12.00"/><line x1="6.91" y1="6.91" x2="5.07" y2="5.07"/><line x1="12.00" y1="4.80" x2="12.00" y2="2.20"/><line x1="17.09" y1="6.91" x2="18.93" y2="5.07"/></svg>
+                  </button>
+                  <button type="button" id="mobileContextLunarBtn" data-pill-key="lunar" data-pill-label="農曆節氣" onclick="triggerMobilePillAction('lunar')" aria-label="農曆節氣"
+                          class="mobile-context-orb mobile-any-orb-btn cursor-pointer select-none">
+                    <i class="fa-solid fa-moon text-[13px]"></i>
+                  </button>
+                </div>
+
+                <!-- 【返回普通大日曆主頁波仔】：白底＋煮食器深藍線條，身處任何子功能時常駐於飛機左邊 -->
+                <div id="mobileHeaderHomeReturnGroup" aria-label="返回普通大日曆主頁">
+                  <button type="button" id="mobileContextHomeReturnBtn" data-pill-key="home" data-pill-label="返回月曆" onclick="triggerMobilePillAction('home')" aria-label="返回月曆"
+                          class="mobile-any-orb-btn cursor-pointer select-none">
+                    <svg class="inline-block shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.8" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="15.0" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="2.8" y="4" width="18.4" height="17.4" rx="2.8"/><path d="M2.8 8.5h18.4"/><rect x="10.65" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="5.7" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="10.65" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="15.6" width="2.7" height="2.6" rx="0.65"/></svg>
+                  </button>
+                </div>
+
+                <!-- 獨立情景：✈ 假期規劃（展開時實心寶藍底白飛機；未選時白底藍飛機） -->
+                <button type="button" id="btnToggleMobileTripRibbon" data-pill-key="plane" data-pill-label="假期規劃"
+                        aria-label="假期規劃"
+                        class="mobile-plane-orb-btn mobile-any-orb-btn cursor-pointer select-none shrink-0">
+                  <i class="fa-solid fa-plane-departure text-[13px]"></i>
+                  <span id="mobileHeaderPlaneBadge" class="mobile-plane-badge is-badge-hidden tabular-nums">0</span>
+                </button>
 
                 <!-- 最右側主展開／收起箭嘴圓鈕 -->
-                <button type="button" id="btnToggleMobileToolbar" onclick="toggleMobileHeaderToolbar()" aria-label="展開或收起快捷工具膠囊"
-                        class="mobile-orb-btn cursor-pointer select-none shrink-0">
+                <button type="button" id="btnToggleMobileToolbar" data-pill-key="menu" data-pill-label="功能選單" aria-label="功能選單"
+                        class="mobile-orb-btn mobile-any-orb-btn cursor-pointer select-none shrink-0">
                   <i id="mobileToolbarToggleIcon" class="fa-solid fa-chevron-left mobile-orb-icon"></i>
                 </button>
               </div>
@@ -3046,7 +3519,7 @@
 
             <!-- 第一行 2: 公眾假期 -->
             <button id="btnHeaderHolidays" class="lg:hidden py-1.5 px-1 md:px-2.5 bg-white/90 hover:bg-orange-50/80 border border-slate-200/90 rounded-xl text-[11px] md:text-xs font-bold text-slate-700 hover:text-orange-700 flex items-center justify-center gap-1 transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer h-[34px] md:h-auto">
-              <i class="fa-solid fa-calendar-days text-orange-500 text-[10px] md:text-[11px] shrink-0"></i>
+              <span class="text-orange-500 inline-flex items-center"><svg class="inline-block shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="17.40,12.00 14.96,13.22 15.82,15.82 13.22,14.96 12.00,17.40 10.78,14.96 8.18,15.82 9.04,13.22 6.60,12.00 9.04,10.78 8.18,8.18 10.78,9.04 12.00,6.60 13.22,9.04 15.82,8.18 14.96,10.78" fill="currentColor" stroke="currentColor" stroke-width="1.2"/><line x1="19.20" y1="12.00" x2="21.80" y2="12.00"/><line x1="17.09" y1="17.09" x2="18.93" y2="18.93"/><line x1="12.00" y1="19.20" x2="12.00" y2="21.80"/><line x1="6.91" y1="17.09" x2="5.07" y2="18.93"/><line x1="4.80" y1="12.00" x2="2.20" y2="12.00"/><line x1="6.91" y1="6.91" x2="5.07" y2="5.07"/><line x1="12.00" y1="4.80" x2="12.00" y2="2.20"/><line x1="17.09" y1="6.91" x2="18.93" y2="5.07"/></svg></span>
               <span class="truncate">公眾假期</span>
             </button>
 
@@ -3070,8 +3543,8 @@
             </button>
 
             <!-- 第二行 3: 年曆全覽 (流暢切換) -->
-            <button id="btnToggleYearView" type="button" class="py-1.5 px-1 md:px-2.5 bg-white/90 hover:bg-emerald-50/80 border border-slate-200/90 rounded-xl text-[11px] md:text-xs font-bold text-slate-700 hover:text-emerald-700 flex items-center justify-center gap-1 transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer h-[34px] md:h-auto">
-              <i class="fa-solid fa-table-cells text-emerald-600 text-[10px] md:text-[11px] shrink-0"></i>
+            <button id="btnToggleYearView" type="button" class="py-1.5 px-1 md:px-2.5 bg-white hover:bg-blue-50/80 border border-blue-900 rounded-xl text-[11px] md:text-xs font-bold text-blue-900 hover:text-blue-950 flex items-center justify-center gap-1 transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer h-[34px] md:h-auto">
+              <svg class="inline-block shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.8" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="15.0" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="2.8" y="4" width="18.4" height="17.4" rx="2.8"/><path d="M2.8 8.5h18.4"/><rect x="10.65" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="5.7" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="10.65" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="15.6" width="2.7" height="2.6" rx="0.65"/></svg>
               <span id="btnYearViewLabel" class="truncate">年曆全覽</span>
             </button>
           </div>
@@ -3119,9 +3592,16 @@
               <span>假期模式 · 點擊日期塗色</span>
             </span>
           </div>
-          <button type="button" id="btnCloseTopBarApplyLeave" class="px-2.5 py-0.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg font-bold text-[11px] transition active:scale-95 cursor-pointer shrink-0">
-            <i class="fa-solid fa-chevron-up mr-0.5"></i> 收回
-          </button>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button type="button" id="btnInsideApplyOpenAssistant" onclick="openTravelModeModal()"
+                    class="px-2.5 py-1 bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white rounded-lg font-extrabold text-[11px] flex items-center gap-1 shadow-2xs transition active:scale-95 cursor-pointer shrink-0">
+              <i class="fa-solid fa-wand-magic-sparkles text-[10px] text-sky-100"></i>
+              <span>假期助手</span>
+            </button>
+            <button type="button" id="btnCloseTopBarApplyLeave" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg font-bold text-[11px] transition active:scale-95 cursor-pointer shrink-0">
+              <i class="fa-solid fa-chevron-up"></i>
+            </button>
+          </div>
         </div>
 
         <!-- 假別卡片區 ＋ 清除排程（溫和精修版：強化層次、微漸層底色、精細大字） -->
@@ -3294,7 +3774,7 @@
           <div id="topInlineRefTabsWrap" class="flex items-center gap-1 bg-orange-200/55 p-0.5 rounded-xl shrink-0">
             <button type="button" id="btnInlineRefTabHolidays" onclick="openTopInlineRefPanel('holidays', true)"
                     class="px-2 py-1 rounded-lg text-[10.5px] sm:text-[11px] font-extrabold bg-orange-500 text-white shadow-xs flex items-center gap-1 transition cursor-pointer">
-              <i class="fa-solid fa-calendar-days text-white text-[10px]"></i>
+              <svg class="inline-block shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="17.40,12.00 14.96,13.22 15.82,15.82 13.22,14.96 12.00,17.40 10.78,14.96 8.18,15.82 9.04,13.22 6.60,12.00 9.04,10.78 8.18,8.18 10.78,9.04 12.00,6.60 13.22,9.04 15.82,8.18 14.96,10.78" fill="currentColor" stroke="currentColor" stroke-width="1.2"/><line x1="19.20" y1="12.00" x2="21.80" y2="12.00"/><line x1="17.09" y1="17.09" x2="18.93" y2="18.93"/><line x1="12.00" y1="19.20" x2="12.00" y2="21.80"/><line x1="6.91" y1="17.09" x2="5.07" y2="18.93"/><line x1="4.80" y1="12.00" x2="2.20" y2="12.00"/><line x1="6.91" y1="6.91" x2="5.07" y2="5.07"/><line x1="12.00" y1="4.80" x2="12.00" y2="2.20"/><line x1="17.09" y1="6.91" x2="18.93" y2="5.07"/></svg>
               <span>公眾假期</span>
             </button>
             <button type="button" id="btnInlineRefTabLunar" onclick="openTopInlineRefPanel('lunar', true)"
@@ -3465,9 +3945,9 @@
                       class="w-[26px] h-[26px] rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-300/90 text-slate-600 inline-flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
                 <i class="fa-solid fa-down-left-and-up-right-to-center text-[9.5px]"></i>
               </button>
-              <button type="button" onclick="event.stopPropagation(); restoreFullCalendarFromStage2()" aria-label="展開完整月曆"
-                      class="w-[26px] h-[26px] rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 inline-flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
-                <i class="fa-regular fa-calendar-days text-[10.5px]"></i>
+              <button type="button" id="mobileStage2RestoreCalBtn" onclick="event.stopPropagation(); restoreFullCalendarFromStage2()" aria-label="展開完整月曆"
+                      class="cursor-pointer select-none">
+                <svg class="inline-block shrink-0" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.8" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="15.0" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="2.8" y="4" width="18.4" height="17.4" rx="2.8"/><path d="M2.8 8.5h18.4"/><rect x="10.65" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="5.7" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="10.65" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="15.6" width="2.7" height="2.6" rx="0.65"/></svg>
               </button>
             </div>
           </div>
@@ -3579,8 +4059,8 @@
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 md:gap-3" id="calendarContainer" style="overflow-anchor: none;"></div>
       </div>
 
-      <div id="rightSidePanel" class="lg:col-span-5 xl:col-span-4 flex flex-col gap-4 mt-2 lg:mt-0">
-        <div id="rightSidePanelCard" class="glass-surface rounded-2xl flex flex-col h-[520px] md:h-[650px] lg:h-full overflow-hidden shadow-sm transition-all duration-200">
+      <div id="rightSidePanel" class="md:col-span-5 xl:col-span-4 flex flex-col gap-4 mt-2 md:mt-0 min-w-0">
+        <div id="rightSidePanelCard" class="glass-surface rounded-2xl flex flex-col h-[520px] md:h-full overflow-hidden shadow-sm transition-all duration-200">
           
           <div class="p-2 border-b border-slate-200 bg-slate-50 flex items-center justify-between gap-1">
             <div class="flex flex-wrap items-center gap-1">
@@ -3589,7 +4069,7 @@
                 假期規劃
               </button>
               <button id="tabBtnHolidays" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-orange-700 hover:bg-orange-50/60 flex items-center gap-1 transition">
-                <i class="fa-solid fa-calendar-days text-orange-500"></i>
+                <span class="text-orange-500 inline-flex items-center"><svg class="inline-block shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="17.40,12.00 14.96,13.22 15.82,15.82 13.22,14.96 12.00,17.40 10.78,14.96 8.18,15.82 9.04,13.22 6.60,12.00 9.04,10.78 8.18,8.18 10.78,9.04 12.00,6.60 13.22,9.04 15.82,8.18 14.96,10.78" fill="currentColor" stroke="currentColor" stroke-width="1.2"/><line x1="19.20" y1="12.00" x2="21.80" y2="12.00"/><line x1="17.09" y1="17.09" x2="18.93" y2="18.93"/><line x1="12.00" y1="19.20" x2="12.00" y2="21.80"/><line x1="6.91" y1="17.09" x2="5.07" y2="18.93"/><line x1="4.80" y1="12.00" x2="2.20" y2="12.00"/><line x1="6.91" y1="6.91" x2="5.07" y2="5.07"/><line x1="12.00" y1="4.80" x2="12.00" y2="2.20"/><line x1="17.09" y1="6.91" x2="18.93" y2="5.07"/></svg></span>
                 公眾假期
               </button>
               <button id="tabBtnLunar" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-700 hover:bg-purple-50/60 flex items-center gap-1 transition">
@@ -3781,6 +4261,9 @@
     <span id="yearSwipePullText">2028</span>
   </div>
 
+  <!-- 全域圖示指向即時中文名浮標（滑鼠指住或長按任何純圖示按鍵時，於旁邊即時顯示中文名稱） -->
+  <div id="universalIconAdjacentBadge" class="fixed z-[120] pointer-events-none hidden px-2.5 py-1 rounded-full bg-slate-900/95 text-white border border-white/15 shadow-lg text-[11px] font-extrabold tracking-tight whitespace-nowrap transition-opacity duration-150"></div>
+
   <!-- 手機版純圖示點擊微型名牌 Micro-Toast (1.35s 自動淡出) -->
   <div id="mobileIconMicroToast" role="status" aria-live="polite"></div>
 
@@ -3789,6 +4272,15 @@
     <span id="yearSwipeUndoLabel" class="text-slate-950 font-black">已轉至 2028</span>
     <button type="button" id="btnUndoYearSwipe" class="px-2.5 py-0.5 rounded-full bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-black text-[11px] shadow-2xs transition cursor-pointer">
       返回 2027
+    </button>
+  </div>
+
+  <!-- 排假完成後無干擾快捷銜接氣泡（填寫目的地 / 查看行程 ➔） -->
+  <div id="tripDestinationBridgePill" class="px-3.5 py-2 rounded-full bg-slate-900/95 text-white border border-white/15 shadow-[0_14px_34px_-6px_rgba(15,23,42,0.35)] flex items-center gap-2.5 text-xs font-extrabold select-none">
+    <span id="tripDestinationBridgeLabel" class="text-white/95 truncate max-w-[185px]">✈️ 已更新連續假期</span>
+    <button type="button" id="btnJumpTripDestinationBridge" onclick="executeTripDestinationBridgeJump()"
+            class="px-2.5 py-1 rounded-full bg-blue-500 hover:bg-blue-400 active:scale-95 text-white font-black text-[11px] shadow-2xs transition cursor-pointer shrink-0">
+      填寫目的地 ➔
     </button>
   </div>
 
@@ -3859,7 +4351,7 @@
       <div class="flex items-center gap-1.5">
         <button type="button" onclick="closeYearPickerPopover(); const b = document.getElementById('btnToggleYearView'); if (b) b.click();"
                 class="px-2.5 py-1 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold tracking-tight transition active:scale-95 cursor-pointer inline-flex items-center gap-1">
-          <i class="fa-solid fa-table-cells text-[9.5px]"></i>
+          <svg class="inline-block shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.8" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="15.0" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="2.8" y="4" width="18.4" height="17.4" rx="2.8"/><path d="M2.8 8.5h18.4"/><rect x="10.65" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="5.7" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="10.65" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="15.6" width="2.7" height="2.6" rx="0.65"/></svg>
           <span>全年縮圖</span>
         </button>
         <button type="button" id="btnYearPopoverJump2027" onclick="selectYearFromTwoTierGrid(2027)"
@@ -3879,7 +4371,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v6.8.1</span>
+      <span>v7.1.5</span>
     </button>
   </footer>
 
@@ -4037,7 +4529,7 @@
           <div>
             <h3 class="font-black text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v6.8.1</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.1.5</span>
             </h3>
           </div>
         </div>
@@ -4047,9 +4539,214 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-3.5 text-xs">
+        <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-emerald-700 text-xs">v7.1.5（緊急修復網頁開啟時月曆與右側假期規劃空白無法載入之腳本執行錯誤）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>修復跨腳本變數初始化時序錯誤（ReferenceError）</b>：修復主啟動函式 <code>run()</code> 執行時提前讀取後方腳本塊 <code>isScheduleModeEnabled</code> 導致中斷、進而令 12 個月日曆與右側假期規劃無法渲染的問題。</li>
+            <li><b>清除重複植入的初始化回呼代碼</b>：移除切換同步代碼與重設 PIN 碼回呼內重複貼上的 4 處初始化區塊與無效分支，確保資料載入與畫面渲染 100% 穩定流暢。</li>
+          </ul>
+        </div>
+
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.8.1（全面修復手機與平板多重滑動／彈窗切換後畫面撠住唔郁之捲動鎖定問題）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（全站所有純圖示 Icon 補齊指向／觸控「旁邊即時顯示中文名稱」功能）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>頂部全部圓波圖示支援指住顯示中文名</b>：為「年曆全覽」、「單日清除」、「假期助手」、「公眾假期」、「農曆節氣」、「返回月曆」、「假期規劃」及「功能選單」所有頂部圓波補齊名稱標籤，滑鼠指住或手指滑過時，旁邊膠囊即時顯示對應中文字。</li>
+            <li><b>全站純圖示按鍵自動旁顯名稱浮標</b>：系統設定、每月例休齒輪、修改配額齒輪、旅程選項、航班雷達、全屏／半屏及收起面板等所有無文字 Icon 按鈕，指住或按住時均於旁邊即時顯示中文名稱。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（年份顯示與萬年曆切換掣長期常駐頂欄左側，任何頁面與模式皆不隱藏）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>年份與萬年曆按掣長期常駐</b>：取消進入寫假、查詢、假期規劃或展開選單時隱藏左上角年份（如 <code>2027</code>）的規則，確保任何頁面下皆可隨時檢視目前年份並一鍵開啟萬年曆切換年份。</li>
+            <li><b>精準單行間距適配</b>：微調右側中文名稱膠囊與功能圓波尺寸（<code>32×32px</code>），令「年份掣 ＋ 中文名膠囊 ＋ 功能圓波」於窄螢幕手機上亦完美同列並排、絕不遮擋或擠壓。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（還原頂部圓波左側「即時中文名稱膠囊」，點按、滑動預覽或切換模式皆於旁邊清晰顯示中文名）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>還原頂部圓波左側「即時中文名稱膠囊」</b>：展開 <code>‹</code> 選單點選或手指滑過圖示時，左側即時顯示對應中文字（如「<b>登記寫假</b>」、「<b>節日查詢</b>」），再點一下確認進入；身處編輯、查詢、假期助手或假期規劃模式時，左側亦持續顯示目前功能中文名稱並配對主題色框。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（情境自動鎖定架構 ＋ 主頁長按日期直達寫假編輯 ＋ 移除寫假頂部多餘鎖頭圓波）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>主頁與其他情境預設嚴格安全鎖定</b>：於主頁月曆、查詢抽屜及飛機規劃內單擊日期僅檢視詳情，徹底杜絕瀏覽時誤觸改動假期。</li>
+            <li><b>長按日曆日期直達「寫假」編輯模式</b>：於主頁長按任何一日（<code>0.5s</code>）即觸發震動回饋與提示，自動解鎖、打開寫假假別列並閃爍高亮該日；進入編輯後長按已排假日期則繼續保留單日保護鎖（🔒）。</li>
+            <li><b>移除寫假頂部獨立鎖頭圓波，離開即自動落鎖</b>：寫假編輯列精簡為 <b>[🧹 擦膠] · [✨ 假期助手]</b>，點按上方任何其他功能鍵（返回主頁、查詢、飛機規劃或年曆全覽）即自動儲存並鎖定日曆。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（優化綠色月曆圖示內部間距，拉闊方格留白更疏爽清晰）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>拉闊綠色月曆內部格子留白</b>：將原先較擠迫的 10 小格精簡為疏爽通透的 5 格錯落佈局（上排右 2 格＋下排 3 格），放大單格尺寸並拉開線條間距，縮細顯示亦絕不黏連。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（訂製「雙活頁環月曆方格」專屬矢量圖示，全面替換所有綠色月曆／年曆全覽／主頁返回圓波）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>訂製「雙活頁環月曆方格」專屬矢量 SVG 圖示</b>：還原頂部雙橢圓活頁環、表頭分隔線及 3-4-3 錯落圓角日子格仔設計，並全面套用至所有綠色月曆圓波與年曆全覽按鈕，與「日曆＋飛機（寫假）」及「雙摺疊燈籠（查詢）」形成完美統一的訂製線條圖示套裝。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（燈籠圖示加肥加大 ＋ 燈籠橙白配色對調 ＋ 移除展開選單外層膠囊框實現全列 36px 圓波 8px 絕對等距）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>雙摺疊燈籠加肥加大（22px 加粗版）</b>：加寬燈籠菱格身形與懸掛流蘇細節並提升線條粗度，縮細至手機頂部圓波依然飽滿清晰。</li>
+            <li><b>燈籠橙白配色對調</b>：將「查詢」燈籠圓波對調為飽和暖橙色圓底配純白燈籠線條（選中分頁時切換為白底橙框橙燈籠高對比識別）。</li>
+            <li><b>移除展開選單外層膠囊框，全站所有頁面圓波 100% 等大等距</b>：取消點開 <code>‹</code> 箭嘴後包住「寫假／查詢」的外層灰白膠囊外框，令所有圓波（主頁、寫假編輯、查詢、飛機規劃、年曆全覽）皆為純粹獨立 <code>36×36px</code> 正圓並保持完全一致的 <code>8px</code> 均勻間距。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（徹底清除頂部隱藏情景容器之幽靈 Flex 間距，確保綠色日曆、飛機與箭嘴三個圓波間距 100% 絕對相等）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>消除幽靈空隙（Ghost Flex Gap Fix）</b>：修正先前未啟用情景容器以 `max-width: 0` 隱藏時仍被 Flexbox 計入多餘空隙的問題，改為徹底 `display: none`，令右上角 <b>[綠色日曆] · [飛機] · [箭嘴]</b> 三粒 `36×36px` 圓波嚴格保持完全一致的 `8px` 等距排列。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（修復查詢抽屜開啟錯誤 ＋ 「寫假／查詢」純圖示放大圓波 ＋ 全站綠色日曆圓波等距對齊飛機旁）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>修復查詢抽屜（公眾假期／農曆節氣）無法開啟問題</b>：修正 `openTopInlineRefPanel()` 切換分頁時因矢量 SVG 圖示引起的腳本中斷，現在點擊「查詢」即可順暢展開公眾假期與農曆節氣列表並自由切換。</li>
+            <li><b>「寫假」與「查詢」簡化為純圖示大圓波</b>：移除按鈕內文字標籤，升級為 `38×38px` 大正圓波搭配放大 `19–20px` 專屬矢量圖示（日曆＋飛機／雙摺疊燈籠），視覺更俐落大器。</li>
+            <li><b>全站綠色日曆圓波統一規格並緊貼飛機掣左側</b>：收緊 `max-width: 36px` 消除多餘空隙，並將年曆全覽頂部返回掣同步升級為同款 `36×36px` 白底翠綠九宮格圓波，任何頁面位置與尺寸 100% 一致。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（訂製「一高一低雙摺疊節慶燈籠」查詢專用圖示，完美呼應公眾假期與農曆傳統節日）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>訂製「雙摺疊燈籠」查詢圖示</b>：參考你發的節慶燈籠線條設計，為手機版「查詢」大膠囊、頂部「公眾假期」圓波及全站「公眾假期」分頁換上一高一低雙層摺疊燈籠與流蘇線條圖示，極具香港假期與傳統節日辨識度。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（訂製「日曆＋飛機」寫假專用圖示，與「日曆＋放大鏡」查詢圖示形成一對對稱識別系統）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>訂製「日曆＋飛機」寫假圖示</b>：參考旅行日曆徽章設計，為「寫假」按鈕換上頂部活頁環日曆搭配右下角起飛飛機的專屬矢量圖示，與「日曆＋放大鏡（查詢）」及「白底翠綠九宮格（主頁／年曆）」形成清晰直觀的視覺套裝。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（全新訂製「日曆＋放大鏡」查詢專用圖示，清晰區分查日曆與主頁日曆）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>訂製「日曆＋放大鏡（查日曆）」線條圖示</b>：為手機版「查詢」大膠囊、頂部「公眾假期」圓波，以及平板／電腦版「公眾假期」分頁換上專屬「日曆右下角疊加放大鏡」線條圖示，一眼識別「查假期」，與主頁綠色九宮格日曆截然不同。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（統一套用「2027 右側翠綠九宮格日曆圓波」至全站日曆返回掣與年曆全覽掣）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>100% 視覺統一</b>：將主頁「2027」右側的 <code>36×36px</code> 白底翠綠細線九宮格日曆圓波，完整套用至「寫假／查詢／飛機」頂部主頁返回圓波，以及「假期規劃全開模式」吸頂狀態列右側的展開日曆圓波，三者圖示、線條粗幼與尺寸完全一致。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（反轉白底翠綠線條日曆圓波 ＋ 統一 36px 整齊圓波軌道與加大日曆圖示）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>反轉「白底＋翠綠線條」日曆圖示風格</b>：將綠色日曆主頁返回掣反轉為純白圓底搭配翠綠外框與加大日曆線條圖示（<code>15px</code>），並將主頁的「全年」按鈕同步升級為同款白底翠綠線條日曆九宮格圓波。</li>
+            <li><b>統一 36×36px 圓波規格與均勻間距</b>：寫假（擦膠／鎖頭／假期助手）、查詢（公眾假期／農曆節氣）、主頁返回、飛機及箭嘴全部統一為 <code>36×36px</code> 白底線條質感圓波，間距均勻不擠迫。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（普通大日曆為主頁 ＋ 全情景常駐「綠色日曆主頁返回波仔」對稱導航架構）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>普通大日曆為主頁</b>：預設進入主頁時頂部顯示「<b>全年</b>」翠綠圓波及「<b>✈ 假期規劃</b>」；點開右側 `‹` 箭嘴只呈現「<b>寫假</b>」與「<b>查詢</b>」兩大入口。</li>
+            <li><b>全情景常駐「綠色日曆主頁波仔」一鍵回家</b>：無論進入「<b>寫假</b>」（頂部顯示 <code>[🧹 擦膠]</code> <code>[🔓 鎖頭]</code> <code>[✨ 助手]</code>）、進入「<b>查詢</b>」（頂部顯示 <code>[📅 公眾假期]</code> <code>[🌙 農曆節氣]</code> 兩個大波波），或點開「<b>✈ 假期規劃</b>」，飛機左邊均會浮現「<b>綠色日曆主頁波仔</b>」，隨時一撳返回普通大日曆。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（情景化頂部副項圓波：「日曆」返回普通月曆並浮現「全年」波仔；「寫假」預設進入編輯並於鎖頭右邊浮現「✨ 假期助手」波仔）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>主項 ①「日曆」直達普通月曆＋頂部「全年」圓波</b>：點「日曆」即返回標準普通月曆，頂部右側自動浮現寫有「<b>全年</b>」的翠綠圓波掣，一撳即切換年曆全覽。</li>
+            <li><b>主項 ②「寫假」預設進入編輯＋鎖頭右邊浮現「✨ 假期助手」圓波</b>：點「寫假」即解鎖進入登記假期塗色模式，頂部右側「鎖頭」波仔的右邊自動多出一粒「<b>✨ 假期助手</b>」圓波掣，隨時一鍵切換至智能拼假助手；鎖回檢視後自動隱藏。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（情景化主從架構：「日曆｜寫假｜查詢」三主項大膠囊 ＋ 情景內嵌副項 ＋ 獨立假期規劃）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>主面版極致精簡（3 主項＋獨立旅程）</b>：手機頂部展開後只顯示「<b>日曆</b>」、「<b>寫假</b>」、「<b>查詢</b>」三個兩字主項大膠囊（<code>34px</code> 高，一撳即入，無冗長字眼），右側保留獨立「<b>✈ 假期規劃</b>」圓鈕；<b>長按右側 `‹` 箭嘴</b>可一次過展開全部主項與分支副項（年曆全覽／假期助手／農曆節氣）。</li>
+            <li><b>副項藏入對應工作情景</b>：「<b>✨ 假期助手</b>」收納入「<b>寫假（休假類別與年度配額）</b>」面板頂列右側，寫假時順手一撳即用；「<b>公眾假期</b>」與「<b>農曆節氣</b>」整合於「<b>查詢</b>」抽屜頂部分頁。</li>
+            <li><b>排假後快捷銜接</b>：完成手動連假或助手套用後，底部浮現「<b>填寫目的地 ➔</b>」快捷氣泡，一撳直達行程設定。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（放大手機版頂部開合掣至 36px，並內置方案 A／B／C 三款大按鈕佈局即時切換體驗）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-20</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li>將手機版「2027」右側開合掣由 <code>26px</code> 放大至 <code>36×36px</code> 拇指友善尺寸。</li>
+            <li>預設採用<b>方案 A（向下展開 2 行 44px 帶文字大按鈕網格，一撳即用）</b>，並於右上角 <code>☰</code> 設定選單提供<b>方案 A / B（36px 單行全寬膠囊）/ C（3 常駐膠囊＋展開）</b>即時一鍵切換對比。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-500 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（全面修復手機與平板多重滑動／彈窗切換後畫面撠住唔郁之捲動鎖定問題）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4061,7 +4758,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.8.1（全面移除手動修訂與多餘狀態列，升級全自動靜默官方核實與「Verified-Only」嚴格發布閘門）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（全面移除手動修訂與多餘狀態列，升級全自動靜默官方核實與「Verified-Only」嚴格發布閘門）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4072,7 +4769,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.8.1（優化入境要求狀態列為暖琥珀同色系設計，並升級「核實更新」即時雙向核對官方公告與雲端規例）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（優化入境要求狀態列為暖琥珀同色系設計，並升級「核實更新」即時雙向核對官方公告與雲端規例）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4083,7 +4780,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.8.1（緊急修復 <code>parseGoogleMapsPastePayload</code> 正則換行語法錯誤，恢復主日曆與右側面板正常顯示）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（緊急修復 <code>parseGoogleMapsPastePayload</code> 正則換行語法錯誤，恢復主日曆與右側面板正常顯示）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4093,7 +4790,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.8.1（優化預訂卡片右下角操作膠囊於編輯模式之按鈕邏輯，移除冗餘交叉並突出完成剔號與紅色重設箭嘴）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（優化預訂卡片右下角操作膠囊於編輯模式之按鈕邏輯，移除冗餘交叉並突出完成剔號與紅色重設箭嘴）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4103,7 +4800,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.8.1（增強住宿詳情貼上 Google Maps 網頁完整 URL／座標自動解析功能）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（增強住宿詳情貼上 Google Maps 網頁完整 URL／座標自動解析功能）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4113,7 +4810,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v6.8.1（優化編輯標題欄右側清除交叉掣觸控靈敏度與即時清空回饋）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.1.5（優化編輯標題欄右側清除交叉掣觸控靈敏度與即時清空回饋）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-19</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4182,7 +4879,7 @@
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
             <li>移除額外佔位說明橫條，將「跨週長假·全用AL / 四季放鬆·留備用 / 請1-2日·輕巧快閃」直接內嵌於頂部三個方案膠囊內，完全不影響原有版面高度。</li>
-            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v6.8.1</code>（移除 beta 字樣）。</li>
+            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.1.5</code>（移除 beta 字樣）。</li>
           </ul>
         </div>
 
@@ -16481,8 +17178,8 @@
         syncHolidayModulesVisibility();
       }
       
-      renderMonthGrid();
-      updateDashboard();
+      try { renderMonthGrid(); } catch (e) { console.error('renderMonthGrid error:', e); }
+      try { updateDashboard(); } catch (e) { console.error('updateDashboard error:', e); }
       isRemoteUpdating = false;
       indicateSync('連線正常', true);
     }
@@ -18295,8 +18992,12 @@
         cell.addEventListener('mousedown', (e) => {
           if (e.button !== 0) return;
           longPressTimer = setTimeout(() => {
-            toggleDayLock(dateStr);
-          }, 750);
+            if (!isEditMode) {
+              enterWriteLeaveFromLongPress(dateStr);
+            } else {
+              toggleDayLock(dateStr);
+            }
+          }, isEditMode ? 750 : 500);
         });
         cell.addEventListener('mouseup', () => clearTimeout(longPressTimer));
         cell.addEventListener('mouseleave', () => {
@@ -18332,10 +19033,15 @@
             }
             return;
           }
-          // 預設關閉「日程模式」（即原版「假期模式」）：點擊日曆格子自動無感啟動編輯並即時排假
+          // 嚴格鎖定保護：主頁／查詢／飛機規劃預設唯讀，單擊僅檢視詳情，長按日期或點選「寫假」先進入編輯模式
           if (!isEditMode) {
-            setEditModeState(true, false);
-            showToast('✏️ 已自動為你切換至編輯模式！');
+            showDayTooltip(e, dateStr);
+            if (typeof showMobileIconMicroToast === 'function') {
+              showMobileIconMicroToast('🔒 檢視鎖定中 · 長按日期進入寫假編輯');
+            } else {
+              showToast('🔒 檢視鎖定中 · 長按日期即可進入寫假編輯模式');
+            }
+            return;
           }
           onCellClick(dateStr);
         };
@@ -18351,6 +19057,42 @@
         hideGanttTooltip();
       }
     }, { passive: true });
+
+    function enterWriteLeaveFromLongPress(dateStr) {
+      if (!isRoomUnlocked) {
+        showUnlockModal();
+        return;
+      }
+      if (navigator.vibrate) {
+        try { navigator.vibrate(22); } catch (_) {}
+      }
+      if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+      if (typeof closeTopInlineRefPanel === 'function') closeTopInlineRefPanel();
+      if (typeof mobileTripRibbonStage !== 'undefined' && mobileTripRibbonStage > 0 && typeof toggleMobileTripRibbonDrawer === 'function') {
+        toggleMobileTripRibbonDrawer(0);
+      }
+      const topApplyBar = document.getElementById('topApplyLeavePopupBar');
+      const btn = document.getElementById('btnToggleMainApplyBar');
+      if (topApplyBar && topApplyBar.classList.contains('hidden') && btn) {
+        btn.click();
+      } else if (!isEditMode) {
+        setEditModeState(true, false);
+      }
+      if (typeof syncMobileSingleRowPillState === 'function') {
+        syncMobileSingleRowPillState();
+      }
+      if (typeof showMobileIconMicroToast === 'function') {
+        showMobileIconMicroToast(`✏️ 已進入寫假編輯模式（${formatHKDate(dateStr)}）`);
+      }
+      showToast(`✏️ 已進入寫假編輯模式，可直接點選 ${formatHKDate(dateStr)} 排假`);
+      const targetCell = document.querySelector(`.calendar-cell[data-date="${dateStr}"]`);
+      if (targetCell) {
+        targetCell.classList.remove('cell-target-highlight');
+        void targetCell.offsetWidth;
+        targetCell.classList.add('cell-target-highlight');
+        setTimeout(() => targetCell.classList.remove('cell-target-highlight'), 1500);
+      }
+    }
 
     function toggleDayLock(dateStr) {
       if (!isRoomUnlocked) {
@@ -19763,13 +20505,14 @@
     let mobilePreviewedPillLabel = '';
 
     const MOBILE_PILL_META = {
-      plane: { label: '假期規劃', icon: 'fa-solid fa-plane-departure text-[10px]', persistent: true },
-      assistant: { label: '假期助手', icon: 'fa-solid fa-wand-magic-sparkles text-[10px]', persistent: true },
-      apply: { label: '登記假期', icon: 'fa-solid fa-paintbrush text-[10px]', persistent: true },
-      holidays: { label: '公眾假期', icon: 'fa-solid fa-calendar-days text-[10px]', persistent: true },
-      lunar: { label: '農曆節氣', icon: 'fa-solid fa-moon text-[10px]', persistent: true },
-      overview: { label: '年曆全覽', icon: 'fa-solid fa-table-cells text-[10px]', persistent: false },
-      home: { label: '普通月曆', icon: 'fa-regular fa-calendar text-[10.5px]', persistent: false }
+      overview: { label: '年曆全覽', icon: 'fa-solid fa-table-cells', persistent: false },
+      home: { label: '返回月曆', icon: 'fa-regular fa-calendar', persistent: false },
+      apply: { label: '登記寫假', icon: 'fa-solid fa-paintbrush', persistent: true },
+      assistant: { label: '假期助手', icon: 'fa-solid fa-wand-magic-sparkles', persistent: true },
+      eraser: { label: '單日清除', icon: 'fa-solid fa-eraser', persistent: true },
+      holidays: { label: '假期與節氣', icon: 'fa-solid fa-calendar-days', persistent: true },
+      lunar: { label: '農曆節氣', icon: 'fa-solid fa-moon', persistent: true },
+      plane: { label: '假期規劃', icon: 'fa-solid fa-plane-departure', persistent: true }
     };
 
     let activeTopInlineRefMode = null; // null | 'holidays' | 'lunar'
@@ -19965,6 +20708,9 @@
         if (closeApplyBtn) closeApplyBtn.click();
         else topApplyBar.classList.add('hidden');
       }
+      if (typeof isEditMode !== 'undefined' && isEditMode && typeof setEditModeState === 'function') {
+        setEditModeState(false, false);
+      }
       const topAssistantPanel = document.getElementById('topInlineAssistantPanel');
       if (topAssistantPanel && !topAssistantPanel.classList.contains('hidden')) {
         topAssistantPanel.classList.add('hidden');
@@ -20071,14 +20817,14 @@
           tabLun.className = 'px-2 py-1 rounded-lg text-[10.5px] sm:text-[11px] font-extrabold bg-purple-600 text-white shadow-xs flex items-center gap-1 transition cursor-pointer';
           tabLun.querySelector('i').className = 'fa-solid fa-moon text-white text-[10px]';
           tabHol.className = 'px-2 py-1 rounded-lg text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:text-orange-700 flex items-center gap-1 transition cursor-pointer';
-          tabHol.querySelector('i').className = 'fa-solid fa-calendar-days text-orange-600 text-[10px]';
+          const holIco1 = tabHol.querySelector('i'); if (holIco1) holIco1.className = 'fa-solid fa-calendar-days text-orange-600 text-[10px]';
           panel.className = 'bg-gradient-to-b from-purple-100/90 via-purple-50/75 to-white backdrop-blur-xl border border-purple-300/95 rounded-2xl p-2 md:p-3 mb-2 shadow-lg animate-in slide-in-from-top duration-200 transition-colors';
           if (headerBar) headerBar.className = 'flex items-center justify-between pb-1.5 mb-1.5 border-b border-purple-200/80 gap-1 min-w-0';
           if (tabsWrap) tabsWrap.className = 'flex items-center gap-1 bg-purple-200/60 p-0.5 rounded-xl shrink-0';
           if (beacon) beacon.className = 'theme-lunar min-w-0 cursor-pointer';
         } else {
           tabHol.className = 'px-2 py-1 rounded-lg text-[10.5px] sm:text-[11px] font-extrabold bg-orange-500 text-white shadow-xs flex items-center gap-1 transition cursor-pointer';
-          tabHol.querySelector('i').className = 'fa-solid fa-calendar-days text-white text-[10px]';
+          const holIco2 = tabHol.querySelector('i'); if (holIco2) holIco2.className = 'fa-solid fa-calendar-days text-white text-[10px]';
           tabLun.className = 'px-2 py-1 rounded-lg text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:text-purple-800 flex items-center gap-1 transition cursor-pointer';
           tabLun.querySelector('i').className = 'fa-solid fa-moon text-purple-600 text-[10px]';
           panel.className = 'bg-gradient-to-b from-orange-100/90 via-orange-50/75 to-white backdrop-blur-xl border border-orange-300/95 rounded-2xl p-2 md:p-3 mb-2 shadow-lg animate-in slide-in-from-top duration-200 transition-colors';
@@ -20125,6 +20871,9 @@
         if (closeApplyBtn) closeApplyBtn.click();
         else topApplyBar.classList.add('hidden');
       }
+      if (typeof closeTopInlineAssistantPanel === 'function') {
+        closeTopInlineAssistantPanel();
+      }
       closeTopInlineRefPanel();
       mobilePinnedPillKey = 'overview';
       mobilePinnedPillLabel = '年曆全覽';
@@ -20138,50 +20887,14 @@
     }
 
     function previewMobilePillItem(key, label) {
-      const leftLabelEl = document.getElementById('mobileCapsuleLeftLabel');
-      const pill = document.getElementById('mobileHeaderSingleRowPill');
-      if (!pill) return;
-
-      const meta = MOBILE_PILL_META[key] || {};
-      const resolvedLabel = label || meta.label || '';
-      const changed = (mobilePreviewedPillKey !== key);
-
       mobilePreviewedPillKey = key;
-      mobilePreviewedPillLabel = resolvedLabel;
-
-      pill.querySelectorAll('.mobile-pill-icon-btn').forEach(btn => {
-        btn.classList.toggle('is-pointed', btn.dataset.pillKey === key);
-      });
-
-      if (leftLabelEl && resolvedLabel) {
-        leftLabelEl.textContent = resolvedLabel;
-        leftLabelEl.classList.add('is-visible');
-        if (changed && typeof leftLabelEl.animate === 'function') {
-          leftLabelEl.animate([
-            { transform: 'scale(0.92)' },
-            { transform: 'scale(1.04)' },
-            { transform: 'scale(1)' }
-          ], { duration: 180, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' });
-        }
-      }
+      mobilePreviewedPillLabel = label || (MOBILE_PILL_META[key] && MOBILE_PILL_META[key].label) || '';
+      syncMobileSingleRowPillState();
     }
 
     function handleMobileCapsuleIconTap(key, label) {
-      const meta = MOBILE_PILL_META[key] || {};
-      const resolvedLabel = label || meta.label || '';
-
-      // 兩段式確認：膠囊展開時，第 1 下點選（或手指掃過）先高亮圖示並於膠囊左邊顯示名稱；再點一下（或點左邊名稱膠囊）先確認進入並自動收縮！
-      if (isMobileToolbarExpanded && mobilePreviewedPillKey !== key) {
-        previewMobilePillItem(key, resolvedLabel);
-        if (navigator.vibrate) {
-          try { navigator.vibrate(8); } catch (e) {}
-        }
-        return;
-      }
-
-      // 第 2 下確認：執行功能 ＋ 自動收縮膠囊 ＋ 留駐 Icon 於箭嘴旁並繼續顯示名稱
       if (navigator.vibrate) {
-        try { navigator.vibrate(14); } catch (e) {}
+        try { navigator.vibrate(12); } catch (e) {}
       }
       triggerMobilePillAction(key);
     }
@@ -20194,9 +20907,18 @@
     }
 
     function triggerPinnedMobileAction() {
-      // 如果膠囊正展開並有預覽項目，點左邊名稱膠囊亦等同第 2 下確認進入該功能！
-      if (isMobileToolbarExpanded && mobilePreviewedPillKey) {
-        triggerMobilePillAction(mobilePreviewedPillKey);
+      // 點擊左側實色身份膠囊時，若目前有展開的子面板，則直接執行該情景的自然收合/切換
+      const inlineAssistantPanel = document.getElementById('topInlineAssistantPanel');
+      if (inlineAssistantPanel && !inlineAssistantPanel.classList.contains('hidden')) {
+        if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+        syncMobileSingleRowPillState();
+        return;
+      }
+      const inlineRefPanel = document.getElementById('topInlineRefPanel');
+      if (inlineRefPanel && !inlineRefPanel.classList.contains('hidden')) {
+        // 查詢模式下點左側實色標籤，於「公眾假期 ⇄ 農曆節氣」之間快速切換
+        openTopInlineRefPanel(activeTopInlineRefMode === 'lunar' ? 'holidays' : 'lunar', true);
+        syncMobileSingleRowPillState();
         return;
       }
       if (!mobilePinnedPillKey) return;
@@ -20208,63 +20930,130 @@
       }
     }
 
+    let mobileHoverRevertTimer = null;
+    let lastTouchInteractionTs = 0;
+
+    function clearAllOrbPointedStates(restoreLabel = true) {
+      clearTimeout(mobileHoverRevertTimer);
+      document.querySelectorAll('.mobile-any-orb-btn, .mobile-pill-icon-btn, .mobile-context-orb, .mobile-orb-btn, .mobile-plane-orb-btn, .mobile-master-pill-btn').forEach(b => {
+        b.classList.remove('is-pointed');
+      });
+      if (restoreLabel && typeof syncMobileSingleRowPillState === 'function') {
+        syncMobileSingleRowPillState();
+      }
+    }
+
+    function getSolidBadgeStyleForKey(key) {
+      if (key === 'overview' || key === 'home') {
+        return 'bg-white text-blue-900 border border-blue-900 shadow-2xs';
+      }
+      if (key === 'eraser') {
+        return 'bg-gradient-to-r from-rose-500 to-rose-600 text-white border border-transparent shadow-xs';
+      }
+      if (key === 'assistant') {
+        return 'bg-gradient-to-r from-sky-500 to-indigo-600 text-white border border-transparent shadow-xs';
+      }
+      if (key === 'holidays') {
+        return 'bg-gradient-to-r from-orange-500 to-orange-600 text-white border border-transparent shadow-xs';
+      }
+      if (key === 'lunar') {
+        return 'bg-gradient-to-r from-purple-600 to-purple-700 text-white border border-transparent shadow-xs';
+      }
+      if (key === 'apply' || key === 'plane') {
+        return 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white border border-transparent shadow-xs';
+      }
+      return 'bg-slate-800 text-white border border-transparent shadow-xs';
+    }
+
+    function showTransientMobileOrbLabel(btn, autoClearMs = 0) {
+      if (!btn) return;
+      const leftLabelEl = document.getElementById('mobileCapsuleLeftLabel');
+      const key = btn.dataset.pillKey || '';
+      let label = btn.dataset.pillLabel || (MOBILE_PILL_META[key] && MOBILE_PILL_META[key].label) || btn.getAttribute('aria-label') || '';
+      if (key === 'menu') {
+        label = isMobileToolbarExpanded ? '收起選單' : '功能選單';
+      }
+
+      clearTimeout(mobileHoverRevertTimer);
+      document.querySelectorAll('.mobile-any-orb-btn, .mobile-pill-icon-btn, .mobile-context-orb, .mobile-orb-btn, .mobile-plane-orb-btn, .mobile-master-pill-btn').forEach(b => {
+        b.classList.toggle('is-pointed', b === btn);
+      });
+
+      if (leftLabelEl && label) {
+        leftLabelEl.textContent = label;
+        leftLabelEl.className = `is-visible ${getSolidBadgeStyleForKey(key)}`;
+      }
+
+      if (autoClearMs > 0) {
+        mobileHoverRevertTimer = setTimeout(() => {
+          clearAllOrbPointedStates(true);
+        }, autoClearMs);
+      }
+    }
+
     (function initMobileCapsuleTouchScrub() {
-      const pill = document.getElementById('mobileHeaderSingleRowPill');
-      if (!pill || pill.dataset.scrubBound === '1') return;
-      pill.dataset.scrubBound = '1';
+      const mobileRightRail = document.querySelector('#yearHeaderRow > div.flex.md\\:hidden');
+      if (!mobileRightRail || mobileRightRail.dataset.scrubBound === '1') return;
+      mobileRightRail.dataset.scrubBound = '1';
 
-      let lastScrubKey = null;
-      let isTouchDragging = false;
+      const ORB_SELECTOR = '.mobile-any-orb-btn, .mobile-pill-icon-btn, .mobile-context-orb, .mobile-orb-btn, .mobile-plane-orb-btn, .mobile-master-pill-btn';
 
-      pill.addEventListener('touchstart', (e) => {
-        isTouchDragging = false;
-        const t = e.touches && e.touches[0];
-        if (!t) return;
-        const el = document.elementFromPoint(t.clientX, t.clientY);
-        const btn = el && el.closest('.mobile-pill-icon-btn');
-        if (btn && btn.dataset.pillKey) {
-          lastScrubKey = btn.dataset.pillKey;
+      // 僅限桌面模擬／觸控筆滑鼠懸停時亮起光環，離開即熄滅；手機觸控完全交由標準單擊處理，零攔截！
+      mobileRightRail.addEventListener('pointerover', (e) => {
+        if (e.pointerType === 'touch') return;
+        if (Date.now() - lastTouchInteractionTs < 650) return;
+        const btn = e.target.closest(ORB_SELECTOR);
+        if (btn) {
+          showTransientMobileOrbLabel(btn, 0);
         }
-      }, { passive: true });
+      });
 
-      pill.addEventListener('touchmove', (e) => {
-        const t = e.touches && e.touches[0];
-        if (!t) return;
-        isTouchDragging = true;
-        const el = document.elementFromPoint(t.clientX, t.clientY);
-        const btn = el && el.closest('.mobile-pill-icon-btn');
-        if (btn && btn.dataset.pillKey && btn.dataset.pillKey !== lastScrubKey) {
-          lastScrubKey = btn.dataset.pillKey;
-          previewMobilePillItem(btn.dataset.pillKey, btn.dataset.pillLabel);
-          if (navigator.vibrate) {
-            try { navigator.vibrate(6); } catch (err) {}
+      mobileRightRail.addEventListener('pointerout', (e) => {
+        if (e.pointerType === 'touch') return;
+        const fromBtn = e.target.closest(ORB_SELECTOR);
+        if (!fromBtn) return;
+        const toBtn = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(ORB_SELECTOR);
+        if (fromBtn !== toBtn) {
+          fromBtn.classList.remove('is-pointed');
+          if (!toBtn) {
+            clearAllOrbPointedStates(true);
           }
         }
+      });
+
+      mobileRightRail.addEventListener('pointerleave', () => {
+        clearAllOrbPointedStates(true);
+      });
+
+      mobileRightRail.addEventListener('touchstart', () => {
+        lastTouchInteractionTs = Date.now();
       }, { passive: true });
 
-      pill.addEventListener('touchend', (e) => {
-        if (isTouchDragging && lastScrubKey) {
-          // 手指橫掃停喺某粒圖示上放手：先鎖定預覽佢個名喺左邊，唔會一放手就誤跳走
-          e.preventDefault();
-          const btn = pill.querySelector(`.mobile-pill-icon-btn[data-pill-key="${lastScrubKey}"]`);
-          if (btn) previewMobilePillItem(lastScrubKey, btn.dataset.pillLabel);
-        }
-        isTouchDragging = false;
-      });
+      mobileRightRail.addEventListener('touchend', () => {
+        lastTouchInteractionTs = Date.now();
+        clearAllOrbPointedStates(true);
+      }, { passive: true });
+
+      mobileRightRail.addEventListener('touchcancel', () => {
+        lastTouchInteractionTs = Date.now();
+        clearAllOrbPointedStates(true);
+      }, { passive: true });
     })();
 
     function syncMobileSingleRowPillState() {
+      const calCtxGroup = document.getElementById('mobileHeaderCalendarContextGroup');
       const editCtxGroup = document.getElementById('mobileHeaderEditContextGroup');
+      const queryCtxGroup = document.getElementById('mobileHeaderQueryContextGroup');
+      const homeReturnGroup = document.getElementById('mobileHeaderHomeReturnGroup');
+      const ctxApplyActiveBtn = document.getElementById('mobileContextApplyActiveBtn');
       const ctxEraserBtn = document.getElementById('mobileContextEraserBtn');
+      const ctxAssistantBtn = document.getElementById('mobileContextAssistantBtn');
+      const ctxHolidaysBtn = document.getElementById('mobileContextHolidaysBtn');
+      const ctxLunarBtn = document.getElementById('mobileContextLunarBtn');
       const applyBtn = document.getElementById('mPillBtnApply');
       const planeBtn = document.getElementById('btnToggleMobileTripRibbon');
-      const applyDot = document.getElementById('mPillApplyBrushDot');
+      const holidaysBtn = document.getElementById('mPillBtnHolidays');
       const topApplyBar = document.getElementById('topApplyLeavePopupBar');
-
-      const pinnedSlot = document.getElementById('mobilePinnedSelectedSlot');
-      const pinnedIconEl = document.getElementById('mobilePinnedIconEl');
-      const pinnedBadge = document.getElementById('mobilePinnedPlaneBadge');
-      const leftLabelEl = document.getElementById('mobileCapsuleLeftLabel');
 
       const editing = (typeof isEditMode !== 'undefined' && isEditMode);
       const curBrush = (typeof activeBrush !== 'undefined') ? activeBrush : 'annual';
@@ -20274,109 +21063,72 @@
       const isRefOpen = Boolean(inlineRefPanel && !inlineRefPanel.classList.contains('hidden') && activeTopInlineRefMode);
       const inlineAssistantPanel = document.getElementById('topInlineAssistantPanel');
       const isAssistantOpen = Boolean(inlineAssistantPanel && !inlineAssistantPanel.classList.contains('hidden'));
-      const assistantPillBtn = document.getElementById('mPillBtnAssistant');
-      if (assistantPillBtn) {
-        assistantPillBtn.classList.toggle('is-active-item', isAssistantOpen);
-      }
+      const isOverviewOpen = document.body.classList.contains('year-overview-mode');
 
-      // 編輯假期專屬情景浮現：唯讀檢視態下完全隱藏擦膠與鎖頭，僅在進入編輯日期模式時浮現 [🧹 擦膠] + [🔓 編輯中]
-      if (editCtxGroup) {
-        editCtxGroup.classList.toggle('is-editing', editing);
-      }
-      if (ctxEraserBtn) {
-        ctxEraserBtn.classList.toggle('is-eraser-on', editing && curBrush === 'eraser');
-      }
-      if (applyBtn) {
-        applyBtn.classList.toggle('is-active-item', isApplyOpen);
-      }
-      if (planeBtn) {
-        planeBtn.classList.toggle('is-active-item', isRibbonOpen);
-      }
-      if (applyDot) {
-        const dotColors = {
-          annual: 'bg-sky-400',
-          wb: 'bg-purple-400',
-          birthday: 'bg-emerald-400',
-          custom: 'bg-amber-400',
-          special: 'bg-slate-400',
-          roster: 'bg-rose-400',
-          eraser: 'bg-rose-500'
-        };
-        applyDot.className = `w-1.5 h-1.5 rounded-full ${dotColors[curBrush] || 'bg-sky-400'} absolute bottom-0.5 right-0.5 ring-1 ring-white`;
-      }
+      const isQueryContext = Boolean(isRefOpen);
+      const isWriteContext = Boolean(!isQueryContext && (editing || isApplyOpen || isAssistantOpen));
+      const isAwayFromHome = Boolean(isQueryContext || isWriteContext || isRibbonOpen || isOverviewOpen);
+      const isHomeContext = Boolean(!isAwayFromHome && !isMobileToolbarExpanded);
 
-      // 智能駐留分流：
-      // 1. 當「✈ 假期規劃」、「🖌️ 登記假期」或原地展開嘅「📅 公眾假期 / 🌙 農曆節氣」開啟運作中，駐留該藍色運作中圖示＋左側白底黑字名牌；
-      // 2. 當處於普通月曆（無任何原地展開面板）時，箭嘴旁預設駐留素雅「⊞ 年曆全覽」快捷圓鈕！
-      const pinnedBtn = document.getElementById('mobilePinnedIconBtn');
-      const holidaysBtn = document.getElementById('mPillBtnHolidays');
-      const lunarBtn = document.getElementById('mPillBtnLunar');
-      if (holidaysBtn) {
-        holidaysBtn.classList.toggle('is-active-holidays', isRefOpen && activeTopInlineRefMode === 'holidays');
-      }
-      if (lunarBtn) {
-        lunarBtn.classList.toggle('is-active-lunar', isRefOpen && activeTopInlineRefMode === 'lunar');
-      }
+      if (calCtxGroup) calCtxGroup.classList.toggle('is-cal-context', isHomeContext);
+      if (editCtxGroup) editCtxGroup.classList.toggle('is-editing', isWriteContext && !isMobileToolbarExpanded);
+      if (queryCtxGroup) queryCtxGroup.classList.toggle('is-query-context', isQueryContext && !isMobileToolbarExpanded);
+      if (homeReturnGroup) homeReturnGroup.classList.toggle('is-away-home', isAwayFromHome && !isMobileToolbarExpanded);
 
-      const getFallbackKey = () => {
-        if (isAssistantOpen) return 'assistant';
-        if (isRefOpen) return activeTopInlineRefMode;
-        if (isApplyOpen) return 'apply';
-        if (isRibbonOpen) return 'plane';
-        return 'overview';
-      };
+      document.body.classList.toggle('mobile-away-from-home', isAwayFromHome && !isMobileToolbarExpanded);
 
-      if (mobilePinnedPillKey === 'assistant' && !isAssistantOpen) {
-        mobilePinnedPillKey = getFallbackKey();
-      } else if (mobilePinnedPillKey === 'plane' && !isRibbonOpen) {
-        mobilePinnedPillKey = getFallbackKey();
-      } else if (mobilePinnedPillKey === 'apply' && !isApplyOpen) {
-        mobilePinnedPillKey = getFallbackKey();
-      } else if ((mobilePinnedPillKey === 'holidays' || mobilePinnedPillKey === 'lunar') && (!isRefOpen || activeTopInlineRefMode !== mobilePinnedPillKey)) {
-        mobilePinnedPillKey = getFallbackKey();
-      } else if (!mobilePinnedPillKey || mobilePinnedPillKey === 'overview') {
-        mobilePinnedPillKey = getFallbackKey();
-      }
-      mobilePinnedPillLabel = (MOBILE_PILL_META[mobilePinnedPillKey] && MOBILE_PILL_META[mobilePinnedPillKey].label) || '';
+      // 寫假情景內：永遠保留「登記寫假」Icon！當前哪個子工具激活，嗰粒就係「實心」，其餘為「反向白底彩框」
+      const isEraserOn = Boolean(editing && curBrush === 'eraser' && !isAssistantOpen);
+      if (ctxApplyActiveBtn) ctxApplyActiveBtn.classList.toggle('is-outline-mode', isEraserOn || isAssistantOpen);
+      if (ctxEraserBtn) ctxEraserBtn.classList.toggle('is-eraser-on', isEraserOn);
+      if (ctxAssistantBtn) ctxAssistantBtn.classList.toggle('is-assistant-on', isAssistantOpen);
 
-      const isActivePersistent = (mobilePinnedPillKey === 'assistant' && isAssistantOpen)
-        || (mobilePinnedPillKey === 'plane' && isRibbonOpen)
-        || (mobilePinnedPillKey === 'apply' && isApplyOpen)
-        || ((mobilePinnedPillKey === 'holidays' || mobilePinnedPillKey === 'lunar') && isRefOpen);
-      const showPinned = Boolean(!isMobileToolbarExpanded && mobilePinnedPillKey);
-      if (pinnedSlot) {
-        pinnedSlot.classList.toggle('has-pinned', showPinned);
-      }
-      if (pinnedBtn) {
-        const isBlueActive = isActivePersistent && (mobilePinnedPillKey === 'plane' || mobilePinnedPillKey === 'apply' || mobilePinnedPillKey === 'assistant');
-        const isOrangeActive = isActivePersistent && mobilePinnedPillKey === 'holidays';
-        const isPurpleActive = isActivePersistent && mobilePinnedPillKey === 'lunar';
-        pinnedBtn.classList.toggle('is-active-item', isBlueActive);
-        pinnedBtn.classList.toggle('is-active-holidays', isOrangeActive);
-        pinnedBtn.classList.toggle('is-active-lunar', isPurpleActive);
-        pinnedBtn.classList.toggle('is-default-shortcut', !isActivePersistent);
-      }
-      if (showPinned && pinnedIconEl) {
-        const meta = MOBILE_PILL_META[mobilePinnedPillKey];
-        if (meta) {
-          pinnedIconEl.className = meta.icon;
-        }
-      }
-      if (pinnedBadge) {
-        const showPlaneBadge = Boolean(showPinned && mobilePinnedPillKey === 'plane' && typeof isMobilePlaneBadgeVisible !== 'undefined' && isMobilePlaneBadgeVisible);
-        pinnedBadge.classList.toggle('is-badge-hidden', !showPlaneBadge);
-      }
+      // 查詢情景內：當前選中分頁係「實心」，未選中嗰粒係「反向白底彩框」
+      if (ctxHolidaysBtn) ctxHolidaysBtn.classList.toggle('is-active-q', isQueryContext && activeTopInlineRefMode !== 'lunar');
+      if (ctxLunarBtn) ctxLunarBtn.classList.toggle('is-active-q', isQueryContext && activeTopInlineRefMode === 'lunar');
 
+      // 展開主選單時：只有已進入對應情景嗰粒先係「實心」，未揀選的一律「反向白底彩框」
+      if (applyBtn) applyBtn.classList.toggle('is-active-master', isWriteContext);
+      if (planeBtn) planeBtn.classList.toggle('is-active', isRibbonOpen);
+      if (holidaysBtn) holidaysBtn.classList.toggle('is-active-holidays', isQueryContext);
+
+      // 左側實色身份膠囊：未揀選（主頁／剛打開選單未選）時保持隱藏，揀選進入邊一行先顯示對應實色標籤！
+      const leftLabelEl = document.getElementById('mobileCapsuleLeftLabel');
       if (leftLabelEl) {
-        if (isMobileToolbarExpanded) {
-          const activePreview = mobilePreviewedPillLabel || (isActivePersistent ? mobilePinnedPillLabel : '點選圖示預覽');
-          leftLabelEl.textContent = activePreview;
-          leftLabelEl.classList.add('is-visible');
-        } else if (showPinned && isActivePersistent && mobilePinnedPillLabel) {
-          leftLabelEl.textContent = mobilePinnedPillLabel;
-          leftLabelEl.classList.add('is-visible');
+        let activeChineseTitle = '';
+        let badgeThemeCls = '';
+
+        if (!isMobileToolbarExpanded) {
+          if (isQueryContext) {
+            if (activeTopInlineRefMode === 'lunar') {
+              activeChineseTitle = '農曆節氣';
+              badgeThemeCls = getSolidBadgeStyleForKey('lunar');
+            } else {
+              activeChineseTitle = '公眾假期';
+              badgeThemeCls = getSolidBadgeStyleForKey('holidays');
+            }
+          } else if (isWriteContext) {
+            if (isAssistantOpen) {
+              activeChineseTitle = '假期助手';
+              badgeThemeCls = getSolidBadgeStyleForKey('assistant');
+            } else if (isEraserOn) {
+              activeChineseTitle = '單日清除';
+              badgeThemeCls = getSolidBadgeStyleForKey('eraser');
+            } else {
+              activeChineseTitle = '登記寫假';
+              badgeThemeCls = getSolidBadgeStyleForKey('apply');
+            }
+          } else if (isRibbonOpen) {
+            activeChineseTitle = '假期規劃';
+            badgeThemeCls = getSolidBadgeStyleForKey('plane');
+          }
+        }
+
+        if (activeChineseTitle) {
+          leftLabelEl.textContent = activeChineseTitle;
+          leftLabelEl.className = `is-visible ${badgeThemeCls}`;
         } else {
-          leftLabelEl.classList.remove('is-visible');
+          leftLabelEl.className = '';
         }
       }
     }
@@ -20389,36 +21141,115 @@
       };
 
       if (action === 'plane') {
-        selectAndPinMobilePillItem('plane', '假期規劃');
         autoCollapsePill();
+        const topApplyBar = document.getElementById('topApplyLeavePopupBar');
+        if (topApplyBar && !topApplyBar.classList.contains('hidden')) {
+          topApplyBar.classList.add('hidden');
+          const chevron = document.getElementById('mainApplyChevron');
+          if (chevron) chevron.style.transform = '';
+        }
+        if (typeof closeTopInlineRefPanel === 'function') closeTopInlineRefPanel();
+        if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+        if (typeof isEditMode !== 'undefined' && isEditMode && typeof setEditModeState === 'function') {
+          setEditModeState(false, false);
+        }
         toggleMobileTripRibbonDrawer();
-        syncMobileSingleRowPillState();
+        setTimeout(syncMobileSingleRowPillState, 25);
       } else if (action === 'assistant') {
-        selectAndPinMobilePillItem('assistant', '假期助手');
         autoCollapsePill();
+        if (typeof closeTopInlineRefPanel === 'function') closeTopInlineRefPanel();
+        if (typeof mobileTripRibbonStage !== 'undefined' && mobileTripRibbonStage > 0) {
+          toggleMobileTripRibbonDrawer(0);
+        }
         openTravelModeModal();
+        setTimeout(syncMobileSingleRowPillState, 30);
       } else if (action === 'apply') {
-        selectAndPinMobilePillItem('apply', '登記假期');
         autoCollapsePill();
+        // 進入「寫假」：駐留實心藍色「登記寫假」Icon ＋ [擦膠] [假期助手] ＋ [深藍日曆返回]
+        if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+        if (typeof closeTopInlineRefPanel === 'function') closeTopInlineRefPanel();
+        if (typeof mobileTripRibbonStage !== 'undefined' && mobileTripRibbonStage > 0) {
+          toggleMobileTripRibbonDrawer(0);
+        }
+        if (typeof activeBrush !== 'undefined' && activeBrush === 'eraser' && typeof selectBrush === 'function') {
+          selectBrush('annual');
+        }
+        const topApplyBar = document.getElementById('topApplyLeavePopupBar');
         const btn = document.getElementById('btnToggleMainApplyBar');
-        if (btn) btn.click();
-        syncMobileSingleRowPillState();
+        if (topApplyBar && topApplyBar.classList.contains('hidden') && btn) {
+          btn.click();
+        } else if (typeof isEditMode !== 'undefined' && !isEditMode) {
+          const lockBtn = document.getElementById('btnToggleGlobalLock');
+          if (lockBtn) lockBtn.click();
+        }
+        setTimeout(syncMobileSingleRowPillState, 30);
       } else if (action === 'holidays') {
-        selectAndPinMobilePillItem('holidays', '公眾假期');
         autoCollapsePill();
-        openTopInlineRefPanel('holidays', false);
+        if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+        if (typeof isEditMode !== 'undefined' && isEditMode && typeof setEditModeState === 'function') {
+          setEditModeState(false, false);
+        }
+        if (typeof mobileTripRibbonStage !== 'undefined' && mobileTripRibbonStage > 0) {
+          toggleMobileTripRibbonDrawer(0);
+        }
+        openTopInlineRefPanel('holidays', true);
+        setTimeout(syncMobileSingleRowPillState, 30);
       } else if (action === 'lunar') {
-        selectAndPinMobilePillItem('lunar', '農曆節氣');
         autoCollapsePill();
-        openTopInlineRefPanel('lunar', false);
+        if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+        if (typeof isEditMode !== 'undefined' && isEditMode && typeof setEditModeState === 'function') {
+          setEditModeState(false, false);
+        }
+        if (typeof mobileTripRibbonStage !== 'undefined' && mobileTripRibbonStage > 0) {
+          toggleMobileTripRibbonDrawer(0);
+        }
+        openTopInlineRefPanel('lunar', true);
+        setTimeout(syncMobileSingleRowPillState, 30);
       } else if (action === 'overview') {
         autoCollapsePill();
+        if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+        if (typeof closeTopInlineRefPanel === 'function') closeTopInlineRefPanel();
+        const topApplyBar = document.getElementById('topApplyLeavePopupBar');
+        if (topApplyBar && !topApplyBar.classList.contains('hidden')) {
+          topApplyBar.classList.add('hidden');
+          const chevron = document.getElementById('mainApplyChevron');
+          if (chevron) chevron.style.transform = '';
+        }
+        if (typeof isEditMode !== 'undefined' && isEditMode && typeof setEditModeState === 'function') {
+          setEditModeState(false, false);
+        }
         syncMobileSingleRowPillState();
         const btn = document.getElementById('btnToggleYearView');
         if (btn) btn.click();
       } else if (action === 'home') {
-        returnToStandardMonthlyCalendar();
+        // 點選「深藍日曆主頁返回波仔」：無論身處寫假、查詢定飛機假期規劃，一鍵收起所有面板並返到普通大日曆主頁！
+        autoCollapsePill();
+        if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+        if (typeof closeTopInlineRefPanel === 'function') closeTopInlineRefPanel();
+        if (typeof mobileTripRibbonStage !== 'undefined' && mobileTripRibbonStage > 0) {
+          toggleMobileTripRibbonDrawer(0);
+        }
+        const topApplyBar = document.getElementById('topApplyLeavePopupBar');
+        if (topApplyBar && !topApplyBar.classList.contains('hidden')) {
+          topApplyBar.classList.add('hidden');
+          const chevron = document.getElementById('mainApplyChevron');
+          if (chevron) chevron.style.transform = '';
+        }
+        if (typeof isEditMode !== 'undefined' && isEditMode) {
+          const lockBtn = document.getElementById('btnToggleGlobalLock');
+          if (lockBtn) lockBtn.click();
+        }
+        if (document.body.classList.contains('year-overview-mode')) {
+          returnToStandardMonthlyCalendar();
+        }
+        setTimeout(syncMobileSingleRowPillState, 30);
       } else if (action === 'eraser') {
+        // 若假期助手正展開，先收起助手並回到手動寫假列再切換擦膠
+        if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+        const topApplyBar = document.getElementById('topApplyLeavePopupBar');
+        if (topApplyBar && topApplyBar.classList.contains('hidden')) {
+          topApplyBar.classList.remove('hidden');
+        }
         const btn = document.getElementById('btnClearAll');
         if (btn) btn.click();
         setTimeout(() => {
@@ -20430,54 +21261,194 @@
         }, 20);
       } else if (action === 'lock') {
         autoCollapsePill();
+        if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
         const btn = document.getElementById('btnToggleGlobalLock');
         if (btn) btn.click();
         setTimeout(() => {
           const editing = (typeof isEditMode !== 'undefined' && isEditMode);
-          if (editing && mobilePinnedPillKey === 'lock') {
-            mobilePinnedPillKey = null;
-            mobilePinnedPillLabel = '';
-          }
-          showMobileIconMicroToast(editing ? '🔓 已解鎖編輯 · 右上可隨時擦膠或鎖返' : '🔒 已鎖定唯讀檢視模式');
+          showMobileIconMicroToast(editing ? '🔓 已解鎖寫假' : '🔒 已鎖定檢視 · 返回主頁');
           syncMobileSingleRowPillState();
         }, 20);
       }
     }
 
-    function toggleMobileHeaderToolbar(forceState = null) {
+    function toggleMobileHeaderToolbar(forceState = null, showAllBranches = false) {
       const pill = document.getElementById('mobileHeaderSingleRowPill');
       const btnEl = document.getElementById('btnToggleMobileToolbar');
       if (!pill) return;
 
       isMobileToolbarExpanded = (forceState !== null) ? forceState : !isMobileToolbarExpanded;
+      document.body.classList.toggle('mobile-pill-is-open', isMobileToolbarExpanded);
 
       if (isMobileToolbarExpanded) {
         pill.classList.add('is-open');
+        pill.classList.toggle('is-all-branches', Boolean(showAllBranches));
         if (btnEl) btnEl.classList.add('is-expanded');
-        // 每次重新展開膠囊時重置預覽確認鎖，確保手機用戶第 1 下點任何圖示都一定先睇到名稱、第 2 下先確認進入！
-        mobilePreviewedPillKey = null;
-        mobilePreviewedPillLabel = '';
-        pill.querySelectorAll('.mobile-pill-icon-btn').forEach(b => b.classList.remove('is-pointed'));
-        const leftLabelEl = document.getElementById('mobileCapsuleLeftLabel');
-        if (leftLabelEl) {
-          if (mobilePinnedPillLabel) {
-            leftLabelEl.textContent = mobilePinnedPillLabel;
-            leftLabelEl.classList.add('is-visible');
-          } else {
-            leftLabelEl.textContent = '點選圖示預覽';
-            leftLabelEl.classList.add('is-visible');
-          }
+        if (showAllBranches && typeof showMobileIconMicroToast === 'function') {
+          showMobileIconMicroToast('🌿 已展開全部主項與分支功能');
         }
       } else {
-        pill.classList.remove('is-open');
+        pill.classList.remove('is-open', 'is-all-branches');
         if (btnEl) btnEl.classList.remove('is-expanded');
-        mobilePreviewedPillKey = null;
-        mobilePreviewedPillLabel = '';
-        pill.querySelectorAll('.mobile-pill-icon-btn').forEach(b => b.classList.remove('is-pointed'));
       }
       syncMobileSingleRowPillState();
       setTimeout(syncStickyRibbonTopOffset, 20);
     }
+
+    (function initMobileToolbarOrbGestures() {
+      const btn = document.getElementById('btnToggleMobileToolbar');
+      if (!btn || btn.dataset.orbGestureBound === '1') return;
+      btn.dataset.orbGestureBound = '1';
+
+      let pressTimer = null;
+      let longPressFired = false;
+      let sx = 0, sy = 0;
+
+      const clearT = () => {
+        if (pressTimer) {
+          clearTimeout(pressTimer);
+          pressTimer = null;
+        }
+      };
+
+      btn.addEventListener('pointerdown', (e) => {
+        if (e.button !== undefined && e.button !== 0) return;
+        longPressFired = false;
+        sx = e.clientX || 0;
+        sy = e.clientY || 0;
+        clearT();
+        pressTimer = setTimeout(() => {
+          longPressFired = true;
+          toggleMobileHeaderToolbar(true, true);
+          if (navigator.vibrate) try { navigator.vibrate(16); } catch (err) {}
+        }, 480);
+      });
+
+      btn.addEventListener('pointermove', (e) => {
+        if (!pressTimer) return;
+        if (Math.abs((e.clientX || 0) - sx) > 8 || Math.abs((e.clientY || 0) - sy) > 8) {
+          clearT();
+        }
+      });
+
+      btn.addEventListener('pointerup', () => {
+        clearT();
+        if (!longPressFired) {
+          toggleMobileHeaderToolbar(null, false);
+        }
+        longPressFired = false;
+      });
+
+      btn.addEventListener('pointercancel', clearT);
+      btn.addEventListener('pointerleave', clearT);
+      btn.addEventListener('contextmenu', (e) => e.preventDefault());
+
+      // 電腦／滑鼠模擬手機闊度時，長按箭嘴展開全部分支後支援「滑鼠按住拖曳橫掃」及「滾輪橫向滑動」
+      const pillRow = document.getElementById('mobileHeaderSingleRowPill');
+      if (pillRow && pillRow.dataset.dragScrollBound !== '1') {
+        pillRow.dataset.dragScrollBound = '1';
+        let isDown = false, startX = 0, scrollLeft = 0, dragged = false;
+        pillRow.addEventListener('pointerdown', (e) => {
+          if (!pillRow.classList.contains('is-all-branches')) return;
+          isDown = true;
+          dragged = false;
+          startX = e.clientX;
+          scrollLeft = pillRow.scrollLeft;
+        });
+        window.addEventListener('pointermove', (e) => {
+          if (!isDown) return;
+          const dx = e.clientX - startX;
+          if (Math.abs(dx) > 4) dragged = true;
+          if (dragged) pillRow.scrollLeft = scrollLeft - dx;
+        });
+        window.addEventListener('pointerup', () => {
+          isDown = false;
+          setTimeout(() => { dragged = false; }, 30);
+        });
+        pillRow.addEventListener('click', (e) => {
+          if (dragged) {
+            e.stopPropagation();
+            e.preventDefault();
+          }
+        }, true);
+        pillRow.addEventListener('wheel', (e) => {
+          if (!pillRow.classList.contains('is-all-branches')) return;
+          if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            pillRow.scrollLeft += e.deltaY;
+            e.preventDefault();
+          }
+        }, { passive: false });
+      }
+    })();
+
+    let bridgeTargetTripKey = null;
+    let bridgeDismissTimer = null;
+
+    function showTripDestinationBridgePill(tripObj) {
+      if (!tripObj) return;
+      const pill = document.getElementById('tripDestinationBridgePill');
+      const labelEl = document.getElementById('tripDestinationBridgeLabel');
+      const btnEl = document.getElementById('btnJumpTripDestinationBridge');
+      if (!pill || !labelEl || !btnEl) return;
+
+      const tKey = `${tripObj.startDate}_${tripObj.endDate}`;
+      bridgeTargetTripKey = tKey;
+      const hasCustomTitle = Boolean(typeof customTripTitles !== 'undefined' && customTripTitles[tKey] && customTripTitles[tKey].trim());
+      labelEl.textContent = hasCustomTitle
+        ? `✈️ ${customTripTitles[tKey]}（共 ${tripObj.totalDays} 日）`
+        : `✈️ 已建立 ${tripObj.totalDays} 日連假`;
+      btnEl.textContent = hasCustomTitle ? '管理行程 ➔' : '填寫目的地 ➔';
+
+      pill.classList.add('is-visible');
+      clearTimeout(bridgeDismissTimer);
+      bridgeDismissTimer = setTimeout(() => {
+        pill.classList.remove('is-visible');
+      }, 4500);
+    }
+    window.showTripDestinationBridgePill = showTripDestinationBridgePill;
+
+    function executeTripDestinationBridgeJump() {
+      const pill = document.getElementById('tripDestinationBridgePill');
+      if (pill) pill.classList.remove('is-visible');
+      clearTimeout(bridgeDismissTimer);
+
+      // 收起編輯工具列，平滑切換到獨立「✈ 假期規劃」旅程領域
+      const topApplyBar = document.getElementById('topApplyLeavePopupBar');
+      if (topApplyBar && !topApplyBar.classList.contains('hidden')) {
+        const closeApplyBtn = document.getElementById('btnCloseTopBarApplyLeave');
+        if (closeApplyBtn) closeApplyBtn.click();
+        else topApplyBar.classList.add('hidden');
+      }
+      if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+      if (typeof closeTopInlineRefPanel === 'function') closeTopInlineRefPanel();
+
+      if (window.innerWidth < 1024) {
+        if (typeof toggleMobileTripRibbonDrawer === 'function') {
+          toggleMobileTripRibbonDrawer(1);
+        }
+        if (bridgeTargetTripKey && Array.isArray(mobileRibbonTripsCache)) {
+          const idx = mobileRibbonTripsCache.findIndex(t => `${t.startDate}_${t.endDate}` === bridgeTargetTripKey);
+          if (idx !== -1 && typeof jumpMobileSmartRibbonCard === 'function') {
+            setTimeout(() => jumpMobileSmartRibbonCard(idx), 80);
+          }
+        }
+        if (bridgeTargetTripKey && typeof window.openEditTripTitleModal === 'function') {
+          const hasCustomTitle = Boolean(typeof customTripTitles !== 'undefined' && customTripTitles[bridgeTargetTripKey] && customTripTitles[bridgeTargetTripKey].trim());
+          if (!hasCustomTitle) {
+            setTimeout(() => window.openEditTripTitleModal(bridgeTargetTripKey), 180);
+          }
+        }
+      } else {
+        if (typeof showLeavesTab === 'function') showLeavesTab();
+        if (bridgeTargetTripKey && typeof window.openEditTripTitleModal === 'function') {
+          const hasCustomTitle = Boolean(typeof customTripTitles !== 'undefined' && customTripTitles[bridgeTargetTripKey] && customTripTitles[bridgeTargetTripKey].trim());
+          if (!hasCustomTitle) {
+            setTimeout(() => window.openEditTripTitleModal(bridgeTargetTripKey), 150);
+          }
+        }
+      }
+    }
+    window.executeTripDestinationBridgeJump = executeTripDestinationBridgeJump;
 
     function jumpToTripOnCalendar(startDate, title, totalDays) {
       // 若從「假期規劃」大彈窗內點擊旅程卡片，自動關閉彈窗以便直接檢視主月曆
@@ -21404,7 +22375,23 @@
       btn.addEventListener('pointerup', (e) => {
         clearPress();
         if (!longPressTriggered) {
-          handleMobileCapsuleIconTap('plane', '假期規劃');
+          if (isMobileToolbarExpanded) toggleMobileHeaderToolbar(false);
+          // 開啟獨立假期規劃走廊時，互斥收起其他頂部抽屜避免畫面堆疊打架
+          if (typeof mobileTripRibbonStage !== 'undefined' && mobileTripRibbonStage === 0) {
+            closeTopInlineRefPanel();
+            if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+            const topApplyBar = document.getElementById('topApplyLeavePopupBar');
+            if (topApplyBar && !topApplyBar.classList.contains('hidden')) {
+              const closeApplyBtn = document.getElementById('btnCloseTopBarApplyLeave');
+              if (closeApplyBtn) closeApplyBtn.click();
+              else topApplyBar.classList.add('hidden');
+            }
+            if (typeof isEditMode !== 'undefined' && isEditMode && typeof setEditModeState === 'function') {
+              setEditModeState(false, false);
+            }
+          }
+          toggleMobileTripRibbonDrawer();
+          syncMobileSingleRowPillState();
         }
         longPressTriggered = false;
       });
@@ -22378,8 +23365,9 @@ function setupYearOverviewToggle() {
           touchStartDist = 0;
         }, { passive: true });
 
-        // 4. 雙擊月份平滑切換檢視
-        container.addEventListener('dblclick', () => {
+        // 4. 僅限觸控平板/手機（無滑鼠雙擊誤觸風險）或明確點擊「年曆全覽」按鈕切換檢視
+        container.addEventListener('dblclick', (e) => {
+          if (window.innerWidth >= 768) return;
           toggleYearOverview();
         });
       }
@@ -22869,7 +23857,14 @@ function setupYearOverviewToggle() {
           closeTopInlineAssistantPanel();
           return;
         }
+        // 互斥收起手動登記列與節日查詢抽屜，進入假期助手情景
+        const topApplyBar = document.getElementById('topApplyLeavePopupBar');
+        if (topApplyBar && !topApplyBar.classList.contains('hidden')) {
+          topApplyBar.classList.add('hidden');
+        }
+        if (typeof closeTopInlineRefPanel === 'function') closeTopInlineRefPanel();
         executeTravelVacation(currentTravelMode || 'casual');
+        if (typeof syncMobileSingleRowPillState === 'function') syncMobileSingleRowPillState();
         return;
       }
       const modal = document.getElementById('modalTravelMode');
@@ -23339,6 +24334,14 @@ function setupYearOverviewToggle() {
         showLeavesTab();
       }
       showToast('✨ 假期助手方案已成功套用（已保留鎖定假期）！');
+      if (currentGeneratedCombo && Array.isArray(currentGeneratedCombo.trips) && currentGeneratedCombo.trips.length > 0) {
+        const sortedNewTrips = [...currentGeneratedCombo.trips].sort((a, b) => (a.startDate || '').localeCompare(b.startDate || ''));
+        if (sortedNewTrips[0] && sortedNewTrips[0].startDate) {
+          const { tripsList } = getActiveLeaveSpansMap(leaveData);
+          const matched = tripsList.find(t => t.startDate === sortedNewTrips[0].startDate) || sortedNewTrips[0];
+          showTripDestinationBridgePill(matched);
+        }
+      }
     }
 
     function renderFlightBoardModal(combo, modeTitle, availableAl) {
@@ -24564,30 +25567,7 @@ function setupYearOverviewToggle() {
       renderHolidayAndLunarTablesForYear(selectedYear);
             renderMonthGrid();
             updateDashboard();
-                  // === v4.3.9 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
-      try {
-        if (tripBookings && Object.keys(tripBookings).length > 0) {
-          const bookingKeys = Object.keys(tripBookings).sort();
-          for (let i = bookingKeys.length - 1; i >= 0; i--) {
-            const b = tripBookings[bookingKeys[i]];
-            if (b && (b.hotelAddress || b.hotelName)) {
-              window.lastKnownStayLocation = {
-                name: b.hotelName || '',
-                address: b.hotelAddress || '',
-                query: buildCardMapQuery(b.hotelName, b.hotelAddress)
-              };
-              console.log('[v4.3.9 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
-              break;
-            }
-          }
-        }
-      } catch (err) {
-        console.warn('Location preload error:', err);
-      }
-      checkRoomSecurityAndConnect();
-      initTopApplyLeaveBar();
-      initDrawerMenu();
-      initFloatingLeaveBar();
+            
             closeDrawer();
             showToast(`✅ 已連接同步代碼 ${currentRoom}`);
           }
@@ -25346,9 +26326,10 @@ function setupYearOverviewToggle() {
       initRosterModeUI();
       syncRosterModeUI();
       // 記憶並還原使用者先前的編輯模式狀態（若已啟用「日程模式」則預設進入日程檢視態）
-      if (localStorage.getItem('hk_edit_mode_state') === 'edit' && !isScheduleModeEnabled) {
+      const _schedModeOn = (typeof isScheduleModeEnabled !== 'undefined' && isScheduleModeEnabled) || (localStorage.getItem('hk_schedule_mode_enabled') === '1');
+      if (localStorage.getItem('hk_edit_mode_state') === 'edit' && !_schedModeOn) {
         setEditModeState(true, false);
-      } else if (isScheduleModeEnabled) {
+      } else if (_schedModeOn) {
         setEditModeState(false, false);
       }
       renderMonthGrid();
@@ -25456,6 +26437,7 @@ function setupYearOverviewToggle() {
       let delPressTimer = null;
       let delLongPressTimer = null;
       let delAutoDismissTimer = null;
+      let suppressNextCellClick = false;
 
       calEl.addEventListener('touchstart', (e) => {
         if (!e.touches || e.touches.length !== 1) return;
@@ -25467,6 +26449,7 @@ function setupYearOverviewToggle() {
         delStartX = e.touches[0].clientX;
         delStartY = e.touches[0].clientY;
         isTouchScrolling = false;
+        suppressNextCellClick = false;
 
         clearTimeout(delPressTimer);
         clearTimeout(delLongPressTimer);
@@ -25480,11 +26463,24 @@ function setupYearOverviewToggle() {
 
         delLongPressTimer = setTimeout(() => {
           if (!isTouchScrolling) {
-            toggleDayLock(dateStr);
+            suppressNextCellClick = true;
             hideDayTooltip();
+            if (!isEditMode) {
+              enterWriteLeaveFromLongPress(dateStr);
+            } else {
+              toggleDayLock(dateStr);
+            }
           }
-        }, 750);
+        }, isEditMode ? 750 : 500);
       }, { passive: true });
+
+      calEl.addEventListener('click', (e) => {
+        if (suppressNextCellClick) {
+          suppressNextCellClick = false;
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      }, true);
 
       calEl.addEventListener('touchmove', (e) => {
         if (!e.touches || e.touches.length !== 1) return;
@@ -26983,9 +27979,7 @@ function setupYearOverviewToggle() {
                 const basePart = currentVal.split(' ')[0];
                 input.value = basePart + ' ' + suffix;
               }
-            } else if (false) {
-              const basePart = currentVal.split(/\s+/)[0];
-              input.value = basePart + ' ' + suffix;
+
             } else {
               input.value = suffix;
             }
@@ -30651,30 +31645,7 @@ function setupYearOverviewToggle() {
           loadLocalFirst();
           renderMonthGrid();
           updateDashboard();
-                // === v4.3.9 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
-      try {
-        if (tripBookings && Object.keys(tripBookings).length > 0) {
-          const bookingKeys = Object.keys(tripBookings).sort();
-          for (let i = bookingKeys.length - 1; i >= 0; i--) {
-            const b = tripBookings[bookingKeys[i]];
-            if (b && (b.hotelAddress || b.hotelName)) {
-              window.lastKnownStayLocation = {
-                name: b.hotelName || '',
-                address: b.hotelAddress || '',
-                query: buildCardMapQuery(b.hotelName, b.hotelAddress)
-              };
-              console.log('[v4.3.9 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
-              break;
-            }
-          }
-        }
-      } catch (err) {
-        console.warn('Location preload error:', err);
-      }
-      checkRoomSecurityAndConnect();
-      initTopApplyLeaveBar();
-      initDrawerMenu();
-      initFloatingLeaveBar();
+          
           document.getElementById('modalMobileSync').classList.add('hidden');
         }
       };
@@ -30697,30 +31668,7 @@ function setupYearOverviewToggle() {
             loadLocalFirst();
             renderMonthGrid();
             updateDashboard();
-                  // === v4.3.9 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
-      try {
-        if (tripBookings && Object.keys(tripBookings).length > 0) {
-          const bookingKeys = Object.keys(tripBookings).sort();
-          for (let i = bookingKeys.length - 1; i >= 0; i--) {
-            const b = tripBookings[bookingKeys[i]];
-            if (b && (b.hotelAddress || b.hotelName)) {
-              window.lastKnownStayLocation = {
-                name: b.hotelName || '',
-                address: b.hotelAddress || '',
-                query: buildCardMapQuery(b.hotelName, b.hotelAddress)
-              };
-              console.log('[v4.3.9 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
-              break;
-            }
-          }
-        }
-      } catch (err) {
-        console.warn('Location preload error:', err);
-      }
-      checkRoomSecurityAndConnect();
-      initTopApplyLeaveBar();
-      initDrawerMenu();
-      initFloatingLeaveBar();
+            
           }
         };
       }
@@ -30804,30 +31752,7 @@ function setupYearOverviewToggle() {
             clearThrottle(currentRoom);
             closeResetPinModal();
             showToast(`🎉 同步代碼【${currentRoom}】密碼已清除！將重新進入首次啟用流程。`);
-                  // === v4.3.9 網頁載入時自動預測與還原最新輸入物業地址與定位終點 ===
-      try {
-        if (tripBookings && Object.keys(tripBookings).length > 0) {
-          const bookingKeys = Object.keys(tripBookings).sort();
-          for (let i = bookingKeys.length - 1; i >= 0; i--) {
-            const b = tripBookings[bookingKeys[i]];
-            if (b && (b.hotelAddress || b.hotelName)) {
-              window.lastKnownStayLocation = {
-                name: b.hotelName || '',
-                address: b.hotelAddress || '',
-                query: buildCardMapQuery(b.hotelName, b.hotelAddress)
-              };
-              console.log('[v4.3.9 Location Preload] 成功預測定位終點:', window.lastKnownStayLocation.query);
-              break;
-            }
-          }
-        }
-      } catch (err) {
-        console.warn('Location preload error:', err);
-      }
-      checkRoomSecurityAndConnect();
-      initTopApplyLeaveBar();
-      initDrawerMenu();
-      initFloatingLeaveBar();
+            
           });
         } else {
           err.textContent = '❌ 安全金鑰錯誤！操作已被拒絕。';
@@ -41129,7 +42054,7 @@ function setupYearOverviewToggle() {
               <i class="fa-solid fa-clock-rotate-left text-sky-600 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-extrabold text-slate-800 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v6.8.1</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.1.5</span>
           </button>
         </div>
 
@@ -41993,6 +42918,160 @@ function setupYearOverviewToggle() {
       };
       syncScheduleModeUI();
     })();
+  
+    // 圖示中文名稱提示字級控制（標準 std / 放大 lg / 特大 xl，預設即為「放大」）
+    window.setIconLabelScale = function(mode) {
+      const valid = ['std', 'lg', 'xl'].includes(mode) ? mode : 'lg';
+      const root = document.documentElement;
+      root.classList.remove('icon-label-lg', 'icon-label-xl');
+      if (valid === 'lg') root.classList.add('icon-label-lg');
+      if (valid === 'xl') root.classList.add('icon-label-xl');
+      try { localStorage.setItem('hk_leave_icon_label_scale_v1', valid); } catch (e) {}
+
+      const statusEl = document.getElementById('iconLabelScaleStatusText');
+      if (statusEl) {
+        statusEl.textContent = valid === 'xl' ? '特大' : (valid === 'lg' ? '放大' : '標準');
+      }
+      const btnMap = {
+        std: document.getElementById('btnIconScaleStd'),
+        lg: document.getElementById('btnIconScaleLg'),
+        xl: document.getElementById('btnIconScaleXl')
+      };
+      Object.entries(btnMap).forEach(([k, b]) => {
+        if (!b) return;
+        const active = (k === valid);
+        b.classList.toggle('bg-white', active);
+        b.classList.toggle('text-blue-700', active);
+        b.classList.toggle('shadow-2xs', active);
+        b.classList.toggle('text-slate-600', !active);
+      });
+    };
+    (function initIconLabelScale() {
+      let saved = 'lg';
+      try {
+        const v = localStorage.getItem('hk_leave_icon_label_scale_v1');
+        if (v && ['std', 'lg', 'xl'].includes(v)) saved = v;
+      } catch (e) {}
+      window.setIconLabelScale(saved);
+    })();
+
+    // 全域所有純圖示按鍵指向即時顯示中文名稱（涵蓋電腦與手機端所有 icon-only 按鈕）
+    (function initUniversalIconAdjacentLabels() {
+      const badge = document.getElementById('universalIconAdjacentBadge');
+      if (!badge || badge.dataset.bound === '1') return;
+      badge.dataset.bound = '1';
+
+      const ID_LABELS = {
+        btnOpenDrawerMenu: '系統設定',
+        btnOverviewDrawerOpen: '系統設定',
+        btnClearAll: '單日清除',
+        btnToggleGlobalLock: '鎖定／編輯',
+        btnCloseTopBarApplyLeave: '收起面板',
+        btnCloseTopInlineRefPanel: '收起面板',
+        btnInlineAssistantScaleToggle: '切換全屏／半屏',
+        btnStepCloseInlineAssistant: '分階收起',
+        btnMobileRibbonExpandStage2: '展開全開／橫條',
+        btnMobileRibbonStepClose: '分階收起',
+        mobileStage2RestoreCalBtn: '展開月曆',
+        btnToggleInsideDateSearch: '直達指定日子',
+        btnScrollToTopFloating: '返回頂部'
+      };
+
+      let hideTimer = null;
+
+      function resolveIconButtonLabel(btn) {
+        if (!btn) return '';
+        // 頂部手機圓波軌道已有專屬左側中文膠囊 `#mobileCapsuleLeftLabel`，避免重複
+        if (btn.closest('#yearHeaderRow > div.flex.md\\:hidden')) return '';
+        // 已有明顯可見中文文字的按鈕不需重複浮標
+        const visibleText = (btn.innerText || '').trim();
+        if (visibleText && /[一-龥]/.test(visibleText)) return '';
+
+        if (btn.dataset && btn.dataset.pillLabel) return btn.dataset.pillLabel;
+        if (btn.id && ID_LABELS[btn.id]) return ID_LABELS[btn.id];
+        if (btn.classList.contains('btn-month-gear')) return '本月例休設定';
+        if (btn.classList.contains('btn-quota-gear')) return '修改年度配額';
+        if (btn.classList.contains('trip-morph-dots-btn')) return '旅程選項';
+        if (btn.classList.contains('radar-morph-main-btn')) return '航班雷達追蹤';
+
+        const aria = (btn.getAttribute('aria-label') || btn.getAttribute('title') || '').trim();
+        if (aria) {
+          return aria.split(/[（(·]/)[0].trim();
+        }
+        return '';
+      }
+
+      function showBadgeBeside(btn) {
+        const label = resolveIconButtonLabel(btn);
+        if (!label) {
+          badge.classList.add('hidden');
+          return;
+        }
+        clearTimeout(hideTimer);
+        badge.textContent = label;
+        badge.classList.remove('hidden');
+
+        const rect = btn.getBoundingClientRect();
+        const bRect = badge.getBoundingClientRect();
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+
+        // 優先顯示在按鈕左側（若左側空間不足則顯示在右側）
+        let left = rect.left - bRect.width - 8;
+        if (left < 8) {
+          left = Math.min(vw - bRect.width - 8, rect.right + 8);
+        }
+        let top = rect.top + (rect.height - bRect.height) / 2;
+        top = Math.max(8, Math.min(vh - bRect.height - 8, top));
+
+        badge.style.left = `${Math.round(left)}px`;
+        badge.style.top = `${Math.round(top)}px`;
+      }
+
+      function hideBadgeSoon(delay = 0) {
+        clearTimeout(hideTimer);
+        if (delay <= 0) {
+          badge.classList.add('hidden');
+        } else {
+          hideTimer = setTimeout(() => badge.classList.add('hidden'), delay);
+        }
+      }
+
+      document.addEventListener('pointerover', (e) => {
+        if (e.pointerType === 'touch') return;
+        const btn = e.target.closest('button, label[aria-label]');
+        if (btn) showBadgeBeside(btn);
+        else hideBadgeSoon(0);
+      });
+
+      document.addEventListener('pointerout', (e) => {
+        if (e.pointerType === 'touch') return;
+        const btn = e.target.closest('button, label[aria-label]');
+        if (btn && (!e.relatedTarget || !btn.contains(e.relatedTarget))) {
+          hideBadgeSoon(0);
+        }
+      });
+
+      // 手機觸控長按或滑過任何純圖示按鍵亦即時於旁邊顯示中文名
+      let touchPreviewTimer = null;
+      document.addEventListener('touchstart', (e) => {
+        const btn = e.target.closest('button, label[aria-label]');
+        clearTimeout(touchPreviewTimer);
+        if (!btn) {
+          hideBadgeSoon(0);
+          return;
+        }
+        touchPreviewTimer = setTimeout(() => {
+          showBadgeBeside(btn);
+          hideBadgeSoon(1500);
+        }, 160);
+      }, { passive: true });
+
+      document.addEventListener('touchend', () => {
+        clearTimeout(touchPreviewTimer);
+      }, { passive: true });
+    })();
+
   </script>
 
   <!-- Firebase 雲端活規則庫：全模組即時熱修與跨裝置同步彈窗（涵蓋出行須知＋城市指南全部 6 大缺口） -->
@@ -42136,4 +43215,30 @@ function setupYearOverviewToggle() {
       </div>
     </div>
   </div>
-</body>
+</body        <!-- 區塊：圖示中文名稱字級調整（標準 / 放大 / 特大） -->
+        <div class="p-4 space-y-2.5 text-xs bg-white">
+          <div class="flex items-center justify-between">
+            <span class="flex items-center gap-2 font-extrabold text-slate-800 text-[13px]">
+              <i class="fa-solid fa-text-height text-sky-600 text-sm w-4 text-center"></i>
+              <span>圖示中文提示字級</span>
+            </span>
+            <span id="iconLabelScaleStatusText" class="text-[10.5px] font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200">放大</span>
+          </div>
+          <p class="text-[11px] text-slate-500 leading-relaxed">調整指住或長按任何純圖示按鍵時，旁邊彈出的中文名稱大細。</p>
+          <div class="grid grid-cols-3 gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200/80">
+            <button type="button" id="btnIconScaleStd" onclick="setIconLabelScale('std')"
+                    class="py-1.5 px-2 rounded-lg text-[11.5px] font-bold text-slate-600 hover:text-slate-900 transition cursor-pointer">
+              標準
+            </button>
+            <button type="button" id="btnIconScaleLg" onclick="setIconLabelScale('lg')"
+                    class="py-1.5 px-2 rounded-lg text-[12px] font-extrabold bg-white text-blue-700 shadow-2xs transition cursor-pointer">
+              放大
+            </button>
+            <button type="button" id="btnIconScaleXl" onclick="setIconLabelScale('xl')"
+                    class="py-1.5 px-2 rounded-lg text-[12.5px] font-black text-slate-600 hover:text-slate-900 transition cursor-pointer">
+              特大
+            </button>
+          </div>
+        </div>
+
+>
