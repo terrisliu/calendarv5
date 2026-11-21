@@ -276,7 +276,7 @@
       box-shadow: inset 3px 0 0 #9333ea;
     }
 
-    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.3.4) === */
+    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.3.7) === */
     @media (max-width: 767px) {
       /* 2027 年份與萬年曆切換掣長期常駐顯示於左側，任何頁面／模式皆不消失 */
       #mainYearSwitcher {
@@ -1343,6 +1343,14 @@
       justify-content: center;
       overflow: hidden !important; /* 統一切割上下半天色塊，維持方形 */
     }
+    .cell-bg-slots {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
     .calendar-cell:hover {
       transform: translateY(-1.5px) scale(1.03);
       box-shadow: 0 6px 16px -2px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.95);
@@ -1443,17 +1451,7 @@
     .custom-scroll::-webkit-scrollbar-track { background: transparent; }
     .custom-scroll::-webkit-scrollbar-thumb { background-color: rgba(203, 213, 225, 0.7); border-radius: 9999px; }
 
-    /* 總覽指示點：右上角微型小點 */
-    body.year-overview-mode .lock-badge {
-      display: block !important;
-      font-size: 0 !important;
-      width: 3.5px !important;
-      height: 3.5px !important;
-      background-color: #f59e0b !important;
-      border-radius: 9999px !important;
-      top: 1.5px !important;
-      right: 1.5px !important;
-    }
+    /* 全年曆覽模式下不顯示鎖標記 */
 
     /* 循環編輯暫存狀態樣式 */
     @keyframes cell-flash-pulse {
@@ -1566,10 +1564,10 @@
     body.year-overview-mode #calendarContainer {
       display: grid !important;
       grid-template-columns: repeat(3, 1fr) !important;
-      column-gap: 6px !important;
-      row-gap: 6px !important;
+      column-gap: 5px !important;
+      row-gap: 4.5px !important;
       width: 100% !important;
-      padding: 6px 6px 28px 6px !important;
+      padding: 4px 5px 12px 5px !important;
       transform-origin: top center;
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform;
@@ -1577,26 +1575,30 @@
     }
 
     body.year-overview-mode .month-card { 
-      padding: 6px 5px !important; 
-      border-radius: 12px !important; 
+      padding: 3px 4px 4px 4px !important; 
+      border-radius: 10px !important; 
       border: 1px solid rgba(226, 232, 240, 0.9) !important; 
-      box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important; 
+      box-shadow: 0 1.5px 4px -1px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important; 
       background: rgba(255, 255, 255, 0.96) !important;
       content-visibility: visible !important;
     }
     body.year-overview-mode .month-header-title { 
-      border-bottom: 1px solid rgba(226, 232, 240, 0.6) !important;
-      margin-bottom: 3px !important; 
-      padding-bottom: 2px !important;
-      padding-left: 2px !important;
-      padding-right: 2px !important;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.55) !important;
+      margin-bottom: 1.5px !important; 
+      padding-bottom: 1px !important;
+      padding-top: 0 !important;
+      padding-left: 1.5px !important;
+      padding-right: 1.5px !important;
+      min-height: 13px !important;
+      line-height: 1 !important;
       display: flex !important;
       align-items: center !important;
       justify-content: space-between !important;
     }
     body.year-overview-mode .month-header-title .month-title-main { 
-      font-size: 0.75rem !important; 
-      font-weight: 800 !important; 
+      font-size: 0.66rem !important; 
+      font-weight: 850 !important; 
+      line-height: 1 !important;
       color: #0f172a !important;
       letter-spacing: -0.02em !important;
     }
@@ -1662,6 +1664,9 @@
     body.year-overview-mode .month-header-title .month-title-year { 
       display: inline !important; 
       font-size: 7px !important;
+      padding: 0 !important;
+      margin-right: 0 !important;
+      pointer-events: none !important;
       color: rgba(148, 163, 184, 0.55) !important;
       font-family: "Outfit", "Plus Jakarta Sans", sans-serif !important;
       letter-spacing: 0.04em !important;
@@ -1672,21 +1677,23 @@
       gap: 3px !important;
     }
     body.year-overview-mode .weekdays-header { 
-      font-size: 8px !important; 
+      font-size: 7px !important; 
+      line-height: 1 !important;
       color: #0f172a !important;
-      margin-bottom: 3px !important; 
+      margin-bottom: 1.5px !important; 
       font-weight: 800 !important;
     }
     body.year-overview-mode .month-grid-days { 
-      gap: 2.5px !important; 
+      gap: 2px !important; 
     }
     body.year-overview-mode .calendar-cell { 
       height: auto !important; 
       aspect-ratio: 1 / 1 !important;
       border: 1px solid rgba(226, 232, 240, 0.55) !important; 
       background-color: rgba(255, 255, 255, 0.8) !important;
-      border-radius: 7.5px !important; /* 手機年曆全覽微縮亦溫潤圓角，如精緻按鍵 */
-      overflow: hidden !important;
+      border-radius: 6.5px !important; /* 手機年曆全覽微縮亦溫潤圓角，如精緻按鍵 */
+      contain: layout style !important;
+      overflow: visible !important;
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), inset 0 0.5px 0 rgba(255, 255, 255, 0.9) !important;
       cursor: pointer;
     }
@@ -1929,23 +1936,27 @@
     }
     body.year-overview-mode .span-badge-pill {
       display: inline-flex !important;
-      bottom: 1px !important;
-      right: 1px !important;
-      height: 10px !important;
-      min-width: 10px !important;
-      font-size: 7px !important;
-      padding: 0 2px !important;
-      border-radius: 2.5px !important;
-      box-shadow: 0 0 0 0.8px rgba(255, 255, 255, 0.95) !important;
+      bottom: -4px !important;
+      right: -2.5px !important;
+      height: auto !important;
+      min-width: auto !important;
+      font-size: 7.5px !important;
+      font-weight: 950 !important;
+      line-height: 1 !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: #1e3a8a !important;
+      text-shadow: 0 0 2px rgba(255, 255, 255, 0.98), 0 0 1px rgba(255, 255, 255, 1) !important;
       animation: none !important;
     }
     @media (min-width: 768px) {
       body.year-overview-mode .span-badge-pill {
-        height: 12px !important;
-        min-width: 12px !important;
-        font-size: 8px !important;
-        padding: 0 2.5px !important;
-        border-radius: 3px !important;
+        bottom: -4.5px !important;
+        right: -3px !important;
+        font-size: 9px !important;
       }
     }
 
@@ -2095,23 +2106,12 @@
       display: none;
     }
 
-    /* 僅在 iPad 橫向三欄緊湊尺寸（小卡片小於 280px）時隱藏鎖標記；年曆全覽保留精巧鎖頭 */
+    /* iPad 橫向三欄緊湊尺寸及全年曆覽模式下隱藏鎖頭，普通月曆視圖照常顯示 */
     body.cal-compact .lock-indicator,
-    body.cal-compact .lock-badge {
+    body.cal-compact .lock-badge,
+    body.year-overview-mode .lock-indicator,
+    body.year-overview-mode .lock-badge {
       display: none !important;
-    }
-    body.year-overview-mode .lock-indicator {
-      display: flex !important;
-      top: 1px !important;
-      right: 1.5px !important;
-    }
-    body.year-overview-mode .lock-indicator .lock-icon {
-      font-size: 6.5px !important;
-    }
-    @media (min-width: 768px) {
-      body.year-overview-mode .lock-indicator .lock-icon {
-        font-size: 8.5px !important;
-      }
     }
 
     /* 電腦大螢幕、平板雙欄及手機單欄：寬敞大格明確認證顯示金色鎖頭 */
@@ -3409,22 +3409,24 @@
       letter-spacing: -0.02em;
     }
     body.year-overview-mode .day-memo-dots {
-      bottom: 1.5px;
-      left: 2px;
-      gap: 1px;
+      bottom: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 1.5px;
+      z-index: 24;
     }
-    body.year-overview-mode .day-memo-dot {
-      width: 4px;
-      height: 4px;
-      box-shadow: none;
-    }
+    body.year-overview-mode .day-memo-dot,
     body.year-overview-mode .day-memo-m-badge {
-      min-width: 8.5px;
-      height: 8.5px;
-      font-size: 6.5px;
-      padding: 0 1px;
-      border-radius: 2px;
-      box-shadow: none;
+      width: 3.5px;
+      height: 3.5px;
+      min-width: 3.5px;
+      height: 3.5px;
+      padding: 0;
+      font-size: 0;
+      line-height: 0;
+      overflow: hidden;
+      border-radius: 9999px;
+      box-shadow: 0 0 0 0.6px rgba(255, 255, 255, 0.95);
     }
     .apple-timeline-card {
       position: relative;
@@ -3443,7 +3445,7 @@
       letter-spacing: 0.045em !important;
     }
 
-    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.3.4） === */
+    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.3.7） === */
     @keyframes orbHaloBreathe {
       0%, 100% {
         opacity: 0.85;
@@ -3737,7 +3739,7 @@
                 </button>
               </div>
 
-              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.3.4) -->
+              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.3.7) -->
               <div class="flex md:hidden items-center gap-1 min-w-0">
                 <!-- 左側即時實色身份膠囊（僅於進入某個功能板塊時顯示對應實色＋白字；選單展開未選前隱藏不干擾） -->
                 <button type="button" id="mobileCapsuleLeftLabel" onclick="triggerPinnedMobileAction()" aria-label="目前功能名稱">登記寫假</button>
@@ -4671,7 +4673,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v7.3.4</span>
+      <span>v7.3.7</span>
     </button>
   </footer>
 
@@ -4829,7 +4831,7 @@
           <div>
             <h3 class="font-black text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.3.4</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.3.7</span>
             </h3>
           </div>
         </div>
@@ -4839,9 +4841,31 @@
       </div>
 
       <div class="p-4 overflow-y-auto custom-scroll space-y-3.5 text-xs">
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.3.7（月曆右上角灰色年份一按直入「年曆全覽」＋ 焦點月份微光定位）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>月曆右上角年份快捷入口</b>：喺任何月份卡片右上角直接輕觸銀灰色年份（例如 <code>2027</code>），無需拉返上頂部即刻流暢縮放進入「年曆全覽」。</li>
+            <li><b>擴大隱形觸控區與焦點月份提示</b>：保持原本極簡銀灰視覺大細，但加大手指觸控範圍；縮入全覽時更會自動以你剛才瀏覽緊嗰個月為中心縮放，並亮起柔和微光提示。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-800 text-xs">v7.3.7（全年曆覽專屬外緣純標誌與隱藏鎖頭 · 主月曆還原原本徽章設計）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>僅限「全年曆覽」模式生效</b>：收窄每月標題行、連假右下角外緣純深藍數字、備注／行程下緣外側純色小圓點，以及隱藏鎖頭，全部僅套用於「全年曆覽」12 個月總覽畫面。</li>
+            <li><b>主月曆完整還原</b>：普通主月曆視圖完全回復原本嘅實心藍色連假小方格、格內左下角「M」備注／日程圓點及右上角金色鎖頭設計。</li>
+          </ul>
+        </div>
+
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.3.4（手機觸控防穿透隔離 ＋ 自動解鎖頁面滾動防卡死守衛）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.3.7（手機觸控防穿透隔離 ＋ 自動解鎖頁面滾動防卡死守衛）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4853,7 +4877,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.3.4（假期小方塊英文全名大細楷標題化 ＋ CL 預設全名 Casual Leave）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.3.7（假期小方塊英文全名大細楷標題化 ＋ CL 預設全名 Casual Leave）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4864,7 +4888,7 @@
 
         <div class="border-l-2 border-indigo-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v7.3.4（年曆全覽與單月視圖 FLIP 連續物理縮放過渡動畫）</span>
+            <span class="font-bold text-indigo-700 text-xs">v7.3.7（年曆全覽與單月視圖 FLIP 連續物理縮放過渡動畫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4875,7 +4899,7 @@
 
         <div class="border-l-2 border-blue-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.3.4（移除方塊右上角齒輪完整顯示英文全名 ＋ 數值全靠右垂直對齊）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.3.7（移除方塊右上角齒輪完整顯示英文全名 ＋ 數值全靠右垂直對齊）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4886,7 +4910,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.3.4（假期方塊同色系字體配搭 ＋ 柔和灰輔助標籤 ＋ 極淺灰齒輪精修）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.3.7（假期方塊同色系字體配搭 ＋ 柔和灰輔助標籤 ＋ 極淺灰齒輪精修）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4897,7 +4921,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.3.4（假期方塊全平台統一尺寸 ＋ 輪休模式右上角齒輪同步 ＋ 主題色實線外框與側邊浮光）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.3.7（假期方塊全平台統一尺寸 ＋ 輪休模式右上角齒輪同步 ＋ 主題色實線外框與側邊浮光）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4909,7 +4933,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.3.4（精簡淺色填滿年度配額卡片 ＋ 機票順序黃色提醒修正 ＋ 全檔文字校對清理）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.3.7（精簡淺色填滿年度配額卡片 ＋ 機票順序黃色提醒修正 ＋ 全檔文字校對清理）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5259,7 +5283,7 @@
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
             <li>移除額外佔位說明橫條，將「跨週長假·全用AL / 四季放鬆·留備用 / 請1-2日·輕巧快閃」直接內嵌於頂部三個方案膠囊內，完全不影響原有版面高度。</li>
-            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.3.4</code>（移除 beta 字樣）。</li>
+            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.3.7</code>（移除 beta 字樣）。</li>
           </ul>
         </div>
 
@@ -19214,7 +19238,8 @@
             </div>
             <div class="month-header-right flex items-center gap-1.5 shrink-0">
               ${gearBtnHtml}
-              <span class="month-title-year text-[10.5px] md:text-[11px] font-semibold tracking-[0.06em] select-none">${selectedYear}</span>
+              <button type="button" onclick="event.stopPropagation(); handleMonthCardYearClick(${m});" aria-label="切換至${selectedYear}年曆全覽（聚焦${m + 1}月）"
+                      class="month-title-year text-[10.5px] md:text-[11px] font-semibold tracking-[0.06em] select-none px-1.5 py-0.5 -mr-1 rounded-md hover:text-blue-600 hover:bg-blue-50/80 active:scale-95 transition cursor-pointer">${selectedYear}</button>
             </div>
           </div>
           <div class="weekdays-header grid grid-cols-7 gap-1 sm:gap-1.5 text-center text-[11px] sm:text-xs font-extrabold text-slate-900 mb-1.5">
@@ -19330,10 +19355,12 @@
           const dayDotHtml = (typeof getDayMemoDotsHtml === 'function') ? getDayMemoDotsHtml(dateStr) : '';
           html += `
             <div class="calendar-cell border rounded ${baseBg} ${isPending}" data-date="${dateStr}">
+              <div class="cell-bg-slots">
+                <div class="half-slot slot-am ${amClass}"></div>
+                <div class="half-slot slot-pm ${pmClass}"></div>
+              </div>
               ${phBadgeHtml}
               ${lockBadge}
-              <div class="half-slot slot-am ${amClass}"></div>
-              <div class="half-slot slot-pm ${pmClass}"></div>
               <span class="day-number ${numColor}">${d}</span>
               ${dayDotHtml}
               ${spanRailHtml}
@@ -23614,6 +23641,26 @@
       });
       return bestIdx;
     }
+
+    function handleMonthCardYearClick(monthIdx) {
+      if (document.body.classList.contains('year-overview-mode')) return;
+      if (typeof closeTopInlineRefPanel === 'function') closeTopInlineRefPanel();
+      if (typeof closeTopInlineAssistantPanel === 'function') closeTopInlineAssistantPanel();
+      const applyBar = document.getElementById('topApplyLeavePopupBar');
+      if (applyBar && !applyBar.classList.contains('hidden')) applyBar.classList.add('hidden');
+      toggleYearOverview(true, monthIdx, 1);
+      requestAnimationFrame(() => {
+        const cards = document.querySelectorAll('#calendarContainer .month-card');
+        const target = cards[monthIdx];
+        if (target) {
+          target.classList.remove('cell-target-highlight');
+          void target.offsetWidth;
+          target.classList.add('cell-target-highlight');
+          setTimeout(() => target.classList.remove('cell-target-highlight'), 1400);
+        }
+      });
+    }
+    window.handleMonthCardYearClick = handleMonthCardYearClick;
 
     function toggleYearOverview(forceState = null, focusMonthIdx = null, fromPinchScale = 1) {
       const isOverview = document.body.classList.contains('year-overview-mode');
@@ -43101,7 +43148,7 @@ function setEditModeState(newState, notifyToast = true) {
               <i class="fa-solid fa-clock-rotate-left text-sky-600 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-extrabold text-slate-800 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.3.4</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.3.7</span>
           </button>
         </div>
 
