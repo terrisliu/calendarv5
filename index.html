@@ -276,7 +276,7 @@
       box-shadow: inset 3px 0 0 #9333ea;
     }
 
-    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.3.7) === */
+    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.4.2) === */
     @media (max-width: 767px) {
       /* 2027 年份與萬年曆切換掣長期常駐顯示於左側，任何頁面／模式皆不消失 */
       #mainYearSwitcher {
@@ -994,9 +994,9 @@
       color: #ffffff !important;
     }
 
-    /* === 彈性分割視圖 (Elastic Split-View · 全程吸頂永不頂走 v6.5.7) === */
-    @media (max-width: 1023px) {
-      /* 令 #leftSideColumn 喺手機/窄視窗下穿透為 contents，令 #stickyHeaderArea 同 #mobileCollapsedCalendarPill 直接依附整頁主容器 #mainContentLayout，即使碌到全頁最底亦 100% 吸頂固定、絕唔會頂走！ */
+    /* === 彈性分割視圖 (Elastic Split-View · 全程吸頂永不頂走 v7.4.2) === */
+    @media (max-width: 767px) {
+      /* 僅喺手機單欄 (<768px) 令 #leftSideColumn 穿透為 contents，避免影響 iPad 768px–1023px 雙欄網格！ */
       #leftSideColumn {
         display: contents !important;
       }
@@ -1971,6 +1971,25 @@
       display: inline-flex !important;
     }
 
+    /* iPad 平板視窗（768px–1279px）連動假期右下角改為純粹藍色數字（無藍底方框），徹底避免遮擋日期 */
+    @media (min-width: 768px) and (max-width: 1279px) {
+      body:not(.year-overview-mode) .span-badge-pill {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        color: #1d4ed8 !important;
+        font-size: 9.5px !important;
+        font-weight: 950 !important;
+        height: auto !important;
+        min-width: auto !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        bottom: 2px !important;
+        right: 3px !important;
+        text-shadow: 0 0 2.5px rgba(255, 255, 255, 0.98), 0 0 1px rgba(255, 255, 255, 1) !important;
+      }
+    }
+
     /* 電腦大螢幕（>= 1280px）時，連假微圓角小方塊進一步精緻收細，完全不干擾日期 */
     @media (min-width: 1280px) {
       body.cal-spacious .span-badge-pill {
@@ -1992,9 +2011,11 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
+    /* 年曆全覽模式下，連動假期底部橫線加幼至 1.4px，精緻不壓迫格仔 */
     body.year-overview-mode .span-rail {
-      height: 2.2px !important;
-      bottom: 0px !important;
+      height: 1.4px !important;
+      bottom: 0.5px !important;
+      box-shadow: none !important;
     }
 
     /* 高清年曆圖片輸出專用排版（強制 1080px 寬幅 4×3 網格，手機輸出亦擁有電腦級清晰標注） */
@@ -3445,7 +3466,7 @@
       letter-spacing: 0.045em !important;
     }
 
-    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.3.7） === */
+    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.4.2） === */
     @keyframes orbHaloBreathe {
       0%, 100% {
         opacity: 0.85;
@@ -3575,6 +3596,388 @@
       }
     }
 
+
+
+    /* =========================================================================
+       【版面風格二：黑金午夜旗艦風 (Midnight Obsidian & Champagne · 固定架構純換膚 · v7.4.2)】
+       ========================================================================= */
+    body.theme-style-2 {
+      background-color: #090b10 !important;
+      background-image: radial-gradient(circle at 18% 12%, rgba(212, 175, 55, 0.14) 0%, transparent 44%),
+                        radial-gradient(circle at 84% 18%, rgba(56, 189, 248, 0.16) 0%, transparent 46%),
+                        linear-gradient(180deg, #0b0e15 0%, #111622 50%, #090b10 100%) !important;
+      background-attachment: fixed !important;
+      animation: none !important;
+      color: #f1f5f9 !important;
+    }
+    body.theme-style-2 #topHeader {
+      border-bottom-color: rgba(212, 175, 55, 0.28) !important;
+    }
+    body.theme-style-2 #topHeader h1 span {
+      color: #f8e5a0 !important;
+      letter-spacing: 0.01em !important;
+    }
+    body.theme-style-2 #btnOpenDrawerMenu {
+      background: rgba(22, 28, 42, 0.9) !important;
+      border-color: rgba(212, 175, 55, 0.45) !important;
+      color: #f3d27a !important;
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.18) !important;
+    }
+    body.theme-style-2 #stickyHeaderArea .glass-surface {
+      background: rgba(17, 22, 34, 0.86) !important;
+      backdrop-filter: blur(24px) saturate(160%) !important;
+      border: 1px solid rgba(212, 175, 55, 0.36) !important;
+      box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(248, 229, 160, 0.18) !important;
+    }
+    body.theme-style-2 #btnOpenMainYearPopover,
+    body.theme-style-2 #mainYearDisplayText,
+    body.theme-style-2 #overviewYearDisplayText {
+      color: #f8e5a0 !important;
+      text-shadow: 0 0 14px rgba(212, 175, 55, 0.32) !important;
+    }
+    body.theme-style-2 #btnOpenMainYearPopover:hover {
+      background-color: rgba(212, 175, 55, 0.14) !important;
+    }
+    body.theme-style-2 #btnToggleMainApplyBar,
+    body.theme-style-2 #btnAutoGenerateTrip {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+      border: 1px solid rgba(212, 175, 55, 0.55) !important;
+      color: #f8e5a0 !important;
+      box-shadow: 0 4px 16px -2px rgba(212, 175, 55, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+    }
+    body.theme-style-2 #btnToggleYearView {
+      background: rgba(15, 23, 42, 0.9) !important;
+      border: 1px solid rgba(56, 189, 248, 0.55) !important;
+      color: #7dd3fc !important;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.2) !important;
+    }
+    body.theme-style-2 #btnClearAll,
+    body.theme-style-2 #btnToggleGlobalLock {
+      background: rgba(22, 28, 42, 0.92) !important;
+      border-color: rgba(212, 175, 55, 0.35) !important;
+      color: #f3d27a !important;
+    }
+    @media (max-width: 767px) {
+      body.theme-style-2 #mobileContextYearOverviewBtn,
+      body.theme-style-2 #mobileContextHomeReturnBtn,
+      body.theme-style-2 #mobileStage2RestoreCalBtn,
+      body.theme-style-2 #btnToggleMobileToolbar {
+        background: linear-gradient(145deg, #1e2638 0%, #0f1420 100%) !important;
+        border: 1.5px solid rgba(212, 175, 55, 0.65) !important;
+        color: #f8e5a0 !important;
+        box-shadow: 0 0 12px rgba(212, 175, 55, 0.28) !important;
+      }
+      body.theme-style-2 #btnToggleMobileToolbar .mobile-orb-icon {
+        color: #f8e5a0 !important;
+      }
+      body.theme-style-2 #btnToggleMobileTripRibbon:not(.is-active):not(.is-active-item) {
+        background: rgba(15, 23, 42, 0.92) !important;
+        border: 1.5px solid rgba(56, 189, 248, 0.65) !important;
+        color: #38bdf8 !important;
+        box-shadow: 0 0 12px rgba(56, 189, 248, 0.25) !important;
+      }
+      body.theme-style-2 #mobileTopTripRibbon > div {
+        background: rgba(15, 20, 32, 0.96) !important;
+        border: 1px solid rgba(212, 175, 55, 0.45) !important;
+        color: #f1f5f9 !important;
+      }
+      body.theme-style-2 #mobileRibbonHeaderBar {
+        background: rgba(22, 29, 46, 0.95) !important;
+        border-bottom-color: rgba(212, 175, 55, 0.25) !important;
+      }
+      body.theme-style-2 #mobileRibbonHeaderBar span.font-black.text-slate-800 {
+        color: #f8e5a0 !important;
+      }
+    }
+    /* 黑金午夜月曆卡片與發光日曆格仔 */
+    body.theme-style-2 .month-card {
+      background: rgba(17, 22, 34, 0.86) !important;
+      backdrop-filter: blur(20px) saturate(150%) !important;
+      border: 1px solid rgba(212, 175, 55, 0.26) !important;
+      box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(248, 229, 160, 0.12) !important;
+    }
+    body.theme-style-2 .month-card:hover {
+      border-color: rgba(56, 189, 248, 0.55) !important;
+      box-shadow: 0 14px 34px -6px rgba(56, 189, 248, 0.22), inset 0 1px 0 rgba(248, 229, 160, 0.2) !important;
+    }
+    body.theme-style-2 .month-header-title {
+      border-bottom-color: rgba(212, 175, 55, 0.22) !important;
+    }
+    body.theme-style-2 .month-title-main {
+      color: #f8e5a0 !important;
+    }
+    body.theme-style-2 .month-title-sub {
+      color: #38bdf8 !important;
+    }
+    body.theme-style-2 .month-title-year {
+      color: rgba(212, 175, 55, 0.45) !important;
+    }
+    body.theme-style-2 .weekdays-header {
+      color: #cbd5e1 !important;
+    }
+    body.theme-style-2 .calendar-cell {
+      background-color: rgba(26, 33, 50, 0.92) !important;
+      border-color: rgba(71, 85, 105, 0.55) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+    }
+    body.theme-style-2 .calendar-cell .day-number:not(.text-white):not(.holiday-ph-number):not(.roster-ph-number):not(.day-half-leave) {
+      color: #e2e8f0 !important;
+    }
+    body.theme-style-2 .calendar-cell.bg-pink-50\/80,
+    body.theme-style-2 .calendar-cell.special-sunday-holiday,
+    body.theme-style-2 .calendar-cell.bg-rose-50\/40 {
+      background-color: rgba(76, 29, 48, 0.62) !important;
+      border-color: rgba(244, 114, 182, 0.35) !important;
+    }
+    body.theme-style-2 .calendar-cell.cell-holiday-ph,
+    body.theme-style-2 .calendar-cell.bg-orange-50 {
+      background-color: rgba(120, 53, 15, 0.68) !important;
+      border-color: rgba(251, 191, 36, 0.55) !important;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.22) !important;
+    }
+    body.theme-style-2 .calendar-cell:hover {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.42) !important;
+    }
+    body.theme-style-2 .span-rail {
+      background: linear-gradient(90deg, #f59e0b, #38bdf8) !important;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.65) !important;
+    }
+    /* 右側面板與卡片：黑金磨砂玻璃 */
+    body.theme-style-2 #rightSidePanelCard.glass-surface,
+    body.theme-style-2 #topApplyLeavePopupBar {
+      background: rgba(15, 20, 32, 0.92) !important;
+      border: 1px solid rgba(212, 175, 55, 0.34) !important;
+      color: #f1f5f9 !important;
+    }
+    body.theme-style-2 #rightSidePanelCard > div:first-child {
+      background: rgba(22, 29, 46, 0.9) !important;
+      border-bottom-color: rgba(212, 175, 55, 0.25) !important;
+    }
+    body.theme-style-2 .trip-card {
+      background: rgba(23, 30, 46, 0.92) !important;
+      border: 1px solid rgba(212, 175, 55, 0.32) !important;
+      color: #f1f5f9 !important;
+    }
+    body.theme-style-2 .trip-card .text-slate-800,
+    body.theme-style-2 .trip-card .text-slate-900,
+    body.theme-style-2 .trip-city-title-text {
+      color: #f8e5a0 !important;
+    }
+    body.theme-style-2 .trip-card .text-slate-500,
+    body.theme-style-2 .trip-card .text-slate-600 {
+      color: #94a3b8 !important;
+    }
+    body.theme-style-2 #ganttTimelineBox {
+      background: rgba(22, 29, 46, 0.85) !important;
+      border-color: rgba(212, 175, 55, 0.25) !important;
+      color: #cbd5e1 !important;
+    }
+
+    /* =========================================================================
+       【版面風格三：日式和紙雜誌風 (Editorial Bento & Warm Paper · 固定架構純換膚 · v7.4.2)】
+       ========================================================================= */
+    body.theme-style-3 {
+      background-color: #f6f3eb !important;
+      background-image: radial-gradient(rgba(120, 113, 108, 0.08) 1px, transparent 0),
+                        linear-gradient(180deg, #faf7f0 0%, #f3efe4 100%) !important;
+      background-size: 18px 18px, 100% 100% !important;
+      background-attachment: scroll !important;
+      animation: none !important;
+      color: #1c1917 !important;
+    }
+    body.theme-style-3 #topHeader {
+      border-bottom: 1.5px solid #292524 !important;
+    }
+    body.theme-style-3 #topHeader h1 span {
+      color: #1c1917 !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.02em !important;
+    }
+    body.theme-style-3 #btnOpenDrawerMenu {
+      background: #fcfaf5 !important;
+      border: 1.25px solid #292524 !important;
+      color: #1c1917 !important;
+      border-radius: 8px !important;
+      box-shadow: 2px 2px 0 #292524 !important;
+    }
+    body.theme-style-3 #stickyHeaderArea .glass-surface {
+      background: #fcfaf5 !important;
+      backdrop-filter: none !important;
+      border: 1.25px solid #292524 !important;
+      border-radius: 12px !important;
+      box-shadow: 3px 3px 0 rgba(41, 37, 36, 0.14) !important;
+    }
+    /* 瑞士報刊大字年份排版 */
+    body.theme-style-3 #mainYearDisplayText,
+    body.theme-style-3 #overviewYearDisplayText {
+      font-family: "Outfit", "Plus Jakarta Sans", sans-serif !important;
+      font-weight: 950 !important;
+      letter-spacing: -0.04em !important;
+      color: #1c1917 !important;
+    }
+    body.theme-style-3 #btnToggleMainApplyBar {
+      background: #292524 !important;
+      border: 1.25px solid #1c1917 !important;
+      color: #faf7f0 !important;
+      border-radius: 8px !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3 #btnAutoGenerateTrip {
+      background: #6b7c59 !important;
+      border: 1.25px solid #292524 !important;
+      color: #fcfaf5 !important;
+      border-radius: 8px !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3 #btnToggleYearView {
+      background: #fcfaf5 !important;
+      border: 1.25px solid #292524 !important;
+      color: #1c1917 !important;
+      border-radius: 8px !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3 #btnClearAll,
+    body.theme-style-3 #btnToggleGlobalLock {
+      background: #fcfaf5 !important;
+      border: 1.25px solid #292524 !important;
+      color: #1c1917 !important;
+      border-radius: 8px !important;
+    }
+    @media (max-width: 767px) {
+      body.theme-style-3 #mobileContextYearOverviewBtn,
+      body.theme-style-3 #mobileContextHomeReturnBtn,
+      body.theme-style-3 #mobileStage2RestoreCalBtn,
+      body.theme-style-3 #btnToggleMobileToolbar,
+      body.theme-style-3 #btnToggleMobileTripRibbon:not(.is-active):not(.is-active-item) {
+        background: #fcfaf5 !important;
+        border: 1.25px solid #292524 !important;
+        color: #1c1917 !important;
+        box-shadow: 1.5px 1.5px 0 rgba(41, 37, 36, 0.22) !important;
+      }
+      body.theme-style-3 #btnToggleMobileToolbar .mobile-orb-icon {
+        color: #1c1917 !important;
+      }
+      body.theme-style-3 #mobileTopTripRibbon > div {
+        background: #fcfaf5 !important;
+        border: 1.25px solid #292524 !important;
+        border-radius: 12px !important;
+        box-shadow: 3px 3px 0 rgba(41, 37, 36, 0.16) !important;
+      }
+      body.theme-style-3 #mobileRibbonHeaderBar {
+        background: #f3efe4 !important;
+        border-bottom: 1px solid #292524 !important;
+      }
+    }
+    /* 日式和紙 Bento 卡片 ＋ 極細墨黑線框 ＋ 低飽和大地色標記 */
+    body.theme-style-3 .month-card {
+      background: #fcfaf5 !important;
+      backdrop-filter: none !important;
+      border: 1.25px solid #292524 !important;
+      border-radius: 10px !important;
+      box-shadow: 3px 3px 0 rgba(41, 37, 36, 0.12) !important;
+    }
+    body.theme-style-3 .month-card:hover {
+      transform: translate(-1px, -1px) !important;
+      box-shadow: 4px 4px 0 rgba(41, 37, 36, 0.22) !important;
+    }
+    body.theme-style-3 .month-header-title {
+      border-bottom: 1px solid #292524 !important;
+    }
+    body.theme-style-3 .month-title-main {
+      font-size: 1.05rem !important;
+      font-weight: 950 !important;
+      color: #1c1917 !important;
+    }
+    body.theme-style-3 .month-title-sub {
+      font-weight: 900 !important;
+      letter-spacing: 0.08em !important;
+      color: #57534e !important;
+    }
+    body.theme-style-3 .weekdays-header {
+      color: #292524 !important;
+      font-weight: 800 !important;
+    }
+    body.theme-style-3 .calendar-cell {
+      background-color: #faf7f0 !important;
+      border: 1px solid rgba(41, 37, 36, 0.32) !important;
+      border-radius: 5px !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3 .calendar-cell:hover {
+      border-color: #1c1917 !important;
+      background-color: #efe9dc !important;
+    }
+    /* 低飽和大地色假期標記（抹茶苔綠 / 陶土赤褐 / 靛藍染 / 枯山水砂金） */
+    body.theme-style-3 .leave-annual,
+    body.theme-style-3 .micro-bg-annual {
+      background: #4a6b82 !important;
+    }
+    body.theme-style-3 .leave-wb,
+    body.theme-style-3 .micro-bg-wb {
+      background: #7c6a82 !important;
+    }
+    body.theme-style-3 .leave-birthday,
+    body.theme-style-3 .micro-bg-birthday {
+      background: #6b7c59 !important;
+    }
+    body.theme-style-3 .leave-custom,
+    body.theme-style-3 .micro-bg-custom {
+      background: #b58348 !important;
+    }
+    body.theme-style-3 .leave-special,
+    body.theme-style-3 .micro-bg-special {
+      background: #78716c !important;
+    }
+    body.theme-style-3 .calendar-cell.cell-holiday-ph,
+    body.theme-style-3 .calendar-cell.bg-orange-50 {
+      background-color: #f3e5d0 !important;
+      border-color: #b45309 !important;
+    }
+    body.theme-style-3 .holiday-ph-number,
+    body.theme-style-3 .roster-ph-number {
+      color: #9a3412 !important;
+    }
+    body.theme-style-3 .calendar-cell.bg-pink-50\/80,
+    body.theme-style-3 .calendar-cell.special-sunday-holiday,
+    body.theme-style-3 .calendar-cell.bg-rose-50\/40 {
+      background-color: #f4e8e6 !important;
+      border-color: rgba(159, 18, 57, 0.28) !important;
+    }
+    body.theme-style-3 .span-rail {
+      background: #292524 !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3 .span-badge-pill {
+      background: #292524 !important;
+      color: #fcfaf5 !important;
+      border-radius: 3px !important;
+    }
+    /* 右側面板與旅行卡片：和紙刊物 Bento */
+    body.theme-style-3 #rightSidePanelCard.glass-surface,
+    body.theme-style-3 #topApplyLeavePopupBar {
+      background: #fcfaf5 !important;
+      backdrop-filter: none !important;
+      border: 1.25px solid #292524 !important;
+      border-radius: 12px !important;
+      box-shadow: 3px 3px 0 rgba(41, 37, 36, 0.14) !important;
+    }
+    body.theme-style-3 #rightSidePanelCard > div:first-child {
+      background: #f3efe4 !important;
+      border-bottom: 1.25px solid #292524 !important;
+    }
+    body.theme-style-3 .trip-card {
+      background: #fcfaf5 !important;
+      backdrop-filter: none !important;
+      border: 1.25px solid #292524 !important;
+      border-radius: 10px !important;
+      box-shadow: 2.5px 2.5px 0 rgba(41, 37, 36, 0.14) !important;
+    }
+    body.theme-style-3 #ganttTimelineBox {
+      background: #f3efe4 !important;
+      border: 1px solid #292524 !important;
+      border-radius: 8px !important;
+    }
 
   </style>
   <!-- Leaflet.js 開源免金鑰地圖庫 -->
@@ -3739,7 +4142,7 @@
                 </button>
               </div>
 
-              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.3.7) -->
+              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.4.2) -->
               <div class="flex md:hidden items-center gap-1 min-w-0">
                 <!-- 左側即時實色身份膠囊（僅於進入某個功能板塊時顯示對應實色＋白字；選單展開未選前隱藏不干擾） -->
                 <button type="button" id="mobileCapsuleLeftLabel" onclick="triggerPinnedMobileAction()" aria-label="目前功能名稱">登記寫假</button>
@@ -3850,19 +4253,19 @@
             </button>
 
             <!-- 第一行 2: 公眾假期 -->
-            <button id="btnHeaderHolidays" class="lg:hidden py-1.5 px-1 md:px-2.5 bg-white/90 hover:bg-orange-50/80 border border-slate-200/90 rounded-xl text-[11px] md:text-xs font-bold text-slate-700 hover:text-orange-700 flex items-center justify-center gap-1 transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer h-[34px] md:h-auto">
+            <button id="btnHeaderHolidays" class="md:hidden py-1.5 px-1 md:px-2.5 bg-white/90 hover:bg-orange-50/80 border border-slate-200/90 rounded-xl text-[11px] md:text-xs font-bold text-slate-700 hover:text-orange-700 flex items-center justify-center gap-1 transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer h-[34px] md:h-auto">
               <span class="text-orange-500 inline-flex items-center"><svg class="inline-block shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="17.40,12.00 14.96,13.22 15.82,15.82 13.22,14.96 12.00,17.40 10.78,14.96 8.18,15.82 9.04,13.22 6.60,12.00 9.04,10.78 8.18,8.18 10.78,9.04 12.00,6.60 13.22,9.04 15.82,8.18 14.96,10.78" fill="currentColor" stroke="currentColor" stroke-width="1.2"/><line x1="19.20" y1="12.00" x2="21.80" y2="12.00"/><line x1="17.09" y1="17.09" x2="18.93" y2="18.93"/><line x1="12.00" y1="19.20" x2="12.00" y2="21.80"/><line x1="6.91" y1="17.09" x2="5.07" y2="18.93"/><line x1="4.80" y1="12.00" x2="2.20" y2="12.00"/><line x1="6.91" y1="6.91" x2="5.07" y2="5.07"/><line x1="12.00" y1="4.80" x2="12.00" y2="2.20"/><line x1="17.09" y1="6.91" x2="18.93" y2="5.07"/></svg></span>
               <span class="truncate">公眾假期</span>
             </button>
 
             <!-- 第一行 3: 農曆節氣 -->
-            <button id="btnHeaderLunar" class="lg:hidden py-1.5 px-1 md:px-2.5 bg-white/90 hover:bg-purple-50/80 border border-slate-200/90 rounded-xl text-[11px] md:text-xs font-bold text-slate-700 hover:text-purple-700 flex items-center justify-center gap-1 transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer h-[34px] md:h-auto">
+            <button id="btnHeaderLunar" class="md:hidden py-1.5 px-1 md:px-2.5 bg-white/90 hover:bg-purple-50/80 border border-slate-200/90 rounded-xl text-[11px] md:text-xs font-bold text-slate-700 hover:text-purple-700 flex items-center justify-center gap-1 transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer h-[34px] md:h-auto">
               <i class="fa-solid fa-moon text-purple-600 text-[10px] md:text-[11px] shrink-0"></i>
               <span class="truncate">農曆節氣</span>
             </button>
 
             <!-- 第二行 1: 請假表 -->
-            <button id="btnHeaderLeaves" class="lg:hidden py-1.5 px-1 md:px-2.5 bg-white/90 hover:bg-blue-50/80 border border-slate-200/90 rounded-xl text-[11px] md:text-xs font-bold text-slate-700 hover:text-blue-700 flex items-center justify-center gap-1 transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer h-[34px] md:h-auto">
+            <button id="btnHeaderLeaves" class="md:hidden py-1.5 px-1 md:px-2.5 bg-white/90 hover:bg-blue-50/80 border border-slate-200/90 rounded-xl text-[11px] md:text-xs font-bold text-slate-700 hover:text-blue-700 flex items-center justify-center gap-1 transition-all duration-200 active:scale-95 shadow-2xs cursor-pointer h-[34px] md:h-auto">
               <i class="fa-solid fa-plane-departure text-blue-600 text-[10px] md:text-[11px] shrink-0"></i>
               <span class="truncate">假期規劃</span>
             </button>
@@ -4093,7 +4496,7 @@
       </div>
 
       <!-- 手機版專屬：原地生出之「假期助手」三層摺疊吸頂板塊（大字戰績看板 ＋ 清單／年曆雙視圖切換） -->
-      <div id="topInlineAssistantPanel" class="hidden lg:hidden flex flex-col bg-gradient-to-b from-amber-50/55 via-white/98 to-indigo-50/40 backdrop-blur-2xl border border-indigo-200/80 rounded-2xl p-2 mb-2 shadow-[0_14px_34px_-10px_rgba(79,70,229,0.14)] transition-all duration-200" style="height: calc(100dvh - 58px);">
+      <div id="topInlineAssistantPanel" class="hidden md:hidden flex flex-col bg-gradient-to-b from-amber-50/55 via-white/98 to-indigo-50/40 backdrop-blur-2xl border border-indigo-200/80 rounded-2xl p-2 mb-2 shadow-[0_14px_34px_-10px_rgba(79,70,229,0.14)] transition-all duration-200" style="height: calc(100dvh - 58px);">
         <!-- 頂列：3 大拼假方案（內嵌精簡副標）＋ 右上角雙箭嘴 -->
         <div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-indigo-100/90 gap-1.5 min-w-0 shrink-0">
           <div class="flex items-stretch gap-1 bg-indigo-50/85 p-0.5 rounded-xl flex-1 min-w-0 border border-indigo-100">
@@ -4215,7 +4618,7 @@
         
         <!-- 第 2 階「全開」專屬：吸頂固定於「2027 年份列」下方 —— 左側「純黑月份老虎機滾輪」＋ 中間「原色假期日子 1–30/31 連續履帶」＋ 右側素雅統一雙圓鈕！ -->
         <div id="mobileCollapsedCalendarPill" onclick="restoreFullCalendarFromStage2()" role="button" tabindex="0"
-             class="lg:hidden hidden w-full mb-1.5 rounded-2xl bg-white/96 backdrop-blur-xl border border-slate-200/95 shadow-[0_6px_18px_-6px_rgba(15,23,42,0.12)] flex-col overflow-hidden transition cursor-pointer select-none">
+             class="md:hidden hidden w-full mb-1.5 rounded-2xl bg-white/96 backdrop-blur-xl border border-slate-200/95 shadow-[0_6px_18px_-6px_rgba(15,23,42,0.12)] flex-col overflow-hidden transition cursor-pointer select-none">
           <div class="w-full px-2 py-1.5 flex items-center justify-between gap-2">
             <!-- 左側：月份老虎機 3D 垂直滾輪（純黑大字焦點，平實素雅） -->
             <div class="slot-drum-viewport" title="月份老虎機滾輪">
@@ -4233,7 +4636,7 @@
 
             <!-- 右側：素雅統一 26×26px 雙圓鈕（左：收窄橫條 ／ 右：彈返開月曆） -->
             <div class="mobile-right-orb-rail">
-              <button type="button" onclick="event.stopPropagation(); toggleMobileTripRibbonDrawer(3)" aria-label="收窄為橫條並顯示月曆"
+              <button type="button" onclick="event.stopPropagation(); applyMobileTripRibbonStage(1)" aria-label="縮回一小幅並顯示月曆"
                       class="w-[26px] h-[26px] rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-300/90 text-slate-600 inline-flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
                 <i class="fa-solid fa-down-left-and-up-right-to-center text-[9.5px]"></i>
               </button>
@@ -4246,9 +4649,9 @@
         </div>
 
         <!-- 手機版頂部：假期規劃四態彈性整合板塊（右上角固定雙圓鈕肌肉記憶：[⤢ 放大/縮窄] [⌃/✕ 收合] 與頂部 [✈] [⌄] 嚴格垂直對齊） -->
-        <div id="mobileTopTripRibbon" style="overflow-anchor: none;" class="lg:hidden hidden mb-1.5 is-pinned-sticky rounded-2xl transition-all duration-200">
+        <div id="mobileTopTripRibbon" style="overflow-anchor: none;" class="md:hidden hidden mb-1.5 is-pinned-sticky rounded-2xl transition-all duration-200">
           <div class="rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-md overflow-hidden">
-            <div id="mobileRibbonHeaderBar" onclick="if (mobileTripRibbonStage === 1) { toggleMobileTripRibbonDrawer(2); } else if (mobileTripRibbonStage === 3) { toggleMobileTripRibbonDrawer(1); }"
+            <div id="mobileRibbonHeaderBar" onclick="stepOpenMobileTripRibbon()"
                  class="px-2 py-1.5 bg-slate-50/95 border-b border-slate-100 flex items-center justify-between gap-2 select-none cursor-pointer">
               <div class="flex items-center gap-1.5 min-w-0 flex-1">
                 <span class="w-5 h-5 rounded-full bg-blue-600 text-white inline-flex items-center justify-center shrink-0 shadow-2xs">
@@ -4260,21 +4663,16 @@
                   <span id="mobileRibbonTripCount" class="font-black text-blue-600 tabular-nums">0</span>
                   <span>個旅程</span>
                 </span>
-                <span id="mobileRibbonStagePill" class="px-1.5 py-0.5 rounded-full bg-slate-200/80 text-slate-700 font-extrabold text-[9px] tracking-tight shrink-0">1/3 一小幅</span>
-                <button type="button" onclick="event.stopPropagation(); cycleIconAndCityFontScale()" aria-label="放大旅遊城市字體"
-                        class="px-1.5 py-0.5 rounded-full bg-white hover:bg-blue-50 border border-slate-300/90 text-[#0f2b63] font-extrabold text-[9.5px] shrink-0 shadow-2xs active:scale-90 transition cursor-pointer inline-flex items-center gap-0.5">
-                  <i class="fa-solid fa-text-height text-blue-600 text-[8.5px]"></i>
-                  <span class="city-font-scale-badge">放大</span>
-                </button>
+
                 <div id="mobileRibbonMiniTripPreview" class="hidden mobile-ribbon-marquee-viewport text-[10.5px] font-bold text-slate-600"></div>
               </div>
-              <!-- 右上角固定雙圓鈕（26×26px + gap-2，與頂部 [✈] [⌄] 嚴格垂直對齊肌肉記憶位） -->
+              <!-- 右上角固定雙圓鈕（左鈕：細 ➔ 中(一小幅) ➔ 大(全開)；右鈕：大 ➔ 中(一小幅) ➔ 細(走馬燈) ➔ 收埋） -->
               <div class="mobile-right-orb-rail">
-                <button type="button" id="btnMobileRibbonExpandStage2" onclick="event.stopPropagation(); toggleMobileTripRibbonDrawer(mobileTripRibbonStage === 2 ? 3 : 2)" aria-label="切換全開或窄身橫條"
+                <button type="button" id="btnMobileRibbonExpandStage2" onclick="event.stopPropagation(); stepExpandMobileTripRibbon()" aria-label="逐級展開假期規劃"
                         class="w-[26px] h-[26px] rounded-full bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-600 inline-flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
                   <i id="mobileRibbonExpandStage2Icon" class="fa-solid fa-up-right-and-down-left-from-center text-[9.5px]"></i>
                 </button>
-                <button type="button" id="btnMobileRibbonStepClose" onclick="event.stopPropagation(); stepCloseMobileTripRibbon()" aria-label="分階收起假期規劃"
+                <button type="button" id="btnMobileRibbonStepClose" onclick="event.stopPropagation(); stepCloseMobileTripRibbon()" aria-label="逐級收細假期規劃"
                         class="w-[26px] h-[26px] rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-500 hover:text-slate-700 inline-flex items-center justify-center shadow-2xs transition active:scale-90 cursor-pointer">
                   <i id="mobileRibbonStepCloseIcon" class="fa-solid fa-chevron-up text-[10px] text-slate-500"></i>
                 </button>
@@ -4356,7 +4754,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 md:gap-3" id="calendarContainer" style="overflow-anchor: none;"></div>
       </div>
 
-      <div id="rightSidePanel" class="md:col-span-5 xl:col-span-4 flex flex-col gap-4 mt-2 md:mt-0 min-w-0">
+      <div id="rightSidePanel" class="hidden md:flex md:col-span-5 xl:col-span-4 flex flex-col gap-4 mt-2 md:mt-0 min-w-0">
         <div id="rightSidePanelCard" class="glass-surface rounded-2xl flex flex-col h-[520px] md:h-full overflow-hidden shadow-sm transition-all duration-200">
           
           <div class="p-2 border-b border-slate-200 bg-slate-50 flex items-center justify-between gap-1">
@@ -4673,7 +5071,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v7.3.7</span>
+      <span>v7.4.2</span>
     </button>
   </footer>
 
@@ -4831,7 +5229,7 @@
           <div>
             <h3 class="font-black text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.3.7</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.4.2</span>
             </h3>
           </div>
         </div>
@@ -4843,7 +5241,55 @@
       <div class="p-4 overflow-y-auto custom-scroll space-y-3.5 text-xs">
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.3.7（月曆右上角灰色年份一按直入「年曆全覽」＋ 焦點月份微光定位）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.4.2（測試版 · 設定新增「版面風格」三選一：風格一晴空原版 / 風格二黑金午夜旗艦風 / 風格三日式和紙雜誌風）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>100% 保持原有固定版面架構與按鈕位置不變</b>：純粹透過設定選單（<code>☰</code>）頂部嘅「版面風格」一鍵切換三套完整視覺皮膚並自動儲存。</li>
+            <li><b>風格一（晴空毛玻璃）</b>：你一路沿用嘅原版清新設計。</li>
+            <li><b>風格二（黑金午夜旗艦風 · Midnight Obsidian &amp; Champagne）</b>：深邃炭黑磨砂玻璃底色、香檳金與電光藍微光邊框、高對比發光日曆格仔。</li>
+            <li><b>風格三（日式和紙雜誌風 · Editorial Bento &amp; Warm Paper）</b>：溫潤米白和紙底色、極細墨黑線框、瑞士報刊大字排版與低飽和大地色標記。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.4.2（移除手機假期規劃「1/3 · 2/3」多餘標籤 ＋ 順序「細 ➔ 中(一小幅) ➔ 大(全開) ➔ 中 ➔ 細 ➔ 收埋」開合節奏）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>移除多餘層級編號膠囊</b>：刪除手機版「假期規劃」頂列中嘅 <code>1/3 一小幅</code> / <code>2/3 全開</code> 標籤，頂列畫面更純淨。</li>
+            <li><b>還原順序階梯式開合（細 ⇄ 中「一小幅」⇄ 大「全開」➔ 收埋）</b>：點擊展開掣或標題列時會由 <b>細（走馬燈）➔ 中（一小幅橫向卡片）➔ 大（全開完整版面）</b> 逐級展開，唔再跳過「一小幅」；點擊收起掣（<code>⌃</code> / <code>✕</code>）亦會嚴格按 <b>大 ➔ 中（一小幅）➔ 細（走馬燈）➔ 完全收埋</b> 順序逐級收細。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-700 text-xs">v7.4.2（修正 iPad 至手機跨斷點拖拉錯亂 ＋ iPad 純藍數字天數標註 ＋ 年曆全覽幼線連動條）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>修正 iPad 拉至手機屏幕跨斷點排版錯亂</b>：對齊 <code>768px</code>（<code>md:</code>）響應式斷點，修正 <code>#leftSideColumn</code> 網格穿透範圍並移除 iPad 工具列重複按鈕，同時喺視窗跨斷點縮放時自動同步清理手機吸頂抽屜狀態，由電腦拉到 iPad 再拉到最細手機屏幕都流暢零錯位。</li>
+            <li><b>iPad 連動假期右下角改為純粹藍色數字</b>：喺 iPad 平板尺寸（<code>768px–1279px</code>）下，移除連假天數嘅藍底白字方框，改為純粹高對比寶藍色數字＋白光描邊，徹底避免遮擋日期數字。</li>
+            <li><b>年曆全覽連動線加幼更精緻</b>：將「年曆全覽」模式下每個連假底部嘅藍色連動橫線由 <code>2.2px</code> 收幼至 <code>1.4px</code>，小格顯示更清爽俐落。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-sky-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-700 text-xs">v7.4.2（雙錦囊兩行清晰標題排版 ＋ 精簡手機頂部走馬燈列 ＋ 移除手機底部重複面板）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>雙錦囊標題列改為兩行排版</b>：第一行完整展示目的地／旅程名稱（唔再被右側按鍵擠壓截斷），第二行獨立放置「🧭 出行須知」與「🛡️ 城市指南」切換掣，電腦與手機版均清晰一目了然。</li>
+            <li><b>手機假期規劃走馬燈頂列更簡潔</b>：移除頂列中嘅「放大」字級按鈕（字體大小設定仍完整保留於主設定選單內），令走馬燈縮成最細橫條時有更充裕嘅橫向顯示空間。</li>
+            <li><b>正式移除手機版底部重複面板</b>：手機螢幕（<code>&lt; 768px</code>）正式隱藏底部重複嘅「假期規劃／公眾假期／農曆節氣」舊面板，全部統一由頂部吸頂抽屜直達操作，頁面捲動更輕盈俐落。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.4.2（月曆右上角灰色年份一按直入「年曆全覽」＋ 焦點月份微光定位）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4854,7 +5300,7 @@
 
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-800 text-xs">v7.3.7（全年曆覽專屬外緣純標誌與隱藏鎖頭 · 主月曆還原原本徽章設計）</span>
+            <span class="font-bold text-indigo-800 text-xs">v7.4.2（全年曆覽專屬外緣純標誌與隱藏鎖頭 · 主月曆還原原本徽章設計）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4865,7 +5311,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.3.7（手機觸控防穿透隔離 ＋ 自動解鎖頁面滾動防卡死守衛）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.4.2（手機觸控防穿透隔離 ＋ 自動解鎖頁面滾動防卡死守衛）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4877,7 +5323,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.3.7（假期小方塊英文全名大細楷標題化 ＋ CL 預設全名 Casual Leave）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.4.2（假期小方塊英文全名大細楷標題化 ＋ CL 預設全名 Casual Leave）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4888,7 +5334,7 @@
 
         <div class="border-l-2 border-indigo-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v7.3.7（年曆全覽與單月視圖 FLIP 連續物理縮放過渡動畫）</span>
+            <span class="font-bold text-indigo-700 text-xs">v7.4.2（年曆全覽與單月視圖 FLIP 連續物理縮放過渡動畫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4899,7 +5345,7 @@
 
         <div class="border-l-2 border-blue-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.3.7（移除方塊右上角齒輪完整顯示英文全名 ＋ 數值全靠右垂直對齊）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.4.2（移除方塊右上角齒輪完整顯示英文全名 ＋ 數值全靠右垂直對齊）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4910,7 +5356,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.3.7（假期方塊同色系字體配搭 ＋ 柔和灰輔助標籤 ＋ 極淺灰齒輪精修）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.4.2（假期方塊同色系字體配搭 ＋ 柔和灰輔助標籤 ＋ 極淺灰齒輪精修）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4921,7 +5367,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.3.7（假期方塊全平台統一尺寸 ＋ 輪休模式右上角齒輪同步 ＋ 主題色實線外框與側邊浮光）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.4.2（假期方塊全平台統一尺寸 ＋ 輪休模式右上角齒輪同步 ＋ 主題色實線外框與側邊浮光）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -4933,7 +5379,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.3.7（精簡淺色填滿年度配額卡片 ＋ 機票順序黃色提醒修正 ＋ 全檔文字校對清理）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.4.2（精簡淺色填滿年度配額卡片 ＋ 機票順序黃色提醒修正 ＋ 全檔文字校對清理）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5283,7 +5729,7 @@
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
             <li>移除額外佔位說明橫條，將「跨週長假·全用AL / 四季放鬆·留備用 / 請1-2日·輕巧快閃」直接內嵌於頂部三個方案膠囊內，完全不影響原有版面高度。</li>
-            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.3.7</code>（移除 beta 字樣）。</li>
+            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.4.2</code>（移除 beta 字樣）。</li>
           </ul>
         </div>
 
@@ -22961,8 +23407,8 @@
     }
 
     function restoreFullCalendarFromStage2() {
-      // 點擊「橫色橫花」月曆收合條：彈返開完整 12 個月年曆，並將假期規劃收為窄身橫條置頂（方便對照看月曆）
-      applyMobileTripRibbonStage(3);
+      // 點擊「橫色橫花」月曆收合條：逐級退回「一小幅」並彈返開完整 12 個月年曆
+      applyMobileTripRibbonStage(1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -22972,7 +23418,6 @@
       const fullBodyEl = document.getElementById('mobileRibbonFullPlannerBody');
       const headerBar = document.getElementById('mobileRibbonHeaderBar');
       const miniPreview = document.getElementById('mobileRibbonMiniTripPreview');
-      const stagePill = document.getElementById('mobileRibbonStagePill');
       const expandStage2Icon = document.getElementById('mobileRibbonExpandStage2Icon');
       const stepCloseIcon = document.getElementById('mobileRibbonStepCloseIcon');
       const planeBtn = document.getElementById('btnToggleMobileTripRibbon');
@@ -22988,7 +23433,7 @@
       }
 
       if (stage === 1) {
-        // 第 1 階（一小幅）：橫向快覽小卡片 ＋ 下方完整月曆
+        // 中（一小幅）：橫向快覽小卡片 ＋ 下方完整月曆
         ribbon.classList.remove('hidden', 'is-elastic-stage2');
         ribbon.classList.add('is-pinned-sticky');
         document.body.classList.remove('mobile-elastic-stage2');
@@ -22996,12 +23441,8 @@
         if (fullBodyEl) fullBodyEl.classList.add('hidden');
         if (headerBar) headerBar.classList.add('border-b', 'border-slate-100');
         if (miniPreview) miniPreview.classList.add('hidden');
-        if (stagePill) {
-          stagePill.classList.remove('hidden');
-          stagePill.textContent = '1/3 一小幅';
-        }
-        if (expandStage2Icon) expandStage2Icon.className = 'fa-solid fa-up-right-and-down-left-from-center text-[9px]';
-        if (stepCloseIcon) stepCloseIcon.className = 'fa-solid fa-chevron-up text-[9.5px] text-slate-500';
+        if (expandStage2Icon) expandStage2Icon.className = 'fa-solid fa-up-right-and-down-left-from-center text-[9.5px]';
+        if (stepCloseIcon) stepCloseIcon.className = 'fa-solid fa-chevron-up text-[10px] text-slate-500';
         if (planeBtn) planeBtn.classList.add('is-active-item'); if (typeof syncMobileSingleRowPillState === 'function') syncMobileSingleRowPillState();
         syncStickyRibbonTopOffset();
         requestAnimationFrame(() => {
@@ -23011,7 +23452,7 @@
           }
         });
       } else if (stage === 2) {
-        // 第 2 階（全開）：完整假期規劃版面 ＋ 底部「橫色橫花」月曆收合條（點擊即彈返開晒月曆）
+        // 大（全開）：完整假期規劃版面 ＋ 底部月曆收合條
         ribbon.classList.remove('hidden', 'is-pinned-sticky');
         ribbon.classList.add('is-elastic-stage2');
         document.body.classList.add('mobile-elastic-stage2');
@@ -23019,12 +23460,8 @@
         if (fullBodyEl) fullBodyEl.classList.remove('hidden');
         if (headerBar) headerBar.classList.add('border-b', 'border-slate-100');
         if (miniPreview) miniPreview.classList.add('hidden');
-        if (stagePill) {
-          stagePill.classList.remove('hidden');
-          stagePill.textContent = '2/3 全開';
-        }
-        if (expandStage2Icon) expandStage2Icon.className = 'fa-solid fa-down-left-and-up-right-to-center text-[9px]';
-        if (stepCloseIcon) stepCloseIcon.className = 'fa-solid fa-chevron-up text-[9.5px] text-slate-500';
+        if (expandStage2Icon) expandStage2Icon.className = 'fa-solid fa-down-left-and-up-right-to-center text-[9.5px]';
+        if (stepCloseIcon) stepCloseIcon.className = 'fa-solid fa-chevron-up text-[10px] text-slate-500';
         if (planeBtn) planeBtn.classList.add('is-active-item'); if (typeof syncMobileSingleRowPillState === 'function') syncMobileSingleRowPillState();
         if (typeof closeInlineBookingStudio === 'function') {
           try { closeInlineBookingStudio(); } catch (e) {}
@@ -23033,15 +23470,14 @@
         renderTopMobileFullPlannerContent();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (stage === 3) {
-        // 第 3 階（窄身畫面下便顯示月曆）：頂部精簡單行跑馬燈 ＋ 下面完整顯示 12 個月年曆
+        // 細（走馬燈橫條）：頂部精簡單行跑馬燈 ＋ 下面完整顯示 12 個月年曆
         ribbon.classList.remove('hidden', 'is-elastic-stage2');
         ribbon.classList.add('is-pinned-sticky');
         document.body.classList.remove('mobile-elastic-stage2');
         if (bodyEl) bodyEl.classList.add('hidden');
         if (fullBodyEl) fullBodyEl.classList.add('hidden');
         if (headerBar) headerBar.classList.remove('border-b', 'border-slate-100');
-        if (stagePill) stagePill.classList.add('hidden');
-        if (expandStage2Icon) expandStage2Icon.className = 'fa-solid fa-up-right-and-down-left-from-center text-[9px]';
+        if (expandStage2Icon) expandStage2Icon.className = 'fa-solid fa-up-right-and-down-left-from-center text-[9.5px]';
         if (stepCloseIcon) stepCloseIcon.className = 'fa-solid fa-xmark text-[10px] text-slate-500';
         if (planeBtn) planeBtn.classList.add('is-active-item'); if (typeof syncMobileSingleRowPillState === 'function') syncMobileSingleRowPillState();
         if (typeof closeInlineBookingStudio === 'function') {
@@ -23075,9 +23511,37 @@
       if (typeof syncBackgroundScrollLock === 'function') syncBackgroundScrollLock();
     }
 
+    function stepExpandMobileTripRibbon() {
+      // 順序放大：細(3) ➔ 中／一小幅(1) ➔ 大／全開(2)；若已喺大／全開(2)，則縮返中／一小幅(1)
+      if (mobileTripRibbonStage === 3) {
+        applyMobileTripRibbonStage(1);
+      } else if (mobileTripRibbonStage === 1) {
+        applyMobileTripRibbonStage(2);
+      } else if (mobileTripRibbonStage === 2) {
+        applyMobileTripRibbonStage(1);
+      } else {
+        applyMobileTripRibbonStage(1);
+      }
+    }
+
+    function stepOpenMobileTripRibbon() {
+      // 點擊頂列：細(3) ➔ 中／一小幅(1) ➔ 大／全開(2) ➔ 中／一小幅(1)
+      if (mobileTripRibbonStage === 3) {
+        applyMobileTripRibbonStage(1);
+      } else if (mobileTripRibbonStage === 1) {
+        applyMobileTripRibbonStage(2);
+      } else if (mobileTripRibbonStage === 2) {
+        applyMobileTripRibbonStage(1);
+      } else {
+        applyMobileTripRibbonStage(1);
+      }
+    }
+
     function stepCloseMobileTripRibbon() {
-      // 分階段收細：全開(2) ➔ 窄身橫條＋下便顯示月曆(3) ➔ 全收(0)；一小幅(1) ➔ 窄身橫條(3) ➔ 全收(0)
-      if (mobileTripRibbonStage === 2 || mobileTripRibbonStage === 1) {
+      // 順序收細：大／全開(2) ➔ 中／一小幅(1) ➔ 細／走馬燈(3) ➔ 完全收埋(0)
+      if (mobileTripRibbonStage === 2) {
+        applyMobileTripRibbonStage(1);
+      } else if (mobileTripRibbonStage === 1) {
         applyMobileTripRibbonStage(3);
       } else {
         applyMobileTripRibbonStage(0);
@@ -23090,9 +23554,16 @@
         applyMobileTripRibbonStage(nextStage);
         return;
       }
-      // 四態彈性循環：0 (全收) -> 1 (一小幅小卡片) -> 2 (全開完整版面＋月曆橫色橫花收合條) -> 3 (窄身橫條＋下便顯示月曆) -> 0 (全收)
-      const nextStage = (mobileTripRibbonStage + 1) % 4;
-      applyMobileTripRibbonStage(nextStage);
+      // 順序循環：收埋(0) ➔ 中／一小幅(1) ➔ 大／全開(2) ➔ 中／一小幅(1) ➔ 細／走馬燈(3) ➔ 收埋(0)
+      if (mobileTripRibbonStage === 0) {
+        applyMobileTripRibbonStage(1);
+      } else if (mobileTripRibbonStage === 1) {
+        applyMobileTripRibbonStage(2);
+      } else if (mobileTripRibbonStage === 2) {
+        applyMobileTripRibbonStage(3);
+      } else {
+        applyMobileTripRibbonStage(0);
+      }
     }
 
     const _origJumpPlan2 = jumpMobileSmartRibbonCard;
@@ -33122,10 +33593,31 @@ function setEditModeState(newState, notifyToast = true) {
     }
 
     let _lastIsDesktopWidth = window.innerWidth >= 1024;
+    let _lastIsMobileWidth = window.innerWidth < 768;
     window.addEventListener('resize', () => {
       checkCalendarColumns();
       const nowIsDesktop = window.innerWidth >= 1024;
-      if (nowIsDesktop !== _lastIsDesktopWidth) {
+      const nowIsMobile = window.innerWidth < 768;
+      if (nowIsMobile !== _lastIsMobileWidth) {
+        _lastIsMobileWidth = nowIsMobile;
+        // iPad (>=768px) <-> 手機 (<768px) 跨斷點拖拉視窗時，即時整理彈性分割態與頂部控制列
+        document.body.classList.remove('mobile-elastic-stage2', 'dc-mobile-sheet-lock');
+        const colPill = document.getElementById('mobileCollapsedCalendarPill');
+        if (colPill && !nowIsMobile) colPill.classList.add('hidden');
+        if (!nowIsMobile) {
+          const refPanel = document.getElementById('topInlineRefPanel');
+          if (refPanel && !refPanel.classList.contains('hidden') && typeof closeTopInlineRefPanel === 'function') {
+            closeTopInlineRefPanel();
+          }
+          const astPanel = document.getElementById('topInlineAssistantPanel');
+          if (astPanel && !astPanel.classList.contains('hidden')) {
+            astPanel.classList.add('hidden');
+          }
+        }
+        if (typeof syncMobileSingleRowPillState === 'function') syncMobileSingleRowPillState();
+        if (typeof syncBackgroundScrollLock === 'function') syncBackgroundScrollLock();
+      }
+      if (nowIsDesktop !== _lastIsDesktopWidth || nowIsMobile) {
         _lastIsDesktopWidth = nowIsDesktop;
         const drawer = document.getElementById('inlineBookingStudioDrawer');
         if (drawer && drawer.classList.contains('is-open') && drawer.offsetParent === null && typeof window.closeInlineBookingStudio === 'function') {
@@ -41425,37 +41917,43 @@ function setEditModeState(newState, notifyToast = true) {
       <div id="dcMobileDragHandle" class="lg:hidden pt-1.5 pb-0.5 bg-sky-100/95 flex items-center justify-center cursor-ns-resize select-none">
         <span class="w-9 h-1 rounded-full bg-sky-400/55"></span>
       </div>
-      <!-- 頂部雙錦囊切換列與放大／縮細／關閉鈕（晴空天藍漸變白主題） -->
-      <div class="px-2.5 sm:px-3 py-2 bg-gradient-to-r from-sky-100/95 via-blue-50/80 to-white border-b border-sky-200/80 text-slate-900 flex items-center justify-between gap-1.5">
-        <div class="flex items-center gap-1.5 min-w-0">
-          <span id="dcHeaderFlag" class="text-base leading-none shrink-0">🌏</span>
-          <span id="dcHeaderTitle" class="font-black text-xs text-slate-900 truncate">雙錦囊旅遊助手</span>
+      <!-- 頂部雙錦囊兩行結構：第一行完整顯示目的地標題，第二行顯示出行須知／城市指南與控制掣 -->
+      <div class="px-2.5 sm:px-3 py-2 bg-gradient-to-r from-sky-100/95 via-blue-50/80 to-white border-b border-sky-200/80 text-slate-900 flex flex-col gap-1.5">
+        <div class="flex items-center justify-between gap-2 min-w-0">
+          <div class="flex items-center gap-1.5 min-w-0 flex-1">
+            <span id="dcHeaderFlag" class="text-base leading-none shrink-0">🌏</span>
+            <span id="dcHeaderTitle" class="font-black text-xs sm:text-[13px] text-slate-900 leading-snug break-words">雙錦囊旅遊助手</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button type="button" id="btnDcMobileExpand" onclick="toggleDcMobileFullscreen()" aria-label="放大或還原視窗"
+                    class="lg:hidden w-6 h-6 rounded-full bg-white/90 hover:bg-sky-50 text-slate-500 hover:text-slate-800 border border-slate-200/80 flex items-center justify-center transition cursor-pointer">
+              <i id="dcMobileExpandIcon" class="fa-solid fa-up-right-and-down-left-from-center text-[10px]"></i>
+            </button>
+            <button type="button" onclick="minimizeTripDualCapsule()" aria-label="暫時縮細至底部"
+                    class="lg:hidden w-6 h-6 rounded-full bg-white/90 hover:bg-sky-50 text-slate-500 hover:text-slate-800 border border-slate-200/80 flex items-center justify-center transition cursor-pointer">
+              <i class="fa-solid fa-minus text-[10px]"></i>
+            </button>
+            <button type="button" onclick="closeTripDualCapsule()" aria-label="收起雙錦囊"
+                    class="w-6 h-6 rounded-full bg-white/90 hover:bg-sky-50 text-slate-500 hover:text-slate-800 border border-slate-200/80 flex items-center justify-center transition cursor-pointer">
+              <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+          </div>
         </div>
-        <div class="flex items-center gap-1 shrink-0">
-          <button type="button" id="dcTabPrep" onclick="switchDualCapsuleTab('prep')"
-                  class="px-2 sm:px-2.5 py-1 rounded-lg text-[10px] sm:text-[10.5px] font-black bg-sky-600 text-white shadow-2xs transition cursor-pointer">
-            🧭 出行須知
-          </button>
-          <button type="button" id="dcTabTips" onclick="switchDualCapsuleTab('tips')"
-                  class="px-2 sm:px-2.5 py-1 rounded-lg text-[10px] sm:text-[10.5px] font-black bg-white/90 text-slate-700 hover:bg-sky-50 border border-sky-200/80 transition cursor-pointer">
-            🛡️ 城市指南
-          </button>
+        <div class="flex items-center justify-between gap-1.5 pt-1 border-t border-sky-200/60">
+          <div class="flex items-center gap-1.5">
+            <button type="button" id="dcTabPrep" onclick="switchDualCapsuleTab('prep')"
+                    class="px-2.5 py-1 rounded-lg text-[10.5px] sm:text-[11px] font-black bg-sky-600 text-white shadow-2xs transition cursor-pointer">
+              🧭 出行須知
+            </button>
+            <button type="button" id="dcTabTips" onclick="switchDualCapsuleTab('tips')"
+                    class="px-2.5 py-1 rounded-lg text-[10.5px] sm:text-[11px] font-black bg-white/90 text-slate-700 hover:bg-sky-50 border border-sky-200/80 transition cursor-pointer">
+              🛡️ 城市指南
+            </button>
+          </div>
           <button type="button" onclick="event.stopPropagation(); cycleIconAndCityFontScale()" title="切換內容字體大細（標準 / 放大 / 特大）"
-                  class="px-1.5 py-1 rounded-lg text-[9.5px] font-extrabold bg-white/90 hover:bg-sky-50 text-[#0f2b63] border border-sky-200/80 transition cursor-pointer inline-flex items-center gap-0.5 shrink-0">
+                  class="px-2 py-1 rounded-lg text-[9.5px] font-extrabold bg-white/90 hover:bg-sky-50 text-[#0f2b63] border border-sky-200/80 transition cursor-pointer inline-flex items-center gap-1 shrink-0">
             <i class="fa-solid fa-text-height text-sky-600 text-[9px]"></i>
             <span class="city-font-scale-badge">放大</span>
-          </button>
-          <button type="button" id="btnDcMobileExpand" onclick="toggleDcMobileFullscreen()" aria-label="放大或還原視窗"
-                  class="lg:hidden w-6 h-6 rounded-full bg-white/90 hover:bg-sky-50 text-slate-500 hover:text-slate-800 border border-slate-200/80 flex items-center justify-center transition cursor-pointer ml-0.5">
-            <i id="dcMobileExpandIcon" class="fa-solid fa-up-right-and-down-left-from-center text-[10px]"></i>
-          </button>
-          <button type="button" onclick="minimizeTripDualCapsule()" aria-label="暫時縮細至底部"
-                  class="lg:hidden w-6 h-6 rounded-full bg-white/90 hover:bg-sky-50 text-slate-500 hover:text-slate-800 border border-slate-200/80 flex items-center justify-center transition cursor-pointer">
-            <i class="fa-solid fa-minus text-[10px]"></i>
-          </button>
-          <button type="button" onclick="closeTripDualCapsule()" aria-label="收起雙錦囊"
-                  class="w-6 h-6 rounded-full bg-white/90 hover:bg-sky-50 text-slate-500 hover:text-slate-800 border border-slate-200/80 flex items-center justify-center transition cursor-pointer">
-            <i class="fa-solid fa-xmark text-xs"></i>
           </button>
         </div>
       </div>
@@ -42838,6 +43336,55 @@ function setEditModeState(newState, notifyToast = true) {
       <!-- 2. 抽屜內容主體（無外框左置分欄 ＋ 深藍主標題 ＋ 高對比深灰說明字 ＋ 專屬色彩開關） -->
       <div class="flex-1 overflow-y-auto custom-scroll divide-y divide-slate-200/80">
 
+        <!-- 區塊零：版面風格切換（固定版面架構 · 三套視覺風格純換膚） -->
+        <div class="p-4 space-y-2.5 text-xs bg-gradient-to-r from-sky-50/60 via-white to-slate-50/70">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-extrabold text-slate-800 flex items-center gap-1.5">
+              <i class="fa-solid fa-palette text-blue-600"></i>
+              <span>版面風格</span>
+            </span>
+            <span id="drawerLayoutStyleBadge" class="text-[9.5px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200/80">風格一</span>
+          </div>
+          <div class="space-y-1.5">
+            <button type="button" id="btnSelectStyle1" onclick="setLayoutThemeStyle('style1')"
+                    class="w-full p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 text-left transition active:scale-[0.99] cursor-pointer flex items-center justify-between gap-2 shadow-2xs">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-tr from-sky-400 to-blue-600 shrink-0"></span>
+                  <span class="font-black text-blue-950 text-xs">風格一 · 晴空毛玻璃（原版）</span>
+                </div>
+                <p class="text-[10px] text-slate-600 mt-0.5 truncate">清新藍白透亮毛玻璃 · 原生經典質感</p>
+              </div>
+              <i id="iconStyle1Check" class="fa-solid fa-circle-check text-blue-600 text-sm shrink-0"></i>
+            </button>
+
+            <button type="button" id="btnSelectStyle2" onclick="setLayoutThemeStyle('style2')"
+                    class="w-full p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition active:scale-[0.99] cursor-pointer flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-tr from-slate-900 via-amber-400 to-sky-400 shrink-0"></span>
+                  <span class="font-black text-slate-900 text-xs">風格二 · 黑金午夜旗艦風</span>
+                </div>
+                <p class="text-[10px] text-slate-600 mt-0.5 truncate">深邃炭黑磨砂玻璃 · 香檳金與電光藍微光</p>
+              </div>
+              <i id="iconStyle2Check" class="fa-regular fa-circle text-slate-300 text-sm shrink-0"></i>
+            </button>
+
+            <button type="button" id="btnSelectStyle3" onclick="setLayoutThemeStyle('style3')"
+                    class="w-full p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-amber-50/40 text-left transition active:scale-[0.99] cursor-pointer flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#e8dfc8] border border-stone-800 shrink-0"></span>
+                  <span class="font-black text-stone-900 text-xs">風格三 · 日式和紙雜誌風</span>
+                </div>
+                <p class="text-[10px] text-slate-600 mt-0.5 truncate">溫潤米白和紙 · 極細墨黑線框與大地色標記</p>
+              </div>
+              <i id="iconStyle3Check" class="fa-regular fa-circle text-slate-300 text-sm shrink-0"></i>
+            </button>
+          </div>
+        </div>
+
+
         <!-- 區塊一：雲端同步狀態與同步代碼 -->
         <div class="p-4 space-y-3 text-xs">
           <div>
@@ -43148,7 +43695,7 @@ function setEditModeState(newState, notifyToast = true) {
               <i class="fa-solid fa-clock-rotate-left text-sky-600 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-extrabold text-slate-800 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.3.7</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.4.2</span>
           </button>
         </div>
 
@@ -44191,5 +44738,53 @@ function setEditModeState(newState, notifyToast = true) {
       </div>
     </div>
   </div>
+  <script>
+    let currentLayoutThemeStyle = localStorage.getItem('hk_leave_layout_style') || 'style1';
+
+    function setLayoutThemeStyle(styleId, silent = false) {
+      const targetStyle = (styleId === 'style2' || styleId === 'style3') ? styleId : 'style1';
+      currentLayoutThemeStyle = targetStyle;
+      try { localStorage.setItem('hk_leave_layout_style', targetStyle); } catch (e) {}
+
+      document.body.classList.remove('theme-style-2', 'theme-style-3');
+      if (targetStyle === 'style2') document.body.classList.add('theme-style-2');
+      if (targetStyle === 'style3') document.body.classList.add('theme-style-3');
+
+      const badge = document.getElementById('drawerLayoutStyleBadge');
+      const labels = {
+        style1: '風格一 · 晴空毛玻璃',
+        style2: '風格二 · 黑金午夜風',
+        style3: '風格三 · 日式和紙風'
+      };
+      if (badge) badge.textContent = labels[targetStyle];
+
+      ['style1', 'style2', 'style3'].forEach((sid, idx) => {
+        const num = idx + 1;
+        const btn = document.getElementById(`btnSelectStyle${num}`);
+        const ic = document.getElementById(`iconStyle${num}Check`);
+        const isSelected = (sid === targetStyle);
+        if (btn) {
+          btn.className = isSelected
+            ? 'w-full p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 text-left transition active:scale-[0.99] cursor-pointer flex items-center justify-between gap-2 shadow-2xs'
+            : 'w-full p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition active:scale-[0.99] cursor-pointer flex items-center justify-between gap-2';
+        }
+        if (ic) {
+          ic.className = isSelected
+            ? 'fa-solid fa-circle-check text-blue-600 text-sm shrink-0'
+            : 'fa-regular fa-circle text-slate-300 text-sm shrink-0';
+        }
+      });
+
+      if (!silent && typeof showToast === 'function') {
+        showToast(`✨ 已切換至「${labels[targetStyle]}」`);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => setLayoutThemeStyle(currentLayoutThemeStyle, true));
+    } else {
+      setLayoutThemeStyle(currentLayoutThemeStyle, true);
+    }
+  </script>
 </body>
 </html>
