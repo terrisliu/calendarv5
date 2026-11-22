@@ -276,7 +276,7 @@
       box-shadow: inset 3px 0 0 #9333ea;
     }
 
-    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.4.2) === */
+    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.5.0) === */
     @media (max-width: 767px) {
       /* 2027 年份與萬年曆切換掣長期常駐顯示於左側，任何頁面／模式皆不消失 */
       #mainYearSwitcher {
@@ -994,7 +994,7 @@
       color: #ffffff !important;
     }
 
-    /* === 彈性分割視圖 (Elastic Split-View · 全程吸頂永不頂走 v7.4.2) === */
+    /* === 彈性分割視圖 (Elastic Split-View · 全程吸頂永不頂走 v7.5.0) === */
     @media (max-width: 767px) {
       /* 僅喺手機單欄 (<768px) 令 #leftSideColumn 穿透為 contents，避免影響 iPad 768px–1023px 雙欄網格！ */
       #leftSideColumn {
@@ -1305,8 +1305,7 @@
       box-shadow: 0 6px 20px -4px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
       border-radius: 14px !important;
       padding: 10px 8px !important; /* 輕微收窄內邊距 */
-      content-visibility: auto;
-      contain-intrinsic-size: auto 340px;
+      content-visibility: visible;
       contain: layout style paint;
       transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -1528,7 +1527,19 @@
       display: none !important; 
     }
     
-    #yearViewControls { display: none; }
+    @keyframes overviewHeaderFadeIn {
+      0% { opacity: 0; transform: translate3d(0, -14px, 0) scale(0.985); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+    @keyframes overviewHeaderFadeOut {
+      0% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+      100% { opacity: 0; transform: translate3d(0, -14px, 0) scale(0.985); }
+    }
+    #yearViewControls {
+      display: none;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
     body.year-overview-mode #yearViewControls {
       display: flex !important;
       position: sticky;
@@ -1541,6 +1552,22 @@
       box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.04);
       border-bottom: 1px solid #e2e8f0;
       padding: 6px 8px;
+      opacity: 1;
+      animation: overviewHeaderFadeIn 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    #yearViewControls.is-fading-out {
+      display: flex !important;
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      background-color: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e2e8f0;
+      padding: 6px 8px;
+      pointer-events: none;
+      animation: overviewHeaderFadeOut 0.24s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
     body.year-overview-mode {
@@ -3466,7 +3493,7 @@
       letter-spacing: 0.045em !important;
     }
 
-    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.4.2） === */
+    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.5.0） === */
     @keyframes orbHaloBreathe {
       0%, 100% {
         opacity: 0.85;
@@ -3599,7 +3626,7 @@
 
 
     /* =========================================================================
-       【版面風格二：黑金午夜旗艦風 (Midnight Obsidian & Champagne · 固定架構純換膚 · v7.4.2)】
+       【版面風格二：黑金午夜旗艦風 (Midnight Obsidian & Champagne · 固定架構純換膚 · v7.5.0)】
        ========================================================================= */
     body.theme-style-2 {
       background-color: #090b10 !important;
@@ -3775,7 +3802,9 @@
     }
 
     /* =========================================================================
-       【版面風格三：日式和紙雜誌風 (Editorial Bento & Warm Paper · 固定架構純換膚 · v7.4.2)】
+       【版面風格三：日式和紙雜誌風 · 方案 A 淡彩和紙粉筆風 (Pastel Washi Tint · v7.5.0)】
+       - 日曆與迷你小日曆：高明度淡彩和紙粉筆底色 ＋ 深色清晰數字，輕盈通透不沉暗
+       - 頂部「休假類別與年度配額」卡片＆年曆全覽膠囊：100% 同步連動和紙粉筆色系
        ========================================================================= */
     body.theme-style-3 {
       background-color: #f6f3eb !important;
@@ -3784,29 +3813,29 @@
       background-size: 18px 18px, 100% 100% !important;
       background-attachment: scroll !important;
       animation: none !important;
-      color: #1c1917 !important;
+      color: #292524 !important;
     }
     body.theme-style-3 #topHeader {
-      border-bottom: 1.5px solid #292524 !important;
+      border-bottom: 1.25px solid rgba(68, 64, 60, 0.45) !important;
     }
     body.theme-style-3 #topHeader h1 span {
-      color: #1c1917 !important;
+      color: #292524 !important;
       font-weight: 900 !important;
       letter-spacing: 0.02em !important;
     }
     body.theme-style-3 #btnOpenDrawerMenu {
       background: #fcfaf5 !important;
-      border: 1.25px solid #292524 !important;
-      color: #1c1917 !important;
+      border: 1.25px solid #57534e !important;
+      color: #292524 !important;
       border-radius: 8px !important;
-      box-shadow: 2px 2px 0 #292524 !important;
+      box-shadow: 2px 2px 0 rgba(87, 83, 78, 0.35) !important;
     }
     body.theme-style-3 #stickyHeaderArea .glass-surface {
       background: #fcfaf5 !important;
       backdrop-filter: none !important;
-      border: 1.25px solid #292524 !important;
+      border: 1.25px solid #57534e !important;
       border-radius: 12px !important;
-      box-shadow: 3px 3px 0 rgba(41, 37, 36, 0.14) !important;
+      box-shadow: 3px 3px 0 rgba(87, 83, 78, 0.14) !important;
     }
     /* 瑞士報刊大字年份排版 */
     body.theme-style-3 #mainYearDisplayText,
@@ -3814,34 +3843,34 @@
       font-family: "Outfit", "Plus Jakarta Sans", sans-serif !important;
       font-weight: 950 !important;
       letter-spacing: -0.04em !important;
-      color: #1c1917 !important;
+      color: #292524 !important;
     }
     body.theme-style-3 #btnToggleMainApplyBar {
-      background: #292524 !important;
-      border: 1.25px solid #1c1917 !important;
+      background: #57534e !important;
+      border: 1.25px solid #44403c !important;
       color: #faf7f0 !important;
       border-radius: 8px !important;
       box-shadow: none !important;
     }
     body.theme-style-3 #btnAutoGenerateTrip {
-      background: #6b7c59 !important;
-      border: 1.25px solid #292524 !important;
+      background: #7c8d6b !important;
+      border: 1.25px solid #57534e !important;
       color: #fcfaf5 !important;
       border-radius: 8px !important;
       box-shadow: none !important;
     }
     body.theme-style-3 #btnToggleYearView {
       background: #fcfaf5 !important;
-      border: 1.25px solid #292524 !important;
-      color: #1c1917 !important;
+      border: 1.25px solid #57534e !important;
+      color: #292524 !important;
       border-radius: 8px !important;
       box-shadow: none !important;
     }
     body.theme-style-3 #btnClearAll,
     body.theme-style-3 #btnToggleGlobalLock {
       background: #fcfaf5 !important;
-      border: 1.25px solid #292524 !important;
-      color: #1c1917 !important;
+      border: 1.25px solid #57534e !important;
+      color: #292524 !important;
       border-radius: 8px !important;
     }
     @media (max-width: 767px) {
@@ -3851,132 +3880,879 @@
       body.theme-style-3 #btnToggleMobileToolbar,
       body.theme-style-3 #btnToggleMobileTripRibbon:not(.is-active):not(.is-active-item) {
         background: #fcfaf5 !important;
-        border: 1.25px solid #292524 !important;
-        color: #1c1917 !important;
-        box-shadow: 1.5px 1.5px 0 rgba(41, 37, 36, 0.22) !important;
+        border: 1.25px solid #57534e !important;
+        color: #292524 !important;
+        box-shadow: 1.5px 1.5px 0 rgba(87, 83, 78, 0.2) !important;
       }
       body.theme-style-3 #btnToggleMobileToolbar .mobile-orb-icon {
-        color: #1c1917 !important;
+        color: #292524 !important;
       }
       body.theme-style-3 #mobileTopTripRibbon > div {
         background: #fcfaf5 !important;
-        border: 1.25px solid #292524 !important;
+        border: 1.25px solid #57534e !important;
         border-radius: 12px !important;
-        box-shadow: 3px 3px 0 rgba(41, 37, 36, 0.16) !important;
+        box-shadow: 3px 3px 0 rgba(87, 83, 78, 0.14) !important;
       }
       body.theme-style-3 #mobileRibbonHeaderBar {
         background: #f3efe4 !important;
-        border-bottom: 1px solid #292524 !important;
+        border-bottom: 1px solid rgba(87, 83, 78, 0.45) !important;
       }
     }
-    /* 日式和紙 Bento 卡片 ＋ 極細墨黑線框 ＋ 低飽和大地色標記 */
+    /* 日式和紙 Bento 卡片 ＋ 溫潤墨灰線框 */
     body.theme-style-3 .month-card {
       background: #fcfaf5 !important;
       backdrop-filter: none !important;
-      border: 1.25px solid #292524 !important;
+      border: 1.25px solid rgba(68, 64, 60, 0.72) !important;
       border-radius: 10px !important;
-      box-shadow: 3px 3px 0 rgba(41, 37, 36, 0.12) !important;
+      box-shadow: 3px 3px 0 rgba(87, 83, 78, 0.1) !important;
     }
     body.theme-style-3 .month-card:hover {
       transform: translate(-1px, -1px) !important;
-      box-shadow: 4px 4px 0 rgba(41, 37, 36, 0.22) !important;
+      box-shadow: 4px 4px 0 rgba(87, 83, 78, 0.18) !important;
     }
     body.theme-style-3 .month-header-title {
-      border-bottom: 1px solid #292524 !important;
+      border-bottom: 1px solid rgba(87, 83, 78, 0.35) !important;
     }
     body.theme-style-3 .month-title-main {
       font-size: 1.05rem !important;
       font-weight: 950 !important;
-      color: #1c1917 !important;
+      color: #292524 !important;
     }
     body.theme-style-3 .month-title-sub {
       font-weight: 900 !important;
       letter-spacing: 0.08em !important;
-      color: #57534e !important;
+      color: #78716c !important;
     }
     body.theme-style-3 .weekdays-header {
-      color: #292524 !important;
+      color: #44403c !important;
       font-weight: 800 !important;
     }
     body.theme-style-3 .calendar-cell {
       background-color: #faf7f0 !important;
-      border: 1px solid rgba(41, 37, 36, 0.32) !important;
+      border: 1px solid rgba(120, 113, 108, 0.28) !important;
       border-radius: 5px !important;
       box-shadow: none !important;
     }
     body.theme-style-3 .calendar-cell:hover {
-      border-color: #1c1917 !important;
-      background-color: #efe9dc !important;
+      border-color: #57534e !important;
+      background-color: #efeae0 !important;
     }
-    /* 低飽和大地色假期標記（抹茶苔綠 / 陶土赤褐 / 靛藍染 / 枯山水砂金） */
+
+    /* =========================================================================
+       方案 A · 淡彩和紙粉筆風 (Pastel Washi Tint) 日曆與迷你日曆假期色塊
+       ========================================================================= */
     body.theme-style-3 .leave-annual,
     body.theme-style-3 .micro-bg-annual {
-      background: #4a6b82 !important;
+      background: #d6ecfc !important;
+      box-shadow: inset 0 0 0 1px rgba(122, 189, 242, 0.72) !important;
     }
     body.theme-style-3 .leave-wb,
     body.theme-style-3 .micro-bg-wb {
-      background: #7c6a82 !important;
+      background: #eadbfc !important;
+      box-shadow: inset 0 0 0 1px rgba(197, 158, 242, 0.72) !important;
     }
     body.theme-style-3 .leave-birthday,
     body.theme-style-3 .micro-bg-birthday {
-      background: #6b7c59 !important;
+      background: #d4f5e6 !important;
+      box-shadow: inset 0 0 0 1px rgba(119, 212, 172, 0.72) !important;
     }
     body.theme-style-3 .leave-custom,
     body.theme-style-3 .micro-bg-custom {
-      background: #b58348 !important;
+      background: #faecc8 !important;
+      box-shadow: inset 0 0 0 1px rgba(235, 194, 115, 0.78) !important;
     }
     body.theme-style-3 .leave-special,
     body.theme-style-3 .micro-bg-special {
-      background: #78716c !important;
+      background: #e8e4dc !important;
+      box-shadow: inset 0 0 0 1px rgba(191, 185, 174, 0.85) !important;
     }
+    body.theme-style-3 .leave-roster,
+    body.theme-style-3 .micro-bg-roster {
+      background: #fadce1 !important;
+      box-shadow: inset 0 0 0 1px rgba(235, 148, 162, 0.75) !important;
+    }
+
+    /* 搭配淡彩和紙粉筆底色：假期數字呈現清晰深色墨韻字體，通透清脆 */
+    body.theme-style-3 .calendar-cell .day-number.text-white,
+    body.theme-style-3 .calendar-cell .day-number.day-half-leave {
+      color: #1c1917 !important;
+      font-weight: 850 !important;
+      text-shadow: 0 0 2px rgba(255, 255, 255, 0.75) !important;
+    }
+    body.theme-style-3.year-overview-mode .calendar-cell .day-number.text-white,
+    body.theme-style-3.year-overview-mode.roster-theme-active .calendar-cell .day-number.text-white {
+      color: #1c1917 !important;
+      font-weight: 650 !important;
+      text-shadow: none !important;
+    }
+    body.theme-style-3 .micro-cal-day .text-white {
+      color: #1c1917 !important;
+      font-weight: 800 !important;
+    }
+
+    /* 公眾假期（亮杏砂紙底）與星期六日（淡櫻和紙底）：柔和統一且保持紅日紅字 */
     body.theme-style-3 .calendar-cell.cell-holiday-ph,
     body.theme-style-3 .calendar-cell.bg-orange-50 {
-      background-color: #f3e5d0 !important;
-      border-color: #b45309 !important;
+      background-color: #f4ead8 !important;
+      border-color: rgba(180, 118, 56, 0.45) !important;
     }
     body.theme-style-3 .holiday-ph-number,
     body.theme-style-3 .roster-ph-number {
-      color: #9a3412 !important;
+      color: #b45309 !important;
     }
     body.theme-style-3 .calendar-cell.bg-pink-50\/80,
     body.theme-style-3 .calendar-cell.special-sunday-holiday,
     body.theme-style-3 .calendar-cell.bg-rose-50\/40 {
-      background-color: #f4e8e6 !important;
-      border-color: rgba(159, 18, 57, 0.28) !important;
+      background-color: #f5ecea !important;
+      border-color: rgba(185, 80, 95, 0.25) !important;
+    }
+    body.theme-style-3 .calendar-cell .day-number.text-pink-600:not(.text-white) {
+      color: #be3a4c !important;
     }
     body.theme-style-3 .span-rail {
-      background: #292524 !important;
+      background: #6b665f !important;
       box-shadow: none !important;
     }
     body.theme-style-3 .span-badge-pill {
-      background: #292524 !important;
+      background: #6b665f !important;
       color: #fcfaf5 !important;
       border-radius: 3px !important;
+      box-shadow: 0 1px 1.5px rgba(41, 37, 36, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.85) !important;
     }
+    body.theme-style-3.year-overview-mode .span-badge-pill {
+      background: transparent !important;
+      color: #57534e !important;
+      box-shadow: none !important;
+    }
+
+    /* =========================================================================
+       方案 A · 頂部「休假類別與年度配額」卡片＆年曆全覽膠囊（100% 同步連動）
+       ========================================================================= */
+    body.theme-style-3 #topApplyLeavePopupBar > div:first-child {
+      border-bottom-color: rgba(87, 83, 78, 0.28) !important;
+    }
+    body.theme-style-3 #topApplyModeIndicatorPill {
+      background-color: #f3efe4 !important;
+      border-color: rgba(87, 83, 78, 0.35) !important;
+      color: #44403c !important;
+    }
+    body.theme-style-3 #btnInsideApplyOpenAssistant {
+      background: #7c8d6b !important;
+      border: 1px solid #57534e !important;
+      color: #fcfaf5 !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3 #btnCloseTopBarApplyLeave {
+      background-color: #f3efe4 !important;
+      border: 1px solid rgba(87, 83, 78, 0.35) !important;
+      color: #292524 !important;
+    }
+
+    /* 未選中配額卡片：和紙米白底 (#fcfaf5) ＋ 對應粉筆和風框線與文字 */
+    body.theme-style-3 .brush-card[data-brush="annual"] {
+      background-color: #fcfaf5 !important;
+      border-color: #7abdf2 !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="annual"] .text-sky-700,
+    body.theme-style-3 .brush-card[data-brush="annual"] .text-sky-800,
+    body.theme-style-3 .brush-card[data-brush="annual"] .text-sky-700\/90 {
+      color: #1d649c !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="annual"] .border-sky-200\/80 {
+      border-color: rgba(122, 189, 242, 0.45) !important;
+    }
+    /* 已選中 AL 卡片：淡彩和紙霧藍底 (#dff0fc) */
+    body.theme-style-3 .brush-card[data-brush="annual"].bg-sky-100\/95 {
+      background-color: #dff0fc !important;
+      border-color: #56a8e8 !important;
+      box-shadow: 0 0 0 2px rgba(122, 189, 242, 0.25) !important;
+    }
+
+    body.theme-style-3 .brush-card[data-brush="wb"] {
+      background-color: #fcfaf5 !important;
+      border-color: #c59ef2 !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="wb"] .text-purple-700,
+    body.theme-style-3 .brush-card[data-brush="wb"] .text-purple-800,
+    body.theme-style-3 .brush-card[data-brush="wb"] .text-purple-700\/90 {
+      color: #693999 !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="wb"] .border-purple-200\/80 {
+      border-color: rgba(197, 158, 242, 0.45) !important;
+    }
+    /* 已選中 WB 卡片：淡彩和紙藤紫底 (#efe2fc) */
+    body.theme-style-3 .brush-card[data-brush="wb"].bg-purple-100\/95 {
+      background-color: #efe2fc !important;
+      border-color: #b584e8 !important;
+      box-shadow: 0 0 0 2px rgba(197, 158, 242, 0.25) !important;
+    }
+
+    body.theme-style-3 .brush-card[data-brush="birthday"] {
+      background-color: #fcfaf5 !important;
+      border-color: #77d4ac !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="birthday"] .text-emerald-700,
+    body.theme-style-3 .brush-card[data-brush="birthday"] .text-emerald-800 {
+      color: #1f6e4e !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="birthday"] .border-emerald-200\/80 {
+      border-color: rgba(119, 212, 172, 0.45) !important;
+    }
+    /* 已選中 BL 卡片：淡彩和紙若竹綠底 (#dcf7eb) */
+    body.theme-style-3 .brush-card[data-brush="birthday"].bg-emerald-100\/95 {
+      background-color: #dcf7eb !important;
+      border-color: #52bd91 !important;
+      box-shadow: 0 0 0 2px rgba(119, 212, 172, 0.25) !important;
+    }
+
+    body.theme-style-3 .brush-card[data-brush="custom"] {
+      background-color: #fcfaf5 !important;
+      border-color: #ebc273 !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="custom"] .text-amber-700,
+    body.theme-style-3 .brush-card[data-brush="custom"] .text-amber-800 {
+      color: #8c5a0d !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="custom"] .border-amber-200\/80 {
+      border-color: rgba(235, 194, 115, 0.5) !important;
+    }
+    /* 已選中 CL 卡片：淡彩和紙杏金底 (#fbf0d4) */
+    body.theme-style-3 .brush-card[data-brush="custom"].bg-amber-100\/95 {
+      background-color: #fbf0d4 !important;
+      border-color: #e0a038 !important;
+      box-shadow: 0 0 0 2px rgba(235, 194, 115, 0.28) !important;
+    }
+
+    body.theme-style-3 .brush-card[data-brush="special"] {
+      background-color: #fcfaf5 !important;
+      border-color: #bfb9ae !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="special"] .text-slate-700 {
+      color: #44403c !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="special"] .border-slate-200\/90 {
+      border-color: rgba(191, 185, 174, 0.55) !important;
+    }
+    /* 已選中 SP 卡片：淡彩和紙暖灰底 (#edeae3) */
+    body.theme-style-3 .brush-card[data-brush="special"].bg-slate-200\/90 {
+      background-color: #edeae3 !important;
+      border-color: #9c968b !important;
+      box-shadow: 0 0 0 2px rgba(191, 185, 174, 0.28) !important;
+    }
+
+    body.theme-style-3 .brush-card[data-brush="roster"] {
+      background-color: #fcfaf5 !important;
+      border-color: #eb94a2 !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="roster"] .text-rose-700,
+    body.theme-style-3 .brush-card[data-brush="roster"] .text-rose-800 {
+      color: #9e2d40 !important;
+    }
+    body.theme-style-3 .brush-card[data-brush="roster"] .border-rose-200\/80 {
+      border-color: rgba(235, 148, 162, 0.45) !important;
+    }
+    /* 已選中 OFF 卡片：淡彩和紙山茶粉底 (#fce4e8) */
+    body.theme-style-3 .brush-card[data-brush="roster"].bg-rose-100\/95 {
+      background-color: #fce4e8 !important;
+      border-color: #e36f82 !important;
+      box-shadow: 0 0 0 2px rgba(235, 148, 162, 0.25) !important;
+    }
+
+    /* 配額列右側清除鍵與年曆全覽頂列和紙化 */
+    body.theme-style-3 #btnBrushEraser,
+    body.theme-style-3 #btnOverviewEraser {
+      background: #fcfaf5 !important;
+      border: 1.5px solid #e39aa6 !important;
+      color: #a83c4e !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3 #floatingLeaveBar,
+    body.theme-style-3 #yearViewControls {
+      background: #faf7f0 !important;
+      border-bottom-color: rgba(87, 83, 78, 0.35) !important;
+    }
+    body.theme-style-3 .brush-capsule[data-brush="annual"] {
+      background-color: #eef6fc !important;
+      border-color: #7abdf2 !important;
+      color: #164e7a !important;
+    }
+    body.theme-style-3 .brush-capsule[data-brush="wb"] {
+      background-color: #f5edfc !important;
+      border-color: #c59ef2 !important;
+      color: #4e237a !important;
+    }
+    body.theme-style-3 .brush-capsule[data-brush="birthday"] {
+      background-color: #ebfaf3 !important;
+      border-color: #77d4ac !important;
+      color: #14543a !important;
+    }
+    body.theme-style-3 .brush-capsule[data-brush="custom"] {
+      background-color: #fcf3e1 !important;
+      border-color: #ebc273 !important;
+      color: #6e4406 !important;
+    }
+    body.theme-style-3 .brush-capsule[data-brush="special"] {
+      background-color: #f0ede6 !important;
+      border-color: #bfb9ae !important;
+      color: #292524 !important;
+    }
+    body.theme-style-3 .brush-capsule[data-brush="roster"] {
+      background-color: #fcebed !important;
+      border-color: #eb94a2 !important;
+      color: #7a1c2c !important;
+    }
+
+    /* 假期規劃列表與詳情表徽章 (.pill-*) 同步和紙粉筆色系 */
+    body.theme-style-3 .pill-al {
+      background-color: #d6ecfc !important;
+      color: #164e7a !important;
+      border-color: #7abdf2 !important;
+    }
+    body.theme-style-3 .pill-custom {
+      background-color: #faecc8 !important;
+      color: #6e4406 !important;
+      border-color: #ebc273 !important;
+    }
+    body.theme-style-3 .pill-roster {
+      background-color: #fadce1 !important;
+      color: #7a1c2c !important;
+      border-color: #eb94a2 !important;
+    }
+    body.theme-style-3 .pill-holiday {
+      background-color: #f4ead8 !important;
+      color: #9a3412 !important;
+      border-color: rgba(180, 118, 56, 0.45) !important;
+    }
+    body.theme-style-3 .pill-weekend {
+      background-color: #f5ecea !important;
+      color: #be3a4c !important;
+      border-color: rgba(185, 80, 95, 0.25) !important;
+    }
+
     /* 右側面板與旅行卡片：和紙刊物 Bento */
     body.theme-style-3 #rightSidePanelCard.glass-surface,
     body.theme-style-3 #topApplyLeavePopupBar {
       background: #fcfaf5 !important;
       backdrop-filter: none !important;
-      border: 1.25px solid #292524 !important;
+      border: 1.25px solid rgba(68, 64, 60, 0.72) !important;
       border-radius: 12px !important;
-      box-shadow: 3px 3px 0 rgba(41, 37, 36, 0.14) !important;
+      box-shadow: 3px 3px 0 rgba(87, 83, 78, 0.12) !important;
     }
     body.theme-style-3 #rightSidePanelCard > div:first-child {
       background: #f3efe4 !important;
-      border-bottom: 1.25px solid #292524 !important;
+      border-bottom: 1.25px solid rgba(87, 83, 78, 0.45) !important;
     }
     body.theme-style-3 .trip-card {
       background: #fcfaf5 !important;
       backdrop-filter: none !important;
-      border: 1.25px solid #292524 !important;
+      border: 1.25px solid rgba(68, 64, 60, 0.72) !important;
       border-radius: 10px !important;
-      box-shadow: 2.5px 2.5px 0 rgba(41, 37, 36, 0.14) !important;
+      box-shadow: 2.5px 2.5px 0 rgba(87, 83, 78, 0.12) !important;
     }
     body.theme-style-3 #ganttTimelineBox {
       background: #f3efe4 !important;
-      border: 1px solid #292524 !important;
+      border: 1px solid rgba(87, 83, 78, 0.5) !important;
       border-radius: 8px !important;
+    }
+
+
+    /* =========================================================================
+       方案 A 延伸 · 假期規劃全板塊 ＋ 🧭 出行須知 ＋ 🛡️ 城市指南 ＋ 預訂工作台 ＋ 查詢抽屜和紙化 (v7.5.0)
+       - 徹底消除和風版下突兀的冷冰藍／鮮藍畫面與按鈕，全數統一為暖和紙米白、霧竹綠、淡彩和紙粉筆色系
+       ========================================================================= */
+
+    /* 1. 右側面板頂部分頁列＆視角切換器（假期規劃 / 公眾假期 / 農曆節氣 / 連續假期 / 詳細清單） */
+    body.theme-style-3 #tabBtnLeaves,
+    body.theme-style-3 #tabBtnHolidays,
+    body.theme-style-3 #tabBtnLunar {
+      border-radius: 8px !important;
+      color: #44403c !important;
+    }
+    body.theme-style-3 #tabBtnLeaves.bg-white,
+    body.theme-style-3 #tabBtnHolidays.bg-white,
+    body.theme-style-3 #tabBtnLunar.bg-white {
+      background-color: #fcfaf5 !important;
+      border: 1px solid #57534e !important;
+      color: #292524 !important;
+      box-shadow: 1.5px 1.5px 0 rgba(87, 83, 78, 0.22) !important;
+    }
+    body.theme-style-3 #tabBtnLeaves i { color: #2b74a8 !important; }
+    body.theme-style-3 #tabBtnHolidays svg { color: #b45309 !important; }
+    body.theme-style-3 #tabBtnLunar i { color: #693999 !important; }
+
+    body.theme-style-3 #tabContentLeaves > div:first-child,
+    body.theme-style-3 #mobileRibbonFullPlannerBody > div:first-child {
+      background-color: #f3efe4 !important;
+      border: 1px solid rgba(87, 83, 78, 0.35) !important;
+    }
+    body.theme-style-3 #btnViewTrips,
+    body.theme-style-3 #btnViewTable,
+    body.theme-style-3 #btnTopPlannerViewTrips,
+    body.theme-style-3 #btnTopPlannerViewTable {
+      color: #57534e !important;
+    }
+    body.theme-style-3 #btnViewTrips.bg-white,
+    body.theme-style-3 #btnViewTable.bg-white,
+    body.theme-style-3 #btnTopPlannerViewTrips.bg-white,
+    body.theme-style-3 #btnTopPlannerViewTable.bg-white {
+      background-color: #fcfaf5 !important;
+      border: 1px solid #57534e !important;
+      color: #292524 !important;
+      box-shadow: 1.5px 1.5px 0 rgba(87, 83, 78, 0.2) !important;
+    }
+    body.theme-style-3 #btnViewTrips i,
+    body.theme-style-3 #btnTopPlannerViewTrips i,
+    body.theme-style-3 #ganttTimelineBox i.fa-timeline,
+    body.theme-style-3 #mobileRibbonFullPlannerBody i.fa-timeline,
+    body.theme-style-3 .city-font-scale-badge,
+    body.theme-style-3 i.fa-text-height {
+      color: #44403c !important;
+    }
+    body.theme-style-3 button:has(.city-font-scale-badge) {
+      background-color: #fcfaf5 !important;
+      border-color: rgba(87, 83, 78, 0.5) !important;
+      color: #292524 !important;
+    }
+
+    /* 2. 全年假期分佈走廊甘特圖（和紙刻度尺 ＋ 淡彩粉筆時間塊） */
+    body.theme-style-3 #ganttTimelineBox,
+    body.theme-style-3 #mobileRibbonFullPlannerBody > div:nth-child(2) {
+      background-color: #f3efe4 !important;
+      border: 1px solid rgba(87, 83, 78, 0.5) !important;
+      border-radius: 10px !important;
+    }
+    body.theme-style-3 .gantt-month-labels {
+      background-color: #faf7f0 !important;
+      border-color: rgba(87, 83, 78, 0.45) !important;
+    }
+    body.theme-style-3 .gantt-month-col {
+      color: #44403c !important;
+      border-right-color: rgba(87, 83, 78, 0.32) !important;
+    }
+    body.theme-style-3 .gantt-month-col:nth-child(even) {
+      background-color: #f3efe4 !important;
+    }
+    body.theme-style-3 .gantt-track-base {
+      background-color: #fcfaf5 !important;
+      border-color: rgba(87, 83, 78, 0.45) !important;
+    }
+    body.theme-style-3 .gantt-span-mega {
+      background: linear-gradient(90deg, #9ec9ec 0%, #7abdf2 100%) !important;
+      border: 1px solid #4e9bd6 !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3 .gantt-span-short {
+      background: linear-gradient(90deg, #b5d8b0 0%, #96c490 100%) !important;
+      border: 1px solid #6b9e65 !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3 .gantt-day-badge {
+      background-color: #44403c !important;
+      color: #fcfaf5 !important;
+      box-shadow: none !important;
+    }
+
+    /* 3. 假期規劃卡片（.trip-card）：去掉冰藍漸變標題橫梁與亮藍按鈕，統一為溫潤和紙刊物風 */
+    body.theme-style-3 .trip-card-header-bar {
+      background: #f3efe4 !important;
+      background-image: none !important;
+      border-bottom: 1px solid rgba(87, 83, 78, 0.42) !important;
+      border-top-left-radius: 9px !important;
+      border-top-right-radius: 9px !important;
+    }
+    body.theme-style-3 .trip-card-header-bar span[title*="連續假期"] {
+      background: #fcfaf5 !important;
+      border-color: #57534e !important;
+      color: #292524 !important;
+    }
+    body.theme-style-3 .trip-card-header-bar span[title*="連續假期"] i,
+    body.theme-style-3 .trip-card-header-bar span[title*="連續假期"] span {
+      color: #292524 !important;
+    }
+    body.theme-style-3 .trip-city-title-text,
+    body.theme-style-3 .ribbon-city-title-text {
+      color: #292524 !important;
+    }
+    body.theme-style-3 .month-stamp-box {
+      background-color: #fcfaf5 !important;
+      border: 1px solid rgba(87, 83, 78, 0.55) !important;
+      box-shadow: 2px 2px 0 rgba(87, 83, 78, 0.1) !important;
+    }
+    body.theme-style-3 .month-stamp-body {
+      background-color: #fcfaf5 !important;
+    }
+    body.theme-style-3 .month-mega-number,
+    body.theme-style-3 .month-mega-range {
+      color: #292524 !important;
+    }
+    /* 季節章戳頂條和風低飽和柔光化 */
+    body.theme-style-3 .month-stamp-header.bg-rose-500 { background-color: #d98290 !important; }
+    body.theme-style-3 .month-stamp-header.bg-sky-500 { background-color: #6eaed9 !important; }
+    body.theme-style-3 .month-stamp-header.bg-amber-500 { background-color: #d69e49 !important; }
+    body.theme-style-3 .month-stamp-header.bg-indigo-600 { background-color: #8489b8 !important; }
+
+    body.theme-style-3 .hero-days-number {
+      color: #292524 !important;
+    }
+    body.theme-style-3 .trip-photo-polaroid-frame {
+      border-color: #fcfaf5 !important;
+      outline-color: rgba(87, 83, 78, 0.55) !important;
+      background: #f3efe4 !important;
+    }
+    body.theme-style-3 .micro-cal-day {
+      border-color: rgba(120, 113, 108, 0.35) !important;
+    }
+    body.theme-style-3 .micro-bg-holiday { background-color: #f4ead8 !important; }
+    body.theme-style-3 .micro-bg-weekend { background-color: #f5ecea !important; }
+    body.theme-style-3 .micro-bg-workday { background-color: #faf7f0 !important; }
+
+    /* 旅程卡片內：預訂資料列、Travel Wallet 膠囊、雙錦囊按鈕（出行須知 / 城市指南） */
+    body.theme-style-3 .trip-card button[onclick*="openTripBookingModal"],
+    body.theme-style-3 .trip-card div[onclick*="openTripBookingModal"],
+    body.theme-style-3 #mobileTopTripRibbon button[onclick*="openTripBookingModal"],
+    body.theme-style-3 #mobileTopTripRibbon div[onclick*="openTripBookingModal"] {
+      background: #faf7f0 !important;
+      background-image: none !important;
+      border-color: rgba(87, 83, 78, 0.42) !important;
+      color: #292524 !important;
+    }
+    body.theme-style-3 .trip-card button[onclick*="openTripBookingModal"] *,
+    body.theme-style-3 .trip-card div[onclick*="openTripBookingModal"] *,
+    body.theme-style-3 #mobileTopTripRibbon button[onclick*="openTripBookingModal"] *,
+    body.theme-style-3 #mobileTopTripRibbon div[onclick*="openTripBookingModal"] * {
+      color: #292524 !important;
+    }
+    body.theme-style-3 .btn-dual-capsule[data-capsule-type="prep"] {
+      background: #eef6fc !important;
+      border-color: #7abdf2 !important;
+      color: #164e7a !important;
+    }
+    body.theme-style-3 .btn-dual-capsule[data-capsule-type="prep"] i {
+      color: #2b74a8 !important;
+    }
+    body.theme-style-3 .btn-dual-capsule[data-capsule-type="tips"] {
+      background: #ebfaf3 !important;
+      border-color: #77d4ac !important;
+      color: #14543a !important;
+    }
+    body.theme-style-3 .btn-dual-capsule[data-capsule-type="tips"] i {
+      color: #2d7d5c !important;
+    }
+    body.theme-style-3 .interval-badge-card {
+      background-color: #f3efe4 !important;
+      border-color: rgba(87, 83, 78, 0.45) !important;
+      color: #44403c !important;
+    }
+    body.theme-style-3 .interval-num-hero {
+      color: #292524 !important;
+    }
+
+    /* 4. 手機版頂部「假期規劃」四態走廊與收合月份膠囊（去掉亮藍底） */
+    body.theme-style-3 #mobileRibbonHeaderBar span.bg-blue-600 {
+      background-color: #57534e !important;
+      color: #fcfaf5 !important;
+    }
+    body.theme-style-3 #mobileRibbonHeaderBar span.bg-blue-50\/95 {
+      background-color: #faf7f0 !important;
+      border-color: rgba(87, 83, 78, 0.45) !important;
+      color: #292524 !important;
+    }
+    body.theme-style-3 #mobileRibbonTripCount {
+      color: #292524 !important;
+    }
+    body.theme-style-3 #btnMobileRibbonExpandStage2 {
+      background-color: #faf7f0 !important;
+      border-color: #57534e !important;
+      color: #292524 !important;
+    }
+    body.theme-style-3 #mobileCollapsedCalendarPill {
+      background: #fcfaf5 !important;
+      border: 1.25px solid #57534e !important;
+    }
+    body.theme-style-3 .slot-drum-viewport,
+    body.theme-style-3 .conveyor-stage-viewport {
+      background: #faf7f0 !important;
+      border-color: rgba(87, 83, 78, 0.42) !important;
+    }
+    body.theme-style-3 #mobileTopTripRibbon .snap-center {
+      background-color: #fcfaf5 !important;
+      border-color: rgba(68, 64, 60, 0.65) !important;
+    }
+    body.theme-style-3 #mobileTopTripRibbon .ribbon-card-header-bar {
+      background: #f3efe4 !important;
+      border-bottom-color: rgba(87, 83, 78, 0.35) !important;
+    }
+
+    /* 5. 雙錦囊抽屜（🧭 出行須知 ＋ 🛡️ 城市指南）：全卡片和紙刊物柔光配色 */
+    body.theme-style-3 #dualCapsuleStudioDrawer {
+      background-color: #fcfaf5 !important;
+      border: 1.25px solid rgba(68, 64, 60, 0.72) !important;
+      border-radius: 12px !important;
+      box-shadow: 3px 3px 0 rgba(87, 83, 78, 0.12) !important;
+    }
+    body.theme-style-3 #dcMobileDragHandle {
+      background-color: #f3efe4 !important;
+    }
+    body.theme-style-3 #dcMobileDragHandle > span {
+      background-color: rgba(87, 83, 78, 0.45) !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer > div:nth-child(2) {
+      background: #f3efe4 !important;
+      background-image: none !important;
+      border-bottom-color: rgba(87, 83, 78, 0.42) !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer > div:nth-child(2) > div:nth-child(2) {
+      border-top-color: rgba(87, 83, 78, 0.25) !important;
+    }
+    body.theme-style-3 #dcHeaderTitle {
+      color: #292524 !important;
+    }
+    body.theme-style-3 #dcTabPrep.bg-sky-600,
+    body.theme-style-3 #dcTabTips.bg-sky-600 {
+      background-color: #44403c !important;
+      color: #fcfaf5 !important;
+      border: 1px solid #292524 !important;
+    }
+    body.theme-style-3 #dcTabPrep:not(.bg-sky-600),
+    body.theme-style-3 #dcTabTips:not(.bg-sky-600) {
+      background-color: #fcfaf5 !important;
+      border-color: rgba(87, 83, 78, 0.45) !important;
+      color: #44403c !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer button[onclick*="cycleIconAndCityFontScale"] {
+      background-color: #fcfaf5 !important;
+      border-color: rgba(87, 83, 78, 0.45) !important;
+      color: #292524 !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer button[onclick*="cycleIconAndCityFontScale"] i {
+      color: #57534e !important;
+    }
+    /* 雙錦囊內部所有分類小卡片（.dc-section-card）：柔光和紙粉筆化，保留溫和區分度 */
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card {
+      border-radius: 10px !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-sky-50\/70,
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-sky-50\/90,
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-blue-50\/70,
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-blue-50\/80 {
+      background-color: #f0f6fa !important;
+      border-color: rgba(122, 189, 242, 0.55) !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-indigo-50\/60,
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-indigo-50\/65,
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-violet-50\/65 {
+      background-color: #f5f1fa !important;
+      border-color: rgba(197, 158, 242, 0.55) !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-emerald-50\/65,
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-emerald-50\/75 {
+      background-color: #eff8f3 !important;
+      border-color: rgba(119, 212, 172, 0.55) !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-amber-50\/70 {
+      background-color: #faf4e6 !important;
+      border-color: rgba(235, 194, 115, 0.6) !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-rose-50\/65 {
+      background-color: #faf0f2 !important;
+      border-color: rgba(235, 148, 162, 0.55) !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-slate-50,
+    body.theme-style-3 #dualCapsuleStudioDrawer .dc-section-card.bg-slate-50\/90 {
+      background-color: #f6f3eb !important;
+      border-color: rgba(120, 113, 108, 0.35) !important;
+    }
+    /* 雙錦囊內部實心膠囊按鈕（一鍵載入範本 / 匯率換算 / 城市切換）轉和紙暖調 */
+    body.theme-style-3 #dualCapsuleStudioDrawer button.bg-sky-600,
+    body.theme-style-3 #dualCapsuleStudioDrawer button.bg-blue-600,
+    body.theme-style-3 #dualCapsuleStudioDrawer button.bg-indigo-600 {
+      background-color: #57534e !important;
+      border-color: #44403c !important;
+      color: #fcfaf5 !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer button.bg-emerald-600 {
+      background-color: #6b8568 !important;
+      border-color: #526950 !important;
+      color: #fcfaf5 !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-sky-700,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-sky-900,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-blue-700,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-blue-800,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-blue-900,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-blue-950 {
+      color: #1d5682 !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-indigo-700,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-indigo-900,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-indigo-950,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-violet-700,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-violet-950 {
+      color: #553578 !important;
+    }
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-emerald-700,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-emerald-900,
+    body.theme-style-3 #dualCapsuleStudioDrawer .text-emerald-950 {
+      color: #1f6347 !important;
+    }
+
+    /* 6. 預訂資料工作台（#inlineBookingStudioCard）與查詢/助手抽屜和紙化 */
+    body.theme-style-3 #inlineBookingStudioCard {
+      background-color: #fcfaf5 !important;
+      border: 1.25px solid rgba(68, 64, 60, 0.72) !important;
+    }
+    body.theme-style-3 #bkMobileDragHandle,
+    body.theme-style-3 #inlineBookingStudioCard > div:nth-child(3) {
+      background: #f3efe4 !important;
+      background-image: none !important;
+      border-bottom-color: rgba(87, 83, 78, 0.35) !important;
+    }
+    body.theme-style-3 #flightSectionWrapper:not(.hkg-pillar-theme) .flight-pillar-header {
+      background: #f3efe4 !important;
+      background-image: none !important;
+      border-bottom-color: rgba(87, 83, 78, 0.35) !important;
+    }
+    body.theme-style-3 #topInlineRefPanel {
+      background: #fcfaf5 !important;
+      background-image: none !important;
+      border: 1.25px solid rgba(68, 64, 60, 0.72) !important;
+      box-shadow: 3px 3px 0 rgba(87, 83, 78, 0.12) !important;
+    }
+    body.theme-style-3 #topInlineAssistantPanel {
+      background: #fcfaf5 !important;
+      background-image: none !important;
+      border: 1.25px solid rgba(68, 64, 60, 0.72) !important;
+    }
+    body.theme-style-3 #topInlineAssistantPanel button[onclick*="applyCurrentTravelAssistantCombo"] {
+      background: #57534e !important;
+      background-image: none !important;
+    }
+
+    /* === 過渡動畫期間 GPU 零掉幀優化（暫停毛玻璃即時重算，播完即還原） === */
+    body.overview-animating .month-card,
+    body.overview-animating .glass-surface,
+    body.overview-animating #yearViewControls {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      box-shadow: 0 4px 14px -4px rgba(15, 23, 42, 0.08) !important;
+    }
+    body.overview-animating .month-card:hover {
+      transform: none !important;
+    }
+
+
+    /* =========================================================================
+       【年曆全覽模式：星期六日紅日紅字 ＋ 精緻較幼字體 ＋ 去日格框線 · v7.5.0】
+       - 星期六日及逢日紅日完整保留鮮明紅色字體 (.text-pink-600 / .text-rose-400)
+       - 調幼所有日子字重 (font-weight: 500)，令 12 個月並列視覺更輕盈優雅、不擁擠
+       - 完整保留月份英文縮寫 (JAN–DEC)、備忘錄綠點／黃點 (.day-memo-dots) 及連假天數標註
+       ========================================================================= */
+    body.year-overview-mode .month-card {
+      border: 1px solid rgba(226, 232, 240, 0.55) !important;
+      box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04) !important;
+      background: rgba(255, 255, 255, 0.96) !important;
+    }
+    body.year-overview-mode .month-header-title {
+      border-bottom: none !important;
+      margin-bottom: 2px !important;
+      padding-bottom: 0 !important;
+    }
+    body.year-overview-mode .month-header-title .month-title-sub {
+      display: inline !important;
+    }
+    body.year-overview-mode .month-header-title .month-title-year {
+      display: none !important;
+    }
+    body.year-overview-mode .weekdays-header {
+      color: #94a3b8 !important;
+      font-weight: 600 !important;
+      opacity: 0.88 !important;
+    }
+    body.year-overview-mode .calendar-cell {
+      border: none !important;
+      box-shadow: none !important;
+      background-color: transparent !important;
+    }
+    /* 一般工作日：精緻幼體字重 (500) */
+    body.year-overview-mode .calendar-cell .day-number:not(.text-white):not(.holiday-ph-number):not(.roster-ph-number):not(.text-pink-600):not(.text-rose-400) {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+    /* 星期六日及逢日紅日：保留清晰紅色字 ＋ 精緻幼體字重 (500) */
+    body.year-overview-mode .calendar-cell.bg-pink-50\/80,
+    body.year-overview-mode .calendar-cell.special-sunday-holiday,
+    body.year-overview-mode .calendar-cell.bg-rose-50\/40,
+    body.year-overview-mode.roster-theme-active .calendar-cell.bg-rose-50\/40 {
+      background-color: rgba(255, 228, 230, 0.55) !important;
+      border: none !important;
+    }
+    body.year-overview-mode .calendar-cell .day-number.text-pink-600:not(.text-white) {
+      color: #e11d48 !important;
+      font-weight: 500 !important;
+    }
+    body.year-overview-mode .calendar-cell .day-number.text-rose-400:not(.text-white),
+    body.year-overview-mode.roster-theme-active .calendar-cell.bg-rose-50\/40 .day-number:not(.text-white) {
+      color: #f43f5e !important;
+      font-weight: 500 !important;
+    }
+    /* 公眾假期（橙日）與已排假期（白字）：同步微調為清爽中幼字重，保持清晰易讀 */
+    body.year-overview-mode .calendar-cell.cell-holiday-ph,
+    body.year-overview-mode .calendar-cell.bg-orange-50 {
+      background-color: rgba(255, 237, 213, 0.88) !important;
+      border: none !important;
+    }
+    body.year-overview-mode .calendar-cell .holiday-ph-number,
+    body.year-overview-mode .calendar-cell .roster-ph-number {
+      font-weight: 600 !important;
+    }
+    body.year-overview-mode .calendar-cell .day-number.text-white,
+    body.year-overview-mode.roster-theme-active .calendar-cell .day-number.text-white {
+      font-weight: 650 !important;
+    }
+    body.year-overview-mode .day-memo-dots {
+      display: flex !important;
+    }
+    body.year-overview-mode .span-rail {
+      height: 1.5px !important;
+      bottom: 1px !important;
+      opacity: 0.9 !important;
+    }
+
+    /* 適配風格二（黑金午夜風）於年曆全覽下的去線條極簡視覺 */
+    body.theme-style-2.year-overview-mode .month-card {
+      border-color: rgba(212, 175, 55, 0.2) !important;
+      background: rgba(17, 22, 34, 0.92) !important;
+    }
+    body.theme-style-2.year-overview-mode .weekdays-header {
+      color: #64748b !important;
+    }
+    body.theme-style-2.year-overview-mode .calendar-cell {
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-2.year-overview-mode .calendar-cell .day-number:not(.text-white):not(.holiday-ph-number):not(.roster-ph-number) {
+      color: #cbd5e1 !important;
+    }
+    body.theme-style-2.year-overview-mode .calendar-cell.bg-pink-50\/80,
+    body.theme-style-2.year-overview-mode .calendar-cell.special-sunday-holiday,
+    body.theme-style-2.year-overview-mode .calendar-cell.bg-rose-50\/40 {
+      background-color: rgba(76, 29, 48, 0.48) !important;
+    }
+    body.theme-style-2.year-overview-mode .calendar-cell.cell-holiday-ph,
+    body.theme-style-2.year-overview-mode .calendar-cell.bg-orange-50 {
+      background-color: rgba(120, 53, 15, 0.58) !important;
+    }
+
+    /* 適配風格三（日式和紙風）於年曆全覽下的去線條極簡視覺 */
+    body.theme-style-3.year-overview-mode .month-card {
+      border: 1px solid rgba(41, 37, 36, 0.28) !important;
+      box-shadow: none !important;
+    }
+    body.theme-style-3.year-overview-mode .calendar-cell {
+      background-color: transparent !important;
+      border: none !important;
     }
 
   </style>
@@ -4142,7 +4918,7 @@
                 </button>
               </div>
 
-              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.4.2) -->
+              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.5.0) -->
               <div class="flex md:hidden items-center gap-1 min-w-0">
                 <!-- 左側即時實色身份膠囊（僅於進入某個功能板塊時顯示對應實色＋白字；選單展開未選前隱藏不干擾） -->
                 <button type="button" id="mobileCapsuleLeftLabel" onclick="triggerPinnedMobileAction()" aria-label="目前功能名稱">登記寫假</button>
@@ -5071,7 +5847,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v7.4.2</span>
+      <span>v7.5.0</span>
     </button>
   </footer>
 
@@ -5229,7 +6005,7 @@
           <div>
             <h3 class="font-black text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.4.2</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.5.0</span>
             </h3>
           </div>
         </div>
@@ -5241,7 +6017,95 @@
       <div class="p-4 overflow-y-auto custom-scroll space-y-3.5 text-xs">
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.4.2（測試版 · 設定新增「版面風格」三選一：風格一晴空原版 / 風格二黑金午夜旗艦風 / 風格三日式和紙雜誌風）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 日式和紙風全介面色彩統一：假期規劃＋出行須知＋城市指南）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>假期規劃全板塊和紙化</b>：統一「假期規劃」頂部分頁列、全年假期走廊甘特圖、旅程標題橫梁、預訂工作台及手機頂部走廊為溫潤和紙刊物色調，消除冷冰藍畫面。</li>
+            <li><b>🧭 出行須知 ＆ 🛡️ 城市指南全套調色</b>：雙錦囊頂欄、分頁按鈕及所有分類小卡片同步轉為淡彩和紙粉筆色系，內外視覺 100% 和諧貫通。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 日式和紙風套用「方案 A 淡彩和紙粉筆風」）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>方案 A 淡彩和紙粉筆風</b>：風格三所有假別改用高明度水彩粉筆底色（晴和淡藍、藤花淡紫、若竹淡綠、杏仁淡金、和紙暖灰、山茶淡粉）配深墨炭清晰數字，通透輕盈不沉重。</li>
+            <li><b>全套連動頂部配額卡片與全覽膠囊</b>：切換至日式和紙風時，頂部「休假類別與年度配額」卡片、年曆全覽膠囊及詳情徽章同步轉為和紙粉筆色系。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 日式和紙風統一高明度霧灰假期色系）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>統一和風霧灰假期色系</b>：重調風格三（日式和紙風）全部假別顏色為統一低飽和、高明度的霧灰和風色調，光亮通透不沉暗。</li>
+            <li><b>柔和邊框與數字對比</b>：同步微調月曆邊框、連假底線與數字色彩，整體和紙刊物質感更輕盈和諧。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 年曆全覽保留星期六日紅色字 ＋ 精緻幼體日子）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>保留星期六日／紅日紅色字</b>：年曆全覽下星期六、星期日及逢日紅日恢復鮮明紅色字體，與平日一目了然區分。</li>
+            <li><b>全體日子調幼字體</b>：將年曆全覽所有日期數字由粗體改為輕盈幼體字重，12 個月並列更顯精緻疏朗。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 年曆全覽還原備忘錄綠黃點、英文月份 JAN–DEC 與連假標註）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>完整還原備忘錄綠點／黃點指示</b>：年曆全覽下恢復顯示所有單日備忘與備注彩色微點，重要日程一目了然。</li>
+            <li><b>還原月份英文縮寫（JAN–DEC）與連假標註</b>：保留每月英文月份及連假天數標記，同時維持無日格框線的通透排版。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 年曆全覽去線條與文字極簡化，架構零改動）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>移除日格框線與標題底線</b>：年曆全覽模式下平日改為純淨無框呈現，只保留週末與公眾假期自然底色，徹底消除網格密集感。</li>
+            <li><b>精簡月份標題與微縮角標</b>：隱藏全覽狀態下重複的英文月份（JAN–DEC）、年份水印及微縮 PH／備忘角標，只保留俐落中文月份與清晰日期。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 消除切換中間停頓，實現零斷點單一連續弾出彈入 Fade-In / Fade-Out 動畫）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>徹底移除切換中間 115ms 停頓</b>：雙指放開或撳掣切換「年曆全覽／還原月曆」時，直接由當前手指實時縮放位置無縫銜接一條連貫彈簧曲線，消除窒格感。</li>
+            <li><b>動畫期間暫停毛玻璃即時重算</b>：縮放彈入／彈出期間釋放 GPU 負載，播完即刻無縫還原質感，全程滿幀順滑。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 年曆全覽手勢順滑度全面升級 ＋ 彈出彈入 Fade-In / Fade-Out 過渡動畫）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>雙指捏合／張開順滑度強化</b>：取消月份卡延遲渲染並加入雙指中心跟隨微位移與低通阻尼插值，縮放切換全覽零掉幀。</li>
+            <li><b>加入彈出彈入（Pop-in / Pop-out ＋ Fade-In / Fade-Out）過渡</b>：無論係手勢捏合定撳掣切換「年曆全覽」與「還原月曆」，頂部工具列同 12 個月網格均具備柔和淡出淡入與縮放彈入動畫。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 設定新增「版面風格」三選一：風格一晴空原版 / 風格二黑金午夜旗艦風 / 風格三日式和紙雜誌風）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5254,7 +6118,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.4.2（移除手機假期規劃「1/3 · 2/3」多餘標籤 ＋ 順序「細 ➔ 中(一小幅) ➔ 大(全開) ➔ 中 ➔ 細 ➔ 收埋」開合節奏）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（移除手機假期規劃「1/3 · 2/3」多餘標籤 ＋ 順序「細 ➔ 中(一小幅) ➔ 大(全開) ➔ 中 ➔ 細 ➔ 收埋」開合節奏）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5265,7 +6129,7 @@
 
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v7.4.2（修正 iPad 至手機跨斷點拖拉錯亂 ＋ iPad 純藍數字天數標註 ＋ 年曆全覽幼線連動條）</span>
+            <span class="font-bold text-indigo-700 text-xs">v7.5.0（修正 iPad 至手機跨斷點拖拉錯亂 ＋ iPad 純藍數字天數標註 ＋ 年曆全覽幼線連動條）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5277,7 +6141,7 @@
 
         <div class="border-l-2 border-sky-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.4.2（雙錦囊兩行清晰標題排版 ＋ 精簡手機頂部走馬燈列 ＋ 移除手機底部重複面板）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.5.0（雙錦囊兩行清晰標題排版 ＋ 精簡手機頂部走馬燈列 ＋ 移除手機底部重複面板）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5289,7 +6153,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.4.2（月曆右上角灰色年份一按直入「年曆全覽」＋ 焦點月份微光定位）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（月曆右上角灰色年份一按直入「年曆全覽」＋ 焦點月份微光定位）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5300,7 +6164,7 @@
 
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-800 text-xs">v7.4.2（全年曆覽專屬外緣純標誌與隱藏鎖頭 · 主月曆還原原本徽章設計）</span>
+            <span class="font-bold text-indigo-800 text-xs">v7.5.0（全年曆覽專屬外緣純標誌與隱藏鎖頭 · 主月曆還原原本徽章設計）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5311,7 +6175,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.4.2（手機觸控防穿透隔離 ＋ 自動解鎖頁面滾動防卡死守衛）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.5.0（手機觸控防穿透隔離 ＋ 自動解鎖頁面滾動防卡死守衛）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5323,7 +6187,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.4.2（假期小方塊英文全名大細楷標題化 ＋ CL 預設全名 Casual Leave）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.5.0（假期小方塊英文全名大細楷標題化 ＋ CL 預設全名 Casual Leave）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5334,7 +6198,7 @@
 
         <div class="border-l-2 border-indigo-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v7.4.2（年曆全覽與單月視圖 FLIP 連續物理縮放過渡動畫）</span>
+            <span class="font-bold text-indigo-700 text-xs">v7.5.0（年曆全覽與單月視圖 FLIP 連續物理縮放過渡動畫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5345,7 +6209,7 @@
 
         <div class="border-l-2 border-blue-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.4.2（移除方塊右上角齒輪完整顯示英文全名 ＋ 數值全靠右垂直對齊）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.0（移除方塊右上角齒輪完整顯示英文全名 ＋ 數值全靠右垂直對齊）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5356,7 +6220,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.4.2（假期方塊同色系字體配搭 ＋ 柔和灰輔助標籤 ＋ 極淺灰齒輪精修）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.5.0（假期方塊同色系字體配搭 ＋ 柔和灰輔助標籤 ＋ 極淺灰齒輪精修）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5367,7 +6231,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.4.2（假期方塊全平台統一尺寸 ＋ 輪休模式右上角齒輪同步 ＋ 主題色實線外框與側邊浮光）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.5.0（假期方塊全平台統一尺寸 ＋ 輪休模式右上角齒輪同步 ＋ 主題色實線外框與側邊浮光）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5379,7 +6243,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.4.2（精簡淺色填滿年度配額卡片 ＋ 機票順序黃色提醒修正 ＋ 全檔文字校對清理）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.5.0（精簡淺色填滿年度配額卡片 ＋ 機票順序黃色提醒修正 ＋ 全檔文字校對清理）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -5729,7 +6593,7 @@
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
             <li>移除額外佔位說明橫條，將「跨週長假·全用AL / 四季放鬆·留備用 / 請1-2日·輕巧快閃」直接內嵌於頂部三個方案膠囊內，完全不影響原有版面高度。</li>
-            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.4.2</code>（移除 beta 字樣）。</li>
+            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.5.0</code>（移除 beta 字樣）。</li>
           </ul>
         </div>
 
@@ -24133,16 +24997,20 @@
     }
     window.handleMonthCardYearClick = handleMonthCardYearClick;
 
-    function toggleYearOverview(forceState = null, focusMonthIdx = null, fromPinchScale = 1) {
+    let overviewAnimCleanupTimer = null;
+
+function toggleYearOverview(forceState = null, focusMonthIdx = null, fromPinchScale = 1, fromPanX = 0, fromPanY = 0) {
       const isOverview = document.body.classList.contains('year-overview-mode');
       const targetState = forceState !== null ? forceState : !isOverview;
       const label = document.getElementById('btnYearViewLabel');
       const container = document.getElementById('calendarContainer');
+      const yearControls = document.getElementById('yearViewControls');
+      const topHeader = document.getElementById('topHeader');
+      const stickyArea = document.getElementById('stickyHeaderArea');
 
       if (targetState === isOverview) {
         if (container) {
-          container.style.transition = 'transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease';
-          container.style.transformOrigin = '50% 0%';
+          container.style.transition = 'transform 0.38s cubic-bezier(0.18, 0.96, 0.24, 1), opacity 0.24s ease';
           container.style.transform = 'translate3d(0, 0, 0) scale(1)';
           container.style.opacity = '1';
         }
@@ -24155,7 +25023,10 @@
         return;
       }
 
-      // 1. FIRST：在切換版面之前，捕捉焦點月份卡片當前於螢幕上的實際視覺座標與尺寸（含雙指捏合當下縮放倍率）
+      clearTimeout(overviewAnimCleanupTimer);
+      document.body.classList.add('overview-animating');
+
+      // 1. FIRST：在零停頓切換前，精準量度焦點月份卡於螢幕上的「實際視覺矩形」（已包含手指捏合縮放與位移！）
       const resolvedFocusIdx = (typeof focusMonthIdx === 'number' && focusMonthIdx >= 0 && focusMonthIdx <= 11)
         ? focusMonthIdx
         : getCurrentViewportFocalMonthIdx(container);
@@ -24164,14 +25035,24 @@
       const focalCardBefore = cardsBefore[resolvedFocusIdx] || cardsBefore[0];
       const firstRect = focalCardBefore ? focalCardBefore.getBoundingClientRect() : null;
 
-      // 2. 切換目標排版模式並同步捲動定位
+      // 2. 同一幀內直接切換目標版面（完全消除中間 setTimeout 停頓窒格！）
       if (targetState) {
+        if (yearControls) yearControls.classList.remove('is-fading-out');
         document.body.classList.add('year-overview-mode');
         if (label) label.textContent = '還原月曆';
         window.scrollTo({ top: 0, behavior: 'auto' });
       } else {
+        if (yearControls) yearControls.classList.remove('is-fading-out');
         document.body.classList.remove('year-overview-mode');
         if (label) label.textContent = '年曆全覽';
+
+        [topHeader, stickyArea].forEach(el => {
+          if (!el) return;
+          el.style.transition = 'none';
+          el.style.opacity = '0';
+          el.style.transform = 'translate3d(0, -6px, 0)';
+        });
+
         const cardsAfterScroll = container.querySelectorAll('.month-card');
         const targetCard = cardsAfterScroll[resolvedFocusIdx];
         if (targetCard) {
@@ -24181,19 +25062,19 @@
         }
       }
 
-      // 3. LAST：讀取切換版面後，同一張焦點月份卡片的新螢幕位置與尺寸
+      // 3. LAST：讀取切換版面後，同一張焦點月份卡片嘅新螢幕座標與尺寸
       const cardsAfter = container.querySelectorAll('.month-card');
       const focalCardAfter = cardsAfter[resolvedFocusIdx] || cardsAfter[0];
       const lastRect = focalCardAfter ? focalCardAfter.getBoundingClientRect() : null;
 
-      // 4. INVERT + PLAY：計算真實位置差與比例差，令畫面由原位／原比例絲滑縮放過渡至目標版面，徹底消除跳躍感
+      // 4. INVERT + PLAY：單一連續 iOS 彈簧曲線一氣呵成彈入／彈出並同步 Fade-In，零斷點！
+      container.style.transition = 'none';
       if (firstRect && lastRect && firstRect.width > 10 && lastRect.width > 10) {
         let initScale = firstRect.width / lastRect.width;
-        // 限制合理縮放區間（縮小進入全覽時由 ~2.2x 慢慢縮至 1x；放大還原月曆時由 ~0.45x 慢慢放大至 1x）
         if (targetState) {
-          initScale = Math.max(1.28, Math.min(2.65, initScale));
+          initScale = Math.max(1.18, Math.min(2.45, initScale));
         } else {
-          initScale = Math.max(0.36, Math.min(0.82, initScale));
+          initScale = Math.max(0.42, Math.min(0.88, initScale));
         }
 
         const firstCx = firstRect.left + firstRect.width * 0.5;
@@ -24204,31 +25085,46 @@
         const dx = firstCx - lastCx;
         const dy = firstCy - lastCy;
 
-        container.style.transition = 'none';
-        container.style.transformOrigin = `${lastCx}px ${lastCy}px`;
+        container.style.transformOrigin = `${lastCx.toFixed(1)}px ${lastCy.toFixed(1)}px`;
         container.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) scale(${initScale.toFixed(4)})`;
-        container.style.opacity = '0.88';
-
-        // 強制瀏覽器提交初始幀，再啟動 0.52s Apple iOS 級流暢緩動過渡
-        void container.offsetWidth;
-
-        requestAnimationFrame(() => {
-          container.style.transition = 'transform 0.52s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.36s ease';
-          container.style.transform = 'translate3d(0px, 0px, 0px) scale(1)';
-          container.style.opacity = '1';
-        });
+        container.style.opacity = '0.28';
       } else {
-        container.style.transition = 'none';
-        container.style.transformOrigin = '50% 18%';
-        container.style.transform = targetState ? 'translate3d(0, 0, 0) scale(1.45)' : 'translate3d(0, 0, 0) scale(0.65)';
-        container.style.opacity = '0.82';
-        void container.offsetWidth;
-        requestAnimationFrame(() => {
-          container.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease';
-          container.style.transform = 'translate3d(0, 0, 0) scale(1)';
-          container.style.opacity = '1';
-        });
+        container.style.transformOrigin = '50% 22%';
+        container.style.transform = targetState ? 'translate3d(0, 0, 0) scale(1.28)' : 'translate3d(0, 0, 0) scale(0.74)';
+        container.style.opacity = '0.28';
       }
+
+      // 強制瀏覽器提交起始幀
+      void container.offsetWidth;
+
+      requestAnimationFrame(() => {
+        container.style.transition = 'transform 0.42s cubic-bezier(0.18, 0.96, 0.24, 1), opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1)';
+        container.style.transform = 'translate3d(0px, 0px, 0px) scale(1)';
+        container.style.opacity = '1';
+
+        if (!targetState) {
+          [topHeader, stickyArea].forEach(el => {
+            if (!el) return;
+            el.style.transition = 'opacity 0.28s ease, transform 0.34s cubic-bezier(0.18, 0.96, 0.24, 1)';
+            el.style.opacity = '1';
+            el.style.transform = 'translate3d(0, 0, 0)';
+          });
+        }
+      });
+
+      overviewAnimCleanupTimer = setTimeout(() => {
+        document.body.classList.remove('overview-animating');
+        container.style.transition = '';
+        container.style.transform = '';
+        container.style.transformOrigin = '';
+        container.style.opacity = '';
+        [topHeader, stickyArea].forEach(el => {
+          if (!el) return;
+          el.style.transition = '';
+          el.style.opacity = '';
+          el.style.transform = '';
+        });
+      }, 450);
     }
     
 function setupYearOverviewToggle() {
@@ -24238,7 +25134,6 @@ function setupYearOverviewToggle() {
       const btnShare = document.getElementById('btnOverviewShare');
       const container = document.getElementById('calendarContainer');
 
-      // 1. 頂部按鍵：0.38 秒 Apple 級彈簧動畫切換
       if (btnToggle) {
         btnToggle.onclick = () => toggleYearOverview();
       }
@@ -24248,18 +25143,22 @@ function setupYearOverviewToggle() {
       if (btnOverviewLock) {
         btnOverviewLock.onclick = () => toggleGlobalEditMode();
       }
-
-      // 2. 分享長圖按鈕 (年曆全覽頂部工具列「分享」按鍵)
       if (btnShare) {
         btnShare.onclick = handleShareYearOverviewImage;
       }
 
-      // 3. Apple iOS 原生日曆級 60fps 跟手雙指捏合／張開 ＋ 單指左右長拉切年引擎
+      // 3. 原生 iOS 相簿級 120Hz 跟手雙指捏合／張開（直接貼合手指、零延遲滯後）＋ 單指左右長拉切年引擎
       if (container) {
         let isPinching = false;
         let pinchStartDist = 0;
+        let pinchStartMidX = 0;
+        let pinchStartMidY = 0;
         let pinchTargetScale = 1;
         let pinchCurrentScale = 1;
+        let pinchTargetPanX = 0;
+        let pinchCurrentPanX = 0;
+        let pinchTargetPanY = 0;
+        let pinchCurrentPanY = 0;
         let pinchOriginX = 50;
         let pinchOriginY = 50;
         let pinchFocalMonthIdx = -1;
@@ -24307,15 +25206,18 @@ function setupYearOverviewToggle() {
             pinchRafId = null;
             return;
           }
-          // 60fps iOS 級低通平滑插值，零抖動跟手縮放
-          pinchCurrentScale += (pinchTargetScale - pinchCurrentScale) * 0.45;
-          if (Math.abs(pinchTargetScale - pinchCurrentScale) < 0.002) {
+          // 高響應 0.65 跟手係數：緊貼雙指零黏滯感，同時濾除觸控採樣微震
+          pinchCurrentScale += (pinchTargetScale - pinchCurrentScale) * 0.65;
+          pinchCurrentPanX += (pinchTargetPanX - pinchCurrentPanX) * 0.65;
+          pinchCurrentPanY += (pinchTargetPanY - pinchCurrentPanY) * 0.65;
+
+          if (Math.abs(pinchTargetScale - pinchCurrentScale) < 0.001) {
             pinchCurrentScale = pinchTargetScale;
           }
           const deltaScale = Math.abs(1 - pinchCurrentScale);
-          const liveOpacity = Math.max(0.86, 1 - deltaScale * 0.35);
+          const liveOpacity = Math.max(0.68, 1 - deltaScale * 0.85);
           container.style.transformOrigin = `${pinchOriginX}% ${pinchOriginY}%`;
-          container.style.transform = `translate3d(0, 0, 0) scale(${pinchCurrentScale.toFixed(4)})`;
+          container.style.transform = `translate3d(${pinchCurrentPanX.toFixed(2)}px, ${pinchCurrentPanY.toFixed(2)}px, 0) scale(${pinchCurrentScale.toFixed(4)})`;
           container.style.opacity = liveOpacity.toFixed(3);
           pinchRafId = requestAnimationFrame(renderPinchFrame);
         };
@@ -24325,7 +25227,7 @@ function setupYearOverviewToggle() {
             swipeRafId = null;
             return;
           }
-          currentVisualX += (targetVisualX - currentVisualX) * 0.42;
+          currentVisualX += (targetVisualX - currentVisualX) * 0.45;
           if (Math.abs(targetVisualX - currentVisualX) < 0.15) {
             currentVisualX = targetVisualX;
           }
@@ -24392,6 +25294,7 @@ function setupYearOverviewToggle() {
             hidePullIndicator();
             isPinching = true;
             pinchThresholdCrossed = false;
+            document.body.classList.add('overview-animating');
             container.classList.add('touching');
             container.style.transition = 'none';
 
@@ -24400,9 +25303,15 @@ function setupYearOverviewToggle() {
             pinchStartDist = Math.max(10, Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY));
             pinchTargetScale = 1;
             pinchCurrentScale = 1;
+            pinchTargetPanX = 0;
+            pinchCurrentPanX = 0;
+            pinchTargetPanY = 0;
+            pinchCurrentPanY = 0;
 
             const midX = (t1.clientX + t2.clientX) / 2;
             const midY = (t1.clientY + t2.clientY) / 2;
+            pinchStartMidX = midX;
+            pinchStartMidY = midY;
             const rect = container.getBoundingClientRect();
             pinchOriginX = rect.width > 0 ? Math.max(0, Math.min(100, ((midX - rect.left) / rect.width) * 100)) : 50;
             pinchOriginY = rect.height > 0 ? Math.max(0, Math.min(100, ((midY - rect.top) / rect.height) * 100)) : 50;
@@ -24430,7 +25339,6 @@ function setupYearOverviewToggle() {
           }
         }, { passive: true });
 
-        // 雙指捏合時需 passive: false 徹底阻止瀏覽器原生網頁放大搶奪手勢
         container.addEventListener('touchmove', (e) => {
           if ((typeof isAnyForegroundOverlayOpen === 'function' && isAnyForegroundOverlayOpen()) || (e.target && e.target.closest && (e.target.closest('#dualCapsuleStudioDrawer') || e.target.closest('#inlineBookingStudioDrawer') || e.target.closest('#mobileTopTripRibbon') || e.target.closest('#yearPickerPopover') || e.target.closest('#topInlineRefPanel') || e.target.closest('#topInlineAssistantPanel') || e.target.closest('#topApplyLeavePopupBar') || e.target.closest('#drawerMenuModal')))) {
             if (swipeAxis === 'x' || isPinching) {
@@ -24439,6 +25347,7 @@ function setupYearOverviewToggle() {
               stopSwipeRaf();
               stopPinchRaf();
               hidePullIndicator();
+              document.body.classList.remove('overview-animating');
               container.classList.remove('touching');
               container.style.transform = 'translate3d(0, 0, 0) scale(1)';
               container.style.opacity = '1';
@@ -24451,25 +25360,29 @@ function setupYearOverviewToggle() {
             const t1 = e.touches[0];
             const t2 = e.touches[1];
             const curDist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+            const curMidX = (t1.clientX + t2.clientX) / 2;
+            const curMidY = (t1.clientY + t2.clientY) / 2;
             const rawRatio = curDist / pinchStartDist;
             const isOverview = document.body.classList.contains('year-overview-mode');
 
-            // 物理橡皮筋阻尼：符合方向時跟手連續放大/縮小，反向拉動時施加強阻尼
+            pinchTargetPanX = Math.max(-56, Math.min(56, (curMidX - pinchStartMidX) * 0.6));
+            pinchTargetPanY = Math.max(-56, Math.min(56, (curMidY - pinchStartMidY) * 0.6));
+
             if (!isOverview) {
               if (rawRatio < 1) {
-                pinchTargetScale = Math.max(0.56, 1 - (1 - rawRatio) * 0.82);
+                pinchTargetScale = Math.max(0.55, 1 - (1 - rawRatio) * 0.92);
               } else {
-                pinchTargetScale = Math.min(1.06, 1 + (rawRatio - 1) * 0.14);
+                pinchTargetScale = Math.min(1.05, 1 + (rawRatio - 1) * 0.12);
               }
             } else {
               if (rawRatio > 1) {
-                pinchTargetScale = Math.min(1.52, 1 + (rawRatio - 1) * 0.78);
+                pinchTargetScale = Math.min(1.6, 1 + (rawRatio - 1) * 0.9);
               } else {
-                pinchTargetScale = Math.max(0.94, 1 - (1 - rawRatio) * 0.14);
+                pinchTargetScale = Math.max(0.95, 1 - (1 - rawRatio) * 0.12);
               }
             }
 
-            const crossed = (!isOverview && pinchTargetScale <= 0.86) || (isOverview && pinchTargetScale >= 1.15);
+            const crossed = (!isOverview && pinchTargetScale <= 0.89) || (isOverview && pinchTargetScale >= 1.12);
             if (crossed && !pinchThresholdCrossed) {
               pinchThresholdCrossed = true;
               if (navigator.vibrate) {
@@ -24553,22 +25466,31 @@ function setupYearOverviewToggle() {
           hidePullIndicator();
 
           const isOverview = document.body.classList.contains('year-overview-mode');
-          const shouldSwitchToOverview = !isOverview && pinchTargetScale <= 0.86;
-          const shouldRestoreMonthView = isOverview && pinchTargetScale >= 1.15;
+          const shouldSwitchToOverview = !isOverview && pinchTargetScale <= 0.89;
+          const shouldRestoreMonthView = isOverview && pinchTargetScale >= 1.12;
 
           if (shouldSwitchToOverview) {
-            toggleYearOverview(true, pinchFocalMonthIdx, pinchCurrentScale);
+            toggleYearOverview(true, pinchFocalMonthIdx, pinchCurrentScale, pinchCurrentPanX, pinchCurrentPanY);
           } else if (shouldRestoreMonthView) {
-            toggleYearOverview(false, pinchFocalMonthIdx, pinchCurrentScale);
+            toggleYearOverview(false, pinchFocalMonthIdx, pinchCurrentScale, pinchCurrentPanX, pinchCurrentPanY);
           } else {
-            // 未達切換臨界點：iOS 級流暢彈簧回彈原尺寸
-            container.style.transition = 'transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.26s ease';
+            // 未達切換臨界點：絲滑彈簧回彈原尺寸
+            container.style.transition = 'transform 0.38s cubic-bezier(0.18, 0.96, 0.24, 1), opacity 0.24s ease';
             container.style.transform = 'translate3d(0, 0, 0) scale(1)';
             container.style.opacity = '1';
+            setTimeout(() => {
+              document.body.classList.remove('overview-animating');
+              container.style.transition = '';
+              container.style.transform = '';
+            }, 390);
           }
           pinchStartDist = 0;
           pinchTargetScale = 1;
           pinchCurrentScale = 1;
+          pinchTargetPanX = 0;
+          pinchCurrentPanX = 0;
+          pinchTargetPanY = 0;
+          pinchCurrentPanY = 0;
           pinchThresholdCrossed = false;
         };
 
@@ -43695,7 +44617,7 @@ function setEditModeState(newState, notifyToast = true) {
               <i class="fa-solid fa-clock-rotate-left text-sky-600 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-extrabold text-slate-800 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.4.2</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.5.0</span>
           </button>
         </div>
 
