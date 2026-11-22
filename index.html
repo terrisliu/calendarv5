@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Noto+Serif+TC:wght@500;600;700;900&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap');
     
     @keyframes airySkyFlow {
       0% {
@@ -276,7 +276,7 @@
       box-shadow: inset 3px 0 0 #9333ea;
     }
 
-    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.5.0) === */
+    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.5.10) === */
     @media (max-width: 767px) {
       /* 2027 年份與萬年曆切換掣長期常駐顯示於左側，任何頁面／模式皆不消失 */
       #mainYearSwitcher {
@@ -994,7 +994,7 @@
       color: #ffffff !important;
     }
 
-    /* === 彈性分割視圖 (Elastic Split-View · 全程吸頂永不頂走 v7.5.0) === */
+    /* === 彈性分割視圖 (Elastic Split-View · 全程吸頂永不頂走 v7.5.10) === */
     @media (max-width: 767px) {
       /* 僅喺手機單欄 (<768px) 令 #leftSideColumn 穿透為 contents，避免影響 iPad 768px–1023px 雙欄網格！ */
       #leftSideColumn {
@@ -2613,7 +2613,7 @@
       transition: max-width 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease, margin-right 0.22s ease;
     }
     .trip-morph-pill.is-open .trip-morph-actions {
-      max-width: 84px;
+      max-width: 112px;
       opacity: 1;
       margin-right: 4px;
     }
@@ -3493,7 +3493,7 @@
       letter-spacing: 0.045em !important;
     }
 
-    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.5.0） === */
+    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.5.10） === */
     @keyframes orbHaloBreathe {
       0%, 100% {
         opacity: 0.85;
@@ -3625,184 +3625,191 @@
 
 
 
+
     /* =========================================================================
-       【版面風格二：黑金午夜旗艦風 (Midnight Obsidian & Champagne · 固定架構純換膚 · v7.5.0)】
+       【版面風格二：四季光影極簡風 (Minimalist 3-Tone Seasonal Atmosphere · v7.5.10)】
+       - 簡約三色主調（霧白 #f8fafc · 霧灰線框 #cbd5e1 · 墨藍灰 #1e293b）繪畫全站界面
+       - 年曆內公眾假期（橙日）、紅日（星期六日）及所有請假顏色（AL/WB/BL/CL/SP/OFF）100% 保持原色不變
+       - 滾動感應當前聚焦月份，自動切換春夏秋冬背景光影與左右邊緣微粒子
        ========================================================================= */
     body.theme-style-2 {
-      background-color: #090b10 !important;
-      background-image: radial-gradient(circle at 18% 12%, rgba(212, 175, 55, 0.14) 0%, transparent 44%),
-                        radial-gradient(circle at 84% 18%, rgba(56, 189, 248, 0.16) 0%, transparent 46%),
-                        linear-gradient(180deg, #0b0e15 0%, #111622 50%, #090b10 100%) !important;
-      background-attachment: fixed !important;
+      background-color: #f8fafc !important;
+      background-image: none !important;
       animation: none !important;
-      color: #f1f5f9 !important;
+      color: #1e293b !important;
+      transition: background-color 0.6s ease;
     }
+    /* 四季柔和背景光暈層（隨滾動月份無縫過渡，保持極簡淡雅三色克制感） */
+    #seasonalAmbientBackdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.45s ease, background 0.9s ease;
+    }
+    body.theme-style-2 #seasonalAmbientBackdrop {
+      opacity: 1;
+    }
+    #seasonalAmbientBackdrop[data-season="spring"] {
+      background:
+        radial-gradient(circle at 8% 18%, rgba(244, 114, 182, 0.11) 0%, transparent 46%),
+        radial-gradient(circle at 92% 78%, rgba(251, 207, 232, 0.16) 0%, transparent 50%),
+        linear-gradient(180deg, #faf8fa 0%, #f8fafc 100%);
+    }
+    #seasonalAmbientBackdrop[data-season="summer"] {
+      background:
+        radial-gradient(circle at 10% 14%, rgba(56, 189, 248, 0.12) 0%, transparent 48%),
+        radial-gradient(circle at 90% 80%, rgba(186, 230, 253, 0.18) 0%, transparent 52%),
+        linear-gradient(180deg, #f5fafe 0%, #f8fafc 100%);
+    }
+    #seasonalAmbientBackdrop[data-season="autumn"] {
+      background:
+        radial-gradient(circle at 10% 16%, rgba(217, 119, 6, 0.10) 0%, transparent 46%),
+        radial-gradient(circle at 90% 82%, rgba(253, 230, 138, 0.16) 0%, transparent 50%),
+        linear-gradient(180deg, #fbf9f5 0%, #f8fafc 100%);
+    }
+    #seasonalAmbientBackdrop[data-season="winter"] {
+      background:
+        radial-gradient(circle at 10% 15%, rgba(100, 116, 139, 0.11) 0%, transparent 48%),
+        radial-gradient(circle at 90% 82%, rgba(203, 213, 225, 0.22) 0%, transparent 52%),
+        linear-gradient(180deg, #f4f7fb 0%, #f8fafc 100%);
+    }
+    #seasonalParticleCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+    body.theme-style-2 #seasonalParticleCanvas {
+      opacity: 1;
+    }
+    body.theme-style-2 #appMainWrapper,
+    body.theme-style-2 footer {
+      position: relative;
+      z-index: 2;
+    }
+    /* 簡約三色主調（霧白 · 霧灰線框 · 墨藍灰）：套用至頂欄、控制列、卡片與面板，絕不改動年曆假期色塊 */
     body.theme-style-2 #topHeader {
-      border-bottom-color: rgba(212, 175, 55, 0.28) !important;
+      border-bottom-color: #e2e8f0 !important;
     }
     body.theme-style-2 #topHeader h1 span {
-      color: #f8e5a0 !important;
-      letter-spacing: 0.01em !important;
+      color: #1e293b !important;
     }
-    body.theme-style-2 #btnOpenDrawerMenu {
-      background: rgba(22, 28, 42, 0.9) !important;
-      border-color: rgba(212, 175, 55, 0.45) !important;
-      color: #f3d27a !important;
-      box-shadow: 0 0 14px rgba(212, 175, 55, 0.18) !important;
-    }
-    body.theme-style-2 #stickyHeaderArea .glass-surface {
-      background: rgba(17, 22, 34, 0.86) !important;
-      backdrop-filter: blur(24px) saturate(160%) !important;
-      border: 1px solid rgba(212, 175, 55, 0.36) !important;
-      box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(248, 229, 160, 0.18) !important;
-    }
-    body.theme-style-2 #btnOpenMainYearPopover,
-    body.theme-style-2 #mainYearDisplayText,
-    body.theme-style-2 #overviewYearDisplayText {
-      color: #f8e5a0 !important;
-      text-shadow: 0 0 14px rgba(212, 175, 55, 0.32) !important;
-    }
-    body.theme-style-2 #btnOpenMainYearPopover:hover {
-      background-color: rgba(212, 175, 55, 0.14) !important;
+    body.theme-style-2 #btnOpenDrawerMenu,
+    body.theme-style-2 #btnToggleYearView,
+    body.theme-style-2 #btnClearAll,
+    body.theme-style-2 #btnToggleGlobalLock {
+      background: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #1e293b !important;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
     }
     body.theme-style-2 #btnToggleMainApplyBar,
     body.theme-style-2 #btnAutoGenerateTrip {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
-      border: 1px solid rgba(212, 175, 55, 0.55) !important;
-      color: #f8e5a0 !important;
-      box-shadow: 0 4px 16px -2px rgba(212, 175, 55, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+      background: #1e293b !important;
+      background-image: none !important;
+      border: 1px solid #0f172a !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.14) !important;
     }
-    body.theme-style-2 #btnToggleYearView {
-      background: rgba(15, 23, 42, 0.9) !important;
-      border: 1px solid rgba(56, 189, 248, 0.55) !important;
-      color: #7dd3fc !important;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.2) !important;
+    body.theme-style-2 #btnToggleMainApplyBar i,
+    body.theme-style-2 #btnAutoGenerateTrip i {
+      color: #cbd5e1 !important;
     }
-    body.theme-style-2 #btnClearAll,
-    body.theme-style-2 #btnToggleGlobalLock {
-      background: rgba(22, 28, 42, 0.92) !important;
-      border-color: rgba(212, 175, 55, 0.35) !important;
-      color: #f3d27a !important;
+    body.theme-style-2 #stickyHeaderArea .glass-surface,
+    body.theme-style-2 #rightSidePanelCard.glass-surface,
+    body.theme-style-2 #topApplyLeavePopupBar,
+    body.theme-style-2 #topInlineRefPanel,
+    body.theme-style-2 #topInlineAssistantPanel {
+      background: rgba(255, 255, 255, 0.90) !important;
+      background-image: none !important;
+      backdrop-filter: blur(18px) !important;
+      -webkit-backdrop-filter: blur(18px) !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 4px 16px -4px rgba(15, 23, 42, 0.05) !important;
+    }
+    body.theme-style-2 #rightSidePanelCard > div:first-child {
+      background: #f8fafc !important;
+      border-bottom-color: #e2e8f0 !important;
+    }
+    body.theme-style-2 #tabBtnLeaves.bg-white,
+    body.theme-style-2 #tabBtnHolidays.bg-white,
+    body.theme-style-2 #tabBtnLunar.bg-white,
+    body.theme-style-2 #btnViewTrips.bg-white,
+    body.theme-style-2 #btnViewTable.bg-white,
+    body.theme-style-2 #btnTopPlannerViewTrips.bg-white,
+    body.theme-style-2 #btnTopPlannerViewTable.bg-white {
+      background: #1e293b !important;
+      border-color: #1e293b !important;
+      color: #ffffff !important;
+    }
+    body.theme-style-2 #tabBtnLeaves.bg-white i,
+    body.theme-style-2 #tabBtnHolidays.bg-white svg,
+    body.theme-style-2 #tabBtnLunar.bg-white i,
+    body.theme-style-2 #btnViewTrips.bg-white i,
+    body.theme-style-2 #btnViewTable.bg-white i {
+      color: #ffffff !important;
+    }
+    body.theme-style-2 .month-card {
+      background: rgba(255, 255, 255, 0.92) !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 2px 10px -3px rgba(15, 23, 42, 0.04) !important;
+    }
+    body.theme-style-2 .month-header-title {
+      border-bottom-color: #e2e8f0 !important;
+    }
+    body.theme-style-2 .month-title-main,
+    body.theme-style-2 .month-title-sub,
+    body.theme-style-2 .weekdays-header,
+    body.theme-style-2 #mainYearDisplayText,
+    body.theme-style-2 #overviewYearDisplayText {
+      color: #1e293b !important;
+    }
+    body.theme-style-2 .trip-card {
+      background: rgba(255, 255, 255, 0.94) !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 3px 12px -4px rgba(15, 23, 42, 0.05) !important;
+    }
+    body.theme-style-2 .trip-card-header-bar {
+      background: #f8fafc !important;
+      background-image: none !important;
+      border-bottom-color: #e2e8f0 !important;
+    }
+    body.theme-style-2 #ganttTimelineBox {
+      background: #f8fafc !important;
+      border-color: #cbd5e1 !important;
     }
     @media (max-width: 767px) {
       body.theme-style-2 #mobileContextYearOverviewBtn,
       body.theme-style-2 #mobileContextHomeReturnBtn,
       body.theme-style-2 #mobileStage2RestoreCalBtn,
-      body.theme-style-2 #btnToggleMobileToolbar {
-        background: linear-gradient(145deg, #1e2638 0%, #0f1420 100%) !important;
-        border: 1.5px solid rgba(212, 175, 55, 0.65) !important;
-        color: #f8e5a0 !important;
-        box-shadow: 0 0 12px rgba(212, 175, 55, 0.28) !important;
+      body.theme-style-2 #btnToggleMobileToolbar,
+      body.theme-style-2 #btnToggleMobileTripRibbon:not(.is-active):not(.is-active-item) {
+        background: #ffffff !important;
+        border: 1.25px solid #475569 !important;
+        color: #1e293b !important;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
       }
       body.theme-style-2 #btnToggleMobileToolbar .mobile-orb-icon {
-        color: #f8e5a0 !important;
-      }
-      body.theme-style-2 #btnToggleMobileTripRibbon:not(.is-active):not(.is-active-item) {
-        background: rgba(15, 23, 42, 0.92) !important;
-        border: 1.5px solid rgba(56, 189, 248, 0.65) !important;
-        color: #38bdf8 !important;
-        box-shadow: 0 0 12px rgba(56, 189, 248, 0.25) !important;
+        color: #1e293b !important;
       }
       body.theme-style-2 #mobileTopTripRibbon > div {
-        background: rgba(15, 20, 32, 0.96) !important;
-        border: 1px solid rgba(212, 175, 55, 0.45) !important;
-        color: #f1f5f9 !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 1px solid #cbd5e1 !important;
       }
       body.theme-style-2 #mobileRibbonHeaderBar {
-        background: rgba(22, 29, 46, 0.95) !important;
-        border-bottom-color: rgba(212, 175, 55, 0.25) !important;
+        background: #f8fafc !important;
+        border-bottom-color: #e2e8f0 !important;
       }
-      body.theme-style-2 #mobileRibbonHeaderBar span.font-black.text-slate-800 {
-        color: #f8e5a0 !important;
-      }
-    }
-    /* 黑金午夜月曆卡片與發光日曆格仔 */
-    body.theme-style-2 .month-card {
-      background: rgba(17, 22, 34, 0.86) !important;
-      backdrop-filter: blur(20px) saturate(150%) !important;
-      border: 1px solid rgba(212, 175, 55, 0.26) !important;
-      box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(248, 229, 160, 0.12) !important;
-    }
-    body.theme-style-2 .month-card:hover {
-      border-color: rgba(56, 189, 248, 0.55) !important;
-      box-shadow: 0 14px 34px -6px rgba(56, 189, 248, 0.22), inset 0 1px 0 rgba(248, 229, 160, 0.2) !important;
-    }
-    body.theme-style-2 .month-header-title {
-      border-bottom-color: rgba(212, 175, 55, 0.22) !important;
-    }
-    body.theme-style-2 .month-title-main {
-      color: #f8e5a0 !important;
-    }
-    body.theme-style-2 .month-title-sub {
-      color: #38bdf8 !important;
-    }
-    body.theme-style-2 .month-title-year {
-      color: rgba(212, 175, 55, 0.45) !important;
-    }
-    body.theme-style-2 .weekdays-header {
-      color: #cbd5e1 !important;
-    }
-    body.theme-style-2 .calendar-cell {
-      background-color: rgba(26, 33, 50, 0.92) !important;
-      border-color: rgba(71, 85, 105, 0.55) !important;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 2px 6px rgba(0, 0, 0, 0.35) !important;
-    }
-    body.theme-style-2 .calendar-cell .day-number:not(.text-white):not(.holiday-ph-number):not(.roster-ph-number):not(.day-half-leave) {
-      color: #e2e8f0 !important;
-    }
-    body.theme-style-2 .calendar-cell.bg-pink-50\/80,
-    body.theme-style-2 .calendar-cell.special-sunday-holiday,
-    body.theme-style-2 .calendar-cell.bg-rose-50\/40 {
-      background-color: rgba(76, 29, 48, 0.62) !important;
-      border-color: rgba(244, 114, 182, 0.35) !important;
-    }
-    body.theme-style-2 .calendar-cell.cell-holiday-ph,
-    body.theme-style-2 .calendar-cell.bg-orange-50 {
-      background-color: rgba(120, 53, 15, 0.68) !important;
-      border-color: rgba(251, 191, 36, 0.55) !important;
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.22) !important;
-    }
-    body.theme-style-2 .calendar-cell:hover {
-      border-color: #38bdf8 !important;
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.42) !important;
-    }
-    body.theme-style-2 .span-rail {
-      background: linear-gradient(90deg, #f59e0b, #38bdf8) !important;
-      box-shadow: 0 0 8px rgba(56, 189, 248, 0.65) !important;
-    }
-    /* 右側面板與卡片：黑金磨砂玻璃 */
-    body.theme-style-2 #rightSidePanelCard.glass-surface,
-    body.theme-style-2 #topApplyLeavePopupBar {
-      background: rgba(15, 20, 32, 0.92) !important;
-      border: 1px solid rgba(212, 175, 55, 0.34) !important;
-      color: #f1f5f9 !important;
-    }
-    body.theme-style-2 #rightSidePanelCard > div:first-child {
-      background: rgba(22, 29, 46, 0.9) !important;
-      border-bottom-color: rgba(212, 175, 55, 0.25) !important;
-    }
-    body.theme-style-2 .trip-card {
-      background: rgba(23, 30, 46, 0.92) !important;
-      border: 1px solid rgba(212, 175, 55, 0.32) !important;
-      color: #f1f5f9 !important;
-    }
-    body.theme-style-2 .trip-card .text-slate-800,
-    body.theme-style-2 .trip-card .text-slate-900,
-    body.theme-style-2 .trip-city-title-text {
-      color: #f8e5a0 !important;
-    }
-    body.theme-style-2 .trip-card .text-slate-500,
-    body.theme-style-2 .trip-card .text-slate-600 {
-      color: #94a3b8 !important;
-    }
-    body.theme-style-2 #ganttTimelineBox {
-      background: rgba(22, 29, 46, 0.85) !important;
-      border-color: rgba(212, 175, 55, 0.25) !important;
-      color: #cbd5e1 !important;
     }
 
     /* =========================================================================
-       【版面風格三：日式和紙雜誌風 · 方案 A 淡彩和紙粉筆風 (Pastel Washi Tint · v7.5.0)】
+       【版面風格三：日式和紙雜誌風 · 方案 A 淡彩和紙粉筆風 (Pastel Washi Tint · v7.5.10)】
        - 日曆與迷你小日曆：高明度淡彩和紙粉筆底色 ＋ 深色清晰數字，輕盈通透不沉暗
        - 頂部「休假類別與年度配額」卡片＆年曆全覽膠囊：100% 同步連動和紙粉筆色系
        ========================================================================= */
@@ -4257,7 +4264,7 @@
 
 
     /* =========================================================================
-       方案 A 延伸 · 假期規劃全板塊 ＋ 🧭 出行須知 ＋ 🛡️ 城市指南 ＋ 預訂工作台 ＋ 查詢抽屜和紙化 (v7.5.0)
+       方案 A 延伸 · 假期規劃全板塊 ＋ 🧭 出行須知 ＋ 🛡️ 城市指南 ＋ 預訂工作台 ＋ 查詢抽屜和紙化 (v7.5.10)
        - 徹底消除和風版下突兀的冷冰藍／鮮藍畫面與按鈕，全數統一為暖和紙米白、霧竹綠、淡彩和紙粉筆色系
        ========================================================================= */
 
@@ -4643,7 +4650,7 @@
 
 
     /* =========================================================================
-       【年曆全覽模式：星期六日紅日紅字 ＋ 精緻較幼字體 ＋ 去日格框線 · v7.5.0】
+       【年曆全覽模式：星期六日紅日紅字 ＋ 精緻較幼字體 ＋ 去日格框線 · v7.5.10】
        - 星期六日及逢日紅日完整保留鮮明紅色字體 (.text-pink-600 / .text-rose-400)
        - 調幼所有日子字重 (font-weight: 500)，令 12 個月並列視覺更輕盈優雅、不擁擠
        - 完整保留月份英文縮寫 (JAN–DEC)、備忘錄綠點／黃點 (.day-memo-dots) 及連假天數標註
@@ -4719,32 +4726,6 @@
       opacity: 0.9 !important;
     }
 
-    /* 適配風格二（黑金午夜風）於年曆全覽下的去線條極簡視覺 */
-    body.theme-style-2.year-overview-mode .month-card {
-      border-color: rgba(212, 175, 55, 0.2) !important;
-      background: rgba(17, 22, 34, 0.92) !important;
-    }
-    body.theme-style-2.year-overview-mode .weekdays-header {
-      color: #64748b !important;
-    }
-    body.theme-style-2.year-overview-mode .calendar-cell {
-      background-color: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
-    body.theme-style-2.year-overview-mode .calendar-cell .day-number:not(.text-white):not(.holiday-ph-number):not(.roster-ph-number) {
-      color: #cbd5e1 !important;
-    }
-    body.theme-style-2.year-overview-mode .calendar-cell.bg-pink-50\/80,
-    body.theme-style-2.year-overview-mode .calendar-cell.special-sunday-holiday,
-    body.theme-style-2.year-overview-mode .calendar-cell.bg-rose-50\/40 {
-      background-color: rgba(76, 29, 48, 0.48) !important;
-    }
-    body.theme-style-2.year-overview-mode .calendar-cell.cell-holiday-ph,
-    body.theme-style-2.year-overview-mode .calendar-cell.bg-orange-50 {
-      background-color: rgba(120, 53, 15, 0.58) !important;
-    }
-
     /* 適配風格三（日式和紙風）於年曆全覽下的去線條極簡視覺 */
     body.theme-style-3.year-overview-mode .month-card {
       border: 1px solid rgba(41, 37, 36, 0.28) !important;
@@ -4761,6 +4742,10 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body class="text-slate-800 antialiased p-2 md:p-6 min-h-screen flex flex-col justify-between readonly-mode">
+  <!-- 風格二專屬：四季光影動態背景與邊緣粒子畫布 -->
+  <div id="seasonalAmbientBackdrop" data-season="winter" aria-hidden="true"></div>
+  <canvas id="seasonalParticleCanvas" aria-hidden="true"></canvas>
+
 
   
 
@@ -4918,7 +4903,7 @@
                 </button>
               </div>
 
-              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.5.0) -->
+              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.5.10) -->
               <div class="flex md:hidden items-center gap-1 min-w-0">
                 <!-- 左側即時實色身份膠囊（僅於進入某個功能板塊時顯示對應實色＋白字；選單展開未選前隱藏不干擾） -->
                 <button type="button" id="mobileCapsuleLeftLabel" onclick="triggerPinnedMobileAction()" aria-label="目前功能名稱">登記寫假</button>
@@ -5843,11 +5828,11 @@
   </div>
 
   <footer class="text-center py-4 text-xs text-slate-400 mt-4 border-t border-slate-200 flex flex-wrap items-center justify-center gap-2">
-    <span>香港假期管理 · 1900–2200</span>
+    <span>Manity Studio 2026</span>
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v7.5.0</span>
+      <span>v7.5.10</span>
     </button>
   </footer>
 
@@ -6005,7 +5990,7 @@
           <div>
             <h3 class="font-black text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.5.0</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.5.10</span>
             </h3>
           </div>
         </div>
@@ -6017,7 +6002,118 @@
       <div class="p-4 overflow-y-auto custom-scroll space-y-3.5 text-xs">
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 日式和紙風全介面色彩統一：假期規劃＋出行須知＋城市指南）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 明信片三版式升級：版式一精簡日期、版式二雅緻明體宋韻、新增版式三電影海報膠卷風）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>版式一 · 航空郵戳精簡排版</b>：移除底部冗餘的「· 連放 X 日」副標，僅保留純淨出發至回程日期，與右上角大日數徽章呼應。</li>
+            <li><b>版式二 · 雅緻刊物明體字韻</b>：載入 <code>Noto Serif TC</code>（明體宋韻）與 <code>Cormorant Garamond</code>（襯線英文字體），令置中題字區重現概念圖的書卷雜誌質感。</li>
+            <li><b>新增「版式三 · 電影海報膠卷風」</b>：35mm 暗房膠片齒孔邊框、<code>KODAK VISION3 500T</code> 片邊編號、銀幕戲劇暗角光影、明體片名及經典電影演職員表排印。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 修復明信片預覽彈窗並統一左上角國際航空三字碼）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>修復相機圖示點擊開啟預覽視窗</b>：補齊明信片預覽與分享引擎模組閉合結構，確保點擊任何旅程之相機圖示即時彈出高清明信片預覽視窗。</li>
+            <li><b>左上角統一國際航空英文三字碼</b>：無論有否預先填寫航班資料，左上角航線膠囊均自動解析為標準 3 位英文 IATA 機場代碼（例如 <code>HKG ✈ KIX</code>、<code>HKG ✈ TYO</code>、<code>HKG ✈ ICN</code>、<code>HKG ✈ TPE</code>）。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 寶麗來明信片 1:1 概念圖比例精調與跨平台矢量國旗）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>跨平台高清矢量國旗方章</b>：改用純 Canvas 矢量繪製白邊圓角國旗徽章，解決 Windows 電腦瀏覽器無法顯示彩色國旗 Emoji 而顯示灰字 <code>JP</code> 的問題。</li>
+            <li><b>1:1 概念圖比例與細節對齊</b>：等比放大復古航空郵戳（<code>AIR MAIL 2027</code>）與貫穿雙側波浪線、放大左上角毛玻璃航線膠囊（<code>HKG ✈ 目的地</code>）、右下角特大 <code>X日 / DAYS</code> 疊字及底部主副標題字距比例。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 新增「寶麗來旅行明信片」雙版式匯出與分享功能）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>每趟旅程專屬寶麗來明信片</b>：點擊旅程卡片右上角 <code>•••</code>（或手機頂部旅程列相機圖示）即可開啟「明信片預覽」，自動帶入目的地靚相、國旗、出發日期、標題與「X日 / DAYS」標記。</li>
+            <li><b>雙版式一鍵切換</b>：內建<b>「版式一 · 航空郵戳」</b>（含 <code>HKG ✈ 目的地</code> 航線膠囊、復古航空郵戳與品牌落款）及<b>「版式二 · 極簡拍立得」</b>（純粹大相片＋對稱留白題字），並自動適配風格三和紙質感。</li>
+            <li><b>自由換相與自訂上傳</b>：可一鍵切換該城市多張精選風景相或從相簿上傳自訂照片，並輸出 2×/3× 超高清 PNG 直接分享至 WhatsApp / IG 或儲存相簿。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 新增「風格二 · 四季光影極簡風」簡約三色主題）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>專屬「風格二 · 四季光影極簡風」</b>：於設定選單「版面風格」方格中新增風格二，全站介面採用霧白（<code>#f8fafc</code>）、霧灰線框（<code>#cbd5e1</code>）與墨藍灰（<code>#1e293b</code>）簡約三色主調繪製。</li>
+            <li><b>年曆核心假期色彩 100% 保留</b>：公眾假期（橙日）、紅日（星期六日）及所有請假色彩（AL／WB／BL／CL／SP／OFF）完全維持原有鮮明色塊不變。</li>
+            <li><b>捲動感應四季動態光影</b>：上下捲動年曆時，背景光暈與螢幕左右兩側邊緣微粒子會隨當前聚焦月份自動切換春櫻、夏光、秋葉與冬雪。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 頁尾署名更新為 Manity Studio 2026）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>頁尾品牌署名更新</b>：將頁面底部原「香港假期管理 · 1900–2200」更名為「Manity Studio 2026」。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 「版面風格」移至「備份與重置」上方可開合方格，並移除風格二）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>選單位置與開合方格</b>：將設定抽屜中的「版面風格」移至「備份與重置」上一行，採用與下方一致的可開合摺疊列，點擊展開後以雙欄方格並排顯示各風格卡片。</li>
+            <li><b>精簡保留風格一與風格三</b>：徹底移除風格二（黑金午夜旗艦風）及其相關樣式，保留「風格一 · 晴空毛玻璃（原版）」與「風格三 · 日式和紙雜誌風」。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 詳細清單鎖頭圖示移至日期後方）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>詳細清單鎖頭排版優化</b>：將所有詳細清單（桌面版右側面板、手機版頂部全開面板及全覽清單）中已鎖定日期的金色鎖頭圖示移至日期後方顯示，日期數字靠左對齊更整齊。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 純淨分享截圖版面，移除底部行程清單）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>移除分享截圖底部行程清單</b>：按「分享」匯出圖片時，底部僅保留簡潔假別圖例欄，不再附加多餘的旅遊行程列表，畫面更乾淨俐落。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 原生 Canvas 2D 1:1 零走位高清分享截圖引擎）</span>
+            <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
+          </div>
+          <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
+            <li><b>1:1 還原當前螢幕編排</b>：重寫「分享」圖片生成引擎，手機直度下嚴格維持 3 欄 × 4 行年曆編排、去日格框線、幼體日子與紅日紅字，絕不再強制改為電腦版 4×3 格式。</li>
+            <li><b>像素級零走位繪製</b>：改用原生 Canvas 2D 數學座標精準置中繪製日期數字、上下半天色塊、連假橫線、連假天數細字及備忘圓點，徹底解決第三方截圖庫數字下墜與標注偏移。</li>
+            <li><b>完整保留當前版面風格</b>：自動偵測風格一（晴空毛玻璃）、風格二（黑金午夜風）或風格三（日式和紙粉筆風），匯出圖片色彩與畫面 100% 一致。</li>
+          </ul>
+        </div>
+
+        <div class="border-l-2 border-blue-600 pl-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 日式和紙風全介面色彩統一：假期規劃＋出行須知＋城市指南）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6028,7 +6124,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 日式和紙風套用「方案 A 淡彩和紙粉筆風」）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 日式和紙風套用「方案 A 淡彩和紙粉筆風」）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6039,7 +6135,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 日式和紙風統一高明度霧灰假期色系）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 日式和紙風統一高明度霧灰假期色系）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6050,7 +6146,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 年曆全覽保留星期六日紅色字 ＋ 精緻幼體日子）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 年曆全覽保留星期六日紅色字 ＋ 精緻幼體日子）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6061,7 +6157,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 年曆全覽還原備忘錄綠黃點、英文月份 JAN–DEC 與連假標註）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 年曆全覽還原備忘錄綠黃點、英文月份 JAN–DEC 與連假標註）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6072,7 +6168,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 年曆全覽去線條與文字極簡化，架構零改動）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 年曆全覽去線條與文字極簡化，架構零改動）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6083,7 +6179,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 消除切換中間停頓，實現零斷點單一連續弾出彈入 Fade-In / Fade-Out 動畫）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 消除切換中間停頓，實現零斷點單一連續弾出彈入 Fade-In / Fade-Out 動畫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6094,7 +6190,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 年曆全覽手勢順滑度全面升級 ＋ 彈出彈入 Fade-In / Fade-Out 過渡動畫）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 年曆全覽手勢順滑度全面升級 ＋ 彈出彈入 Fade-In / Fade-Out 過渡動畫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6105,7 +6201,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（測試版 · 設定新增「版面風格」三選一：風格一晴空原版 / 風格二黑金午夜旗艦風 / 風格三日式和紙雜誌風）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（測試版 · 設定新增「版面風格」三選一：風格一晴空原版 / 風格二黑金午夜旗艦風 / 風格三日式和紙雜誌風）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6118,7 +6214,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（移除手機假期規劃「1/3 · 2/3」多餘標籤 ＋ 順序「細 ➔ 中(一小幅) ➔ 大(全開) ➔ 中 ➔ 細 ➔ 收埋」開合節奏）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（移除手機假期規劃「1/3 · 2/3」多餘標籤 ＋ 順序「細 ➔ 中(一小幅) ➔ 大(全開) ➔ 中 ➔ 細 ➔ 收埋」開合節奏）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6129,7 +6225,7 @@
 
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v7.5.0（修正 iPad 至手機跨斷點拖拉錯亂 ＋ iPad 純藍數字天數標註 ＋ 年曆全覽幼線連動條）</span>
+            <span class="font-bold text-indigo-700 text-xs">v7.5.10（修正 iPad 至手機跨斷點拖拉錯亂 ＋ iPad 純藍數字天數標註 ＋ 年曆全覽幼線連動條）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6141,7 +6237,7 @@
 
         <div class="border-l-2 border-sky-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.5.0（雙錦囊兩行清晰標題排版 ＋ 精簡手機頂部走馬燈列 ＋ 移除手機底部重複面板）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.5.10（雙錦囊兩行清晰標題排版 ＋ 精簡手機頂部走馬燈列 ＋ 移除手機底部重複面板）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6153,7 +6249,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（月曆右上角灰色年份一按直入「年曆全覽」＋ 焦點月份微光定位）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（月曆右上角灰色年份一按直入「年曆全覽」＋ 焦點月份微光定位）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6164,7 +6260,7 @@
 
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-800 text-xs">v7.5.0（全年曆覽專屬外緣純標誌與隱藏鎖頭 · 主月曆還原原本徽章設計）</span>
+            <span class="font-bold text-indigo-800 text-xs">v7.5.10（全年曆覽專屬外緣純標誌與隱藏鎖頭 · 主月曆還原原本徽章設計）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6175,7 +6271,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.5.0（手機觸控防穿透隔離 ＋ 自動解鎖頁面滾動防卡死守衛）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.5.10（手機觸控防穿透隔離 ＋ 自動解鎖頁面滾動防卡死守衛）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6187,7 +6283,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.5.0（假期小方塊英文全名大細楷標題化 ＋ CL 預設全名 Casual Leave）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.5.10（假期小方塊英文全名大細楷標題化 ＋ CL 預設全名 Casual Leave）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6198,7 +6294,7 @@
 
         <div class="border-l-2 border-indigo-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v7.5.0（年曆全覽與單月視圖 FLIP 連續物理縮放過渡動畫）</span>
+            <span class="font-bold text-indigo-700 text-xs">v7.5.10（年曆全覽與單月視圖 FLIP 連續物理縮放過渡動畫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6209,7 +6305,7 @@
 
         <div class="border-l-2 border-blue-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.0（移除方塊右上角齒輪完整顯示英文全名 ＋ 數值全靠右垂直對齊）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.10（移除方塊右上角齒輪完整顯示英文全名 ＋ 數值全靠右垂直對齊）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6220,7 +6316,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.5.0（假期方塊同色系字體配搭 ＋ 柔和灰輔助標籤 ＋ 極淺灰齒輪精修）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.5.10（假期方塊同色系字體配搭 ＋ 柔和灰輔助標籤 ＋ 極淺灰齒輪精修）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6231,7 +6327,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.5.0（假期方塊全平台統一尺寸 ＋ 輪休模式右上角齒輪同步 ＋ 主題色實線外框與側邊浮光）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.5.10（假期方塊全平台統一尺寸 ＋ 輪休模式右上角齒輪同步 ＋ 主題色實線外框與側邊浮光）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6243,7 +6339,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.5.0（精簡淺色填滿年度配額卡片 ＋ 機票順序黃色提醒修正 ＋ 全檔文字校對清理）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.5.10（精簡淺色填滿年度配額卡片 ＋ 機票順序黃色提醒修正 ＋ 全檔文字校對清理）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6593,7 +6689,7 @@
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
             <li>移除額外佔位說明橫條，將「跨週長假·全用AL / 四季放鬆·留備用 / 請1-2日·輕巧快閃」直接內嵌於頂部三個方案膠囊內，完全不影響原有版面高度。</li>
-            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.5.0</code>（移除 beta 字樣）。</li>
+            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.5.10</code>（移除 beta 字樣）。</li>
           </ul>
         </div>
 
@@ -21312,6 +21408,17 @@
       if (btn) btn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
     }
 
+    function toggleDrawerLayoutStyleSection(forceState) {
+      const body = document.getElementById('drawerLayoutStyleCollapsibleBody');
+      const chevron = document.getElementById('drawerLayoutStyleChevron');
+      const btn = document.getElementById('btnToggleDrawerLayoutStyle');
+      if (!body) return;
+      const shouldOpen = typeof forceState === 'boolean' ? forceState : body.classList.contains('hidden');
+      body.classList.toggle('hidden', !shouldOpen);
+      if (chevron) chevron.style.transform = shouldOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+      if (btn) btn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    }
+
     function toggleDrawerBackupResetSection(forceState) {
       const body = document.getElementById('drawerBackupResetCollapsibleBody');
       const chevron = document.getElementById('drawerBackupResetChevron');
@@ -21607,7 +21714,7 @@
 
         const isYearOverview = document.body.classList.contains('year-overview-mode');
         const formattedDate = formatHKDate(dateStr);
-        const lockIcon = item.locked ? '<i class="fa-solid fa-lock text-amber-500 mr-1 text-[10px]"></i>' : '';
+        const lockIcon = item.locked ? '<i class="fa-solid fa-lock text-amber-500 ml-1 text-[10px]"></i>' : '';
 
         // 備註欄統一渲染：電腦與手機端全面統一為按鈕觸發，點擊即呼出高質感備註與智慧決策彈窗！
         let noteCellHtml = '';
@@ -21626,7 +21733,7 @@
           const tr = document.createElement('tr');
           tr.className = 'hover:bg-slate-50 transition';
           tr.innerHTML = `
-            <td class="py-2 px-2 font-medium text-slate-800 whitespace-nowrap">${lockIcon}${formattedDate}</td>
+            <td class="py-2 px-2 font-medium text-slate-800 whitespace-nowrap">${formattedDate}${lockIcon}</td>
             <td class="py-2 px-1 text-center"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600">${slotDesc}</span></td>
             <td class="py-2 px-1 whitespace-nowrap"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium ${badge}">${typeDesc}</span></td>
             <td class="py-2 px-2">${noteCellHtml}</td>
@@ -22178,6 +22285,11 @@
                 <!-- 極簡小圓點 (•••) ➔ 點擊橫向平滑伸展為鵝蛋形膠囊，露出純圖示 [✎] 與 [🗑] -->
                 <div class="trip-morph-pill shrink-0" onclick="event.stopPropagation()">
                   <div class="trip-morph-actions">
+                    <button type="button" onclick="event.stopPropagation(); window.openTripPostcardModal('${trip.startDate}_${trip.endDate}')"
+                            class="btn-open-trip-postcard w-5 h-5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90"
+                            data-trip-key="${trip.startDate}_${trip.endDate}" title="匯出寶麗來明信片" aria-label="匯出寶麗來明信片">
+                      <i class="fa-solid fa-camera-retro text-[9px]"></i>
+                    </button>
                     <button type="button" onclick="event.stopPropagation(); window.openEditTripTitleModal('${trip.startDate}_${trip.endDate}')"
                             class="btn-edit-trip-title w-5 h-5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 inline-flex items-center justify-center cursor-pointer transition active:scale-90"
                             data-trip-key="${trip.startDate}_${trip.endDate}" aria-label="旅程標題">
@@ -23657,6 +23769,11 @@
               </div>
               <div class="flex items-center gap-1 shrink-0 h-[18px]">
                 ${renderTripConflictBadgeHtml(tripKey, 'ribbon')}
+                <button type="button" onclick="event.stopPropagation(); window.openTripPostcardModal('${tripKey}')" data-trip-key="${tripKey}"
+                        class="btn-open-trip-postcard w-[18px] h-[18px] rounded-full bg-amber-50 hover:bg-amber-100 active:bg-amber-200 text-amber-600 inline-flex items-center justify-center shrink-0 cursor-pointer transition"
+                        title="匯出寶麗來明信片" aria-label="匯出寶麗來明信片">
+                  <i class="fa-solid fa-camera-retro text-[8px] leading-none"></i>
+                </button>
                 <button type="button" onclick="event.stopPropagation(); openEditTripTitleModal('${tripKey}')" data-trip-key="${tripKey}"
                         class="btn-edit-trip-title w-[18px] h-[18px] rounded-full bg-slate-100 hover:bg-blue-50 active:bg-blue-100 text-[#0f2b63] hover:text-blue-800 inline-flex items-center justify-center shrink-0 cursor-pointer transition"
                         aria-label="旅程標題">
@@ -24719,207 +24836,518 @@
     }
 
     async function captureYearOverviewCanvas() {
-      const calendarEl = document.getElementById('calendarContainer');
-      const wasOverview = document.body.classList.contains('year-overview-mode');
+      // 【原生 Canvas 2D 1:1 像素級重繪引擎 · v7.5.10】
+      // 完全繞開 html2canvas 對 flex 置中、負邊距定位及 backdrop-filter 的排版偏差：
+      // 直接讀取當前螢幕 3×4 / 4×3 網格比例與當前版面風格（晴空毛玻璃 / 黑金午夜 / 日式和紙粉筆），
+      // 逐格精準繪製 12 個月年曆、紅日紅字、幼體日期、連假橫線、連假天數細字及備忘圓點！
+      const isMobilePortrait = window.innerWidth < 768;
+      const cols = isMobilePortrait ? 3 : 4;
+      const rows = isMobilePortrait ? 4 : 3;
 
-      // 暫時套用 1080px 寬幅 4×3 高清排版捕捉，確保手機與電腦輸出同樣大字清晰、假期與標注完整可見
-      document.body.classList.add('year-export-capture-mode');
-      if (!wasOverview) {
-        document.body.classList.add('year-overview-mode');
-      }
+      const isStyle2 = document.body.classList.contains('theme-style-2');
+      const isStyle3 = document.body.classList.contains('theme-style-3');
+      const isRoster = Boolean(typeof rosterModeConfig !== 'undefined' && rosterModeConfig && rosterModeConfig.enabled);
 
-      let calCanvas;
-      try {
-        await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-        calCanvas = await html2canvas(calendarEl, {
-          scale: 2,
-          width: 1080,
-          windowWidth: 1280,
-          backgroundColor: '#fafbfc',
-          useCORS: true,
-          logging: false,
-          imageTimeout: 0,
-          removeContainer: true
-        });
-      } finally {
-        document.body.classList.remove('year-export-capture-mode');
-        if (!wasOverview) {
-          document.body.classList.remove('year-overview-mode');
+      // 3 倍 Retina 超高清基準解析度
+      const scale = 3;
+      const logicalW = isMobilePortrait ? 414 : 1080;
+      const padX = isMobilePortrait ? 10 : 28;
+      const headerH = isMobilePortrait ? 44 : 74;
+      const colGap = isMobilePortrait ? 6 : 16;
+      const rowGap = isMobilePortrait ? 6 : 16;
+
+      // 依當前風格設定精準色票
+      const palette = isStyle2 ? {
+        pageBg: '#f8fafc',
+        cardBg: '#ffffff',
+        cardBorder: '#cbd5e1',
+        titleZh: '#1e293b',
+        titleEn: '#475569',
+        headerText: '#1e293b',
+        subHeaderText: '#64748b',
+        divider: '#e2e8f0',
+        weekdayNormal: '#64748b',
+        weekdayWeekend: '#e11d48',
+        dayNormal: '#334155',
+        weekendBg: 'rgba(255, 228, 230, 0.65)',
+        weekendText: '#e11d48',
+        holidayBg: '#ffedd5',
+        holidayText: '#ea580c',
+        railColor: '#1e293b',
+        badgeText: '#1e293b',
+        badgeHalo: 'rgba(255, 255, 255, 0.98)',
+        dockBg: '#f1f5f9',
+        dockBorder: '#cbd5e1',
+        tripCardBg: '#ffffff',
+        tripCardBorder: '#cbd5e1',
+        tripTitle: '#1e293b',
+        tripSub: '#475569',
+        leaves: {
+          annual:   { fill: '#0284c7', text: '#ffffff', legendLabel: 'AL 年假' },
+          wb:       { fill: '#a855f7', text: '#ffffff', legendLabel: 'WB 身心假' },
+          birthday: { fill: '#10b981', text: '#ffffff', legendLabel: 'BL 生日假' },
+          custom:   { fill: '#d97706', text: '#ffffff', legendLabel: 'CL 自訂假' },
+          special:  { fill: '#94a3b8', text: '#ffffff', legendLabel: 'SP 特別假' },
+          roster:   { fill: '#f43f5e', text: '#ffffff', legendLabel: 'OFF 例休' }
         }
-      }
-
-      const contentWidth = calCanvas.width;
-      const contentHeight = calCanvas.height;
-
-      // 收集該年度所有連續假期／行程標注，繪製於底部摘要欄
-      let tripsList = [];
-      try {
-        if (typeof getActiveLeaveSpansMap === 'function' && typeof leaveData !== 'undefined') {
-          const res = getActiveLeaveSpansMap(leaveData);
-          tripsList = Array.isArray(res && res.tripsList) ? res.tripsList : [];
+      } : isStyle3 ? {
+        pageBg: '#f6f3eb',
+        cardBg: '#fcfaf5',
+        cardBorder: 'rgba(68, 64, 60, 0.65)',
+        titleZh: '#292524',
+        titleEn: '#78716c',
+        headerText: '#292524',
+        subHeaderText: '#78716c',
+        divider: 'rgba(87, 83, 78, 0.35)',
+        weekdayNormal: '#57534e',
+        weekdayWeekend: '#be3a4c',
+        dayNormal: '#292524',
+        weekendBg: '#f5ecea',
+        weekendText: '#be3a4c',
+        holidayBg: '#f4ead8',
+        holidayText: '#b45309',
+        railColor: '#6b665f',
+        badgeText: '#44403c',
+        badgeHalo: 'rgba(252, 250, 245, 0.95)',
+        dockBg: '#f3efe4',
+        dockBorder: 'rgba(87, 83, 78, 0.45)',
+        tripCardBg: '#fcfaf5',
+        tripCardBorder: 'rgba(68, 64, 60, 0.6)',
+        tripTitle: '#292524',
+        tripSub: '#57534e',
+        leaves: {
+          annual:   { fill: '#d6ecfc', stroke: '#7abdf2', text: '#164e7a', legendLabel: 'AL 年假' },
+          wb:       { fill: '#eadbfc', stroke: '#c59ef2', text: '#4e237a', legendLabel: 'WB 身心假' },
+          birthday: { fill: '#d4f5e6', stroke: '#77d4ac', text: '#14543a', legendLabel: 'BL 生日假' },
+          custom:   { fill: '#faecc8', stroke: '#ebc273', text: '#6e4406', legendLabel: 'CL 自訂假' },
+          special:  { fill: '#e8e4dc', stroke: '#bfb9ae', text: '#292524', legendLabel: 'SP 特別假' },
+          roster:   { fill: '#fadce1', stroke: '#eb94a2', text: '#7a1c2c', legendLabel: 'OFF 例休' }
         }
-      } catch (e) {}
+      } : {
+        pageBg: '#f8fafc',
+        cardBg: '#ffffff',
+        cardBorder: 'rgba(226, 232, 240, 0.9)',
+        titleZh: '#0f172a',
+        titleEn: '#334155',
+        headerText: '#0f172a',
+        subHeaderText: '#64748b',
+        divider: '#e2e8f0',
+        weekdayNormal: '#64748b',
+        weekdayWeekend: '#e11d48',
+        dayNormal: '#334155',
+        weekendBg: 'rgba(255, 228, 230, 0.65)',
+        weekendText: '#e11d48',
+        holidayBg: '#ffedd5',
+        holidayText: '#ea580c',
+        railColor: '#1d4ed8',
+        badgeText: '#1e3a8a',
+        badgeHalo: 'rgba(255, 255, 255, 0.98)',
+        dockBg: '#f1f5f9',
+        dockBorder: '#e2e8f0',
+        tripCardBg: '#ffffff',
+        tripCardBorder: '#cbd5e1',
+        tripTitle: '#0f172a',
+        tripSub: '#0369a1',
+        leaves: {
+          annual:   { fill: '#2596eb', text: '#ffffff', legendLabel: 'AL 年假' },
+          wb:       { fill: '#b36cf9', text: '#ffffff', legendLabel: 'WB 身心假' },
+          birthday: { fill: '#34d399', text: '#064e3b', legendLabel: 'BL 生日假' },
+          custom:   { fill: '#ea8c06', text: '#ffffff', legendLabel: 'CL 自訂假' },
+          special:  { fill: '#94a3b8', text: '#1e293b', legendLabel: 'SP 特別假' },
+          roster:   { fill: '#f43f5e', text: '#ffffff', legendLabel: 'OFF 例休' }
+        }
+      };
 
-      const paddingX = Math.round(contentWidth * 0.035);
-      const headerHeight = Math.round(contentWidth * 0.085);
-      const legendBarHeight = Math.round(contentWidth * 0.056);
-
-      // 計算行程摘要列數（每行 2 項，最多顯示 10 項，超出顯示統計）
-      const visibleTrips = tripsList.slice(0, 10);
-      const tripRowsCount = visibleTrips.length > 0 ? Math.ceil(visibleTrips.length / 2) : 0;
-      const tripRowH = Math.round(contentWidth * 0.032);
-      const tripSectionH = tripRowsCount > 0 ? (Math.round(contentWidth * 0.025) + tripRowsCount * tripRowH + Math.round(contentWidth * 0.02)) : 0;
-      const footerHeight = legendBarHeight + tripSectionH + Math.round(contentWidth * 0.025);
-
-      const targetWidth = contentWidth + (paddingX * 2);
-      const targetHeight = headerHeight + contentHeight + footerHeight;
-
-      const outCanvas = document.createElement('canvas');
-      outCanvas.width = targetWidth;
-      outCanvas.height = targetHeight;
-      const ctx = outCanvas.getContext('2d');
-
-      // 純淨白底背景
-      ctx.fillStyle = '#fafbfc';
-      ctx.fillRect(0, 0, outCanvas.width, outCanvas.height);
-
-      // 1. 上層：大標題與同步代碼
-      const titleY = Math.round(headerHeight * 0.64);
-      ctx.fillStyle = '#0f172a';
-      ctx.font = '900 ' + Math.round(contentWidth * 0.036) + 'px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
-      ctx.textAlign = 'left';
-      ctx.fillText(`香港假期管理 · ${selectedYear} 全年排程`, paddingX, titleY);
-
-      ctx.textAlign = 'right';
-      ctx.font = 'bold ' + Math.round(contentWidth * 0.02) + 'px monospace';
-      ctx.fillStyle = '#2563eb';
-      ctx.fillText('同步代碼: ' + currentRoom, outCanvas.width - paddingX, titleY);
-
-      ctx.strokeStyle = '#e2e8f0';
-      ctx.lineWidth = Math.max(2, Math.round(contentWidth * 0.0015));
-      ctx.beginPath();
-      ctx.moveTo(paddingX, headerHeight - 10);
-      ctx.lineTo(outCanvas.width - paddingX, headerHeight - 10);
-      ctx.stroke();
-
-      // 2. 中層：高清 12 個月年曆全圖（含連假底線、總日數徽章、鎖定及備忘標注）
-      ctx.drawImage(calCanvas, paddingX, headerHeight);
-
-      // 3. 下層：完整假別圖例 Dock 欄
-      const legendStartY = headerHeight + contentHeight + Math.round(contentWidth * 0.01);
-      const dockHeight = Math.round(legendBarHeight * 0.76);
-      const dockY = legendStartY;
-      const dockWidth = outCanvas.width - (paddingX * 2);
-
-      ctx.fillStyle = '#f1f5f9';
-      ctx.beginPath();
-      if (ctx.roundRect) {
-        ctx.roundRect(paddingX, dockY, dockWidth, dockHeight, 14);
-      } else {
-        ctx.rect(paddingX, dockY, dockWidth, dockHeight);
-      }
-      ctx.fill();
-
-      const legends = [
-        { label: 'AL 年假', color: '#0284c7', textColor: '#ffffff' },
-        { label: 'WB 身心假', color: '#a855f7', textColor: '#ffffff' },
-        { label: 'BL 生日假', color: '#10b981', textColor: '#ffffff' }
-      ];
+      // 更新自訂假別名稱
       if (typeof customLeaveConfig !== 'undefined' && customLeaveConfig && customLeaveConfig.enabled) {
         const cTag = customLeaveConfig.tag || 'CL';
         const cTitle = customLeaveConfig.title || '自訂假';
-        legends.push({ label: `${cTag} ${cTitle}`, color: '#d97706', textColor: '#ffffff' });
+        palette.leaves.custom.legendLabel = `${cTag} ${cTitle}`;
       }
-      legends.push({ label: 'SP 特別假', color: '#64748b', textColor: '#ffffff' });
-      if (typeof rosterModeConfig !== 'undefined' && rosterModeConfig && rosterModeConfig.enabled) {
-        legends.push({ label: 'OFF 例休', color: '#f43f5e', textColor: '#ffffff' });
+
+      const { spansMap: activeSpansMap, tripsList: rawTripsList } = getActiveLeaveSpansMap(leaveData);
+      const tripsList = Array.isArray(rawTripsList) ? rawTripsList : [];
+
+      // 計算每張月曆卡精確幾何尺寸（嚴格還原 1:1 正方形日格與 5/6 週高度）
+      const cardW = (logicalW - padX * 2 - colGap * (cols - 1)) / cols;
+      const cardPadX = isMobilePortrait ? 6 : 12;
+      const cardPadTop = isMobilePortrait ? 7 : 12;
+      const cardPadBot = isMobilePortrait ? 8 : 13;
+      const monthTitleH = isMobilePortrait ? 15 : 22;
+      const weekdayH = isMobilePortrait ? 12 : 18;
+      const cellGap = isMobilePortrait ? 2.2 : 4.5;
+      const cellSize = (cardW - cardPadX * 2 - cellGap * 6) / 7;
+
+      // 預先計算 12 個月各自需要 5 行定 6 行，同排取最大行數保持列高整齊對齊
+      const monthRowCounts = [];
+      for (let m = 0; m < 12; m++) {
+        const firstDay = new Date(selectedYear, m, 1).getDay();
+        const daysInMonth = new Date(selectedYear, m + 1, 0).getDate();
+        const totalSlots = firstDay + daysInMonth;
+        monthRowCounts.push(totalSlots > 35 ? 6 : 5);
       }
-      legends.push({ label: '公眾假期', color: '#ffedd5', textColor: '#c2410c', border: '#fdba74' });
 
-      let curX = paddingX + 20;
-      const pillH = Math.round(dockHeight * 0.62);
-      const pillY = dockY + (dockHeight - pillH) / 2;
-      ctx.font = '800 ' + Math.round(dockHeight * 0.36) + 'px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
-
-      legends.forEach(item => {
-        const textW = ctx.measureText(item.label).width;
-        const pillW = textW + 24;
-        ctx.fillStyle = item.color;
-        ctx.beginPath();
-        if (ctx.roundRect) {
-          ctx.roundRect(curX, pillY, pillW, pillH, 8);
-        } else {
-          ctx.rect(curX, pillY, pillW, pillH);
+      const rowHeights = [];
+      for (let r = 0; r < rows; r++) {
+        let maxWeeks = 5;
+        for (let c = 0; c < cols; c++) {
+          const mIdx = r * cols + c;
+          if (mIdx < 12 && monthRowCounts[mIdx] > maxWeeks) {
+            maxWeeks = monthRowCounts[mIdx];
+          }
         }
-        ctx.fill();
+        const gridH = maxWeeks * cellSize + (maxWeeks - 1) * cellGap;
+        rowHeights.push(cardPadTop + monthTitleH + weekdayH + gridH + cardPadBot);
+      }
 
-        if (item.border) {
-          ctx.strokeStyle = item.border;
-          ctx.lineWidth = 2;
-          ctx.stroke();
-        }
+      const calendarTotalH = rowHeights.reduce((a, b) => a + b, 0) + rowGap * (rows - 1);
 
-        ctx.fillStyle = item.textColor || '#ffffff';
-        ctx.textAlign = 'center';
-        ctx.fillText(item.label, curX + pillW / 2, pillY + pillH * 0.7);
-        curX += pillW + 12;
+      // 底部圖例與連假摘要高度
+      const legendItems = [
+        palette.leaves.annual,
+        palette.leaves.wb,
+        palette.leaves.birthday
+      ];
+      if (typeof customLeaveConfig !== 'undefined' && customLeaveConfig && customLeaveConfig.enabled) {
+        legendItems.push(palette.leaves.custom);
+      }
+      legendItems.push(palette.leaves.special);
+      if (isRoster) {
+        legendItems.push(palette.leaves.roster);
+      }
+      legendItems.push({
+        fill: palette.holidayBg,
+        stroke: palette.holidayText,
+        text: palette.holidayText,
+        legendLabel: '公眾假期'
       });
 
-      ctx.fillStyle = '#64748b';
-      ctx.font = 'bold ' + Math.round(dockHeight * 0.31) + 'px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
+      const dockH = isMobilePortrait ? 32 : 44;
+      const footerH = 10 + dockH + 12;
+
+      const logicalH = headerH + calendarTotalH + footerH;
+
+      const outCanvas = document.createElement('canvas');
+      outCanvas.width = Math.round(logicalW * scale);
+      outCanvas.height = Math.round(logicalH * scale);
+      const ctx = outCanvas.getContext('2d');
+      ctx.scale(scale, scale);
+
+      const fontSans = '"Plus Jakarta Sans", "PingFang HK", "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif';
+      const fontNum = '"Outfit", "Plus Jakarta Sans", "PingFang HK", -apple-system, BlinkMacSystemFont, sans-serif';
+
+      function drawRoundRect(x, y, w, h, r) {
+        const radius = Math.min(r, w / 2, h / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.arcTo(x + w, y, x + w, y + h, radius);
+        ctx.arcTo(x + w, y + h, x, y + h, radius);
+        ctx.arcTo(x, y + h, x, y, radius);
+        ctx.arcTo(x, y, x + w, y, radius);
+        ctx.closePath();
+      }
+
+      // 1. 畫布背景
+      ctx.fillStyle = palette.pageBg;
+      ctx.fillRect(0, 0, logicalW, logicalH);
+
+      // 2. 頂部標題列
+      const headerMidY = headerH * 0.54;
+      ctx.fillStyle = palette.headerText;
+      ctx.font = `900 ${isMobilePortrait ? 15 : 24}px ${fontSans}`;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(`香港假期管理  ${selectedYear}`, padX, headerMidY);
+
       ctx.textAlign = 'right';
-      ctx.fillText(`數字徽章＝連假總日數 · 藍底線＝連續假期`, outCanvas.width - paddingX - 20, dockY + dockHeight * 0.63);
+      ctx.font = `700 ${isMobilePortrait ? 10 : 14}px ${fontSans}`;
+      ctx.fillStyle = palette.subHeaderText;
+      ctx.fillText(`全年排程 · ${currentRoom}`, logicalW - padX, headerMidY);
 
-      // 4. 連續假期與旅遊行程標注一覽（直接印出每段連假日期、目的地與日數）
-      if (visibleTrips.length > 0) {
-        const listTopY = dockY + dockHeight + Math.round(contentWidth * 0.022);
-        const colW = Math.floor((dockWidth - 20) / 2);
-        ctx.font = '800 ' + Math.round(contentWidth * 0.0175) + 'px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif';
-        ctx.textAlign = 'left';
+      ctx.strokeStyle = palette.divider;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(padX, headerH - 6);
+      ctx.lineTo(logicalW - padX, headerH - 6);
+      ctx.stroke();
 
-        visibleTrips.forEach((t, idx) => {
-          const col = idx % 2;
-          const row = Math.floor(idx / 2);
-          const itemX = paddingX + col * (colW + 20);
-          const itemY = listTopY + row * tripRowH;
+      // 3. 逐月精準繪製 12 個月卡片
+      const monthNamesEn = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+      const weekDays = ["日", "一", "二", "三", "四", "五", "六"];
+      const memoDotColors = {
+        amber: '#f59e0b',
+        rose: '#f43f5e',
+        emerald: '#10b981',
+        blue: '#2563eb',
+        purple: '#9333ea',
+        slate: '#64748b'
+      };
 
-          const boxH = Math.round(tripRowH * 0.82);
-          ctx.fillStyle = '#ffffff';
-          ctx.strokeStyle = '#cbd5e1';
-          ctx.lineWidth = 1.5;
-          ctx.beginPath();
-          if (ctx.roundRect) {
-            ctx.roundRect(itemX, itemY, colW, boxH, 8);
-          } else {
-            ctx.rect(itemX, itemY, colW, boxH);
-          }
+      let curRowY = headerH;
+      for (let r = 0; r < rows; r++) {
+        const cardH = rowHeights[r];
+        for (let c = 0; c < cols; c++) {
+          const m = r * cols + c;
+          if (m >= 12) break;
+
+          const cardX = padX + c * (cardW + colGap);
+          const cardY = curRowY;
+
+          // 月份白卡底框
+          ctx.fillStyle = palette.cardBg;
+          drawRoundRect(cardX, cardY, cardW, cardH, isMobilePortrait ? 9 : 14);
           ctx.fill();
+
+          ctx.strokeStyle = palette.cardBorder;
+          ctx.lineWidth = isStyle3 ? 1.15 : 0.85;
           ctx.stroke();
 
-          const d1 = typeof formatHKDate === 'function' ? formatHKDate(t.startDate) : t.startDate;
-          const d2 = typeof formatHKDate === 'function' ? formatHKDate(t.endDate) : t.endDate;
-          const numTag = `#${String(idx + 1).padStart(2, '0')}`;
-          const titleStr = (t.title || '連假旅程').trim();
-          const daysStr = `連放 ${t.totalDays} 日` + (t.userDays > 0 ? ` (請${t.userDays % 1 === 0 ? t.userDays.toFixed(0) : t.userDays.toFixed(1)}日)` : '');
-
-          ctx.fillStyle = '#1d4ed8';
-          ctx.fillText(numTag, itemX + 14, itemY + boxH * 0.68);
-
-          ctx.fillStyle = '#0f172a';
-          const mainLabel = `${titleStr} · ${d1}–${d2}`;
-          ctx.fillText(mainLabel, itemX + 68, itemY + boxH * 0.68);
-
-          ctx.fillStyle = '#0369a1';
-          ctx.textAlign = 'right';
-          ctx.fillText(daysStr, itemX + colW - 14, itemY + boxH * 0.68);
+          // 月份中英文標題（1月 JAN）
+          const titleBaseY = cardY + cardPadTop + monthTitleH * 0.48;
           ctx.textAlign = 'left';
-        });
+          ctx.textBaseline = 'middle';
+          ctx.fillStyle = palette.titleZh;
+          const zhFontSize = isMobilePortrait ? 10.5 : 15.5;
+          ctx.font = `800 ${zhFontSize}px ${fontSans}`;
+          const zhText = `${m + 1}月`;
+          ctx.fillText(zhText, cardX + cardPadX, titleBaseY);
+          const zhWidth = ctx.measureText(zhText).width;
+
+          ctx.fillStyle = palette.titleEn;
+          const enFontSize = isMobilePortrait ? 8 : 11;
+          ctx.font = `800 ${enFontSize}px ${fontNum}`;
+          ctx.fillText(monthNamesEn[m], cardX + cardPadX + zhWidth + (isMobilePortrait ? 4 : 6), titleBaseY + 0.5);
+
+          // 星期列（日 一 二 三 四 五 六）
+          const wkY = cardY + cardPadTop + monthTitleH + weekdayH * 0.42;
+          ctx.font = `700 ${isMobilePortrait ? 7.2 : 10.5}px ${fontSans}`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          for (let w = 0; w < 7; w++) {
+            const cellCenterX = cardX + cardPadX + w * (cellSize + cellGap) + cellSize / 2;
+            ctx.fillStyle = (w === 0 || w === 6) ? palette.weekdayWeekend : palette.weekdayNormal;
+            ctx.fillText(weekDays[w], cellCenterX, wkY);
+          }
+
+          // 逐日繪製正方形日格
+          const gridStartY = cardY + cardPadTop + monthTitleH + weekdayH;
+          const firstDay = new Date(selectedYear, m, 1).getDay();
+          const daysInMonth = new Date(selectedYear, m + 1, 0).getDate();
+          const cellRadius = Math.max(4, Math.min(cellSize * 0.28, isMobilePortrait ? 6.5 : 10));
+
+          for (let d = 1; d <= daysInMonth; d++) {
+            const slotIdx = firstDay + d - 1;
+            const gridRow = Math.floor(slotIdx / 7);
+            const dayOfWeek = slotIdx % 7;
+            const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+
+            const cx = cardX + cardPadX + dayOfWeek * (cellSize + cellGap);
+            const cy = gridStartY + gridRow * (cellSize + cellGap);
+
+            const dateStr = `${selectedYear}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+            const isHoliday = Boolean(getPublicHolidayName(dateStr));
+            const isSundayPink = isSundayHolidayPinkDate(dateStr);
+
+            const dayLeave = leaveData[dateStr] || { am: null, pm: null };
+            const effAm = (dayLeave.am === 'roster' && !isRoster) ? null : dayLeave.am;
+            const effPm = (dayLeave.pm === 'roster' && !isRoster) ? null : dayLeave.pm;
+
+            // A. 繪製底色（公假 / 六日粉底）
+            if (isHoliday) {
+              ctx.fillStyle = palette.holidayBg;
+              drawRoundRect(cx, cy, cellSize, cellSize, cellRadius);
+              ctx.fill();
+            } else if (isSundayPink || isWeekend) {
+              ctx.fillStyle = palette.weekendBg;
+              drawRoundRect(cx, cy, cellSize, cellSize, cellRadius);
+              ctx.fill();
+            }
+
+            // B. 繪製請假上下半天／全日色塊（嚴格裁切於日格圓角內）
+            if (effAm || effPm) {
+              ctx.save();
+              drawRoundRect(cx, cy, cellSize, cellSize, cellRadius);
+              ctx.clip();
+
+              if (effAm && palette.leaves[effAm]) {
+                ctx.fillStyle = palette.leaves[effAm].fill;
+                ctx.fillRect(cx, cy, cellSize, cellSize * 0.505);
+              }
+              if (effPm && palette.leaves[effPm]) {
+                ctx.fillStyle = palette.leaves[effPm].fill;
+                ctx.fillRect(cx, cy + cellSize * 0.495, cellSize, cellSize * 0.505);
+              }
+              ctx.restore();
+
+              // 若為和紙風帶微框線
+              if (isStyle3 && effAm === effPm && palette.leaves[effAm] && palette.leaves[effAm].stroke) {
+                ctx.strokeStyle = palette.leaves[effAm].stroke;
+                ctx.lineWidth = 0.8;
+                drawRoundRect(cx + 0.4, cy + 0.4, cellSize - 0.8, cellSize - 0.8, cellRadius);
+                ctx.stroke();
+              }
+            }
+
+            // C. 繪製日期數字（100% 數學正中心，零偏移！）
+            let numColor = palette.dayNormal;
+            let numWeight = '500';
+            if (isHoliday) {
+              numColor = palette.holidayText;
+              numWeight = '600';
+            } else if (isSundayPink || isWeekend) {
+              numColor = palette.weekendText;
+              numWeight = '500';
+            }
+
+            if (effAm && effPm && effAm === effPm && palette.leaves[effAm]) {
+              numColor = palette.leaves[effAm].text;
+              numWeight = '650';
+            } else if (effAm && effPm && palette.leaves[effAm]) {
+              numColor = palette.leaves[effAm].text;
+              numWeight = '650';
+            } else if (effAm || effPm) {
+              numColor = isStyle2 ? '#ffffff' : '#0f172a';
+              numWeight = '750';
+            }
+
+            const dayFontSize = isMobilePortrait ? 9.5 : 13.5;
+            ctx.font = `${numWeight} ${dayFontSize}px ${fontNum}`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            if ((effAm && !effPm) || (!effAm && effPm)) {
+              ctx.strokeStyle = isStyle2 ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.95)';
+              ctx.lineWidth = 2.2;
+              ctx.strokeText(String(d), cx + cellSize / 2, cy + cellSize / 2 + 0.3);
+            }
+            ctx.fillStyle = numColor;
+            ctx.fillText(String(d), cx + cellSize / 2, cy + cellSize / 2 + 0.3);
+
+            // D. 繪製備忘錄／日程小圓點（位於日格正下方，與年曆全覽一致）
+            const rec = (typeof daySchedules === 'object' && daySchedules) ? daySchedules[dateStr] : null;
+            if (rec) {
+              const events = Array.isArray(rec.events) ? rec.events : [];
+              const hasEvents = events.length > 0;
+              const hasMemoOrTodo = (rec.memo && rec.memo.trim().length > 0) || (Array.isArray(rec.todos) && rec.todos.length > 0);
+              const dots = [];
+              if (hasMemoOrTodo) {
+                dots.push(memoDotColors[rec.memoColor] || '#f59e0b');
+              }
+              if (hasEvents) {
+                const evCol = events[0].color || 'blue';
+                dots.push(memoDotColors[evCol] || '#2563eb');
+              }
+              if (dots.length > 0) {
+                const dotR = isMobilePortrait ? 1.4 : 2.1;
+                const dotSpacing = dotR * 2.8;
+                const totalDotsW = (dots.length - 1) * dotSpacing;
+                const dotStartX = cx + cellSize / 2 - totalDotsW / 2;
+                const dotY = cy + cellSize + (isMobilePortrait ? 0.5 : 1);
+                dots.forEach((colHex, di) => {
+                  ctx.fillStyle = colHex;
+                  ctx.beginPath();
+                  ctx.arc(dotStartX + di * dotSpacing, dotY, dotR, 0, Math.PI * 2);
+                  ctx.fill();
+                });
+              }
+            }
+
+            // E. 繪製連續假期底線與連假總日數細字
+            const spanInfo = activeSpansMap[dateStr];
+            if (spanInfo && (spanInfo.hasAm || spanInfo.hasPm)) {
+              let railX1 = cx;
+              let railX2 = cx + cellSize;
+
+              if (spanInfo.hasAm && !spanInfo.hasPm) {
+                railX2 = cx + cellSize * 0.5;
+              } else if (!spanInfo.hasAm && spanInfo.hasPm) {
+                railX1 = cx + cellSize * 0.5;
+              } else {
+                if (spanInfo.isSpanStart) railX1 = cx + 2;
+                else if (spanInfo.dow === 0 && spanInfo.hasAm) railX1 = cx + 1;
+                else if (spanInfo.hasAm) railX1 = cx - cellGap * 0.55;
+
+                if (spanInfo.isSpanEnd) railX2 = cx + cellSize - 2;
+                else if (spanInfo.dow === 6 && spanInfo.hasPm) railX2 = cx + cellSize - 1;
+                else if (spanInfo.hasPm) railX2 = cx + cellSize + cellGap * 0.55;
+              }
+
+              const railH = isMobilePortrait ? 1.45 : 2.2;
+              const railY = cy + cellSize - railH * 0.5;
+              ctx.fillStyle = palette.railColor;
+              drawRoundRect(railX1, railY, Math.max(2, railX2 - railX1), railH, railH / 2);
+              ctx.fill();
+
+              if (spanInfo.isSpanEnd) {
+                const badgeStr = String(spanInfo.totalDays);
+                const badgeFontSize = isMobilePortrait ? 6.8 : 9.2;
+                ctx.font = `900 ${badgeFontSize}px ${fontNum}`;
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                const bx = cx + cellSize + (isMobilePortrait ? 1.5 : 2);
+                const by = cy + cellSize + (isMobilePortrait ? 1.2 : 1.8);
+                ctx.strokeStyle = palette.badgeHalo;
+                ctx.lineWidth = 2.4;
+                ctx.strokeText(badgeStr, bx, by);
+                ctx.fillStyle = palette.badgeText;
+                ctx.fillText(badgeStr, bx, by);
+              }
+            }
+          }
+        }
+        curRowY += cardH + rowGap;
+      }
+
+      // 4. 下層：假別圖例 Dock 欄
+      const dockY = headerH + calendarTotalH + 8;
+      const dockW = logicalW - padX * 2;
+      ctx.fillStyle = palette.dockBg;
+      drawRoundRect(padX, dockY, dockW, dockH, 10);
+      ctx.fill();
+      ctx.strokeStyle = palette.dockBorder;
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+
+      const pillH = dockH * 0.62;
+      const pillY = dockY + (dockH - pillH) / 2;
+      const pillFontSize = isMobilePortrait ? 8.2 : 12;
+      ctx.font = `700 ${pillFontSize}px ${fontSans}`;
+      ctx.textBaseline = 'middle';
+
+      let curX = padX + (isMobilePortrait ? 8 : 16);
+      legendItems.forEach(item => {
+        const label = item.legendLabel;
+        const textW = ctx.measureText(label).width;
+        const pillW = textW + (isMobilePortrait ? 12 : 20);
+        if (curX + pillW > logicalW - padX - 6) return;
+
+        ctx.fillStyle = item.fill;
+        drawRoundRect(curX, pillY, pillW, pillH, 6);
+        ctx.fill();
+
+        if (item.stroke) {
+          ctx.strokeStyle = item.stroke;
+          ctx.lineWidth = 0.9;
+          ctx.stroke();
+        }
+
+        ctx.fillStyle = item.text || '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText(label, curX + pillW / 2, pillY + pillH / 2 + 0.3);
+        curX += pillW + (isMobilePortrait ? 5 : 10);
+      });
+
+      if (!isMobilePortrait) {
+        ctx.fillStyle = palette.subHeaderText;
+        ctx.font = `600 11px ${fontSans}`;
+        ctx.textAlign = 'right';
+        ctx.fillText('數字徽章＝連假總日數 · 橫線＝連續假期', logicalW - padX - 16, dockY + dockH / 2 + 0.3);
       }
 
       return outCanvas;
     }
 
-    // === 分享點擊處理函式 (完整補齊，支援手機原生分享與電腦直接下載) ===
+    // === 分享點擊處理函式 (支援手機原生分享與電腦直接下載) ===
     async function handleShareYearOverviewImage() {
       const btnShare = document.getElementById('btnOverviewShare');
       const originalHtml = btnShare ? btnShare.innerHTML : '';
@@ -27452,7 +27880,7 @@ function setEditModeState(newState, notifyToast = true) {
 
         const isYearOverview = document.body.classList.contains('year-overview-mode');
         const formattedDate = formatHKDate(dateStr);
-        const lockIcon = item.locked ? '<i class="fa-solid fa-lock text-amber-500 mr-1 text-[10px]"></i>' : '';
+        const lockIcon = item.locked ? '<i class="fa-solid fa-lock text-amber-500 ml-1 text-[10px]"></i>' : '';
 
         let modalNoteHtml = '';
         if (isYearOverview) {
@@ -27468,7 +27896,7 @@ function setEditModeState(newState, notifyToast = true) {
 
         tableHtml += `
           <tr class="hover:bg-slate-50 transition">
-            <td class="py-2 px-2 font-medium text-slate-800 whitespace-nowrap">${lockIcon}${formattedDate}</td>
+            <td class="py-2 px-2 font-medium text-slate-800 whitespace-nowrap">${formattedDate}${lockIcon}</td>
             <td class="py-2 px-1 text-center"><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600">${slotDesc}</span></td>
             <td class="py-2 px-1 whitespace-nowrap"><span class="px-1.5 py-0.5 rounded text-[10px] font-medium ${badge}">${typeDesc}</span></td>
             <td class="py-2 px-2">${modalNoteHtml}</td>
@@ -27508,7 +27936,7 @@ function setEditModeState(newState, notifyToast = true) {
         'modalQuickQuotaAdjust', 'modalUserGuide', 'modalChangelog', 'modalMapPinPicker',
         'modalTravelMode', 'modalFlightBoard', 'modalMobileEditNote', 'modalAppleDayTimeline',
         'modalResetConfirm', 'modalExportIcal', 'modalResetPinAdmin', 'modalMobileSync',
-        'modalActivationPin', 'modalUnlockPin', 'modalEditTripTitle', 'modalMonthRosterQuota',
+        'modalActivationPin', 'modalUnlockPin', 'modalEditTripTitle', 'modalTripPostcard', 'modalMonthRosterQuota',
         'modalHotelMapPicker', 'modalConfirmSectionReset', 'modalDcRuleHotPatch', 'modalSmartSyncDecision'
       ];
       for (let i = 0; i < overlayIds.length; i++) {
@@ -27536,7 +27964,7 @@ function setEditModeState(newState, notifyToast = true) {
         'modalQuickQuotaAdjust', 'modalUserGuide', 'modalChangelog', 'modalMapPinPicker',
         'modalTravelMode', 'modalFlightBoard', 'modalMobileEditNote', 'modalAppleDayTimeline',
         'modalResetConfirm', 'modalExportIcal', 'modalResetPinAdmin', 'modalMobileSync',
-        'modalActivationPin', 'modalUnlockPin', 'modalEditTripTitle', 'modalMonthRosterQuota',
+        'modalActivationPin', 'modalUnlockPin', 'modalEditTripTitle', 'modalTripPostcard', 'modalMonthRosterQuota',
         'modalHotelMapPicker', 'modalConfirmSectionReset', 'modalDcRuleHotPatch', 'modalSmartSyncDecision'
       ].some(id => {
         const el = document.getElementById(id);
@@ -42662,6 +43090,81 @@ function setEditModeState(newState, notifyToast = true) {
     </div>
   </div>
 
+  <!-- 寶麗來旅行明信片雙版式預覽與匯出彈窗 (v7.5.10) -->
+  <div id="modalTripPostcard" class="fixed inset-0 z-[76] flex items-center justify-center bg-slate-950/75 backdrop-blur-md hidden p-3 md:p-4" onclick="if(event.target===this) closeTripPostcardModal()">
+    <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-md w-full max-h-[92dvh] overflow-hidden flex flex-col">
+      <!-- 頂部標題與關閉鍵 -->
+      <div class="px-4 py-3 border-b border-slate-200/80 bg-slate-50/90 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="w-8 h-8 rounded-2xl bg-amber-500/15 text-amber-600 border border-amber-200/80 flex items-center justify-center text-sm shrink-0">
+            <i class="fa-solid fa-camera-retro"></i>
+          </span>
+          <div class="min-w-0">
+            <h3 class="font-black text-slate-900 text-sm tracking-tight truncate">明信片預覽</h3>
+            <p class="text-[10px] text-slate-500 truncate">寶麗來旅行通知卡 · 3× Retina 超高清輸出</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeTripPostcardModal()" aria-label="關閉明信片預覽"
+                class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition active:scale-95 cursor-pointer shrink-0">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- 版式一 / 版式二 / 版式三 分段切換器 -->
+      <div class="px-3.5 pt-2.5 pb-1.5 bg-white shrink-0">
+        <div class="grid grid-cols-3 gap-1 p-1 rounded-2xl bg-slate-100 border border-slate-200/80">
+          <button type="button" id="btnPostcardLayout1" onclick="setTripPostcardLayout(1)"
+                  class="py-1.5 px-1.5 rounded-xl bg-white text-slate-900 font-black text-[10.5px] shadow-2xs transition cursor-pointer flex items-center justify-center gap-1">
+            <i class="fa-solid fa-stamp text-rose-500 text-[10px] shrink-0"></i>
+            <span class="truncate">版式一 · 郵戳</span>
+          </button>
+          <button type="button" id="btnPostcardLayout2" onclick="setTripPostcardLayout(2)"
+                  class="py-1.5 px-1.5 rounded-xl text-slate-600 hover:text-slate-900 font-bold text-[10.5px] transition cursor-pointer flex items-center justify-center gap-1">
+            <i class="fa-solid fa-feather-pointed text-blue-600 text-[10px] shrink-0"></i>
+            <span class="truncate">版式二 · 雅緻拍立得</span>
+          </button>
+          <button type="button" id="btnPostcardLayout3" onclick="setTripPostcardLayout(3)"
+                  class="py-1.5 px-1.5 rounded-xl text-slate-600 hover:text-slate-900 font-bold text-[10.5px] transition cursor-pointer flex items-center justify-center gap-1">
+            <i class="fa-solid fa-film text-amber-600 text-[10px] shrink-0"></i>
+            <span class="truncate">版式三 · 電影海報</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 中央寶麗來明信片預覽舞台 -->
+      <div class="flex-1 min-h-0 overflow-y-auto custom-scroll px-4 py-2 flex flex-col items-center justify-center bg-gradient-to-b from-slate-50/70 to-slate-100/80">
+        <div class="relative w-full max-w-[270px] sm:max-w-[295px] aspect-[3/4] rounded-2xl shadow-[0_18px_40px_-12px_rgba(15,23,42,0.28)] overflow-hidden bg-white border border-slate-200/80 flex items-center justify-center">
+          <canvas id="tripPostcardPreviewCanvas" class="w-full h-full object-contain block"></canvas>
+          <div id="tripPostcardLoadingOverlay" class="hidden absolute inset-0 bg-white/80 backdrop-blur-xs flex flex-col items-center justify-center gap-1.5 text-xs font-bold text-slate-600">
+            <i class="fa-solid fa-spinner fa-spin text-blue-600 text-base"></i>
+            <span>正在沖印寶麗來相片...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部多相縮圖選擇列 ＋ 雙動作按鈕 -->
+      <div class="p-3.5 border-t border-slate-200/80 bg-white space-y-2.5 shrink-0">
+        <!-- 風景相縮圖列 + 自訂上傳相片 -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5" id="tripPostcardThumbRow"></div>
+
+        <!-- 底部雙圓角膠囊按鈕：[切換照片] + [分享 / 儲存相片] -->
+        <div class="grid grid-cols-2 gap-2">
+          <button type="button" onclick="cycleTripPostcardPhoto()"
+                  class="py-2.5 px-3 rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-extrabold text-xs flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer shadow-2xs">
+            <i class="fa-solid fa-arrows-rotate text-slate-500 text-[11px]"></i>
+            <span>切換照片</span>
+          </button>
+          <button type="button" id="btnShareTripPostcard" onclick="shareOrDownloadTripPostcard()"
+                  class="py-2.5 px-3 rounded-full bg-gradient-to-r from-sky-500 via-blue-600 to-amber-500 hover:brightness-105 text-white font-black text-xs flex items-center justify-center gap-1.5 transition active:scale-95 cursor-pointer shadow-md">
+            <i class="fa-solid fa-share-from-square text-[11px]"></i>
+            <span>分享 / 儲存相片</span>
+          </button>
+        </div>
+        <input type="file" id="inputCustomPostcardPhoto" accept="image/*" class="hidden" onchange="handleCustomPostcardPhotoUpload(event)">
+      </div>
+    </div>
+  </div>
+
   <!-- 自訂假期名稱美化彈窗 (v2.9.1) -->
   <div id="modalEditTripTitle" class="fixed inset-0 z-[75] flex items-center justify-center bg-slate-950/70 backdrop-blur-md hidden p-3 md:p-4">
     <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-md w-full overflow-hidden animate-in fade-in zoom-in-95 duration-200 flex flex-col">
@@ -44258,55 +44761,6 @@ function setEditModeState(newState, notifyToast = true) {
       <!-- 2. 抽屜內容主體（無外框左置分欄 ＋ 深藍主標題 ＋ 高對比深灰說明字 ＋ 專屬色彩開關） -->
       <div class="flex-1 overflow-y-auto custom-scroll divide-y divide-slate-200/80">
 
-        <!-- 區塊零：版面風格切換（固定版面架構 · 三套視覺風格純換膚） -->
-        <div class="p-4 space-y-2.5 text-xs bg-gradient-to-r from-sky-50/60 via-white to-slate-50/70">
-          <div class="flex items-center justify-between">
-            <span class="text-[11px] font-extrabold text-slate-800 flex items-center gap-1.5">
-              <i class="fa-solid fa-palette text-blue-600"></i>
-              <span>版面風格</span>
-            </span>
-            <span id="drawerLayoutStyleBadge" class="text-[9.5px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200/80">風格一</span>
-          </div>
-          <div class="space-y-1.5">
-            <button type="button" id="btnSelectStyle1" onclick="setLayoutThemeStyle('style1')"
-                    class="w-full p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 text-left transition active:scale-[0.99] cursor-pointer flex items-center justify-between gap-2 shadow-2xs">
-              <div class="min-w-0">
-                <div class="flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-tr from-sky-400 to-blue-600 shrink-0"></span>
-                  <span class="font-black text-blue-950 text-xs">風格一 · 晴空毛玻璃（原版）</span>
-                </div>
-                <p class="text-[10px] text-slate-600 mt-0.5 truncate">清新藍白透亮毛玻璃 · 原生經典質感</p>
-              </div>
-              <i id="iconStyle1Check" class="fa-solid fa-circle-check text-blue-600 text-sm shrink-0"></i>
-            </button>
-
-            <button type="button" id="btnSelectStyle2" onclick="setLayoutThemeStyle('style2')"
-                    class="w-full p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition active:scale-[0.99] cursor-pointer flex items-center justify-between gap-2">
-              <div class="min-w-0">
-                <div class="flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-tr from-slate-900 via-amber-400 to-sky-400 shrink-0"></span>
-                  <span class="font-black text-slate-900 text-xs">風格二 · 黑金午夜旗艦風</span>
-                </div>
-                <p class="text-[10px] text-slate-600 mt-0.5 truncate">深邃炭黑磨砂玻璃 · 香檳金與電光藍微光</p>
-              </div>
-              <i id="iconStyle2Check" class="fa-regular fa-circle text-slate-300 text-sm shrink-0"></i>
-            </button>
-
-            <button type="button" id="btnSelectStyle3" onclick="setLayoutThemeStyle('style3')"
-                    class="w-full p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-amber-50/40 text-left transition active:scale-[0.99] cursor-pointer flex items-center justify-between gap-2">
-              <div class="min-w-0">
-                <div class="flex items-center gap-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-[#e8dfc8] border border-stone-800 shrink-0"></span>
-                  <span class="font-black text-stone-900 text-xs">風格三 · 日式和紙雜誌風</span>
-                </div>
-                <p class="text-[10px] text-slate-600 mt-0.5 truncate">溫潤米白和紙 · 極細墨黑線框與大地色標記</p>
-              </div>
-              <i id="iconStyle3Check" class="fa-regular fa-circle text-slate-300 text-sm shrink-0"></i>
-            </button>
-          </div>
-        </div>
-
-
         <!-- 區塊一：雲端同步狀態與同步代碼 -->
         <div class="p-4 space-y-3 text-xs">
           <div>
@@ -44546,6 +45000,63 @@ function setEditModeState(newState, notifyToast = true) {
           </div>
         </div>
 
+        <!-- 區塊二之五：主項目「版面風格」（位於備份與重置上一行 · 可開合方格形式 · 保留風格一與風格三） -->
+        <div>
+          <button type="button" id="btnToggleDrawerLayoutStyle" onclick="toggleDrawerLayoutStyleSection()" aria-expanded="false"
+                  class="w-full py-3.5 px-4 bg-white hover:bg-sky-50/60 flex items-center justify-between text-left transition cursor-pointer select-none">
+            <span class="flex items-center gap-2.5 min-w-0">
+              <i class="fa-solid fa-palette text-sky-600 text-sm w-4 text-center shrink-0"></i>
+              <span class="text-[13.5px] font-extrabold text-slate-800 tracking-tight">版面風格</span>
+            </span>
+            <span class="flex items-center gap-2 shrink-0">
+              <span id="drawerLayoutStyleBadge" class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200/80">風格一 · 晴空毛玻璃</span>
+              <i id="drawerLayoutStyleChevron" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform duration-200"></i>
+            </span>
+          </button>
+
+          <div id="drawerLayoutStyleCollapsibleBody" class="hidden px-4 pb-4 pt-1.5 text-xs bg-slate-50/50">
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" id="btnSelectStyle1" onclick="setLayoutThemeStyle('style1')"
+                      class="p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/75 text-left transition active:scale-[0.98] cursor-pointer flex flex-col justify-between gap-2 shadow-2xs">
+                <div class="flex items-center justify-between gap-1">
+                  <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-sky-400 to-blue-600 ring-2 ring-white shadow-2xs shrink-0"></span>
+                  <i id="iconStyle1Check" class="fa-solid fa-circle-check text-blue-600 text-sm shrink-0"></i>
+                </div>
+                <div>
+                  <div class="font-black text-blue-950 text-xs leading-snug">風格一</div>
+                  <div class="font-bold text-blue-800 text-[10.5px] mt-0.5">晴空毛玻璃（原版）</div>
+                  <p class="text-[9.5px] text-slate-500 mt-1 line-clamp-2 leading-tight">清新藍白透亮毛玻璃質感</p>
+                </div>
+              </button>
+
+              <button type="button" id="btnSelectStyle2" onclick="setLayoutThemeStyle('style2')"
+                      class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition active:scale-[0.98] cursor-pointer flex flex-col justify-between gap-2">
+                <div class="flex items-center justify-between gap-1">
+                  <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-slate-800 via-slate-400 to-rose-300 ring-2 ring-white shadow-2xs shrink-0"></span>
+                  <i id="iconStyle2Check" class="fa-regular fa-circle text-slate-300 text-sm shrink-0"></i>
+                </div>
+                <div>
+                  <div class="font-black text-slate-900 text-xs leading-snug">風格二</div>
+                  <div class="font-bold text-slate-700 text-[10.5px] mt-0.5">四季光影極簡風</div>
+                  <p class="text-[9.5px] text-slate-500 mt-1 line-clamp-2 leading-tight">霧白墨灰簡約三色 · 隨月換季光影</p>
+                </div>
+              </button>
+
+              <button type="button" id="btnSelectStyle3" onclick="setLayoutThemeStyle('style3')"
+                      class="col-span-2 p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-amber-50/40 text-left transition active:scale-[0.98] cursor-pointer flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-3.5 h-3.5 rounded-full bg-[#e8dfc8] border border-stone-700 ring-2 ring-white shadow-2xs shrink-0"></span>
+                    <span class="font-black text-stone-900 text-xs">風格三 · 日式和紙雜誌風</span>
+                  </div>
+                  <p class="text-[9.5px] text-slate-500 mt-0.5 truncate">溫潤米白和紙與淡彩粉筆色系</p>
+                </div>
+                <i id="iconStyle3Check" class="fa-regular fa-circle text-slate-300 text-sm shrink-0"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!-- 區塊三：主項目「備份與重置」（無外框、深藍大字左置、純箭頭收合） -->
         <div>
           <button type="button" id="btnToggleDrawerBackupReset" onclick="toggleDrawerBackupResetSection()" aria-expanded="false"
@@ -44617,7 +45128,7 @@ function setEditModeState(newState, notifyToast = true) {
               <i class="fa-solid fa-clock-rotate-left text-sky-600 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-extrabold text-slate-800 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.5.0</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.5.10</span>
           </button>
         </div>
 
@@ -45663,38 +46174,216 @@ function setEditModeState(newState, notifyToast = true) {
   <script>
     let currentLayoutThemeStyle = localStorage.getItem('hk_leave_layout_style') || 'style1';
 
+    // === 風格二專屬：四季光影感應與左右邊緣粒子引擎 ===
+    const SeasonalAtmosphereEngine = (() => {
+      let rafId = null;
+      let currentSeason = 'winter';
+      let particles = [];
+      let canvas = null;
+      let ctx = null;
+      let w = 0;
+      let h = 0;
+
+      function getSeasonForMonth(month1to12) {
+        if (month1to12 >= 2 && month1to12 <= 4) return 'spring';
+        if (month1to12 >= 5 && month1to12 <= 7) return 'summer';
+        if (month1to12 >= 8 && month1to12 <= 10) return 'autumn';
+        return 'winter';
+      }
+
+      function detectFocusedSeason() {
+        if (document.body.classList.contains('year-overview-mode')) {
+          const m = new Date().getMonth() + 1;
+          return getSeasonForMonth(m);
+        }
+        const cards = document.querySelectorAll('#calendarContainer .month-card');
+        if (!cards || cards.length === 0) return 'spring';
+        const targetY = window.innerHeight * 0.42;
+        let bestIdx = 0;
+        let bestDist = Infinity;
+        cards.forEach((card, idx) => {
+          const rect = card.getBoundingClientRect();
+          const centerY = rect.top + rect.height * 0.5;
+          const dist = Math.abs(centerY - targetY);
+          if (dist < bestDist) {
+            bestDist = dist;
+            bestIdx = idx;
+          }
+        });
+        return getSeasonForMonth(bestIdx + 1);
+      }
+
+      function spawnParticle(season, randomY = true) {
+        // 僅在螢幕左右邊緣走廊（0%~14% 及 86%~100%）生成，絕不遮擋中央月曆數字
+        const isLeft = Math.random() < 0.5;
+        const marginRatio = window.innerWidth < 768 ? 0.08 : 0.14;
+        const x = isLeft
+          ? Math.random() * (w * marginRatio)
+          : w - Math.random() * (w * marginRatio);
+        const y = randomY ? Math.random() * h : -14;
+        const baseSize = window.innerWidth < 768 ? 3.2 : 4.6;
+        return {
+          x,
+          y,
+          size: baseSize * (0.65 + Math.random() * 0.75),
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: season === 'summer' ? -(0.18 + Math.random() * 0.25) : (0.28 + Math.random() * 0.42),
+          angle: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 0.025,
+          alpha: 0.28 + Math.random() * 0.32
+        };
+      }
+
+      function rebuildParticles() {
+        const count = window.innerWidth < 768 ? 14 : 24;
+        particles = Array.from({ length: count }, () => spawnParticle(currentSeason, true));
+      }
+
+      function syncSeasonFromScroll() {
+        if (currentLayoutThemeStyle !== 'style2') return;
+        const nextSeason = detectFocusedSeason();
+        if (nextSeason !== currentSeason) {
+          currentSeason = nextSeason;
+          const bd = document.getElementById('seasonalAmbientBackdrop');
+          if (bd) bd.setAttribute('data-season', currentSeason);
+          rebuildParticles();
+        }
+      }
+
+      function resizeCanvas() {
+        if (!canvas) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function drawParticle(p) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.globalAlpha = p.alpha;
+
+        if (currentSeason === 'spring') {
+          // 櫻花微瓣
+          ctx.fillStyle = '#f472b6';
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (currentSeason === 'summer') {
+          // 晴空水波微光點
+          ctx.fillStyle = '#38bdf8';
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size * 0.85, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (currentSeason === 'autumn') {
+          // 暖金琥珀秋葉
+          ctx.fillStyle = '#d97706';
+          ctx.beginPath();
+          ctx.moveTo(0, -p.size);
+          ctx.quadraticCurveTo(p.size * 0.85, 0, 0, p.size);
+          ctx.quadraticCurveTo(-p.size * 0.85, 0, 0, -p.size);
+          ctx.fill();
+        } else {
+          // 冬日靜謐微雪點
+          ctx.fillStyle = '#94a3b8';
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size * 0.65, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function tick() {
+        if (currentLayoutThemeStyle !== 'style2') {
+          rafId = null;
+          return;
+        }
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx + Math.sin(p.angle) * 0.18;
+          p.y += p.vy;
+          p.angle += p.spin;
+          if (currentSeason === 'summer') {
+            if (p.y < -16) {
+              particles[i] = spawnParticle(currentSeason, false);
+              particles[i].y = h + 12;
+            }
+          } else if (p.y > h + 16) {
+            particles[i] = spawnParticle(currentSeason, false);
+          }
+          drawParticle(particles[i]);
+        }
+        rafId = requestAnimationFrame(tick);
+      }
+
+      function start() {
+        canvas = document.getElementById('seasonalParticleCanvas');
+        if (!canvas) return;
+        ctx = canvas.getContext('2d');
+        resizeCanvas();
+        currentSeason = detectFocusedSeason();
+        const bd = document.getElementById('seasonalAmbientBackdrop');
+        if (bd) bd.setAttribute('data-season', currentSeason);
+        rebuildParticles();
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      }
+
+      function stop() {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+        if (ctx && canvas) ctx.clearRect(0, 0, w, h);
+      }
+
+      window.addEventListener('resize', () => {
+        if (currentLayoutThemeStyle === 'style2') {
+          resizeCanvas();
+          rebuildParticles();
+        }
+      }, { passive: true });
+
+      window.addEventListener('scroll', syncSeasonFromScroll, { passive: true });
+
+      return { start, stop, syncSeasonFromScroll };
+    })();
+
     function setLayoutThemeStyle(styleId, silent = false) {
       const targetStyle = (styleId === 'style2' || styleId === 'style3') ? styleId : 'style1';
       currentLayoutThemeStyle = targetStyle;
       try { localStorage.setItem('hk_leave_layout_style', targetStyle); } catch (e) {}
 
       document.body.classList.remove('theme-style-2', 'theme-style-3');
-      if (targetStyle === 'style2') document.body.classList.add('theme-style-2');
-      if (targetStyle === 'style3') document.body.classList.add('theme-style-3');
+      if (targetStyle === 'style2') {
+        document.body.classList.add('theme-style-2');
+        SeasonalAtmosphereEngine.start();
+      } else {
+        SeasonalAtmosphereEngine.stop();
+        if (targetStyle === 'style3') document.body.classList.add('theme-style-3');
+      }
 
       const badge = document.getElementById('drawerLayoutStyleBadge');
       const labels = {
         style1: '風格一 · 晴空毛玻璃',
-        style2: '風格二 · 黑金午夜風',
+        style2: '風格二 · 四季光影極簡',
         style3: '風格三 · 日式和紙風'
       };
       if (badge) badge.textContent = labels[targetStyle];
 
-      ['style1', 'style2', 'style3'].forEach((sid, idx) => {
-        const num = idx + 1;
+      [
+        { sid: 'style1', num: 1, activeCls: 'p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/75 text-left transition active:scale-[0.98] cursor-pointer flex flex-col justify-between gap-2 shadow-2xs', idleCls: 'p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition active:scale-[0.98] cursor-pointer flex flex-col justify-between gap-2', checkCls: 'fa-solid fa-circle-check text-blue-600 text-sm shrink-0' },
+        { sid: 'style2', num: 2, activeCls: 'p-2.5 rounded-xl border-2 border-slate-800 bg-slate-100/90 text-left transition active:scale-[0.98] cursor-pointer flex flex-col justify-between gap-2 shadow-2xs', idleCls: 'p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition active:scale-[0.98] cursor-pointer flex flex-col justify-between gap-2', checkCls: 'fa-solid fa-circle-check text-slate-800 text-sm shrink-0' },
+        { sid: 'style3', num: 3, activeCls: 'col-span-2 p-2.5 rounded-xl border-2 border-stone-700 bg-amber-50/70 text-left transition active:scale-[0.98] cursor-pointer flex items-center justify-between gap-2 shadow-2xs', idleCls: 'col-span-2 p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-amber-50/40 text-left transition active:scale-[0.98] cursor-pointer flex items-center justify-between gap-2', checkCls: 'fa-solid fa-circle-check text-stone-800 text-sm shrink-0' }
+      ].forEach(({ sid, num, activeCls, idleCls, checkCls }) => {
         const btn = document.getElementById(`btnSelectStyle${num}`);
         const ic = document.getElementById(`iconStyle${num}Check`);
         const isSelected = (sid === targetStyle);
-        if (btn) {
-          btn.className = isSelected
-            ? 'w-full p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50/70 text-left transition active:scale-[0.99] cursor-pointer flex items-center justify-between gap-2 shadow-2xs'
-            : 'w-full p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-left transition active:scale-[0.99] cursor-pointer flex items-center justify-between gap-2';
-        }
-        if (ic) {
-          ic.className = isSelected
-            ? 'fa-solid fa-circle-check text-blue-600 text-sm shrink-0'
-            : 'fa-regular fa-circle text-slate-300 text-sm shrink-0';
-        }
+        if (btn) btn.className = isSelected ? activeCls : idleCls;
+        if (ic) ic.className = isSelected ? checkCls : 'fa-regular fa-circle text-slate-300 text-sm shrink-0';
       });
 
       if (!silent && typeof showToast === 'function') {
@@ -45707,6 +46396,936 @@ function setEditModeState(newState, notifyToast = true) {
     } else {
       setLayoutThemeStyle(currentLayoutThemeStyle, true);
     }
+  </script>
+
+  <script>
+    // === 寶麗來旅行明信片雙版式沖印與分享引擎 (v7.5.10 · 1:1 概念圖比例精調 ＋ 跨平台矢量國旗徽章) ===
+    const TripPostcardStudio = (() => {
+      let currentTripKey = null;
+      let currentLayout = 1; // 1 = 航空郵戳明信片, 2 = 經典極簡拍立得
+      let photoCandidates = [];
+      let currentPhotoIdx = 0;
+      let customUploadedDataUrl = null;
+      let lastRenderedCanvas = null;
+
+      function formatPostcardDateRange(startDate, endDate) {
+        if (!startDate || !endDate) return '';
+        const [sy, sm, sd] = startDate.split('-').map(n => parseInt(n, 10));
+        const [ey, em, ed] = endDate.split('-').map(n => parseInt(n, 10));
+        if (sy === ey) {
+          return `${sy}年${sm}月${sd}日 – ${em}月${ed}日`;
+        }
+        return `${sy}年${sm}月${sd}日 – ${ey}年${em}月${ed}日`;
+      }
+
+      function findTripByKey(tripKey) {
+        if (typeof getActiveLeaveSpansMap !== 'function' || typeof leaveData === 'undefined') return null;
+        const { tripsList } = getActiveLeaveSpansMap(leaveData);
+        return (tripsList || []).find(t => `${t.startDate}_${t.endDate}` === tripKey) || null;
+      }
+
+      const CITY_TO_IATA_MAP = {
+        // 日本
+        '東京': 'TYO', '成田': 'NRT', '羽田': 'HND', '大阪': 'KIX', '關西': 'KIX', '京都': 'KIX', '奈良': 'KIX', '神戶': 'UKB',
+        '札幌': 'CTS', '新千歲': 'CTS', '北海道': 'CTS', '小樽': 'CTS', '富良野': 'CTS', '美瑛': 'CTS', '函館': 'HKD', '旭川': 'AKJ',
+        '福岡': 'FUK', '九州': 'FUK', '由布院': 'FUK', '別府': 'OIT', '熊本': 'KMJ', '鹿兒島': 'KOJ', '長崎': 'NGS', '宮崎': 'KMI', '大分': 'OIT', '佐賀': 'HSG',
+        '沖繩': 'OKA', '那霸': 'OKA', '石垣': 'ISG', '宮古': 'MMY',
+        '名古屋': 'NGO', '中部': 'NGO', '高山': 'NGO', '白川鄉': 'NGO', '金澤': 'KMQ', '小松': 'KMQ', '富山': 'TOY',
+        '廣島': 'HIJ', '岡山': 'OKJ', '高松': 'TAK', '松山': 'MYJ', '高知': 'KCZ', '德島': 'TKS', '仙台': 'SDJ', '青森': 'AOJ', '秋田': 'AXT', '新潟': 'KIJ', '靜岡': 'FSZ', '富士山': 'TYO', '河口湖': 'TYO', '箱根': 'TYO', '輕井澤': 'TYO',
+        // 台灣
+        '台北': 'TPE', '臺北': 'TPE', '桃園': 'TPE', '九份': 'TPE', '新北': 'TPE', '宜蘭': 'TPE', '新竹': 'TPE',
+        '台中': 'RMQ', '臺中': 'RMQ', '清境': 'RMQ', '日月潭': 'RMQ', '阿里山': 'CYI', '嘉義': 'CYI',
+        '台南': 'TNN', '臺南': 'TNN', '高雄': 'KHH', '墾丁': 'KHH', '屏東': 'KHH', '花蓮': 'HUN', '台東': 'TTT', '臺東': 'TTT', '澎湖': 'MZG', '金門': 'KNH',
+        // 韓國
+        '首爾': 'ICN', '仁川': 'ICN', '京畿道': 'ICN', '釜山': 'PUS', '濟州': 'CJU', '大邱': 'TAE', '江原道': 'YNY',
+        // 東南亞
+        '曼谷': 'BKK', '芭堤雅': 'BKK', '華欣': 'BKK', '布吉': 'HKT', '普吉': 'HKT', '清邁': 'CNX', '清萊': 'CEI', '蘇梅': 'USM', '甲米': 'KBV',
+        '新加坡': 'SIN', '吉隆坡': 'KUL', '檳城': 'PEN', '沙巴': 'BKI', '亞庇': 'BKI', '蘭卡威': 'LGK', '馬六甲': 'MKZ', '新山': 'JHB',
+        '河內': 'HAN', '下龍灣': 'HAN', '胡志明': 'SGN', '西貢': 'SGN', '峴港': 'DAD', '會安': 'DAD', '芽莊': 'CXR', '富國島': 'PQC',
+        '峇里': 'DPS', '巴厘': 'DPS', '雅加達': 'CGK', '日惹': 'YIA', '馬尼拉': 'MNL', '宿霧': 'CEB', '長灘島': 'MPH', '金邊': 'PNH', '暹粒': 'REP', '吳哥': 'REP', '永珍': 'VTE', '琅勃拉邦': 'LPQ', '仰光': 'RGN',
+        // 中國大陸及澳門
+        '北京': 'PEK', '上海': 'PVG', '廣州': 'CAN', '深圳': 'SZX', '成都': 'CTU', '重慶': 'CKG', '杭州': 'HGH', '南京': 'NKG', '蘇州': 'SHA',
+        '廈門': 'XMN', '福州': 'FOC', '青島': 'TAO', '大連': 'DLC', '哈爾濱': 'HRB', '瀋陽': 'SHE', '西安': 'XIY', '昆明': 'KMG', '麗江': 'LJG', '大理': 'DLU', '香格里拉': 'DIG', '桂林': 'KWL', '張家界': 'DYG', '三亞': 'SYX', '海口': 'HAK', '烏魯木齊': 'URC', '拉薩': 'LXA', '澳門': 'MFM',
+        // 歐洲
+        '倫敦': 'LHR', '英國': 'LHR', '曼徹斯特': 'MAN', '愛丁堡': 'EDI', '蘇格蘭': 'EDI',
+        '巴黎': 'CDG', '法國': 'CDG', '尼斯': 'NCE', '里昂': 'LYS', '馬賽': 'MRS',
+        '羅馬': 'FCO', '意大利': 'FCO', '米蘭': 'MXP', '威尼斯': 'VCE', '佛羅倫斯': 'FLR', '拿坡里': 'NAP',
+        '蘇黎世': 'ZRH', '瑞士': 'ZRH', '日內瓦': 'GVA', '琉森': 'ZRH', '因特拉肯': 'ZRH', '少女峰': 'ZRH',
+        '法蘭克福': 'FRA', '德國': 'FRA', '慕尼黑': 'MUC', '柏林': 'BER', '漢堡': 'HAM',
+        '阿姆斯特丹': 'AMS', '荷蘭': 'AMS', '布魯塞爾': 'BRU', '比利時': 'BRU', '盧森堡': 'LUX',
+        '維也納': 'VIE', '奧地利': 'VIE', '薩爾茨堡': 'SZG', '布拉格': 'PRG', '捷克': 'PRG', '布達佩斯': 'BUD', '匈牙利': 'BUD', '華沙': 'WAW', '波蘭': 'WAW',
+        '馬德里': 'MAD', '西班牙': 'MAD', '巴塞隆拿': 'BCN', '巴塞羅那': 'BCN', '里斯本': 'LIS', '葡萄牙': 'LIS', '波圖': 'OPO',
+        '雅典': 'ATH', '希臘': 'ATH', '聖托里尼': 'JTR', '伊斯坦堡': 'IST', '土耳其': 'IST',
+        '雷克雅未克': 'KEF', '冰島': 'KEF', '哥本哈根': 'CPH', '丹麥': 'CPH', '斯德哥爾摩': 'ARN', '瑞典': 'ARN', '奧斯陸': 'OSL', '挪威': 'OSL', '赫爾辛基': 'HEL', '芬蘭': 'HEL',
+        // 澳紐美加中東
+        '悉尼': 'SYD', '雪梨': 'SYD', '澳洲': 'SYD', '墨爾本': 'MEL', '布里斯本': 'BNE', '黃金海岸': 'OOL', '珀斯': 'PER', '凱恩斯': 'CNS', '阿德萊德': 'ADL', '塔斯曼尼亞': 'HBA',
+        '奧克蘭': 'AKL', '紐西蘭': 'AKL', '新西蘭': 'AKL', '皇后鎮': 'ZQN', '基督城': 'CHC',
+        '溫哥華': 'YVR', '多倫多': 'YYZ', '加拿大': 'YVR', '卡加利': 'YYC', '班夫': 'YYC', '滿地可': 'YUL',
+        '紐約': 'JFK', '美國': 'LAX', '洛杉磯': 'LAX', '三藩市': 'SFO', '舊金山': 'SFO', '西雅圖': 'SEA', '芝加哥': 'ORD', '波士頓': 'BOS', '夏威夷': 'HNL', '檀香山': 'HNL', '拉斯維加斯': 'LAS',
+        '杜拜': 'DXB', '迪拜': 'DXB', '阿布扎比': 'AUH', '多哈': 'DOH', '開羅': 'CAI', '埃及': 'CAI'
+      };
+
+      const COUNTRY_DEFAULT_IATA = {
+        'JP': 'TYO', 'KR': 'ICN', 'TW': 'TPE', 'TH': 'BKK', 'SG': 'SIN', 'MY': 'KUL', 'VN': 'SGN',
+        'ID': 'DPS', 'PH': 'MNL', 'KH': 'REP', 'CN': 'PEK', 'MO': 'MFM', 'GB': 'LHR', 'UK': 'LHR',
+        'FR': 'CDG', 'IT': 'FCO', 'CH': 'ZRH', 'DE': 'FRA', 'NL': 'AMS', 'ES': 'MAD', 'PT': 'LIS',
+        'GR': 'ATH', 'TR': 'IST', 'IS': 'KEF', 'FI': 'HEL', 'NO': 'OSL', 'SE': 'ARN', 'DK': 'CPH',
+        'AT': 'VIE', 'CZ': 'PRG', 'HU': 'BUD', 'AU': 'SYD', 'NZ': 'AKL', 'CA': 'YVR', 'US': 'LAX',
+        'AE': 'DXB', 'QA': 'DOH', 'EG': 'CAI', 'IN': 'DEL', 'MV': 'MLE'
+      };
+
+      function resolveDestinationIataCode(trip, matchedDest) {
+        // 1. 最優先：預訂工作台已填寫的去程抵達機場三字碼（如 NRT / KIX / ICN）
+        const bk = (typeof tripBookings !== 'undefined' && tripBookings) ? tripBookings[`${trip.startDate}_${trip.endDate}`] : null;
+        const outCode = bk && bk.outFlight && bk.outFlight.arrCode ? bk.outFlight.arrCode.trim().toUpperCase() : '';
+        if (outCode && /^[A-Z]{3}$/.test(outCode)) {
+          return outCode;
+        }
+        // 2. 次優先：從標題與匹配目的地比對國際機場三字碼
+        const searchStr = `${trip.title || ''} ${(matchedDest && matchedDest.name) || ''}`;
+        for (const [kw, code] of Object.entries(CITY_TO_IATA_MAP)) {
+          if (searchStr.includes(kw)) return code;
+        }
+        // 3. 從標題中直接尋找現成的 3 位大寫英文機場碼（排除 HKG）
+        const codeMatches = searchStr.toUpperCase().match(/\b[A-Z]{3}\b/g);
+        if (codeMatches) {
+          const nonHkg = codeMatches.find(c => c !== 'HKG' && c !== 'DAY');
+          if (nonHkg) return nonHkg;
+        }
+        // 4. 從 GLOBAL_CITY_DATABASE keywords 提取 3 位機場碼
+        if (matchedDest && matchedDest.name && typeof GLOBAL_CITY_DATABASE !== 'undefined') {
+          const cleanName = matchedDest.name.replace(/（.*?）/g, '').trim();
+          for (const k in GLOBAL_CITY_DATABASE) {
+            const item = GLOBAL_CITY_DATABASE[k];
+            if (item && item.name && item.name.includes(cleanName) && Array.isArray(item.keywords)) {
+              const kwCode = item.keywords.find(w => /^[a-z]{3}$/i.test(String(w).trim()) && String(w).trim().toUpperCase() !== 'HKG');
+              if (kwCode) return String(kwCode).trim().toUpperCase();
+            }
+          }
+        }
+        // 5. 按國家代碼對應主要國際樞紐機場三字碼
+        if (matchedDest && matchedDest.countryCode) {
+          const cc = matchedDest.countryCode.toUpperCase();
+          if (COUNTRY_DEFAULT_IATA[cc]) return COUNTRY_DEFAULT_IATA[cc];
+        }
+        return 'INT';
+      }
+
+      function getRouteBadgeText(trip, matchedDest) {
+        const destIata = resolveDestinationIataCode(trip, matchedDest);
+        return `HKG ✈ ${destIata}`;
+      }
+
+      function loadImageSafe(url) {
+        return new Promise((resolve) => {
+          if (!url) {
+            resolve(null);
+            return;
+          }
+          const img = new Image();
+          if (!url.startsWith('data:')) {
+            img.crossOrigin = 'anonymous';
+          }
+          const timer = setTimeout(() => resolve(null), 5500);
+          img.onload = () => {
+            clearTimeout(timer);
+            resolve(img);
+          };
+          img.onerror = () => {
+            clearTimeout(timer);
+            resolve(null);
+          };
+          img.src = url;
+        });
+      }
+
+      function drawFallbackScenicArt(ctx, x, y, w, h, startMonth) {
+        const grad = ctx.createLinearGradient(x, y, x, y + h);
+        if (startMonth >= 2 && startMonth <= 4) {
+          grad.addColorStop(0, '#fbcfe8');
+          grad.addColorStop(0.55, '#fde68a');
+          grad.addColorStop(1, '#93c5fd');
+        } else if (startMonth >= 5 && startMonth <= 8) {
+          grad.addColorStop(0, '#0284c7');
+          grad.addColorStop(0.55, '#38bdf8');
+          grad.addColorStop(1, '#bae6fd');
+        } else if (startMonth >= 9 && startMonth <= 11) {
+          grad.addColorStop(0, '#ea580c');
+          grad.addColorStop(0.55, '#fbbf24');
+          grad.addColorStop(1, '#fef3c7');
+        } else {
+          grad.addColorStop(0, '#1e3a8a');
+          grad.addColorStop(0.55, '#60a5fa');
+          grad.addColorStop(1, '#e0f2fe');
+        }
+        ctx.fillStyle = grad;
+        ctx.fillRect(x, y, w, h);
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.42)';
+        ctx.beginPath();
+        ctx.arc(x + w * 0.5, y + h * 0.44, w * 0.14, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.24)';
+        ctx.beginPath();
+        ctx.moveTo(x, y + h);
+        ctx.lineTo(x + w * 0.28, y + h * 0.62);
+        ctx.lineTo(x + w * 0.52, y + h * 0.42);
+        ctx.lineTo(x + w * 0.78, y + h * 0.66);
+        ctx.lineTo(x + w, y + h * 0.54);
+        ctx.lineTo(x + w, y + h);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      function drawRoundedRectPath(ctx, x, y, w, h, r) {
+        const radius = Math.min(r, w / 2, h / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.arcTo(x + w, y, x + w, y + h, radius);
+        ctx.arcTo(x + w, y + h, x, y + h, radius);
+        ctx.arcTo(x, y + h, x, y, radius);
+        ctx.arcTo(x, y, x + w, y, radius);
+        ctx.closePath();
+      }
+
+      function drawCoverImage(ctx, img, x, y, w, h) {
+        const iw = img.naturalWidth || img.width;
+        const ih = img.naturalHeight || img.height;
+        if (!iw || !ih) return;
+        const scale = Math.max(w / iw, h / ih);
+        const dw = iw * scale;
+        const dh = ih * scale;
+        const dx = x + (w - dw) * 0.5;
+        const dy = y + (h - dh) * 0.5;
+        ctx.drawImage(img, dx, dy, dw, dh);
+      }
+
+      // 跨平台矢量國旗徽章繪製（解決 Windows 瀏覽器將國旗顯示成灰色 JP 字母的問題，100% 還原概念圖白底圓角國旗方章）
+      function drawVectorCountryFlagBadge(ctx, countryCode, x, y, w, h) {
+        const cc = (countryCode || '').toUpperCase();
+        if (!cc) return false;
+
+        ctx.save();
+        ctx.shadowColor = 'rgba(15, 23, 42, 0.14)';
+        ctx.shadowBlur = 6;
+        ctx.shadowOffsetY = 2;
+        ctx.fillStyle = '#ffffff';
+        drawRoundedRectPath(ctx, x - 3, y - 3, w + 6, h + 6, 9);
+        ctx.fill();
+        ctx.shadowColor = 'transparent';
+        ctx.strokeStyle = 'rgba(203, 213, 225, 0.9)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        drawRoundedRectPath(ctx, x, y, w, h, 6);
+        ctx.clip();
+
+        if (cc === 'JP') {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(x, y, w, h);
+          ctx.fillStyle = '#bc002d';
+          ctx.beginPath();
+          ctx.arc(x + w / 2, y + h / 2, h * 0.30, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (cc === 'KR') {
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(x, y, w, h);
+          const cx = x + w / 2, cy = y + h / 2, r = h * 0.28;
+          ctx.fillStyle = '#cd2e3a';
+          ctx.beginPath();
+          ctx.arc(cx, cy, r, Math.PI, 0);
+          ctx.fill();
+          ctx.fillStyle = '#0047a0';
+          ctx.beginPath();
+          ctx.arc(cx, cy, r, 0, Math.PI);
+          ctx.fill();
+          ctx.fillStyle = '#cd2e3a';
+          ctx.beginPath();
+          ctx.arc(cx - r / 2, cy, r / 2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#0047a0';
+          ctx.beginPath();
+          ctx.arc(cx + r / 2, cy, r / 2, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (cc === 'TW') {
+          ctx.fillStyle = '#fe0000';
+          ctx.fillRect(x, y, w, h);
+          ctx.fillStyle = '#000095';
+          ctx.fillRect(x, y, w * 0.5, h * 0.5);
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(x + w * 0.25, y + h * 0.25, h * 0.13, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (cc === 'TH') {
+          const stripes = ['#a51931', '#f4f5f8', '#2d2a4a', '#2d2a4a', '#f4f5f8', '#a51931'];
+          stripes.forEach((c, idx) => {
+            ctx.fillStyle = c;
+            ctx.fillRect(x, y + (h / 6) * idx, w, h / 6 + 0.5);
+          });
+        } else if (cc === 'VN') {
+          ctx.fillStyle = '#da251d';
+          ctx.fillRect(x, y, w, h);
+          ctx.fillStyle = '#ffff00';
+          ctx.beginPath();
+          ctx.arc(x + w / 2, y + h / 2, h * 0.22, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (cc === 'SG') {
+          ctx.fillStyle = '#ef3340';
+          ctx.fillRect(x, y, w, h / 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(x, y + h / 2, w, h / 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(x + w * 0.26, y + h * 0.25, h * 0.15, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#ef3340';
+          ctx.beginPath();
+          ctx.arc(x + w * 0.31, y + h * 0.25, h * 0.13, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (cc === 'GB' || cc === 'UK') {
+          ctx.fillStyle = '#012169';
+          ctx.fillRect(x, y, w, h);
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = h * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(x, y); ctx.lineTo(x + w, y + h);
+          ctx.moveTo(x + w, y); ctx.lineTo(x, y + h);
+          ctx.stroke();
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(x + w * 0.4, y, w * 0.2, h);
+          ctx.fillRect(x, y + h * 0.36, w, h * 0.28);
+          ctx.fillStyle = '#c8102e';
+          ctx.fillRect(x + w * 0.44, y, w * 0.12, h);
+          ctx.fillRect(x, y + h * 0.42, w, h * 0.16);
+        } else if (cc === 'FR') {
+          ctx.fillStyle = '#002395'; ctx.fillRect(x, y, w / 3, h);
+          ctx.fillStyle = '#ffffff'; ctx.fillRect(x + w / 3, y, w / 3, h);
+          ctx.fillStyle = '#ed2939'; ctx.fillRect(x + (w * 2) / 3, y, w / 3, h);
+        } else if (cc === 'IT') {
+          ctx.fillStyle = '#009246'; ctx.fillRect(x, y, w / 3, h);
+          ctx.fillStyle = '#ffffff'; ctx.fillRect(x + w / 3, y, w / 3, h);
+          ctx.fillStyle = '#ce2b37'; ctx.fillRect(x + (w * 2) / 3, y, w / 3, h);
+        } else if (cc === 'DE') {
+          ctx.fillStyle = '#000000'; ctx.fillRect(x, y, w, h / 3);
+          ctx.fillStyle = '#dd0000'; ctx.fillRect(x, y + h / 3, w, h / 3);
+          ctx.fillStyle = '#ffce00'; ctx.fillRect(x, y + (h * 2) / 3, w, h / 3);
+        } else if (cc === 'CH') {
+          ctx.fillStyle = '#d52b1e'; ctx.fillRect(x, y, w, h);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(x + w * 0.43, y + h * 0.2, w * 0.14, h * 0.6);
+          ctx.fillRect(x + w * 0.26, y + h * 0.41, w * 0.48, h * 0.18);
+        } else if (cc === 'AU' || cc === 'NZ') {
+          ctx.fillStyle = '#00008b'; ctx.fillRect(x, y, w, h);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(x + w * 0.2, y, w * 0.08, h * 0.5);
+          ctx.fillRect(x, y + h * 0.2, w * 0.48, h * 0.1);
+          ctx.fillStyle = '#ff0000';
+          ctx.fillRect(x + w * 0.22, y, w * 0.04, h * 0.5);
+          ctx.fillRect(x, y + h * 0.22, w * 0.48, h * 0.06);
+        } else if (cc === 'US') {
+          for (let i = 0; i < 7; i++) {
+            ctx.fillStyle = i % 2 === 0 ? '#b22234' : '#ffffff';
+            ctx.fillRect(x, y + (h / 7) * i, w, h / 7 + 0.5);
+          }
+          ctx.fillStyle = '#3c3b6e';
+          ctx.fillRect(x, y, w * 0.45, h * 0.55);
+        } else if (cc === 'CA') {
+          ctx.fillStyle = '#ff0000';
+          ctx.fillRect(x, y, w * 0.26, h);
+          ctx.fillRect(x + w * 0.74, y, w * 0.26, h);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(x + w * 0.26, y, w * 0.48, h);
+          ctx.fillStyle = '#ff0000';
+          ctx.beginPath();
+          ctx.arc(x + w / 2, y + h / 2, h * 0.22, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          const g = ctx.createLinearGradient(x, y, x + w, y + h);
+          g.addColorStop(0, '#0284c7');
+          g.addColorStop(1, '#2563eb');
+          ctx.fillStyle = g;
+          ctx.fillRect(x, y, w, h);
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '800 16px "Outfit", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(cc.slice(0, 2), x + w / 2, y + h / 2 + 1);
+        }
+
+        ctx.restore();
+        return true;
+      }
+
+      // 放大還原概念圖比例：復古赤陶紅圓形航空郵戳 ＋ 貫穿雙側波浪郵戳線
+      function drawVintagePostmark(ctx, cx, cy, yearStr, isWashi) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(-0.16);
+        const stampColor = isWashi ? 'rgba(178, 56, 46, 0.84)' : 'rgba(190, 62, 52, 0.82)';
+        ctx.strokeStyle = stampColor;
+        ctx.fillStyle = stampColor;
+
+        const outerR = 66;
+        const innerR = 56;
+
+        ctx.lineWidth = 3.4;
+        ctx.beginPath();
+        ctx.arc(0, 0, outerR, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.arc(0, 0, innerR, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(0, -innerR + 7, 2.2, 0, Math.PI * 2);
+        ctx.arc(0, innerR - 7, 2.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.lineWidth = 2.4;
+        [-18, -6, 6, 18].forEach((row) => {
+          ctx.beginPath();
+          ctx.moveTo(-98, row);
+          ctx.quadraticCurveTo(-84, row - 6, -70, row);
+          ctx.quadraticCurveTo(-56, row + 6, -42, row);
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.moveTo(42, row);
+          ctx.quadraticCurveTo(56, row - 6, 70, row);
+          ctx.quadraticCurveTo(84, row + 6, 98, row);
+          ctx.stroke();
+        });
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = '800 15px "Outfit", sans-serif';
+        ctx.fillText('AIR MAIL', 0, -13);
+        ctx.font = '900 22px "Outfit", sans-serif';
+        ctx.fillText(String(yearStr), 0, 13);
+        ctx.restore();
+      }
+
+      async function ensureEditorialFontsReady() {
+        try {
+          if (document.fonts && document.fonts.load) {
+            await Promise.race([
+              Promise.all([
+                document.fonts.load('700 58px "Noto Serif TC"'),
+                document.fonts.load('600 32px "Cormorant Garamond"'),
+                document.fonts.load('700 28px "Cinzel"')
+              ]),
+              new Promise(r => setTimeout(r, 1200))
+            ]);
+          }
+        } catch (e) {}
+      }
+
+      function drawCinemaFilmFrame(ctx, W, H, framePadX, framePadTop, photoW, photoH) {
+        // 35mm 電影暗房底色（黑曜石膠片質感）
+        ctx.fillStyle = '#0b0d12';
+        ctx.fillRect(0, 0, W, H);
+
+        // 頂部與底部 35mm 膠片齒孔與片邊編號
+        const sprocketYTop = 18;
+        const sprocketYBot = H - 34;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.14)';
+        for (let sx = 34; sx <= W - 54; sx += 46) {
+          drawRoundedRectPath(ctx, sx, sprocketYTop, 22, 14, 3);
+          ctx.fill();
+          drawRoundedRectPath(ctx, sx, sprocketYBot, 22, 14, 3);
+          ctx.fill();
+        }
+
+        // 左右微細膠片刻度線
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(framePadX - 4, framePadTop - 4, photoW + 8, photoH + 8);
+      }
+
+      async function renderPostcardCanvas() {
+        const trip = findTripByKey(currentTripKey);
+        if (!trip) return null;
+
+        const overlay = document.getElementById('tripPostcardLoadingOverlay');
+        if (overlay) overlay.classList.remove('hidden');
+
+        await ensureEditorialFontsReady();
+
+        const isWashi = document.body.classList.contains('theme-style-3');
+        const matchedDest = typeof matchDestination === 'function' ? matchDestination(trip.title, trip) : null;
+        const countryCode = (matchedDest && matchedDest.countryCode) ? matchedDest.countryCode : '';
+        const cleanTitle = (trip.title || '連假旅程').replace(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/g, '').trim() || '連假旅程';
+        const dateRangeStr = formatPostcardDateRange(trip.startDate, trip.endDate);
+        const startMonth = parseInt(trip.startDate.split('-')[1], 10) || 1;
+        const yearStr = trip.startDate.split('-')[0] || String(selectedYear || 2027);
+        const routeText = getRouteBadgeText(trip, matchedDest);
+        const destIata = resolveDestinationIataCode(trip, matchedDest);
+        const totalNumStr = trip.totalDays % 1 === 0 ? trip.totalDays.toFixed(0) : trip.totalDays.toFixed(1);
+
+        const activeUrl = customUploadedDataUrl || photoCandidates[currentPhotoIdx] || '';
+        const loadedImg = await loadImageSafe(activeUrl);
+
+        const scale = 2;
+        const W = 900;
+        const H = 1200;
+        const canvas = document.createElement('canvas');
+        canvas.width = W * scale;
+        canvas.height = H * scale;
+        const ctx = canvas.getContext('2d');
+        ctx.scale(scale, scale);
+
+        const fontSans = '"Plus Jakarta Sans", "PingFang HK", "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif';
+        const fontDisplay = '"Outfit", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif';
+        const fontEditorialSerif = '"Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif';
+        const fontCinemaLatin = '"Cinzel", "Cormorant Garamond", Georgia, serif';
+
+        if (currentLayout === 3) {
+          // =========================================================================
+          // 版式三 · 電影海報膠卷風 (Cinema Poster / 35mm Film Look)
+          // =========================================================================
+          const framePadX = 48;
+          const framePadTop = 52;
+          const photoW = W - framePadX * 2; // 804
+          const photoH = 852;
+
+          drawCinemaFilmFrame(ctx, W, H, framePadX, framePadTop, photoW, photoH);
+
+          // 膠片片邊暗金色文字
+          ctx.fillStyle = 'rgba(245, 194, 107, 0.72)';
+          ctx.font = `700 12px ${fontDisplay}`;
+          ctx.textAlign = 'left';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(`KODAK VISION3 500T  ·  HKG → ${destIata}`, framePadX, 41);
+          ctx.textAlign = 'right';
+          ctx.fillText(`SCENE ${String(startMonth).padStart(2, '0')}A  ·  ${yearStr}`, W - framePadX, 41);
+
+          // 電影銀幕相片區（帶暗角戲劇光影漸層）
+          ctx.save();
+          drawRoundedRectPath(ctx, framePadX, framePadTop, photoW, photoH, 8);
+          ctx.clip();
+
+          if (loadedImg) {
+            drawCoverImage(ctx, loadedImg, framePadX, framePadTop, photoW, photoH);
+          } else {
+            drawFallbackScenicArt(ctx, framePadX, framePadTop, photoW, photoH, startMonth);
+          }
+
+          // 電影上下暗角漸層（令字幕與海報標題極具戲劇張力）
+          const topVig = ctx.createLinearGradient(0, framePadTop, 0, framePadTop + 140);
+          topVig.addColorStop(0, 'rgba(6, 8, 12, 0.56)');
+          topVig.addColorStop(1, 'rgba(6, 8, 12, 0)');
+          ctx.fillStyle = topVig;
+          ctx.fillRect(framePadX, framePadTop, photoW, 140);
+
+          const botVig = ctx.createLinearGradient(0, framePadTop + photoH * 0.45, 0, framePadTop + photoH);
+          botVig.addColorStop(0, 'rgba(6, 8, 12, 0)');
+          botVig.addColorStop(0.65, 'rgba(6, 8, 12, 0.62)');
+          botVig.addColorStop(1, 'rgba(11, 13, 18, 0.96)');
+          ctx.fillStyle = botVig;
+          ctx.fillRect(framePadX, framePadTop + photoH * 0.45, photoW, photoH * 0.55);
+
+          // 銀幕左上角：電影節推薦標章 / 路線標記
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.88)';
+          ctx.font = `700 16px ${fontCinemaLatin}`;
+          ctx.textAlign = 'left';
+          ctx.fillText(`OFFICIAL SELECTION  ·  HKG ✈ ${destIata}`, framePadX + 26, framePadTop + 34);
+
+          // 銀幕右上角：放映天數膠囊（GOLD CINEMA BADGE）
+          ctx.fillStyle = 'rgba(245, 194, 107, 0.92)';
+          ctx.font = `800 18px ${fontDisplay}`;
+          ctx.textAlign = 'right';
+          ctx.fillText(`${totalNumStr} DAYS`, framePadX + photoW - 26, framePadTop + 34);
+
+          // 銀幕底部置中電影主片名（明體宋韻大字 + 疏朗字距）
+          ctx.save();
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.85)';
+          ctx.shadowBlur = 22;
+          ctx.shadowOffsetY = 4;
+          ctx.fillStyle = '#ffffff';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'alphabetic';
+          ctx.font = `700 66px ${fontEditorialSerif}`;
+          ctx.fillText(cleanTitle, W / 2, framePadTop + photoH - 44, photoW - 56);
+          ctx.restore();
+
+          // 銀幕內底部細金線
+          ctx.strokeStyle = 'rgba(245, 194, 107, 0.55)';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(framePadX + 180, framePadTop + photoH - 18);
+          ctx.lineTo(W - framePadX - 180, framePadTop + photoH - 18);
+          ctx.stroke();
+
+          ctx.restore();
+
+          // 海報下方：電影上映檔期與演職員表式落款
+          const creditTop = framePadTop + photoH;
+          ctx.fillStyle = '#f5c26b';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'alphabetic';
+          ctx.font = `700 26px ${fontCinemaLatin}`;
+          ctx.fillText(`RELEASED  ${dateRangeStr}`, W / 2, creditTop + 62, photoW - 32);
+
+          // 電影海報經典演職員表 Credits 小字排印
+          ctx.fillStyle = 'rgba(203, 213, 225, 0.62)';
+          ctx.font = `600 12px ${fontCinemaLatin}`;
+          ctx.fillText(
+            `DIRECTED BY TRAVELER   ·   DESTINATION ${destIata}   ·   DURATION ${totalNumStr} DAYS   ·   CINEMASCOPE 35MM`,
+            W / 2,
+            creditTop + 108,
+            photoW - 24
+          );
+
+          // 底部片商署名與國旗方章
+          if (countryCode) {
+            drawVectorCountryFlagBadge(ctx, countryCode, W / 2 - 148, creditTop + 132, 34, 24);
+          }
+          ctx.fillStyle = 'rgba(248, 250, 252, 0.85)';
+          ctx.textAlign = countryCode ? 'left' : 'center';
+          ctx.font = `700 18px ${fontCinemaLatin}`;
+          ctx.fillText('MANITY STUDIO 2026', countryCode ? W / 2 - 102 : W / 2, creditTop + 150);
+
+        } else {
+          // =========================================================================
+          // 版式一（航空郵戳） & 版式二（雅緻明體拍立得）
+          // =========================================================================
+          ctx.fillStyle = isWashi ? '#fcfaf5' : '#f9f9f7';
+          ctx.fillRect(0, 0, W, H);
+
+          ctx.strokeStyle = isWashi ? 'rgba(87, 83, 78, 0.35)' : 'rgba(203, 213, 225, 0.85)';
+          ctx.lineWidth = 3;
+          ctx.strokeRect(1.5, 1.5, W - 3, H - 3);
+
+          const framePadX = 52;
+          const framePadTop = 52;
+          const photoW = W - framePadX * 2;
+          const photoH = currentLayout === 1 ? 824 : 868;
+          const photoRadius = currentLayout === 1 ? 24 : 14;
+
+          ctx.save();
+          drawRoundedRectPath(ctx, framePadX, framePadTop, photoW, photoH, photoRadius);
+          ctx.clip();
+
+          if (loadedImg) {
+            drawCoverImage(ctx, loadedImg, framePadX, framePadTop, photoW, photoH);
+          } else {
+            drawFallbackScenicArt(ctx, framePadX, framePadTop, photoW, photoH, startMonth);
+          }
+
+          if (currentLayout === 1) {
+            const shadowGrad = ctx.createLinearGradient(0, framePadTop + photoH * 0.50, 0, framePadTop + photoH);
+            shadowGrad.addColorStop(0, 'rgba(15, 23, 42, 0)');
+            shadowGrad.addColorStop(1, 'rgba(15, 23, 42, 0.72)');
+            ctx.fillStyle = shadowGrad;
+            ctx.fillRect(framePadX, framePadTop, photoW, photoH);
+
+            ctx.font = `800 34px ${fontDisplay}`;
+            const pillTextW = ctx.measureText(routeText).width;
+            const pillW = Math.min(photoW - 68, pillTextW + 76);
+            const pillH = 74;
+            const pillX = framePadX + 34;
+            const pillY = framePadTop + 34;
+
+            ctx.save();
+            ctx.shadowColor = 'rgba(15, 23, 42, 0.16)';
+            ctx.shadowBlur = 14;
+            ctx.shadowOffsetY = 4;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.84)';
+            drawRoundedRectPath(ctx, pillX, pillY, pillW, pillH, 37);
+            ctx.fill();
+            ctx.restore();
+
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.96)';
+            ctx.lineWidth = 2.5;
+            drawRoundedRectPath(ctx, pillX, pillY, pillW, pillH, 37);
+            ctx.stroke();
+
+            ctx.fillStyle = '#1e293b';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(routeText, pillX + pillW / 2, pillY + pillH / 2 + 1, pillW - 32);
+
+            ctx.save();
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.60)';
+            ctx.shadowBlur = 16;
+            ctx.shadowOffsetY = 4;
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'alphabetic';
+
+            ctx.font = `900 54px ${fontSans}`;
+            const unitW = ctx.measureText('日').width;
+            ctx.fillText('日', framePadX + photoW - 36, framePadTop + photoH - 76);
+
+            ctx.font = `900 132px ${fontDisplay}`;
+            ctx.fillText(totalNumStr, framePadX + photoW - 40 - unitW, framePadTop + photoH - 72);
+
+            ctx.font = `900 36px ${fontDisplay}`;
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.fillText('DAYS', framePadX + photoW - 38, framePadTop + photoH - 28);
+            ctx.restore();
+          } else {
+            // 版式二：左上角精緻磨砂深色圓角徽章「X日 / DAYS」
+            const badgeX = framePadX + 30;
+            const badgeY = framePadTop + 30;
+            const badgeW = 148;
+            const badgeH = 128;
+            ctx.fillStyle = 'rgba(30, 41, 59, 0.56)';
+            drawRoundedRectPath(ctx, badgeX, badgeY, badgeW, badgeH, 22);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.font = `900 46px ${fontDisplay}`;
+            ctx.fillText(`${totalNumStr}日`, badgeX + badgeW / 2, badgeY + 48);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.90)';
+            ctx.font = `800 22px ${fontDisplay}`;
+            ctx.fillText('DAYS', badgeX + badgeW / 2, badgeY + 94);
+          }
+          ctx.restore();
+
+          const captionTop = framePadTop + photoH;
+          if (currentLayout === 1) {
+            // 版式一：左側主標題＋純淨出發日期（不寫「連放幾多日」），右側大航空郵戳
+            const textX = framePadX + 4;
+            const maxTextW = photoW - 220;
+            const titleBaselineY = captionTop + 114;
+
+            let titleStartX = textX;
+            const hasFlag = drawVectorCountryFlagBadge(ctx, countryCode, textX + 3, titleBaselineY - 42, 54, 38);
+            if (hasFlag) {
+              titleStartX += 74;
+            }
+
+            ctx.fillStyle = isWashi ? '#292524' : '#111827';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'alphabetic';
+            ctx.font = `900 56px ${fontSans}`;
+            ctx.fillText(cleanTitle, titleStartX, titleBaselineY, maxTextW - (hasFlag ? 74 : 0));
+
+            ctx.fillStyle = isWashi ? '#57534e' : '#334155';
+            ctx.font = `600 32px ${fontSans}`;
+            ctx.fillText(dateRangeStr, textX, captionTop + 178, maxTextW);
+
+            drawVintagePostmark(ctx, W - framePadX - 110, captionTop + 132, yearStr, isWashi);
+
+            ctx.fillStyle = isWashi ? '#78716c' : '#64748b';
+            ctx.textAlign = 'right';
+            ctx.font = `600 20px ${fontDisplay}`;
+            ctx.fillText('Manity Studio 2026', W - framePadX - 4, H - 30);
+          } else {
+            // 版式二：雅緻刊物明體宋韻置中題字（還原概念圖書卷氣質，不再死板）
+            const titleBaselineY = captionTop + 118;
+            ctx.font = `700 62px ${fontEditorialSerif}`;
+            const titleW = Math.min(photoW - 110, ctx.measureText(cleanTitle).width);
+            const flagW = countryCode ? 56 : 0;
+            const flagGap = countryCode ? 22 : 0;
+            const groupTotalW = flagW + flagGap + titleW;
+            const groupStartX = (W - groupTotalW) / 2;
+
+            if (countryCode) {
+              drawVectorCountryFlagBadge(ctx, countryCode, groupStartX, titleBaselineY - 44, flagW, 40);
+            }
+
+            ctx.fillStyle = isWashi ? '#292524' : '#111827';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillText(cleanTitle, groupStartX + flagW + flagGap, titleBaselineY, photoW - 110);
+
+            ctx.fillStyle = isWashi ? '#57534e' : '#64748b';
+            ctx.textAlign = 'center';
+            ctx.font = `600 29px ${fontEditorialSerif}`;
+            ctx.fillText(dateRangeStr, W / 2, captionTop + 176, photoW - 24);
+
+            ctx.fillStyle = isWashi ? '#a8a29e' : '#94a3b8';
+            ctx.font = `600 19px ${fontCinemaLatin}`;
+            ctx.fillText('Manity Studio 2026', W / 2, H - 28);
+          }
+        }
+
+        const previewCanvas = document.getElementById('tripPostcardPreviewCanvas');
+        if (previewCanvas) {
+          previewCanvas.width = canvas.width;
+          previewCanvas.height = canvas.height;
+          const pCtx = previewCanvas.getContext('2d');
+          pCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+          pCtx.drawImage(canvas, 0, 0);
+        }
+
+        lastRenderedCanvas = canvas;
+        if (overlay) overlay.classList.add('hidden');
+        return canvas;
+      }
+
+      function renderThumbnailStrip() {
+        const row = document.getElementById('tripPostcardThumbRow');
+        if (!row) return;
+        let htmlStr = photoCandidates.map((url, idx) => {
+          const isActive = !customUploadedDataUrl && idx === currentPhotoIdx;
+          return `
+            <button type="button" onclick="selectTripPostcardPhoto(${idx})"
+                    class="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border-2 transition active:scale-95 cursor-pointer ${isActive ? 'border-blue-600 ring-2 ring-blue-300/60 shadow-xs' : 'border-slate-200 opacity-75 hover:opacity-100'}">
+              <img src="${url}" alt="風景相 ${idx + 1}" class="w-full h-full object-cover" />
+            </button>
+          `;
+        }).join('');
+
+        const isCustomActive = Boolean(customUploadedDataUrl);
+        htmlStr += `
+          <button type="button" onclick="document.getElementById('inputCustomPostcardPhoto')?.click()"
+                  class="w-12 h-12 rounded-xl shrink-0 border-2 border-dashed flex flex-col items-center justify-center gap-0.5 text-[9px] font-extrabold transition active:scale-95 cursor-pointer ${isCustomActive ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-slate-300 bg-slate-50 hover:bg-slate-100 text-slate-600'}">
+            <i class="fa-solid fa-plus text-xs"></i>
+            <span>自訂相</span>
+          </button>
+        `;
+        row.innerHTML = htmlStr;
+      }
+
+      function updateLayoutTabsUI() {
+        const b1 = document.getElementById('btnPostcardLayout1');
+        const b2 = document.getElementById('btnPostcardLayout2');
+        const b3 = document.getElementById('btnPostcardLayout3');
+        const activeCls = 'py-1.5 px-1.5 rounded-xl bg-white text-slate-900 font-black text-[10.5px] shadow-2xs transition cursor-pointer flex items-center justify-center gap-1';
+        const idleCls = 'py-1.5 px-1.5 rounded-xl text-slate-600 hover:text-slate-900 font-bold text-[10.5px] transition cursor-pointer flex items-center justify-center gap-1';
+        if (b1) b1.className = currentLayout === 1 ? activeCls : idleCls;
+        if (b2) b2.className = currentLayout === 2 ? activeCls : idleCls;
+        if (b3) b3.className = currentLayout === 3 ? activeCls : idleCls;
+      }
+
+      async function open(tripKey) {
+        const trip = findTripByKey(tripKey);
+        if (!trip) return;
+        currentTripKey = tripKey;
+        customUploadedDataUrl = null;
+        currentPhotoIdx = 0;
+
+        const matchedDest = typeof matchDestination === 'function' ? matchDestination(trip.title, trip) : null;
+        photoCandidates = (matchedDest && Array.isArray(matchedDest.images)) ? matchedDest.images.slice(0, 6) : [];
+
+        // 若卡片當前輪播正停留在某一張相，預設同步選取該張相
+        const activeSlider = document.querySelector(`.trip-bg-slider[data-trip-slider="${tripKey}"]`);
+        if (activeSlider && photoCandidates.length > 0) {
+          const slides = Array.from(activeSlider.querySelectorAll('.trip-bg-slide'));
+          const activeSlideIdx = slides.findIndex(s => s.classList.contains('active'));
+          if (activeSlideIdx >= 0 && activeSlideIdx < photoCandidates.length) {
+            currentPhotoIdx = activeSlideIdx;
+          }
+        }
+
+        const modal = document.getElementById('modalTripPostcard');
+        if (modal) modal.classList.remove('hidden');
+        if (typeof syncBackgroundScrollLock === 'function') syncBackgroundScrollLock();
+
+        updateLayoutTabsUI();
+        renderThumbnailStrip();
+        await renderPostcardCanvas();
+      }
+
+      function close() {
+        const modal = document.getElementById('modalTripPostcard');
+        if (modal) modal.classList.add('hidden');
+        if (typeof syncBackgroundScrollLock === 'function') syncBackgroundScrollLock();
+      }
+
+      async function setLayout(layoutNum) {
+        currentLayout = (layoutNum === 2 || layoutNum === 3) ? layoutNum : 1;
+        updateLayoutTabsUI();
+        await renderPostcardCanvas();
+      }
+
+      async function selectPhoto(idx) {
+        customUploadedDataUrl = null;
+        currentPhotoIdx = idx;
+        renderThumbnailStrip();
+        await renderPostcardCanvas();
+      }
+
+      async function cyclePhoto() {
+        customUploadedDataUrl = null;
+        if (photoCandidates.length > 0) {
+          currentPhotoIdx = (currentPhotoIdx + 1) % photoCandidates.length;
+        }
+        renderThumbnailStrip();
+        await renderPostcardCanvas();
+      }
+
+      function handleUpload(e) {
+        const file = e && e.target && e.target.files ? e.target.files[0] : null;
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async (ev) => {
+          customUploadedDataUrl = ev.target.result;
+          renderThumbnailStrip();
+          await renderPostcardCanvas();
+        };
+        reader.readAsDataURL(file);
+        e.target.value = '';
+      }
+
+      async function shareOrDownload() {
+        const trip = findTripByKey(currentTripKey);
+        if (!trip) return;
+        const btn = document.getElementById('btnShareTripPostcard');
+        const origHtml = btn ? btn.innerHTML : '';
+        try {
+          if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-[11px]"></i><span>生成中...</span>';
+          }
+          const canvas = lastRenderedCanvas || await renderPostcardCanvas();
+          if (!canvas) return;
+          const safeName = (trip.title || 'Trip').replace(/[\/:*?"<>|\s]+/g, '_');
+          const fileName = `Polaroid_${safeName}_${trip.startDate}.png`;
+
+          canvas.toBlob(async (blob) => {
+            if (!blob) return;
+            const file = new File([blob], fileName, { type: 'image/png' });
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+              try {
+                await navigator.share({
+                  title: `${trip.title || '連假旅程'} · 寶麗來明信片`,
+                  files: [file]
+                });
+                return;
+              } catch (err) {}
+            }
+            const link = document.createElement('a');
+            link.download = fileName;
+            link.href = URL.createObjectURL(blob);
+            link.click();
+            URL.revokeObjectURL(link.href);
+            if (typeof showToast === 'function') {
+              showToast('📸 寶麗來旅行明信片已儲存！');
+            }
+          }, 'image/png');
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = origHtml;
+          }
+        }
+      }
+
+      return { open, close, setLayout, selectPhoto, cyclePhoto, handleUpload, shareOrDownload };
+    })();
+
+
+
+    window.openTripPostcardModal = (tripKey) => TripPostcardStudio.open(tripKey);
+    window.closeTripPostcardModal = () => TripPostcardStudio.close();
+    window.setTripPostcardLayout = (n) => TripPostcardStudio.setLayout(n);
+    window.selectTripPostcardPhoto = (idx) => TripPostcardStudio.selectPhoto(idx);
+    window.cycleTripPostcardPhoto = () => TripPostcardStudio.cyclePhoto();
+    window.handleCustomPostcardPhotoUpload = (e) => TripPostcardStudio.handleUpload(e);
+    window.shareOrDownloadTripPostcard = () => TripPostcardStudio.shareOrDownload();
   </script>
 </body>
 </html>
