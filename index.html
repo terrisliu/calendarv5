@@ -276,7 +276,7 @@
       box-shadow: inset 3px 0 0 #9333ea;
     }
 
-    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.5.43_OverviewShareClassicExact) === */
+    /* === 手機版「未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示」架構 (v7.5.45_OverviewCircleIcons) === */
     @media (max-width: 767px) {
       /* 2027 年份與萬年曆切換掣長期常駐顯示於左側，任何頁面／模式皆不消失 */
       #mainYearSwitcher {
@@ -994,7 +994,7 @@
       color: #ffffff !important;
     }
 
-    /* === 彈性分割視圖 (Elastic Split-View · 全程吸頂永不頂走 v7.5.43_OverviewShareClassicExact) === */
+    /* === 彈性分割視圖 (Elastic Split-View · 全程吸頂永不頂走 v7.5.45_OverviewCircleIcons) === */
     @media (max-width: 767px) {
       /* 僅喺手機單欄 (<768px) 令 #leftSideColumn 穿透為 contents，避免影響 iPad 768px–1023px 雙欄網格！ */
       #leftSideColumn {
@@ -1773,7 +1773,7 @@
       body.year-overview-mode #yearViewControls span {
         font-size: 0.95rem !important;
       }
-      body.year-overview-mode #yearViewControls button {
+      body.year-overview-mode #yearViewControls button:not(#btnOverviewShare):not(#btnOverviewToggleLock):not(#btnExitYearViewTop):not(#btnOverviewDrawerOpen) {
         font-size: 0.8rem !important;
         padding: 5px 12px !important;
       }
@@ -3493,7 +3493,7 @@
       letter-spacing: 0.045em !important;
     }
 
-    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.5.43_OverviewShareClassicExact） === */
+    /* === 全站所有圓形圖示波統一「呼吸微光浮凸」動態效果（::after 獨立光環層 · 零衝突 · 離開即刻歸零 v7.5.45_OverviewCircleIcons） === */
     @keyframes orbHaloBreathe {
       0%, 100% {
         opacity: 0.85;
@@ -3627,7 +3627,7 @@
 
 
     /* =========================================================================
-       【版面風格二：四季光影極簡風 (Minimalist 3-Tone Seasonal Atmosphere · v7.5.43_OverviewShareClassicExact)】
+       【版面風格二：四季光影極簡風 (Minimalist 3-Tone Seasonal Atmosphere · v7.5.45_OverviewCircleIcons)】
        - 簡約三色主調（霧白 #f8fafc · 霧灰線框 #cbd5e1 · 墨藍灰 #1e293b）繪畫全站界面
        - 年曆內公眾假期（橙日）、紅日（星期六日）及所有請假顏色（AL/WB/BL/CL/SP/OFF）100% 保持原色不變
        - 滾動感應當前聚焦月份，自動切換春夏秋冬背景光影與左右邊緣微粒子
@@ -3809,7 +3809,7 @@
     }
 
     /* =========================================================================
-       【版面風格三：日式和紙雜誌風 · 方案 A 淡彩和紙粉筆風 (Pastel Washi Tint · v7.5.43_OverviewShareClassicExact)】
+       【版面風格三：日式和紙雜誌風 · 方案 A 淡彩和紙粉筆風 (Pastel Washi Tint · v7.5.45_OverviewCircleIcons)】
        - 日曆與迷你小日曆：高明度淡彩和紙粉筆底色 ＋ 深色清晰數字，輕盈通透不沉暗
        - 頂部「休假類別與年度配額」卡片＆年曆全覽膠囊：100% 同步連動和紙粉筆色系
        ========================================================================= */
@@ -4264,7 +4264,7 @@
 
 
     /* =========================================================================
-       方案 A 延伸 · 假期規劃全板塊 ＋ 🧭 出行須知 ＋ 🛡️ 城市指南 ＋ 預訂工作台 ＋ 查詢抽屜和紙化 (v7.5.43_OverviewShareClassicExact)
+       方案 A 延伸 · 假期規劃全板塊 ＋ 🧭 出行須知 ＋ 🛡️ 城市指南 ＋ 預訂工作台 ＋ 查詢抽屜和紙化 (v7.5.45_OverviewCircleIcons)
        - 徹底消除和風版下突兀的冷冰藍／鮮藍畫面與按鈕，全數統一為暖和紙米白、霧竹綠、淡彩和紙粉筆色系
        ========================================================================= */
 
@@ -4650,7 +4650,7 @@
 
 
     /* =========================================================================
-       【年曆全覽模式：星期六日紅日紅字 ＋ 精緻較幼字體 ＋ 去日格框線 · v7.5.43_OverviewShareClassicExact】
+       【年曆全覽模式：星期六日紅日紅字 ＋ 精緻較幼字體 ＋ 去日格框線 · v7.5.45_OverviewCircleIcons】
        - 星期六日及逢日紅日完整保留鮮明紅色字體 (.text-pink-600 / .text-rose-400)
        - 調幼所有日子字重 (font-weight: 500)，令 12 個月並列視覺更輕盈優雅、不擁擠
        - 完整保留月份英文縮寫 (JAN–DEC)、備忘錄綠點／黃點 (.day-memo-dots) 及連假天數標註
@@ -4773,13 +4773,11 @@
       </div>
 
       <div class="flex items-center gap-1.5 shrink-0">
-        <button id="btnOverviewShare" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 flex items-center gap-1 transition active:scale-95 shadow-2xs">
-          <i class="fa-solid fa-share-nodes text-indigo-600 text-[10px]"></i>
-          <span>分享</span>
+        <button id="btnOverviewShare" title="分享年曆全覽圖片" aria-label="分享年曆全覽圖片" class="w-9 h-9 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-300 flex items-center justify-center transition active:scale-95 shadow-2xs cursor-pointer">
+          <i class="fa-solid fa-share-nodes text-sm"></i>
         </button>
-        <button id="btnOverviewToggleLock" class="px-2 py-1 rounded-lg text-[11px] font-bold transition flex items-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300">
-          <i class="fa-solid fa-lock text-slate-500 text-[10px]"></i>
-          <span>檢視</span>
+        <button id="btnOverviewToggleLock" title="切換檢視或編輯模式" aria-label="切換檢視或編輯模式" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-300 flex items-center justify-center transition active:scale-95 shadow-2xs cursor-pointer">
+          <i class="fa-solid fa-lock text-sm"></i>
         </button>
         <button id="btnExitYearViewTop" aria-label="返回月曆主頁" class="w-9 h-9 md:w-auto md:h-auto md:px-2.5 md:py-1 bg-white hover:bg-blue-50 border-[1.5px] border-blue-900 text-blue-900 rounded-full md:rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 active:scale-95 transition shadow-2xs cursor-pointer">
           <svg class="inline-block shrink-0" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.8" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="15.0" y="2" width="2.2" height="3.8" rx="1.1"/><rect x="2.8" y="4" width="18.4" height="17.4" rx="2.8"/><path d="M2.8 8.5h18.4"/><rect x="10.65" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="10.8" width="2.7" height="2.6" rx="0.65"/><rect x="5.7" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="10.65" y="15.6" width="2.7" height="2.6" rx="0.65"/><rect x="15.6" y="15.6" width="2.7" height="2.6" rx="0.65"/></svg>
@@ -4903,7 +4901,7 @@
                 </button>
               </div>
 
-              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.5.43_OverviewShareClassicExact) -->
+              <!-- 手機版專屬：未選反向白底彩框 · 選中實心高亮 · 駐留當前功能圖示 (v7.5.45_OverviewCircleIcons) -->
               <div class="flex md:hidden items-center gap-1 min-w-0">
                 <!-- 左側即時實色身份膠囊（僅於進入某個功能板塊時顯示對應實色＋白字；選單展開未選前隱藏不干擾） -->
                 <button type="button" id="mobileCapsuleLeftLabel" onclick="triggerPinnedMobileAction()" aria-label="目前功能名稱">登記寫假</button>
@@ -5832,7 +5830,7 @@
     <span>•</span>
     <button id="btnOpenChangelog" type="button" class="inline-flex items-center gap-1 font-mono font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2 py-0.5 rounded-md transition active:scale-95 shadow-2xs">
       <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
-      <span>v7.5.43_OverviewShareClassicExact</span>
+      <span>v7.5.45_OverviewCircleIcons</span>
     </button>
   </footer>
 
@@ -5990,7 +5988,7 @@
           <div>
             <h3 class="font-black text-slate-900 text-sm flex items-center gap-2">
               版本更新日誌
-              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.5.43_OverviewShareClassicExact</span>
+              <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 bg-sky-500/15 text-sky-700 rounded border border-sky-200">v7.5.45_OverviewCircleIcons</span>
             </h3>
           </div>
         </div>
@@ -6002,7 +6000,7 @@
       <div class="p-4 overflow-y-auto custom-scroll space-y-3.5 text-xs">
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 明信片設計工作室全面升級：保留原有 3 款經典 ＋ 新增 14 款藝術／介面／票據／攝影版式）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 明信片設計工作室全面升級：保留原有 3 款經典 ＋ 新增 14 款藝術／介面／票據／攝影版式）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-23</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6013,7 +6011,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 徹底修復電腦＆手機「分享 / 儲存相片」無反應問題）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 徹底修復電腦＆手機「分享 / 儲存相片」無反應問題）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-23</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6025,7 +6023,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · AI 風景圖「憑 API Key 解鎖」門禁 ＋ 未填 Key 自動收起所有 AI 圖像與按鈕）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · AI 風景圖「憑 API Key 解鎖」門禁 ＋ 未填 Key 自動收起所有 AI 圖像與按鈕）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6036,7 +6034,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 基於 v7.5.43_OverviewShareClassicExact 升級：Pollinations 慢工專攻 1 幅 ＋ 解除 crossOrigin 誤殺）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 基於 v7.5.45_OverviewCircleIcons 升級：Pollinations 慢工專攻 1 幅 ＋ 解除 crossOrigin 誤殺）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6048,7 +6046,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 免費 AI 雙模型接力 FLUX＋Turbo · 零金鑰出圖成功率再提升）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 免費 AI 雙模型接力 FLUX＋Turbo · 零金鑰出圖成功率再提升）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6058,7 +6056,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 原有精選圖庫優先 ＋ Google Gemini / Wikipedia 實景雙加插 ＋ 徹底屏蔽黃色失敗圖）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 原有精選圖庫優先 ＋ Google Gemini / Wikipedia 實景雙加插 ＋ 徹底屏蔽黃色失敗圖）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6070,7 +6068,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 實景相片＋每次自動生成 2 幅 AI 專屬風景圖雙混合輪播引擎）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 實景相片＋每次自動生成 2 幅 AI 專屬風景圖雙混合輪播引擎）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6081,7 +6079,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 雙軌國旗/香港區旗顯示、郵戳下移避讓標題、修正香港/深圳/日本風景圖庫）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 雙軌國旗/香港區旗顯示、郵戳下移避讓標題、修正香港/深圳/日本風景圖庫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6093,7 +6091,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 明信片三版式升級：版式一精簡日期、版式二雅緻明體宋韻、新增版式三電影海報膠卷風）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 明信片三版式升級：版式一精簡日期、版式二雅緻明體宋韻、新增版式三電影海報膠卷風）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6105,7 +6103,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 修復明信片預覽彈窗並統一左上角國際航空三字碼）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 修復明信片預覽彈窗並統一左上角國際航空三字碼）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6116,7 +6114,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 寶麗來明信片 1:1 概念圖比例精調與跨平台矢量國旗）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 寶麗來明信片 1:1 概念圖比例精調與跨平台矢量國旗）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6127,7 +6125,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 新增「寶麗來旅行明信片」雙版式匯出與分享功能）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 新增「寶麗來旅行明信片」雙版式匯出與分享功能）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6139,7 +6137,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 新增「風格二 · 四季光影極簡風」簡約三色主題）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 新增「風格二 · 四季光影極簡風」簡約三色主題）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6151,7 +6149,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 頁尾署名更新為 Manity Studio 2026）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 頁尾署名更新為 Manity Studio 2026）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6161,7 +6159,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 「版面風格」移至「備份與重置」上方可開合方格，並移除風格二）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 「版面風格」移至「備份與重置」上方可開合方格，並移除風格二）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6172,7 +6170,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 詳細清單鎖頭圖示移至日期後方）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 詳細清單鎖頭圖示移至日期後方）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6182,7 +6180,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 純淨分享截圖版面，移除底部行程清單）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 純淨分享截圖版面，移除底部行程清單）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6192,7 +6190,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 原生 Canvas 2D 1:1 零走位高清分享截圖引擎）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 原生 Canvas 2D 1:1 零走位高清分享截圖引擎）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6204,7 +6202,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 日式和紙風全介面色彩統一：假期規劃＋出行須知＋城市指南）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 日式和紙風全介面色彩統一：假期規劃＋出行須知＋城市指南）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6215,7 +6213,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 日式和紙風套用「方案 A 淡彩和紙粉筆風」）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 日式和紙風套用「方案 A 淡彩和紙粉筆風」）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6226,7 +6224,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 日式和紙風統一高明度霧灰假期色系）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 日式和紙風統一高明度霧灰假期色系）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6237,7 +6235,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 年曆全覽保留星期六日紅色字 ＋ 精緻幼體日子）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 年曆全覽保留星期六日紅色字 ＋ 精緻幼體日子）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6248,7 +6246,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 年曆全覽還原備忘錄綠黃點、英文月份 JAN–DEC 與連假標註）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 年曆全覽還原備忘錄綠黃點、英文月份 JAN–DEC 與連假標註）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6259,7 +6257,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 年曆全覽去線條與文字極簡化，架構零改動）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 年曆全覽去線條與文字極簡化，架構零改動）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6270,7 +6268,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 消除切換中間停頓，實現零斷點單一連續弾出彈入 Fade-In / Fade-Out 動畫）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 消除切換中間停頓，實現零斷點單一連續弾出彈入 Fade-In / Fade-Out 動畫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6281,7 +6279,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 年曆全覽手勢順滑度全面升級 ＋ 彈出彈入 Fade-In / Fade-Out 過渡動畫）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 年曆全覽手勢順滑度全面升級 ＋ 彈出彈入 Fade-In / Fade-Out 過渡動畫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-22</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6292,7 +6290,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（測試版 · 設定新增「版面風格」三選一：風格一晴空原版 / 風格二黑金午夜旗艦風 / 風格三日式和紙雜誌風）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（測試版 · 設定新增「版面風格」三選一：風格一晴空原版 / 風格二黑金午夜旗艦風 / 風格三日式和紙雜誌風）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6305,7 +6303,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（移除手機假期規劃「1/3 · 2/3」多餘標籤 ＋ 順序「細 ➔ 中(一小幅) ➔ 大(全開) ➔ 中 ➔ 細 ➔ 收埋」開合節奏）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（移除手機假期規劃「1/3 · 2/3」多餘標籤 ＋ 順序「細 ➔ 中(一小幅) ➔ 大(全開) ➔ 中 ➔ 細 ➔ 收埋」開合節奏）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6316,7 +6314,7 @@
 
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v7.5.43_OverviewShareClassicExact（修正 iPad 至手機跨斷點拖拉錯亂 ＋ iPad 純藍數字天數標註 ＋ 年曆全覽幼線連動條）</span>
+            <span class="font-bold text-indigo-700 text-xs">v7.5.45_OverviewCircleIcons（修正 iPad 至手機跨斷點拖拉錯亂 ＋ iPad 純藍數字天數標註 ＋ 年曆全覽幼線連動條）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6328,7 +6326,7 @@
 
         <div class="border-l-2 border-sky-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.5.43_OverviewShareClassicExact（雙錦囊兩行清晰標題排版 ＋ 精簡手機頂部走馬燈列 ＋ 移除手機底部重複面板）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.5.45_OverviewCircleIcons（雙錦囊兩行清晰標題排版 ＋ 精簡手機頂部走馬燈列 ＋ 移除手機底部重複面板）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6340,7 +6338,7 @@
 
         <div class="border-l-2 border-blue-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（月曆右上角灰色年份一按直入「年曆全覽」＋ 焦點月份微光定位）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（月曆右上角灰色年份一按直入「年曆全覽」＋ 焦點月份微光定位）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6351,7 +6349,7 @@
 
         <div class="border-l-2 border-indigo-600 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-800 text-xs">v7.5.43_OverviewShareClassicExact（全年曆覽專屬外緣純標誌與隱藏鎖頭 · 主月曆還原原本徽章設計）</span>
+            <span class="font-bold text-indigo-800 text-xs">v7.5.45_OverviewCircleIcons（全年曆覽專屬外緣純標誌與隱藏鎖頭 · 主月曆還原原本徽章設計）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6362,7 +6360,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.5.43_OverviewShareClassicExact（手機觸控防穿透隔離 ＋ 自動解鎖頁面滾動防卡死守衛）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.5.45_OverviewCircleIcons（手機觸控防穿透隔離 ＋ 自動解鎖頁面滾動防卡死守衛）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6374,7 +6372,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.5.43_OverviewShareClassicExact（假期小方塊英文全名大細楷標題化 ＋ CL 預設全名 Casual Leave）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.5.45_OverviewCircleIcons（假期小方塊英文全名大細楷標題化 ＋ CL 預設全名 Casual Leave）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6385,7 +6383,7 @@
 
         <div class="border-l-2 border-indigo-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-indigo-700 text-xs">v7.5.43_OverviewShareClassicExact（年曆全覽與單月視圖 FLIP 連續物理縮放過渡動畫）</span>
+            <span class="font-bold text-indigo-700 text-xs">v7.5.45_OverviewCircleIcons（年曆全覽與單月視圖 FLIP 連續物理縮放過渡動畫）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6396,7 +6394,7 @@
 
         <div class="border-l-2 border-blue-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-blue-700 text-xs">v7.5.43_OverviewShareClassicExact（移除方塊右上角齒輪完整顯示英文全名 ＋ 數值全靠右垂直對齊）</span>
+            <span class="font-bold text-blue-700 text-xs">v7.5.45_OverviewCircleIcons（移除方塊右上角齒輪完整顯示英文全名 ＋ 數值全靠右垂直對齊）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6407,7 +6405,7 @@
 
         <div class="border-l-2 border-sky-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-sky-700 text-xs">v7.5.43_OverviewShareClassicExact（假期方塊同色系字體配搭 ＋ 柔和灰輔助標籤 ＋ 極淺灰齒輪精修）</span>
+            <span class="font-bold text-sky-700 text-xs">v7.5.45_OverviewCircleIcons（假期方塊同色系字體配搭 ＋ 柔和灰輔助標籤 ＋ 極淺灰齒輪精修）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6418,7 +6416,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.5.43_OverviewShareClassicExact（假期方塊全平台統一尺寸 ＋ 輪休模式右上角齒輪同步 ＋ 主題色實線外框與側邊浮光）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.5.45_OverviewCircleIcons（假期方塊全平台統一尺寸 ＋ 輪休模式右上角齒輪同步 ＋ 主題色實線外框與側邊浮光）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6430,7 +6428,7 @@
 
         <div class="border-l-2 border-emerald-500 pl-3 space-y-1">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-emerald-700 text-xs">v7.5.43_OverviewShareClassicExact（精簡淺色填滿年度配額卡片 ＋ 機票順序黃色提醒修正 ＋ 全檔文字校對清理）</span>
+            <span class="font-bold text-emerald-700 text-xs">v7.5.45_OverviewCircleIcons（精簡淺色填滿年度配額卡片 ＋ 機票順序黃色提醒修正 ＋ 全檔文字校對清理）</span>
             <span class="text-[10px] text-slate-400 font-mono">2026-11-21</span>
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
@@ -6780,7 +6778,7 @@
           </div>
           <ul class="list-disc pl-4 text-slate-600 space-y-0.5 text-[11px]">
             <li>移除額外佔位說明橫條，將「跨週長假·全用AL / 四季放鬆·留備用 / 請1-2日·輕巧快閃」直接內嵌於頂部三個方案膠囊內，完全不影響原有版面高度。</li>
-            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.5.43_OverviewShareClassicExact</code>（移除 beta 字樣）。</li>
+            <li>全數移除黑色按鈕與黑底徽章，改用清透晨光暖白底搭配藍紫漸層月章與明亮色彩，清爽耐看；版本號正式升級為 <code>v7.5.45_OverviewCircleIcons</code>（移除 beta 字樣）。</li>
           </ul>
         </div>
 
@@ -17200,7 +17198,7 @@
     // 啟動旅遊目的地背景 20 秒定時平滑淡入淡出輪播 (方式 A)
         // 啟動旅遊目的地背景：多卡片錯峰非同步輪播（Staggered & Dynamic Rhythm）
     // =========================================================================
-    // 【四級優先瀑布流混合圖片引擎 (v7.5.43_OverviewShareClassicExact)：原有精選圖庫優先 ＋ Google Gemini ＋ Wikipedia 實景 ＋ 靜默過濾】
+    // 【四級優先瀑布流混合圖片引擎 (v7.5.45_OverviewCircleIcons)：原有精選圖庫優先 ＋ Google Gemini ＋ Wikipedia 實景 ＋ 靜默過濾】
     // =========================================================================
     const HYBRID_AI_CACHE_KEY = 'hk_leave_hybrid_ai_photos_v4';
     const USER_GEMINI_KEY_STORAGE = 'hk_leave_user_gemini_api_key_v1';
@@ -25647,25 +25645,13 @@
       ctx.fillStyle = palette.pageBg;
       ctx.fillRect(0, 0, logicalW, logicalH);
 
-      // 2. 頂部經典標題列：「香港假期管理 · 2027」（左側） ＋ 「同步代碼：XXXX」（右側藍色）
+      // 2. 頂部經典標題列：「香港假期管理 · 2027」（左側；已移除右上角文字）
       const headerMidY = headerH * 0.50;
       ctx.fillStyle = palette.headerText;
       ctx.font = `900 ${isMobilePortrait ? 15.5 : 24}px ${fontSans}`;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'middle';
       ctx.fillText(`香港假期管理 · ${selectedYear}`, padX, headerMidY);
-
-      const syncLabelPrefix = '同步代碼：';
-      const syncCodeStr = String(currentRoom || '').toUpperCase();
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = palette.syncCodeText;
-      ctx.font = `800 ${isMobilePortrait ? 10 : 14}px ${fontMono}`;
-      ctx.fillText(syncCodeStr, logicalW - padX, headerMidY + 0.3);
-      const codeW = ctx.measureText(syncCodeStr).width;
-
-      ctx.font = `700 ${isMobilePortrait ? 9.5 : 13.5}px ${fontSans}`;
-      ctx.fillText(syncLabelPrefix, logicalW - padX - codeW - 1, headerMidY);
 
       ctx.strokeStyle = palette.divider;
       ctx.lineWidth = 0.9;
@@ -25705,7 +25691,7 @@
           ctx.lineWidth = isStyle3 ? 1.1 : 0.85;
           ctx.stroke();
 
-          // 月份標題列：左側「1月 JAN」＋ 右側淺灰年份水印「2027」（還原圖二細節）
+          // 月份標題列：純淨「1月 JAN」（已移除右上角年份水印）
           const titleBaseY = cardY + cardPadTop + monthTitleH * 0.46;
           ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';
@@ -25720,11 +25706,6 @@
           const enFontSize = isMobilePortrait ? 8 : 11;
           ctx.font = `800 ${enFontSize}px ${fontNum}`;
           ctx.fillText(monthNamesEn[m], cardX + cardPadX + zhWidth + (isMobilePortrait ? 4 : 6), titleBaseY + 0.4);
-
-          ctx.textAlign = 'right';
-          ctx.fillStyle = palette.titleYear;
-          ctx.font = `700 ${isMobilePortrait ? 7.2 : 10}px ${fontNum}`;
-          ctx.fillText(String(selectedYear), cardX + cardW - cardPadX, titleBaseY + 0.3);
 
           // 星期列（日 一 二 三 四 五 六）
           const wkY = cardY + cardPadTop + monthTitleH + weekdayH * 0.42;
@@ -25928,7 +25909,7 @@
         const label = item.legendLabel;
         const mText = ctx.measureText(label);
         const pillW = mText.width + (isMobilePortrait ? 10 : 18);
-        if (curX + pillW > logicalW - padX - (isMobilePortrait ? 90 : 180)) return;
+        if (curX + pillW > logicalW - padX - (isMobilePortrait ? 84 : 135)) return;
 
         ctx.fillStyle = item.fill;
         drawRoundRect(curX, pillY, pillW, pillH, 4.5);
@@ -25950,9 +25931,9 @@
         curX += pillW + (isMobilePortrait ? 4 : 8);
       });
 
-      // 右側年份註腳（與圖二右下角呼應）
-      const noteText = `${selectedYear} 香港假期管理 · 連假與公眾假期總覽`;
-      ctx.font = `600 ${isMobilePortrait ? 6.8 : 10.5}px ${fontSans}`;
+      // 右下角品牌署名：Manity Studio 2026
+      const noteText = 'Manity Studio 2026';
+      ctx.font = `600 ${isMobilePortrait ? 7.5 : 11}px ${fontSans}`;
       const nMetrics = ctx.measureText(noteText);
       const nAsc = nMetrics.actualBoundingBoxAscent || (isMobilePortrait ? 5 : 7.5);
       const nDesc = nMetrics.actualBoundingBoxDescent || 0;
@@ -25971,7 +25952,7 @@
       try {
         if (btnShare) {
           btnShare.disabled = true;
-          btnShare.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-[10px]"></i><span>處理中</span>';
+          btnShare.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-sm"></i>';
         }
         const canvas = await captureYearOverviewCanvas();
         canvas.toBlob(async (blob) => {
@@ -26612,8 +26593,9 @@ function setEditModeState(newState, notifyToast = true) {
         if (text) text.textContent = '編輯中';
         if (icon) icon.className = 'fa-solid fa-pen text-white text-[12px]';
         if (overviewLockBtn) {
-          overviewLockBtn.className = 'px-2 py-0.5 rounded text-[10px] font-bold transition flex items-center gap-1 bg-amber-500 text-white';
-          overviewLockBtn.innerHTML = '<i class="fa-solid fa-pen"></i> 編輯中';
+          overviewLockBtn.className = 'w-9 h-9 rounded-full bg-amber-500 hover:bg-amber-600 text-white border border-amber-500 flex items-center justify-center transition active:scale-95 shadow-2xs cursor-pointer animate-pulse';
+          overviewLockBtn.innerHTML = '<i class="fa-solid fa-pen text-sm"></i>';
+          overviewLockBtn.title = '編輯中（點擊切換至檢視模式）';
         }
         if (notifyToast) {
           showToast('✏️ 已開啟編輯模式，可點選日期排假');
@@ -26625,8 +26607,9 @@ function setEditModeState(newState, notifyToast = true) {
         if (text) text.textContent = '檢視'; stopAutoLockTimer();
         if (icon) icon.className = 'fa-solid fa-lock text-slate-500 text-[12px]';
         if (overviewLockBtn) {
-          overviewLockBtn.className = 'px-2 py-0.5 rounded text-[10px] font-bold transition flex items-center gap-1 bg-slate-100 text-slate-700 border border-slate-300';
-          overviewLockBtn.innerHTML = '<i class="fa-solid fa-lock text-slate-500"></i> 檢視';
+          overviewLockBtn.className = 'w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-300 flex items-center justify-center transition active:scale-95 shadow-2xs cursor-pointer';
+          overviewLockBtn.innerHTML = '<i class="fa-solid fa-lock text-sm"></i>';
+          overviewLockBtn.title = '檢視模式（點擊切換至編輯模式）';
         }
         if (notifyToast) {
           showToast('🔒 已切換至檢視模式');
@@ -43707,7 +43690,7 @@ function setEditModeState(newState, notifyToast = true) {
     </div>
   </div>
 
-  <!-- 寶麗來旅行明信片全系列設計工作室彈窗 (v7.5.43_OverviewShareClassicExact · 17款旗艦設計版式) -->
+  <!-- 寶麗來旅行明信片全系列設計工作室彈窗 (v7.5.45_OverviewCircleIcons · 17款旗艦設計版式) -->
   <div id="modalTripPostcard" class="fixed inset-0 z-[76] flex items-center justify-center bg-slate-950/75 backdrop-blur-md hidden p-2.5 sm:p-4" style="font-family: 'Plus Jakarta Sans', 'PingFang HK', 'Hiragino Sans GB', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;" onclick="if(event.target===this) closeTripPostcardModal()">
     <div class="bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-md w-full max-h-[94dvh] overflow-hidden flex flex-col">
       <!-- 頂部極簡標題列（拿走細字副標，釋放更多垂直預覽空間） -->
@@ -45858,7 +45841,7 @@ function setEditModeState(newState, notifyToast = true) {
               <i class="fa-solid fa-clock-rotate-left text-sky-600 text-sm w-4 text-center"></i>
               <span class="text-[13.5px] font-extrabold text-slate-800 tracking-tight">版本更新日誌</span>
             </span>
-            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.5.43_OverviewShareClassicExact</span>
+            <span id="drawerVersionBadgeText" class="text-[10.5px] font-mono font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200/80">v7.5.45_OverviewCircleIcons</span>
           </button>
         </div>
 
@@ -47129,7 +47112,7 @@ function setEditModeState(newState, notifyToast = true) {
   </script>
 
   <script>
-    // === 寶麗來旅行明信片雙版式沖印與分享引擎 (v7.5.43_OverviewShareClassicExact · 1:1 概念圖比例精調 ＋ 跨平台矢量國旗徽章) ===
+    // === 寶麗來旅行明信片雙版式沖印與分享引擎 (v7.5.45_OverviewCircleIcons · 1:1 概念圖比例精調 ＋ 跨平台矢量國旗徽章) ===
     const TripPostcardStudio = (() => {
       // 6 大設計系列 · 17 款藝術與票據版式（完整保留原有 1=航空郵戳, 2=雅緻拍立得, 3=35mm電影海報）
       const STYLE_CATEGORIES = [
