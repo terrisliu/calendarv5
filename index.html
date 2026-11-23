@@ -45868,7 +45868,7 @@ function setEditModeState(newState, notifyToast = true) {
           </div>
         </div>
 
-        <!-- 區塊三之二：手機鎖機通知推播設定 (iPhone / Android / 電腦原生通知卡片) -->
+        <!-- 區塊三之二：手機鎖機通知推播設定 (iPhone / Android / 電腦原生通知卡片 · 免填 Key 一鍵啟用) -->
         <div class="p-3.5 bg-gradient-to-br from-blue-50/70 via-white to-indigo-50/50 space-y-2.5">
           <div class="flex items-center justify-between gap-2">
             <span class="flex items-center gap-2 text-[13px] font-extrabold text-slate-800">
@@ -45878,14 +45878,8 @@ function setEditModeState(newState, notifyToast = true) {
             <span id="pushSubStatusBadge" class="px-2 py-0.5 rounded-full bg-slate-200/80 text-slate-600 font-extrabold text-[10px]">未啟用</span>
           </div>
           <p class="text-[11px] text-slate-500 leading-relaxed">
-            貼上你於 <code class="font-mono text-slate-700">vapidkeys.com</code> 產生的 <b>Public Key</b> 並啟用，iPhone（加入主畫面後）與 Android 鎖機時亦會彈出原生系統通知卡片。
+            一鍵啟用後，iPhone（加入主畫面後）與 Android 鎖機時亦會收到所屬房間的日程與備忘原生通知卡片（各房間完全獨立隔離）。
           </p>
-          <div class="space-y-1.5">
-            <label class="block text-[10.5px] font-bold text-slate-600">VAPID Public Key（公鑰）：</label>
-            <input type="text" id="inputVapidPublicKey" placeholder="貼上 B 開頭的 Public Key…"
-                   onchange="saveVapidPublicKeySetting(this.value)"
-                   class="w-full px-2.5 py-1.5 rounded-xl bg-white border border-slate-200 focus:border-blue-500 focus:outline-none text-[11px] font-mono text-slate-800">
-          </div>
           <div class="grid grid-cols-2 gap-1.5 pt-0.5">
             <button type="button" id="btnEnableDevicePush" onclick="enableDevicePushSubscription()"
                     class="py-2 px-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-2xs transition active:scale-95 cursor-pointer">
@@ -50013,6 +50007,7 @@ function setEditModeState(newState, notifyToast = true) {
   <script>
     // === iPhone / Android / 電腦原生鎖機推播訂閱與雲端排程同步引擎 (v7.5.8) ===
     const PUSH_WORKER_URL = 'https://calendarv5push.terrisliu.workers.dev';
+    const DEFAULT_VAPID_PUBLIC_KEY = 'BDX8g4mY6utee6_hppGTf3sviHc7SuX-FbrFZ1kS7LOPOYYrqMmT2Zf2oe9nIz7XYcoTU8DnJvcKD_XUnzsXUP8';
     const VAPID_PUB_STORAGE_KEY = 'hk_leave_vapid_public_key_v1';
     const DEVICE_PUSH_SUB_KEY = 'hk_leave_device_push_sub_v1';
 
@@ -50067,11 +50062,9 @@ function setEditModeState(newState, notifyToast = true) {
     }
 
     window.enableDevicePushSubscription = async function() {
-      const inputEl = document.getElementById('inputVapidPublicKey');
-      const vapidPub = (inputEl ? inputEl.value : localStorage.getItem(VAPID_PUB_STORAGE_KEY) || '').trim();
+      const vapidPub = (DEFAULT_VAPID_PUBLIC_KEY || localStorage.getItem(VAPID_PUB_STORAGE_KEY) || '').trim();
       if (!vapidPub) {
-        if (typeof showToast === 'function') showToast('⚠️ 請先貼上 VAPID Public Key（公鑰）');
-        if (inputEl) inputEl.focus();
+        if (typeof showToast === 'function') showToast('⚠️ 尚未設定推播公鑰');
         return;
       }
       localStorage.setItem(VAPID_PUB_STORAGE_KEY, vapidPub);
@@ -50253,11 +50246,11 @@ function setEditModeState(newState, notifyToast = true) {
       });
     };
 
-    // 初始化：自動載入已儲存的 VAPID 公鑰與檢查推播狀態
+    // 初始化：自動寫入內建 VAPID 公鑰並檢查本機推播狀態
     (async function initPushNotificationEngine() {
-      const savedKey = localStorage.getItem(VAPID_PUB_STORAGE_KEY) || '';
-      const inputEl = document.getElementById('inputVapidPublicKey');
-      if (inputEl && savedKey) inputEl.value = savedKey;
+      if (DEFAULT_VAPID_PUBLIC_KEY) {
+        localStorage.setItem(VAPID_PUB_STORAGE_KEY, DEFAULT_VAPID_PUBLIC_KEY);
+      }
 
       const reg = await registerAppServiceWorker();
       if (reg && reg.pushManager) {
