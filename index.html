@@ -50162,7 +50162,7 @@ function setEditModeState(newState, notifyToast = true) {
       try {
         const [y, m, d] = dateStr.split('-').map(Number);
         const [hh, mm] = (timeStr || '09:00').split(':').map(Number);
-        const targetMs = new Date(y, m - 1, d, hh, mm, 0).getTime() - (offsetMinutes || 0) * 60000;
+        const targetMs = new Date(y, m - 1, d, hh, mm, 0).getTime() - (offsetMinutes || 0) * 60000 - 30000;
 
         const roomKey = (typeof currentRoom !== 'undefined' && currentRoom) ? currentRoom : 'PUBLIC';
         // 讀取當前房間所有已登記推播的裝置憑證（iPhone + Android + 電腦）
