@@ -46700,26 +46700,28 @@ function setEditModeState(newState, notifyToast = true) {
         }
         const timeVal = (txtEl && txtEl.value) ? txtEl.value : '10:00';
         const rec = ensureDayScheduleObj(currentAppleTimelineDate);
+        let savedEv = null;
         if (editingAppleEventId) {
-          const target = rec.events.find(e => e.id === editingAppleEventId);
-          if (target) {
-            target.time = timeVal;
-            target.title = title;
-            target.color = selectedAppleEventColor || 'blue';
+          savedEv = rec.events.find(e => e.id === editingAppleEventId) || null;
+          if (savedEv) {
+            savedEv.time = timeVal;
+            savedEv.title = title;
+            savedEv.color = selectedAppleEventColor || 'blue';
           }
           editingAppleEventId = null;
-        } else {
-          rec.events.push({
+        }
+        if (!savedEv) {
+          savedEv = {
             id: 'ev_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
             time: timeVal,
             title: title,
             color: selectedAppleEventColor || 'blue'
-          });
+          };
+          rec.events.push(savedEv);
         }
         const remSel = document.getElementById('selectAppleEventReminder');
         const remVal = remSel ? remSel.value : 'none';
-        const latestEv = rec.events[rec.events.length - 1];
-        if (latestEv) latestEv.reminder = remVal;
+        savedEv.reminder = remVal;
 
         const submitBtn = document.getElementById('btnSubmitAppleTimelineEvent');
         if (submitBtn) submitBtn.textContent = '加入';
@@ -46730,13 +46732,15 @@ function setEditModeState(newState, notifyToast = true) {
 
         if (remVal !== 'none' && typeof syncPushReminderToCloud === 'function') {
           syncPushReminderToCloud({
-            itemId: (editingAppleEventId || (latestEv && latestEv.id) || ('ev_' + Date.now())),
+            itemId: savedEv.id,
             dateStr: currentAppleTimelineDate,
             timeStr: timeVal,
             offsetMinutes: parseInt(remVal, 10) || 0,
             title: `📅 ${timeVal} ${title}`,
             body: `${currentAppleTimelineDate} 日程提醒：${title}`
           });
+        } else if (remVal === 'none' && typeof deletePushReminderFromCloud === 'function') {
+          deletePushReminderFromCloud(savedEv.id, true);
         }
       };
 
@@ -46748,6 +46752,9 @@ function setEditModeState(newState, notifyToast = true) {
         if (typeof pushData === 'function') pushData();
         if (typeof renderMonthGrid === 'function') renderMonthGrid();
         renderAppleDayTimelineContent();
+        if (typeof deletePushReminderFromCloud === 'function') {
+          deletePushReminderFromCloud(evId, true);
+        }
       };
 
       window.addAppleDayTodo = function() {
@@ -50208,40 +50215,62 @@ function setEditModeState(newState, notifyToast = true) {
       }
     };
 
+    window.deletePushReminderFromCloud = async function(itemId, showFeedback) {
+      if (!itemId) return;
+      try {
+        const roomKey = (typeof currentRoom !== 'undefined' && currentRoom) ? currentRoom : 'PUBLIC';
+        await fetch(`${FIREBASE_BASE_URL}/push_queue/${encodeURIComponent(roomKey)}/${encodeURIComponent(itemId)}.json`, {
+          method: 'DELETE'
+        });
+        if (showFeedback && typeof showToast === 'function') {
+          showToast('🔕 已同步取消雲端通知排程');
+        }
+      } catch (err) {
+        console.warn('deletePushReminderFromCloud error:', err);
+      }
+    };
+
     window.scheduleAppleMemoReminder = function() {
       const sel = document.getElementById('selectAppleMemoReminder');
       const memoEl = document.getElementById('inputAppleDayMemo');
-      if (!sel || sel.value === 'none') return;
+      if (!sel) return;
+
+      const dateStr = document.getElementById('appleDayTitleText')?.textContent || '';
+      const activeDate = (typeof currentAppleTimelineDate !== 'undefined' && currentAppleTimelineDate) ? currentAppleTimelineDate : null;
+      let baseDateStr = activeDate;
+      if (!baseDateStr) {
+        const m = dateStr.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+        if (m) baseDateStr = `${m[1]}-${String(m[2]).padStart(2,'0')}-${String(m[3]).padStart(2,'0')}`;
+      }
+      if (!baseDateStr) return;
+
+      if (sel.value === 'none') {
+        deletePushReminderFromCloud('memo_' + baseDateStr, true);
+        return;
+      }
+
       const memoTxt = (memoEl ? memoEl.value : '').trim();
       if (!memoTxt) {
         if (typeof showToast === 'function') showToast('💡 請先輸入文字備忘內容');
         sel.value = 'none';
         return;
       }
-      const dateStr = document.getElementById('appleDayTitleText')?.textContent || '';
-      const activeDate = (typeof currentAppleTimelineDate !== 'undefined' && currentAppleTimelineDate) ? currentAppleTimelineDate : null;
-      // Fallback: parse from title if needed
-      let targetDateStr = activeDate;
-      if (!targetDateStr) {
-        const m = dateStr.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
-        if (m) targetDateStr = `${m[1]}-${String(m[2]).padStart(2,'0')}-${String(m[3]).padStart(2,'0')}`;
-      }
-      if (!targetDateStr) return;
 
+      let targetDateStr = baseDateStr;
       let timeStr = sel.value;
       if (timeStr.startsWith('prev')) {
         timeStr = timeStr.replace('prev', '');
-        const [yy, mm, dd] = targetDateStr.split('-').map(Number);
+        const [yy, mm, dd] = baseDateStr.split('-').map(Number);
         const prev = new Date(yy, mm - 1, dd - 1);
         targetDateStr = `${prev.getFullYear()}-${String(prev.getMonth() + 1).padStart(2,'0')}-${String(prev.getDate()).padStart(2,'0')}`;
       }
 
       syncPushReminderToCloud({
-        itemId: 'memo_' + targetDateStr,
+        itemId: 'memo_' + baseDateStr,
         dateStr: targetDateStr,
         timeStr: timeStr,
         offsetMinutes: 0,
-        title: `📝 文字備忘提醒（${targetDateStr}）`,
+        title: `📝 文字備忘提醒（${baseDateStr}）`,
         body: memoTxt
       });
     };
