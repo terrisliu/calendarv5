@@ -5956,6 +5956,682 @@
       }
     }
 
+    /* =========================================================================
+       【電腦版與大螢幕 (>= 768px) Apple iOS 26 / macOS Liquid Glass 統一升級版 (v7.6.33)】
+       - 保留原有「左年曆 ＋ 右雙層面板」黃金雙欄架構，徹底縫合上下設計語言分叉位
+       - 上半部合併精簡：年份 ＋ 年曆全覽收歸左側視角群組；右側精簡為「假期助手 ＋ 登記假期」膠囊主鍵 ＋ 清除／鎖定圓波
+       - 下半部左右雙欄、分頁分段控制器、旅程卡、甘特圖、公眾假期/農曆節氣、雙錦囊與寬屏明信片工作室全數統一液態玻璃材質
+       - 加入「跨欄磁吸聯動」：滑鼠懸停右邊旅程卡時，左邊月曆對應日期自動亮起琉璃光暈框
+       ========================================================================= */
+    @media (min-width: 768px) {
+      /* 1. 頂部標題列：輕盈通透玻璃列，消除硬朗底部橫線 */
+      body.ui-liquid-v2 #topHeader {
+        border-bottom: none !important;
+        margin-bottom: 8px !important;
+        padding: 4px 6px !important;
+      }
+      body.ui-liquid-v2 #topHeader #btnOpenDrawerMenu {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 9999px !important;
+        background: rgba(255, 255, 255, 0.78) !important;
+        backdrop-filter: blur(20px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 4px 14px -4px rgba(15, 23, 42, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
+      }
+
+      /* 2. 左側年曆頂部雙層合併為「單行統一液態玻璃指揮膠囊列」 */
+      body.ui-liquid-v2 #stickyHeaderArea > .glass-surface {
+        border-radius: 26px !important;
+        background: rgba(255, 255, 255, 0.72) !important;
+        backdrop-filter: blur(28px) saturate(210%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(210%) !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.95) !important;
+        box-shadow:
+          0 12px 32px -8px rgba(15, 23, 42, 0.08),
+          inset 0 1.5px 1px rgba(255, 255, 255, 0.98) !important;
+        padding: 8px 14px !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 10px !important;
+      }
+      /* 合併第一行年份與第二行工具欄為同一水平線 */
+      body.ui-liquid-v2 #yearHeaderRow {
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+        flex-shrink: 0 !important;
+      }
+      body.ui-liquid-v2 #mainYearSwitcher {
+        background: rgba(241, 245, 249, 0.75) !important;
+        border: 1px solid rgba(255, 255, 255, 0.95) !important;
+        border-radius: 9999px !important;
+        padding: 2px 6px !important;
+        box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+      }
+      body.ui-liquid-v2 #collapsibleMainToolbar {
+        flex: 1 1 auto !important;
+        justify-content: flex-end !important;
+        gap: 8px !important;
+      }
+      body.ui-liquid-v2 #collapsibleMainToolbar > div:first-child {
+        justify-content: flex-end !important;
+        gap: 8px !important;
+      }
+
+      /* 膠囊化頂部功能鍵：假期助手、登記假期、年曆全覽、單日清除、檢視鎖定統一圓潤語言 */
+      body.ui-liquid-v2 #btnAutoGenerateTrip,
+      body.ui-liquid-v2 #btnToggleMainApplyBar,
+      body.ui-liquid-v2 #btnToggleYearView {
+        border-radius: 9999px !important;
+        padding: 7px 15px !important;
+        font-size: 12px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.01em !important;
+      }
+      body.ui-liquid-v2 #btnToggleYearView {
+        background: rgba(255, 255, 255, 0.85) !important;
+        border: 1.25px solid rgba(30, 58, 138, 0.28) !important;
+        color: #1e3a8a !important;
+        box-shadow: 0 2px 8px -2px rgba(30, 58, 138, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+      }
+      body.ui-liquid-v2 #btnToggleYearView:hover {
+        background: rgba(239, 246, 255, 0.95) !important;
+        border-color: #2563eb !important;
+      }
+      body.ui-liquid-v2 #btnClearAll,
+      body.ui-liquid-v2 #btnToggleGlobalLock {
+        width: 34px !important;
+        height: 34px !important;
+        border-radius: 9999px !important;
+        background: rgba(255, 255, 255, 0.85) !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
+      }
+      body.ui-liquid-v2 #btnClearAll:not(.is-eraser-active) {
+        color: #e11d48 !important;
+      }
+
+      /* 展開「休假類別與年度配額」列（佔滿整行寬度 w-full，Apple Grouped Inset 玻璃卡片） */
+      body.ui-liquid-v2 #topApplyLeavePopupBar {
+        width: 100% !important;
+        flex-basis: 100% !important;
+        margin-top: 4px !important;
+        margin-bottom: 0 !important;
+        border-radius: 22px !important;
+        background: rgba(248, 250, 252, 0.72) !important;
+        border: 1px solid rgba(255, 255, 255, 0.92) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 4px 14px -4px rgba(15, 23, 42, 0.05) !important;
+      }
+      body.ui-liquid-v2 #topApplyModeIndicatorPill {
+        border-radius: 9999px !important;
+      }
+      body.ui-liquid-v2 .brush-card {
+        border-radius: 16px !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+      }
+      body.ui-liquid-v2 #btnBrushEraser {
+        border-radius: 16px !important;
+      }
+
+      /* 3. 下半部左欄：12 個月年曆 Bento 玻璃卡片統一圓角與折射高光邊 */
+      body.ui-liquid-v2:not(.year-overview-mode) .month-card {
+        border-radius: 22px !important;
+        background: rgba(255, 255, 255, 0.76) !important;
+        backdrop-filter: blur(22px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(22px) saturate(190%) !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.95) !important;
+        box-shadow:
+          0 10px 28px -8px rgba(15, 23, 42, 0.06),
+          inset 0 1.5px 0 rgba(255, 255, 255, 0.98) !important;
+        padding: 12px 10px !important;
+      }
+      body.ui-liquid-v2:not(.year-overview-mode) .month-card:hover {
+        box-shadow:
+          0 16px 36px -8px rgba(37, 99, 235, 0.11),
+          inset 0 1.5px 0 rgba(255, 255, 255, 1) !important;
+      }
+
+      /* 跨欄磁吸聯動高亮（滑鼠指向右側旅程卡時，左側月曆對應日期亮起琉璃光暈） */
+      .calendar-cell.desktop-trip-hover-halo {
+        transform: translateY(-2px) scale(1.06) !important;
+        box-shadow: 0 0 0 2.5px #2563eb, 0 8px 20px -2px rgba(37, 99, 235, 0.42) !important;
+        z-index: 28 !important;
+      }
+      .trip-card.desktop-cell-hover-focus {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.35), 0 18px 36px -8px rgba(37, 99, 235, 0.18) !important;
+        transform: translateY(-2px) !important;
+      }
+
+      /* 4. 下半部右欄：Apple Liquid Glass 側邊檢查器面板 */
+      body.ui-liquid-v2 #rightSidePanelCard.glass-surface {
+        border-radius: 26px !important;
+        background: rgba(255, 255, 255, 0.72) !important;
+        backdrop-filter: blur(28px) saturate(205%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(205%) !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.95) !important;
+        box-shadow:
+          0 16px 40px -10px rgba(15, 23, 42, 0.09),
+          inset 0 1.5px 1px rgba(255, 255, 255, 0.98) !important;
+      }
+      /* 右欄頂部 3 分頁改為 Apple iOS 膠囊分段控制器 */
+      body.ui-liquid-v2 #rightSidePanelCard > div:first-child {
+        background: rgba(248, 250, 252, 0.45) !important;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.6) !important;
+        padding: 10px 12px !important;
+      }
+      body.ui-liquid-v2 #rightSidePanelCard > div:first-child > div:first-child {
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        background: rgba(226, 232, 240, 0.52) !important;
+        border: 1px solid rgba(255, 255, 255, 0.85) !important;
+        border-radius: 9999px !important;
+        padding: 3px !important;
+        gap: 2px !important;
+      }
+      body.ui-liquid-v2 #tabBtnLeaves,
+      body.ui-liquid-v2 #tabBtnHolidays,
+      body.ui-liquid-v2 #tabBtnLunar {
+        border-radius: 9999px !important;
+        justify-content: center !important;
+        padding: 6px 8px !important;
+        border: none !important;
+      }
+      body.ui-liquid-v2 #tabBtnLeaves.bg-white,
+      body.ui-liquid-v2 #tabBtnHolidays.bg-white,
+      body.ui-liquid-v2 #tabBtnLunar.bg-white {
+        background: #ffffff !important;
+        box-shadow: 0 3px 10px -2px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
+      }
+
+      /* 右欄內部甘特圖、視角切換器、旅程卡片、雙錦囊與預訂工作台統一玻璃語言 */
+      body.ui-liquid-v2 #btnViewTrips,
+      body.ui-liquid-v2 #btnViewTable {
+        border-radius: 9999px !important;
+      }
+      body.ui-liquid-v2 #ganttTimelineBox {
+        border-radius: 20px !important;
+        background: rgba(255, 255, 255, 0.62) !important;
+        border: 1px solid rgba(255, 255, 255, 0.92) !important;
+        box-shadow: 0 4px 14px -4px rgba(15, 23, 42, 0.04) !important;
+      }
+      body.ui-liquid-v2 .trip-card {
+        border-radius: 22px !important;
+        background: rgba(255, 255, 255, 0.78) !important;
+        backdrop-filter: blur(20px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 10px 26px -6px rgba(15, 23, 42, 0.06), inset 0 1.5px 0 rgba(255, 255, 255, 0.98) !important;
+      }
+      body.ui-liquid-v2 .trip-card-header-bar {
+        background: rgba(255, 255, 255, 0.45) !important;
+        background-image: none !important;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.6) !important;
+        border-top-left-radius: 21px !important;
+        border-top-right-radius: 21px !important;
+      }
+      body.ui-liquid-v2 .btn-dual-capsule {
+        border-radius: 9999px !important;
+      }
+      body.ui-liquid-v2 #dualCapsuleStudioDrawer,
+      body.ui-liquid-v2 #inlineBookingStudioCard {
+        border-radius: 22px !important;
+        background: rgba(255, 255, 255, 0.84) !important;
+        backdrop-filter: blur(24px) saturate(200%) !important;
+        -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.95) !important;
+      }
+
+      /* 右欄「公眾假期」與「農曆節氣」分頁同步 Apple Grouped Inset 玻璃表格設計 */
+      body.ui-liquid-v2 #tabContentHolidays > div:first-child,
+      body.ui-liquid-v2 #tabContentLunar > div:first-child {
+        border-radius: 16px !important;
+        background: rgba(255, 255, 255, 0.66) !important;
+        border: 1px solid rgba(255, 255, 255, 0.92) !important;
+        box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04) !important;
+        padding: 8px 12px !important;
+      }
+      body.ui-liquid-v2 #tabContentHolidays table,
+      body.ui-liquid-v2 #tabContentLunar table {
+        border-collapse: separate !important;
+        border-spacing: 0 !important;
+        border-radius: 18px !important;
+        overflow: hidden !important;
+        background: rgba(255, 255, 255, 0.58) !important;
+        border: 1px solid rgba(255, 255, 255, 0.92) !important;
+        box-shadow: 0 4px 16px -4px rgba(15, 23, 42, 0.05) !important;
+      }
+      body.ui-liquid-v2 #tabContentHolidays thead,
+      body.ui-liquid-v2 #tabContentLunar thead {
+        background: rgba(248, 250, 252, 0.88) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+      }
+      body.ui-liquid-v2 #tabContentHolidays tbody td:last-child span,
+      body.ui-liquid-v2 #tabContentLunar tbody td:last-child span {
+        border-radius: 9999px !important;
+        padding: 2px 8px !important;
+      }
+
+      /* 5. 電腦版設定抽屜與所有彈窗：統一懸浮液態玻璃質感 */
+      body.ui-liquid-v2 #drawerMenuModal,
+      body.ui-liquid-v2 [id^="modal"] {
+        backdrop-filter: blur(8px) saturate(140%) !important;
+        -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+      }
+      body.ui-liquid-v2 #drawerMenuPanel {
+        margin: 12px !important;
+        height: calc(100dvh - 24px) !important;
+        border-radius: 30px !important;
+        background: rgba(246, 248, 252, 0.80) !important;
+        backdrop-filter: blur(34px) saturate(210%) !important;
+        -webkit-backdrop-filter: blur(34px) saturate(210%) !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 28px 64px -12px rgba(15, 23, 42, 0.25), inset 0 1.5px 1px rgba(255, 255, 255, 0.98) !important;
+      }
+      body.ui-liquid-v2 #drawerMenuPanel > div:nth-child(2) > div {
+        margin: 10px 12px !important;
+        border-top: none !important;
+        border-radius: 20px !important;
+        background: rgba(255, 255, 255, 0.74) !important;
+        border: 1px solid rgba(255, 255, 255, 0.94) !important;
+        box-shadow: 0 4px 16px -4px rgba(15, 23, 42, 0.05) !important;
+      }
+      body.ui-liquid-v2 [id^="modal"] > div {
+        border-radius: 28px !important;
+        background: rgba(255, 255, 255, 0.84) !important;
+        backdrop-filter: blur(32px) saturate(210%) !important;
+        -webkit-backdrop-filter: blur(32px) saturate(210%) !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.95) !important;
+      }
+
+      /* 6. 電腦版「明信片設計工作室」寬屏雙欄 Pro Studio 佈局（無需捲動，左畫布舞台 ＋ 右液態玻璃控制台） */
+      body.ui-liquid-v2 #modalTripPostcard > div {
+        max-width: 780px !important;
+        border-radius: 32px !important;
+        background: rgba(247, 249, 253, 0.82) !important;
+        display: grid !important;
+        grid-template-columns: 1.06fr 0.94fr !important;
+        grid-template-rows: auto auto 1fr auto auto !important;
+        grid-template-areas:
+          "header header"
+          "stage  cats"
+          "stage  custom"
+          "stage  inputs"
+          "stage  footer" !important;
+      }
+      body.ui-liquid-v2 #modalTripPostcard > div > div:nth-child(1) {
+        grid-area: header !important;
+        background: rgba(255, 255, 255, 0.50) !important;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.62) !important;
+      }
+      body.ui-liquid-v2 #modalTripPostcard > div > div:nth-child(2) {
+        grid-area: cats !important;
+        background: transparent !important;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.55) !important;
+        padding: 14px 16px 10px 16px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+      }
+      body.ui-liquid-v2 #modalTripPostcard > div > div:nth-child(3) {
+        grid-area: stage !important;
+        border-right: 1px solid rgba(226, 232, 240, 0.65) !important;
+        background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.42), rgba(226, 232, 240, 0.22)) !important;
+        padding: 16px !important;
+      }
+      body.ui-liquid-v2 #customPhotoAdjustBar {
+        grid-area: custom !important;
+        border-top: none !important;
+        background: rgba(255, 251, 235, 0.72) !important;
+        padding: 8px 16px !important;
+      }
+      body.ui-liquid-v2 #modalTripPostcard > div > div:nth-child(5) {
+        grid-area: inputs !important;
+        background: transparent !important;
+        border-top: none !important;
+        padding: 10px 16px !important;
+      }
+      body.ui-liquid-v2 #modalTripPostcard > div > div:nth-child(5) div.rounded-xl {
+        border-radius: 9999px !important;
+        background: rgba(255, 255, 255, 0.85) !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+      }
+      body.ui-liquid-v2 #btnResetPostcardCustomText {
+        border-radius: 9999px !important;
+      }
+      body.ui-liquid-v2 #modalTripPostcard > div > div:nth-child(6) {
+        grid-area: footer !important;
+        background: rgba(255, 255, 255, 0.45) !important;
+        border-top: 1px solid rgba(226, 232, 240, 0.6) !important;
+        padding: 12px 16px !important;
+      }
+      body.ui-liquid-v2 #modalTripPostcard > div > div:nth-child(6) > div {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+      }
+      body.ui-liquid-v2 #btnShareTripPostcard {
+        border-radius: 9999px !important;
+        padding: 10px 18px !important;
+        font-size: 12.5px !important;
+      }
+      body.ui-liquid-v2 #postcardSubStyleRow button {
+        border-radius: 9999px !important;
+      }
+      body.ui-liquid-v2 #postcardSubStyleRow button.text-blue-700 {
+        background: rgba(0, 122, 255, 0.13) !important;
+        color: #007aff !important;
+        border: 1px solid rgba(0, 122, 255, 0.25) !important;
+      }
+      body.ui-liquid-v2 #postcardSubStyleRow button span.bg-blue-600 {
+        display: none !important;
+      }
+    }
+
+    /* =========================================================================
+       【電腦版耳目一新外框 ＋ 精簡雙按鈕指揮列 ＋ 新設計連假日期小方塊 (v7.6.34)】
+       - 100% 僅作用於電腦／大螢幕 (`@media (min-width: 768px)` + `body.ui-liquid-v2`)
+       - 取消電腦版「年曆全覽」按鈕；將「公眾假期」與「農曆節氣」合併為單一「假期節氣」膠囊
+       - 右欄標題改為「旅程」；頂欄精簡為「假期助手」＋「寫假畫筆」雙主鍵（清除鍵收歸寫假列內）
+       - 全新雕塑感磨砂外框 ＋ 連續假期內「立體膠囊日曆小方塊」設計
+       ========================================================================= */
+    @media (min-width: 768px) {
+      /* 1. 耳目一新嘅雕塑感液態玻璃外框（Sculpted Liquid Glass Studio Shell） */
+      body.ui-liquid-v2 {
+        background-color: #e8eef6 !important;
+        background-image:
+          radial-gradient(circle at 8% 6%, rgba(125, 211, 252, 0.55) 0%, transparent 38%),
+          radial-gradient(circle at 92% 10%, rgba(216, 180, 254, 0.50) 0%, transparent 40%),
+          radial-gradient(circle at 50% 96%, rgba(253, 186, 116, 0.35) 0%, transparent 45%),
+          linear-gradient(145deg, #f4f7fb 0%, #e5ecf6 100%) !important;
+        padding: 16px 20px !important;
+      }
+      body.ui-liquid-v2 #appMainWrapper {
+        background: rgba(255, 255, 255, 0.42) !important;
+        backdrop-filter: blur(32px) saturate(195%) !important;
+        -webkit-backdrop-filter: blur(32px) saturate(195%) !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.92) !important;
+        border-radius: 34px !important;
+        padding: 14px 18px 18px 18px !important;
+        box-shadow:
+          0 30px 70px -18px rgba(15, 23, 42, 0.14),
+          0 4px 16px -4px rgba(15, 23, 42, 0.05),
+          inset 0 2px 1.5px rgba(255, 255, 255, 0.98) !important;
+      }
+
+      /* 2. 取消「年曆全覽」掣，並隱藏冗餘獨立「清除」與「鎖定」小圓鈕（寫假列展開時內建「清除」） */
+      body.ui-liquid-v2 #btnToggleYearView,
+      body.ui-liquid-v2 #btnClearAll,
+      body.ui-liquid-v2 #btnToggleGlobalLock {
+        display: none !important;
+      }
+
+      /* 頂部玻璃標題列：Logo ＋ 名稱 ＋ 年份膠囊 ＋ 精簡雙主鍵（「假期助手」＋「寫假畫筆」） */
+      body.ui-liquid-v2 #stickyHeaderArea > .glass-surface {
+        border-radius: 9999px !important;
+        background: rgba(255, 255, 255, 0.78) !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.96) !important;
+        padding: 7px 14px !important;
+        box-shadow:
+          0 10px 28px -8px rgba(15, 23, 42, 0.08),
+          inset 0 1.5px 1px rgba(255, 255, 255, 0.98) !important;
+      }
+      body.ui-liquid-v2 #stickyHeaderArea:has(#topApplyLeavePopupBar:not(.hidden)) > .glass-surface {
+        border-radius: 26px !important;
+      }
+
+      /* 兩大核心膠囊主鍵：「假期助手」＋「寫假畫筆（登記假期）」 */
+      body.ui-liquid-v2 #btnAutoGenerateTrip {
+        background: rgba(255, 255, 255, 0.90) !important;
+        color: #0369a1 !important;
+        border: 1.25px solid rgba(125, 211, 252, 0.85) !important;
+        box-shadow: 0 3px 10px -2px rgba(2, 132, 199, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
+        padding: 7px 16px !important;
+      }
+      body.ui-liquid-v2 #btnAutoGenerateTrip:hover {
+        background: #f0f9ff !important;
+        border-color: #0284c7 !important;
+        transform: translateY(-1px) !important;
+      }
+      body.ui-liquid-v2 #btnAutoGenerateTrip i {
+        color: #0284c7 !important;
+      }
+      body.ui-liquid-v2 #btnToggleMainApplyBar {
+        background: linear-gradient(135deg, #007aff 0%, #2563eb 100%) !important;
+        color: #ffffff !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.35) !important;
+        box-shadow: 0 4px 14px -2px rgba(0, 122, 255, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+        padding: 7px 18px !important;
+      }
+
+      /* 3. 右欄頂部合併為「旅程」＋「假期節氣」雙膠囊切換器 */
+      body.ui-liquid-v2 #rightPanelSegmentedRoot {
+        display: grid !important;
+        grid-template-columns: 1fr 1.25fr !important;
+        align-items: center !important;
+        background: rgba(226, 232, 240, 0.55) !important;
+        border: 1px solid rgba(255, 255, 255, 0.9) !important;
+        border-radius: 9999px !important;
+        padding: 3px !important;
+        gap: 3px !important;
+      }
+      body.ui-liquid-v2 #tabBtnLeaves {
+        width: 100% !important;
+        border-radius: 9999px !important;
+        justify-content: center !important;
+        padding: 6px 10px !important;
+      }
+      body.ui-liquid-v2 #desktopMergedRefCapsule {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        border-radius: 9999px !important;
+        overflow: hidden !important;
+      }
+      /* 預設在「旅程」分頁時，合併顯示單一「假期節氣」膠囊按鈕 */
+      body.ui-liquid-v2 #desktopMergedRefCapsule:not(.is-ref-expanded) #tabBtnHolidays {
+        width: 100% !important;
+        justify-content: center !important;
+        border-radius: 9999px !important;
+        padding: 6px 10px !important;
+      }
+      body.ui-liquid-v2 #desktopMergedRefCapsule:not(.is-ref-expanded) #tabBtnLunar {
+        display: none !important;
+      }
+      /* 當點開「假期節氣」後，平滑展開為「公眾假期 | 農曆節氣」雙子膠囊，一鍵互切 */
+      body.ui-liquid-v2 #desktopMergedRefCapsule.is-ref-expanded {
+        background: rgba(255, 255, 255, 0.55) !important;
+        padding: 1px !important;
+        gap: 2px !important;
+      }
+      body.ui-liquid-v2 #desktopMergedRefCapsule.is-ref-expanded .desktop-ref-label-hol {
+        display: none !important;
+      }
+      body.ui-liquid-v2 #desktopMergedRefCapsule.is-ref-expanded #tabBtnHolidays::after {
+        content: "公假";
+      }
+      body.ui-liquid-v2 #desktopMergedRefCapsule.is-ref-expanded .desktop-ref-label-lun {
+        display: none !important;
+      }
+      body.ui-liquid-v2 #desktopMergedRefCapsule.is-ref-expanded #tabBtnLunar::after {
+        content: "節氣";
+      }
+      body.ui-liquid-v2 #desktopMergedRefCapsule.is-ref-expanded #tabBtnHolidays,
+      body.ui-liquid-v2 #desktopMergedRefCapsule.is-ref-expanded #tabBtnLunar {
+        flex: 1 1 0% !important;
+        justify-content: center !important;
+        border-radius: 9999px !important;
+        padding: 5px 6px !important;
+        font-size: 11px !important;
+      }
+
+      /* 4. 全新設計：連續假期內「立體膠囊日曆小方塊 (.micro-cal-day)」 */
+      body.ui-liquid-v2 .micro-cal-day {
+        width: 28px !important;
+        height: 42px !important;
+        border-radius: 10px !important;
+        border: 1.25px solid rgba(255, 255, 255, 0.92) !important;
+        box-shadow:
+          0 3px 8px -2px rgba(15, 23, 42, 0.10),
+          inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+        transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.18s ease !important;
+      }
+      body.ui-liquid-v2 .micro-cal-day:hover {
+        transform: translateY(-3px) scale(1.08) !important;
+        box-shadow:
+          0 8px 16px -3px rgba(37, 99, 235, 0.24),
+          0 0 0 1.5px rgba(255, 255, 255, 0.98) !important;
+        z-index: 15 !important;
+      }
+      body.ui-liquid-v2 .micro-cal-day .micro-content {
+        justify-content: space-between !important;
+        padding: 3.5px 0 4px 0 !important;
+      }
+      body.ui-liquid-v2 .micro-cal-day .micro-content > span:first-child {
+        font-size: 7.5px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.02em !important;
+        line-height: 1 !important;
+      }
+      body.ui-liquid-v2 .micro-cal-day .micro-content > span:nth-child(2) {
+        font-family: "Outfit", "Plus Jakarta Sans", sans-serif !important;
+        font-size: 11.5px !important;
+        font-weight: 900 !important;
+        line-height: 1 !important;
+      }
+      /* 底部精緻狀態指示微點（一眼辨識半日／全日假別層次） */
+      body.ui-liquid-v2 .micro-cal-day::after {
+        content: "";
+        position: absolute;
+        bottom: 2.5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.78);
+        z-index: 3;
+        pointer-events: none;
+      }
+    }
+
+    /* =========================================================================
+       【電腦版「假期助手」原版舒爽年曆 ＋ 精緻比例「助手排序」＋ 全段連假框選 ＋ 三膠囊高對比切換 (v7.6.39)】
+       - 100% 保留 v7.6.34 原版舒爽大器嘅年曆尺寸與網格，絕不縮細或變形
+       - 右欄頂部「旅程 | 假期節氣 | 助手排序」三膠囊清晰高對比（選中實白底＋深藍字，未選中深灰字，絕無白字隱形）
+       - 右欄「助手排序」採用精緻克制比例嘅 Apple Liquid Glass 卡片，「放 X 日 / 請 Y 日 AL」大小適中不誇張
+       - 指向或點擊任何推薦假期，主月曆即時一次過框選整段連續假期（含週末、紅日與請假日）
+       ========================================================================= */
+    @media (min-width: 768px) {
+      body.ui-liquid-v2 #stickyHeaderArea:has(#desktopInlineAssistantBar:not(.hidden)) > .glass-surface {
+        border-radius: 26px !important;
+        padding: 8px 14px !important;
+      }
+      body.ui-liquid-v2 #desktopInlineAssistantBar {
+        width: 100% !important;
+        flex-basis: 100% !important;
+        margin-top: 6px !important;
+        padding: 7px 12px !important;
+        border-radius: 20px !important;
+        background: rgba(255, 255, 255, 0.88) !important;
+        border: 1px solid rgba(255, 255, 255, 0.98) !important;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 4px 16px -4px rgba(37, 99, 235, 0.12) !important;
+      }
+
+      /* 助手推薦請假日（AL）琉璃藍標示 */
+      .calendar-cell.desktop-assistant-preview-al {
+        background: linear-gradient(135deg, #007aff 0%, #2563eb 100%) !important;
+        border-color: #1d4ed8 !important;
+        box-shadow: 0 2px 6px -1px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+      }
+      .calendar-cell.desktop-assistant-preview-al .day-number {
+        color: #ffffff !important;
+        font-weight: 900 !important;
+      }
+      .calendar-cell.desktop-assistant-preview-off {
+        background: linear-gradient(135deg, #fb7185 0%, #e11d48 100%) !important;
+        border-color: #be123c !important;
+      }
+      .calendar-cell.desktop-assistant-preview-off .day-number {
+        color: #ffffff !important;
+        font-weight: 900 !important;
+      }
+
+      /* 整段連續假期常駐淡雅外框（涵蓋紅日、週末與 AL） */
+      .calendar-cell.desktop-assistant-span-member {
+        outline: 1.5px solid rgba(37, 99, 235, 0.35);
+        outline-offset: -1px;
+      }
+
+      /* 指向或點選右側某段假期時：一次過用琥珀金框線完整框選整段連續假期！ */
+      .calendar-cell.desktop-assistant-span-active {
+        outline: 2.5px solid #f59e0b !important;
+        outline-offset: -1px !important;
+        box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.32), 0 6px 14px -2px rgba(245, 158, 11, 0.42) !important;
+        transform: scale(1.05) !important;
+        z-index: 25 !important;
+      }
+      .calendar-cell.desktop-assistant-span-active:not(.desktop-assistant-preview-al):not(.desktop-assistant-preview-off) {
+        background-color: #fef3c7 !important;
+      }
+
+      /* 右側面板頂部三膠囊（「旅程 | 假期節氣 | 助手排序」）：清晰高對比配色，絕無白字隱形 */
+      body.ui-liquid-v2.desktop-assistant-active #rightPanelSegmentedRoot {
+        grid-template-columns: 1fr 1.15fr 1.15fr !important;
+      }
+      body.ui-liquid-v2.desktop-assistant-active #tabBtnAssistantList {
+        display: flex !important;
+      }
+      #tabBtnAssistantList {
+        border-radius: 9999px !important;
+        justify-content: center !important;
+        padding: 6px 8px !important;
+        color: #334155 !important;
+        background: transparent !important;
+        border: none !important;
+      }
+      #tabBtnAssistantList:hover {
+        background: rgba(255, 255, 255, 0.65) !important;
+        color: #1d4ed8 !important;
+      }
+      #tabBtnAssistantList.is-asst-tab-active {
+        background: #ffffff !important;
+        color: #1d4ed8 !important;
+        font-weight: 800 !important;
+        box-shadow: 0 3px 10px -2px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
+      }
+
+      /* 右欄「助手排序」Apple Liquid Glass 卡片（比例克制雅緻、字級清晰不誇張） */
+      .apple-asst-bento-card {
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(20px) saturate(185%);
+        -webkit-backdrop-filter: blur(20px) saturate(185%);
+        border: 1px solid rgba(255, 255, 255, 0.98);
+        border-radius: 20px;
+        box-shadow:
+          0 6px 20px -6px rgba(15, 23, 42, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 1);
+        transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+      }
+      .apple-asst-bento-card:hover,
+      .apple-asst-bento-card.is-card-selected {
+        background: #ffffff;
+        border-color: #f59e0b;
+        transform: translateY(-1.5px);
+        box-shadow:
+          0 0 0 2px rgba(245, 158, 11, 0.25),
+          0 12px 26px -6px rgba(15, 23, 42, 0.11);
+      }
+    }
+
     /* === 液態玻璃通透度三級自訂 (強 / 中 / 弱 · 全裝置通用) === */
     /* 強（清透液態玻璃）：低模糊 blur(4px) ＋ 高透光底色 (22%–30%) ＋ 晶瑩高光折射邊，直接透視背後日曆數字與文字 */
     body.liquid-glass-strong .glass-surface,
@@ -6398,10 +7074,11 @@
               <span class="truncate">假期規劃</span>
             </button>
 
-            <!-- 第二行 2: 登記假期 -->
-            <button id="btnToggleMainApplyBar" class="py-1.5 px-1 md:px-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-xl shadow-xs text-[11px] md:text-xs font-bold flex items-center justify-center gap-1 transition-all duration-200 active:scale-95 border border-white/30 cursor-pointer h-[34px] md:h-auto">
+            <!-- 第二行 2: 登記假期 / 寫假畫筆 -->
+            <button id="btnToggleMainApplyBar" class="py-1.5 px-1 md:px-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-xl shadow-xs text-[11px] md:text-xs font-bold flex items-center justify-center gap-1.5 transition-all duration-200 active:scale-95 border border-white/30 cursor-pointer h-[34px] md:h-auto">
               <span id="mainApplyBrushDot" class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-emerald-400 shadow-xs ring-2 ring-emerald-300/50 animate-pulse shrink-0"></span>
-              <span class="truncate">登記假期</span>
+              <span class="truncate md:hidden">登記假期</span>
+              <span class="truncate hidden md:inline">寫假畫筆</span>
               <i id="mainApplyChevron" class="fa-solid fa-chevron-down text-[8px] md:text-[9px] text-blue-200 transition-transform duration-200 shrink-0"></i>
             </button>
 
@@ -6580,6 +7257,55 @@
             <span class="text-[9.5px] md:text-[10.5px] font-black">清除</span>
           </button>
 
+        </div>
+      </div>
+
+      <!-- 電腦版專屬：原地展開「假期助手」方案與時間列（取代遮罩彈窗） -->
+      <div id="desktopInlineAssistantBar" class="hidden p-2.5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <!-- 左側：3 大拼假方案膠囊 -->
+          <div class="inline-flex items-center gap-1 bg-white/70 border border-white p-1 rounded-full shadow-2xs">
+            <button type="button" id="deskAsstScheme-max" onclick="executeTravelVacation('max')"
+                    class="px-3 py-1 rounded-full text-xs font-bold text-slate-700 hover:bg-white transition cursor-pointer flex items-center gap-1">
+              <span>🚀 長假首選</span>
+              <span class="text-[10px] font-semibold text-blue-600">跨週長假</span>
+            </button>
+            <button type="button" id="deskAsstScheme-casual" onclick="executeTravelVacation('casual')"
+                    class="px-3 py-1 rounded-full text-xs font-black bg-white text-emerald-700 shadow-xs border border-emerald-200/80 transition cursor-pointer flex items-center gap-1">
+              <span>☕ 均衡休閒</span>
+              <span class="text-[10px] font-bold text-emerald-600">四季放鬆</span>
+            </button>
+            <button type="button" id="deskAsstScheme-minimal" onclick="executeTravelVacation('minimal')"
+                    class="px-3 py-1 rounded-full text-xs font-bold text-slate-700 hover:bg-white transition cursor-pointer flex items-center gap-1">
+              <span>🌿 週末微休</span>
+              <span class="text-[10px] font-semibold text-amber-600">快閃充電</span>
+            </button>
+          </div>
+
+          <!-- 中間：即時戰績膠囊 -->
+          <div class="inline-flex items-center gap-1.5 text-xs font-extrabold">
+            <span id="deskAsstKpiDays" class="px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-800 border border-amber-300/70 tabular-nums">享受 放 0 日</span>
+            <span id="deskAsstKpiAl" class="px-2.5 py-1 rounded-full bg-sky-500/15 text-sky-800 border border-sky-300/70 tabular-nums">消耗 請 0 日 AL</span>
+            <span id="deskAsstKpiRate" class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-800 border border-emerald-300/70 tabular-nums">使用率 0%</span>
+          </div>
+
+          <!-- 右側：更換 / 一鍵套用 / 關閉 -->
+          <div class="inline-flex items-center gap-1.5">
+            <button type="button" onclick="executeTravelVacation(currentTravelMode || 'casual')"
+                    class="px-3 py-1.5 rounded-full bg-white hover:bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-extrabold flex items-center gap-1 shadow-2xs transition cursor-pointer">
+              <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+              <span>更換組合</span>
+            </button>
+            <button type="button" onclick="applyCurrentTravelAssistantCombo()"
+                    class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-xs font-extrabold flex items-center gap-1 shadow-sm transition cursor-pointer">
+              <i class="fa-solid fa-check text-[10px]"></i>
+              <span>套用至日曆</span>
+            </button>
+            <button type="button" onclick="closeDesktopInlineAssistant()" aria-label="關閉假期助手"
+                    class="w-7 h-7 rounded-full bg-white/80 hover:bg-slate-200/70 text-slate-600 border border-white flex items-center justify-center text-xs transition cursor-pointer">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -6875,22 +7601,37 @@
         <div id="rightSidePanelCard" class="glass-surface rounded-2xl flex flex-col h-[520px] md:h-full overflow-hidden shadow-sm transition-all duration-200">
           
           <div class="p-2 border-b border-slate-200 bg-slate-50 flex items-center justify-between gap-1">
-            <div class="flex flex-wrap items-center gap-1">
-              <button id="tabBtnLeaves" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-700 shadow-xs border border-slate-200 flex items-center gap-1 transition">
+            <div id="rightPanelSegmentedRoot" class="flex flex-wrap items-center gap-1 w-full">
+              <button id="tabBtnLeaves" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-700 shadow-xs border border-slate-200 flex items-center gap-1.5 transition">
                 <i class="fa-solid fa-plane-departure text-blue-600"></i>
-                假期規劃
+                <span class="md:hidden">假期規劃</span>
+                <span class="hidden md:inline">旅程</span>
               </button>
-              <button id="tabBtnHolidays" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-orange-700 hover:bg-orange-50/60 flex items-center gap-1 transition">
-                <span class="text-orange-500 inline-flex items-center"><svg class="inline-block shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="17.40,12.00 14.96,13.22 15.82,15.82 13.22,14.96 12.00,17.40 10.78,14.96 8.18,15.82 9.04,13.22 6.60,12.00 9.04,10.78 8.18,8.18 10.78,9.04 12.00,6.60 13.22,9.04 15.82,8.18 14.96,10.78" fill="currentColor" stroke="currentColor" stroke-width="1.2"/><line x1="19.20" y1="12.00" x2="21.80" y2="12.00"/><line x1="17.09" y1="17.09" x2="18.93" y2="18.93"/><line x1="12.00" y1="19.20" x2="12.00" y2="21.80"/><line x1="6.91" y1="17.09" x2="5.07" y2="18.93"/><line x1="4.80" y1="12.00" x2="2.20" y2="12.00"/><line x1="6.91" y1="6.91" x2="5.07" y2="5.07"/><line x1="12.00" y1="4.80" x2="12.00" y2="2.20"/><line x1="17.09" y1="6.91" x2="18.93" y2="5.07"/></svg></span>
-                公眾假期
-              </button>
-              <button id="tabBtnLunar" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-700 hover:bg-purple-50/60 flex items-center gap-1 transition">
-                <i class="fa-solid fa-moon text-purple-600"></i>
-                農曆節氣
+              <div id="desktopMergedRefCapsule" class="inline-flex items-center gap-0.5 rounded-full">
+                <button id="tabBtnHolidays" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-orange-700 hover:bg-orange-50/60 flex items-center gap-1 transition">
+                  <span class="text-orange-500 inline-flex items-center"><svg class="inline-block shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="17.40,12.00 14.96,13.22 15.82,15.82 13.22,14.96 12.00,17.40 10.78,14.96 8.18,15.82 9.04,13.22 6.60,12.00 9.04,10.78 8.18,8.18 10.78,9.04 12.00,6.60 13.22,9.04 15.82,8.18 14.96,10.78" fill="currentColor" stroke="currentColor" stroke-width="1.2"/><line x1="19.20" y1="12.00" x2="21.80" y2="12.00"/><line x1="17.09" y1="17.09" x2="18.93" y2="18.93"/><line x1="12.00" y1="19.20" x2="12.00" y2="21.80"/><line x1="6.91" y1="17.09" x2="5.07" y2="18.93"/><line x1="4.80" y1="12.00" x2="2.20" y2="12.00"/><line x1="6.91" y1="6.91" x2="5.07" y2="5.07"/><line x1="12.00" y1="4.80" x2="12.00" y2="2.20"/><line x1="17.09" y1="6.91" x2="18.93" y2="5.07"/></svg></span>
+                  <span class="md:hidden">公眾假期</span>
+                  <span class="hidden md:inline desktop-ref-label-hol">假期節氣</span>
+                </button>
+                <button id="tabBtnLunar" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-700 hover:bg-purple-50/60 flex items-center gap-1 transition">
+                  <i class="fa-solid fa-moon text-purple-600"></i>
+                  <span class="md:hidden">農曆節氣</span>
+                  <span class="hidden md:inline desktop-ref-label-lun">農曆節氣</span>
+                </button>
+              </div>
+              <button id="tabBtnAssistantList" type="button" onclick="showDesktopAssistantListTab()"
+                      class="hidden px-2.5 py-1.5 rounded-full text-xs font-bold text-indigo-700 hover:bg-white/70 items-center justify-center gap-1 transition cursor-pointer">
+                <i class="fa-solid fa-wand-magic-sparkles text-indigo-600 text-[11px]"></i>
+                <span>助手排序</span>
               </button>
             </div>
 
+
+
           </div>
+
+          <!-- 電腦版假期助手推薦行程詳細排序列表 -->
+          <div id="desktopAssistantRightPane" class="hidden flex-1 overflow-y-auto custom-scroll p-2.5 space-y-2 flex-col" style="overflow-anchor: none;"></div>
 
           <div id="tabContentLeaves" class="flex-1 overflow-y-auto custom-scroll p-2.5 space-y-2.5" style="overflow-anchor: none;">
             
@@ -28607,6 +29348,21 @@ function setEditModeState(newState, notifyToast = true) {
         if (typeof syncMobileSingleRowPillState === 'function') syncMobileSingleRowPillState();
         return;
       }
+      if (window.innerWidth >= 768) {
+        if (document.body.classList.contains('desktop-assistant-active')) {
+          closeDesktopInlineAssistant();
+          return;
+        }
+        // 若手動寫假列正開啟，先自動收起保持清爽
+        const topApplyBar = document.getElementById('topApplyLeavePopupBar');
+        if (topApplyBar && !topApplyBar.classList.contains('hidden')) {
+          const closeApplyBtn = document.getElementById('btnCloseTopBarApplyLeave');
+          if (closeApplyBtn) closeApplyBtn.click();
+          else topApplyBar.classList.add('hidden');
+        }
+        executeTravelVacation(currentTravelMode || 'casual');
+        return;
+      }
       const modal = document.getElementById('modalTravelMode');
       if (modal) modal.classList.remove('hidden');
     }
@@ -29069,6 +29825,7 @@ function setEditModeState(newState, notifyToast = true) {
       const modal = document.getElementById('modalFlightBoard');
       if (modal) modal.classList.add('hidden');
       closeTopInlineAssistantPanel();
+      if (typeof closeDesktopInlineAssistant === 'function') closeDesktopInlineAssistant();
 
       if (typeof showLeavesTab === 'function') {
         showLeavesTab();
@@ -29086,8 +29843,12 @@ function setEditModeState(newState, notifyToast = true) {
 
     function renderFlightBoardModal(combo, modeTitle, availableAl) {
       currentGeneratedCombo = combo;
-      if (window.innerWidth < 1024) {
+      if (window.innerWidth < 768) {
         renderInlineAssistantPanel(combo, modeTitle, availableAl);
+        return;
+      }
+      if (window.innerWidth >= 768) {
+        renderDesktopInlineAssistant(combo, modeTitle, availableAl);
         return;
       }
       const modal = document.getElementById('modalFlightBoard');
@@ -36938,28 +37699,50 @@ function setEditModeState(newState, notifyToast = true) {
       const btnScrollToTopFloating = document.getElementById('btnScrollToTopFloating');
 
       function resetTabs() {
-        tabLeaves.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-blue-700 hover:bg-blue-50/60 flex items-center gap-1 transition';
-        tabHolidays.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-orange-700 hover:bg-orange-50/60 flex items-center gap-1 transition';
-        tabLunar.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-purple-700 hover:bg-purple-50/60 flex items-center gap-1 transition';
+        tabLeaves.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-blue-700 hover:bg-white/60 flex items-center gap-1.5 transition';
+        tabHolidays.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-orange-700 hover:bg-white/60 flex items-center gap-1 transition';
+        tabLunar.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-purple-700 hover:bg-white/60 flex items-center gap-1 transition';
         contentLeaves.classList.add('hidden');
         contentHolidays.classList.add('hidden');
         contentLunar.classList.add('hidden');
+        const asstPane = document.getElementById('desktopAssistantRightPane');
+        if (asstPane) asstPane.classList.add('hidden');
+        const asstTabBtn = document.getElementById('tabBtnAssistantList');
+        if (asstTabBtn) {
+          asstTabBtn.classList.remove('is-asst-tab-active', 'bg-white', 'shadow-xs');
+        }
+        const mergedCap = document.getElementById('desktopMergedRefCapsule');
+        if (mergedCap) mergedCap.classList.remove('is-ref-expanded');
       }
+
+      window.showDesktopAssistantListTab = function() {
+        resetTabs();
+        const asstPane = document.getElementById('desktopAssistantRightPane');
+        if (asstPane) asstPane.classList.remove('hidden');
+        const asstTabBtn = document.getElementById('tabBtnAssistantList');
+        if (asstTabBtn) {
+          asstTabBtn.classList.add('is-asst-tab-active');
+        }
+      };
 
       function showLeavesTab() {
         resetTabs();
-        tabLeaves.className = 'px-2.5 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-700 shadow-xs border border-slate-200 flex items-center gap-1 transition';
+        tabLeaves.className = 'px-2.5 py-1.5 rounded-lg text-xs font-bold bg-white text-blue-700 shadow-xs border border-slate-200 flex items-center gap-1.5 transition';
         contentLeaves.classList.remove('hidden');
       }
 
       function showHolidaysTab() {
         resetTabs();
+        const mergedCap = document.getElementById('desktopMergedRefCapsule');
+        if (mergedCap) mergedCap.classList.add('is-ref-expanded');
         tabHolidays.className = 'px-2.5 py-1.5 rounded-lg text-xs font-bold bg-white text-orange-700 shadow-xs border border-orange-200 flex items-center gap-1 transition';
         contentHolidays.classList.remove('hidden');
       }
 
       function showLunarTab() {
         resetTabs();
+        const mergedCap = document.getElementById('desktopMergedRefCapsule');
+        if (mergedCap) mergedCap.classList.add('is-ref-expanded');
         tabLunar.className = 'px-2.5 py-1.5 rounded-lg text-xs font-bold bg-white text-purple-800 shadow-xs border border-purple-200 flex items-center gap-1 transition';
         contentLunar.classList.remove('hidden');
       }
@@ -52531,5 +53314,253 @@ function setEditModeState(newState, notifyToast = true) {
         deletePushReminderFromCloud(`trip_${safeKey}_hotel_checkin`, false);
       }
     };
+  </script>
+  <script>
+    (function initDesktopMagneticHoverSync() {
+      let activeHighlightCells = [];
+      function clearHighlightCells() {
+        for (let i = 0; i < activeHighlightCells.length; i++) {
+          activeHighlightCells[i].classList.remove('desktop-trip-hover-halo');
+        }
+        activeHighlightCells = [];
+      }
+
+      document.addEventListener('mouseover', (e) => {
+        if (window.innerWidth < 768) return;
+        const microSingle = e.target.closest('#rightSidePanel .micro-cal-day[data-micdate]');
+        if (microSingle) {
+          clearHighlightCells();
+          const ds = microSingle.getAttribute('data-micdate');
+          const cell = ds ? document.querySelector(`#calendarContainer .calendar-cell[data-date="${ds}"]`) : null;
+          if (cell) {
+            cell.classList.add('desktop-trip-hover-halo');
+            activeHighlightCells.push(cell);
+          }
+          return;
+        }
+        const card = e.target.closest('#rightSidePanel .trip-card');
+        if (!card) return;
+        clearHighlightCells();
+        const microDays = card.querySelectorAll('.micro-cal-day[data-micdate]');
+        microDays.forEach(md => {
+          const ds = md.getAttribute('data-micdate');
+          if (!ds) return;
+          const cell = document.querySelector(`#calendarContainer .calendar-cell[data-date="${ds}"]`);
+          if (cell) {
+            cell.classList.add('desktop-trip-hover-halo');
+            activeHighlightCells.push(cell);
+          }
+        });
+      }, { passive: true });
+
+      document.addEventListener('mouseout', (e) => {
+        if (window.innerWidth < 768) return;
+        const card = e.target.closest('#rightSidePanel .trip-card');
+        if (!card) return;
+        const related = e.relatedTarget;
+        if (related && card.contains(related)) return;
+        clearHighlightCells();
+      }, { passive: true });
+    })();
+  </script>
+  <script>
+    let pinnedDesktopAssistantTripId = null;
+
+    function clearDesktopAssistantCalendarPreview() {
+      document.querySelectorAll('#calendarContainer .desktop-assistant-preview-al, #calendarContainer .desktop-assistant-preview-off, #calendarContainer .desktop-assistant-span-member, #calendarContainer .desktop-assistant-span-active').forEach(el => {
+        el.classList.remove('desktop-assistant-preview-al', 'desktop-assistant-preview-off', 'desktop-assistant-span-member', 'desktop-assistant-span-active');
+      });
+    }
+
+    function paintDesktopAssistantCalendarPreview(combo) {
+      clearDesktopAssistantCalendarPreview();
+      if (!combo || !Array.isArray(combo.trips)) return;
+      combo.trips.forEach(t => {
+        const fullSpan = Array.isArray(t.spanAllDates) && t.spanAllDates.length > 0 ? t.spanAllDates : (t.dates || []);
+        fullSpan.forEach(ds => {
+          const cell = document.querySelector(`#calendarContainer .calendar-cell[data-date="${ds}"]`);
+          if (cell) cell.classList.add('desktop-assistant-span-member');
+        });
+        if (Array.isArray(t.dates)) {
+          t.dates.forEach(ds => {
+            const cell = document.querySelector(`#calendarContainer .calendar-cell[data-date="${ds}"]`);
+            if (cell) cell.classList.add('desktop-assistant-preview-al');
+          });
+        }
+        if (Array.isArray(t.offDates)) {
+          t.offDates.forEach(ds => {
+            const cell = document.querySelector(`#calendarContainer .calendar-cell[data-date="${ds}"]`);
+            if (cell) cell.classList.add('desktop-assistant-preview-off');
+          });
+        }
+      });
+    }
+
+    function highlightDesktopAssistantTripSpan(spanDates, active, scrollIntoViewFirst = false) {
+      if (!Array.isArray(spanDates)) return;
+      let firstCell = null;
+      spanDates.forEach(ds => {
+        const cell = document.querySelector(`#calendarContainer .calendar-cell[data-date="${ds}"]`);
+        if (cell) {
+          if (!firstCell) firstCell = cell;
+          cell.classList.toggle('desktop-assistant-span-active', Boolean(active));
+        }
+      });
+      if (active && scrollIntoViewFirst && firstCell) {
+        const monthCard = firstCell.closest('.month-card');
+        if (monthCard) {
+          monthCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
+
+    function renderDesktopInlineAssistant(combo, modeTitle, availableAl) {
+      currentGeneratedCombo = combo;
+      pinnedDesktopAssistantTripId = null;
+      document.body.classList.add('desktop-assistant-active');
+
+      const bar = document.getElementById('desktopInlineAssistantBar');
+      if (bar) bar.classList.remove('hidden');
+
+      const schemeClsMap = {
+        max: 'px-3 py-1 rounded-full text-xs font-black bg-blue-600 text-white shadow-xs transition cursor-pointer flex items-center gap-1',
+        casual: 'px-3 py-1 rounded-full text-xs font-black bg-emerald-600 text-white shadow-xs transition cursor-pointer flex items-center gap-1',
+        minimal: 'px-3 py-1 rounded-full text-xs font-black bg-amber-500 text-white shadow-xs transition cursor-pointer flex items-center gap-1'
+      };
+      const activeMode = schemeClsMap[currentTravelMode] ? currentTravelMode : 'casual';
+      ['max', 'casual', 'minimal'].forEach(m => {
+        const btn = document.getElementById('deskAsstScheme-' + m);
+        if (!btn) return;
+        const subSpan = btn.querySelector('span:last-child');
+        if (m === activeMode) {
+          btn.className = schemeClsMap[m];
+          if (subSpan) subSpan.className = 'text-[10px] font-bold text-white/90';
+        } else {
+          btn.className = 'px-3 py-1 rounded-full text-xs font-bold text-slate-700 hover:bg-white/80 transition cursor-pointer flex items-center gap-1';
+          if (subSpan) {
+            subSpan.className = m === 'max' ? 'text-[10px] font-semibold text-blue-600'
+              : (m === 'casual' ? 'text-[10px] font-semibold text-emerald-600' : 'text-[10px] font-semibold text-amber-600');
+          }
+        }
+      });
+
+      const usagePct = availableAl > 0 ? ((combo.totalAl / availableAl) * 100).toFixed(1) : '0.0';
+      const elDays = document.getElementById('deskAsstKpiDays');
+      const elAl = document.getElementById('deskAsstKpiAl');
+      const elRate = document.getElementById('deskAsstKpiRate');
+      if (elDays) elDays.textContent = `享受 放 ${combo.totalDays} 日`;
+      if (elAl) elAl.textContent = `消耗 請 ${combo.totalAl} 日 AL`;
+      if (elRate) elRate.textContent = `使用率 ${usagePct}%`;
+
+      const pane = document.getElementById('desktopAssistantRightPane');
+      if (pane) {
+        pane.innerHTML = '';
+        pane.className = 'hidden flex-1 overflow-y-auto custom-scroll p-3 space-y-2.5 flex-col';
+        const sortedTrips = [...combo.trips].sort((a, b) => (a.startDate || '').localeCompare(b.startDate || ''));
+
+        // 頂部清透白玻璃摘要橫幅
+        const banner = document.createElement('div');
+        banner.className = 'rounded-2xl bg-white/90 border border-white px-3.5 py-2 flex items-center justify-between gap-2 shadow-2xs shrink-0';
+        banner.innerHTML = `
+          <div class="flex items-center gap-2 min-w-0">
+            <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs shrink-0 shadow-xs">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </span>
+            <div class="min-w-0">
+              <div class="text-xs font-black text-slate-900 truncate">${modeTitle}</div>
+              <div class="text-[11px] font-medium text-slate-500 truncate">指向或點擊卡片 · 一次框選整段連續假期</div>
+            </div>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-extrabold shrink-0 tabular-nums">
+            共 ${sortedTrips.length} 段
+          </span>
+        `;
+        pane.appendChild(banner);
+
+        sortedTrips.forEach((t, idx) => {
+          const orderNo = String(idx + 1).padStart(2, '0');
+          const fullSpanDates = Array.isArray(t.spanAllDates) && t.spanAllDates.length > 0 ? t.spanAllDates : (t.dates || []);
+          const card = document.createElement('div');
+          card.className = 'apple-asst-bento-card p-3.5 cursor-pointer flex flex-col gap-2 shrink-0';
+          card.innerHTML = `
+            <!-- 上層：月份序號膠囊 ＋ 日期區間 ＋ 假期名稱 ＋ 精緻比例「放/請」膠囊 -->
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5 mb-1">
+                  <span class="px-2 py-0.5 rounded-full bg-blue-600 text-white text-[10.5px] font-extrabold tracking-wide tabular-nums">
+                    #${orderNo} · ${t.month}月
+                  </span>
+                  <span class="text-xs font-bold text-slate-600 tabular-nums">
+                    ${t.range}
+                  </span>
+                </div>
+                <h4 class="text-sm font-black text-slate-900 tracking-tight leading-snug">
+                  ${t.name}
+                </h4>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0 pt-0.5">
+                <span class="px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200/90 text-amber-800 text-xs font-extrabold tabular-nums">
+                  放 ${t.totalDays} 日
+                </span>
+                <span class="px-2.5 py-1 rounded-full bg-sky-50 border border-sky-200/90 text-sky-800 text-xs font-extrabold tabular-nums">
+                  請 ${t.alCost} 日 AL
+                </span>
+              </div>
+            </div>
+
+            <!-- 下層：簡潔攻略說明 -->
+            ${t.desc ? `<div class="text-[11.5px] font-medium text-slate-500 flex items-center gap-1.5 pt-1.5 border-t border-slate-100">
+              <i class="fa-regular fa-circle-check text-emerald-600 text-[11px] shrink-0"></i>
+              <span>${t.desc}</span>
+            </div>` : ''}
+          `;
+
+          card.addEventListener('mouseenter', () => {
+            highlightDesktopAssistantTripSpan(fullSpanDates, true, true);
+          });
+          card.addEventListener('mouseleave', () => {
+            if (pinnedDesktopAssistantTripId !== t.id) {
+              highlightDesktopAssistantTripSpan(fullSpanDates, false, false);
+            }
+          });
+          card.addEventListener('click', () => {
+            document.querySelectorAll('#calendarContainer .desktop-assistant-span-active').forEach(el => el.classList.remove('desktop-assistant-span-active'));
+            document.querySelectorAll('#desktopAssistantRightPane .apple-asst-bento-card').forEach(el => el.classList.remove('is-card-selected'));
+            if (pinnedDesktopAssistantTripId === t.id) {
+              pinnedDesktopAssistantTripId = null;
+            } else {
+              pinnedDesktopAssistantTripId = t.id;
+              card.classList.add('is-card-selected');
+              highlightDesktopAssistantTripSpan(fullSpanDates, true, true);
+            }
+          });
+
+          pane.appendChild(card);
+        });
+      }
+
+      if (typeof window.showDesktopAssistantListTab === 'function') {
+        window.showDesktopAssistantListTab();
+      }
+      paintDesktopAssistantCalendarPreview(combo);
+    }
+
+    function closeDesktopInlineAssistant() {
+      pinnedDesktopAssistantTripId = null;
+      document.body.classList.remove('desktop-assistant-active');
+      const bar = document.getElementById('desktopInlineAssistantBar');
+      if (bar) bar.classList.add('hidden');
+      clearDesktopAssistantCalendarPreview();
+      const tabLeavesBtn = document.getElementById('tabBtnLeaves');
+      if (tabLeavesBtn) tabLeavesBtn.click();
+    }
+
+    // 點擊「寫假畫筆」時，若假期助手列正開啟則自動收起
+    document.addEventListener('click', (e) => {
+      const applyBtn = e.target.closest('#btnToggleMainApplyBar');
+      if (applyBtn && document.body.classList.contains('desktop-assistant-active')) {
+        closeDesktopInlineAssistant();
+      }
+    }, true);
   </script>
 </body>
