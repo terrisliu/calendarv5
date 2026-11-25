@@ -46216,11 +46216,6 @@ function setEditModeState(newState, notifyToast = true) {
           <h3 class="font-bold text-slate-900 text-[13px] tracking-normal truncate">明信片設計工作室</h3>
         </div>
         <div class="flex items-center gap-1.5 shrink-0">
-          <button type="button" onclick="openPostcardFullscreenPreview()" title="全螢幕放大預覽完整明信片" aria-label="全螢幕放大預覽"
-                  class="px-2.5 h-7 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/80 text-[10.5px] font-extrabold flex items-center gap-1 transition active:scale-95 cursor-pointer">
-            <i class="fa-solid fa-expand text-[10px]"></i>
-            <span>全螢幕預覽</span>
-          </button>
           <button type="button" onclick="closeTripPostcardModal()" aria-label="關閉明信片預覽"
                   class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition active:scale-95 cursor-pointer shrink-0">
             <i class="fa-solid fa-xmark text-xs"></i>
@@ -52049,9 +52044,12 @@ function setEditModeState(newState, notifyToast = true) {
       }
 
       let isPostcardFullscreenMagnified = false;
-      function openPostcardFullscreenPreview() {
+      async function openPostcardFullscreenPreview() {
         const fsModal = document.getElementById('postcardFullscreenZoomModal');
         if (!fsModal) return;
+        if (!lastRenderedCanvas) {
+          await renderPostcardCanvas();
+        }
         syncPostcardFullscreenCanvas();
         isPostcardFullscreenMagnified = false;
         applyPostcardFullscreenScaleUI();
@@ -52731,9 +52729,10 @@ function setEditModeState(newState, notifyToast = true) {
           return `<button type="button" onclick="selectPostcardQuoteCategory('${t.id}')" class="px-2 py-0.5 rounded-full text-[10px] ${act ? 'font-extrabold bg-white text-slate-900 shadow-2xs' : 'font-bold text-slate-500 hover:text-slate-800'} transition cursor-pointer">${t.label}</button>`;
         }).join('');
 
-        const fontSelectOptionsHtml = fonts.map(f => {
-          const selAttr = f.id === activeFontId ? 'selected' : '';
-          return `<option value="${f.id}" ${selAttr}>${f.label}</option>`;
+        const fontPillsHtml = fonts.map(f => {
+          const isAct = f.id === activeFontId;
+          return `<button type="button" data-font-id="${f.id}" onclick="setPostcardQuoteFont('${f.id}')" style="font-family: ${f.family.replace(/"/g, "'")}; font-weight: ${f.weight}; font-style: ${f.style};"
+                          class="shrink-0 px-2.5 h-6 rounded-full border text-[11px] leading-none flex items-center justify-center transition active:scale-95 cursor-pointer whitespace-nowrap ${isAct ? 'bg-slate-900 text-white border-slate-900 shadow-2xs' : 'bg-white hover:bg-slate-50 text-slate-800 border-slate-300/90'}">${f.label}</button>`;
         }).join('');
 
         const sizeBtnsHtml = QUOTE_SIZE_STEPS.map(s => {
@@ -52784,18 +52783,20 @@ function setEditModeState(newState, notifyToast = true) {
           <!-- 第二層：高密度多行金句預覽清單（一屏同時顯示多行，快速掃描揀選） -->
           <div class="${compactListHeightClass} overflow-y-auto custom-scroll space-y-1 pr-0.5">${listItemsHtml}</div>
 
-          <!-- 第三層：中／英 7 款字型下拉選單 ＋ 大小 [細|中|大|更大] ＋ 黑白雙色 -->
-          <div class="flex items-center justify-between gap-1 pt-0.5 px-0.5">
-            <div class="flex items-center gap-1 min-w-0 flex-1">
-              <span class="text-[9.5px] font-bold text-slate-500 shrink-0 select-none">${isEnMode ? '英字型' : '中字型'}</span>
-              <select id="selectPostcardQuoteFont" onchange="setPostcardQuoteFont(this.value)" aria-label="選擇金句字型"
-                      class="min-w-0 flex-1 max-w-[116px] h-6 px-1.5 rounded-full bg-white border border-slate-300/90 text-[10.5px] font-extrabold text-slate-800 focus:outline-none focus:border-blue-500 cursor-pointer shadow-2xs truncate">
-                ${fontSelectOptionsHtml}
-              </select>
+          <!-- 第三層：中／英 7 款所見即所得橫向字型膠囊快選列 ＋ 大小 [細|中|大] ＋ 黑白雙色 -->
+          <div class="flex flex-col gap-1.5 pt-0.5 px-0.5">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <span class="text-[9.5px] font-extrabold text-slate-500 shrink-0 select-none">${isEnMode ? '英字型' : '中字型'}</span>
+              <div id="postcardQuoteFontPillRail" class="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5 flex-1 min-w-0">
+                ${fontPillsHtml}
+              </div>
             </div>
-            <div class="flex items-center gap-1 shrink-0">
-              <div class="inline-flex items-center p-0.5 rounded-full bg-slate-200/75 border border-slate-200/90">${sizeBtnsHtml}</div>
-              <div class="inline-flex items-center p-0.5 rounded-full bg-slate-200/75 border border-slate-200/90">${colorBtnsHtml}</div>
+            <div class="flex items-center justify-between gap-1.5">
+              <span class="text-[9.5px] font-bold text-slate-400 select-none">左右滑動 · 一撳即預覽字型</span>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <div class="inline-flex items-center p-0.5 rounded-full bg-slate-200/75 border border-slate-200/90">${sizeBtnsHtml}</div>
+                <div class="inline-flex items-center p-0.5 rounded-full bg-slate-200/75 border border-slate-200/90">${colorBtnsHtml}</div>
+              </div>
             </div>
           </div>
         `;
@@ -52821,8 +52822,14 @@ function setEditModeState(newState, notifyToast = true) {
         if (plan2ConsoleMode === 'quote') {
           if (captionPane) captionPane.classList.add('hidden');
           if (p2QuotePane) {
-            p2QuotePane.innerHTML = buildQuoteCompactControlsHTML('h-[82px] max-h-[82px] md:h-[174px] md:max-h-[174px]');
+            p2QuotePane.innerHTML = buildQuoteCompactControlsHTML('h-[66px] max-h-[66px] md:h-[156px] md:max-h-[156px]');
             p2QuotePane.classList.remove('hidden');
+            const rail = document.getElementById('postcardQuoteFontPillRail');
+            const actPill = rail ? rail.querySelector('button.bg-slate-900') : null;
+            if (rail && actPill) {
+              const targetLeft = actPill.offsetLeft - (rail.clientWidth / 2) + (actPill.offsetWidth / 2);
+              rail.scrollLeft = Math.max(0, targetLeft);
+            }
           }
         } else {
           if (p2QuotePane) p2QuotePane.classList.add('hidden');
@@ -53593,7 +53600,7 @@ function setEditModeState(newState, notifyToast = true) {
         }
       }
 
-      return { open, close, setLayout, selectCategory, randomizeStyle, selectPhoto, cyclePhoto, handleUpload, shareOrDownload, regenerateAi, onAiReady, onAiFailed, updateCustomText, resetCustomText, setTextSize: setPostcardTextSize, toggleCustomTextDrawer, toggleQuoteDrawer: togglePostcardQuoteDrawer, setPlan2Mode: setPostcardPlan2Mode, setQuoteSize: setPostcardQuoteSize, selectQuoteCat: selectPostcardQuoteCategory, selectQuoteItem: selectPostcardQuoteItem, pickRandomQuote: pickRandomPostcardQuote, clearQuote: clearPostcardQuote, setQuoteFont: setPostcardQuoteFont, setQuoteColor: setPostcardQuoteColor, setPhotoFilter, nudgePan: nudgeCustomPhotoPan, setZoom: setCustomPhotoZoom, resetPan: resetCustomPhotoPan };
+      return { open, close, setLayout, selectCategory, randomizeStyle, selectPhoto, cyclePhoto, handleUpload, shareOrDownload, regenerateAi, onAiReady, onAiFailed, updateCustomText, resetCustomText, setTextSize: setPostcardTextSize, toggleCustomTextDrawer, toggleQuoteDrawer: togglePostcardQuoteDrawer, setPlan2Mode: setPostcardPlan2Mode, setQuoteSize: setPostcardQuoteSize, selectQuoteCat: selectPostcardQuoteCategory, selectQuoteItem: selectPostcardQuoteItem, pickRandomQuote: pickRandomPostcardQuote, clearQuote: clearPostcardQuote, setQuoteFont: setPostcardQuoteFont, setQuoteColor: setPostcardQuoteColor, setPhotoFilter, nudgePan: nudgeCustomPhotoPan, setZoom: setCustomPhotoZoom, resetPan: resetCustomPhotoPan, openFullscreen: openPostcardFullscreenPreview, closeFullscreen: closePostcardFullscreenPreview, toggleFullscreenMagnify: togglePostcardFullscreenMagnify };
     })();
 
     window.togglePostcardQuoteDrawer = (forceState) => TripPostcardStudio.toggleQuoteDrawer(forceState);
@@ -53624,6 +53631,9 @@ function setEditModeState(newState, notifyToast = true) {
     window.resetCustomPhotoPan = () => TripPostcardStudio.resetPan();
     window.shareOrDownloadTripPostcard = () => TripPostcardStudio.shareOrDownload();
     window.regenerateTripPostcardAiPhotos = () => TripPostcardStudio.regenerateAi();
+    window.openPostcardFullscreenPreview = () => TripPostcardStudio.openFullscreen();
+    window.closePostcardFullscreenPreview = () => TripPostcardStudio.closeFullscreen();
+    window.togglePostcardFullscreenMagnify = () => TripPostcardStudio.toggleFullscreenMagnify();
   </script>
 
   <script>
