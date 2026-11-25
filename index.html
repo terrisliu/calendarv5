@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Klee+One:wght@600&family=Noto+Serif+TC:wght@500;600;700;900&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caveat:wght@600;700&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Dancing+Script:wght@600;700&family=JetBrains+Mono:wght@600;700&family=Klee+One:wght@600&family=LXGW+WenKai+TC:wght@400;700&family=Montserrat:wght@700;800;900&family=Noto+Sans+TC:wght@300;400;500;600;700;800;900&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Outfit:wght@500;600;700;800;900&family=Pacifico&family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Quicksand:wght@600;700&family=Roboto+Slab:wght@600;700&family=Shippori+Mincho:wght@600;700;800&family=Yuji+Syuku&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap');
     
     @keyframes airySkyFlow {
       0% {
@@ -3155,6 +3155,13 @@
         font-size: 16px !important;
       }
 
+      /* 金句字型下拉選單：防 iOS Safari 自動放大並保持精緻小巧字級 */
+      #selectPostcardQuoteFont {
+        font-size: 16px !important;
+        zoom: 0.68;
+        height: 32px !important;
+      }
+
       /* 明信片文字輸入框：防 iOS Safari 自動放大，並以 flex 垂直置中保持細緻等大字級 */
       #inputPostcardCustomTitle,
       #inputPostcardCustomSubtitle {
@@ -5513,7 +5520,7 @@
         backdrop-filter: blur(34px) saturate(210%) !important;
         -webkit-backdrop-filter: blur(34px) saturate(210%) !important;
         border: 1.25px solid rgba(255, 255, 255, 0.95) !important;
-        max-height: calc(100dvh - 20px) !important;
+        max-height: calc(100dvh - 36px) !important;
         min-height: 0 !important;
         box-shadow:
           0 28px 64px -12px rgba(15, 23, 42, 0.28),
@@ -5856,7 +5863,8 @@
         background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.34), rgba(226, 232, 240, 0.20)) !important;
       }
       body.ui-liquid-v2 #modalTripPostcard button[onclick="randomizeTripPostcardStyle()"],
-      body.ui-liquid-v2 #btnTogglePostcardQuoteDrawer {
+      body.ui-liquid-v2 #btnTogglePostcardQuoteDrawer,
+      body.ui-liquid-v2 #btnOpenPostcardFullscreenZoom {
         background: rgba(255, 255, 255, 0.80) !important;
         backdrop-filter: blur(16px) saturate(190%) !important;
         -webkit-backdrop-filter: blur(16px) saturate(190%) !important;
@@ -46196,9 +46204,9 @@ function setEditModeState(newState, notifyToast = true) {
     </div>
   </div>
 
-  <!-- 寶麗來旅行明信片全系列設計工作室彈窗 (v7.6.52 · 零跳動鎖定架構) -->
-  <div id="modalTripPostcard" class="fixed inset-0 z-[76] flex items-center justify-center bg-slate-950/75 backdrop-blur-md hidden p-2 sm:p-4" style="font-family: 'Plus Jakarta Sans', 'PingFang HK', 'Hiragino Sans GB', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;" onclick="if(event.target===this) closeTripPostcardModal()">
-    <div id="postcardStudioCardShell" class="relative bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-md w-full h-[calc(100dvh-16px)] max-h-[calc(100dvh-16px)] overflow-hidden flex flex-col">
+  <!-- 寶麗來旅行明信片全系列設計工作室彈窗 (v7.6.56 · 舒展高度上下留白5mm ＋ 大圖預覽 ＋ 全螢幕放大檢視燈箱) -->
+  <div id="modalTripPostcard" class="fixed inset-0 z-[76] flex items-center justify-center bg-slate-950/75 backdrop-blur-md hidden px-2.5 py-[18px] sm:p-4" style="font-family: 'Plus Jakarta Sans', 'PingFang HK', 'Hiragino Sans GB', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;" onclick="if(event.target===this) closeTripPostcardModal()">
+    <div id="postcardStudioCardShell" class="relative bg-white rounded-3xl shadow-2xl border border-slate-200/90 max-w-md w-full h-[calc(100dvh-36px)] max-h-[calc(100dvh-36px)] overflow-hidden flex flex-col">
       <!-- 頂部極簡標題列（拿走細字副標，釋放更多垂直預覽空間） -->
       <div class="px-4 py-2 border-b border-slate-200/80 bg-slate-50/90 flex items-center justify-between gap-2 shrink-0">
         <div class="flex items-center gap-2 min-w-0">
@@ -46207,10 +46215,17 @@ function setEditModeState(newState, notifyToast = true) {
           </span>
           <h3 class="font-bold text-slate-900 text-[13px] tracking-normal truncate">明信片設計工作室</h3>
         </div>
-        <button type="button" onclick="closeTripPostcardModal()" aria-label="關閉明信片預覽"
-                class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition active:scale-95 cursor-pointer shrink-0">
-          <i class="fa-solid fa-xmark text-xs"></i>
-        </button>
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button type="button" onclick="openPostcardFullscreenPreview()" title="全螢幕放大預覽完整明信片" aria-label="全螢幕放大預覽"
+                  class="px-2.5 h-7 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/80 text-[10.5px] font-extrabold flex items-center gap-1 transition active:scale-95 cursor-pointer">
+            <i class="fa-solid fa-expand text-[10px]"></i>
+            <span>全螢幕預覽</span>
+          </button>
+          <button type="button" onclick="closeTripPostcardModal()" aria-label="關閉明信片預覽"
+                  class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition active:scale-95 cursor-pointer shrink-0">
+            <i class="fa-solid fa-xmark text-xs"></i>
+          </button>
+        </div>
       </div>
 
       <!-- 雙層分類導航：第一層 5 大風格系列 ＋ 第二層無外框統一字級細分選項 -->
@@ -46224,8 +46239,8 @@ function setEditModeState(newState, notifyToast = true) {
       <!-- 中央寶麗來明信片預覽舞台：左側正圓「隨機」按鈕 ＋ 中央嚴格置中大明信片 ＋ 右側對稱直排 5 款正圓濾鏡鈕 -->
       <div class="flex-1 min-h-0 overflow-y-auto custom-scroll px-2 sm:px-3.5 py-2 flex items-center justify-center bg-gradient-to-b from-slate-50/70 to-slate-100/80">
         <div class="w-full grid grid-cols-[46px_minmax(0,1fr)_46px] sm:grid-cols-[50px_minmax(0,1fr)_50px] items-center gap-1.5 sm:gap-2">
-          <!-- 左側對稱控制欄：正圓形「隨機」版式靈感鈕 ＋ 正圓形「金句」工作室鈕 -->
-          <div class="flex flex-col items-center justify-center gap-2.5 shrink-0">
+          <!-- 左側對稱控制欄：正圓形「隨機」版式靈感鈕 ＋ 正圓形「金句」工作室鈕 ＋ 正圓形「放大」全螢幕預覽鈕（放於海報外邊絕不遮擋畫面） -->
+          <div class="flex flex-col items-center justify-center gap-2 shrink-0">
             <button type="button" onclick="randomizeTripPostcardStyle()" title="隨機切換設計版式"
                     class="w-[44px] h-[44px] sm:w-[48px] sm:h-[48px] aspect-square shrink-0 rounded-full bg-white hover:bg-indigo-50 text-indigo-700 border border-indigo-200/90 hover:border-indigo-300 shadow-xs transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer select-none active:scale-95">
               <i class="fa-solid fa-dice text-[13px] sm:text-sm text-indigo-600 leading-none"></i>
@@ -46237,10 +46252,15 @@ function setEditModeState(newState, notifyToast = true) {
               <span class="text-[9.5px] sm:text-[10px] font-bold leading-none tracking-normal">金句</span>
               <span id="badgePostcardQuoteActive" class="hidden absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-amber-500 ring-2 ring-white"></span>
             </button>
+            <button type="button" id="btnOpenPostcardFullscreenZoom" onclick="openPostcardFullscreenPreview()" title="全螢幕放大檢視完整海報與金句文字"
+                    class="w-[44px] h-[44px] sm:w-[48px] sm:h-[48px] aspect-square shrink-0 rounded-full bg-white hover:bg-blue-50 text-blue-700 border border-blue-200/90 hover:border-blue-300 shadow-xs transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer select-none active:scale-95">
+              <i class="fa-solid fa-magnifying-glass-plus text-[12.5px] sm:text-[13.5px] text-blue-600 leading-none"></i>
+              <span class="text-[9.5px] sm:text-[10px] font-bold leading-none tracking-normal">放大</span>
+            </button>
           </div>
-          <!-- 中央明信片預覽畫布（完整大尺寸原幅置中；自訂相片時可直接拖移構圖與縮放） -->
-          <div class="relative w-full max-w-[280px] sm:max-w-[308px] mx-auto aspect-[3/4] rounded-2xl shadow-[0_18px_40px_-12px_rgba(15,23,42,0.28)] overflow-hidden bg-white border border-slate-200/80 flex items-center justify-center">
-            <canvas id="tripPostcardPreviewCanvas" class="w-full h-full object-contain block"></canvas>
+          <!-- 中央明信片預覽畫布（100% 無遮擋完整原幅置中） -->
+          <div class="relative w-full max-w-[334px] sm:max-w-[346px] max-h-full mx-auto aspect-[3/4] rounded-2xl shadow-[0_18px_40px_-12px_rgba(15,23,42,0.28)] overflow-hidden bg-white border border-slate-200/80 flex items-center justify-center">
+            <canvas id="tripPostcardPreviewCanvas" onclick="if(!customUploadedDataUrl) openPostcardFullscreenPreview()" class="w-full h-full object-contain block cursor-zoom-in"></canvas>
             <div id="customPhotoPanBadge" class="hidden pointer-events-none absolute top-2 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-slate-900/75 text-white text-[10px] font-bold tracking-wide backdrop-blur-xs shadow-xs flex items-center gap-1 whitespace-nowrap">
               <i class="fa-solid fa-up-down-left-right text-[9px] text-amber-300"></i>
               <span>拖移調整相片位置</span>
@@ -46275,8 +46295,8 @@ function setEditModeState(newState, notifyToast = true) {
         </div>
       </div>
 
-      <!-- 明信片標題與金句工作室控制台（鎖定固定高度，切換分頁 0px 零跳動） -->
-      <div id="postcardBottomConsoleBox" class="px-3.5 py-2 bg-slate-50/90 border-t border-slate-200/70 shrink-0 h-[196px] min-h-[196px] max-h-[196px] overflow-hidden flex flex-col justify-between">
+      <!-- 明信片標題與金句工作室控制台（精簡緊湊固定高度，確保字體／大小／黑白設定完整無遮擋） -->
+      <div id="postcardBottomConsoleBox" class="px-3 py-1.5 bg-slate-50/90 border-t border-slate-200/70 shrink-0 h-[176px] min-h-[176px] max-h-[176px] overflow-hidden flex flex-col justify-between">
         <!-- 控制台頂部原地分頁切換 [ 標題字級 | 金句庫 ] -->
         <div id="postcardPlan2ConsoleSwitcher" class="flex items-center justify-between gap-2">
           <div class="inline-flex items-center p-0.5 rounded-full bg-slate-200/80 border border-slate-200/95">
@@ -46344,8 +46364,8 @@ function setEditModeState(newState, notifyToast = true) {
           </div>
         </div>
 
-        <!-- 金句工作室區塊（舒爽雙行卡片清單 ＋ 整齊左右對齊字體／大小／黑白控制列） -->
-        <div id="postcardPlan2QuotePane" class="hidden space-y-2"></div>
+        <!-- 金句工作室區塊（緊湊多行預覽 ＋ 完整可見字型／大小／黑白設定列） -->
+        <div id="postcardPlan2QuotePane" class="hidden flex-1 min-h-0 flex flex-col justify-between gap-1 pt-0.5"></div>
       </div>
 
       <!-- 底部單行合併列：左側可橫滑細相選擇列 ＋ 右側精緻「分享 / 儲存」動作鈕（省去獨立一排按鈕，大幅釋放預覽空間） -->
@@ -46396,9 +46416,9 @@ function setEditModeState(newState, notifyToast = true) {
           <!-- 三大分頁膠囊（一般金句 50 / 名人中文 50 / 名人英文 50） -->
           <div id="postcardQuoteCatTabs" class="grid grid-cols-3 p-0.5 rounded-full bg-slate-200/75 border border-slate-200/90 gap-0.5">
             <button type="button" data-qcat="general" onclick="selectPostcardQuoteCategory('general')"
-                    class="py-1 px-2 rounded-full text-[10.5px] font-extrabold bg-white text-slate-900 shadow-2xs transition cursor-pointer">一般金句 · 50</button>
+                    class="py-1 px-2 rounded-full text-[10.5px] font-extrabold bg-white text-slate-900 shadow-2xs transition cursor-pointer">一般金句 · 150</button>
             <button type="button" data-qcat="famous_zh" onclick="selectPostcardQuoteCategory('famous_zh')"
-                    class="py-1 px-2 rounded-full text-[10.5px] font-bold text-slate-500 hover:text-slate-800 transition cursor-pointer">名人中文 · 50</button>
+                    class="py-1 px-2 rounded-full text-[10.5px] font-bold text-slate-500 hover:text-slate-800 transition cursor-pointer">名人中文 · 100</button>
             <button type="button" data-qcat="famous_en" onclick="selectPostcardQuoteCategory('famous_en')"
                     class="py-1 px-2 rounded-full text-[10.5px] font-bold text-slate-500 hover:text-slate-800 transition cursor-pointer">名人英文 · 50</button>
           </div>
@@ -46431,6 +46451,44 @@ function setEditModeState(newState, notifyToast = true) {
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- 完整明信片／海報全螢幕放大檢視燈箱（一鍵放大睇清整幅相片同金句字體細節 · 支援雙擊／按鈕 100% ⇄ 155% 局部放大） -->
+  <div id="postcardFullscreenZoomModal" class="fixed inset-0 z-[92] hidden bg-slate-950/92 backdrop-blur-xl flex flex-col justify-between p-3 sm:p-5 select-none" onclick="if(event.target===this) closePostcardFullscreenPreview()">
+    <!-- 頂部控制條 -->
+    <div class="flex items-center justify-between gap-2 shrink-0 z-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/12 border border-white/20 text-white text-xs font-bold backdrop-blur-md">
+        <i class="fa-solid fa-magnifying-glass-plus text-amber-300"></i>
+        <span>完整海報預覽</span>
+        <span id="labelFullscreenZoomScale" class="px-1.5 py-0.5 rounded-full bg-white/15 text-[10px] font-mono text-amber-200">100%</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" onclick="togglePostcardFullscreenMagnify()" class="px-3 py-1.5 rounded-full bg-white/15 hover:bg-white/25 border border-white/25 text-white text-xs font-extrabold flex items-center gap-1.5 transition active:scale-95 cursor-pointer">
+          <i class="fa-solid fa-search-plus text-[11px]"></i>
+          <span id="btnTextFullscreenMagnify">局部放大</span>
+        </button>
+        <button type="button" onclick="closePostcardFullscreenPreview()" aria-label="關閉全螢幕預覽"
+                class="w-9 h-9 rounded-full bg-white/18 hover:bg-rose-500/80 border border-white/30 text-white flex items-center justify-center transition active:scale-90 cursor-pointer">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- 中央完整大圖舞台（直接高清繪製 Canvas，100% 零跨域限制 · 佔滿螢幕最大可視寬高） -->
+    <div id="postcardFullscreenViewport" class="flex-1 min-h-0 my-2.5 overflow-auto flex items-center justify-center" onclick="if(event.target===this) closePostcardFullscreenPreview()">
+      <canvas id="postcardFullscreenCanvas" ondblclick="togglePostcardFullscreenMagnify()"
+              class="max-w-full max-h-full w-auto h-auto object-contain rounded-2xl shadow-[0_24px_60px_rgba(0,0,0,0.65)] border border-white/20 transition-all duration-200 cursor-zoom-in block bg-white"></canvas>
+    </div>
+
+    <!-- 底部提示與快捷分享 -->
+    <div class="flex items-center justify-between gap-2 shrink-0 z-10">
+      <span class="text-[11px] font-semibold text-slate-300 truncate">雙擊圖片可放大檢視金句字體細節 · 點擊空白處返回</span>
+      <button type="button" onclick="closePostcardFullscreenPreview(); shareOrDownloadTripPostcard();"
+              class="shrink-0 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-green-600 text-white text-xs font-black flex items-center gap-1.5 shadow-lg active:scale-95 cursor-pointer">
+        <i class="fa-solid fa-share-from-square"></i>
+        <span>分享 / 儲存</span>
+      </button>
     </div>
   </div>
 
@@ -50735,13 +50793,17 @@ function setEditModeState(newState, notifyToast = true) {
       async function ensureEditorialFontsReady() {
         try {
           if (document.fonts && document.fonts.load) {
+            const zhSpec = QUOTE_FONTS_ZH.find(f => f.id === postcardQuoteFontZh) || QUOTE_FONTS_ZH[0];
+            const enSpec = QUOTE_FONTS_EN.find(f => f.id === postcardQuoteFontEn) || QUOTE_FONTS_EN[0];
             await Promise.race([
               Promise.all([
                 document.fonts.load('700 58px "Noto Serif TC"'),
                 document.fonts.load('600 32px "Cormorant Garamond"'),
-                document.fonts.load('700 28px "Cinzel"')
+                document.fonts.load('700 28px "Cinzel"'),
+                document.fonts.load(`${zhSpec.weight} 28px ${zhSpec.family}`),
+                document.fonts.load(`${enSpec.weight} 28px ${enSpec.family}`)
               ]),
-              new Promise(r => setTimeout(r, 1200))
+              new Promise(r => setTimeout(r, 1400))
             ]);
           }
         } catch (e) {}
@@ -51969,8 +52031,63 @@ function setEditModeState(newState, notifyToast = true) {
         }
 
         lastRenderedCanvas = canvas;
+        syncPostcardFullscreenCanvas(canvas);
         if (overlay) overlay.classList.add('hidden');
         return canvas;
+      }
+
+      function syncPostcardFullscreenCanvas(srcCanvas) {
+        const fsCanvas = document.getElementById('postcardFullscreenCanvas');
+        const source = srcCanvas || lastRenderedCanvas || document.getElementById('tripPostcardPreviewCanvas');
+        if (!fsCanvas || !source || !source.width || !source.height) return false;
+        fsCanvas.width = source.width;
+        fsCanvas.height = source.height;
+        const fCtx = fsCanvas.getContext('2d');
+        fCtx.clearRect(0, 0, fsCanvas.width, fsCanvas.height);
+        fCtx.drawImage(source, 0, 0);
+        return true;
+      }
+
+      let isPostcardFullscreenMagnified = false;
+      function openPostcardFullscreenPreview() {
+        const fsModal = document.getElementById('postcardFullscreenZoomModal');
+        if (!fsModal) return;
+        syncPostcardFullscreenCanvas();
+        isPostcardFullscreenMagnified = false;
+        applyPostcardFullscreenScaleUI();
+        fsModal.classList.remove('hidden');
+      }
+
+      function closePostcardFullscreenPreview() {
+        const fsModal = document.getElementById('postcardFullscreenZoomModal');
+        if (fsModal) fsModal.classList.add('hidden');
+        isPostcardFullscreenMagnified = false;
+      }
+
+      function togglePostcardFullscreenMagnify() {
+        isPostcardFullscreenMagnified = !isPostcardFullscreenMagnified;
+        applyPostcardFullscreenScaleUI();
+      }
+
+      function applyPostcardFullscreenScaleUI() {
+        const fsCanvas = document.getElementById('postcardFullscreenCanvas');
+        const lbl = document.getElementById('labelFullscreenZoomScale');
+        const btnTxt = document.getElementById('btnTextFullscreenMagnify');
+        const vp = document.getElementById('postcardFullscreenViewport');
+        if (!fsCanvas) return;
+        if (isPostcardFullscreenMagnified) {
+          fsCanvas.classList.remove('max-w-full', 'max-h-full', 'w-auto', 'h-auto', 'cursor-zoom-in');
+          fsCanvas.classList.add('w-[155vw]', 'sm:w-[560px]', 'max-w-none', 'h-auto', 'cursor-zoom-out');
+          if (vp) { vp.classList.remove('items-center', 'justify-center'); vp.classList.add('items-start', 'justify-start'); }
+          if (lbl) lbl.textContent = '155%';
+          if (btnTxt) btnTxt.textContent = '還原整幅';
+        } else {
+          fsCanvas.classList.remove('w-[155vw]', 'sm:w-[560px]', 'max-w-none', 'cursor-zoom-out');
+          fsCanvas.classList.add('max-w-full', 'max-h-full', 'w-auto', 'h-auto', 'cursor-zoom-in');
+          if (vp) { vp.classList.remove('items-start', 'justify-start'); vp.classList.add('items-center', 'justify-center'); }
+          if (lbl) lbl.textContent = '100%';
+          if (btnTxt) btnTxt.textContent = '局部放大';
+        }
       }
 
       function renderThumbnailStrip() {
@@ -52210,9 +52327,159 @@ function setEditModeState(newState, notifyToast = true) {
           { text: "此刻的風很輕，雲很淡，一切剛剛好。", author: "午後隨筆" },
           { text: "探索未知的角落，發現世界隱藏的驚喜。", author: "尋寶地圖" },
           { text: "以夢為馬，不負韶華，向快樂出發。", author: "青春紀行" },
-          { text: "願所有旅途，都有暖陽相伴、平安順遂。", author: "平安祝福" }
+          { text: "願所有旅途，都有暖陽相伴、平安順遂。", author: "平安祝福" },
+          { text: "世界那麼大，我想去看看，只要出發永遠不算晚。", author: "出發與奔赴遠方" },
+          { text: "人出發了，心也放假了。", author: "出發與奔赴遠方" },
+          { text: "出發，就是今天最重要的事。", author: "出發與奔赴遠方" },
+          { text: "把工作留低，把行李帶走。", author: "出發與奔赴遠方" },
+          { text: "今天沒有行程表，只有想去的地方。", author: "出發與奔赴遠方" },
+          { text: "把腳步印在遠方，把回憶裝進行囊。", author: "出發與奔赴遠方" },
+          { text: "暫時離開日常幾日，去呼吸不一樣的空氣。", author: "出發與奔赴遠方" },
+          { text: "向著有光與風的地方出發。", author: "出發與奔赴遠方" },
+          { text: "買一張車票，去往心裡惦記已久的角落。", author: "出發與奔赴遠方" },
+          { text: "趁著微風正好，去見想見的人，看想看的景。", author: "出發與奔赴遠方" },
+          { text: "離開熟悉的地方，才能重新認識自己。", author: "出發與奔赴遠方" },
+          { text: "行囊裝滿期待，腳步踏出自由。", author: "出發與奔赴遠方" },
+          { text: "有些風景，只有親自走過才算擁有。", author: "出發與奔赴遠方" },
+          { text: "不等未來，現在就是最好的出發時機。", author: "出發與奔赴遠方" },
+          { text: "去往地圖上那個閃閃發亮的名字。", author: "出發與奔赴遠方" },
+          { text: "逃離喧囂，奔赴一場屬於自己的山海。", author: "出發與奔赴遠方" },
+          { text: "每一張登機證或車票，都是通往新故事的鑰匙。", author: "出發與奔赴遠方" },
+          { text: "放下煩惱，背起行囊，出發去遇見驚喜。", author: "出發與奔赴遠方" },
+          { text: "腳步向前，心向遠方。", author: "出發與奔赴遠方" },
+          { text: "給自己一段空白，寫下旅途的第一行詩。", author: "出發與奔赴遠方" },
+          { text: "風很自由，我也是。", author: "風景與慢時光" },
+          { text: "被好風景收買，剩下的全是好心情。", author: "風景與慢時光" },
+          { text: "不匆匆趕路，才能好好感悟。", author: "風景與慢時光" },
+          { text: "晝夜不同的風景，去一次才看得到。", author: "風景與慢時光" },
+          { text: "最美的風景，永遠在路上。", author: "風景與慢時光" },
+          { text: "讓時間慢下來，聽風吹過山谷與海浪。", author: "風景與慢時光" },
+          { text: "日出與日落，是每天免費贈送的浪漫。", author: "風景與慢時光" },
+          { text: "把自己交給山川湖海，煩惱自然會變小。", author: "風景與慢時光" },
+          { text: "陽光灑在肩上，連影子都變得輕盈。", author: "風景與慢時光" },
+          { text: "坐在海邊發呆，也是一種奢侈的幸福。", author: "風景與慢時光" },
+          { text: "雲朵在天上慢慢走，我在人間悄悄看。", author: "風景與慢時光" },
+          { text: "每一陣晚風，都在替旅途溫柔作結。", author: "風景與慢時光" },
+          { text: "走進自然，才發現自己有多渺小又自由。", author: "風景與慢時光" },
+          { text: "街角的咖啡香與微風，構成午後最美的畫面。", author: "風景與慢時光" },
+          { text: "藍天白雲之下，什麼都不做也很美好。", author: "風景與慢時光" },
+          { text: "看過遼闊的大海，心胸也會跟著寬廣。", author: "風景與慢時光" },
+          { text: "迷路在異國的小巷裡，反而遇見了驚喜。", author: "風景與慢時光" },
+          { text: "黃昏把天空染成橘色，旅途也染上溫柔。", author: "風景與慢時光" },
+          { text: "聽一場雨落在陌生的屋簷上。", author: "風景與慢時光" },
+          { text: "慢下腳步，才能看見草木與光影的細節。", author: "風景與慢時光" },
+          { text: "揣著一口袋的開心，滿載而歸。", author: "治癒與好心情" },
+          { text: "旅行是治癒心靈的良藥。", author: "治癒與好心情" },
+          { text: "最好的時光，一直在路上。", author: "治癒與好心情" },
+          { text: "暫時關掉鬧鐘，只聽內心的聲音。", author: "治癒與好心情" },
+          { text: "笑聲留在旅途裡，疲憊拋在身後。", author: "治癒與好心情" },
+          { text: "美食與好天氣，是旅途最棒的雙倍快樂。", author: "治癒與好心情" },
+          { text: "哪怕只有幾天，也要過得像個自由的人。", author: "治癒與好心情" },
+          { text: "心情像晴天一樣明朗，每一步都踩在節拍上。", author: "治癒與好心情" },
+          { text: "把焦慮留在原地，把快樂帶回家。", author: "治癒與好心情" },
+          { text: "吃一頓地道美食，感受一座城的溫度。", author: "治癒與好心情" },
+          { text: "沒有 KPI 的日子，連呼吸都格外順暢。", author: "治癒與好心情" },
+          { text: "快樂很簡單，一陣風、一杯茶、一段好路。", author: "治癒與好心情" },
+          { text: "讓旅途替你按下一鍵重啟。", author: "治癒與好心情" },
+          { text: "只要心是自由的，哪裡都是好去處。", author: "治癒與好心情" },
+          { text: "收集沿途的笑臉與晚霞，變成日後的底氣。", author: "治癒與好心情" },
+          { text: "忘記時間與壓力，只管享受當下。", author: "治癒與好心情" },
+          { text: "旅途中的每一口甜，都是生活給的獎勵。", author: "治癒與好心情" },
+          { text: "心裡裝滿陽光，走到哪裡都是春天。", author: "治癒與好心情" },
+          { text: "好好吃飯、好好看景，就是此刻的全部。", author: "治癒與好心情" },
+          { text: "一個人出發，也能擁有完整的旅程。", author: "獨旅與自我對話" },
+          { text: "獨自旅行，是按照自己的心情安排一天。", author: "獨旅與自我對話" },
+          { text: "不需要配合誰，想停留多久就停留多久。", author: "獨旅與自我對話" },
+          { text: "一個人的旅程，也有很多值得分享的故事。", author: "獨旅與自我對話" },
+          { text: "在陌生城市裡，練習相信自己的判斷。", author: "獨旅與自我對話" },
+          { text: "獨自走過的路，會變成往後的勇氣。", author: "獨旅與自我對話" },
+          { text: "沒有人催促，腳步自然找到喜歡的速度。", author: "獨旅與自我對話" },
+          { text: "一個人看風景，也能感受到豐富與自在。", author: "獨旅與自我對話" },
+          { text: "獨處不是孤單，而是與自己深度對話。", author: "獨旅與自我對話" },
+          { text: "學會自己照顧自己，是旅行送給我的禮物。", author: "獨旅與自我對話" },
+          { text: "在沒有人認識的地方，做最真實的自己。", author: "獨旅與自我對話" },
+          { text: "一個人吃飯、一個人看海，安靜卻很有力量。", author: "獨旅與自我對話" },
+          { text: "走過越多的路，越懂得自己真正想要什麼。", author: "獨旅與自我對話" },
+          { text: "獨自面對未知，每一次解決問題都是成長。", author: "獨旅與自我對話" },
+          { text: "靜靜走在陌生的街頭，聽見內心的平靜。", author: "獨旅與自我對話" },
+          { text: "一個人也能把日子過得很有質感。", author: "獨旅與自我對話" },
+          { text: "旅途教會我獨立，也教會我溫柔。", author: "獨旅與自我對話" },
+          { text: "與自己同行，是最不會走散的陪伴。", author: "獨旅與自我對話" },
+          { text: "在遠方找回那個專注、勇敢又通透的自己。", author: "獨旅與自我對話" },
+          { text: "獨自看過的世界，會成為心裡最堅實的依靠。", author: "獨旅與自我對話" },
+          { text: "在路上，我們永遠年輕，永遠熱淚盈眶。", author: "感悟與回程" },
+          { text: "美好不是被放在某個地方，而是被銘記於心。", author: "感悟與回程" },
+          { text: "短的是旅程，長的是人生。", author: "感悟與回程" },
+          { text: "生活裡有人情世故，旅行中有世間百態。", author: "感悟與回程" },
+          { text: "每個人都是這個世界的探索者。", author: "感悟與回程" },
+          { text: "不同的旅行，看見不同的世界。", author: "感悟與回程" },
+          { text: "旅行的意義在於沿途發生的不期而遇。", author: "感悟與回程" },
+          { text: "旅行就是從自己活膩的地方，到別人活膩的地方去。", author: "感悟與回程" },
+          { text: "祝你一路順風，旅途平安，滿載回憶回來。", author: "感悟與回程" },
+          { text: "願每段行程都順利，每次相遇都美好。", author: "感悟與回程" },
+          { text: "擦肩而過的陌生人，都是這趟旅程的風景。", author: "感悟與回程" },
+          { text: "最好的相遇，往往發生在沒有計畫的轉角。", author: "感悟與回程" },
+          { text: "帶走照片與故事，留下尊重與足跡。", author: "感悟與回程" },
+          { text: "每一次出發，都是為了更好地回歸生活。", author: "感悟與回程" },
+          { text: "旅途會結束，但被點亮的眼睛不會暗。", author: "感悟與回程" },
+          { text: "感謝這趟旅程，讓我用更開闊的眼光看世界。", author: "感悟與回程" },
+          { text: "回程的路上，心裡已經在期待下一次出發。", author: "感悟與回程" },
+          { text: "有些記憶會褪色，但吹過臉頰的風不會忘。", author: "感悟與回程" },
+          { text: "把旅途的浪漫，揉進往後平凡的日子裡。", author: "感悟與回程" },
+          { text: "下一站未知，但每一步都算數。", author: "感悟與回程" },
+          { text: "星光不問趕路人，時光不負有心人，下一趟旅程見。", author: "感悟與回程" }
         ],
         famous_zh: [
+          { text: "學習一種語言就是進入一個世界，一種文化。", author: "弗朗茨·法農" },
+          { text: "旅行是增長智慧的最佳方式。", author: "埃米爾·左拉" },
+          { text: "只有旅行才能真正學習。", author: "馬克·吐溫" },
+          { text: "去看看世界。它比任何夢境都奇妙。", author: "雷·布拉德伯里" },
+          { text: "旅行的投資是對自己的投資。", author: "馬修·卡斯滕" },
+          { text: "生活不是一場大膽的冒險，就是什麼都不是。", author: "海倫·凱勒" },
+          { text: "衡量一段旅程的最好方式是結交了多少朋友，而不是行走了多少里程。", author: "提姆·卡希爾" },
+          { text: "旅行——它先讓你語塞，然後讓你成為一個說故事的人。", author: "伊本·白圖泰" },
+          { text: "我喜歡在一個陌生城市裡，享受無名無姓的感覺。", author: "比爾·布萊森" },
+          { text: "永遠不要猶豫去遠方，越過所有海洋、所有邊界、所有國家、所有信仰。", author: "阿敏·馬魯夫" },
+          { text: "遠行有一種魔力，當你回來時，你已經徹底改變了。", author: "凱特·道格拉斯·威金" },
+          { text: "旅行就是不斷成長。", author: "皮埃爾·伯納多" },
+          { text: "一旦被旅行的病毒咬住，就再也無藥可救，我願幸福地感染一輩子。", author: "麥可·帕林" },
+          { text: "啊，你將會去到無數奇妙的地方！", author: "蘇斯博士" },
+          { text: "優秀的旅行者沒有固定的計劃，也不執著於目的地。", author: "老子" },
+          { text: "我沒有去過所有地方，但這在我的清單上。", author: "蘇珊·桑塔格" },
+          { text: "旅行者看到的是他眼前的世界，遊客則看到的是他計劃中的風景。", author: "G.K. 切斯特頓" },
+          { text: "目的地從來不是一個地方，而是一個全新的視角。", author: "亨利·米勒" },
+          { text: "不要擔心路上的坑洞，盡情享受旅程吧。", author: "菲茨休·穆蘭" },
+          { text: "只帶走回憶，只留下腳印。", author: "西雅圖酋長" },
+          { text: "每年至少去一個你從未去過的地方。", author: "達賴喇嘛" },
+          { text: "旅行不是一種技能，而是一種行動。", author: "蓋爾·福爾曼" },
+          { text: "旅行，就是生活的另一種方式。", author: "漢斯·克里斯蒂安·安徒生" },
+          { text: "旅行會讓你發現，對其他國家的偏見是錯誤的。", author: "奧爾德斯·赫胥黎" },
+          { text: "世界是一本書，不旅行的人只讀了其中的一頁。", author: "聖奧古斯丁" },
+          { text: "如果你希望旅行得又快又遠，就要輕裝上陣。放下你所有的嫉妒、不原諒、自私和恐懼。", author: "塞薩雷·帕維塞" },
+          { text: "我在歐洲遇到了很多人，也遇見了真實的自己。", author: "詹姆斯·鮑德溫" },
+          { text: "並不是所有漫遊的人都迷失了方向。", author: "J.R.R. 托爾金" },
+          { text: "旅行讓人謙卑，你會發現自己在世界中的位置是多麼渺小。", author: "古斯塔夫·福樓拜" },
+          { text: "只有在冒險中，一些人才能成功地認識自己——找到自己。", author: "安德烈·吉德" },
+          { text: "我們旅行不是為了逃避生活，而是為了讓生活不逃避我們。", author: "匿名" },
+          { text: "遊客不知道他們去過哪裡，旅行者不知道他們將去哪裡。", author: "保羅·賽魯斯" },
+          { text: "旅行不是人們計劃的，而是旅行塑造了人。", author: "約翰·斯坦貝克" },
+          { text: "旅行是對偏見與狹隘心態的致命打擊。", author: "馬克·吐溫" },
+          { text: "旅行是唯一能讓你更富有的花費。", author: "匿名" },
+          { text: "如果你拒絕食物、忽視習俗、害怕宗教並迴避人群，那還不如待在家裡。", author: "詹姆斯·米契納" },
+          { text: "看過世界另一端的月光後，我不再是從前的自己。", author: "瑪麗·安·拉德馬赫" },
+          { text: "如果你不知道你要去哪裡，任何路都能帶你到那裡。", author: "路易斯·卡羅" },
+          { text: "沒有人意識到旅行的美好，直到他回家躺在自己熟悉的枕頭上。", author: "林語堂" },
+          { text: "沒有觀察的旅行者就像沒有翅膀的鳥。", author: "莫斯里赫·艾丁·薩迪" },
+          { text: "敢於迷失方向的人，才能發現新的道路。", author: "挪威諺語" },
+          { text: "縱然我們行遍世界尋覓美好，若未將美好隨身攜帶，終究無從發現。", author: "拉爾夫·沃爾多·愛默生" },
+          { text: "走得越遠，離自己越近。", author: "安德魯·麥卡錫" },
+          { text: "每個追夢人都知道，思念一個從未踏足的地方，比想念熟悉的土地更加深切。", author: "朱迪思·瑟曼" },
+          { text: "活著，旅行，冒險，感恩，絕不後悔。", author: "傑克·凱魯亞克" },
+          { text: "旅行的終點不是目的地，而是沿途的意外與回憶。", author: "佩內洛普·萊利" },
+          { text: "活著的人看得多，旅行的人看得更多。", author: "阿拉伯諺語" },
+          { text: "如果你覺得冒險危險，那就試試日復一日的平淡，這更致命。", author: "保羅·科埃略" },
+          { text: "旅行教會我們寬容。", author: "本傑明·迪斯雷利" },
+          { text: "冒險是值得的。", author: "亞里士多德" },
           { text: "讀萬卷書，行萬里路。", author: "董其昌" },
           { text: "世界是一本書，不旅行的人只讀了其中一頁。", author: "聖奧古斯丁" },
           { text: "人之所以愛旅行，不是為了抵達目的地，而是為了享受旅途中的種種樂趣。", author: "歌德" },
@@ -52319,15 +52586,23 @@ function setEditModeState(newState, notifyToast = true) {
       };
 
       const QUOTE_FONTS_ZH = [
-        { id: 'sans', label: '黑體', family: '"Plus Jakarta Sans", "PingFang HK", "Noto Sans TC", sans-serif', weight: '600', style: 'normal' },
-        { id: 'serif', label: '宋體', family: '"Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif', weight: '600', style: 'normal' },
-        { id: 'script', label: '手寫', family: '"Klee One", "PingFang HK", cursive, sans-serif', weight: '600', style: 'normal' }
+        { id: 'sans', label: '經典黑體', family: '"Plus Jakarta Sans", "PingFang HK", "Noto Sans TC", sans-serif', weight: '700', style: 'normal' },
+        { id: 'serif', label: '典雅宋體', family: '"Noto Serif TC", "Songti TC", "PMingLiU", Georgia, serif', weight: '600', style: 'normal' },
+        { id: 'script', label: '隨筆手寫', family: '"Klee One", "PingFang HK", cursive, sans-serif', weight: '600', style: 'normal' },
+        { id: 'rounded', label: '懷舊圓體', family: '"Zen Maru Gothic", "PingFang HK", "Noto Sans TC", sans-serif', weight: '700', style: 'normal' },
+        { id: 'kai', label: '勁道書楷', family: '"Yuji Syuku", "BiauKai", "DFKai-SB", "Noto Serif TC", serif', weight: '600', style: 'normal' },
+        { id: 'wenkai', label: '秀麗行楷', family: '"LXGW WenKai TC", "Klee One", "Noto Serif TC", serif', weight: '700', style: 'normal' },
+        { id: 'ultralight', label: '簡約細線', family: '"Noto Sans TC", "Zen Kaku Gothic New", "PingFang HK", sans-serif', weight: '300', style: 'normal' }
       ];
 
       const QUOTE_FONTS_EN = [
-        { id: 'sans', label: 'Sans', family: '"Plus Jakarta Sans", "Outfit", -apple-system, sans-serif', weight: '600', style: 'normal' },
-        { id: 'serif', label: 'Serif', family: '"Cormorant Garamond", "Cinzel", Georgia, serif', weight: '700', style: 'italic' },
-        { id: 'script', label: 'Script', family: '"Caveat", "Cormorant Garamond", cursive, serif', weight: '700', style: 'normal' }
+        { id: 'sans', label: 'Modern Sans', family: '"Plus Jakarta Sans", "Outfit", -apple-system, sans-serif', weight: '700', style: 'normal' },
+        { id: 'serif', label: 'Classic Serif', family: '"Cormorant Garamond", "Cinzel", Georgia, serif', weight: '700', style: 'italic' },
+        { id: 'script', label: 'Casual Script', family: '"Caveat", cursive, serif', weight: '700', style: 'normal' },
+        { id: 'slab', label: 'Retro Slab', family: '"Roboto Slab", Georgia, serif', weight: '700', style: 'normal' },
+        { id: 'calligraphy', label: 'Calligraphy', family: '"Dancing Script", cursive, serif', weight: '700', style: 'normal' },
+        { id: 'mono', label: 'Tech Mono', family: '"JetBrains Mono", ui-monospace, SFMono-Regular, monospace', weight: '600', style: 'normal' },
+        { id: 'signature', label: 'Signature', family: '"Pacifico", "Caveat", cursive', weight: '400', style: 'normal' }
       ];
 
       const QUOTE_SIZE_STEPS = [
@@ -52443,27 +52718,27 @@ function setEditModeState(newState, notifyToast = true) {
 
       function buildQuoteCompactControlsHTML(compactListHeightClass) {
         const items = POSTCARD_QUOTES_DB[activeQuoteCategory] || [];
-        const isEnMode = (selectedPostcardQuote ? selectedPostcardQuote.cat === 'famous_en' : activeQuoteCategory === 'famous_en');
+        const isEnMode = (activeQuoteCategory === 'famous_en');
         const fonts = isEnMode ? QUOTE_FONTS_EN : QUOTE_FONTS_ZH;
         const activeFontId = isEnMode ? postcardQuoteFontEn : postcardQuoteFontZh;
 
         const catTabsHtml = [
-          { id: 'general', label: '一般 (50)' },
-          { id: 'famous_zh', label: '名人中 (50)' },
-          { id: 'famous_en', label: '名人英 (50)' }
+          { id: 'general', label: `一般 (${POSTCARD_QUOTES_DB.general.length})` },
+          { id: 'famous_zh', label: `名人中 (${POSTCARD_QUOTES_DB.famous_zh.length})` },
+          { id: 'famous_en', label: `名人英 (${POSTCARD_QUOTES_DB.famous_en.length})` }
         ].map(t => {
           const act = t.id === activeQuoteCategory;
-          return `<button type="button" onclick="selectPostcardQuoteCategory('${t.id}')" class="px-2.5 py-1 rounded-full text-[10px] ${act ? 'font-extrabold bg-white text-slate-900 shadow-2xs' : 'font-bold text-slate-500 hover:text-slate-800'} transition cursor-pointer">${t.label}</button>`;
+          return `<button type="button" onclick="selectPostcardQuoteCategory('${t.id}')" class="px-2 py-0.5 rounded-full text-[10px] ${act ? 'font-extrabold bg-white text-slate-900 shadow-2xs' : 'font-bold text-slate-500 hover:text-slate-800'} transition cursor-pointer">${t.label}</button>`;
         }).join('');
 
-        const fontBtnsHtml = fonts.map(f => {
-          const act = f.id === activeFontId;
-          return `<button type="button" onclick="setPostcardQuoteFont('${f.id}')" class="px-2 py-0.5 rounded-full text-[10px] ${act ? 'font-extrabold bg-white text-slate-900 shadow-2xs' : 'font-bold text-slate-500 hover:text-slate-800'} transition cursor-pointer">${f.label}</button>`;
+        const fontSelectOptionsHtml = fonts.map(f => {
+          const selAttr = f.id === activeFontId ? 'selected' : '';
+          return `<option value="${f.id}" ${selAttr}>${f.label}</option>`;
         }).join('');
 
         const sizeBtnsHtml = QUOTE_SIZE_STEPS.map(s => {
           const act = s.id === postcardQuoteSizeStep;
-          return `<button type="button" onclick="setPostcardQuoteSize(${s.id})" class="px-2 py-0.5 rounded-full text-[10px] ${act ? 'font-extrabold bg-white text-slate-900 shadow-2xs' : 'font-bold text-slate-500 hover:text-slate-800'} transition cursor-pointer">${s.label}</button>`;
+          return `<button type="button" onclick="setPostcardQuoteSize(${s.id})" class="px-1.5 py-0.5 rounded-full text-[9.5px] ${act ? 'font-extrabold bg-white text-slate-900 shadow-2xs' : 'font-bold text-slate-500 hover:text-slate-800'} transition cursor-pointer">${s.label}</button>`;
         }).join('');
 
         const colorBtnsHtml = [
@@ -52471,20 +52746,23 @@ function setEditModeState(newState, notifyToast = true) {
           { id: 'white', label: '白', dotCls: 'bg-white' }
         ].map(c => {
           const act = c.id === postcardQuoteColor;
-          return `<button type="button" onclick="setPostcardQuoteColor('${c.id}')" class="px-2 py-0.5 rounded-full text-[10px] flex items-center gap-1 ${act ? 'font-extrabold bg-white text-slate-900 shadow-2xs' : 'font-bold text-slate-500 hover:text-slate-800'} transition cursor-pointer"><span class="w-2.5 h-2.5 rounded-full ${c.dotCls} border border-slate-400"></span><span>${c.label}</span></button>`;
+          return `<button type="button" onclick="setPostcardQuoteColor('${c.id}')" class="px-1.5 py-0.5 rounded-full text-[9.5px] flex items-center gap-1 ${act ? 'font-extrabold bg-white text-slate-900 shadow-2xs' : 'font-bold text-slate-500 hover:text-slate-800'} transition cursor-pointer"><span class="w-2 h-2 rounded-full ${c.dotCls} border border-slate-400"></span><span>${c.label}</span></button>`;
         }).join('');
 
+        // 高密度多行預覽清單：一屏同時展示 5–6 句（含序號 #001 ＋ 金句 ＋ 出處），無需逐句慢慢拉
         const listItemsHtml = items.map((item, idx) => {
           const isSel = selectedPostcardQuote && selectedPostcardQuote.cat === activeQuoteCategory && selectedPostcardQuote.index === idx;
+          const numStr = `#${String(idx + 1).padStart(3, '0')}`;
           return `
             <button type="button" onclick="selectPostcardQuoteItem('${activeQuoteCategory}', ${idx})"
-                    class="w-full text-left px-3 py-2 rounded-2xl border transition flex items-center justify-between gap-2.5 cursor-pointer ${isSel ? 'bg-amber-50/95 border-amber-400 shadow-2xs' : 'bg-white hover:bg-slate-50 border-slate-200/85'}">
-              <div class="min-w-0 flex-1 space-y-0.5">
-                <div class="text-[11.5px] font-bold leading-snug line-clamp-2 ${isSel ? 'text-slate-950' : 'text-slate-800'}">${item.text}</div>
-                <div class="text-[9.5px] font-semibold ${isSel ? 'text-amber-700' : 'text-slate-400'}">— ${item.author}</div>
+                    class="w-full text-left px-2.5 py-1 rounded-xl border transition flex items-center justify-between gap-2 cursor-pointer ${isSel ? 'bg-amber-50/95 border-amber-400 shadow-2xs' : 'bg-white hover:bg-slate-50 border-slate-200/80'}">
+              <div class="min-w-0 flex-1 flex items-baseline gap-1.5 truncate">
+                <span class="font-mono text-[9px] font-extrabold shrink-0 ${isSel ? 'text-amber-600' : 'text-slate-400'}">${numStr}</span>
+                <span class="text-[11px] font-bold truncate ${isSel ? 'text-slate-950' : 'text-slate-800'}">${item.text}</span>
+                <span class="text-[9px] font-medium shrink-0 ${isSel ? 'text-amber-700' : 'text-slate-400'}">· ${item.author}</span>
               </div>
-              <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${isSel ? 'bg-amber-500 text-white shadow-2xs' : 'bg-slate-100 text-slate-400'}">
-                <i class="fa-solid ${isSel ? 'fa-check' : 'fa-plus'} text-[9px]"></i>
+              <span class="w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${isSel ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-400'}">
+                <i class="fa-solid ${isSel ? 'fa-check' : 'fa-plus'} text-[8px]"></i>
               </span>
             </button>
           `;
@@ -52492,25 +52770,28 @@ function setEditModeState(newState, notifyToast = true) {
 
         return `
           <!-- 第一層：三大金句分類膠囊 ＋ 抽一句 / 清除 -->
-          <div class="flex items-center justify-between gap-1.5">
+          <div class="flex items-center justify-between gap-1">
             <div class="inline-flex items-center p-0.5 rounded-full bg-slate-200/75 border border-slate-200/90">${catTabsHtml}</div>
             <div class="flex items-center gap-1 shrink-0">
               <button type="button" onclick="pickRandomPostcardQuote()" title="隨機抽一句金句"
-                      class="px-2.5 py-1 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200/90 text-[10px] font-bold flex items-center gap-1 transition active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-shuffle text-[9px]"></i><span>抽一句</span>
+                      class="px-2 py-0.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200/90 text-[9.5px] font-bold flex items-center gap-1 transition active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-shuffle text-[8.5px]"></i><span>抽一句</span>
               </button>
-              ${selectedPostcardQuote ? `<button type="button" onclick="clearPostcardQuote()" title="移除已選金句" class="w-6 h-6 rounded-full bg-white hover:bg-rose-50 border border-slate-300/90 text-slate-500 hover:text-rose-600 flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs"><i class="fa-solid fa-xmark text-[9.5px]"></i></button>` : ''}
+              ${selectedPostcardQuote ? `<button type="button" onclick="clearPostcardQuote()" title="移除已選金句" class="w-5 h-5 rounded-full bg-white hover:bg-rose-50 border border-slate-300/90 text-slate-500 hover:text-rose-600 flex items-center justify-center transition active:scale-90 cursor-pointer shadow-2xs"><i class="fa-solid fa-xmark text-[9px]"></i></button>` : ''}
             </div>
           </div>
 
-          <!-- 第二層：舒爽雙行金句卡片清單（正文與作者分行呈現，閱讀不擁擠） -->
-          <div class="${compactListHeightClass} overflow-y-auto custom-scroll space-y-1.5 pr-0.5">${listItemsHtml}</div>
+          <!-- 第二層：高密度多行金句預覽清單（一屏同時顯示多行，快速掃描揀選） -->
+          <div class="${compactListHeightClass} overflow-y-auto custom-scroll space-y-1 pr-0.5">${listItemsHtml}</div>
 
-          <!-- 第三層：字體三選一 ＋ 大小 [細|中|大] ＋ 黑白雙色（整齊左右貼邊排布） -->
-          <div class="flex items-center justify-between gap-1.5 pt-0.5 px-0.5">
-            <div class="flex items-center gap-1 min-w-0">
-              <span class="text-[10px] font-bold text-slate-500 shrink-0 select-none">字體</span>
-              <div class="inline-flex items-center p-0.5 rounded-full bg-slate-200/75 border border-slate-200/90">${fontBtnsHtml}</div>
+          <!-- 第三層：中／英 7 款字型下拉選單 ＋ 大小 [細|中|大|更大] ＋ 黑白雙色 -->
+          <div class="flex items-center justify-between gap-1 pt-0.5 px-0.5">
+            <div class="flex items-center gap-1 min-w-0 flex-1">
+              <span class="text-[9.5px] font-bold text-slate-500 shrink-0 select-none">${isEnMode ? '英字型' : '中字型'}</span>
+              <select id="selectPostcardQuoteFont" onchange="setPostcardQuoteFont(this.value)" aria-label="選擇金句字型"
+                      class="min-w-0 flex-1 max-w-[116px] h-6 px-1.5 rounded-full bg-white border border-slate-300/90 text-[10.5px] font-extrabold text-slate-800 focus:outline-none focus:border-blue-500 cursor-pointer shadow-2xs truncate">
+                ${fontSelectOptionsHtml}
+              </select>
             </div>
             <div class="flex items-center gap-1 shrink-0">
               <div class="inline-flex items-center p-0.5 rounded-full bg-slate-200/75 border border-slate-200/90">${sizeBtnsHtml}</div>
@@ -52540,7 +52821,7 @@ function setEditModeState(newState, notifyToast = true) {
         if (plan2ConsoleMode === 'quote') {
           if (captionPane) captionPane.classList.add('hidden');
           if (p2QuotePane) {
-            p2QuotePane.innerHTML = buildQuoteCompactControlsHTML('h-[82px] max-h-[82px] md:h-[124px] md:max-h-[124px]');
+            p2QuotePane.innerHTML = buildQuoteCompactControlsHTML('h-[82px] max-h-[82px] md:h-[174px] md:max-h-[174px]');
             p2QuotePane.classList.remove('hidden');
           }
         } else {
@@ -52635,7 +52916,7 @@ function setEditModeState(newState, notifyToast = true) {
       }
 
       async function setPostcardQuoteFont(fontId) {
-        const isEnMode = (selectedPostcardQuote ? selectedPostcardQuote.cat === 'famous_en' : activeQuoteCategory === 'famous_en');
+        const isEnMode = (activeQuoteCategory === 'famous_en');
         if (isEnMode) {
           postcardQuoteFontEn = fontId;
         } else {
